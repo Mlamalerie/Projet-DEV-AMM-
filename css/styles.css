@@ -88,5 +88,32 @@ header .overlay-sombre {
   header video {
     display: none;
   }
-
 }
+
+/******** SECTIONS *****/
+/*section 1 */
+section:first-of-type {
+    background: linear-gradient(to right, #5d4157, #a8caba);
+}
+
+/*section 2 */
+section:nth-of-type(2) {
+    background: #14181b;
+}
+
+/* section 3 */
+section:nth-of-type(3) {
+    background: #121618;
+}
+
+.mb-4, .my-4 {/*couleur titres de section*/
+    color: white;
+}
+
+
+
+
+
+
+
+
