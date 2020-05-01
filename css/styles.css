@@ -1,0 +1,32 @@
+.bg-light { /*couleur de fond navbar*/
+     background-color: #212529!important;
+}
+
+.navbar-light .navbar-brand {/*violet pour WeBeats*/
+    color: rgba(121, 6, 247, 0.9);
+}
+
+.navbar-light .navbar-nav .nav-link {/*couleur texte navbar*/
+    color: #f8f9fa;
+}
+
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover { /*bleu turquois qd on passe sur les mots de la navbar*/
+    color: rgb(32, 227, 236);
+}
+
+.dropdown-item{
+    color: white;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {/*couleur sous menu et bleu turquoie qd tu passes sur les mots*/
+    color: rgb(32, 227, 236);
+    text-decoration: none;
+    background-color: #1d2124;
+}
+
+
+.dropdown-menu{ /* couleur fond sous menu
+    */
+    background-color: #1d2124;
+}
