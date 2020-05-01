@@ -8,6 +8,7 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>WeBeats</title>
     </head>
     <body>
@@ -91,38 +92,63 @@
         <!--   ************************** FOOTER  **************************  -->
 
 
-        <footer class="page-footer font-small stylish-color-dark pt-4">
-            <!-- Liens Footer -->
-            <div class="container text-center text-md-left">
-                <!-- Lignes -->
-                <div class="row">
-                    <!-- Colonnes -->
-                    <div class="col-md-4 mx-auto">
-                        <!-- Contenu -->
-                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
-                        <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-                         consectetur
-                        adipisicing elit.</p>
+    <footer class="bg-info">
+    <div class="container py-5">
+      <div class="row py-4">
 
+        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" class="mb-3">
+          <p class="font-italic text-mute">Retrouvez-nous également sur les réseaux sociaux</p>
+          <ul class="list-inline mt-4">
+            <!-- Facebook-->
+            <li class="list-inline-item"><a href="#" class="social-link rounded py-2 px-4 my-2 social-facebook"><i class="fa fa-facebook-f fa-fw"></i></a></li>
+            <!-- Twitter-->
+            <li class="list-inline-item"><a href="#" class="social-link rounded py-2 px-4 my-2 social-twitter"><i class="fa fa-twitter fa-fw"></i></a></li>
+            <!-- Youtube-->
+            <li class="list-inline-item mr-2"><a href="#" class="social-link rounded py-2 px-4 my-2 social-youtube"><i class="fa fa-youtube-play fa-fw"></i></a></li>
+          </ul>
+        </div>
 
-
-
-
-
-
-
-
-
-
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">WeBeats</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-mute">A Propos</a></li>
+            <li class="mb-2"><a href="#" class="text-mute">Aide</a></li>
+            <li class="mb-2"><a href="#" class="text-mute">On recrute</a></li>
+            <li class="mb-2"><a href="#" class="text-mute">Contactez-nous</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Explorer</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-mute">Tendances</a></li>
+            <li class="mb-2"><a href="#" class="text-mute">Top ventes</a></li>
+            <li class="mb-2"><a href="#" class="text-mute">Nos meilleurs producteurs</a></li>
+            <li class="mb-2"><a href="#" class="text-mute">Témoignages</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Newsletter</h6>
+          <p class="text-mute mb-4">Inscrivez-vous pour ne rien louper de notre Actualité !</p>
+          <div class="p-1 rounded border">
+            <div class="input-group">
+              <input type="email" placeholder="Entrez votre adresse email" aria-describedby="button-addon1" class="form-control border-0 shadow-0">
+              <div class="input-group-append">
+                <button id="button-addon1" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
+              </div>
             </div>
-            
+          </div>
+        </div>
+      </div>
+    </div>
 
-
-
-
-
-
-        </footer>
+    <!-- Copyrights -->
+    <div class="bg-light py-4">
+      <div class="container text-center">
+        <p class="text-mute mb-0 py-2">© 2020 WeBeats All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <!-- End -->
 
 
 
