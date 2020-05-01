@@ -83,19 +83,19 @@ if(!empty($_POST)){
             
         }else {
             $date_naissance = $naiss_jour .'-'. $naiss_mois.'-'.$naiss_annees;
-        }s
+        }
             // veri departement 
         $verif_departement = array(1,2,3);
 
-        if(!in_array($departementannees, $verif_departement )) {
+        if(!in_array($departement, $verif_departement )) {
             $ok = false;
-            $err_departementannees = "Veuillez renseigner ce champ !";
+            $err_departement = "Veuillez renseigner ce champ !";
 
         }
         if($ok) {
             $date_inscription = date("Y-m-d");
             
-            $req = $BDD->prepare("INSERT INTO(pseud)") // preparer requete
+            $req = $BDD->prepare("INSERT INTO(pseudo)"); // preparer requete
         }
 
 
