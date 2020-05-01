@@ -22,7 +22,9 @@
     color: rgb(32, 227, 236);
 }
 
-/s
+.dropdown-item {/*couleur blanche option du sous-menu*/
+    color: white ;
+}
 
 .dropdown-item:focus, .dropdown-item:hover {/*couleur sous menu et bleu turquoie qd tu passes sur les mots*/
     color: rgb(32, 227, 236);
@@ -90,6 +92,32 @@ header .overlay-sombre {
   }
 }
 
+/* Bouton Inscription */
+.btn-danger {
+    color: #fff;
+    background-color: rgba(121, 6, 247, 0.9);
+    border-color: rgba(121, 6, 247, 0.9);
+}
+.btn-danger:hover {/*qd on passe sur le bouton*/
+    color: #fff;
+    background-color: #4e0f88;
+    border-color: #4e0f88;
+}
+.btn-danger:not(:disabled):not(.disabled).active, .btn-danger:not(:disabled):not(.disabled):active, .show>.btn-danger.dropdown-toggle {
+    color: #fff;
+    background-color: rgba(121, 6, 247, 0.9);
+    border-color: rgba(121, 6, 247, 0.9);
+}
+.btn-danger.focus, .btn-danger:focus {
+    color: #fff;
+    background-color:#4e0f88;
+    border-color: #4e0f88;
+    box-shadow: 0 0 0 0.2rem #4e0f88;
+}
+
+
+
+
 /******** SECTIONS *****/
 /*section 1 */
 section:first-of-type {
@@ -105,6 +133,18 @@ section:nth-of-type(2) {
 section:nth-of-type(3) {
     background: #121618;
 }
+
+/* section 4 */
+section:nth-of-type(4) {
+    background: #121618;
+}
+
+/* section 5 */
+section:nth-of-type(5) {
+    background: #121618;
+}
+
+
 
 .mb-4, .my-4 {/*couleur titres de section*/
     color: white;

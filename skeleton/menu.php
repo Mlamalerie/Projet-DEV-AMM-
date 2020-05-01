@@ -18,10 +18,13 @@
                             Genres
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Afro Beats</a>
+                            <a class="dropdown-item" href="#">Agressif</a>
+                             <a class="dropdown-item" href="#">Drill</a>
+                             <a class="dropdown-item" href="#">Electro</a>
+                             <a class="dropdown-item" href="#">Trap</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">Free Beats</a>
                         </div>
                     </li>
 

@@ -32,7 +32,14 @@
                     <div class="w-100 text-white">
                         <h1 class="display-3">Développez vos sons</h1>
                         <p class="lead mb-0">Découvrez et Partagez les prods de vos choix</p>
-                    </div>
+                        <p class="lead mb-0">Pour pouvoir acheter ou vendre des prods  <a href="inscription.php"><button type="button" class="btn btn-danger" >Inscrivez-vous</button></a></p>
+                    </div><br/>
+                  <!-- test barre de recherche <form class="Recherche">
+                      <div class="form-group">
+                        <input type="search" class="input-sm form-control" placeholder="musique, artistes,...">
+                        <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Rechercher</button>
+                      </div>
+                    </form> -->
                 </div>
             </div>
         </header>
@@ -50,7 +57,7 @@
             </div>
         </section>
 
-<!-- Section 2-->
+        <!-- Section 2-->
         <section class="py-5 d-flex align-items-center" id="two">
             <div class="container py-5">
                 <div class="row text-center">
@@ -75,7 +82,61 @@
                 </div>
             </div>
         </section>
-        
+        <!-- Section 4 -->
+        <section class="py-5 d-flex align-items-center" id="four">
+            <div class="container py-5">
+                <div class="row text-center">
+                    <div class="col-lg-9 mx-auto">
+                        <h2 class="h1 mb-4">Meilleur Producteur</h2>
+                        <p class="font-italic mb-4 text-muted">Liste des profils des producteurs</p>
+                        <table class="table table-dark">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">First</th>
+                              <th scope="col">Last</th>
+                              <th scope="col">Handle</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td>@mdo</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">2</th>
+                              <td>Jacob</td>
+                              <td>Thornton</td>
+                              <td>@fat</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">3</th>
+                              <td>Larry</td>
+                              <td>the Bird</td>
+                              <td>@twitter</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section 5 -->
+        <section class="py-5 d-flex align-items-center" id="five">
+            <div class="container py-5">
+                <div class="row text-center">
+                    <div class="col-lg-9 mx-auto">
+                        <h2 class="h1 mb-4">Témoignages</h2>
+                        <p class="font-italic mb-4 text-muted">Blablatez sur notre</p>
+                        <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
             
         
 
