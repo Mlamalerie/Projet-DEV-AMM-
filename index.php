@@ -47,6 +47,48 @@
 
 
 
+        <!--   *************************************************************  -->
+        <!--   ************************** FOOTER  **************************  -->
+
+
+        <footer class="page-footer font-small stylish-color-dark pt-4">
+            <!-- Liens Footer -->
+            <div class="container text-center text-md-left">
+                <!-- Lignes -->
+                <div class="row">
+                    <!-- Colonnes -->
+                    <div class="col-md-4 mx-auto">
+                        <!-- Contenu -->
+                        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+                        <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+                         consectetur
+                        adipisicing elit.</p>
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+            
+
+
+
+
+
+
+        </footer>
+
+
+
+
+
+
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
