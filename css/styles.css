@@ -22,7 +22,9 @@
     color: rgb(32, 227, 236);
 }
 
-/s
+.dropdown-item {/*couleur blanche option du sous-menu*/
+    color: white ;
+}
 
 .dropdown-item:focus, .dropdown-item:hover {/*couleur sous menu et bleu turquoie qd tu passes sur les mots*/
     color: rgb(32, 227, 236);
@@ -88,5 +90,142 @@ header .overlay-sombre {
   header video {
     display: none;
   }
+}
 
+/* Bouton Inscription */
+.btn-danger {
+    color: #fff;
+    background-color: rgba(121, 6, 247, 0.9);
+    border-color: rgba(121, 6, 247, 0.9);
+}
+.btn-danger:hover {/*qd on passe sur le bouton*/
+    color: #fff;
+    background-color: #4e0f88;
+    border-color: #4e0f88;
+}
+.btn-danger:not(:disabled):not(.disabled).active, .btn-danger:not(:disabled):not(.disabled):active, .show>.btn-danger.dropdown-toggle {
+    color: #fff;
+    background-color: rgba(121, 6, 247, 0.9);
+    border-color: rgba(121, 6, 247, 0.9);
+}
+.btn-danger.focus, .btn-danger:focus {
+    color: #fff;
+    background-color:#4e0f88;
+    border-color: #4e0f88;
+    box-shadow: 0 0 0 0.2rem #4e0f88;
+}
+
+
+
+
+/******** SECTIONS *****/
+/*section 1 */
+section:first-of-type {
+    background: linear-gradient(to right, #5d4157, #a8caba);
+}
+
+/*section 2 */
+section:nth-of-type(2) {
+    background: #14181b;
+}
+
+/* section 3 */
+section:nth-of-type(3) {
+    background: #121618;
+}
+
+/* section 4 */
+section:nth-of-type(4) {
+    background: #121618;
+}
+
+/* section 5 */
+section:nth-of-type(5) {
+    background: #121618;
+}
+
+
+
+.mb-4, .my-4 {/*couleur titres de section*/
+    color: white;
+}
+
+
+
+
+
+/*****FOOTER*****/
+
+body {
+  background: #ff5f6d;
+  background: -webkit-linear-gradient(to right, #ff5f6d, white);
+  background: linear-gradient(to right, #ff5f6d, white);
+  min-height: 100vh;
+}
+
+#button-addon1 {
+  color: white;
+}
+
+i {
+  color: white;
+}
+
+.form-control::placeholder {
+  font-size: 0.95rem;
+  color: #aaa;
+  font-style: italic;
+}
+
+.form-control.shadow-0:focus {
+  box-shadow: none;
+}
+
+.bg-info {
+    background-color: #7728b2!important;
+}
+
+
+.text-mute {
+    color: #f8f9fa!important;
+}
+
+.social-link {
+    color: #fff;
+    background: #7728b2;
+    display: block;
+    transition: all 0.3s;
+}
+
+.social-link:hover, .social-link:focus {
+    color: white;
+    text-decoration: none;
+}
+
+.social-link .icon {
+    width: 4rem;
+    text-align: center;
+    margin-right: 1.5rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.social-facebook {
+    background: #7728b2;
+}
+
+.social-facebook:hover, .social-facebook:focus {
+    background: #2d4373;
+}
+
+.social-link-gradient.social-facebook {
+    background: linear-gradient(to right, #3b5998, #718dc8);
+}
+
+
+.social-twitter {
+    background: #7728b2;
+}
+
+.social-twitter:hover, .social-twitter:focus {
+    background: #0087ba;
 }
