@@ -43,7 +43,8 @@
                 </div>
             </div>
         </header>
-        
+
+
         <!-- ******* Section 1 -->
         <section class="py-5 d-flex align-items-center" id="one">
             <div class="container py-5">
@@ -51,7 +52,50 @@
                     <div class="col-lg-9 mx-auto" id="tendances">
                         <h2 class="h1 mb-4">Les Produits Tendances du Moment</h2>
                         <p class="font-italic mb-4 text-muted">Ici on mettra les prods Tendances</p>
-                        <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
+
+                        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                          <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                          </ol>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img src="img/roddy.jpg" class="d-block w-100" alt="...">
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Nom de la prod : </h5>
+                                <p>Nom du producteur : </p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img src="img/bigmetro.jpg" class="d-block w-100" alt="...">
+                              <div class="carousel-caption d-none d-md-block">
+                                 <h5>Nom de la prod : </h5>
+                                <p>Nom du producteur : </p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img src="img/luv.jpg" class="d-block w-100" alt="...">
+                              <div class="carousel-caption d-none d-md-block">
+                                 <h5>Nom de la prod : </h5>
+                                <p>Nom du producteur : </p>
+                              </div>
+                            </div>
+                          </div>
+                          <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                          <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </div>
+
+
+
+
+                     <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
                     </div>
                 </div>
             </div>
@@ -64,6 +108,49 @@
                     <div class="col-lg-9 mx-auto" id="topventes">
                         <h2 class="h1 mb-4">TOP des ventes</h2>
                         <p class="font-italic mb-4 text-muted">On fera une liste avec les produits les vendus.</p>
+
+
+
+                       <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
+                          <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleCaptions1" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleCaptions1" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleCaptions1" data-slide-to="2"></li>
+                          </ol>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img src="img/roddy.jpg" class="d-block w-100" alt="...">
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Nom de la prod : </h5>
+                                <p>Nom du producteur : </p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img src="img/bigmetro.jpg" class="d-block w-100" alt="...">
+                              <div class="carousel-caption d-none d-md-block">
+                                 <h5>Nom de la prod : </h5>
+                                <p>Nom du producteur : </p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img src="img/luv.jpg" class="d-block w-100" alt="...">
+                              <div class="carousel-caption d-none d-md-block">
+                                 <h5>Nom de la prod : </h5>
+                                <p>Nom du producteur : </p>
+                              </div>
+                            </div>
+                          </div>
+                          <a class="carousel-control-prev" href="#carouselExampleCaptions1" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                          <a class="carousel-control-next" href="#carouselExampleCaptions1" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </div>
+
+
                         <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
                     </div>
                 </div>

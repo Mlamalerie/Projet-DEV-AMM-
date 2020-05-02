@@ -133,7 +133,6 @@ header .overlay-sombre {
 
 
 
-
 /******** SECTIONS *****/
 /*section 1 */
 section:first-of-type {
@@ -170,15 +169,37 @@ section:nth-of-type(5) {
 
 
 
+
+
+
+/* carousel */
+.d-block {
+    width: 30%!important;
+    margin-left: 290px;
+}
+.h5, h5 {
+     margin-right: 450px;
+}
+.carousel-caption p{
+    margin-right: 450px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*****FOOTER*****/
 
-/* ça la, c'est pas bon, copier coller paas betement svp, le style ci dessus est inutile */
-body {
-  background: #ff5f6d;
-  background: -webkit-linear-gradient(to right, #ff5f6d, white);
-  background: linear-gradient(to right, #ff5f6d, white);
-  min-height: 100vh;
-}
 
 #button-addon1 {
   color: white;
@@ -250,3 +271,4 @@ i {
 .social-youtube:hover, .social-youtube:focus {
     background: #cd201f;
 }
+
