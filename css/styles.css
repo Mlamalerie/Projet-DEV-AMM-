@@ -227,7 +227,7 @@ i {
 }
 
 .social-facebook {
-    background: #1cceff; //*inutile wsh*// 
+    background: #7728b2;
 }
 
 .social-facebook:hover, .social-facebook:focus {
@@ -245,4 +245,8 @@ i {
 
 .social-twitter:hover, .social-twitter:focus {
     background: #0087ba;
+}
+
+.social-youtube:hover, .social-youtube:focus {
+    background: #cd201f;
 }
