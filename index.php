@@ -163,7 +163,6 @@
                     <div class="col-lg-9 mx-auto">
                         <h2 class="h1 mb-4">Comment ça marche?</h2>
                         <p class="font-italic mb-4 text-muted">Descritption du fonctionnement du site</p>
-                        <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
                     </div>
                 </div>
             </div>
