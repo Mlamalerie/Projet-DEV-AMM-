@@ -12,13 +12,10 @@ if(!empty($_POST)){
 
     if(isset($_POST['inscription'])){
         $pseudo = (String) trim($pseudo);
-        $email = (String) trim($email);
+        $email = (String) strtolower(trim($email));
         $motdepasse = (String) trim($motdepasse);
-        $prenom = (String) trim($prenom);
-        $nom = (String) trim($nom);
 
-
-        $departement = (int) $departement;
+        $pays = (int) $pays;
 
         $naiss_jour = (int) $naiss_jour;
         $naiss_mois = (int) $naiss_mois;
@@ -26,99 +23,103 @@ if(!empty($_POST)){
 
         $date_naissance = (String) null;
 
-        // Verif-Sécurité
+        // Verification pseudo motdepasse et email
         if(empty($pseudo)) {
             $ok = false;
-            $err_pseudo = "Veuillez renseigner ce champ !";echo "***x";
+            $err_pseudo = "Veuillez renseigner ce champ !";
 
+        } else {
+            $req = $BDD->prepare("SELECT user_id
+                            FROM user
+                            WHERE user_pseudo = ? 
+                                ");
+            $req->execute(array($pseudo));
+            $user = $req->fetch();
+
+            if(isset($user['user_id'])){
+                $ok = false;
+                $err_pseudo = "Ce pseudo existe déjé !";
+            }
         }
-        if(empty($motdepasse)) {
+        if(empty($motdepasse)) { // si le champ mot de passe est vide
             $ok = false;
-            $err_motdepasse = "Veuillez renseigner ce champ !";echo "**v*";
-
-        }
-
-        if(empty($nom)) {
-            $ok = false;
-            $err_nom = "Veuillez renseigner ce champ !";echo "**b*";
-
-        }
-        if(empty($prenom)) {
-            $ok = false;
-            $err_prenom = "Veuillez renseigner ce champ !";echo "*c**";
+            $err_motdepasse = "Veuillez renseigner ce champ !";
 
         }
         if(empty($email)) {
             $ok = false;
-            $err_email = "Veuillez renseigner ce champ !";echo "*t**";
+            $err_email = "Veuillez renseigner ce champ !";
 
-        }
-        // verif date de naissance
-        $verif_jour = array();
-        for($i = 1; $i <= 31; $i++) {
-            array_push($verif_jour,$i);
+        }else {
+            $req = $BDD->prepare("SELECT user_id
+                            FROM user
+                            WHERE user_email = ? 
+                                ");
+            $req->execute(array($email));
+            $user = $req->fetch();
+
+            if(isset($user['user_id'])){
+                $ok = false;
+                $err_email = "Cette e-mail existe déjé !";
+            }
         }
 
-        if(!in_array($naiss_jour, $verif_jour )) {
+        // verification date de naissance
+
+        if($naiss_jour < 1 || $naiss_jour > 31) {
             $ok = false;
-            $err_naiss_jour = "Veuillez renseigner ce champ !";echo "**zz*";
+            $err_naiss_jour = "Veuillez renseigner ce champ !";
 
         }
-
-        $verif_mois = array();
-        for($i = 1; $i <= 12; $i++) {
-            array_push($verif_mois,$i);
-        }
-
-        if(!in_array($naiss_mois, $verif_mois )) {
+        if($naiss_mois < 1 || $naiss_mois > 12){
             $ok = false;
-            $err_naiss_mois = "Veuillez renseigner ce champ !";echo "*eyez**";
+            $err_naiss_mois = "Veuillez renseigner ce champ !";
 
         }
-
-
         $aaa_debut = 1950; $aaa_n = 70;
 
-        $verif_annees = array();
-        for($i = 0; $i <$aaa_n ; $i++) {
-            array_push($verif_annees,($aaa_debut+$i));
-        }
-       
-        if(!in_array($naiss_annees, $verif_annees )) {
+        if($naiss_annees < 1900 || $naiss_annees > 2020 ){
             $ok = false;
-            $err_naiss_annees = "Veuillez renseigner ce champ !";echo "*ee**";
+            $err_naiss_annees = "Veuillez renseigner ce champ !";
 
         }
 
         if (!checkdate($naiss_jour,$naiss_mois,$naiss_annees)){
             $ok = false;
-            $err_date = "Date fausse !";echo "**::*";
+            $err_date = "Date fausse !";
 
         }else {
             $date_naissance = $naiss_annees .'-'. $naiss_mois.'-'.$naiss_jour;
 
         }
-        // veri departement 
+        // veri pays 
+
+        $req = $BDD->prepare("SELECT id 
+                            FROM pays
+                            WHERE code = ?");
+        $req->execute(array($pays));
+        $verif_pays = $req->fetch();
 
 
-        $verif_departement = array();
-        for($i = 1; $i <100000; $i++) {
-            array_push($verif_departement,$i);
-        }
-
-        if(!in_array($departement, $verif_departement )) {
+        if(!isset($verif_pays['id'])){
             $ok = false;
-            $err_departement = "Veuillez renseigner ce champ !";echo "*aaa**";
-
+            $err_pays = "Veuillez renseigner ce champ !";
         }
+
         if($ok) {
 
-            $date_inscription = date("Y-m-d");
+            $date_inscription = date("Y-m-d H:i:s"); 
+            $motdepasse = crypt($motdepasse, '$6$rounds=5000$grzgirjzgrpzhte95grzegruoRZPrzg8$');
+
 
             // preparer requete
-            $req = $BDD->prepare("INSERT INTO user (user_pseudo,user_mail,user_password,user_prenom,user_nom,user_datenaissance,user_departement,user_dateinscription,user_dateconnexion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"); 
+            $req = $BDD->prepare("INSERT INTO user (user_pseudo,user_email,user_password,user_datenaissance,user_pays,user_dateinscription,user_dateconnexion) VALUES (?, ?, ?, ?, ?, ?, ?)"); 
 
-            $req->execute(array($pseudo,$email,$motdepasse,$prenom,$nom,$date_naissance,$departement,$date_inscription,$date_inscription));
+            $req->execute(array($pseudo,$email,$motdepasse,$date_naissance,$pays,$date_inscription,$date_inscription));
+
+            header('Location: index.php');
+            exit;
+
         }
 
 
@@ -138,6 +139,7 @@ if(!empty($_POST)){
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="css/inscription.css">
         <title>Inscription</title>
     </head>
     <body>
@@ -153,55 +155,60 @@ if(!empty($_POST)){
         <!--   *************************************************************  -->
         <!--   ************************** Form  **************************  -->
         <form method="post">
-            <div class="form-group">
-                <label for="nom">Comment vous appelez vous ?</label>
-                <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom">
-                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prenom">
-            </div>
 
+            <!--PSEUDO-->
             <div class="form-group">
                 <?php
-
                 if(isset($err_pseudo)){
                     echo $err_pseudo;
                 } 
                 ?>
                 <label for="pseudo">Votre Pseudo</label>
-                <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo">
+                <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Mettez un pseudo pour votre profil" value="<?php if(isset($pseudo)){echo $pseudo;}?>">
             </div>
-
+            <!--EMAIL-->
             <div class="form-group">
-<?php
+                <?php
 
-                if(isset($err_pseudo)){
-                    echo $err_pseudo;
+                if(isset($err_email)){
+                    echo $err_email;
                 } 
                 ?>
                 <label for="email">Votre Adresse Email</label>
-                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Adresse Email">
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Tapez votre e-mail" value="<?php if(isset($email)){echo $email;}?>">
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
+            <!--MOT DE PASSE-->
             <div class="form-group">
-               <?php
+                <?php
 
-                if(isset($err_pseudo)){
-                    echo $err_pseudo;
+                if(isset($err_motdepasse)){
+                    echo $err_motdepasse;
                 } 
                 ?>
                 <label for="motdepasse">Mot de passe</label>
-                <input type="password" class="form-control" id="motdepasse" name ="motdepasse" placeholder="Mot de passe">
+                <input type="password" class="form-control" id="motdepasse" name ="motdepasse" placeholder="Tapez votre mot de passe">
             </div>
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
-
+            <!--DATE DE NAISSANCE-->
             <div class="form-group">
-               <?php
+                <?php
 
-                if(isset($err_pseudo)){
-                    echo $err_pseudo;
+                if(isset($err_naiss_jour)){
+                    echo $err_naiss_jour;
                 } 
+                if(isset($err_naiss_mois)){
+                    echo $err_naiss_mois;
+                }
+                if(isset($err_naiss_annes)){
+                    echo $err_naiss_annes;
+                }
+                if(isset($err_date)){
+                    echo $err_date;
+                }
                 ?>
                 <select name="naiss_jour">
                     <?php
@@ -225,16 +232,40 @@ if(!empty($_POST)){
                 </select>
                 <select name="naiss_annees">
                     <?php
-
                     listannee(1950,70);
                     ?>
                 </select> 
             </div>
             <div class="form-group">
-                <select name="departement">
-                    <option value="1">Ain </option>
-                    <option value="2">Aisne</option>
+                <select name="pays">
+                    <?php
+                    if(isset($pays)){
+                        $req = $BDD->prepare("SELECT code,nom_fr_fr
+                            FROM pays 
+                            WHERE code = ?
+                            ");
+                        $req->execute(array($pays));
+                        $voir_pays = $req->fetch();
+                    ?>
+                    <option value="<?= $voir_pays['code'] ?>"> <?= mb_strtoupper($voir_pays['nom_fr_fr']) ?> </option>
 
+
+
+                    <?php
+                    }
+
+                    $req = $BDD->prepare("SELECT code,nom_fr_fr  
+                            FROM pays 
+                             ORDER BY pays.nom_fr_fr ASC");
+                    $req->execute();
+                    $voir_pays = $req->fetchAll();
+
+                    foreach($voir_pays as $vp) {
+                    ?>     
+                    <option value="<?= $vp['code'] ?>"> <?= mb_strtoupper($vp['nom_fr_fr']) ?> </option>
+                    <?php
+                    }
+                    ?>
                 </select>
 
             </div>
