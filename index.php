@@ -48,7 +48,7 @@
         <section class="py-5 d-flex align-items-center" id="one">
             <div class="container py-5">
                 <div class="row text-center">
-                    <div class="col-lg-9 mx-auto">
+                    <div class="col-lg-9 mx-auto" id="tendances">
                         <h2 class="h1 mb-4">Les Produits Tendances du Moment</h2>
                         <p class="font-italic mb-4 text-muted">Ici on mettra les prods Tendances</p>
                         <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
@@ -61,7 +61,7 @@
         <section class="py-5 d-flex align-items-center" id="two">
             <div class="container py-5">
                 <div class="row text-center">
-                    <div class="col-lg-9 mx-auto">
+                    <div class="col-lg-9 mx-auto" id="topventes">
                         <h2 class="h1 mb-4">TOP des ventes</h2>
                         <p class="font-italic mb-4 text-muted">On fera une liste avec les produits les vendus.</p>
                         <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
@@ -86,7 +86,7 @@
         <section class="py-5 d-flex align-items-center" id="four">
             <div class="container py-5">
                 <div class="row text-center">
-                    <div class="col-lg-9 mx-auto">
+                    <div class="col-lg-9 mx-auto" id="bestprod">
                         <h2 class="h1 mb-4">Meilleur Producteur</h2>
                         <p class="font-italic mb-4 text-muted">Liste des profils des producteurs</p>
                         <table class="table table-dark">
@@ -128,7 +128,7 @@
         <section class="py-5 d-flex align-items-center" id="five">
             <div class="container py-5">
                 <div class="row text-center">
-                    <div class="col-lg-9 mx-auto">
+                    <div class="col-lg-9 mx-auto" id="temoignages">
                         <h2 class="h1 mb-4">Témoignages</h2>
                         <p class="font-italic mb-4 text-muted">Blablatez sur notre</p>
                         <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
@@ -181,10 +181,10 @@
         <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
           <h6 class="text-uppercase font-weight-bold mb-4">Explorer</h6>
           <ul class="list-unstyled mb-0">
-            <li class="mb-2"><a href="#" class="text-mute">Tendances</a></li>
-            <li class="mb-2"><a href="#" class="text-mute">Top ventes</a></li>
-            <li class="mb-2"><a href="#" class="text-mute">Nos meilleurs producteurs</a></li>
-            <li class="mb-2"><a href="#" class="text-mute">Témoignages</a></li>
+            <li class="mb-2"><a href="#tendances" class="text-mute">Tendances</a></li>
+            <li class="mb-2"><a href="#topventes" class="text-mute">Top ventes</a></li>
+            <li class="mb-2"><a href="#bestprod" class="text-mute">Nos meilleurs producteurs</a></li>
+            <li class="mb-2"><a href="#temoignages" class="text-mute">Témoignages</a></li>
           </ul>
         </div>
         <div class="col-lg-4 col-md-6 mb-lg-0">
