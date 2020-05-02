@@ -40,6 +40,14 @@
                         <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span> Rechercher</button>
                       </div>
                     </form> -->
+                  <!-- 2eme test barre de recherche  <div class="container h-100">
+                      <div class="d-flex justify-content-center h-100">
+                        <div class="searchbar">
+                          <input class="search_input" type="text" name="" placeholder="Search...">
+                          <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                        </div>
+                      </div>
+                    </div> -->
                 </div>
             </div>
         </header>
@@ -50,8 +58,44 @@
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto">
                         <h2 class="h1 mb-4">Les Produits Tendances du Moment</h2>
-                        <p class="font-italic mb-4 text-muted">Ici on mettra les prods Tendances</p>
-                        <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
+                        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                          <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                          </ol>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img src="img/CG6.png" class="d-block w-100" alt="...">
+                              <div class="carousel-caption d-none d-md-block">
+                                <h5>Nom de la prod : </h5>
+                                <p>Nom du producteur : </p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img src="img/DB5.jpg" class="d-block w-100" alt="...">
+                              <div class="carousel-caption d-none d-md-block">
+                                 <h5>Nom de la prod : </h5>
+                                <p>Nom du producteur : </p>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <img src="img/MILS.jpg" class="d-block w-100" alt="...">
+                              <div class="carousel-caption d-none d-md-block">
+                                 <h5>Nom de la prod : </h5>
+                                <p>Nom du producteur : </p>
+                              </div>
+                            </div>
+                          </div>
+                          <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                          <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -126,15 +170,75 @@
         </section>
         <!-- Section 5 -->
         <section class="py-5 d-flex align-items-center" id="five">
-            <div class="container py-5">
-                <div class="row text-center">
-                    <div class="col-lg-9 mx-auto">
-                        <h2 class="h1 mb-4">Témoignages</h2>
-                        <p class="font-italic mb-4 text-muted">Blablatez sur notre</p>
-                        <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
+             <div class="container">
+                 <h2 class="h1 mb-4">Témoignages</h2>
+                    <div class="row">
+                        <div class="col-lg-10 col-xl-8 mx-auto">
+                            <div class="p-5 bg-white shadow rounded">
+                                <div class="carousel slide" id="carouselExampleIndicators" data-ride="carousel">
+                                    <ol class="carousel-indicators mb-0">
+                                        <li class="active" data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                    </ol>
+
+
+                                    <div class="carousel-inner px-5 pb-4">
+                                        <!-- Carousel slide-->
+                                        <div class="carousel-item active">
+                                            <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-1_ffutqr.jpg" alt="" width="75">
+                                                <div class="media-body ml-3">
+                                                    <blockquote class="blockquote border-0 p-0">
+                                                        <p class="font-italic lead"> <i class="fa fa-quote-left mr-3 text-success"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                        <footer class="blockquote-footer">Someone famous in
+                                                            <cite title="Source Title">Source Title</cite>
+                                                        </footer>
+                                                    </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-item">
+                                            <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-3_hdxocq.jpg" alt="" width="75">
+                                                <div class="media-body ml-3">
+                                                    <blockquote class="blockquote border-0 p-0">
+                                                        <p class="font-italic lead"> <i class="fa fa-quote-left mr-3 text-success"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                        <footer class="blockquote-footer">Someone famous in
+                                                            <cite title="Source Title">Source Title</cite>
+                                                        </footer>
+                                                    </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-item">
+                                            <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-2_gibm2s.jpg" alt="" width="75">
+                                                <div class="media-body ml-3">
+                                                    <blockquote class="blockquote border-0 p-0">
+                                                        <p class="font-italic lead"> <i class="fa fa-quote-left mr-3 text-success"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                        <footer class="blockquote-footer">Someone famous in
+                                                            <cite title="Source Title">Source Title</cite>
+                                                        </footer>
+                                                    </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <a class="carousel-control-prev width-auto" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                        <i class="fa fa-angle-left text-dark text-lg"></i>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next width-auto" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                        <i class="fa fa-angle-right text-dark text-lg"></i>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
        
             

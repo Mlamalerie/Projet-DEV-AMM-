@@ -19,7 +19,6 @@
 .bg-light {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Ombre*/
     background-color: #262c33!important;
-    
 }
 
 .navbar-light .navbar-brand {/*violet pour WeBeats*/
@@ -96,6 +95,7 @@ header .overlay-sombre {
   z-index: 1;
 }
 
+
 @media (pointer: coarse) and (hover: none) {
   header {
     background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
@@ -111,8 +111,6 @@ header .overlay-sombre {
     color: #fff;
     background-color: rgba(121, 6, 247, 0.9);
     border-color: rgba(121, 6, 247, 0.9);
-   
-    
 }
 .btn-danger:hover {/*qd on passe sur le bouton*/
     color: #fff;
@@ -139,6 +137,17 @@ header .overlay-sombre {
 section:first-of-type {
     background: linear-gradient(to right, #5d4157, #a8caba);
 }
+/* carousel */
+.d-block {
+    width: 30%!important;
+    margin-left: 290px;
+}
+.h5, h5 {
+     margin-right: 450px;
+}
+.carousel-caption p{
+    margin-right: 450px;
+}
 
 /*section 2 */
 section:nth-of-type(2) {
@@ -147,7 +156,7 @@ section:nth-of-type(2) {
 
 /* section 3 */
 section:nth-of-type(3) {
-    background: #121618;
+    background: linear-gradient(to left, #7728b2, #121618);
 }
 
 /* section 4 */
@@ -158,6 +167,15 @@ section:nth-of-type(4) {
 /* section 5 */
 section:nth-of-type(5) {
     background: #121618;
+}
+
+/*Slides des avis*/
+.carousel-indicators li {
+    border: none;
+    background: #ccc;
+}
+.carousel-indicators li.active {
+    background: #28a745;
 }
 
 
