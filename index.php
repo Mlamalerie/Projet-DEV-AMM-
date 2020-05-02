@@ -159,20 +159,23 @@
         <section class="py-5 d-flex align-items-center" id="three">
             <div class="container py-5">
                 <div class="row text-center">
-                    <div class="col-lg-9 mx-auto">
+                    <div class="col-lg-9 mx-auto" id="ccm">
                         <h2 class="h1 mb-4">Comment ça marche?</h2>
                         
-                        <div>
+                        <div id="recherchez">
                             <h3>Recherchez</h3>
                             <p> Retrouvez de nombreuses productions au sein de notre catalogue.</p>
+                            <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/browse.svg">
                         </div>
-                        <div>
+                        <div id="achetez">
                             <h3>Achetez</h3>
                             <p>Choisissez la licence qui vous convient et ajoutez la au panier.</p>
+                            <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/buy.svg" width="100">
                         </div>
-                        <div>
+                        <div id="creez">
                             <h3>Créez</h3>
                             <p>Uploadez vos créations sur notre site et rejoignez de nombreux beatmakers</p>
+                            <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/create.svg">
                         </div>
 
 

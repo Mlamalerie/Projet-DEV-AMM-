@@ -217,19 +217,17 @@ section:nth-of-type(5) {
 
 
 /*Comment ca marche*/
-h3{
+#ccm h3{
   font-family: 'Montserrat', sans-serif;
   color: white;
+  margin-top: 40px;
 }
 
-
-
-
-
-
-
-
-
+#ccm p{
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  margin-bottom: 10px;
+}
 
 /*****FOOTER*****/
 
