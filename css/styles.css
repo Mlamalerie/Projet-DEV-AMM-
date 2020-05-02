@@ -96,7 +96,7 @@ header .overlay-sombre {
 /* *********************** */
 /* ******* SECTION 1 : blabla ******* */
 /* Bouton Inscription */
-.btn-danger {
+.btn-danger, .btn-danger:not(:disabled):not(.disabled).active, .btn-danger:not(:disabled):not(.disabled):active, .show>.btn-danger.dropdown-toggle {/*fb,twitter violet*/
     color: #fff;
     background-color: rgba(121, 6, 247, 0.9);
     border-color: rgba(121, 6, 247, 0.9);
@@ -105,11 +105,6 @@ header .overlay-sombre {
     color: #fff;
     background-color: #4e0f88;
     border-color: #4e0f88;
-}
-.btn-danger:not(:disabled):not(.disabled).active, .btn-danger:not(:disabled):not(.disabled):active, .show>.btn-danger.dropdown-toggle {
-    color: #fff;
-    background-color: rgba(121, 6, 247, 0.9);
-    border-color: rgba(121, 6, 247, 0.9);
 }
 .btn-danger.focus, .btn-danger:focus {
     color: #fff;
@@ -126,15 +121,12 @@ section:first-of-type {
     background: linear-gradient(to right, #5d4157, #a8caba);
 }
 /* carousel */
-.d-block {
+.d-block {/*les images des instrus*/
     width: 30%!important;
     margin-left: 290px;
 }
-.h5, h5 {
+.h5, h5, .carousel-caption p{/*Nom de la prod et nom du producteur*/
      margin-right: 450px;
-}
-.carousel-caption p{
-    margin-right: 450px;
 }
 
 /*section 2 */
@@ -171,17 +163,11 @@ section:nth-of-type(5) {
 .bg-white {/*couleur de fond*/
     background-color: #000000!important;
 }
-.font-italic{/*couleur des textes/avis*/
+.font-italic, .mb-4, .my-4 {/*couleur des textes/avis et couleur des titres de section*/
     color:white;
 }
 .text-dark {/*couleur des boutons*/
     color: rgb(32, 227, 236)!important;
-}
-
-
-
-.mb-4, .my-4 {/*couleur titres de section*/
-    color: white;
 }
 
 
@@ -204,11 +190,7 @@ section:nth-of-type(5) {
 /*****FOOTER*****/
 
 
-#button-addon1 {
-  color: white;
-}
-
-i { 
+#button-addon1, i {
   color: white;
 }
 
