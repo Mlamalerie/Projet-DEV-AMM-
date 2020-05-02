@@ -19,7 +19,6 @@
 .bg-light {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Ombre*/
     background-color: #262c33!important;
-    
 }
 
 .navbar-light .navbar-brand {/*violet pour WeBeats*/
@@ -96,6 +95,7 @@ header .overlay-sombre {
   z-index: 1;
 }
 
+
 @media (pointer: coarse) and (hover: none) {
   header {
     background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
@@ -111,8 +111,6 @@ header .overlay-sombre {
     color: #fff;
     background-color: rgba(121, 6, 247, 0.9);
     border-color: rgba(121, 6, 247, 0.9);
-   
-    
 }
 .btn-danger:hover {/*qd on passe sur le bouton*/
     color: #fff;
@@ -133,11 +131,21 @@ header .overlay-sombre {
 
 
 
-
 /******** SECTIONS *****/
 /*section 1 */
 section:first-of-type {
     background: linear-gradient(to right, #5d4157, #a8caba);
+}
+/* carousel */
+.d-block {
+    width: 30%!important;
+    margin-left: 290px;
+}
+.h5, h5 {
+     margin-right: 450px;
+}
+.carousel-caption p{
+    margin-right: 450px;
 }
 
 /*section 2 */
@@ -147,7 +155,7 @@ section:nth-of-type(2) {
 
 /* section 3 */
 section:nth-of-type(3) {
-    background: #121618;
+    background: linear-gradient(to left, #7728b2, #121618);
 }
 
 /* section 4 */
@@ -157,7 +165,28 @@ section:nth-of-type(4) {
 
 /* section 5 */
 section:nth-of-type(5) {
-    background: #121618;
+    background: linear-gradient(to left, #7728b2, rgb(119, 189, 193));
+}
+
+/*Slides des avis*/
+.carousel-indicators li {
+    border: none;
+    background: #ccc;
+}
+.carousel-indicators li.active{/*couleur mini-barres*/
+    background: rgb(32, 227, 236);
+}
+.text-success {/*couleur guillemets*/
+    color: rgb(32, 227, 236)!important;
+}
+.bg-white {/*couleur de fond*/
+    background-color: #000000!important;
+}
+.font-italic{/*couleur des textes/avis*/
+    color:white;
+}
+.text-dark {/*couleur des boutons*/
+    color: rgb(32, 227, 236)!important;
 }
 
 
@@ -170,15 +199,37 @@ section:nth-of-type(5) {
 
 
 
+
+
+
+/* carousel */
+.d-block {
+    width: 30%!important;
+    margin-left: 290px;
+}
+.h5, h5 {
+     margin-right: 450px;
+}
+.carousel-caption p{
+    margin-right: 450px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*****FOOTER*****/
 
-/* ça la, c'est pas bon, copier coller paas betement svp, le style ci dessus est inutile */
-body {
-  background: #ff5f6d;
-  background: -webkit-linear-gradient(to right, #ff5f6d, white);
-  background: linear-gradient(to right, #ff5f6d, white);
-  min-height: 100vh;
-}
 
 #button-addon1 {
   color: white;
@@ -227,7 +278,7 @@ i {
 }
 
 .social-facebook {
-    background: #1cceff; //*inutile wsh*// 
+    background: #7728b2;
 }
 
 .social-facebook:hover, .social-facebook:focus {
@@ -246,3 +297,8 @@ i {
 .social-twitter:hover, .social-twitter:focus {
     background: #0087ba;
 }
+
+.social-youtube:hover, .social-youtube:focus {
+    background: #cd201f;
+}
+
