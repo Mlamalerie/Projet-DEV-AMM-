@@ -149,8 +149,6 @@
                           </a>
                         </div>
 
-
-                        <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
                     </div>
                 </div>
             </div>
@@ -204,7 +202,6 @@
                             </tr>
                           </tbody>
                         </table>
-                        <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
                     </div>
                 </div>
             </div>
@@ -278,15 +275,6 @@
                                 </div>
                             </div>
                         </div>
-            <div class="container py-5">
-                <div class="row text-center">
-                    <div class="col-lg-9 mx-auto" id="temoignages">
-                        <h2 class="h1 mb-4">Témoignages</h2>
-                        <p class="font-italic mb-4 text-muted">Blablatez sur notre</p>
-                        <a class="btn btn-outline-light px-4 rounded-0 scroll-top" href="#">Back to top</a>
-                    </div>
-                </div>
-            </div>
             </div>
             </div>
         </section>
