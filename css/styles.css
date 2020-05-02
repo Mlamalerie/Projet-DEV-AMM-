@@ -165,7 +165,7 @@ section:nth-of-type(4) {
 
 /* section 5 */
 section:nth-of-type(5) {
-    background: #121618;
+    background: linear-gradient(to left, #7728b2, rgb(119, 189, 193));
 }
 
 /*Slides des avis*/
@@ -173,8 +173,20 @@ section:nth-of-type(5) {
     border: none;
     background: #ccc;
 }
-.carousel-indicators li.active {
-    background: #28a745;
+.carousel-indicators li.active{/*couleur mini-barres*/
+    background: rgb(32, 227, 236);
+}
+.text-success {/*couleur guillemets*/
+    color: rgb(32, 227, 236)!important;
+}
+.bg-white {/*couleur de fond*/
+    background-color: #000000!important;
+}
+.font-italic{/*couleur des textes/avis*/
+    color:white;
+}
+.text-dark {/*couleur des boutons*/
+    color: rgb(32, 227, 236)!important;
 }
 
 
