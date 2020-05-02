@@ -5,6 +5,7 @@ include_once("fichierfct.php");
 print_r($_POST);
 
 if(!empty($_POST)){
+
     extract($_POST); // si pas vide alors extraire le tableau, grace a ça on pourra directemet mettre le nom de la varilable en dur
 
     $ok = true;
@@ -28,79 +29,102 @@ if(!empty($_POST)){
         // Verif-Sécurité
         if(empty($pseudo)) {
             $ok = false;
-            $err_pseudo = "Veuillez renseigner ce champ !";
+            $err_pseudo = "Veuillez renseigner ce champ !";echo "***x";
 
         }
         if(empty($motdepasse)) {
             $ok = false;
-            $err_motdepasse = "Veuillez renseigner ce champ !";
+            $err_motdepasse = "Veuillez renseigner ce champ !";echo "**v*";
 
         }
 
         if(empty($nom)) {
             $ok = false;
-            $err_nom = "Veuillez renseigner ce champ !";
+            $err_nom = "Veuillez renseigner ce champ !";echo "**b*";
 
         }
         if(empty($prenom)) {
             $ok = false;
-            $err_prenom = "Veuillez renseigner ce champ !";
+            $err_prenom = "Veuillez renseigner ce champ !";echo "*c**";
 
         }
         if(empty($email)) {
             $ok = false;
-            $err_email = "Veuillez renseigner ce champ !";
+            $err_email = "Veuillez renseigner ce champ !";echo "*t**";
 
         }
         // verif date de naissance
-        $verif_jour = array(1,2,3);
+        $verif_jour = array();
+        for($i = 1; $i <= 31; $i++) {
+            array_push($verif_jour,$i);
+        }
 
         if(!in_array($naiss_jour, $verif_jour )) {
             $ok = false;
-            $err_naiss_jour = "Veuillez renseigner ce champ !";
+            $err_naiss_jour = "Veuillez renseigner ce champ !";echo "**zz*";
 
         }
 
-        $verif_mois = array(1,2,3);
+        $verif_mois = array();
+        for($i = 1; $i <= 12; $i++) {
+            array_push($verif_mois,$i);
+        }
 
         if(!in_array($naiss_mois, $verif_mois )) {
             $ok = false;
-            $err_naiss_mois = "Veuillez renseigner ce champ !";
+            $err_naiss_mois = "Veuillez renseigner ce champ !";echo "*eyez**";
 
         }
 
-        $verif_annees = array(1,2,3);
 
+        $aaa_debut = 1950; $aaa_n = 70;
+
+        $verif_annees = array();
+        for($i = 0; $i <$aaa_n ; $i++) {
+            array_push($verif_annees,($aaa_debut+$i));
+        }
+       
         if(!in_array($naiss_annees, $verif_annees )) {
             $ok = false;
-            $err_naiss_annees = "Veuillez renseigner ce champ !";
+            $err_naiss_annees = "Veuillez renseigner ce champ !";echo "*ee**";
 
         }
-        
+
         if (!checkdate($naiss_jour,$naiss_mois,$naiss_annees)){
-             $ok = false;
-            $err_date = "Date fausse !";
-            
+            $ok = false;
+            $err_date = "Date fausse !";echo "**::*";
+
         }else {
-            $date_naissance = $naiss_jour .'-'. $naiss_mois.'-'.$naiss_annees;
+            $date_naissance = $naiss_annees .'-'. $naiss_mois.'-'.$naiss_jour;
+
         }
-            // veri departement 
-        $verif_departement = array(1,2,3);
+        // veri departement 
+
+
+        $verif_departement = array();
+        for($i = 1; $i <100000; $i++) {
+            array_push($verif_departement,$i);
+        }
 
         if(!in_array($departement, $verif_departement )) {
             $ok = false;
-            $err_departement = "Veuillez renseigner ce champ !";
+            $err_departement = "Veuillez renseigner ce champ !";echo "*aaa**";
 
         }
         if($ok) {
+
             $date_inscription = date("Y-m-d");
-            
-            $req = $BDD->prepare("INSERT INTO(pseudo)"); // preparer requete
+
+            // preparer requete
+            $req = $BDD->prepare("INSERT INTO user (user_pseudo,user_mail,user_password,user_prenom,user_nom,user_datenaissance,user_departement,user_dateinscription,user_dateconnexion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"); 
+
+            $req->execute(array($pseudo,$email,$motdepasse,$prenom,$nom,$date_naissance,$departement,$date_inscription,$date_inscription));
         }
 
 
     }
 }
+
 ?>
 
 
@@ -128,7 +152,7 @@ if(!empty($_POST)){
         <h1>Inscription</h1>
         <!--   *************************************************************  -->
         <!--   ************************** Form  **************************  -->
-        <form action="" method="post">
+        <form method="post">
             <div class="form-group">
                 <label for="nom">Comment vous appelez vous ?</label>
                 <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom">
@@ -136,21 +160,34 @@ if(!empty($_POST)){
             </div>
 
             <div class="form-group">
+                <?php
+
+                if(isset($err_pseudo)){
+                    echo $err_pseudo;
+                } 
+                ?>
                 <label for="pseudo">Votre Pseudo</label>
                 <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo">
             </div>
 
             <div class="form-group">
-                <?php
-if(empty($err_pseudo)){
-    echo $err_pseudo;
-} 
+<?php
+
+                if(isset($err_pseudo)){
+                    echo $err_pseudo;
+                } 
                 ?>
                 <label for="email">Votre Adresse Email</label>
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Adresse Email">
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
+               <?php
+
+                if(isset($err_pseudo)){
+                    echo $err_pseudo;
+                } 
+                ?>
                 <label for="motdepasse">Mot de passe</label>
                 <input type="password" class="form-control" id="motdepasse" name ="motdepasse" placeholder="Mot de passe">
             </div>
@@ -160,6 +197,12 @@ if(empty($err_pseudo)){
             </div>
 
             <div class="form-group">
+               <?php
+
+                if(isset($err_pseudo)){
+                    echo $err_pseudo;
+                } 
+                ?>
                 <select name="naiss_jour">
                     <?php
 
@@ -183,7 +226,7 @@ if(empty($err_pseudo)){
                 <select name="naiss_annees">
                     <?php
 
-                    listannee(1930,80);
+                    listannee(1950,70);
                     ?>
                 </select> 
             </div>

@@ -2,7 +2,7 @@
     <a class="navbar-brand" href="#">
         <img src="https://getbootstrap.com/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
     </a>
-    <a class="navbar-brand" href="#">WeBeats</a>
+    <a class="navbar-brand" href="index.php">WeBeats</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

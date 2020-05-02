@@ -1,4 +1,17 @@
 
+/* ******* IMPORT ******* */
+/*********************************************/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+/* ************************************************ */
+/* ********* BODY (toute la page) ******** */
+
+
+
+
+
+
 /* *********************** */
 /* ******* NAV BAR ******* */
 
@@ -41,7 +54,7 @@
 
 
 /* *****************s****** */
-/* BACKGROUND VIDEO HEADER */
+/* SECTION 0 : BACKGROUND VIDEO + Title */
 
 header {
   position: relative;
@@ -91,12 +104,15 @@ header .overlay-sombre {
     display: none;
   }
 }
-
+/* *********************** */
+/* ******* SECTION 1 : blabla ******* */
 /* Bouton Inscription */
 .btn-danger {
     color: #fff;
     background-color: rgba(121, 6, 247, 0.9);
     border-color: rgba(121, 6, 247, 0.9);
+   
+    
 }
 .btn-danger:hover {/*qd on passe sur le bouton*/
     color: #fff;
@@ -156,6 +172,7 @@ section:nth-of-type(5) {
 
 /*****FOOTER*****/
 
+/* ça la, c'est pas bon, copier coller paas betement svp, le style ci dessus est inutile */
 body {
   background: #ff5f6d;
   background: -webkit-linear-gradient(to right, #ff5f6d, white);
@@ -167,7 +184,7 @@ body {
   color: white;
 }
 
-i {
+i { 
   color: white;
 }
 
@@ -210,7 +227,7 @@ i {
 }
 
 .social-facebook {
-    background: #7728b2;
+    background: #1cceff; //*inutile wsh*// 
 }
 
 .social-facebook:hover, .social-facebook:focus {
@@ -223,7 +240,7 @@ i {
 
 
 .social-twitter {
-    background: #7728b2;
+    background: #7728b2; /* inutile wsh faite pareil en bas (en haut aussi, supprimer les choses qui servent à rien et mettez les css equivalet dans les mm {} */
 }
 
 .social-twitter:hover, .social-twitter:focus {
