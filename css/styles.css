@@ -21,29 +21,18 @@
     background-color: #262c33!important;
 }
 
-.navbar-light .navbar-brand {/*violet pour WeBeats*/
+.navbar-light .navbar-brand, .navbar-light .navbar-nav .nav-link, .dropdown-item  {/*violet pour WeBeats, couleur texte navbar et couleur option du sous-menu */
     color: white;
 }
 
-.navbar-light .navbar-nav .nav-link {/*couleur texte navbar*/
-    color: #f8f9fa;
-}
-
-
-.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover { /*bleu turquois qd on passe sur les mots de la navbar*/
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover { /*bleu turquoise qd on passe sur les mots de la navbar*/
     color: rgb(32, 227, 236);
 }
-
-.dropdown-item {/*couleur blanche option du sous-menu*/
-    color: white ;
-}
-
 .dropdown-item:focus, .dropdown-item:hover {/*couleur sous menu et bleu turquoie qd tu passes sur les mots*/
     color: rgb(32, 227, 236);
     text-decoration: none;
     background-color: #1d2124;
 }
-
 
 .dropdown-menu{ /* couleur fond sous menu
     */
@@ -199,35 +188,6 @@ section:nth-of-type(5) {
 
 
 
-
-
-
-/* carousel */
-.d-block {
-    width: 30%!important;
-    margin-left: 290px;
-}
-.h5, h5 {
-     margin-right: 450px;
-}
-.carousel-caption p{
-    margin-right: 450px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*****FOOTER*****/
 
 
@@ -264,7 +224,6 @@ i {
     display: block;
     transition: all 0.3s;
 }
-
 .social-link:hover, .social-link:focus {
     color: white;
     text-decoration: none;
@@ -277,7 +236,7 @@ i {
     border-right: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.social-facebook {
+.social-facebook, .social-twitter, .social-youtube{
     background: #7728b2;
 }
 
@@ -287,11 +246,6 @@ i {
 
 .social-link-gradient.social-facebook {
     background: linear-gradient(to right, #3b5998, #718dc8);
-}
-
-
-.social-twitter {
-    background: #7728b2; /* inutile wsh faite pareil en bas (en haut aussi, supprimer les choses qui servent à rien et mettez les css equivalet dans les mm {} */
 }
 
 .social-twitter:hover, .social-twitter:focus {
