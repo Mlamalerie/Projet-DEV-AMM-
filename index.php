@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
         <title>WeBeats</title>
     </head>
     <body>
@@ -158,9 +159,26 @@
         <section class="py-5 d-flex align-items-center" id="three">
             <div class="container py-5">
                 <div class="row text-center">
-                    <div class="col-lg-9 mx-auto">
+                    <div class="col-lg-9 mx-auto" id="ccm">
                         <h2 class="h1 mb-4">Comment ça marche?</h2>
-                        <p class="font-italic mb-4 text-muted">Descritption du fonctionnement du site</p>
+                        
+                        <div id="recherchez">
+                            <h3>Recherchez</h3>
+                            <p> Retrouvez de nombreuses productions au sein de notre catalogue.</p>
+                            <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/browse.svg">
+                        </div>
+                        <div id="achetez">
+                            <h3>Achetez</h3>
+                            <p>Choisissez la licence qui vous convient et ajoutez la au panier.</p>
+                            <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/buy.svg" width="100">
+                        </div>
+                        <div id="creez">
+                            <h3>Créez</h3>
+                            <p>Uploadez vos créations sur notre site et rejoignez de nombreux beatmakers</p>
+                            <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/create.svg">
+                        </div>
+
+
                     </div>
                 </div>
             </div>
