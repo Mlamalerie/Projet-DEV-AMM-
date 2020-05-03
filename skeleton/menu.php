@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark blanc" >
     <a class="navbar-brand" href="#">
         <img src="https://getbootstrap.com/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
     </a>
@@ -8,23 +8,23 @@
     </button>
     <!--            Menu droite -->
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-md-auto">
+        <ul class="navbar-nav ml-md-auto" >
             <li class="nav-item ">
                 <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
             </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="blanc">
                     Genres
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Afro Beats</a>
-                    <a class="dropdown-item" href="#">Agressif</a>
-                    <a class="dropdown-item" href="#">Drill</a>
-                    <a class="dropdown-item" href="#">Electro</a>
-                    <a class="dropdown-item" href="#">Trap</a>
+                    <a class="dropdown-item" href="#" id="blanc">Afro Beats</a>
+                    <a class="dropdown-item" href="#" id="blanc">Agressif</a>
+                    <a class="dropdown-item" href="#" id="blanc">Drill</a>
+                    <a class="dropdown-item" href="#" id="blanc">Electro</a>
+                    <a class="dropdown-item" href="#" id="blanc">Trap</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Free Beats</a>
+                    <a class="dropdown-item" href="#" id="blanc">Free Beats</a>
                 </div>
             </li>
 
@@ -32,7 +32,7 @@
                 <a class="nav-link btn" href="connexion.php">Se connecter</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link btn btn-danger" href="inscription.php">S'inscrire</a>
+                <a class="nav-link btn btn-danger" href="inscription.php" id="inscription">S'inscrire</a>
             </li>
         </ul>
     </div>

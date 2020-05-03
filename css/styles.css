@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
 /* ************************************************ */
-/* ********* BODY (toute la page) ******** */
+                    /* ********* BODY (toute la page) ******** */
 
 
 
@@ -13,36 +13,33 @@
 
 
 /* *********************** */
-/* ******* NAV BAR ******* */
+                /* ******* NAV BAR ******* */
 
 
 .bg-light {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Ombre*/
     background-color: #262c33!important;
 }
-
-.navbar-light .navbar-brand, .navbar-light .navbar-nav .nav-link, .dropdown-item  {/*violet pour WeBeats, couleur texte navbar et couleur option du sous-menu */
-    color: white;
+.navbar-light, .navbar-nav, .nav-link ,.navbar-brand{
+    color: white!important;
 }
-
 .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover { /*bleu turquoise qd on passe sur les mots de la navbar*/
-    color: rgb(32, 227, 236);
+    color: rgb(183, 232, 234);
 }
-.dropdown-item:focus, .dropdown-item:hover {/*couleur sous menu et bleu turquoie qd tu passes sur les mots*/
+.dropdown-item:focus, .dropdown-item:hover {/*couleur sous menu et bleu turquoise qd tu passes sur les mots*/
     color: rgb(32, 227, 236);
     text-decoration: none;
     background-color: #1d2124;
 }
 
-.dropdown-menu{ /* couleur fond sous menu
-    */
+.dropdown-menu{ /* couleur fond sous menu*/
     background-color: #1d2124;
 }
 
 
 
 /* *****************s****** */
-/* SECTION 0 : BACKGROUND VIDEO + Title */
+                /* SECTION 0 : HEADER = BACKGROUND VIDEO + Title */
 
 header {
   position: relative;
@@ -93,20 +90,18 @@ header .overlay-sombre {
     display: none;
   }
 }
-/* *********************** */
-/* ******* SECTION 1 : blabla ******* */
 /* Bouton Inscription */
-.btn-danger, .btn-danger:not(:disabled):not(.disabled).active, .btn-danger:not(:disabled):not(.disabled):active, .show>.btn-danger.dropdown-toggle {/*fb,twitter violet*/
+#inscription {/*bouton violet*/
     color: #fff;
     background-color: rgba(121, 6, 247, 0.9);
     border-color: rgba(121, 6, 247, 0.9);
 }
-.btn-danger:hover {/*qd on passe sur le bouton*/
+#inscription:hover {/*qd on passe sur le bouton*/
     color: #fff;
     background-color: #4e0f88;
     border-color: #4e0f88;
 }
-.btn-danger.focus, .btn-danger:focus {
+#inscription.focus, #inscription:focus {/*quand on clique sur le bouton c'est un peu plus foncé*/
     color: #fff;
     background-color:#4e0f88;
     border-color: #4e0f88;
@@ -115,19 +110,30 @@ header .overlay-sombre {
 
 
 
-/******** SECTIONS *****/
+                /******** SECTIONS ********/
 /*section 1 */
 section:first-of-type {
     background: linear-gradient(to right, #5d4157, #a8caba);
 }
 /* carousel */
-.d-block {/*les images des instrus*/
+#sons {/*les images des instrus*/
     width: 30%!important;
     margin-left: 290px;
 }
 .h5, h5, .carousel-caption p{/*Nom de la prod et nom du producteur*/
      margin-right: 450px;
 }
+#play{
+    background: rgba(121, 6, 247,0.5);
+    border-color:  rgba(121, 6, 247,0.5);
+}
+#play:hover, #play.focus, #play:focus{
+    visibility: visible;
+    background: rgb(121, 6, 247);
+    border-color:  rgb(121, 6, 247);
+    box-shadow: 0 0 0 0.2rem rgb(121, 6, 247);
+}
+
 
 /*section 2 */
 section:nth-of-type(2) {
@@ -150,23 +156,22 @@ section:nth-of-type(5) {
 }
 
 /*Slides des avis*/
-.carousel-indicators li {
+.carousel-indicators li {/*couleur mini-barres*/
     border: none;
     background: #ccc;
 }
-.carousel-indicators li.active{/*couleur mini-barres*/
+.carousel-indicators li.active{/*couleur de la mini-barre active*/
     background: rgb(32, 227, 236);
 }
-.text-success {/*couleur guillemets*/
+#guillemets {/*couleur guillemets*/
     color: rgb(32, 227, 236)!important;
 }
-.bg-white {/*couleur de fond*/
-    background-color: #000000!important;
-}
-.font-italic {/*couleur des textes/avis et couleur des titres de section*/
+
+.blanc {/*couleur des textes/avis et couleur des titres de section*/
+
     color:white;
 }
-.text-dark {/*couleur des boutons*/
+#fleches {/*couleur des boutons qui font coulisser les avis*/
     color: rgb(32, 227, 236)!important;
 }
 
@@ -187,7 +192,8 @@ section:nth-of-type(5) {
   margin-bottom: 10px;
 }
 
-/*****FOOTER*****/
+
+                    /*****FOOTER*****/
 
 
 #button-addon1, i {
@@ -204,7 +210,7 @@ section:nth-of-type(5) {
   box-shadow: none;
 }
 
-.bg-info {
+#foot {
     background-color: #7728b2!important;
 }
 
@@ -231,14 +237,13 @@ section:nth-of-type(5) {
     border-right: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-.social-facebook, .social-twitter, .social-youtube{
+.social-facebook, .social-twitter, .social-youtube{/*fb,twitter violet*/
     background: #7728b2;
 }
 
 .social-facebook:hover, .social-facebook:focus {
     background: #2d4373;
 }
-
 .social-link-gradient.social-facebook {
     background: linear-gradient(to right, #3b5998, #718dc8);
 }
