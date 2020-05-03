@@ -47,7 +47,7 @@
                     <div class="w-100 text-white">
                         <h1 class="display-3">Développez vos sons</h1>
                         <p class="lead mb-0">Découvrez et Partagez les prods de vos choix</p>
-                        <p class="lead mb-0">Pour pouvoir acheter ou vendre des prods  <a href="inscription.php"><button type="button" class="btn btn-danger" id="inscription" >Inscrivez-vous</button></a></p>
+                        <p class="lead mb-0">Pour pouvoir acheter ou vendre des prods  <a href="inscription.php"><button type="button" class="btn btn-danger btninscription" >Inscrivez-vous</button></a></p>
                     </div><br/>
 
 
@@ -68,6 +68,8 @@
 
 
 
+        <!--   *************************************************************  -->
+        <!--   ************************** SECTION 1  ***********************  -->
         <!-- ******* Section 1 -->
         <section class="py-5 d-flex align-items-center" id="one">
             <div class="container py-5">
@@ -75,8 +77,6 @@
                     <div class="col-lg-9 mx-auto" id="tendances">
                         <h2 class="h1 mb-4" id="blanc">Les Produits Tendances du Moment</h2>
                         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-
-
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
                                 <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -107,17 +107,16 @@
                                         <p>Nom du producteur : </p>
                                         <button class="btn btn-danger btn-circle btn-circle-xl m-1" id="play" ><i class="fa fa-play"></i></button>
                                     </div>
-
                                 </div>
-                                <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
                             </div>
+                            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -130,7 +129,6 @@
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto" id="topventes">
                         <h2 class="h1 mb-4" id="blanc">TOP des ventes</h2>
-
 
                         <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
@@ -162,19 +160,18 @@
                                         <p>Nom du producteur : </p>
                                         <button class="btn btn-danger btn-circle btn-circle-xl m-1" id="play" ><i class="fa fa-play"></i></button>
                                     </div>
-
                                 </div>
-                                <a class="carousel-control-prev" href="#carouselExampleCaptions1" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleCaptions1" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
                             </div>
-
+                            <a class="carousel-control-prev" href="#carouselExampleCaptions1" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleCaptions1" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -185,9 +182,7 @@
             <div class="container py-5">
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto" id="ccm">
-
                         <h2 class="h1 mb-4" id="blanc">Comment ça marche?</h2>
-
 
                         <div id="recherchez">
                             <h3>Recherchez</h3>
@@ -253,7 +248,6 @@
         </section>
         <!-- Section 5 -->
         <section class="py-5 d-flex align-items-center" id="five">
-
             <div class="container">
                 <h2 class="h1 mb-4" id="blanc">Témoignages</h2>
                 <div class="row">
@@ -279,59 +273,50 @@
                                                     </footer>
                                                 </blockquote>
                                             </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="carousel-item">
+                                        <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-3_hdxocq.jpg" alt="" width="75">
+                                            <div class="media-body ml-3">
+                                                <blockquote class="blockquote border-0 p-0">
+                                                    <p class="font-italic lead" id="blanc"> <i class="fa fa-quote-left mr-3 text-success " id="guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <footer class="blockquote-footer">Someone famous in
+                                                        <cite title="Source Title">Source Title</cite>
+                                                    </footer>
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="carousel-item">
+                                        <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-2_gibm2s.jpg" alt="" width="75">
+                                            <div class="media-body ml-3">
+                                                <blockquote class="blockquote border-0 p-0">
+                                                    <p class="font-italic lead" id="blanc"> <i class="fa fa-quote-left mr-3 text-success" id="guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <footer class="blockquote-footer">Someone famous in
+                                                        <cite title="Source Title">Source Title</cite>
+                                                    </footer>
+                                                </blockquote>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
 
-                                <div class="carousel-item">
-                                    <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-3_hdxocq.jpg" alt="" width="75">
-                                        <div class="media-body ml-3">
-                                            <blockquote class="blockquote border-0 p-0">
-                                                <p class="font-italic lead" id="blanc"> <i class="fa fa-quote-left mr-3 text-success " id="guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                <footer class="blockquote-footer">Someone famous in
-                                                    <cite title="Source Title">Source Title</cite>
-                                                </footer>
-                                            </blockquote>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="carousel-item">
-                                <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-2_gibm2s.jpg" alt="" width="75">
-                                    <div class="media-body ml-3">
-                                        <blockquote class="blockquote border-0 p-0">
-                                            <p class="font-italic lead" id="blanc"> <i class="fa fa-quote-left mr-3 text-success" id="guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                            <footer class="blockquote-footer">Someone famous in
-                                                <cite title="Source Title">Source Title</cite>
-                                            </footer>
-                                        </blockquote>
-                                    </div>
-
-                                </div>
+                                <a class="carousel-control-prev width-auto" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <i class="fa fa-angle-left text-dark text-lg" id="fleches"></i>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next width-auto" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <i class="fa fa-angle-right text-dark text-lg" id="fleches"></i>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
                         </div>
                     </div>
-
-
-
-                    <a class="carousel-control-prev width-auto" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <i class="fa fa-angle-left text-dark text-lg" id="fleches"></i>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next width-auto" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <i class="fa fa-angle-right text-dark text-lg" id="fleches"></i>
-                        <span class="sr-only">Next</span>
-                    </a>
                 </div>
-
             </div>
-
-
         </section>
 
 
@@ -348,7 +333,6 @@
 
         <!--   *************************************************************  -->
         <!--   ************************** FOOTER  **************************  -->
-
 
 
         <footer class="bg-info" id="foot">
@@ -394,20 +378,18 @@
                                 <div class="input-group-append">
                                     <button id="button-addon1" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
                                 </div>
-
-                            </div>
-
-                            <!-- Copyrights -->
-                            <div class="bg-light py-4">
-                                <div class="container text-center">
-                                    <p class="text-mute mb-0 py-2">© 2020 WeBeats All rights reserved.</p>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Copyrights -->
+            <div class="bg-light py-4">
+                <div class="container text-center">
+                    <p class="text-mute mb-0 py-2">© 2020 WeBeats All rights reserved.</p>
+                </div>
+            </div>
         </footer>
         <!-- End -->
 

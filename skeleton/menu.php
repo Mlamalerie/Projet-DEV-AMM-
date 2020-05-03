@@ -14,7 +14,7 @@
             </li>
 
             <li class="nav-item dropdown ">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="blanc">
+                <a class="nav-link dropdown-toggle btn" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="blanc">
                     Genres
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -32,7 +32,7 @@
                 <a class="nav-link btn" href="connexion.php">Se connecter</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link btn btn-danger" href="inscription.php" id="inscription">S'inscrire</a>
+                <a class="nav-link btn btn-danger btninscription" href="inscription.php">S'inscrire</a>
             </li>
         </ul>
     </div>
