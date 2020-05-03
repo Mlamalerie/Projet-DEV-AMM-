@@ -32,7 +32,7 @@
                 <a class="nav-link btn" href="connexion.php">Se connecter</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link btn btn-danger" href="inscription.php">S'inscrire</a>
+                <a class="nav-link btn btn-danger" href="inscription.php" id="inscription">S'inscrire</a>
             </li>
         </ul>
     </div>

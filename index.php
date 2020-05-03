@@ -25,7 +25,7 @@
 
         <header>
             <div class="overlay-sombre"></div>
-            <video id="BACKGROUNDVIDEO1" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <video id="BACKGROUNDVIDEO1" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><!--fond d'écran animé--> 
                 <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4">
             </video>
             <div class="container h-100">
@@ -33,7 +33,7 @@
                     <div class="w-100 text-white">
                         <h1 class="display-3">Développez vos sons</h1>
                         <p class="lead mb-0">Découvrez et Partagez les prods de vos choix</p>
-                        <p class="lead mb-0">Pour pouvoir acheter ou vendre des prods  <a href="inscription.php"><button type="button" class="btn btn-danger" >Inscrivez-vous</button></a></p>
+                        <p class="lead mb-0">Pour pouvoir acheter ou vendre des prods  <a href="inscription.php"><button type="button" class="btn btn-danger" id="inscription" >Inscrivez-vous</button></a></p>
                     </div><br/>
                   <!-- test barre de recherche <form class="Recherche">
                       <div class="form-group">
@@ -72,6 +72,7 @@
                               <div class="carousel-caption d-none d-md-block">
                                 <h5>Nom de la prod : </h5>
                                 <p>Nom du producteur : </p>
+                               <button class="btn btn-danger btn-circle btn-circle-xl m-1" id="play" ><i class="fa fa-play"></i></button>
                               </div>
                             </div>
                             <div class="carousel-item">
@@ -79,6 +80,7 @@
                               <div class="carousel-caption d-none d-md-block">
                                  <h5>Nom de la prod : </h5>
                                 <p>Nom du producteur : </p>
+                                  <button class="btn btn-danger btn-circle btn-circle-xl m-1" id="play" ><i class="fa fa-play"></i></button>
                               </div>
                             </div>
                             <div class="carousel-item">
@@ -87,6 +89,7 @@
                               <div class="carousel-caption d-none d-md-block">
                                  <h5>Nom de la prod : </h5>
                                 <p>Nom du producteur : </p>
+                                  <button class="btn btn-danger btn-circle btn-circle-xl m-1" id="play" ><i class="fa fa-play"></i></button>
                               </div>
                             </div>
                           </div>
@@ -123,6 +126,7 @@
                               <div class="carousel-caption d-none d-md-block">
                                 <h5>Nom de la prod : </h5>
                                 <p>Nom du producteur : </p>
+                                <button class="btn btn-danger btn-circle btn-circle-xl m-1" id="play" ><i class="fa fa-play"></i></button>
                               </div>
                             </div>
                             <div class="carousel-item">
@@ -130,6 +134,7 @@
                               <div class="carousel-caption d-none d-md-block">
                                  <h5>Nom de la prod : </h5>
                                 <p>Nom du producteur : </p>
+                                  <button class="btn btn-danger btn-circle btn-circle-xl m-1" id="play" ><i class="fa fa-play"></i></button>
                               </div>
                             </div>
                             <div class="carousel-item">
@@ -137,6 +142,7 @@
                               <div class="carousel-caption d-none d-md-block">
                                  <h5>Nom de la prod : </h5>
                                 <p>Nom du producteur : </p>
+                                  <button class="btn btn-danger btn-circle btn-circle-xl m-1" id="play" ><i class="fa fa-play"></i></button>
                               </div>
                             </div>
                           </div>
@@ -230,7 +236,7 @@
                  <h2 class="h1 mb-4">Témoignages</h2>
                     <div class="row">
                         <div class="col-lg-10 col-xl-8 mx-auto">
-                            <div class="p-5 bg-white shadow rounded">
+                            <div class="p-5 bg-dark shadow rounded">
                                 <div class="carousel slide" id="carouselExampleIndicators" data-ride="carousel">
                                     <ol class="carousel-indicators mb-0">
                                         <li class="active" data-target="#carouselExampleIndicators" data-slide-to="0"></li>
