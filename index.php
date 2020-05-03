@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+        
         <title>WeBeats</title>
     </head>
     <body>
@@ -49,6 +50,7 @@
                         </div>
                       </div>
                     </div> -->
+                    
                 </div>
             </div>
         </header>
@@ -59,7 +61,7 @@
             <div class="container py-5">
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto" id="tendances">
-                        <h2 class="h1 mb-4">Les Produits Tendances du Moment</h2>
+                        <h2 class="h1 mb-4" id="blanc">Les Produits Tendances du Moment</h2>
                         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                           <ol class="carousel-indicators">
                             <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -68,7 +70,7 @@
                           </ol>
                           <div class="carousel-inner">
                             <div class="carousel-item active">
-                              <img src="img/CG6.png" class="d-block w-100" alt="...">
+                              <img src="img/CG6.png" class="d-block w-100" id="sons" alt="..." >
                               <div class="carousel-caption d-none d-md-block">
                                 <h5>Nom de la prod : </h5>
                                 <p>Nom du producteur : </p>
@@ -76,7 +78,7 @@
                               </div>
                             </div>
                             <div class="carousel-item">
-                              <img src="img/DB5.jpg" class="d-block w-100" alt="...">
+                              <img src="img/DB5.jpg" class="d-block w-100" id="sons" alt="...">
                               <div class="carousel-caption d-none d-md-block">
                                  <h5>Nom de la prod : </h5>
                                 <p>Nom du producteur : </p>
@@ -85,7 +87,7 @@
                             </div>
                             <div class="carousel-item">
 
-                              <img src="img/MILS.jpg" class="d-block w-100" alt="...">
+                              <img src="img/MILS.jpg" class="d-block w-100" id="sons" alt="...">
                               <div class="carousel-caption d-none d-md-block">
                                  <h5>Nom de la prod : </h5>
                                 <p>Nom du producteur : </p>
@@ -112,7 +114,7 @@
             <div class="container py-5">
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto" id="topventes">
-                        <h2 class="h1 mb-4">TOP des ventes</h2>
+                        <h2 class="h1 mb-4" id="blanc">TOP des ventes</h2>
 
                        <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
                           <ol class="carousel-indicators">
@@ -122,7 +124,7 @@
                           </ol>
                           <div class="carousel-inner">
                             <div class="carousel-item active">
-                              <img src="img/roddy.jpg" class="d-block w-100" alt="...">
+                              <img src="img/roddy.jpg" class="d-block w-100" id="sons" alt="...">
                               <div class="carousel-caption d-none d-md-block">
                                 <h5>Nom de la prod : </h5>
                                 <p>Nom du producteur : </p>
@@ -130,7 +132,7 @@
                               </div>
                             </div>
                             <div class="carousel-item">
-                              <img src="img/bigmetro.jpg" class="d-block w-100" alt="...">
+                              <img src="img/bigmetro.jpg" class="d-block w-100" id="sons" alt="...">
                               <div class="carousel-caption d-none d-md-block">
                                  <h5>Nom de la prod : </h5>
                                 <p>Nom du producteur : </p>
@@ -138,7 +140,7 @@
                               </div>
                             </div>
                             <div class="carousel-item">
-                              <img src="img/luv.jpg" class="d-block w-100" alt="...">
+                              <img src="img/luv.jpg" class="d-block w-100" id="sons" alt="...">
                               <div class="carousel-caption d-none d-md-block">
                                  <h5>Nom de la prod : </h5>
                                 <p>Nom du producteur : </p>
@@ -166,7 +168,7 @@
             <div class="container py-5">
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto" id="ccm">
-                        <h2 class="h1 mb-4">Comment ça marche?</h2>
+                        <h2 class="h1 mb-4" id="blanc">Comment ça marche?</h2>
                         
                         <div id="recherchez">
                             <h3>Recherchez</h3>
@@ -194,7 +196,7 @@
             <div class="container py-5">
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto" id="bestprod">
-                        <h2 class="h1 mb-4">Meilleur Producteur</h2>
+                        <h2 class="h1 mb-4" id="blanc">Meilleur Producteur</h2>
                         <p class="font-italic mb-4 text-muted">Liste des profils des producteurs</p>
                         <table class="table table-dark">
                           <thead>
@@ -233,13 +235,13 @@
         <!-- Section 5 -->
         <section class="py-5 d-flex align-items-center" id="five">
              <div class="container">
-                 <h2 class="h1 mb-4">Témoignages</h2>
+                 <h2 class="h1 mb-4" id="blanc">Témoignages</h2>
                     <div class="row">
                         <div class="col-lg-10 col-xl-8 mx-auto">
                             <div class="p-5 bg-dark shadow rounded">
                                 <div class="carousel slide" id="carouselExampleIndicators" data-ride="carousel">
                                     <ol class="carousel-indicators mb-0">
-                                        <li class="active" data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                                        <li class="active" data-target="#carouselExampleIndicators" data-slide-to="0" ></li>
                                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                     </ol>
@@ -251,7 +253,7 @@
                                             <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-1_ffutqr.jpg" alt="" width="75">
                                                 <div class="media-body ml-3">
                                                     <blockquote class="blockquote border-0 p-0">
-                                                        <p class="font-italic lead"> <i class="fa fa-quote-left mr-3 text-success"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                        <p class="font-italic lead" id="blanc"> <i class="fa fa-quote-left mr-3 text-success" id="guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                         <footer class="blockquote-footer">Someone famous in
                                                             <cite title="Source Title">Source Title</cite>
                                                         </footer>
@@ -264,7 +266,7 @@
                                             <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-3_hdxocq.jpg" alt="" width="75">
                                                 <div class="media-body ml-3">
                                                     <blockquote class="blockquote border-0 p-0">
-                                                        <p class="font-italic lead"> <i class="fa fa-quote-left mr-3 text-success"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                        <p class="font-italic lead" id="blanc"> <i class="fa fa-quote-left mr-3 text-success " id="guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                         <footer class="blockquote-footer">Someone famous in
                                                             <cite title="Source Title">Source Title</cite>
                                                         </footer>
@@ -277,7 +279,7 @@
                                             <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-2_gibm2s.jpg" alt="" width="75">
                                                 <div class="media-body ml-3">
                                                     <blockquote class="blockquote border-0 p-0">
-                                                        <p class="font-italic lead"> <i class="fa fa-quote-left mr-3 text-success"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                        <p class="font-italic lead" id="blanc"> <i class="fa fa-quote-left mr-3 text-success" id="guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                         <footer class="blockquote-footer">Someone famous in
                                                             <cite title="Source Title">Source Title</cite>
                                                         </footer>
@@ -289,11 +291,11 @@
 
 
                                     <a class="carousel-control-prev width-auto" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                        <i class="fa fa-angle-left text-dark text-lg"></i>
+                                        <i class="fa fa-angle-left text-dark text-lg" id="fleches"></i>
                                         <span class="sr-only">Previous</span>
                                     </a>
                                     <a class="carousel-control-next width-auto" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                        <i class="fa fa-angle-right text-dark text-lg"></i>
+                                        <i class="fa fa-angle-right text-dark text-lg" id="fleches"></i>
                                         <span class="sr-only">Next</span>
                                     </a>
                                 </div>
@@ -319,7 +321,7 @@
         <!--   ************************** FOOTER  **************************  -->
 
 
-    <footer class="bg-info">
+    <footer class="bg-info" id="foot">
     <div class="container py-5">
       <div class="row py-4">
 
@@ -336,7 +338,7 @@
         </div>
 
         <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-          <h6 class="text-uppercase font-weight-bold mb-4">WeBeats</h6>
+          <h6 class="text-uppercase font-weight-bold mb-4" id="blanc">WeBeats</h6>
           <ul class="list-unstyled mb-0">
             <li class="mb-2"><a href="#" class="text-mute">A Propos</a></li>
             <li class="mb-2"><a href="#" class="text-mute">Aide</a></li>
@@ -345,7 +347,7 @@
           </ul>
         </div>
         <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-          <h6 class="text-uppercase font-weight-bold mb-4">Explorer</h6>
+          <h6 class="text-uppercase font-weight-bold mb-4" id="blanc">Explorer</h6>
           <ul class="list-unstyled mb-0">
             <li class="mb-2"><a href="#tendances" class="text-mute">Tendances</a></li>
             <li class="mb-2"><a href="#topventes" class="text-mute">Top ventes</a></li>
@@ -354,7 +356,7 @@
           </ul>
         </div>
         <div class="col-lg-4 col-md-6 mb-lg-0">
-          <h6 class="text-uppercase font-weight-bold mb-4">Newsletter</h6>
+          <h6 class="text-uppercase font-weight-bold mb-4" id="blanc">Newsletter</h6>
           <p class="text-mute mb-4">Inscrivez-vous pour ne rien louper de notre Actualité !</p>
           <div class="p-1 rounded border">
             <div class="input-group">
