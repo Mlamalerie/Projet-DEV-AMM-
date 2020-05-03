@@ -14,17 +14,17 @@
             </li>
 
             <li class="nav-item dropdown ">
-                <a class="nav-link dropdown-toggle btn" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="blanc">
+                <a class="nav-link dropdown-toggle btn blanc" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                     Genres
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#" id="blanc">Afro Beats</a>
-                    <a class="dropdown-item" href="#" id="blanc">Agressif</a>
-                    <a class="dropdown-item" href="#" id="blanc">Drill</a>
-                    <a class="dropdown-item" href="#" id="blanc">Electro</a>
-                    <a class="dropdown-item" href="#" id="blanc">Trap</a>
+                    <a class="dropdown-item blanc" href="#">Afro Beats</a>
+                    <a class="dropdown-item blanc" href="#" >Agressif</a>
+                    <a class="dropdown-item blanc" href="#" >Drill</a>
+                    <a class="dropdown-item blanc" href="#" >Electro</a>
+                    <a class="dropdown-item blanc" href="#" >Trap</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" id="blanc">Free Beats</a>
+                    <a class="dropdown-item blanc" href="#">Free Beats</a>
                 </div>
             </li>
 

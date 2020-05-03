@@ -121,18 +121,18 @@ section:first-of-type {
     background: linear-gradient(to right, #5d4157, #a8caba);
 }
 /* carousel */
-#sons {/*les images des instrus*/
+.image_sons {/*les images des instrus*/
     width: 30%!important;
     margin-left: 290px;
 }
 .h5, h5, .carousel-caption p{/*Nom de la prod et nom du producteur*/
      margin-right: 450px;
 }
-#play{
+.btnplay{
     background: rgba(121, 6, 247,0.5);
     border-color:  rgba(121, 6, 247,0.5);
 }
-#play:hover, #play.focus, #play:focus{
+.btnplay:hover, .btnplay.focus, .btnplay:focus{
     visibility: visible;
     background: rgb(121, 6, 247);
     border-color:  rgb(121, 6, 247);
@@ -168,7 +168,7 @@ section:nth-of-type(5) {
 .carousel-indicators li.active{/*couleur de la mini-barre active*/
     background: rgb(32, 227, 236);
 }
-#guillemets {/*couleur guillemets*/
+.guillemets {/*couleur guillemets*/
     color: rgb(32, 227, 236)!important;
 }
 
@@ -176,7 +176,7 @@ section:nth-of-type(5) {
 
     color:white;
 }
-#fleches {/*couleur des boutons qui font coulisser les avis*/
+.fleches {/*couleur des boutons qui font coulisser les avis*/
     color: rgb(32, 227, 236)!important;
 }
 
