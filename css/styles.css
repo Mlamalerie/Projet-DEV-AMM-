@@ -7,7 +7,11 @@
 /* ************************************************ */
                     /* ********* BODY (toute la page) ******** */
 
-
+.btn:focus, .btn.focus {
+   
+    box-shadow: 0 0 0 0.1rem rgba(20, 230, 214, 0.12);
+    
+}
 
 
 
@@ -102,11 +106,11 @@ header .overlay-sombre {
     background-color: #4e0f88;
     border-color: #4e0f88;
 }
-.btninscription:focus {/*quand on clique sur le bouton c'est un peu plus foncé*/
+.btninscription:focus, .btninscription.focus {/*quand on clique sur le bouton c'est un peu plus foncé*/
     color: #fff;
     background-color:#4e0f88;
     border-color: #4e0f88;
-    box-shadow: 0 0 0 0.2rem #4e0f88;
+    box-shadow: 0 0 0 0.15rem #581e8e;
 }
 
 

@@ -293,7 +293,7 @@ if(!empty($_POST)){
 
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary" name="inscription">Submit</button>
+                                        <button type="submit" class="btn btn-primary btn-block mt-5 rounded-pill shadow-sm" name="inscription">C'est parti</button>
                                     </form>
                                 </div>
                             </div>
