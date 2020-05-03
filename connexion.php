@@ -1,3 +1,83 @@
+<?php
+include_once("db/connexiondb.php"); // inclure le fichier pour se connecter à la base de donnée
+include_once("fichierfct.php");
+
+print_r($_POST);
+
+if(!empty($_POST)){
+
+    extract($_POST); // si pas vide alors extraire le tableau, grace a ça on pourra directemet mettre le nom de la varilable en dur
+
+    $ok = true;
+
+    if(isset($_POST['inscription'])){
+
+        $email = (String) strtolower(trim($email));
+        $motdepasse = (String) trim($motdepasse);
+
+
+        if(empty($motdepasse)) { // si le champ mot de passe est vide
+            $ok = false;
+            $err_motdepasse = "Veuillez renseigner ce champ !";
+
+        }
+        if(empty($email)) {
+            $ok = false;
+            $err_email = "Veuillez renseigner ce champ !";
+
+        }else {
+            $req = $BDD->prepare("SELECT user_id
+                            FROM user
+                            WHERE user_email = ? 
+                                ");
+            $req->execute(array($email));
+            $user = $req->fetch();
+
+            if(!isset($user['user_id'])){
+                $ok = false;
+                $err_email = "Veuillez renseigner ce champ";
+            }
+        }
+
+        $req = $BDD->prepare("SELECT user_id
+                            FROM user
+                            WHERE user_email = ? AND user_password = ?
+                                ");
+        $req->execute(array($email,crypt($motdepasse,'$6$rounds=5000$grzgirjzgrpzhte95grzegruoRZPrzg8$')));
+        $verif_user = $req->fetch();
+
+        if(!isset($verif_user['user_id'])) {
+            $ok = false;
+            $err_email = "Veuillez renseigner ce champ";
+
+        }
+
+        if($ok){//tout est bon on a bien l'utilisateur
+            $req = $BDD->prepare("INSERT INTO user (dateconnexion) VALUES (?)");
+            $req->execute(array(date("Y-m-d H:i:s"); ));
+
+
+            // selectionne tout les info de l'user
+            $req = $BDD->prepare("SELECT *
+                            FROM user
+                            WHERE user_id = ?
+                                ");
+            $req->execute(array($verif_user['user_id']));
+            $verif_user = $req->fetch();
+
+            // initialiser variable de session
+            $_SESSION['user_id'] = $verif_user['user_id']
+                $_SESSION['user_pseudo'] = $verif_user['user_pseudo']
+                $_SESSION['user_email'] = $verif_user['user_email']
+
+                header('Location: /');
+            exit;
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -13,12 +93,73 @@
     <body>
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
-         <?php
+        <?php
         require_once('skeleton/menu.php');
         ?>
 
-page connexion
-    
+        <div class="container-fluid">
+            <div class="row no-gutter">
+                <!-- The image half -->
+                <div class="col-md-6 d-none d-md-flex bg-image"></div>
+
+
+                <!-- The content half -->
+                <div class="col-md-6 ">
+                    <div class="login d-flex align-items-center py-5">
+
+                        <!-- Demo content-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-10 col-xl-7 mx-auto">
+                                    <h3 class="display-4">Connexion</h3>
+                                    <p class="text-muted mb-4">Create a login split page using Bootstrap 4.</p>
+                                    <form method="post">
+
+
+                                        <!--EMAIL-->
+                                        <div class="form-group mb-4">
+                                            <?php
+
+                                            if(isset($err_email)){
+                                                echo "<span class='spanAlertchamp'> ";
+                                                echo $icon . $err_email ;
+                                                echo "</span> ";
+                                            } 
+                                            ?>
+                                            <label for="email">Votre Adresse Email</label>
+                                            <input type="email" class="form-control rounded-pill border-0 shadow-sm px-4" id="email" name="email" aria-describedby="emailHelp" placeholder="Tapez votre e-mail" value="<?php if(isset($email)){echo $email;}?>">
+                                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        </div>
+                                        <!--MOT DE PASSE-->
+                                        <div class="form-group">
+                                            <?php
+
+                                            if(isset($err_motdepasse)){
+                                                echo "<span class='spanAlertchamp'> ";
+                                                echo  $icon . $err_motdepasse ;
+                                                echo "</span> ";
+                                            } 
+                                            ?>
+                                            <label for="motdepasse">Mot de passe</label>
+                                            <input type="password" class="form-control rounded-pill border-0 shadow-sm px-4" id="motdepasse" name ="motdepasse" placeholder="Tapez votre mot de passe">
+                                        </div>
+
+
+
+
+
+                                        <button type="submit" class="btn btn-primary" name="connexion">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!-- End -->
+
+                    </div>
+                </div><!-- End -->
+
+            </div>
+        </div>
+
 
 
         <!-- Optional JavaScript -->

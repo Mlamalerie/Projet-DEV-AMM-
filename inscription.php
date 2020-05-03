@@ -22,6 +22,11 @@ if(!empty($_POST)){
         $naiss_annees = (int) $naiss_annees;
 
         $date_naissance = (String) null;
+        
+        $icon = " <svg class='bi bi-exclamation-circle' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+                                            <path fill-rule='evenodd' d='M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z' clip-rule='evenodd'/>
+                                            <path d='M7.002 11a1 1 0 112 0 1 1 0 01-2 0zM7.1 4.995a.905.905 0 111.8 0l-.35 3.507a.552.552 0 01-1.1 0L7.1 4.995z'/>
+                                        </svg>";
 
         // Verification pseudo motdepasse et email
         if(empty($pseudo)) {
@@ -139,7 +144,7 @@ if(!empty($_POST)){
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
-        <link rel="stylesheet" type="text/css" href="css/inscription.css">
+        <link rel="stylesheet" type="text/css" href="css/inscription-connexion.css">
         <title>Inscription</title>
     </head>
     <body>
@@ -151,127 +156,157 @@ if(!empty($_POST)){
 
         ?>
 
-        <h1>Inscription</h1>
-        <!--   *************************************************************  -->
-        <!--   ************************** Form  **************************  -->
-        <form method="post">
+        <div class="container-fluid">
+            <div class="row no-gutter">
+                <!-- The image half -->
+                <div class="col-md-6 d-none d-md-flex bg-image"></div>
 
-            <!--PSEUDO-->
-            <div class="form-group">
-                <?php
-                if(isset($err_pseudo)){
-                    echo $err_pseudo;
-                } 
-                ?>
-                <label for="pseudo">Votre Pseudo</label>
-                <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Mettez un pseudo pour votre profil" value="<?php if(isset($pseudo)){echo $pseudo;}?>">
-            </div>
-            <!--EMAIL-->
-            <div class="form-group">
-                <?php
 
-                if(isset($err_email)){
-                    echo $err_email;
-                } 
-                ?>
-                <label for="email">Votre Adresse Email</label>
-                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Tapez votre e-mail" value="<?php if(isset($email)){echo $email;}?>">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <!--MOT DE PASSE-->
-            <div class="form-group">
-                <?php
+                <!-- The content half -->
+                <div class="col-md-6 ">
+                    <div class="login d-flex align-items-center py-5">
 
-                if(isset($err_motdepasse)){
-                    echo $err_motdepasse;
-                } 
-                ?>
-                <label for="motdepasse">Mot de passe</label>
-                <input type="password" class="form-control" id="motdepasse" name ="motdepasse" placeholder="Tapez votre mot de passe">
-            </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <!--DATE DE NAISSANCE-->
-            <div class="form-group">
-                <?php
+                        <!-- Demo content-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-10 col-xl-7 mx-auto">
+                                    <h3 class="display-4">Inscription</h3>
+                                    <p class="text-muted mb-4">Create a login split page using Bootstrap 4.</p>
+                                    <form method="post">
+                                       
+                                        <!--PSEUDO-->
+                                        <div class="form-group mb-3 ">
+                                            <?php
+                                            if(isset($err_pseudo)){
+                                                echo "<span class='spanAlertchamp'> ";
+                                                echo $icon . $err_pseudo ;
+                                                echo "</span> ";
+                                            } 
+                                            ?>
+                                            <label for="pseudo">Votre Pseudo </label>
+                                            <input type="text" class="form-control rounded-pill border-0 shadow-sm px-4" id="pseudo" name="pseudo" placeholder="Mettez un pseudo pour votre profil"  value="<?php if(isset($pseudo)){echo $pseudo;}?>" autofocus>
+                                        </div>
+                                        <!--EMAIL-->
+                                        <div class="form-group mb-4">
+                                            <?php
 
-                if(isset($err_naiss_jour)){
-                    echo $err_naiss_jour;
-                } 
-                if(isset($err_naiss_mois)){
-                    echo $err_naiss_mois;
-                }
-                if(isset($err_naiss_annes)){
-                    echo $err_naiss_annes;
-                }
-                if(isset($err_date)){
-                    echo $err_date;
-                }
-                ?>
-                <select name="naiss_jour">
-                    <?php
+                                            if(isset($err_email)){
+                                                echo "<span class='spanAlertchamp'> ";
+                                                echo $icon . $err_email ;
+                                                echo "</span> ";
+                                            } 
+                                            ?>
+                                            <label for="email">Votre Adresse Email</label>
+                                            <input type="email" class="form-control rounded-pill border-0 shadow-sm px-4" id="email" name="email" aria-describedby="emailHelp" placeholder="Tapez votre e-mail" value="<?php if(isset($email)){echo $email;}?>">
+                                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        </div>
+                                        <!--MOT DE PASSE-->
+                                        <div class="form-group">
+                                            <?php
 
-                    listannee(1,31);
-                    ?>
-                </select>
-                <select name="naiss_mois">
-                    <option value="1">Janvier </option>
-                    <option value="2">Février </option>
-                    <option value="3">Mars </option>
-                    <option value="4">Avril </option>
-                    <option value="5">Mai</option>
-                    <option value="6">Juin </option>
-                    <option value="7">Juillet </option>
-                    <option value="8">Aout </option>
-                    <option value="9">Septembre </option>
-                    <option value="10">Octobre </option>
-                    <option value="11">Novembre </option>
-                    <option value="12">Décembre </option>
-                </select>
-                <select name="naiss_annees">
-                    <?php
-                    listannee(1950,70);
-                    ?>
-                </select> 
-            </div>
-            <div class="form-group">
-                <select name="pays">
-                    <?php
-                    if(isset($pays)){
-                        $req = $BDD->prepare("SELECT code,nom_fr_fr
+                                            if(isset($err_motdepasse)){
+                                                echo "<span class='spanAlertchamp'> ";
+                                                echo  $icon . $err_motdepasse ;
+                                                echo "</span> ";
+                                            } 
+                                            ?>
+                                            <label for="motdepasse">Mot de passe</label>
+                                            <input type="password" class="form-control rounded-pill border-0 shadow-sm px-4" id="motdepasse" name ="motdepasse" placeholder="Tapez votre mot de passe">
+                                        </div>
+
+                                        <!--DATE DE NAISSANCE-->
+                                        <div id="divNaissance" class="form-group btn-group dropup">
+                                            <?php
+
+                                            if(isset($err_naiss_jour)){
+                                                echo $err_naiss_jour;
+                                            } 
+                                            if(isset($err_naiss_mois)){
+                                                echo $err_naiss_mois;
+                                            }
+                                            if(isset($err_naiss_annes)){
+                                                echo $err_naiss_annes;
+                                            }
+                                            if(isset($err_date)){
+                                                echo $err_date;
+                                            }
+                                            ?>
+                                            <select name="naiss_jour" class="form-control rounded-pill custom-select ">
+                                                <?php
+
+                                                listannee(1,31);
+                                                ?>
+                                            </select>
+                                            <select name="naiss_mois" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
+                                                <option value="1">Janvier </option>
+                                                <option value="2">Février </option>
+                                                <option value="3">Mars </option>
+                                                <option value="4">Avril </option>
+                                                <option value="5">Mai</option>
+                                                <option value="6">Juin </option>
+                                                <option value="7">Juillet </option>
+                                                <option value="8">Aout </option>
+                                                <option value="9">Septembre </option>
+                                                <option value="10">Octobre </option>
+                                                <option value="11">Novembre </option>
+                                                <option value="12">Décembre </option>
+                                            </select>
+                                            <select name="naiss_annees" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
+                                                <?php
+                                                listannee(1950,70);
+                                                ?>
+                                            </select> 
+                                        </div>
+                                        <!--PAYS-->
+                                        <div class="form-group">
+                                            <label for="pays">Votre Pays</label>
+                                            <select name="pays" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
+                                                <?php
+                                                if(isset($pays)){
+                                                    $req = $BDD->prepare("SELECT code,nom_fr_fr
                             FROM pays 
                             WHERE code = ?
                             ");
-                        $req->execute(array($pays));
-                        $voir_pays = $req->fetch();
-                    ?>
-                    <option value="<?= $voir_pays['code'] ?>"> <?= mb_strtoupper($voir_pays['nom_fr_fr']) ?> </option>
+                                                    $req->execute(array($pays));
+                                                    $voir_pays = $req->fetch();
+                                                ?>
+                                                <option value="<?= $voir_pays['code'] ?>"> <?= mb_strtoupper($voir_pays['nom_fr_fr']) ?> </option>
 
 
 
-                    <?php
-                    }
+                                                <?php
+                                                }
 
-                    $req = $BDD->prepare("SELECT code,nom_fr_fr  
+                                                $req = $BDD->prepare("SELECT code,nom_fr_fr  
                             FROM pays 
                              ORDER BY pays.nom_fr_fr ASC");
-                    $req->execute();
-                    $voir_pays = $req->fetchAll();
+                                                $req->execute();
+                                                $voir_pays = $req->fetchAll();
 
-                    foreach($voir_pays as $vp) {
-                    ?>     
-                    <option value="<?= $vp['code'] ?>"> <?= mb_strtoupper($vp['nom_fr_fr']) ?> </option>
-                    <?php
-                    }
-                    ?>
-                </select>
+                                                foreach($voir_pays as $vp) {
+                                                ?>     
+                                                <option value="<?= $vp['code'] ?>"> <?= mb_strtoupper($vp['nom_fr_fr']) ?> </option>
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary" name="inscription">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!-- End -->
+
+                    </div>
+                </div><!-- End -->
 
             </div>
+        </div>
+        <!--   *************************************************************  -->
+        <!--   ************************** Form  **************************  -->
 
-            <button type="submit" class="btn btn-primary" name="inscription">Submit</button>
-        </form>
 
 
 

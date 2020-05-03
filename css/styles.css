@@ -163,7 +163,7 @@ section:nth-of-type(5) {
 .bg-white {/*couleur de fond*/
     background-color: #000000!important;
 }
-.font-italic, .mb-4, .my-4 {/*couleur des textes/avis et couleur des titres de section*/
+.font-italic {/*couleur des textes/avis et couleur des titres de section*/
     color:white;
 }
 .text-dark {/*couleur des boutons*/

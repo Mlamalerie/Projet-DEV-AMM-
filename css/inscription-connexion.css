@@ -1,0 +1,39 @@
+body {
+    background: rgba(255, 214, 121, 0.92);
+    
+}
+.login,
+.image {
+  min-height: 100vh;
+}
+
+.bg-image {
+  background-image: url('https://res.cloudinary.com/mhmd/image/upload/v1555917661/art-colorful-contemporary-2047905_dxtao7.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+label {
+    color: black;
+}
+
+select {
+
+    text-align: center;
+  text-align-last: center;    
+  
+}
+
+
+#divNaissance{
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.spanAlertchamp {
+    color: red!important;
+    font-size: 0.8rem;
+    
+}
