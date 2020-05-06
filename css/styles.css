@@ -17,7 +17,7 @@
 
 
 /* *********************** */
-                /* ******* NAV BAR ******* */
+/* ******* NAV BAR ******* */
 
 
 .bg-light {
@@ -44,7 +44,7 @@
 
 
 /* *****************s****** */
-                /* SECTION 0 : HEADER = BACKGROUND VIDEO + Title */
+/* SECTION 0 : HEADER = BACKGROUND VIDEO + Title */
 
 header {
   position: relative;
@@ -98,6 +98,7 @@ header .overlay-sombre {
 /* Bouton Inscription */
 .btninscription {/*bouton violet*/
     color: #fff;
+
     background-color: rgba(121, 6, 247, 0.9);
     border-color: rgba(121, 6, 247, 0.9);
 }
@@ -217,6 +218,7 @@ section:nth-of-type(5) {
 
 #foot {
     background-color: #7728b2!important;
+/*    background: linear-gradient(to right, #1f7efd, #33AEFF)!important;*/
 }
 
 
