@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -32,6 +37,14 @@
         require_once('skeleton/menu.php');
         ?>
 
+        <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
+        <?php
+        if(isset($_SESSION['user_id'])) {
+            print_r($_SESSION);
+        } else{
+            echo "Pas de connexion";
+        }
+        ?>
 
 
         <!--   *************************************************************  -->

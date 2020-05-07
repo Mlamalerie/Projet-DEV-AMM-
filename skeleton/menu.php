@@ -9,6 +9,18 @@
     <!--            Menu droite -->
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-md-auto" >
+            <?php
+            // si je detecte une connexion alors
+            if(isset($_SESSION['user_id'])){
+            ?>
+ <li class="nav-item">
+                <a class="nav-link btn" href="deconnexion.php">Déconnexion</a>
+            </li>
+
+
+            <?php
+            }else{
+            ?>
             <li class="nav-item ">
                 <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
             </li>
@@ -34,6 +46,12 @@
             <li class="nav-item">
                 <a class="nav-link btn btn-danger btninscription" href="inscription.php">S'inscrire</a>
             </li>
+
+            <?php
+            }
+            ?>
+
+
         </ul>
     </div>
 </nav>

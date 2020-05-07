@@ -1,6 +1,12 @@
 <?php
+session_start();
 include_once("db/connexiondb.php"); // inclure le fichier pour se connecter à la base de donnée
 include_once("fichierfct.php");
+
+if(isset($_SESSION['user_id'])){
+    header('Location: index.php');
+    exit;
+}
 
 print_r($_POST);
 

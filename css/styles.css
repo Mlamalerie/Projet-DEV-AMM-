@@ -4,8 +4,22 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
-/* ************************************************ */
-                    /* ********* BODY (toute la page) ******** */
+/* **************************************************** 
+            ********* GLOBAL ******** 
+***************************************************** */
+
+:root {
+    --base-taille: 16px;
+    --base-color1: rgba(121, 6, 247, 0.9);
+    --base-color2: #434343;
+    --base-color3: #ff3aff;
+/*  --base-font-family: 'Roboto', sans-serif;*/
+
+}
+
+body {
+    
+}
 
 .btn:focus, .btn.focus {
     box-shadow: 0 0 0 0.1rem rgba(20, 230, 214, 0.12);
@@ -115,6 +129,8 @@ header .overlay-sombre {
 /*Barre de recherche*/
 .searchbar{
     height: 60px;
+    margin: auto;
+    max-width: 83%;
     background-color: #353b48;
     border-radius: 30px; /*forme arrondie de la barre*/
     padding: 10px;
@@ -124,7 +140,7 @@ header .overlay-sombre {
     border: 0;
     outline: 0;
     background: none;
-    width: 950px;
+/*    max-width:  90%; le curseur descend en bas*/
      caret-color:rgba(121, 6, 247, 0.9);
     line-height: 40px;
 }
