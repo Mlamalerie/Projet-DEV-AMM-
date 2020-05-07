@@ -244,7 +244,7 @@
                 <h2 class="h1 mb-4 blanc">Témoignages</h2>
                 <div class="row">
                     <div class="col-lg-10 col-xl-8 mx-auto">
-                        <div class="p-5 bg-dark shadow rounded">
+                        <div class="p-5 rounded bloc_avis">
                             <div class="carousel slide" id="carouselExampleIndicators" data-ride="carousel">
                                 <ol class="carousel-indicators mb-0">
                                     <li class="active" data-target="#carouselExampleIndicators" data-slide-to="0" ></li>

@@ -180,6 +180,17 @@ section:nth-of-type(2) {
 section:nth-of-type(3) {
     background: linear-gradient(to left, #7728b2, #121618);
 }
+/*Comment ca marche*/
+#ccm h3{
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  margin-top: 40px;
+}
+#ccm p{
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  margin-bottom: 10px;
+}
 
 /* section 4 */
 section:nth-of-type(4) {
@@ -190,7 +201,9 @@ section:nth-of-type(4) {
 section:nth-of-type(5) {
     background: linear-gradient(to left, #7728b2, rgb(119, 189, 193));
 }
-
+.bloc_avis{/*bloc des avis*/
+   
+}
 /*Slides des avis*/
 .carousel-indicators li {/*couleur mini-barres*/
     border: none;
@@ -214,18 +227,7 @@ section:nth-of-type(5) {
 
 
 
-/*Comment ca marche*/
-#ccm h3{
-  font-family: 'Montserrat', sans-serif;
-  color: white;
-  margin-top: 40px;
-}
 
-#ccm p{
-  font-family: 'Montserrat', sans-serif;
-  color: white;
-  margin-bottom: 10px;
-}
 
 
                     /*****FOOTER*****/
