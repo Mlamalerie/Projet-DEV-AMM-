@@ -3,10 +3,12 @@ session_start();
 include_once("db/connexiondb.php"); // inclure le fichier pour se connecter à la base de donnée
 include_once("fichierfct.php");
 
+// si une connection est détecter : (ta rien a faire ici mec)
 if(isset($_SESSION['user_id'])){
-    header('Location: index.php');
+    header('Location: dashboard.php');
     exit;
 }
+
 
 print_r($_POST);
 
@@ -128,7 +130,7 @@ if(!empty($_POST)){
 
             $req->execute(array($pseudo,$email,$motdepasse,$date_naissance,$pays,$date_inscription,$date_inscription));
 
-            header('Location: index.php');
+            header('Location: dashboard.php');
             exit;
 
         }

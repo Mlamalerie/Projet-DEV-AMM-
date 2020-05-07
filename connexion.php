@@ -3,9 +3,9 @@ session_start();
 include_once("db/connexiondb.php"); // inclure le fichier pour se connecter à la base de donnée
 include_once("fichierfct.php");
 
-// ssi one une connection  detext (ta reien a faire ici mec)
+// si une connection est détecter : (ta rien a faire ici mec)
 if(isset($_SESSION['user_id'])){
-    header('Location: index.php');
+    header('Location: dashboard.php');
     exit;
 }
 
@@ -82,7 +82,7 @@ if(!empty($_POST)){
             $_SESSION['user_pseudo'] = $verif_user['user_pseudo'];
             $_SESSION['user_email'] = $verif_user['user_email'];
 
-            header('Location: index.php');
+            header('Location: dashboard.php');
             exit;
         }
     }
