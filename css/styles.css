@@ -112,6 +112,38 @@ header .overlay-sombre {
     box-shadow: 0 0 0 0.15rem #581e8e;
 }
 
+/*Barre de recherche*/
+.searchbar{
+    height: 60px;
+    background-color: #353b48;
+    border-radius: 30px; /*forme arrondie de la barre*/
+    padding: 10px;
+}
+.search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 950px;
+     caret-color:rgba(121, 6, 247, 0.9);
+    line-height: 40px;
+}
+.search_icon{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    text-decoration:none;
+}
+.search_icon:hover{
+    background: white;
+    color: rgba(121, 6, 247, 0.9);
+}
+
 
 
                 /******** SECTIONS ********/
