@@ -248,8 +248,8 @@ section:nth-of-type(5) {
 }
 
 #foot {
-    background-color: #7728b2!important;
-/*    background: linear-gradient(to right, #1f7efd, #33AEFF)!important;*/
+    /*background-color: #7728b2!important*/;
+   background: linear-gradient(to right, #13161a, #7327ad)!important;
 }
 
 
