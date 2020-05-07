@@ -8,9 +8,7 @@
                     /* ********* BODY (toute la page) ******** */
 
 .btn:focus, .btn.focus {
-   
     box-shadow: 0 0 0 0.1rem rgba(20, 230, 214, 0.12);
-    
 }
 
 
@@ -128,11 +126,11 @@ section:first-of-type {
 .h5, h5, .carousel-caption p{/*Nom de la prod et nom du producteur*/
      margin-right: 450px;
 }
-.btnplay{
+.btnplay{/*couleur du bouton play*/ 
     background: rgba(121, 6, 247,0.5);
     border-color:  rgba(121, 6, 247,0.5);
 }
-.btnplay:hover, .btnplay.focus, .btnplay:focus{
+.btnplay:hover, .btnplay.focus, .btnplay:focus{/*couleur du bouton play qd on passe ou clique dessus*/ 
     visibility: visible;
     background: rgb(121, 6, 247);
     border-color:  rgb(121, 6, 247);
@@ -173,7 +171,6 @@ section:nth-of-type(5) {
 }
 
 .blanc {/*couleur des textes/avis et couleur des titres de section*/
-
     color:white;
 }
 .fleches {/*couleur des boutons qui font coulisser les avis*/
