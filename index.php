@@ -15,7 +15,6 @@ session_start();
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
 
         <!--        LOGo -->
@@ -24,6 +23,8 @@ session_start();
         <!--        PACK DE ICON -->
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
 
+        <!-- lien pour rechercher dans  barre de recherche 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 
 
 
@@ -62,13 +63,12 @@ session_start();
                         <p class="lead mb-0">Découvrez et Partagez les prods de vos choix</p>
                         <p class="lead mb-0">Pour pouvoir acheter ou vendre des prods  <a href="inscription.php"><button type="button" class="btn btn-danger btninscription" >Inscrivez-vous</button></a></p><br/>
                         <div class="searchbar">
-                            <input class="search_input" type="text" placeholder="Recherchez vos musiques, artistes...">
-                            <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                            <input class="search_input" type="text" id ="recherche" placeholder="Recherchez vos musiques, artistes..."/>
+                           <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-
         </header>
 
 
