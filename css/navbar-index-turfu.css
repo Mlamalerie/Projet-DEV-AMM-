@@ -1,0 +1,35 @@
+
+
+/* **************************** */
+/* ******* AVANT SCROLL ******* */
+.navbar {
+    height: 6.4rem;
+    margin: 0px auto;
+    transition: all 0.4s;
+     transition-timing-function: ease-out;
+    border-bottom: bold ;
+    background: none;
+}
+
+
+
+
+
+/* **************************** */
+/* ******* APRES SCROLL ******* */
+/* Change navbar styling on scroll */
+
+.navbar.active {
+    height: 4rem;
+    background: var(--couleurdark);
+    box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+/*faire media avec*/
+
+
+
