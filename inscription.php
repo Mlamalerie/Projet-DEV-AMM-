@@ -129,6 +129,8 @@ if(!empty($_POST)){
             $req = $BDD->prepare("INSERT INTO user (user_pseudo,user_email,user_password,user_datenaissance,user_pays,user_dateinscription,user_dateconnexion) VALUES (?, ?, ?, ?, ?, ?, ?)"); 
 
             $req->execute(array($pseudo,$email,$motdepasse,$date_naissance,$pays,$date_inscription,$date_inscription));
+            
+             $_SESSION['user_pseudo'] = $pseudo;
 
             header('Location: dashboard.php');
             exit;
@@ -149,10 +151,12 @@ if(!empty($_POST)){
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <?php
+        require_once('skeleton/headLinkCSS.php');
+        ?>
+        <link rel="stylesheet" type="text/css" href="css/navbar.css">
         <link rel="stylesheet" type="text/css" href="css/inscription-connexion.css">
+        
         <title>Inscription</title>
     </head>
     <body>

@@ -1,0 +1,20 @@
+
+/* ******* IMPORT ******* */
+/*********************************************/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
+
+
+/* **************************************************** */
+
+:root {
+
+    --base-color1: #7728b2;
+    --base-color2: #ff00c4;
+    --base-color3: #ff3aff;
+
+
+    --base-police1: 'Poppins', sans-serif;
+
+    --base-taille1: 16px;
+}

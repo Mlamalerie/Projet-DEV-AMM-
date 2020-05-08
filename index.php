@@ -11,12 +11,12 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name='description' content="Site Responsive Hotel ">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
-        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-
+        <?php
+        require_once('skeleton/headLinkCSS.php');
+        ?>
+        <link rel="stylesheet" type="text/css" href="css/styles-index.css"> 
+        <link rel="stylesheet" type="text/css" href="css/navbar.css"> 
+        <link rel="stylesheet" type="text/css" href="css/navbar-index-turfu.css"> 
 
         <!--        LOGo -->
         <link rel="shortcut icon" href="img/bigmetro.jpg">
@@ -37,14 +37,7 @@ session_start();
         require_once('skeleton/menu.php');
         ?>
 
-        <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
-        <?php
-        if(isset($_SESSION['user_id'])) {
-            print_r($_SESSION);
-        } else{
-            echo "Pas de connexion";
-        }
-        ?>
+
 
 
         <!--   *************************************************************  -->
@@ -70,7 +63,21 @@ session_start();
             </div>
 
         </header>
+        <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
+        <?php
+        if(isset($_SESSION['user_id'])) {
+            print_r($_SESSION);
+        } else{
+            echo "Pas de connexion <br>";
+            echo "Pas de connexion <br>";
+            echo "Pas de connexion <br>";
+            echo "Pas de connexion <br>";
+            echo "Pas de connexion <br>";
+            echo "Pas de connexion <br>";
+            echo "Pas de connexion <br>";
 
+        }
+        ?>
 
 
         <!--   *************************************************************  -->
@@ -80,7 +87,7 @@ session_start();
             <div class="container py-5">
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto" id="tendances">
-                        <h2 class="h1 mb-4 blanc">Les Produits Tendances du Moment</h2>
+                        <h2 class="h1 mb-4  ">Les Produits Tendances du Moment</h2>
                         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -133,7 +140,7 @@ session_start();
             <div class="container py-5">
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto" id="topventes">
-                        <h2 class="h1 mb-4 blanc" >TOP des ventes</h2>
+                        <h2 class="h1 mb-4  " >TOP des ventes</h2>
 
                         <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
@@ -187,7 +194,7 @@ session_start();
             <div class="container py-5">
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto" id="ccm">
-                        <h2 class="h1 mb-4 blanc" >Comment ça marche?</h2>
+                        <h2 class="h1 mb-4  " >Comment ça marche?</h2>
 
                         <div id="recherchez">
                             <h3>Recherchez</h3>
@@ -215,7 +222,7 @@ session_start();
             <div class="container py-5">
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto" id="bestprod">
-                        <h2 class="h1 mb-4 blanc" >Meilleur Producteur</h2>
+                        <h2 class="h1 mb-4  " >Meilleur Producteur</h2>
                         <p class="font-italic mb-4 text-muted">Liste des profils des producteurs</p>
                         <table class="table table-dark">
                             <thead>
@@ -254,7 +261,7 @@ session_start();
         <!-- Section 5 -->
         <section class="py-5 d-flex align-items-center" id="five">
             <div class="container">
-                <h2 class="h1 mb-4 blanc">Témoignages</h2>
+                <h2 class="h1 mb-4  ">Témoignages</h2>
                 <div class="row">
                     <div class="col-lg-10 col-xl-8 mx-auto">
                         <div class="p-5 rounded bloc_avis">
@@ -272,7 +279,7 @@ session_start();
                                         <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-1_ffutqr.jpg" alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-italic lead blanc" > <i class="fa fa-quote-left mr-3 text-success guillemets" ></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <p class="font-italic lead  " > <i class="fa fa-quote-left mr-3 text-success guillemets" ></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                     <footer class="blockquote-footer">Someone famous in
                                                         <cite title="Source Title">Source Title</cite>
                                                     </footer>
@@ -285,7 +292,7 @@ session_start();
                                         <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-3_hdxocq.jpg" alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-italic lead blanc"> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <p class="font-italic lead  "> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                     <footer class="blockquote-footer">Someone famous in
                                                         <cite title="Source Title">Source Title</cite>
                                                     </footer>
@@ -298,7 +305,7 @@ session_start();
                                         <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-2_gibm2s.jpg" alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-italic lead blanc"> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                    <p class="font-italic lead  "> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                                     <footer class="blockquote-footer">Someone famous in
                                                         <cite title="Source Title">Source Title</cite>
                                                     </footer>
@@ -344,20 +351,17 @@ session_start();
             <div class="container py-5">
                 <div class="row py-4">
 
-                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" class="mb-3">
+                    <div id='boxocial' class="col-lg-4 col-md-6 mb-4 mb-lg-0  "><img src="img/logo.png" alt="" width="180" class="mb-3">
                         <p class="font-italic text-mute">Retrouvez-nous également sur les réseaux sociaux</p>
-                        <ul class="list-inline mt-4">
-                            <!-- Facebook-->
-                            <li class="list-inline-item"><a href="#" class="social-link rounded py-2 px-4 my-2 social-facebook"><i class="fa fa-facebook-f fa-fw"></i></a></li>
-                            <!-- Twitter-->
-                            <li class="list-inline-item"><a href="#" class="social-link rounded py-2 px-4 my-2 social-twitter"><i class="fa fa-twitter fa-fw"></i></a></li>
-                            <!-- Youtube-->
-                            <li class="list-inline-item mr-2"><a href="#" class="social-link rounded py-2 px-4 my-2 social-youtube"><i class="fa fa-youtube-play fa-fw"></i></a></li>
+                        <ul class="list-inline mt-4 footer__social">
+                            <li class=" "><a href="#0"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                            <li class=" "><a href="#0"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                            <li class=" "><a href="#0"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
                         </ul>
                     </div>
 
                     <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                        <h6 class="text-uppercase font-weight-bold mb-4 blanc">WeBeats</h6>
+                        <h6 class="text-uppercase font-weight-bold mb-4  ">WeBeats</h6>
                         <ul class="list-unstyled mb-0">
                             <li class="mb-2"><a href="#" class="text-mute">A Propos</a></li>
                             <li class="mb-2"><a href="#" class="text-mute">Aide</a></li>
@@ -366,7 +370,7 @@ session_start();
                         </ul>
                     </div>
                     <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                        <h6 class="text-uppercase font-weight-bold mb-4 blanc">Explorer</h6>
+                        <h6 class="text-uppercase font-weight-bold mb-4  ">Explorer</h6>
                         <ul class="list-unstyled mb-0">
                             <li class="mb-2"><a href="#tendances" class="text-mute">Tendances</a></li>
                             <li class="mb-2"><a href="#topventes" class="text-mute">Top ventes</a></li>
@@ -375,7 +379,7 @@ session_start();
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-lg-0">
-                        <h6 class="text-uppercase font-weight-bold mb-4 blanc">Newsletter</h6>
+                        <h6 class="text-uppercase font-weight-bold mb-4  ">Newsletter</h6>
                         <p class="text-mute mb-4">Inscrivez-vous pour ne rien louper de notre Actualité !</p>
                         <div class="p-1 rounded border">
                             <div class="input-group">
@@ -398,15 +402,15 @@ session_start();
         </footer>
         <!-- End -->
 
+        <?php
+        require_once('skeleton/endLinkScripts.php');
+        ?>
 
 
 
 
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
     </body>
 </html>
