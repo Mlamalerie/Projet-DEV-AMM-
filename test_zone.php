@@ -44,7 +44,6 @@ session_start();
         <form id="searchform" method="get" action="recherche.php">
             <div class="searchbar ">
                 <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
-                <!--            <input type="submit" value="Chercher"/> -->
                 <a onclick="goSearch()" href="#" class="search_icon"><i class="fas fa-search"></i></a>
             </div>
         </form>
