@@ -1,0 +1,23 @@
+.nav-link {
+  color: #555;
+}
+
+/*
+.nav-link:hover {
+  background: #f5f5f5;
+}
+*/
+
+#menuvertical {
+    background: linear-gradient(to right, #1b1b1f, #2d2536);
+}
+
+.activer:hover{/*qaund on passe sur les catégories */
+    background: #7728b2;
+    color: white;
+}
+
+h4{
+    color: white;
+}
+

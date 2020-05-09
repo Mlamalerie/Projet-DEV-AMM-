@@ -10,7 +10,7 @@ session_start();
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name='description' content="Site Responsive Hotel ">
-
+        
         <?php
         require_once('skeleton/headLinkCSS.php');
         ?>
@@ -29,7 +29,11 @@ session_start();
         <!--        PACK DE ICON -->
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
 
-        
+
+        <!-- lien pour rechercher dans  barre de recherche 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+
+
 
 
         <title>WeBeats</title>
@@ -64,13 +68,12 @@ session_start();
 
 
                         <div class="searchbar">
-                            <input class="search_input" type="text" placeholder="Recherchez vos musiques, artistes...">
-                            <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                            <input class="search_input" type="text" id ="recherche" placeholder="Recherchez vos musiques, artistes..."/>
+                           <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-
         </header>
         <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
         <?php

@@ -15,6 +15,8 @@
             $this->name = $name;           
             $this->user = $user;          
             $this->pass = $pass;
+            
+            
         }
         try{
             $this->connexion = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->name,
