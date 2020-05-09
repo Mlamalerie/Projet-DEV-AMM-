@@ -93,10 +93,24 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
                 <div class="col-lg-4 mb-4 mb-lg-0 col-md-4 col-xl-3">
 
                     <!-- Vertical Menu-->
+                    <form method="get" id="form_menu_vert" action="">
                     <nav id="menuvertical" class="nav flex-column bg-white shadow-sm font-italic rounded p-3"> <h3 class="text-white">Filtres de recherche</h3>
 
                         <div class="list_group">
                             <h4 class="text-white">Trier par prix</h4>
+                            <p class="text-white"> Trier par ordre croissant </p>
+                            <p class="text-white"> Trier par ordre décroissant </p>
+                            <div data-role="main" class="ui-content">
+                            <form method="post" action="/action_page_post.php">
+                              <div data-role="rangeslider">
+                                <label for="price-min" class="text-white">Prix minimum:</label>
+                                <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
+                                <label for="price-max" class="text-white">Prix maximum:</label>
+                                <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
+                              </div>
+                                <input type="submit" data-inline="true" value="Submit">
+                              </form>
+                          </div>
                         </div>
 
                         <div class="list_group">
@@ -104,33 +118,33 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
 
 
                             <a href="#" class="nav-link px-4 rounded-pill activer">
-                                <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                <input type="checkbox" class="icon_activer">
                                 Tout
                                 <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>
                             </a>
                             <a href="#" class="nav-link px-4 rounded-pill activer">
-                                <i class="fa fa-circle-o mr-2"></i>
+                                <input type="checkbox" class="icon_activer">
                                 Afro Beats
                             </a>
                             <a href="#" class="nav-link px-4 rounded-pill activer">
-                                <i class="fa fa-circle-o mr-2"></i>
+                                <input type="checkbox" class="icon_activer">
                                 Active link
                             </a>
                             <a href="#" class="nav-link px-4 rounded-pill activer">
-                                <i class="fa fa-circle-o mr-2"></i>
+                                <input type="checkbox" class="icon_activer">
                                 Drill
                             </a>
                             <a href="#" class="nav-link px-4 rounded-pill activer">
-                                <i class="fa fa-circle-o mr-2"></i>
+                                <input type="checkbox" class="icon_activer">
                                 Electro
                             </a>
                             <a href="#" class="nav-link px-4 rounded-pill activer">
-                                <i class="fa fa-circle-o mr-2"></i>
+                                <input type="checkbox" class="icon_activer">
                                 Trap
                             </a>
                             <a href="#" class="nav-link rounded-pill px-4 activer">
-                                <i class="fa fa-circle-o mr-2"></i>
-                                Urbatutt
+                                <input type="checkbox" class="icon_activer">
+                                Urban
                             </a>
                         </div> 
 
@@ -138,6 +152,7 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
                             <h4 class="text-white">Trier par Date</h4>
                         </div>
                     </nav>
+                    </form>
                     <!-- End -->
 
                 </div>
@@ -146,22 +161,11 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
                     <!-- Demo Content-->
                     <div class="p-5 bg-white d-flex align-items-center shadow-sm rounded h-100">
                         <div class="demo-content">
-                            <!--  <p class="lead font-italic">- Demo content:</p>
-<p class="lead font-italic mb-0">"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat consectetur
-adipisicing eli exercitation ullamco laboris nisi."</p>-->
-                            <!--<img src="img/Sch.jpg">-->
+
                             <?php
-
-
-    //print_r($resu);
     foreach($resu as $r){
-
-
-
                             ?>
-
                             <?= $r['beat_title']." "?><?= $r['beat_author']." "?><?= $r['beat_year']." ---"?>
-
                             <?php
 
     }
