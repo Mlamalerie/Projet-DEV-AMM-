@@ -14,9 +14,14 @@ session_start();
         <?php
         require_once('skeleton/headLinkCSS.php');
         ?>
+
         <link rel="stylesheet" type="text/css" href="css/styles-index.css"> 
         <link rel="stylesheet" type="text/css" href="css/navbar.css"> 
         <link rel="stylesheet" type="text/css" href="css/navbar-index-turfu.css"> 
+        <link rel="stylesheet" href="APlayer.min.css">
+        
+        <!-- APlayer CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css">
 
         <!--        LOGo -->
         <link rel="shortcut icon" href="img/bigmetro.jpg">
@@ -24,7 +29,7 @@ session_start();
         <!--        PACK DE ICON -->
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
 
-
+        
 
 
         <title>WeBeats</title>
@@ -54,6 +59,10 @@ session_start();
                         <h1 class="display-3">Développez vos sons</h1>
                         <p class="lead mb-0">Découvrez et Partagez les prods de vos choix</p>
                         <p class="lead mb-0">Pour pouvoir acheter ou vendre des prods  <a href="inscription.php"><button type="button" class="btn btn-danger btninscription" >Inscrivez-vous</button></a></p><br/>
+
+                        <a href="testplayer.php"><button type="button" class="btn btn-danger btninscription">Test</button></a></br>
+
+
                         <div class="searchbar">
                             <input class="search_input" type="text" placeholder="Recherchez vos musiques, artistes...">
                             <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
@@ -94,32 +103,43 @@ session_start();
                                 <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
                                 <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
                             </ol>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="img/CG6.png" class="d-block w-100 image_sons"  alt="..." >
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Nom de la prod : </h5>
-                                        <p>Nom du producteur : </p>
-                                        <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay" ><i class="fa fa-play"></i></button>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="img/DB5.jpg" class="d-block w-100 image_sons" alt="...">
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Nom de la prod : </h5>
-                                        <p>Nom du producteur : </p>
-                                        <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
 
-                                    <img src="img/MILS.jpg" class="d-block w-100 image_sons" alt="...">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">                             
+                                <img src="img/CG6.png" class="d-block w-100 image_sons"  alt="..." >
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Nom de la prod : </h5>
                                         <p>Nom du producteur : </p>
-                                        <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay" ><i class="fa fa-play"></i></button>
+                                        <a href="javascript:void();" class="album-poster" data-switch="0">
+                                       <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
+                                       </a>
                                     </div>
                                 </div>
+
+                                <div class="carousel-item"> 
+                                <img src="img/DB5.jpg" class="d-block w-100 image_sons" alt="...">                                    
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Nom de la prod : </h5>
+                                        <p>Nom du producteur : </p>
+                                        <a href="javascript:void();" class="album-poster" data-switch="1">
+                                            <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="carousel-item">
+                                <img src="img/MILS.jpg" class="d-block w-100 image_sons" alt="...">                              
+                                   <div class="carousel-caption d-none d-md-block">
+                                        <h5>Nom de la prod : </h5>
+                                        <p>Nom du producteur : </p>
+                                        <a href="javascript:void();" class="album-poster" data-switch="2">
+                                            <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i>
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -149,28 +169,37 @@ session_start();
                                 <li data-target="#carouselExampleCaptions1" data-slide-to="2"></li>
                             </ol>
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="img/roddy.jpg" class="d-block w-100 image_sons"  alt="...">
+
+                                <div class="carousel-item active">     
+                                <img src="img/roddy.jpg" class="d-block w-100 image_sons"  alt="...">                                
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Nom de la prod : </h5>
                                         <p>Nom du producteur : </p>
-                                        <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
+                                        <a href="javascript:void();" class="album-poster" data-switch="3">
+                                            <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <img src="img/bigmetro.jpg" class="d-block w-100 image_sons"  alt="...">
+
+                                <div class="carousel-item">                                    
+                                    <img src="img/bigmetro.jpg" class="d-block w-100 image_sons"  alt="...">                             
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Nom de la prod : </h5>
                                         <p>Nom du producteur : </p>
-                                        <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay" ><i class="fa fa-play"></i></button>
+                                        <a href="javascript:void();" class="album-poster" data-switch="4">
+                                            <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay" ><i class="fa fa-play"></i></button>
+                                        </a>
                                     </div>
                                 </div>
+
                                 <div class="carousel-item">
-                                    <img src="img/luv.jpg" class="d-block w-100 image_sons"  alt="...">
+                                <img src="img/luv.jpg" class="d-block w-100 image_sons"  alt="...">                                  
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Nom de la prod : </h5>
                                         <p>Nom du producteur : </p>
-                                        <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
+                                        <a href="javascript:void();" class="album-poster" data-switch="5">
+                                            <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -334,7 +363,7 @@ session_start();
 
 
 
-
+        <div id="aplayer"></div>
 
 
 
@@ -402,14 +431,22 @@ session_start();
         </footer>
         <!-- End -->
 
+
+
+
+
+        <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+
+
+
         <?php
         require_once('skeleton/endLinkScripts.php');
         ?>
-
-
-
-
-
 
 
     </body>
