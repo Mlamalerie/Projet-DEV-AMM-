@@ -12,7 +12,7 @@ session_start();
         <meta name='description' content="Site Responsive Hotel ">
         
         <?php
-        require_once('skeleton/headLinkCSS.php');
+        require_once('skeleton/headLinkCSS.html');
         ?>
         
         <link rel="stylesheet" type="text/css" href="css/styles-index.css"> 
