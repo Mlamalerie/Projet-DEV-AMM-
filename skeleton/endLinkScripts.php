@@ -6,8 +6,8 @@
 
 
 <!-- APlayer Jquery link -->
-**********************DESACTIVE CAR PB CAROUSSEL****************************
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+<!--**********************DESACTIVE CAR PB CAROUSSEL****************************
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>-->
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

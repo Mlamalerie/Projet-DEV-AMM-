@@ -18,10 +18,8 @@ session_start();
         <link rel="stylesheet" type="text/css" href="css/styles-index.css"> 
         <link rel="stylesheet" type="text/css" href="css/navbar.css"> 
         <link rel="stylesheet" type="text/css" href="css/navbar-index-turfu.css"> 
-        <link rel="stylesheet" href="APlayer.min.css">
+       
 
-        <!-- APlayer CSS -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css">
 
         <!--        LOGo -->
         <link rel="shortcut icon" href="img/bigmetro.jpg">
@@ -111,36 +109,27 @@ session_start();
                         <div class="container row col-md-12" style="padding-left : 200px">
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="0"><img src="img/roddy.jpg">
-                                </a>
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="1">
-                                    <img src="img/bigmetro.jpg"  height="225">
-                                </a>
+                                <img src="img/bigmetro.jpg"  height="225">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="2">
-                                    <img src="img/luv.jpg" height="225">
-                                </a>
+                                <img src="img/luv.jpg" height="225">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
-                            <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="3">
-                                    <img src="img/roddy.jpg">
-                                </a>
+                            <div class="col-md-3">                              
+                                <img src="img/roddy.jpg">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
-
 
                         </div>
                     </div>
@@ -149,70 +138,54 @@ session_start();
                         <div class="container row col-md-12" style="padding-left : 200px">
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="0"><img src="img/roddy.jpg">
-                                </a>
+                                <img src="img/roddy.jpg">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="1">
-                                    <img src="img/bigmetro.jpg"  height="225">
-                                </a>
+                                <img src="img/bigmetro.jpg"  height="225">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="2">
-                                    <img src="img/luv.jpg" height="225">
-                                </a>
+                                <img src="img/luv.jpg" height="225">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="3">
-                                    <img src="img/roddy.jpg">
-                                </a>
+                                <img src="img/roddy.jpg">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
                         </div> 
-                        <a href="javascript:void();" class="album-poster" data-switch="1">
-                        </a>
                     </div>
 
                     <div class="carousel-item">
                         <div class="container row col-md-12" style="padding-left : 200px">
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="0"><img src="img/roddy.jpg">
-                                </a>
+                                <img src="img/roddy.jpg">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="1">
-                                    <img src="img/bigmetro.jpg"  height="225">
-                                </a>
+                                <img src="img/bigmetro.jpg"  height="225">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="2">
-                                    <img src="img/luv.jpg" height="225">
-                                </a>
+                                <img src="img/luv.jpg" height="225">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="3">
-                                    <img src="img/roddy.jpg">
-                                </a>
+                                <img src="img/roddy.jpg">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
@@ -259,9 +232,7 @@ session_start();
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Nom de la prod : </h5>
                                     <p>Nom du producteur : </p>
-                                    <a href="javascript:void();" class="album-poster" data-switch="3">
-                                        <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
-                                    </a>
+                                    <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
                                 </div>
                             </div>
 
@@ -270,9 +241,7 @@ session_start();
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Nom de la prod : </h5>
                                     <p>Nom du producteur : </p>
-                                    <a href="javascript:void();" class="album-poster" data-switch="4">
-                                        <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay" ><i class="fa fa-play"></i></button>
-                                    </a>
+                                    <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay" ><i class="fa fa-play"></i></button>
                                 </div>
                             </div>
 
@@ -281,9 +250,7 @@ session_start();
                                 <div class="carousel-caption d-none d-md-block">
                                     <h5>Nom de la prod : </h5>
                                     <p>Nom du producteur : </p>
-                                    <a href="javascript:void();" class="album-poster" data-switch="5">
-                                        <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
-                                    </a>
+                                     <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
                                 </div>
                             </div>
                         </div>
