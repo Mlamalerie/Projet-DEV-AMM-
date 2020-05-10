@@ -6,7 +6,7 @@ session_start();
 
 
 
-<br><br><br><br><br><br><br><br>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -15,7 +15,7 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <?php
-        require_once('skeleton/headLinkCSS.php');
+        require_once('skeleton/headLinkCSS.html');
         ?>
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="css/styles-index.css"> 
@@ -25,6 +25,7 @@ session_start();
         <title>TEST ZONE</title>
     </head>
     <body>
+        <br><br><br><br><br><br><br>
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
 
@@ -41,9 +42,18 @@ session_start();
             echo "Pas de connexion";
         }
         ?>
-        <form id="searchform" method="get" action="recherche.php">
+        <form id="searchform" method="get" action="search.php">
+            <select name="Genre" class="custom-select">
+                    <option value="All"selected>ALL</option>
+                    <option value="Trap">TRAP</option>
+                    <option value="Afro">AFRO</option>
+                   
+                </select>
             <div class="searchbar ">
+               
                 <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
+
+
                 <a onclick="goSearch()" href="#" class="search_icon"><i class="fas fa-search"></i></a>
             </div>
         </form>
@@ -70,7 +80,7 @@ session_start();
 
                 ok = (baysearch != "");
                 console.log(champs,baysearch,ok);
-                
+
                 if (ok) {
                     document.getElementById("searchform").submit();
                 }
@@ -85,7 +95,7 @@ session_start();
             //                    if (beat != ""){
             //                        $.ajax({
             //                            type : "GET",
-            //                            url : 'recherche.php',
+            //                            url : 'search.php',
             //                            data: 'instru=' + encodeURIComponent(beat),
             //                            success: function(data){
             //                                if(data != ""){
