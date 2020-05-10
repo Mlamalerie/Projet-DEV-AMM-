@@ -111,32 +111,25 @@ session_start();
                         <div class="container row col-md-12" style="padding-left : 200px">
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="0"><img src="img/roddy.jpg">
-                                </a>
+                                <img src="img/roddy.jpg">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="1">
-                                    <img src="img/bigmetro.jpg"  height="225">
-                                </a>
+                                <img src="img/bigmetro.jpg"  height="225">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="2">
-                                    <img src="img/luv.jpg" height="225">
-                                </a>
+                                <img src="img/luv.jpg" height="225">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="3">
                                     <img src="img/roddy.jpg">
-                                </a>
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
@@ -149,77 +142,58 @@ session_start();
                         <div class="container row col-md-12" style="padding-left : 200px">
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="0"><img src="img/roddy.jpg">
-                                </a>
+                               <img src="img/roddy.jpg">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="1">
                                     <img src="img/bigmetro.jpg"  height="225">
-                                </a>
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="2">
                                     <img src="img/luv.jpg" height="225">
-                                </a>
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="3">
                                     <img src="img/roddy.jpg">
-                                </a>
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
-                        </div> 
-                        <a href="javascript:void();" class="album-poster" data-switch="1">
-                        </a>
+                        </div>
                     </div>
 
                     <div class="carousel-item">
                         <div class="container row col-md-12" style="padding-left : 200px">
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="0"><img src="img/roddy.jpg">
-                                </a>
+                               <img src="img/roddy.jpg">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="1">
                                     <img src="img/bigmetro.jpg"  height="225">
-                                </a>
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="2">
                                     <img src="img/luv.jpg" height="225">
-                                </a>
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
 
                             <div class="col-md-3">
-                                <a href="javascript:void();" class="album-poster" data-switch="3">
                                     <img src="img/roddy.jpg">
-                                </a>
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
                         </div> 
-
-                        <a href="javascript:void();" class="album-poster" data-switch="2">
-                        </a>
                     </div>
 
                 </div>
