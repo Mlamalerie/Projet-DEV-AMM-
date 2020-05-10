@@ -94,7 +94,7 @@
     </div>
   </div>
 
-    <div id="aplayer"></div>
+    <div class="fixed-top" id="aplayer"></div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

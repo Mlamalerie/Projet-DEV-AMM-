@@ -20,7 +20,7 @@ session_start();
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="css/styles-index.css"> 
         <link rel="stylesheet" type="text/css" href="css/navbar.css">
-
+<link rel="stylesheet" type="text/css" href="css/test_zone.css">
 
         <title>TEST ZONE</title>
     </head>
@@ -44,13 +44,13 @@ session_start();
         ?>
         <form id="searchform" method="get" action="search.php">
             <select name="Genre" class="custom-select">
-                    <option value="All"selected>ALL</option>
-                    <option value="Trap">TRAP</option>
-                    <option value="Afro">AFRO</option>
-                   
-                </select>
+                <option value="All"selected>ALL</option>
+                <option value="Trap">TRAP</option>
+                <option value="Afro">AFRO</option>
+
+            </select>
             <div class="searchbar ">
-               
+
                 <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
 
 
@@ -64,10 +64,13 @@ session_start();
 
 
 
+
+
         <?php
         require_once('skeleton/endLinkScripts.php');
         ?>
         <script>
+         
             function goSearch() {
 
 
@@ -82,6 +85,7 @@ session_start();
                 console.log(champs,baysearch,ok);
 
                 if (ok) {
+                    
                     document.getElementById("searchform").submit();
                 }
 
