@@ -10,16 +10,16 @@ session_start();
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name='description' content="Site Responsive Hotel ">
-        
+       
         <?php
         require_once('skeleton/headLinkCSS.html');
         ?>
 
-        <link rel="stylesheet" type="text/css" href="css/styles-index.css"> 
-        <link rel="stylesheet" type="text/css" href="css/navbar.css"> 
-        <link rel="stylesheet" type="text/css" href="css/navbar-index-turfu.css"> 
+        <link rel="stylesheet" type="text/css" href="css/styles-index.css">
+        <link rel="stylesheet" type="text/css" href="css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="css/navbar-index-turfu.css">
         <link rel="stylesheet" href="APlayer.min.css">
-        
+       
         <!-- APlayer CSS -->
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css">
 
@@ -30,7 +30,7 @@ session_start();
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
 
 
-        <!-- lien pour rechercher dans  barre de recherche 
+        <!-- lien pour rechercher dans  barre de recherche
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 
 
@@ -54,7 +54,7 @@ session_start();
 
         <header>
             <div class="overlay-sombre"></div>
-            <video id="BACKGROUNDVIDEO1" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><!--fond d'écran animé--> 
+            <video id="BACKGROUNDVIDEO1" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><!--fond d'écran animé-->
                 <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4">
             </video>
             <div class="container h-100">
@@ -64,7 +64,7 @@ session_start();
                         <p class="lead mb-0">Découvrez et Partagez les prods de vos choix</p>
                         <p class="lead mb-0">Pour pouvoir acheter ou vendre des prods  <a href="inscription.php"><button type="button" class="btn btn-danger btninscription" >Inscrivez-vous</button></a></p><br/>
 
-                        <a href="testplayer.php"><button type="button" class="btn btn-danger btninscription">Test</button></a></br>
+                        <a href="testplayer.php"><button type="button" class="btn btn-danger btninscription">Test</button></a>
 
 
                         <div class="searchbar">
@@ -108,7 +108,7 @@ session_start();
                             </ol>
 
                             <div class="carousel-inner">
-                                <div class="carousel-item active">                             
+                                <div class="carousel-item active">                            
                                 <img src="img/CG6.png" class="d-block w-100 image_sons"  alt="..." >
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Nom de la prod : </h5>
@@ -119,7 +119,7 @@ session_start();
                                     </div>
                                 </div>
 
-                                <div class="carousel-item"> 
+                                <div class="carousel-item">
                                 <img src="img/DB5.jpg" class="d-block w-100 image_sons" alt="...">                                    
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Nom de la prod : </h5>
@@ -173,7 +173,7 @@ session_start();
                             </ol>
                             <div class="carousel-inner">
 
-                                <div class="carousel-item active">     
+                                <div class="carousel-item active">    
                                 <img src="img/roddy.jpg" class="d-block w-100 image_sons"  alt="...">                                
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Nom de la prod : </h5>
@@ -185,7 +185,7 @@ session_start();
                                 </div>
 
                                 <div class="carousel-item">                                    
-                                    <img src="img/bigmetro.jpg" class="d-block w-100 image_sons"  alt="...">                             
+                                    <img src="img/bigmetro.jpg" class="d-block w-100 image_sons"  alt="...">                            
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Nom de la prod : </h5>
                                         <p>Nom du producteur : </p>
@@ -443,7 +443,7 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    
+   
 
 
 

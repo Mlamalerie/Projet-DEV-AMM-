@@ -43,10 +43,10 @@ session_start();
         }
         ?>
         <form id="searchform" method="get" action="search.php">
-            <select name="Genre" class="custom-select">
-                <option value="All"selected>ALL</option>
-                <option value="Trap">TRAP</option>
-                <option value="Afro">AFRO</option>
+           <select name="Genre" class="custom-select">-->
+                <option value="All" selected >ALL</option>
+                <option value="Trap" >TRAP</option>
+                <option value="Afro" >AFRO</option>
 
             </select>
             <div class="searchbar ">
@@ -58,11 +58,6 @@ session_start();
             </div>
         </form>
 
-        <div>
-            <div id="result-search"> </div>
-        </div>
-
-
 
 
 
@@ -72,7 +67,7 @@ session_start();
         <script>
          
             function goSearch() {
-
+console.log("*goSearch*");
 
                 var ok = false;
                 var champs = document.getElementById('searchbar');
