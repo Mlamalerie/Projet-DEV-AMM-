@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-include_once("db/connexiondb.php");
+include_once("assets/db/connexiondb.php");
 
 print_r($_GET);
 $listeGenres = ['Hip Hop','Trap','Afro Beat','Deep','Soul','Mlamali'];
@@ -101,19 +101,18 @@ else {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <?php
-        require_once('skeleton/headLinkCSS.html');
+        require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <link rel="stylesheet" href="APlayer.min.css">
-        <link rel="stylesheet" type="text/css" href="css/LecteurAudio.css">
-        
-        <link rel="stylesheet" type="text/css" href="css/navbar.css">
-        <link rel="stylesheet" type="text/css" href="css/navmenuvertical.css">
-        <link rel="stylesheet" type="text/css" href="css/navmenuvertical_responsive.css">
-        <link rel="stylesheet" type="text/css" href="css/search.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/LecteurAudio.css">
+
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/search.css">
 
 
-        <!-- APlayer CSS -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css">
+  
 
         <title>Search</title>
     </head>
@@ -122,7 +121,7 @@ else {
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
         <?php
-        //require_once('skeleton/menu.php');
+        //require_once('assets/skeleton/menu.php');
         ?>
         <!--   *************************************************************  -->
         <!--   ************************** TEST TECHERCHE MLAMALI  **************************  -->
@@ -145,6 +144,7 @@ else {
                 <div class="col-lg-4 mb-4 mb-lg-0 col-md-4 col-xl-3">
                     <!--   *************************************************************  -->
                     <!--   ************************** MENU VERTICAL **************************  -->
+
 
                     <nav id="menuvertical" class="nav flex-column bg-white shadow-sm font-italic rounded p-3">
                         <form id='formMenuvertical' action="search.php">
@@ -206,6 +206,7 @@ else {
                     <h1 class="resultat">Résultats trouvés pour "<?= $_GET['q'] ?>"</h1>
                     <?php } ?>
                     <!-- Demo Content-->
+
                     <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : cyan;">
 
                         <div class=" container-fluid ligneCardMusic">
@@ -282,7 +283,7 @@ else {
 
                     ?>
                     <div class="col-md-3">
-                        <a  class="album-poster" data-switch="0">
+                        <a  class="album-poster" data-switch="1">
                             <img src="img/roddy.jpg">
                         </a>
                         <h4>Titre</h4>
@@ -297,14 +298,14 @@ else {
             </div>
         </div>
         <!--   END MENU + RESULTAT -->
+
         
-        <div class="fixed-top" id="aplayer"></div>
-       
+
 
 
 
         <script type="text/javascript">
-
+           
             function goGenre(bay){
 
 
@@ -336,15 +337,19 @@ else {
 
             console.log("a",a);
 
+
+        </script>
+
+        <script>
+
+
         </script>
 
 
         <?php
-        require_once('skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.php');
         ?>
 
-        <script src="js/mediaplayer.js"></script>
-        <!-- APlayer Jquery link -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>
+    
     </body>
 </html>

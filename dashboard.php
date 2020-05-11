@@ -28,7 +28,7 @@ session_start();
         require_once('skeleton/menu.php');
         ?>
 
-        Ici c'est l'index des connecté
+        Ici c'est l'index des connectés
         <?php
         if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
             print_r($_SESSION);

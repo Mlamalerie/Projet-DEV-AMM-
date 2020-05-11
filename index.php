@@ -12,22 +12,19 @@ session_start();
         <meta name='description' content="Site Responsive Hotel ">
        
         <?php
-        require_once('skeleton/headLinkCSS.html');
+        require_once('assets/skeleton/headLinkCSS.html');
         ?>
 
-        <link rel="stylesheet" type="text/css" href="css/styles-index.css">
-        <link rel="stylesheet" type="text/css" href="css/navbar.css">
-        <link rel="stylesheet" type="text/css" href="css/navbar-index-turfu.css">
-        <link rel="stylesheet" href="APlayer.min.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar-index-turfu.css">
        
-        <!-- APlayer CSS -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css">
+     
 
         <!--        LOGo -->
         <link rel="shortcut icon" href="img/bigmetro.jpg">
 
-        <!--        PACK DE ICON -->
-        <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
+       
 
 
         <!-- lien pour rechercher dans  barre de recherche
@@ -43,7 +40,7 @@ session_start();
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('skeleton/menu.php');
+        require_once('assets/skeleton/menu.php');
         ?>
 
 
@@ -366,7 +363,7 @@ session_start();
 
 
 
-        <div id="aplayer"></div>
+     
 
 
 
@@ -448,7 +445,7 @@ session_start();
 
 
         <?php
-        require_once('skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.php');
         ?>
 
 
