@@ -4,7 +4,7 @@ session_start();
 include_once("assets/db/connexiondb.php");
 
 print_r($_GET);
-$listeGenres = ['Hip Hop','Trap','Afro Beat','Deep','Soul','Mlamali'];
+$listeGenres = ['Hip Hop','Trap','Afro','Deep','Soul','Mlamali'];
 sort($listeGenres);
 
 
@@ -49,34 +49,37 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
 else if ( !empty($_GET['Genre']) ) {
 
 
-    print_r($_GET['Genre']);
+    if(in_array($_GET['Genre'],$listeGenres)) {
 
-    foreach($listeGenres as $gr){
-        print_r("<br> > ");
-        print_r($gr);
+        foreach($listeGenres as $gr){
+            print_r("<br> > ");
+            print_r($gr);
 
-        if($_GET['Genre'] == $gr) {
-            print_r("- ");
-            $req = $BDD->prepare("SELECT *
+            if($_GET['Genre'] == $gr) {
+                print_r("- ");
+                $req = $BDD->prepare("SELECT *
                          FROM beat
                          WHERE beat_genre = '$gr'
                          ORDER BY beat_title DESC");
-        //break;break;
+                //break;break;
+
+
+            }
 
 
         }
-        
-//        else {
-//            print_r("+ ");
-//            $req = $BDD->prepare("SELECT *
-//                            FROM beat
-//                            ORDER BY beat_title DESC");
-//
-//        }
-
-        $req->execute(array());
-        $resu = $req->fetchAll();
     }
+    else {
+        print_r("+ ");
+        $req = $BDD->prepare("SELECT *
+                            FROM beat
+                            ORDER BY beat_title DESC");
+
+    }
+
+    $req->execute(array());
+    $resu = $req->fetchAll();
+
 
 } 
 else {
