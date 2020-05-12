@@ -12,13 +12,20 @@ session_start();
         <meta name='description' content="Site Responsive Hotel ">
 
         <?php
-        require_once('skeleton/headLinkCSS.html');
+        require_once('assets/skeleton/headLinkCSS.html');
         ?>
 
+<<<<<<< HEAD
         <link rel="stylesheet" type="text/css" href="css/styles-index.css"> 
         <link rel="stylesheet" type="text/css" href="css/navbar.css"> 
         <link rel="stylesheet" type="text/css" href="css/navbar-index-turfu.css"> 
 
+=======
+        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar-index-turfu.css">
+       
+>>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
 
         <!--        LOGo -->
         <link rel="shortcut icon" href="img/bigmetro.jpg">
@@ -37,7 +44,7 @@ session_start();
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('skeleton/menu.php');
+        require_once('assets/skeleton/menu.php');
         ?>
 
 
@@ -48,7 +55,7 @@ session_start();
 
         <header>
             <div class="overlay-sombre"></div>
-            <video id="BACKGROUNDVIDEO1" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><!--fond d'écran animé--> 
+            <video id="BACKGROUNDVIDEO1" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><!--fond d'écran animé-->
                 <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4">
             </video>
             <div class="container h-100">
@@ -69,6 +76,7 @@ session_start();
                 </div>
             </div>
         </header>
+<<<<<<< HEAD
         <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
         <?php
         if(isset($_SESSION['user_id'])) {
@@ -84,6 +92,39 @@ session_start();
 
         }
         ?>
+=======
+    <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
+    <?php
+    if(isset($_SESSION['user_id'])) {
+        print_r($_SESSION);
+    } else{
+        echo "Pas de connexion <br>";
+        echo "Pas de connexion <br>";
+        echo "Pas de connexion <br>";
+        echo "Pas de connexion <br>";
+        echo "Pas de connexion <br>";
+        echo "Pas de connexion <br>";
+        echo "Pas de connexion <br>";
+
+    }
+    ?>
+
+
+    <!--   *************************************************************  -->
+    <!--   ************************** SECTION 1  ***********************  -->
+    <!-- ******* Section 1 -->
+    <section class="py-5 d-flex align-items-center" id="one">
+        <div class="row" id="tendances">
+            <div style="padding-left : 575px">
+                <h2 class="h1 mb-4">Tendances</h2>
+            </div>
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators invisible" style="padding-left : 150px">
+                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class=" rounded-circle active"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="1" class="rounded-circle"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="2" class="rounded-circle"></li>
+                </ol>
+>>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
 
 
         <!--   *************************************************************  -->
@@ -196,12 +237,19 @@ session_start();
 
                                 <div class="col-md-3">
                                     <img src="img/roddy.jpg">
+<<<<<<< HEAD
                                     <h4>Titre</h4>
                                     <p>Nom artiste</p>
                                 </div>
                             </div> 
                         </div>
 
+=======
+                                <h4>Titre</h4>
+                                <p>Nom artiste</p>
+                            </div>
+                        </div>
+>>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
                     </div>
 
                     <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
@@ -217,6 +265,7 @@ session_start();
             </div>          
 
 
+<<<<<<< HEAD
         </section>
 
         <!-- Section 2-->
@@ -243,8 +292,40 @@ session_start();
                                             <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
                                         </a>
                                     </div>
+=======
+            </div>
+        </div>          
+
+
+    </section>
+
+    <!-- Section 2-->
+    <section class="py-5 d-flex align-items-center" id="two">
+        <div class="container py-5">
+            <div class="row text-center">
+                <div class="col-lg-9 mx-auto" id="topventes">
+                    <h2 class="h1 mb-4">TOP des ventes</h2>
+
+                    <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleCaptions1" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleCaptions1" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleCaptions1" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active">    
+                                <img src="img/roddy.jpg" class="d-block w-100 image_sons"  alt="...">                                
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Nom de la prod : </h5>
+                                    <p>Nom du producteur : </p>
+                                    <a href="javascript:void();" class="album-poster" data-switch="3">
+                                        <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
+                                    </a>
+>>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
                                 </div>
 
+<<<<<<< HEAD
                                 <div class="carousel-item">                                    
                                     <img src="img/bigmetro.jpg" class="d-block w-100 image_sons"  alt="...">                             
                                     <div class="carousel-caption d-none d-md-block">
@@ -254,6 +335,16 @@ session_start();
                                             <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay" ><i class="fa fa-play"></i></button>
                                         </a>
                                     </div>
+=======
+                            <div class="carousel-item">                                    
+                                <img src="img/bigmetro.jpg" class="d-block w-100 image_sons"  alt="...">                            
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Nom de la prod : </h5>
+                                    <p>Nom du producteur : </p>
+                                    <a href="javascript:void();" class="album-poster" data-switch="4">
+                                        <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay" ><i class="fa fa-play"></i></button>
+                                    </a>
+>>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
                                 </div>
 
                                 <div class="carousel-item">
@@ -499,6 +590,7 @@ session_start();
 
 
 
+<<<<<<< HEAD
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -511,6 +603,15 @@ session_start();
         <?php
         require_once('skeleton/endLinkScripts.php');
         ?>
+=======
+   
+
+
+
+    <?php
+    require_once('assets/skeleton/endLinkScripts.php');
+    ?>
+>>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
 
 
     </body>
