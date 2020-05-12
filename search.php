@@ -1,13 +1,19 @@
-<br><br><br><br><br><br><br><br>
+
 <?php
 session_start();
-include_once("db/connexiondb.php");
+include_once("assets/db/connexiondb.php");
 
 print_r($_GET);
+$listeGenres = ['Hip Hop','Trap','Afro Beat','Deep','Soul','Mlamali'];
+sort($listeGenres);
+
+
+
+// si le contenu recherché existe et n'est pas vide
 if(isset($_GET['q']) && !empty($_GET['q'])) {
 
     $xxx = (String) trim(($_GET['q']));
-    $listeGenres = ['Trap','Afro','Deep'];
+
 
 
     if($_GET['Genre'] == "All") {
@@ -28,7 +34,7 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
                                         WHERE beat_genre = '$gr'
                                         ORDER BY beat_title DESC");
 
-                break;
+                //break;
             } 
 
         }
@@ -36,12 +42,51 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
     }
 
 
-
-
-
-
     $req->execute(array("%".$xxx."%"));
     $resu = $req->fetchAll();
+
+} //si bay recherche vide mais Genre pas vide
+else if ( !empty($_GET['Genre']) ) {
+
+    print_r("<br><br> genre pas nul : ");
+    print_r($_GET['Genre']);
+
+    foreach($listeGenres as $gr){
+
+        if($_GET['Genre'] == $gr) {
+            $req = $BDD->prepare("SELECT *
+                         FROM beat
+                         WHERE beat_genre = '$gr'
+                         ORDER BY beat_title DESC");
+
+
+        }else {
+            $req = $BDD->prepare("SELECT *
+                            FROM beat
+                            ORDER BY beat_title DESC");
+
+        }
+
+        $req->execute(array());
+        $resu = $req->fetchAll();
+    }
+
+} 
+else {
+    $req = $BDD->prepare("SELECT *
+                            FROM beat
+                            ORDER BY beat_title DESC");
+
+    $req->execute(array());
+    $resu = $req->fetchAll();
+    print_r("****");
+}
+
+
+
+
+
+
 
 
 
@@ -56,12 +101,17 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <?php
-    require_once('skeleton/headLinkCSS.html');
+        require_once('assets/skeleton/headLinkCSS.html');
         ?>
-        <link rel="stylesheet" type="text/css" href="css/navbar.css">
-        <link rel="stylesheet" type="text/css" href="css/navmenuvertical.css">
-        <link rel="stylesheet" type="text/css" href="css/navmenuvertical_responsive.css">
-        <link rel="stylesheet" type="text/css" href="css/recherche.css">
+
+
+
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/search.css">
+
+      
 
         <title>Search</title>
     </head>
@@ -70,124 +120,228 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
         <?php
-    require_once('skeleton/menu.php');
+        //require_once('assets/skeleton/menu.php');
         ?>
         <!--   *************************************************************  -->
         <!--   ************************** TEST TECHERCHE MLAMALI  **************************  -->
         Ici c'est l'index des connecté
         <?php
-    if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
-        print_r($_SESSION);
-    } else{
-        echo "Pas de connexion";
-    }
+        if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
+            print_r($_SESSION);
+        } else{
+            echo "Pas de connexion";
+        }
         ?>
 
 
 
-        <!--   *************************************************************  -->
-        <!--   ************************** MENU VERTICAL **************************  -->
-        <h1 class="resultat">Résultats trouvés</h1>
-        <div class="rounded">
-            <div class="row">
+
+
+        <div class="rounded container-fluid mb-0">
+            <div class="row ">
+
                 <div class="col-lg-4 mb-4 mb-lg-0 col-md-4 col-xl-3">
+                    <!--   *************************************************************  -->
+                    <!--   ************************** MENU VERTICAL **************************  -->
 
-                    <!-- Vertical Menu-->
-                    <form method="get" id="form_menu_vert" action="">
-                    <nav id="menuvertical" class="nav flex-column bg-white shadow-sm font-italic rounded p-3"> <h3 class="text-white">Filtres de recherche</h3>
+                    <nav id="menuvertical" class="nav flex-column bg-white shadow-sm font-italic rounded p-3">
+                        <form id='formMenuvertical' action="search.php">
+                            <div class="list_group">
 
-                        <div class="list_group">
-                            <h4 class="text-white">Trier par prix</h4>
-                            <p class="text-white"> Trier par ordre croissant </p>
-                            <p class="text-white"> Trier par ordre décroissant </p>
-                            <div data-role="main" class="ui-content">
-                            <form method="post" action="/action_page_post.php">
-                              <div data-role="rangeslider">
-                                <label for="price-min" class="text-white">Prix minimum:</label>
-                                <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
-                                <label for="price-max" class="text-white">Prix maximum:</label>
-                                <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
-                              </div>
-                                <input type="submit" data-inline="true" value="Submit">
-                              </form>
-                          </div>
-                        </div>
+                                <h4 class="text-white">Trier par prix</h4>
 
-                        <div class="list_group">
-                            <h4 class="text-white">Catégories</h4>
+                            </div>
+
+                            <div class="list_group">
+                                <h4 class="text-white display-6">Catégories</h4>
 
 
-                            <a href="#" class="nav-link px-4 rounded-pill activer">
-                                <input type="checkbox" class="icon_activer">
-                                Tout
-                                <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>
-                            </a>
-                            <a href="#" class="nav-link px-4 rounded-pill activer">
-                                <input type="checkbox" class="icon_activer">
-                                Afro Beats
-                            </a>
-                            <a href="#" class="nav-link px-4 rounded-pill activer">
-                                <input type="checkbox" class="icon_activer">
-                                Active link
-                            </a>
-                            <a href="#" class="nav-link px-4 rounded-pill activer">
-                                <input type="checkbox" class="icon_activer">
-                                Drill
-                            </a>
-                            <a href="#" class="nav-link px-4 rounded-pill activer">
-                                <input type="checkbox" class="icon_activer">
-                                Electro
-                            </a>
-                            <a href="#" class="nav-link px-4 rounded-pill activer">
-                                <input type="checkbox" class="icon_activer">
-                                Trap
-                            </a>
-                            <a href="#" class="nav-link rounded-pill px-4 activer">
-                                <input type="checkbox" class="icon_activer">
-                                Urban
-                            </a>
-                        </div> 
-
-                        <div class="list_group">
-                            <h4 class="text-white">Trier par Date</h4>
-                        </div>
-                    </nav>
-                    </form>
-                    <!-- End -->
-
-                </div>
-
-                <div class="col-lg-8 mb-5 col-md-8 col-xl-9">
-                    <!-- Demo Content-->
-                    <div class="p-5 bg-white d-flex align-items-center shadow-sm rounded h-100">
-                        <div class="demo-content">
-
-                            <?php
-    foreach($resu as $r){
-                            ?>
-                            <?= $r['beat_title']." "?><?= $r['beat_author']." "?><?= $r['beat_year']." ---"?>
-                            <?php
-
-    }
+                                <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
 
 
+                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <span id="genre_All" >All</span>
+                                    <!--                                    <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>-->
 
-} else {
-    print_r("****");
+                                </span>
+
+                                <?php foreach($listeGenres as $gr){
+                                ?>
+                                <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
+
+
+                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <span id="genre_<?= $gr?>" ><?= $gr?></span>
+                                    <!--                                    <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>-->
+
+                                </span>
+
+                                <?php
 }
+                                ?>
+
+
+                                <?php if (!empty($_GET['q']))  { ?>
+                                <input id='valq' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
+                                <?php } ?>
+
+                                <input id='valGenreMenu' type='hidden' name='Genre' value=''/>
+
+                            </div> 
+
+                            <div class="list_group">
+                                <h4 class="text-white">Trier par Date</h4>
+                            </div>
+                        </form>
+                    </nav>
+
+
+                </div>
+                <!--   *************************************************************  -->
+                <!--   ************************** RESULTAT **************************  -->
+                <div class="col-lg-8 mb-5 col-md-8 col-xl-9 m-0 " style="background-color : yellow;">
+                    <?php if (!empty($_GET['q']))  { ?>
+                    <h1 class="resultat">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
+                    <?php } ?>
+                    <!-- Demo Content-->
+                    <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : cyan;">
+
+                        <div class=" container-fluid ligneCardMusic">
+                            <?php
+                            foreach($resu as $r){
+                            ?>
+                            <div class="row justify-content-center p-0 mx-auto mb-2 rounded"  style="background-color : pink;">
+
+                                <div class="col-sm-2 p-0  " style="background-color : red;">
+                                    <img  src="img/Laylow.jpg" width="80"  >
+
+
+                                </div>
+
+                                <div class=" col-sm-6 align-middle  " style="background-color : blue;">
+
+                                    <span class='TitleCardMusic'><?=$r['beat_title']?> </span>
+                                    <span class='authorCardMusic'><?=$r['beat_author']?> </span>
+                                    <span class='GenreCardMusic'><?=$r['beat_genre']?> </span>
+
+
+
+                                </div>
+
+
+
+
+                                <div class=" col-sm-4  row align-items-center justify-content-center rounded-right" style="background-color : green;"> 
+                                    <span> (Likes ) </span>
+
+                                    <a class="btn btn-danger" href="#" role="button"><?=$r['beat_price']?> €</a>
+
+
+                                </div>
+
+                            </div>
+                            <?php
+
+                            }
 
                             ?>
                         </div>
+
+
                     </div>
+
+                    <p class="lead font-italic mb-0">"Lorem ipsumnisi."</p>
+
+                    <?php
+                    foreach($resu as $r){
+
+                    ?>
+
+                    <?= "<br>".$r['beat_title']." "?><?= $r['beat_author']." "?><?= $r['beat_year']." ---"?>
+
+                    <?php
+
+                    }
+
+                    ?>
+
+                    <?php
+                    $i = 0;
+                    foreach($resu as $r){ 
+
+                    ?>
+
+                    en travaux
+
+                    <?php
+
+                        $i++;
+                    }
+
+                    ?>
+                    <div class="col-md-3">
+                        <a  class="album-poster" data-switch="0">
+                            <img src="img/roddy.jpg">
+                        </a>
+                        <h4>Titre</h4>
+                        <p>Nom artiste</p>
+                    </div>
+
+
+
                 </div>
+                <!--   END divResultat -->
+
             </div>
         </div>
+        <!--   END MENU + RESULTAT -->
+       
 
 
+
+        <script>
+         
+
+            function goGenre(bay){
+
+
+                console.log();
+                gr = bay.children[1].innerHTML;
+
+                // for (var i = 0; i < bay.children)
+                console.log("bay",bay.children);
+
+                console.log("gr",gr);
+                ok = true;
+
+
+                console.log(gr);
+
+
+                valGenreMenu = document.getElementById('valGenreMenu');
+                valGenreMenu.value = gr;
+
+
+
+
+
+                if (ok) {
+                    document.getElementById('formMenuvertical').submit();
+
+                }
+
+
+
+
+            }
+
+
+
+        </script>
 
 
         <?php
-        require_once('skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.php');
         ?>
 
 

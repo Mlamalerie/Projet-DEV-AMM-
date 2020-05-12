@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("db/connexiondb.php"); // inclure le fichier pour se connecter à la base de donnée
+include_once("assets/db/connexiondb.php"); // inclure le fichier pour se connecter à la base de donnée
 include_once("fichierfct.php");
 
 // si une connection est détecter : (ta rien a faire ici mec)
@@ -99,15 +99,17 @@ if(!empty($_POST)){
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
-        <link rel="stylesheet" type="text/css" href="css/inscription-connexion.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/inscription-connexion.css">
+         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+        
         <title>Connexion</title>
     </head>
     <body>
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
         <?php
-        require_once('skeleton/menu.php');
+        require_once('assets/skeleton/menu.php');
         ?>
 
         <div class="container-fluid">

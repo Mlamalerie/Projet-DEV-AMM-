@@ -15,13 +15,13 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <?php
-        require_once('skeleton/headLinkCSS.html');
+        require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="css/styles-index.css"> 
-        <link rel="stylesheet" type="text/css" href="css/navbar.css">
-
-
+        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> 
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/test_zone.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/MusicPlayerMlamali.css">
         <title>TEST ZONE</title>
     </head>
     <body>
@@ -30,7 +30,7 @@ session_start();
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('skeleton/menu.php');
+        require_once('assets/skeleton/menu.php');
         ?>
 
 
@@ -43,14 +43,14 @@ session_start();
         }
         ?>
         <form id="searchform" method="get" action="search.php">
-            <select name="Genre" class="custom-select">
-                    <option value="All"selected>ALL</option>
-                    <option value="Trap">TRAP</option>
-                    <option value="Afro">AFRO</option>
-                   
-                </select>
+            <select name="Genre" class="custom-select">-->
+                <option value="All" selected >ALL</option>
+                <option value="Trap" >TRAP</option>
+                <option value="Afro" >AFRO</option>
+
+            </select>
             <div class="searchbar ">
-               
+
                 <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
 
 
@@ -58,18 +58,36 @@ session_start();
             </div>
         </form>
 
-        <div>
-            <div id="result-search"> </div>
-        </div>
+        <nav id="MusicPlayer" class="navbar-light bg-dark fixed-bottom">
+            <div class="container-fluid p-2 px-5" style="background-color:yellow;">
+                <div class="row">
+                    <div class="d-flex align-items-center justify-content-center" style="background-color:red;">
+                        <a class="navbar-brand" >
+                            <i id="logoPlay" onclick=" changeIcon()" class="fas fa-play " style="color : purple;"></i>
+                        </a>
 
+                    </div>
+                    <div class="" style="background-color:blue;">2/3 </div>
+                    <div class="" style="background-color:green;">3/3        </div>
+                </div>
+            </div>
+
+        </nav>
 
 
         <?php
-        require_once('skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.php');
         ?>
         <script>
-            function goSearch() {
+            function changeIcon(){
+                let ici = document.getElementById("logoPlay")
+                console.log(ici.node);
+                //ici.classList.remove("fa-play");
+                //console.log(ici);
+            }
 
+            function goSearch() {
+                console.log("*goSearch*");
 
                 var ok = false;
                 var champs = document.getElementById('searchbar');
@@ -82,39 +100,12 @@ session_start();
                 console.log(champs,baysearch,ok);
 
                 if (ok) {
+
                     document.getElementById("searchform").submit();
                 }
 
             }
-            //            $(document).ready(function() {
-            //                $('#searchbar').keyup(function(){
-            //                    $('#result-search').html('');
-            //
-            //                    var beat = $(this).val();
-            //
-            //                    if (beat != ""){
-            //                        $.ajax({
-            //                            type : "GET",
-            //                            url : 'search.php',
-            //                            data: 'instru=' + encodeURIComponent(beat),
-            //                            success: function(data){
-            //                                if(data != ""){
-            //                                    $('#result-search').append(data);
-            //                                }else {
-            //                                    document.getElementById('result-search').innerHTML = "AUCUN BAY";
-            //                                }
-            //                            }
-            //
-            //
-            //
-            //                        });
-            //
-            //                    }
 
-            //                    console.log(beat);
-            //                });
-            //
-            //            });
         </script>
 
     </body>
