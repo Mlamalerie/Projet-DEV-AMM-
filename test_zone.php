@@ -20,7 +20,7 @@ session_start();
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="css/styles-index.css"> 
         <link rel="stylesheet" type="text/css" href="css/navbar.css">
-
+        <link rel="stylesheet" type="text/css" href="css/music_card.css">
 
         <title>TEST ZONE</title>
     </head>
@@ -44,13 +44,13 @@ session_start();
         ?>
         <form id="searchform" method="get" action="search.php">
             <select name="Genre" class="custom-select">
-                    <option value="All"selected>ALL</option>
-                    <option value="Trap">TRAP</option>
-                    <option value="Afro">AFRO</option>
-                   
-                </select>
+                <option value="All"selected>ALL</option>
+                <option value="Trap">TRAP</option>
+                <option value="Afro">AFRO</option>
+
+            </select>
             <div class="searchbar ">
-               
+
                 <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
 
 
@@ -116,6 +116,20 @@ session_start();
             //
             //            });
         </script>
+        <br/><br/>
+
+
+
+        <div class="container row col-md-12">
+            <div class="col-md-3">
+                <div class="hover hover-5 text-white rounded"><img src="img/Laylow.jpg" alt="">
+                    <div class="hover-overlay"></div>
+                    <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                    <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Laylow<strong class="font-weight-bold text-white">
+                        BURNING MAN</strong><span> 2020</span></h6>
+                </div>
+            </div>
+        </div>
 
     </body>
 </html>
