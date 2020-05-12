@@ -200,7 +200,7 @@ else {
                             </div> 
 
                             <div class="list_group">
-                                <h4 class="text-white">Trier par Date</h4>
+                                <h4 class="text-white">Ajouté </h4>
                             </div>
                         </form>
                     </nav>
@@ -344,6 +344,35 @@ else {
 
 
             }
+            function goTrier(bay){
+
+
+                console.log();
+              
+                ok = true;
+
+
+                console.log(gr);
+
+
+                valTrie = document.getElementById('valTrie');
+               
+
+
+
+
+                if (ok) {
+                    document.getElementById('formMenuvertical').submit();
+
+                }
+
+
+
+
+            }
+            
+            
+            
 
 
 
