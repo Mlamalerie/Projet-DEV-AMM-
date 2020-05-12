@@ -103,16 +103,15 @@ else {
         <?php
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
-        <link rel="stylesheet" href="APlayer.min.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/LecteurAudio.css">
+
+
 
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
 
-
-  
+      
 
         <title>Search</title>
     </head>
@@ -144,7 +143,6 @@ else {
                 <div class="col-lg-4 mb-4 mb-lg-0 col-md-4 col-xl-3">
                     <!--   *************************************************************  -->
                     <!--   ************************** MENU VERTICAL **************************  -->
-
 
                     <nav id="menuvertical" class="nav flex-column bg-white shadow-sm font-italic rounded p-3">
                         <form id='formMenuvertical' action="search.php">
@@ -203,10 +201,9 @@ else {
                 <!--   ************************** RESULTAT **************************  -->
                 <div class="col-lg-8 mb-5 col-md-8 col-xl-9 m-0 " style="background-color : yellow;">
                     <?php if (!empty($_GET['q']))  { ?>
-                    <h1 class="resultat">Résultats trouvés pour "<?= $_GET['q'] ?>"</h1>
+                    <h1 class="resultat">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
                     <?php } ?>
                     <!-- Demo Content-->
-
                     <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : cyan;">
 
                         <div class=" container-fluid ligneCardMusic">
@@ -283,7 +280,7 @@ else {
 
                     ?>
                     <div class="col-md-3">
-                        <a  class="album-poster" data-switch="1">
+                        <a  class="album-poster" data-switch="0">
                             <img src="img/roddy.jpg">
                         </a>
                         <h4>Titre</h4>
@@ -298,20 +295,23 @@ else {
             </div>
         </div>
         <!--   END MENU + RESULTAT -->
-
-        
-
+       
 
 
 
-        <script type="text/javascript">
-           
+        <script>
+         
+
             function goGenre(bay){
 
 
                 console.log();
-                gr = bay.childNodes[3].innerHTML;
+                gr = bay.children[1].innerHTML;
 
+                // for (var i = 0; i < bay.children)
+                console.log("bay",bay.children);
+
+                console.log("gr",gr);
                 ok = true;
 
 
@@ -335,12 +335,6 @@ else {
 
             }
 
-            console.log("a",a);
-
-
-        </script>
-
-        <script>
 
 
         </script>
@@ -350,6 +344,6 @@ else {
         require_once('assets/skeleton/endLinkScripts.php');
         ?>
 
-    
+
     </body>
 </html>
