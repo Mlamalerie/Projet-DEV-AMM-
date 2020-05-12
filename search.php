@@ -119,7 +119,9 @@ else {
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
+
 
 
 
@@ -206,11 +208,11 @@ else {
                 <!--   *************************************************************  -->
                 <!--   ************************** RESULTAT **************************  -->
                 <div class="col-lg-8 mb-5 col-md-8 col-xl-9 m-0 " style="background-color : yellow;">
-                   <label for="trierpar"> Trier par</label>
+                    <label for="trierpar"> Trier par</label>
                     <select id='trierpar' name="trierpar" class="custom-select ">
-                    <option value="All" selected >Ordre Alphabétique (A - Z) </option>
+                        <option value="All" selected >Ordre Alphabétique (A - Z) </option>
                     </select>
-                   
+
                     <?php if (!empty($_GET['q']))  { ?>
                     <h1 class="resultat">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
                     <?php } ?>
@@ -243,8 +245,6 @@ else {
 
 
                                 </div>
-
-
 
 
                                 <div class=" col-sm-4  row align-items-center justify-content-center rounded-right" style="background-color : green;"> 
@@ -288,7 +288,16 @@ else {
 
                     ?>
 
-                    en travaux
+                    <div class="col-md-3">
+                        <div class="hover hover-5 text-white rounded"><img src="img/<?= $r['beat_image']?>" alt="">
+                            <div class="hover-overlay"></div>
+
+                            <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                            <h6 class="hover-5-title text-uppercase font-weight-light mb-0"> <?=$r['beat_author']?><strong class="font-weight-bold text-white">
+                                <?=$r['beat_title']?></strong><span><?= $r['beat_year']?></span></h6>
+                        </div>
+                    </div>
+
 
                     <?php
 
