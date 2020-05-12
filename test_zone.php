@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-
+$_SESSION['ici_index_bool'] = false;
 ?>
 
 
@@ -19,12 +19,16 @@ session_start();
         ?>
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <link rel="stylesheet" type="text/css" href="css/styles-index.css"> 
         <link rel="stylesheet" type="text/css" href="css/navbar.css">
         <link rel="stylesheet" type="text/css" href="css/music_card.css">
 
 =======
         <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> 
+=======
+<!--        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> -->
+>>>>>>> 8ed55db6a7fc1cb754039467711dc0df7eafe42a
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/test_zone.css">
         <link rel="stylesheet" type="text/css" href="assets/css/MusicPlayerMlamali.css">

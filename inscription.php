@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("db/connexiondb.php"); // inclure le fichier pour se connecter à la base de donnée
+include_once("assets/db/connexiondb.php"); // inclure le fichier pour se connecter à la base de donnée
 include_once("fichierfct.php");
 
 // si une connection est détecter : (ta rien a faire ici mec)
@@ -152,10 +152,10 @@ if(!empty($_POST)){
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
       <?php
-        require_once('skeleton/headLinkCSS.html');
+        require_once('assets/skeleton/headLinkCSS.html');
         ?>
-        <link rel="stylesheet" type="text/css" href="css/navbar.css">
-        <link rel="stylesheet" type="text/css" href="css/inscription-connexion.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/inscription-connexion.css">
         
         <title>Inscription</title>
     </head>
@@ -164,7 +164,7 @@ if(!empty($_POST)){
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('skeleton/menu.php');
+        require_once('assets/skeleton/menu.php');
 
         ?>
 

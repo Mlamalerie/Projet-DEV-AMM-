@@ -4,9 +4,9 @@ session_start();
 include_once("assets/db/connexiondb.php");
 
 print_r($_GET);
-$listeGenres = ['Hip Hop','Trap','Afro','Deep','Soul','Mlamali'];
+$listeGenres = ['Hip Hop','Trap','Afro','Deep','House','DanceHall','Soul','Pop','Rock','Techno','Reggae','World','Jazz'];
 sort($listeGenres);
-
+$_SESSION["listeGenres"] = $listeGenres;
 
 
 // si le contenu recherché existe et n'est pas vide
@@ -26,7 +26,7 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
     } else {
         foreach($listeGenres as $gr){
 
-            if($_GET['Genre'] == $gr) {
+            if($_GET['Genre'] == (htmlspecialchars($gr))) {
                 $req = $BDD->prepare("SELECT * FROM (
                                                         SELECT * FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
@@ -55,7 +55,7 @@ else if ( !empty($_GET['Genre']) ) {
             print_r("<br> > ");
             print_r($gr);
 
-            if($_GET['Genre'] == $gr) {
+            if($_GET['Genre'] == (htmlspecialchars($gr))) {
                 print_r("- ");
                 $req = $BDD->prepare("SELECT *
                          FROM beat
@@ -156,21 +156,17 @@ else {
 
                     <nav id="menuvertical" class="nav flex-column bg-white shadow-sm font-italic rounded p-3">
                         <form id='formMenuvertical' action="search.php">
-                            <div class="list_group">
 
-                                <h4 class="text-white">Trier par prix</h4>
-
-                            </div>
 
                             <div class="list_group">
-                                <h4 class="text-white display-6">Catégories</h4>
+                                <h4 class="text-white display-6">GENRES</h4>
 
 
                                 <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
 
 
                                     <i class="fa fa-circle-o mr-2 icon_activer"></i>
-                                    <span id="genre_All" >All</span>
+                                    <span id="genre_All" >All Genres</span>
                                     <!--                                    <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>-->
 
                                 </span>
@@ -210,17 +206,27 @@ else {
                 <!--   *************************************************************  -->
                 <!--   ************************** RESULTAT **************************  -->
                 <div class="col-lg-8 mb-5 col-md-8 col-xl-9 m-0 " style="background-color : yellow;">
+                   <label for="trierpar"> Trier par</label>
+                    <select id='trierpar' name="trierpar" class="custom-select ">
+                    <option value="All" selected >Ordre Alphabétique (A - Z) </option>
+                    </select>
+                   
                     <?php if (!empty($_GET['q']))  { ?>
                     <h1 class="resultat">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
                     <?php } ?>
+
+
                     <!-- Demo Content-->
                     <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : cyan;">
 
                         <div class=" container-fluid ligneCardMusic">
                             <?php
+
+                            $i = 1;
                             foreach($resu as $r){
                             ?>
                             <div class="row justify-content-center p-0 mx-auto mb-2 rounded"  style="background-color : pink;">
+                                <?= $i ?>
 
                                 <div class="col-sm-2 p-0  " style="background-color : red;">
                                     <img  src="img/Laylow.jpg" width="80"  >
@@ -251,8 +257,9 @@ else {
 
                             </div>
                             <?php
-
+                                $i++;
                             }
+
 
                             ?>
                         </div>
@@ -289,13 +296,6 @@ else {
                     }
 
                     ?>
-                    <div class="col-md-3">
-                        <a  class="album-poster" data-switch="0">
-                            <img src="img/roddy.jpg">
-                        </a>
-                        <h4>Titre</h4>
-                        <p>Nom artiste</p>
-                    </div>
 
 
 
@@ -348,7 +348,7 @@ else {
 
 
                 console.log();
-              
+
                 ok = true;
 
 
@@ -356,7 +356,7 @@ else {
 
 
                 valTrie = document.getElementById('valTrie');
-               
+
 
 
 
@@ -370,9 +370,9 @@ else {
 
 
             }
-            
-            
-            
+
+
+
 
 
 

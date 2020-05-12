@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+$_SESSION['ici_index_bool'] = true;
 ?>
 
 
@@ -15,17 +17,15 @@ session_start();
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
 
-<<<<<<< HEAD
-        <link rel="stylesheet" type="text/css" href="css/styles-index.css"> 
-        <link rel="stylesheet" type="text/css" href="css/navbar.css"> 
-        <link rel="stylesheet" type="text/css" href="css/navbar-index-turfu.css"> 
-
-=======
         <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar-index-turfu.css">
-       
->>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
+        
+        <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">
+        
+                
+
+
 
         <!--        LOGo -->
         <link rel="shortcut icon" href="img/bigmetro.jpg">
@@ -48,7 +48,7 @@ session_start();
         ?>
 
 
-
+       
 
         <!--   *************************************************************  -->
         <!--   ************************** HEADER  **************************  -->
@@ -65,66 +65,44 @@ session_start();
                         <p class="lead mb-0">Découvrez et Partagez les prods de vos choix</p>
                         <p class="lead mb-0">Pour pouvoir acheter ou vendre des prods  <a href="inscription.php"><button type="button" class="btn btn-danger btninscription" >Inscrivez-vous</button></a></p><br/>
 
-                        <a href="testplayer.php"><button type="button" class="btn btn-danger btninscription">Test</button></a><br/>
+                        <a href="test_zone.php"
+                           ><button type="button" class="btn btn-danger btninscription">Test</button></a><br/>
 
 
-                        <div class="searchbar">
-                            <input class="search_input" type="text" id ="recherche" placeholder="Recherchez vos musiques, artistes..."/>
-                            <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
-                        </div>
+                        <form id="searchform" method="get" action="search.php">
+                            <input type="hidden" name="Genre" value="All">
+
+                            <div class="searchbar ">
+
+                                <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
+
+
+                                <a onclick="goSearch()" href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
         </header>
-<<<<<<< HEAD
         <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
         <?php
         if(isset($_SESSION['user_id'])) {
             print_r($_SESSION);
         } else{
             echo "Pas de connexion <br>";
-            echo "Pas de connexion <br>";
-            echo "Pas de connexion <br>";
-            echo "Pas de connexion <br>";
-            echo "Pas de connexion <br>";
-            echo "Pas de connexion <br>";
-            echo "Pas de connexion <br>";
+         
+       
 
         }
         ?>
-=======
-    <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
-    <?php
-    if(isset($_SESSION['user_id'])) {
-        print_r($_SESSION);
-    } else{
-        echo "Pas de connexion <br>";
-        echo "Pas de connexion <br>";
-        echo "Pas de connexion <br>";
-        echo "Pas de connexion <br>";
-        echo "Pas de connexion <br>";
-        echo "Pas de connexion <br>";
-        echo "Pas de connexion <br>";
-
-    }
-    ?>
+        <div id="countdown">
+           Temps restant pour le projet :
+            <span id="d"></span>&
+            <span id="h"></span>
 
 
-    <!--   *************************************************************  -->
-    <!--   ************************** SECTION 1  ***********************  -->
-    <!-- ******* Section 1 -->
-    <section class="py-5 d-flex align-items-center" id="one">
-        <div class="row" id="tendances">
-            <div style="padding-left : 575px">
-                <h2 class="h1 mb-4">Tendances</h2>
-            </div>
-            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators invisible" style="padding-left : 150px">
-                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class=" rounded-circle active"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="1" class="rounded-circle"></li>
-                    <li data-target="#carouselExampleCaptions" data-slide-to="2" class="rounded-circle"></li>
-                </ol>
->>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
+        </div>
 
 
         <!--   *************************************************************  -->
@@ -148,7 +126,7 @@ session_start();
 
                             <div class="container row col-md-12" style="padding-left : 200px">
 
-                                <div class="col-md-3">
+                               <div class="col-md-3">
                                     <div class="hover hover-5 text-white rounded"><img src="img/Laylow.jpg" alt="">
                                         <div class="hover-overlay"></div>
                                         <div class="link_icon"><i class="far fa-play-circle"></i></div>
@@ -156,7 +134,7 @@ session_start();
                                             BURNING MAN</strong><span> 2020</span></h6>
                                     </div>
                                 </div>
-                                
+                               
                                 <div class="col-md-3">
                                     <div class="hover hover-5 text-white rounded"><img src="img/bigmetro.jpg" alt="">
                                         <div class="hover-overlay"></div>
@@ -164,7 +142,7 @@ session_start();
                                         <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Big Sean ft Travis Scott,Metro Boomin<strong class="font-weight-bold text-white"> Go Legend</strong><span> 2020</span></h6>
                                     </div>
                                 </div>
-                                
+                               
                                 <div class="col-md-3">
                                     <div class="hover hover-5 text-white rounded"><img src="img/luv.jpg" alt="">
                                         <div class="hover-overlay"></div>
@@ -172,7 +150,7 @@ session_start();
                                         <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Lil Uzi Vert<strong class="font-weight-bold text-white"> Futsal Shuffle 2020</strong><span> 2020</span></h6>
                                     </div>
                                 </div>
-                                
+                               
                                 <div class="col-md-3">
                                     <div class="hover hover-5 text-white rounded"><img src="img/roddy.jpg" alt="">
                                         <div class="hover-overlay"></div>
@@ -180,7 +158,6 @@ session_start();
                                         <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Roddy Rich<strong class="font-weight-bold text-white"> Tip Toe</strong><span> 2020</span></h6>
                                     </div>
                                 </div>
-                            
 
                             </div>
                         </div>
@@ -237,26 +214,19 @@ session_start();
 
                                 <div class="col-md-3">
                                     <img src="img/roddy.jpg">
-<<<<<<< HEAD
                                     <h4>Titre</h4>
                                     <p>Nom artiste</p>
                                 </div>
-                            </div> 
-                        </div>
-
-=======
-                                <h4>Titre</h4>
-                                <p>Nom artiste</p>
                             </div>
                         </div>
->>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
+
                     </div>
 
                     <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next caroufleche" href="#carouselExampleCaptions" role="button" data-slide="next">
+                    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
@@ -265,7 +235,6 @@ session_start();
             </div>          
 
 
-<<<<<<< HEAD
         </section>
 
         <!-- Section 2-->
@@ -283,7 +252,7 @@ session_start();
                             </ol>
                             <div class="carousel-inner">
 
-                                <div class="carousel-item active">     
+                                <div class="carousel-item active">    
                                     <img src="img/roddy.jpg" class="d-block w-100 image_sons"  alt="...">                                
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Nom de la prod : </h5>
@@ -292,42 +261,10 @@ session_start();
                                             <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
                                         </a>
                                     </div>
-=======
-            </div>
-        </div>          
-
-
-    </section>
-
-    <!-- Section 2-->
-    <section class="py-5 d-flex align-items-center" id="two">
-        <div class="container py-5">
-            <div class="row text-center">
-                <div class="col-lg-9 mx-auto" id="topventes">
-                    <h2 class="h1 mb-4">TOP des ventes</h2>
-
-                    <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleCaptions1" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleCaptions1" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleCaptions1" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-
-                            <div class="carousel-item active">    
-                                <img src="img/roddy.jpg" class="d-block w-100 image_sons"  alt="...">                                
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Nom de la prod : </h5>
-                                    <p>Nom du producteur : </p>
-                                    <a href="javascript:void();" class="album-poster" data-switch="3">
-                                        <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
-                                    </a>
->>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
                                 </div>
 
-<<<<<<< HEAD
                                 <div class="carousel-item">                                    
-                                    <img src="img/bigmetro.jpg" class="d-block w-100 image_sons"  alt="...">                             
+                                    <img src="img/bigmetro.jpg" class="d-block w-100 image_sons"  alt="...">                            
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>Nom de la prod : </h5>
                                         <p>Nom du producteur : </p>
@@ -335,16 +272,6 @@ session_start();
                                             <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay" ><i class="fa fa-play"></i></button>
                                         </a>
                                     </div>
-=======
-                            <div class="carousel-item">                                    
-                                <img src="img/bigmetro.jpg" class="d-block w-100 image_sons"  alt="...">                            
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>Nom de la prod : </h5>
-                                    <p>Nom du producteur : </p>
-                                    <a href="javascript:void();" class="album-poster" data-switch="4">
-                                        <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay" ><i class="fa fa-play"></i></button>
-                                    </a>
->>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
                                 </div>
 
                                 <div class="carousel-item">
@@ -590,28 +517,18 @@ session_start();
 
 
 
-<<<<<<< HEAD
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
 
 
         <?php
-        require_once('skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.php');
         ?>
-=======
-   
+        <!--        COMPTE A REBOURS -->
 
 
-
-    <?php
-    require_once('assets/skeleton/endLinkScripts.php');
-    ?>
->>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
+        <script src="assets/js/comptearebours.js"></script>
+        <!--    END     COMPTE A REBOURS -->
 
 
     </body>
