@@ -125,7 +125,7 @@ $_SESSION['ici_index_bool'] = true;
                         <div class="carousel-item active">
 
                             <div class="container row col-md-12" style="padding-left : 200px">
-
+                                
                                <div class="col-md-3">
                                     <div class="hover hover-5 text-white rounded"><img src="img/Laylow.jpg" alt="">
                                         <div class="hover-overlay"></div>

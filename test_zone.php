@@ -18,21 +18,10 @@ $_SESSION['ici_index_bool'] = false;
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <link rel="stylesheet" type="text/css" href="css/styles-index.css"> 
-        <link rel="stylesheet" type="text/css" href="css/navbar.css">
-        <link rel="stylesheet" type="text/css" href="css/music_card.css">
-
-=======
-        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> 
-=======
 <!--        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> -->
->>>>>>> 8ed55db6a7fc1cb754039467711dc0df7eafe42a
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/test_zone.css">
         <link rel="stylesheet" type="text/css" href="assets/css/MusicPlayerMlamali.css">
->>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
         <title>TEST ZONE</title>
     </head>
     <body>
@@ -54,17 +43,10 @@ $_SESSION['ici_index_bool'] = false;
         }
         ?>
         <form id="searchform" method="get" action="search.php">
-<<<<<<< HEAD
-            <select name="Genre" class="custom-select">
-                <option value="All"selected>ALL</option>
-                <option value="Trap">TRAP</option>
-                <option value="Afro">AFRO</option>
-=======
             <select name="Genre" class="custom-select">-->
                 <option value="All" selected >ALL</option>
                 <option value="Trap" >TRAP</option>
                 <option value="Afro" >AFRO</option>
->>>>>>> a823754265ecf12ba8ee768a6a4f2929e7942f91
 
             </select>
             <div class="searchbar ">
@@ -125,20 +107,6 @@ $_SESSION['ici_index_bool'] = false;
             }
 
         </script>
-        <br/><br/>
-
-
-
-        <div class="container row col-md-12">
-            <div class="col-md-3">
-                <div class="hover hover-5 text-white rounded"><img src="img/Laylow.jpg" alt="">
-                    <div class="hover-overlay"></div>
-                    <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                    <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Laylow<strong class="font-weight-bold text-white">
-                        BURNING MAN</strong><span> 2020</span></h6>
-                </div>
-            </div>
-        </div>
 
     </body>
 </html>
