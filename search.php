@@ -156,11 +156,7 @@ else {
 
                     <nav id="menuvertical" class="nav flex-column bg-white shadow-sm font-italic rounded p-3">
                         <form id='formMenuvertical' action="search.php">
-                            <div class="list_group">
 
-                                <h4 class="text-white">Trier par prix</h4>
-
-                            </div>
 
                             <div class="list_group">
                                 <h4 class="text-white display-6">GENRES</h4>
@@ -187,7 +183,7 @@ else {
                                 </span>
 
                                 <?php
-                                }
+}
                                 ?>
 
 
@@ -210,17 +206,27 @@ else {
                 <!--   *************************************************************  -->
                 <!--   ************************** RESULTAT **************************  -->
                 <div class="col-lg-8 mb-5 col-md-8 col-xl-9 m-0 " style="background-color : yellow;">
+                   <label for="trierpar"> Trier par</label>
+                    <select id='trierpar' name="trierpar" class="custom-select ">
+                    <option value="All" selected >Ordre Alphabétique (A - Z) </option>
+                    </select>
+                   
                     <?php if (!empty($_GET['q']))  { ?>
                     <h1 class="resultat">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
                     <?php } ?>
+
+
                     <!-- Demo Content-->
                     <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : cyan;">
 
                         <div class=" container-fluid ligneCardMusic">
                             <?php
+
+                            $i = 1;
                             foreach($resu as $r){
                             ?>
                             <div class="row justify-content-center p-0 mx-auto mb-2 rounded"  style="background-color : pink;">
+                                <?= $i ?>
 
                                 <div class="col-sm-2 p-0  " style="background-color : red;">
                                     <img  src="img/Laylow.jpg" width="80"  >
@@ -251,8 +257,9 @@ else {
 
                             </div>
                             <?php
-
+                                $i++;
                             }
+
 
                             ?>
                         </div>
@@ -289,7 +296,7 @@ else {
                     }
 
                     ?>
-                 
+
 
 
                 </div>
