@@ -5,11 +5,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
+<<<<<<< HEAD
 <!-- APlayer Jquery link -->
 <!--**********************DESACTIVE CAR PB CAROUSSEL****************************
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>-->
 
 
+=======
+>>>>>>> 6bbff11768f20711d4473a07341aa1ec57ffd4b2
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 <script src="js/navbar.js"></script>

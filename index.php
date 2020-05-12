@@ -109,6 +109,8 @@ session_start();
                         <div class="container row col-md-12" style="padding-left : 200px">
 
                             <div class="col-md-3">
+
+                                <img src="img/roddy.jpg">
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
@@ -145,6 +147,7 @@ session_start();
 
                             <div class="col-md-3">
                                 <img src="img/bigmetro.jpg"  height="225">
+
                                 <h4>Titre</h4>
                                 <p>Nom artiste</p>
                             </div>
@@ -190,9 +193,6 @@ session_start();
                                 <p>Nom artiste</p>
                             </div>
                         </div> 
-
-                        <a href="javascript:void();" class="album-poster" data-switch="2">
-                        </a>
                     </div>
 
                 </div>

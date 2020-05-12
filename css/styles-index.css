@@ -128,8 +128,6 @@ section:first-of-type {
     width: 30%!important;
     margin-left: 290px;
 }
-
-
 .h5, h5, .carousel-caption p{/*Nom de la prod et nom du producteur*/
     margin-right: 450px;
 }
@@ -266,32 +264,4 @@ section:nth-of-type(5) {
 
 .text-mute {
     color: #f8f9fa!important;
-}
-
-/*Lecteur MP3*/
-#aplayer{
-    position: fixed;
-    bottom: -100%;
-    left: 0;
-    width: 100%
-    margin: 0;
-    box-shadow: 0 -2px 2px #dadada;
-    background-color: #fff;
-    transition: all ease 0.5s;
-}
-
-#aplayer.showPlayer{
-    bottom: 0;
-}
-
-.aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded{
-    background: #e0e0e0;
-    height: 4px;
-}
-.aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played{
-    height: 4px;
-    background-color: #2196F3 !important;
-}
-.aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb{
-    background-color: #2196F3 !important;
 }
