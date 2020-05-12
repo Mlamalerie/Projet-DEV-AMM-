@@ -48,24 +48,31 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
 } //si bay recherche vide mais Genre pas vide
 else if ( !empty($_GET['Genre']) ) {
 
-    print_r("<br><br> genre pas nul : ");
+
     print_r($_GET['Genre']);
 
     foreach($listeGenres as $gr){
+        print_r("<br> > ");
+        print_r($gr);
 
         if($_GET['Genre'] == $gr) {
+            print_r("- ");
             $req = $BDD->prepare("SELECT *
                          FROM beat
                          WHERE beat_genre = '$gr'
                          ORDER BY beat_title DESC");
+        //break;break;
 
-
-        }else {
-            $req = $BDD->prepare("SELECT *
-                            FROM beat
-                            ORDER BY beat_title DESC");
 
         }
+        
+//        else {
+//            print_r("+ ");
+//            $req = $BDD->prepare("SELECT *
+//                            FROM beat
+//                            ORDER BY beat_title DESC");
+//
+//        }
 
         $req->execute(array());
         $resu = $req->fetchAll();
@@ -79,7 +86,7 @@ else {
 
     $req->execute(array());
     $resu = $req->fetchAll();
-    print_r("****");
+    print_r("****-");
 }
 
 
@@ -111,7 +118,7 @@ else {
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
 
-      
+
 
         <title>Search</title>
     </head>
@@ -295,12 +302,12 @@ else {
             </div>
         </div>
         <!--   END MENU + RESULTAT -->
-       
+
 
 
 
         <script>
-         
+
 
             function goGenre(bay){
 
