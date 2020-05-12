@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-
+$_SESSION['ici_index_bool'] = false;
 ?>
 
 
@@ -18,7 +18,7 @@ session_start();
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> 
+<!--        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> -->
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/test_zone.css">
         <link rel="stylesheet" type="text/css" href="assets/css/MusicPlayerMlamali.css">

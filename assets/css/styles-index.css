@@ -265,3 +265,10 @@ section:nth-of-type(5) {
 .text-mute {
     color: #f8f9fa!important;
 }
+
+/* *****************s****** */
+/* Compte a rebours*/
+
+#countdown span {
+    font-size: 45px;
+}
