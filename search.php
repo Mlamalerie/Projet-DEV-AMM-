@@ -9,6 +9,7 @@ sort($listeGenres);
 $_SESSION["listeGenres"] = $listeGenres;
 
 
+// SORT
 if (isset($_GET['sort']) && !empty($_GET['sort'])) {
     $wesortexiste = true;
 
@@ -37,27 +38,41 @@ if (isset($_GET['sort']) && !empty($_GET['sort'])) {
     $_GET['asc_desc'] = "DESC";
 
 }
-
-
-
 $trierpar = $_GET['trierpar'];
-
 $asc_desc = $_GET['asc_desc'];
-// si le contenu recherché existe et n'est pas vide
+
+// PRICE
+if (isset($_GET['Price']) && !empty($_GET['Price'])) {
+    
+    if ($_GET['Price'] == "free") {
+        $jeveuxquelesfreebeats = true;
+    }else {
+        $jeveuxquelesfreebeats = false;
+        
+        
+        
+    }
+}
+
+//******************************************************
+// si on recherche un truc
 if(isset($_GET['q']) && !empty($_GET['q'])) {
 
     $xxx = (String) trim(($_GET['q']));
 
+    // recherche dans tout les genres 
+    if($_GET['Genre'] == "All Genres") {
 
-
-    if($_GET['Genre'] == "All") {
         $req = $BDD->prepare("SELECT *
                                                         FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
                                                         LIKE ?
                                                         ORDER BY $trierpar $asc_desc");
 
-    } else {
+    } 
+    // recherche dans un genre précis
+    else {
+
         foreach($listeGenres as $gr){
 
             if($_GET['Genre'] == (htmlspecialchars($gr))) {
@@ -68,7 +83,6 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
                                         WHERE beat_genre = '$gr'
                                         ORDER BY $trierpar $asc_desc");
 
-                //break;
             } 
 
         }
@@ -194,28 +208,19 @@ else {
                         <form id='formMenuvertical' action="search.php">
 
 
-                            <div class="list_group">
+                            <div class="list-group">
                                 <h4 class="text-white display-6">GENRES</h4>
-
-
                                 <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
-
-
                                     <i class="fa fa-circle-o mr-2 icon_activer"></i>
                                     <span id="genre_All" >All Genres</span>
                                     <!--                                    <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>-->
-
                                 </span>
 
                                 <?php foreach($listeGenres as $gr){
                                 ?>
                                 <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
-
-
                                     <i class="fa fa-circle-o mr-2 icon_activer"></i>
                                     <span id="genre_<?= $gr?>" ><?= $gr?></span>
-                                    <!--                                    <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>-->
-
                                 </span>
 
                                 <?php
@@ -235,11 +240,65 @@ else {
 
                             </div> 
 
-                            <div class="list_group">
-                                <h4 class="text-white">Ajouté </h4>
+                            <div class="list-group">
+
+                                <h4 class="text-white">PRIX </h4>
+                                <span onclick="goPrice(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
+                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <span id="price_Price" >Free Beats</span>
+
+
+                                    <input id='valPriceFreeMenu' type='hidden' name='Price' value='free'/>
+
+                                </span>
+
+
+
+                                <!-- Fourchete de prix -->
+                                <!--
+<div class="wrapper fourchettes2prix">
+<div class="container">
+
+<div class="slider-wrapper">
+<div id="slider-range"></div>
+
+<div class="range-wrapper">
+<div class="range"></div>
+<div class="range-alert">+</div>
+
+<div class="gear-wrapper">
+<div class="gear-large gear-one">
+<div class="gear-tooth"></div>
+<div class="gear-tooth"></div>
+<div class="gear-tooth"></div>
+<div class="gear-tooth"></div>
+</div>
+<div class="gear-large gear-two">
+<div class="gear-tooth"></div>
+<div class="gear-tooth"></div>
+<div class="gear-tooth"></div>
+<div class="gear-tooth"></div>
+</div>
+</div>
+
+</div>
+
+<div class="marker marker-0"><sup>$</sup>10,000</div>
+<div class="marker marker-25"><sup>$</sup>35,000</div>
+<div class="marker marker-50"><sup>$</sup>60,000</div>
+<div class="marker marker-75"><sup>$</sup>85,000</div>
+<div class="marker marker-100"><sup>$</sup>110,000+</div>
+</div>
+
+</div>
+</div>
+-->
                             </div>
+
+
                         </form>
                     </nav>
+                    <!--   END Menu vertical      -->
 
 
                 </div>
@@ -384,10 +443,6 @@ else {
                 valGenreMenu = document.getElementById('valGenreMenu');
                 valGenreMenu.value = gr;
 
-
-
-
-
                 if (ok) {
                     document.getElementById('formMenuvertical').submit();
 
@@ -398,28 +453,23 @@ else {
 
             }
             function goTrier(bay){
-
-
-                console.log();
-
                 ok = true;
-
-                selectTrie = document.getElementById('sort');
-                console.log(selectTrie);
-
-
-
-
-
-
-
-
-
                 if (ok) {
                     document.getElementById('formTrie').submit();
 
                 }
 
+            }
+
+            function goPrice(bay) {
+
+                ok = true;
+
+                console.log(valPriceFreeMenu.value);
+                if (ok) {
+                    document.getElementById('formMenuvertical').submit();
+
+                }
 
 
 
@@ -427,16 +477,18 @@ else {
 
 
 
-
-
-
         </script>
+
 
 
         <?php
         require_once('assets/skeleton/endLinkScripts.php');
         ?>
-
+        <!-- JS de Fourchette -->
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script src="assets/js/fourchette2prix.js"></script>
+        <!--   END JS de fourchette      -->
 
     </body>
 </html>

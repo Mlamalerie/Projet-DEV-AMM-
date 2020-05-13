@@ -98,8 +98,7 @@ $_SESSION['ici_index_bool'] = true;
         ?>
         <div id="countdown">
            Temps restant pour le projet :
-            <span id="d"></span>&
-            <span id="h"></span>
+            <span id="d"></span>
 
 
         </div>

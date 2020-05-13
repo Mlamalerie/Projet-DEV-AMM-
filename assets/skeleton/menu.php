@@ -83,17 +83,17 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <?php 
-            $listeGenres = $_SESSION['listeGenres'];
-            foreach($listeGenres as $gr){
+                    $listeGenres = $_SESSION['listeGenres'];
+                    foreach($listeGenres as $gr){
 
-              
-                    ?>
+
+                        ?>
                         <a class="dropdown-item  " href="#"><?= $gr?></a>
-                              <?php
-            }
-                    ?>
+                        <?php
+                    }
+                        ?>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item  " href="#">Free Beats</a>
+                        <a class="dropdown-item" href="#">Free Beats</a>
                     </div>
                 </li>
 
