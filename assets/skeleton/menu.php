@@ -23,10 +23,10 @@
             $listeGenres = $_SESSION['listeGenres'];
             foreach($listeGenres as $gr){
 
-                $sheesh = (htmlspecialchars($gr));
+                $grgood = (htmlspecialchars($gr));
                     ?>
 
-                    <option value="<?= $sheesh?>" class="dropdown-item"><?= $gr?></option>
+                    <option value="<?= $grgood?>" class="dropdown-item"><?= $gr?></option>
 
                     <?php
             }

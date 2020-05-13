@@ -9,6 +9,14 @@ sort($listeGenres);
 $_SESSION["listeGenres"] = $listeGenres;
 
 
+if (isset($_GET['Genre']) && !empty($_GET['Genre'])) {
+    $wegenreexiste = true;
+
+}
+else {
+    $wegenreexiste = false;
+}
+
 // SORT
 if (isset($_GET['sort']) && !empty($_GET['sort'])) {
     $wesortexiste = true;
@@ -43,15 +51,20 @@ $asc_desc = $_GET['asc_desc'];
 
 // PRICE
 if (isset($_GET['Price']) && !empty($_GET['Price'])) {
-    
+    $wepriceexiste = true;
     if ($_GET['Price'] == "free") {
-        $jeveuxquelesfreebeats = true;
+        $borneprixinf = 0;
+        $borneprixsup = 0;
     }else {
-        $jeveuxquelesfreebeats = false;
-        
-        
-        
+
+
+
+
     }
+}
+else {
+    $wepriceexiste = false;
+
 }
 
 //******************************************************
@@ -60,31 +73,67 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
 
     $xxx = (String) trim(($_GET['q']));
 
-    // recherche dans tout les genres 
-    if($_GET['Genre'] == "All Genres") {
+    //*** recherche dans tout les genres 
+    if($_GET['Genre'] == "All") {
+        print_r("##");
 
-        $req = $BDD->prepare("SELECT *
+        // selection des free beats
+        if ($wepriceexiste){
+            print_r("##");
+
+            print_r("<br> FREEBEATZ+");
+            $req = $BDD->prepare("SELECT * FROM (       SELECT *
+                                                        FROM beat
+                                                        WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
+                                                        LIKE ?  ) base
+                                                        WHERE beat_price = 0
+                                                        ORDER BY $trierpar $asc_desc");
+        }
+
+        //si ya pas de condition de prix
+        else {
+            print_r("<br> FREEBEATZ--");
+            $req = $BDD->prepare("SELECT *
                                                         FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
                                                         LIKE ?
                                                         ORDER BY $trierpar $asc_desc");
-
+        }
     } 
-    // recherche dans un genre précis
+
+    //*** recherche dans un genre précis
     else {
+        if($wepriceexiste){
+            foreach($listeGenres as $gr){
 
-        foreach($listeGenres as $gr){
+                if($_GET['Genre'] == (htmlspecialchars($gr))) {
+                    $req = $BDD->prepare("SELECT * FROM (
+                                                        SELECT * FROM beat
+                                                        WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
+                                                        LIKE ? ) base
+                                        WHERE beat_genre = '$gr' AND ($borneprixinf <= beat_price AND beat_price <= $borneprixsup )
+                                        ORDER BY $trierpar $asc_desc");
+                } 
 
-            if($_GET['Genre'] == (htmlspecialchars($gr))) {
-                $req = $BDD->prepare("SELECT * FROM (
+            }
+
+        }
+
+        // pas de condition de prix
+        else {
+            foreach($listeGenres as $gr){
+
+                if($_GET['Genre'] == (htmlspecialchars($gr))) {
+                    $req = $BDD->prepare("SELECT * FROM (
                                                         SELECT * FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
                                                         LIKE ? ) base
                                         WHERE beat_genre = '$gr'
                                         ORDER BY $trierpar $asc_desc");
 
-            } 
+                } 
 
+            }
         }
 
     }
@@ -94,7 +143,7 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
     $resu = $req->fetchAll();
 
 } //si bay recherche vide mais Genre pas vide
-else if ( !empty($_GET['Genre']) ) {
+else if ($wegenreexiste) {
 
 
     if(in_array($_GET['Genre'],$listeGenres)) {
@@ -110,11 +159,7 @@ else if ( !empty($_GET['Genre']) ) {
                          WHERE beat_genre = '$gr'
                          ORDER BY $trierpar $asc_desc");
                 //break;break;
-
-
             }
-
-
         }
     }
     else {
@@ -130,6 +175,8 @@ else if ( !empty($_GET['Genre']) ) {
 
 
 } 
+
+// si genre vide et q vide
 else {
     $req = $BDD->prepare("SELECT *
                             FROM beat
@@ -211,7 +258,14 @@ else {
                             <div class="list-group">
                                 <h4 class="text-white display-6">GENRES</h4>
                                 <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
+
+
+                                    <?php if($wegenreexiste && $_GET['Genre'] == "All") { ?>
+                                    <i class="fas fa-times-circle"></i>
+                                    <?php } else { ?> 
                                     <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <?php } ?>
+
                                     <span id="genre_All" >All Genres</span>
                                     <!--                                    <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>-->
                                 </span>
@@ -219,7 +273,11 @@ else {
                                 <?php foreach($listeGenres as $gr){
                                 ?>
                                 <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
+                                    <?php if($wegenreexiste && $_GET['Genre'] == $gr) { ?>
+                                    <i class="fas fa-times-circle"></i>
+                                    <?php } else { ?> 
                                     <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <?php } ?>
                                     <span id="genre_<?= $gr?>" ><?= $gr?></span>
                                 </span>
 
@@ -232,11 +290,15 @@ else {
                                 <input id='valq' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
                                 <?php } ?>
 
-                                <?php if (!empty($_GET['sort']))  { ?>
+                                <?php if ($wesortexiste)  { ?>
                                 <input id='valq' type='hidden' name='sort' value='<?= $_GET['sort'] ?>'/>
                                 <?php } ?>
 
-                                <input id='valGenreMenu' type='hidden' name='Genre' value=''/>
+                                <?php if ($wegenreexiste) { ?>
+                                <input id='valGenreMenu' type='hidden' name='Genre' value='<?= $_GET['Genre'] ?>'/>
+                                <?php } else {?>
+                                <input id='valGenreMenu' type='hidden' name='Genre' value=''/> 
+                                <?php } ?>
 
                             </div> 
 
@@ -434,10 +496,13 @@ else {
                 console.log("bay",bay.children);
 
                 console.log("gr",gr);
-                ok = true;
+                ok = false;
 
 
                 console.log(gr);
+                if (gr == "All Genres") {
+                    gr = "All";
+                }
 
 
                 valGenreMenu = document.getElementById('valGenreMenu');
@@ -464,8 +529,9 @@ else {
             function goPrice(bay) {
 
                 ok = true;
+                valGenreMenu = document.getElementById('valGenreMenu');
+                console.log("goprice",valPriceFreeMenu.value);
 
-                console.log(valPriceFreeMenu.value);
                 if (ok) {
                     document.getElementById('formMenuvertical').submit();
 
