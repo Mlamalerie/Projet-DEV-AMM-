@@ -1,3 +1,5 @@
+
+
 <div class="boxnav">
     <nav id='LANAVBAR' class="navbar navbar-expand-lg navbar-light fixed-top" >
         <a class="navbar-brand" href="#">
@@ -7,6 +9,52 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span> 
         </button>
+        <!--   Barre de recherche     -->
+        <?php 
+        $jesuissurindex = $_SESSION['ici_index_bool'];
+
+        if (!$jesuissurindex) { ?>
+        <form id="searchform" method="get" action="search.php">
+            <div class="input-group searchbar">
+
+                <select name="Genre" class="custom-select ">
+                    <option value="All" selected class="dropdown-item">All Genres</option>
+                    <?php 
+            $listeGenres = $_SESSION['listeGenres'];
+            foreach($listeGenres as $gr){
+
+                $grgood = (htmlspecialchars($gr));
+                    ?>
+
+                    <option value="<?= $grgood?>" class="dropdown-item"><?= $gr?></option>
+
+                    <?php
+            }
+                    ?>
+                </select>
+
+
+                <input id='searchbar' class="search_input form-control  mr-sm-" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
+
+                <div class="input-group-append">
+                    <a onclick="goSearch()" href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                </div>
+
+
+
+            </div>
+        </form>
+
+
+        <?php  
+        }
+
+
+
+
+
+        ?>
+
         <!--            Menu droite -->
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-md-auto" >
@@ -23,6 +71,9 @@
                 }else{
                 ?>
                 <li class="nav-item ">
+                    <a class="nav-link" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
                 </li>
 
@@ -31,13 +82,18 @@
                         Genres
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item  " href="#">Afro Beats</a>
-                        <a class="dropdown-item  " href="#" >Agressif</a>
-                        <a class="dropdown-item  " href="#" >Drill</a>
-                        <a class="dropdown-item  " href="#" >Electro</a>
-                        <a class="dropdown-item  " href="#" >Trap</a>
+                        <?php 
+                    $listeGenres = $_SESSION['listeGenres'];
+                    foreach($listeGenres as $gr){
+
+
+                        ?>
+                        <a class="dropdown-item  " href="#"><?= $gr?></a>
+                        <?php
+                    }
+                        ?>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item  " href="#">Free Beats</a>
+                        <a class="dropdown-item" href="#">Free Beats</a>
                     </div>
                 </li>
 
@@ -52,21 +108,21 @@
                 }
                 ?>
                 <!-- User account -->
-<!--
-                <div class="pull-right">
+                <!--
+<div class="pull-right">
 
-                    <div class="dropdown user-account">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                            <img src="img/user.png" width='50' alt="avatar">
-                        </a>
+<div class="dropdown user-account">
+<a class="dropdown-toggle" href="#" data-toggle="dropdown">
+<img src="img/user.png" width='50' alt="avatar">
+</a>
 
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="EditProfile.php">Edit Profile</a></li>
-                            <li><a href="deconnexion.php">Logout</a></li>
-                        </ul>
-                    </div>
+<ul class="dropdown-menu dropdown-menu-right">
+<li><a href="EditProfile.php">Edit Profile</a></li>
+<li><a href="deconnexion.php">Logout</a></li>
+</ul>
+</div>
 
-                </div>
+</div>
 -->
                 <!-- END User account -->
 

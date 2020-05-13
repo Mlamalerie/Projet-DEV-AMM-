@@ -141,6 +141,10 @@ section:first-of-type {
     border-color:  rgb(121, 6, 247);
     box-shadow: 0 0 0 0.2rem rgb(121, 6, 247);
 }
+.caroufleche{
+    right: -9%;
+}
+
 
 
 /*section 2 */
@@ -264,4 +268,11 @@ section:nth-of-type(5) {
 
 .text-mute {
     color: #f8f9fa!important;
+}
+
+/* *****************s****** */
+/* Compte a rebours*/
+
+#countdown span {
+    font-size: 45px;
 }
