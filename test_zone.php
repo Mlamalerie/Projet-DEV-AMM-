@@ -22,6 +22,10 @@ $_SESSION['ici_index_bool'] = false;
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/test_zone.css">
         <link rel="stylesheet" type="text/css" href="assets/css/MusicPlayerMlamali.css">
+        
+        <!--  Slides Link      -->
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+       
         <title>TEST ZONE</title>
     </head>
     <body>
@@ -107,6 +111,35 @@ $_SESSION['ici_index_bool'] = false;
             }
 
         </script>
-
+        
+        <div class="my_slides">
+            <div class="items">
+                <img src="img/DB5.jpg" alt="">
+            </div>
+            <div class="items">
+                <img src="img/bigmetro.jpg" alt="">
+            </div>
+            <div class="items">
+                <img src="img/CG6.png" alt="">
+            </div>
+            <div class="items">
+                <img src="img/Laylow.jpg" alt="">
+            </div>
+            <div class="items">
+                <img src="img/luv.jpg" alt="">
+            </div>
+            <div class="items">
+                <img src="img/MILS.jpg" alt="">
+            </div>
+        </div>
+        
+        
+        <!--    SLIDES JS SCRIPT    -->
+        
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <script src="assets/js/slide.js"></script>
+        
+        
+        
     </body>
 </html>

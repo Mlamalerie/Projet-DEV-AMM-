@@ -7,3 +7,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js" crossorigin="anonymous"></script>
 <script src="assets/js/navbar.js"></script>
 
+  <!--    SLIDES JS SCRIPT    -->
+<script
+        src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+<script src="assets/js/slick.min.js"></script>
+<script src="assets/js/slide.js"></script>
