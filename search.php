@@ -9,6 +9,40 @@ sort($listeGenres);
 $_SESSION["listeGenres"] = $listeGenres;
 
 
+if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+    $wesortexiste = true;
+
+    if($_GET['sort'] == "populaire") {
+        $_GET['trierpar'] = "beat_like";
+        $_GET['asc_desc'] = "DESC";
+
+    } else if($_GET['sort'] == "prixcr") {
+        $_GET['trierpar'] = "beat_price";
+        $_GET['asc_desc'] = "ASC";
+
+    } else if($_GET['sort'] == "prixdecr") {
+        $_GET['trierpar'] = "beat_price";
+        $_GET['asc_desc'] = "DESC";
+
+    } else {
+        $_GET['trierpar'] = "beat_dateupload";
+        $_GET['asc_desc'] = "DESC";
+
+    }
+
+
+} else {
+    $wesortexiste = false;
+    $_GET['trierpar'] = "beat_dateupload";
+    $_GET['asc_desc'] = "DESC";
+
+}
+
+
+
+$trierpar = $_GET['trierpar'];
+
+$asc_desc = $_GET['asc_desc'];
 // si le contenu recherché existe et n'est pas vide
 if(isset($_GET['q']) && !empty($_GET['q'])) {
 
@@ -21,7 +55,7 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
                                                         FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
                                                         LIKE ?
-                                                        ORDER BY beat_title DESC");
+                                                        ORDER BY $trierpar $asc_desc");
 
     } else {
         foreach($listeGenres as $gr){
@@ -32,7 +66,7 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
                                                         LIKE ? ) base
                                         WHERE beat_genre = '$gr'
-                                        ORDER BY beat_title DESC");
+                                        ORDER BY $trierpar $asc_desc");
 
                 //break;
             } 
@@ -60,7 +94,7 @@ else if ( !empty($_GET['Genre']) ) {
                 $req = $BDD->prepare("SELECT *
                          FROM beat
                          WHERE beat_genre = '$gr'
-                         ORDER BY beat_title DESC");
+                         ORDER BY $trierpar $asc_desc");
                 //break;break;
 
 
@@ -73,7 +107,7 @@ else if ( !empty($_GET['Genre']) ) {
         print_r("+ ");
         $req = $BDD->prepare("SELECT *
                             FROM beat
-                            ORDER BY beat_title DESC");
+                            ORDER BY $trierpar $asc_desc");
 
     }
 
@@ -85,7 +119,7 @@ else if ( !empty($_GET['Genre']) ) {
 else {
     $req = $BDD->prepare("SELECT *
                             FROM beat
-                            ORDER BY beat_title DESC");
+                            ORDER BY $trierpar $asc_desc");
 
     $req->execute(array());
     $resu = $req->fetchAll();
@@ -193,6 +227,10 @@ else {
                                 <input id='valq' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
                                 <?php } ?>
 
+                                <?php if (!empty($_GET['sort']))  { ?>
+                                <input id='valq' type='hidden' name='sort' value='<?= $_GET['sort'] ?>'/>
+                                <?php } ?>
+
                                 <input id='valGenreMenu' type='hidden' name='Genre' value=''/>
 
                             </div> 
@@ -208,13 +246,31 @@ else {
                 <!--   *************************************************************  -->
                 <!--   ************************** RESULTAT **************************  -->
                 <div class="col-lg-8 mb-5 col-md-8 col-xl-9 m-0 " style="background-color : yellow;">
-                    <label for="trierpar"> Trier par</label>
-                    <select id='trierpar' name="trierpar" class="custom-select ">
-                        <option value="All" selected >Ordre Alphabétique (A - Z) </option>
-                    </select>
+                    <form id="formTrie" action="search.php">
+                        <select id='sort' name="sort" class="custom-select " onchange="goTrier()">
+                            <option value="nouveaute" <?php if($wesortexiste && $_GET['sort'] == 'nouveaute'){?> selected <?php } ?>>Nouveautés en premier </option>
+                            <option value="populaire"  <?php if($wesortexiste && $_GET['sort'] == 'populaire'){?> selected <?php } ?> >Popularité </option>
+                            <option value="prixcr" <?php if($wesortexiste && $_GET['sort'] == 'prixcr'){?> selected <?php } ?>>Prix croissant </option>
+                            <option value="prixdecr"  <?php if($wesortexiste && $_GET['sort'] == 'prixdecr'){?> selected <?php } ?>>Prix décroissant </option>
+                        </select>
+                        <?php if (!empty($_GET['q']))  { ?>
+                        <input id='valq' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
+                        <?php } ?>
+                        <?php if (!empty($_GET['Genre']))  { ?>
+                        <input id='valGenreMenu' type='hidden' name='Genre' value='<?= $_GET['Genre'] ?>'/>
+                        <?php } ?>
+                    </form>
 
                     <?php if (!empty($_GET['q']))  { ?>
-                    <h1 class="resultat">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
+                    <div class="row mb-5">
+                        <div class="col-lg-7 mx-auto">
+
+                            <h1 class="display-4">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
+
+                            <p class="lead mb-0">(Nombre de résultat)</p>
+
+                        </div>
+                    </div>
                     <?php } ?>
 
 
@@ -236,24 +292,24 @@ else {
 
                                 </div>
 
-                                <div class=" col-sm-6 align-middle  " style="background-color : blue;">
+                                <div class=" d-flex col-sm-6 align-middle  " style="background-color : blue; flex-direction : row;">
 
                                     <span class='TitleCardMusic'><?=$r['beat_title']?> </span>
                                     <span class='authorCardMusic'><?=$r['beat_author']?> </span>
                                     <span class='GenreCardMusic'><?=$r['beat_genre']?> </span>
 
+                                    <div style="background-color : green;"> 
+                                        <span> (Likes ) </span>
+
+                                        <a class="btn btn-danger" href="#" role="button"><?=$r['beat_price']?> €</a><?=$r['beat_dateupload']?> ---
+
+
+                                    </div>
 
 
                                 </div>
 
 
-                                <div class=" col-sm-4  row align-items-center justify-content-center rounded-right" style="background-color : green;"> 
-                                    <span> (Likes ) </span>
-
-                                    <a class="btn btn-danger" href="#" role="button"><?=$r['beat_price']?> €</a>
-
-
-                                </div>
 
                             </div>
                             <?php
@@ -263,9 +319,18 @@ else {
 
                             ?>
                         </div>
+                        <!--  END -->
+
 
 
                     </div>
+                    <!--  END div blue -->
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item">First item</li>
+                        <li class="list-group-item">Second item</li>
+                        <li class="list-group-item">Third item</li>
+                        <li class="list-group-item">Fourth item</li>
+                    </ul> 
 
                     <p class="lead font-italic mb-0">"Lorem ipsumnisi."</p>
 
@@ -282,29 +347,8 @@ else {
 
                     ?>
 
-                    <?php
-                    $i = 0;
-                    foreach($resu as $r){ 
-
-                    ?>
-
-                    <div class="col-md-3">
-                        <div class="hover hover-5 text-white rounded"><img src="img/<?= $r['beat_image']?>" alt="">
-                            <div class="hover-overlay"></div>
-
-                            <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                            <h6 class="hover-5-title text-uppercase font-weight-light mb-0"> <?=$r['beat_author']?><strong class="font-weight-bold text-white">
-                                <?=$r['beat_title']?></strong><span><?= $r['beat_year']?></span></h6>
-                        </div>
-                    </div>
 
 
-                    <?php
-
-                        $i++;
-                    }
-
-                    ?>
 
 
 
@@ -360,18 +404,19 @@ else {
 
                 ok = true;
 
+                selectTrie = document.getElementById('sort');
+                console.log(selectTrie);
 
-                console.log(gr);
 
 
-                valTrie = document.getElementById('valTrie');
+
 
 
 
 
 
                 if (ok) {
-                    document.getElementById('formMenuvertical').submit();
+                    document.getElementById('formTrie').submit();
 
                 }
 

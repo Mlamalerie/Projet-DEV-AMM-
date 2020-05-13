@@ -82,11 +82,16 @@
                         Genres
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item  " href="#">Afro Beats</a>
-                        <a class="dropdown-item  " href="#" >Agressif</a>
-                        <a class="dropdown-item  " href="#" >Drill</a>
-                        <a class="dropdown-item  " href="#" >Electro</a>
-                        <a class="dropdown-item  " href="#" >Trap</a>
+                        <?php 
+            $listeGenres = $_SESSION['listeGenres'];
+            foreach($listeGenres as $gr){
+
+              
+                    ?>
+                        <a class="dropdown-item  " href="#"><?= $gr?></a>
+                              <?php
+            }
+                    ?>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item  " href="#">Free Beats</a>
                     </div>
