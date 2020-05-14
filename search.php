@@ -9,6 +9,14 @@ sort($listeGenres);
 $_SESSION["listeGenres"] = $listeGenres;
 
 
+// $_GET[Q
+if(isset($_GET['q']) && !empty($_GET['q'])) {
+    $weqexiste = true;
+}else{
+    $weqexiste = false;
+
+}
+// $_GET[GENRE
 if (isset($_GET['Genre']) && !empty($_GET['Genre'])) {
     $wegenreexiste = true;
 
@@ -17,7 +25,7 @@ else {
     $wegenreexiste = false;
 }
 
-// SORT
+// $_GET[SORT
 if (isset($_GET['sort']) && !empty($_GET['sort'])) {
     $wesortexiste = true;
 
@@ -49,15 +57,13 @@ if (isset($_GET['sort']) && !empty($_GET['sort'])) {
 $trierpar = $_GET['trierpar'];
 $asc_desc = $_GET['asc_desc'];
 
-// PRICE
+// $_GET[PRICE
 if (isset($_GET['Price']) && !empty($_GET['Price'])) {
     $wepriceexiste = true;
     if ($_GET['Price'] == "free") {
         $borneprixinf = 0;
         $borneprixsup = 0;
     }else {
-
-
 
 
     }
@@ -69,12 +75,13 @@ else {
 
 //******************************************************
 // si on recherche un truc
-if(isset($_GET['q']) && !empty($_GET['q'])) {
+if($weqexiste) {
 
     $xxx = (String) trim(($_GET['q']));
 
-    //*** recherche dans tout les genres 
-    if($_GET['Genre'] == "All") {
+    //*** recherche dans tout les genres
+
+    if(($wegenreexiste && $_GET['Genre'] == "All") || !$wegenreexiste) {
         print_r("##");
 
         // selection des free beats
@@ -106,7 +113,7 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
         if($wepriceexiste){
             foreach($listeGenres as $gr){
 
-                if($_GET['Genre'] == (htmlspecialchars($gr))) {
+                if($wegenreexiste && $_GET['Genre'] == $gr ) {
                     $req = $BDD->prepare("SELECT * FROM (
                                                         SELECT * FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
@@ -123,7 +130,7 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
         else {
             foreach($listeGenres as $gr){
 
-                if($_GET['Genre'] == (htmlspecialchars($gr))) {
+                if($wegenreexiste && $_GET['Genre'] == $gr) {
                     $req = $BDD->prepare("SELECT * FROM (
                                                         SELECT * FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
@@ -145,14 +152,13 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
 } //si bay recherche vide mais Genre pas vide
 else if ($wegenreexiste) {
 
-
     if(in_array($_GET['Genre'],$listeGenres)) {
 
         foreach($listeGenres as $gr){
             print_r("<br> > ");
             print_r($gr);
 
-            if($_GET['Genre'] == (htmlspecialchars($gr))) {
+            if($_GET['Genre'] == $gr) {
                 print_r("- ");
                 $req = $BDD->prepare("SELECT *
                          FROM beat
@@ -229,9 +235,7 @@ else {
         <?php
         //require_once('assets/skeleton/menu.php');
         ?>
-        <!--   *************************************************************  -->
-        <!--   ************************** TEST TECHERCHE MLAMALI  **************************  -->
-        Ici c'est l'index des connecté
+
         <?php
         if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
             print_r($_SESSION);
@@ -252,14 +256,15 @@ else {
                     <!--   ************************** MENU VERTICAL **************************  -->
 
                     <nav id="menuvertical" class="nav flex-column bg-white shadow-sm font-italic rounded p-3">
-                        <form id='formMenuvertical' action="search.php">
+                        <form id='formGenre' action="search.php">
 
-
+                            <!-- ** GENRES -->
                             <div class="list-group">
                                 <h4 class="text-white display-6">GENRES</h4>
+                                <!-- -All Genres-  -->
                                 <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
 
-
+                                    <!--   icon croix ou rond -->
                                     <?php if($wegenreexiste && $_GET['Genre'] == "All") { ?>
                                     <i class="fas fa-times-circle"></i>
                                     <?php } else { ?> 
@@ -272,7 +277,9 @@ else {
 
                                 <?php foreach($listeGenres as $gr){
                                 ?>
+                                <!-- -Coulissage de tout les autres genres -  -->
                                 <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
+                                    <!--   icon croix ou rond -->
                                     <?php if($wegenreexiste && $_GET['Genre'] == $gr) { ?>
                                     <i class="fas fa-times-circle"></i>
                                     <?php } else { ?> 
@@ -285,32 +292,42 @@ else {
 }
                                 ?>
 
-
-                                <?php if (!empty($_GET['q']))  { ?>
+                                <!-- garder la variable de recherche -->
+                                <?php if ($weqexiste)  { ?>
                                 <input id='valq' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
                                 <?php } ?>
-
+                                <!-- garder la variable de trie -->
                                 <?php if ($wesortexiste)  { ?>
-                                <input id='valq' type='hidden' name='sort' value='<?= $_GET['sort'] ?>'/>
+                                <input id='valsort' type='hidden' name='sort' value='<?= $_GET['sort'] ?>'/>
                                 <?php } ?>
 
-                                <?php if ($wegenreexiste) { ?>
-                                <input id='valGenreMenu' type='hidden' name='Genre' value='<?= $_GET['Genre'] ?>'/>
-                                <?php } else {?>
-                                <input id='valGenreMenu' type='hidden' name='Genre' value=''/> 
+                                <?php if ($wepriceexiste)  { ?>
+                                <input id='valprice' type='hidden' name='sort' value='<?= $_GET['Price'] ?>'/>
                                 <?php } ?>
+
+                                <!-- *DIV BAZOUKA D'ENVOIE du genre* -->
+                                <div id="icigenre">  <span id="wewegenre"></span></div>
+
+
+
 
                             </div> 
+                        </form>
 
-                            <div class="list-group">
-
+                        <div class="list-group">
+                            <form action="search.php" id="formPrice">
                                 <h4 class="text-white">PRIX </h4>
                                 <span onclick="goPrice(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
+                                     <!--   icon croix ou rond -->
+                                    <?php if($wepriceexiste && $_GET['Price'] == "free") { ?>
+                                    <i class="fas fa-times-circle"></i>
+                                    <?php } else { ?> 
                                     <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <?php } ?>
                                     <span id="price_Price" >Free Beats</span>
 
 
-                                    <input id='valPriceFreeMenu' type='hidden' name='Price' value='free'/>
+                                    <!--                                    <input id='valPriceFreeMenu' type='hidden' name='Price' value='free'/>-->
 
                                 </span>
 
@@ -355,10 +372,28 @@ else {
 </div>
 </div>
 -->
-                            </div>
+
+                                <!-- garder la variable de recherche -->
+                                <?php if ($weqexiste)  { ?>
+                                <input id='valq3' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
+                                <?php } ?>
+                                <!-- garder la variable de genre -->
+                                <?php if ($wegenreexiste)  { ?>
+                                <input id='valGenre3' type='hidden' name='Genre' value='<?= $_GET['Genre'] ?>'/>
+                                <?php } ?>
+                                <!-- garder la variable de trie -->
+                                <?php if ($wesortexiste)  { ?>
+                                <input id='valsort3' type='hidden' name='sort' value='<?= $_GET['sort'] ?>'/>
+                                <?php } ?>
+
+                                <!-- *DIV BAZOUKA D'ENVOIE du price* -->
+                                <div id="iciprice">  <span id="weweprice"></span></div>
+
+                            </form>          
+                        </div>
 
 
-                        </form>
+
                     </nav>
                     <!--   END Menu vertical      -->
 
@@ -367,20 +402,7 @@ else {
                 <!--   *************************************************************  -->
                 <!--   ************************** RESULTAT **************************  -->
                 <div class="col-lg-8 mb-5 col-md-8 col-xl-9 m-0 " style="background-color : yellow;">
-                    <form id="formTrie" action="search.php">
-                        <select id='sort' name="sort" class="custom-select " onchange="goTrier()">
-                            <option value="nouveaute" <?php if($wesortexiste && $_GET['sort'] == 'nouveaute'){?> selected <?php } ?>>Nouveautés en premier </option>
-                            <option value="populaire"  <?php if($wesortexiste && $_GET['sort'] == 'populaire'){?> selected <?php } ?> >Popularité </option>
-                            <option value="prixcr" <?php if($wesortexiste && $_GET['sort'] == 'prixcr'){?> selected <?php } ?>>Prix croissant </option>
-                            <option value="prixdecr"  <?php if($wesortexiste && $_GET['sort'] == 'prixdecr'){?> selected <?php } ?>>Prix décroissant </option>
-                        </select>
-                        <?php if (!empty($_GET['q']))  { ?>
-                        <input id='valq' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
-                        <?php } ?>
-                        <?php if (!empty($_GET['Genre']))  { ?>
-                        <input id='valGenreMenu' type='hidden' name='Genre' value='<?= $_GET['Genre'] ?>'/>
-                        <?php } ?>
-                    </form>
+
 
                     <?php if (!empty($_GET['q']))  { ?>
                     <div class="row mb-5">
@@ -393,6 +415,29 @@ else {
                         </div>
                     </div>
                     <?php } ?>
+
+                    <form id="formTrie" action="search.php">
+                        <select id='sort' name="sort" class="custom-select " onchange="goTrier()">
+                            <option value="nouveaute" <?php if($wesortexiste && $_GET['sort'] == 'nouveaute'){?> selected <?php } ?>>Nouveautés en premier </option>
+                            <option value="populaire"  <?php if($wesortexiste && $_GET['sort'] == 'populaire'){?> selected <?php } ?> >Popularité </option>
+                            <option value="prixcr" <?php if($wesortexiste && $_GET['sort'] == 'prixcr'){?> selected <?php } ?>>Prix croissant </option>
+                            <option value="prixdecr"  <?php if($wesortexiste && $_GET['sort'] == 'prixdecr'){?> selected <?php } ?>>Prix décroissant </option>
+                        </select>
+
+
+                        <?php if ($weqexiste)  { ?>
+                        <input id='valq2' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
+                        <?php } ?>
+                        <?php if ($wegenreexiste)  { ?>
+                        <input id='valGenre2' type='hidden' name='Genre' value='<?= $_GET['Genre'] ?>'/>
+                        <?php } ?>
+
+                        <?php if ($wepriceexiste)  { ?>
+                        <input id='valprice2' type='hidden' name='Price' value='<?= $_GET['Price'] ?>'/>
+                        <?php } ?>
+
+                    </form>
+
 
 
                     <!-- Demo Content-->
@@ -483,67 +528,7 @@ else {
 
 
 
-        <script>
-
-
-            function goGenre(bay){
-
-
-                console.log();
-                gr = bay.children[1].innerHTML;
-
-                // for (var i = 0; i < bay.children)
-                console.log("bay",bay.children);
-
-                console.log("gr",gr);
-                ok = false;
-
-
-                console.log(gr);
-                if (gr == "All Genres") {
-                    gr = "All";
-                }
-
-
-                valGenreMenu = document.getElementById('valGenreMenu');
-                valGenreMenu.value = gr;
-
-                if (ok) {
-                    document.getElementById('formMenuvertical').submit();
-
-                }
-
-
-
-
-            }
-            function goTrier(bay){
-                ok = true;
-                if (ok) {
-                    document.getElementById('formTrie').submit();
-
-                }
-
-            }
-
-            function goPrice(bay) {
-
-                ok = true;
-                valGenreMenu = document.getElementById('valGenreMenu');
-                console.log("goprice",valPriceFreeMenu.value);
-
-                if (ok) {
-                    document.getElementById('formMenuvertical').submit();
-
-                }
-
-
-
-            }
-
-
-
-        </script>
+        <script src="assets/js/search.js"></script>
 
 
 

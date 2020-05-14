@@ -523,9 +523,10 @@ $_SESSION['ici_index_bool'] = true;
         <?php
         require_once('assets/skeleton/endLinkScripts.php');
         ?>
+        <!--     RECHERCHE  -->
+        <script src="assets/js/search.js"></script>
+        
         <!--        COMPTE A REBOURS -->
-
-
         <script src="assets/js/comptearebours.js"></script>
         <!--    END     COMPTE A REBOURS -->
 
