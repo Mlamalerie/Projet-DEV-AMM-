@@ -3,22 +3,35 @@ $(function() {
     // Initiate Slider
     $('#slider-range').slider({
         range: true,
-        min: 10000,
-        max: 110000,
-        step: 100,
-        values: [45000, 75000]
+        min: 10,
+        max: 300,
+        step: 10,
+        values: [10, 300]
     });
 
     // Move the range wrapper into the generated divs
     $('.ui-slider-range').append($('.range-wrapper'));
 
     // Apply initial values to the range container
-    $('.range').html('<span class="range-value"><sup>$</sup>' + $('#slider-range').slider("values", 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span><span class="range-divider"></span><span class="range-value"><sup>$</sup>' + $("#slider-range").slider("values", 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
+    $('.range').html('<input id="rangeBorneInf" class="range-value" type="text" value="' + $('#slider-range').slider("values",0 ).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"><span class="range-divider"></span><input id="rangeBorneSup" class="range-value" type="text" value="' + $("#slider-range").slider("values", 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"> <input name="Price" type="hidden" value="'+$('#slider-range').slider("values", 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '-' + $("#slider-range").slider("values", 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"> ');
 
     // Show the gears on press of the handles
     $('.ui-slider-handle, .ui-slider-range').on('mousedown', function() {
         $('.gear-large').addClass('active');
+        
     });
+    
+     $('.ui-slider-handle, .ui-slider-range').on('mouseup', function(){
+         let ok = true;
+         
+        
+         
+         $("#formPrice").submit();
+         
+     });
+   
+   
+    
 
     // Hide the gears when the mouse is released
     // Done on document just incase the user hovers off of the handle
@@ -41,7 +54,7 @@ $(function() {
 
             // Update the range container values upon sliding
 
-            $('.range').html('<span class="range-value"><sup>$</sup>' + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span><span class="range-divider"></span><span class="range-value"><sup>$</sup>' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '</span>');
+            $('.range').html('<input id="rangeBorneInf" class="range-value" type="text" value="'  + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"><span class="range-divider"></span><input id="rangeBorneSup" class="range-value" type="text" value="' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"> <input name="Price" type="hidden" value="'+ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '-' +  ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"> ');
 
             // Get old value
             var previousVal = parseInt($(this).data('value'));
@@ -80,7 +93,7 @@ $(function() {
 
             }
 
-            if (ui.values[1] === 110000) {
+            if (ui.values[1] === 305) {
                 if (!$('.range-alert').hasClass('active')) {
                     $('.range-alert').addClass('active');
                 }

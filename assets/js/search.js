@@ -71,7 +71,6 @@ function goPrice(bay) {
 
             // poser le genre sur le input d'envoie
             input.value = fr;
-
             ici.insertBefore(input,avant);
         }
 
@@ -86,6 +85,13 @@ function goPrice(bay) {
     }
 
 
+
+}
+
+
+function goPrice2range(){
+
+console.log("**");
 
 }
 function goTrier(bay){

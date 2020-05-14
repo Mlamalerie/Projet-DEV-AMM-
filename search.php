@@ -14,7 +14,6 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
     $weqexiste = true;
 }else{
     $weqexiste = false;
-
 }
 // $_GET[GENRE
 if (isset($_GET['Genre']) && !empty($_GET['Genre'])) {
@@ -64,7 +63,6 @@ if (isset($_GET['Price']) && !empty($_GET['Price'])) {
         $borneprixinf = 0;
         $borneprixsup = 0;
     }else {
-
 
     }
 }
@@ -318,7 +316,7 @@ else {
                             <form action="search.php" id="formPrice">
                                 <h4 class="text-white">PRIX </h4>
                                 <span onclick="goPrice(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
-                                     <!--   icon croix ou rond -->
+                                    <!--   icon croix ou rond -->
                                     <?php if($wepriceexiste && $_GET['Price'] == "free") { ?>
                                     <i class="fas fa-times-circle"></i>
                                     <?php } else { ?> 
@@ -334,17 +332,18 @@ else {
 
 
                                 <!-- Fourchete de prix -->
-                                <!--
-<div class="wrapper fourchettes2prix">
-<div class="container">
 
-<div class="slider-wrapper">
-<div id="slider-range"></div>
+                                <div class="wrapper fourchettes2prix mt-4">
+                                    <div class="container">
 
-<div class="range-wrapper">
-<div class="range"></div>
-<div class="range-alert">+</div>
+                                        <div class="slider-wrapper">
+                                            <div id="slider-range"></div>
+                                            <div class="range mt-3"></div>
+                                            <div class="range-wrapper">
 
+                                                <!--                                                <div class="range-alert">+</div>-->
+
+                                                <!--
 <div class="gear-wrapper">
 <div class="gear-large gear-one">
 <div class="gear-tooth"></div>
@@ -359,19 +358,16 @@ else {
 <div class="gear-tooth"></div>
 </div>
 </div>
-
-</div>
-
-<div class="marker marker-0"><sup>$</sup>10,000</div>
-<div class="marker marker-25"><sup>$</sup>35,000</div>
-<div class="marker marker-50"><sup>$</sup>60,000</div>
-<div class="marker marker-75"><sup>$</sup>85,000</div>
-<div class="marker marker-100"><sup>$</sup>110,000+</div>
-</div>
-
-</div>
-</div>
 -->
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
 
                                 <!-- garder la variable de recherche -->
                                 <?php if ($weqexiste)  { ?>
@@ -387,7 +383,9 @@ else {
                                 <?php } ?>
 
                                 <!-- *DIV BAZOUKA D'ENVOIE du price* -->
+                                
                                 <div id="iciprice">  <span id="weweprice"></span></div>
+                                <div id="icifourchette">   </div>
 
                             </form>          
                         </div>
@@ -529,6 +527,9 @@ else {
 
 
         <script src="assets/js/search.js"></script>
+        <?php 
+        
+        ?>
 
 
 

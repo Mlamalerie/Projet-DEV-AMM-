@@ -20,10 +20,10 @@ $_SESSION['ici_index_bool'] = true;
         <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar-index-turfu.css">
-        
+
         <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">
-        
-                
+
+
 
 
 
@@ -48,7 +48,7 @@ $_SESSION['ici_index_bool'] = true;
         ?>
 
 
-       
+
 
         <!--   *************************************************************  -->
         <!--   ************************** HEADER  **************************  -->
@@ -91,13 +91,13 @@ $_SESSION['ici_index_bool'] = true;
             print_r($_SESSION);
         } else{
             echo "Pas de connexion <br>";
-         
-       
+
+
 
         }
         ?>
         <div id="countdown">
-           Temps restant pour le projet :
+            Temps restant pour le projet :
             <span id="d"></span>
 
 
@@ -124,8 +124,8 @@ $_SESSION['ici_index_bool'] = true;
                         <div class="carousel-item active">
 
                             <div class="container row col-md-12" style="padding-left : 200px">
-                                
-                               <div class="col-md-3">
+
+                                <div class="col-md-3">
                                     <div class="hover hover-5 text-white rounded"><img src="img/Laylow.jpg" alt="">
                                         <div class="hover-overlay"></div>
                                         <div class="link_icon"><i class="far fa-play-circle"></i></div>
@@ -133,7 +133,7 @@ $_SESSION['ici_index_bool'] = true;
                                             BURNING MAN</strong><span> 2020</span></h6>
                                     </div>
                                 </div>
-                               
+
                                 <div class="col-md-3">
                                     <div class="hover hover-5 text-white rounded"><img src="img/bigmetro.jpg" alt="">
                                         <div class="hover-overlay"></div>
@@ -141,7 +141,7 @@ $_SESSION['ici_index_bool'] = true;
                                         <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Big Sean ft Travis Scott,Metro Boomin<strong class="font-weight-bold text-white"> Go Legend</strong><span> 2020</span></h6>
                                     </div>
                                 </div>
-                               
+
                                 <div class="col-md-3">
                                     <div class="hover hover-5 text-white rounded"><img src="img/luv.jpg" alt="">
                                         <div class="hover-overlay"></div>
@@ -149,7 +149,7 @@ $_SESSION['ici_index_bool'] = true;
                                         <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Lil Uzi Vert<strong class="font-weight-bold text-white"> Futsal Shuffle 2020</strong><span> 2020</span></h6>
                                     </div>
                                 </div>
-                               
+
                                 <div class="col-md-3">
                                     <div class="hover hover-5 text-white rounded"><img src="img/roddy.jpg" alt="">
                                         <div class="hover-overlay"></div>
@@ -327,6 +327,7 @@ $_SESSION['ici_index_bool'] = true;
                 </div>
             </div>
         </section>
+
         <!-- Section 4 -->
         <section class="py-5 d-flex align-items-center" id="four">
             <div class="container py-5">
@@ -441,18 +442,6 @@ $_SESSION['ici_index_bool'] = true;
             </div>
         </section>
 
-
-
-
-        <div id="aplayer"></div>
-
-
-
-
-
-
-
-
         <!--   *************************************************************  -->
         <!--   ************************** FOOTER  **************************  -->
 
@@ -461,7 +450,8 @@ $_SESSION['ici_index_bool'] = true;
             <div class="container py-5">
                 <div class="row py-4">
 
-                    <div id='boxocial' class="col-lg-4 col-md-6 mb-4 mb-lg-0  "><img src="img/logo.png" alt="" width="180" class="mb-3">
+                    <div id='boxocial' class="col-lg-4 col-md-6 mb-4 mb-lg-0  ">
+                        <!--                       <img src="img/logo.png" alt="" width="180" class="mb-3">-->
                         <p class="font-italic text-mute">Retrouvez-nous également sur les réseaux sociaux</p>
                         <ul class="list-inline mt-4 footer__social">
                             <li class=" "><a href="#0"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
@@ -509,6 +499,7 @@ $_SESSION['ici_index_bool'] = true;
                     <p class="text-mute mb-0 py-2">© 2020 WeBeats All rights reserved.</p>
                 </div>
             </div>
+
         </footer>
         <!-- End -->
 
@@ -517,15 +508,15 @@ $_SESSION['ici_index_bool'] = true;
 
 
 
-
+        <script src="assets/js/search.js"></script>
 
 
         <?php
         require_once('assets/skeleton/endLinkScripts.php');
         ?>
         <!--     RECHERCHE  -->
-        <script src="assets/js/search.js"></script>
-        
+
+
         <!--        COMPTE A REBOURS -->
         <script src="assets/js/comptearebours.js"></script>
         <!--    END     COMPTE A REBOURS -->
