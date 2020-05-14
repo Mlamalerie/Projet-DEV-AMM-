@@ -22,6 +22,10 @@ $_SESSION['ici_index_bool'] = false;
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/test_zone.css">
         <link rel="stylesheet" type="text/css" href="assets/css/MusicPlayerMlamali.css">
+        
+        <!--  Slides Link      -->
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+       
         <title>TEST ZONE</title>
     </head>
     <body>
@@ -107,6 +111,19 @@ $_SESSION['ici_index_bool'] = false;
             }
 
         </script>
-
+        
+        
+        <div class="profil_card rounded-circle text-center">
+            <img src="img/user.png">
+            <span>Pseudo</span>
+        </div>
+        
+        <!--    SLIDES JS SCRIPT    -->
+        
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <script src="assets/js/slide.js"></script>
+        
+        
+        
     </body>
 </html>

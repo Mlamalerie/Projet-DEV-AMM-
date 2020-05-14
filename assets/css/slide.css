@@ -1,0 +1,28 @@
+/*slides*/
+.my_slides{
+    display: flex;
+}
+.my_slides .items {
+    width: 250px;
+    height: 250px;
+    margin: 100px;
+}
+.my_slides .items img {
+    width: 250px;
+    height: 250px;
+}
+.slider-btn .prev1, .slider-btn .next1, .slider-btn .prev2, .slider-btn .next2 {
+    background-color: #7728b2;
+    padding: 1rem 1.25rem;
+    color: white;
+    margin:0 1rem;
+    border-radius:60%;
+}
+.right-0{
+    right: 0;
+}
+
+.position-top{
+    position: absolute;
+}
+

@@ -141,9 +141,6 @@ section:first-of-type {
     border-color:  rgb(121, 6, 247);
     box-shadow: 0 0 0 0.2rem rgb(121, 6, 247);
 }
-.caroufleche{
-    right: -9%;
-}
 
 
 
@@ -151,6 +148,7 @@ section:first-of-type {
 section:nth-of-type(2) {
     background: #14181b;
 }
+
 
 /* section 3 */
 section:nth-of-type(3) {
