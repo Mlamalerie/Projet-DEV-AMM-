@@ -1,19 +1,18 @@
-const background = document.querySelector('#background'); // background derived from album cover below
-const thumbnail = document.querySelector('#thumbnail'); // album cover 
-const song = document.querySelector('#song'); // audio object
+const background = document.querySelector('#background'); 
+const thumbnail = document.querySelector('#thumbnail'); 
+const song = document.querySelector('#song'); 
 
-const songArtist = document.querySelector('.song-artist'); // element where track artist appears
-const songTitle = document.querySelector('.song-title'); // element where track title appears
-const progressBar = document.querySelector('#progress-bar'); // element where progress bar appears
-let pPause = document.querySelector('#play-pause'); // element where play and pause image appears
+const songArtist = document.querySelector('.song-artist'); 
+const songTitle = document.querySelector('.song-title'); 
+const progressBar = document.querySelector('#progress-bar');
+let pPause = document.querySelector('#play-pause');
 
 songIndex = 0;
-songs = ['./assets/music/high_fashion.mp3', './assets/music/Malcolm.mp3']; // object storing paths for audio objects
-thumbnails = ['./assets/img/roddy.jpg', './assets/img/MILS.jpg']; // object storing paths for album covers and backgrounds
-songArtists = ['Roddy Rich', 'Ninho']; // object storing track artists
-songTitles = ["High Fashion", "Malcolm"]; // object storing track titles
+songs = ['./assets/music/high_fashion.mp3', './assets/music/Malcolm.mp3']; 
+thumbnails = ['./assets/img/roddy.jpg', './assets/img/MILS.jpg']; 
+songArtists = ['Roddy Rich', 'Ninho']; 
+songTitles = ["High Fashion", "Malcolm"];
 
-// function where pp (play-pause) element changes based on playing boolean value - if play button clicked, change pp.src to pause button and call song.play() and vice versa.
 let playing = true;
 function playPause() {
     if (playing) {
@@ -32,12 +31,11 @@ function playPause() {
     }
 }
 
-// automatically play the next song at the end of the audio object's duration
+// joue automatiquement le son suivant
 song.addEventListener('ended', function(){
     nextSong();
 });
 
-// function where songIndex is incremented, song/thumbnail image/background image/song artist/song title changes to next index value, and playPause() runs to play next track 
 function nextSong() {
     songIndex++;
     if (songIndex > 1) {
@@ -54,7 +52,6 @@ function nextSong() {
     playPause();
 }
 
-// function where songIndex is decremented, song/thumbnail image/background image/song artist/song title changes to previous index value, and playPause() runs to play previous track 
 function previousSong() {
     songIndex--;
     if (songIndex < 0) {
@@ -71,7 +68,7 @@ function previousSong() {
     playPause();
 }
 
-// update progressBar.max to song object's duration, same for progressBar.value, update currentTime/duration DOM
+// maj de la durée max du son, maj temps actuel
 function updateProgressValue() {
     progressBar.max = song.duration;
     progressBar.value = song.currentTime;
@@ -83,7 +80,7 @@ function updateProgressValue() {
     }
 };
 
-// convert song.currentTime and song.duration into MM:SS format
+// conversion du temps en minutes/secondes dans le lecteur
 function formatTime(seconds) {
     let min = Math.floor((seconds / 60));
     let sec = Math.floor(seconds - (min * 60));
@@ -93,10 +90,10 @@ function formatTime(seconds) {
     return `${min}:${sec}`;
 };
 
-// run updateProgressValue function every 1/2 second to show change in progressBar and song.currentTime on the DOM
+// actualisation du lecteur en fct du temps(demi-secondes)
 setInterval(updateProgressValue, 500);
 
-// function where progressBar.value is changed when slider thumb is dragged without auto-playing audio
+// Valeur de la bar qd curseur est glissé sans lecture
 function changeProgressBar() {
     song.currentTime = progressBar.value;
 };
