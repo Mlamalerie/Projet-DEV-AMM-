@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Music Player</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="player.css">
+</head>
+<body>
+    <img src="./assets/img/roddy.jpg" id="background" />
+    <audio src="./assets/music/high_fashion.mp3" id="song"></audio>
+  
+        <div class="box">     
+        <img src="./assets/img/roddy.jpg" id="thumbnail" />
+        
+        <img src="./assets/icons/play.png" onclick="playPause()" id="play-pause" />
+        <img src="./assets/icons/forward.png" onclick="nextSong()" id="next-song" />
+        <img src="./assets/icons/backward.png" onclick="previousSong()" id="previous-song" />
+
+        <div class="song-artist">Roddy Rich</div>
+        <div class="song-title">High Fashion</div>
+
+        
+        <input 
+            type="range" 
+            id="progress-bar" 
+            min="0" 
+            max="" 
+            value="0" 
+            onchange="changeProgressBar()"
+        />
+
+        <button type="button" class="btn btn-light btn-buy">Acheter</button>
+
+        <div class="currentTime"></div>
+        <div class="durationTime"></div>
+    </div>
+
+    <script src="player.js"></script>
+</body>
+</html>
