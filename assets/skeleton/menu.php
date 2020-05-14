@@ -88,7 +88,7 @@
 
               
                     ?>
-                        <a class="dropdown-item  " href="#"><?= $gr?></a>
+                        <a class="dropdown-item" href="#"><?= $gr?></a>
                               <?php
             }
                     ?>

@@ -112,27 +112,11 @@ $_SESSION['ici_index_bool'] = false;
 
         </script>
         
-        <div class="my_slides">
-            <div class="items">
-                <img src="img/DB5.jpg" alt="">
-            </div>
-            <div class="items">
-                <img src="img/bigmetro.jpg" alt="">
-            </div>
-            <div class="items">
-                <img src="img/CG6.png" alt="">
-            </div>
-            <div class="items">
-                <img src="img/Laylow.jpg" alt="">
-            </div>
-            <div class="items">
-                <img src="img/luv.jpg" alt="">
-            </div>
-            <div class="items">
-                <img src="img/MILS.jpg" alt="">
-            </div>
-        </div>
         
+        <div class="profil_card rounded-circle text-center">
+            <img src="img/user.png">
+            <span>Pseudo</span>
+        </div>
         
         <!--    SLIDES JS SCRIPT    -->
         

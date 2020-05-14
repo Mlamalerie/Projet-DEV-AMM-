@@ -135,26 +135,54 @@ $_SESSION['ici_index_bool'] = true;
                             </div>
                         </div>
                         <div class="items">
-                            <img src="img/CG6.png" alt="">
+                            <div class="hover hover-5 text-white rounded"><img src="img/CG6.png" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">CG6<strong class="font-weight-bold text-white">
+                                    Nelson</strong><span> 2019</span></h6>
+                            </div>
                         </div>
                         <div class="items">
-                            <img src="img/Laylow.jpg" alt="">
+                           <div class="hover hover-5 text-white rounded"><img src="img/DB5.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Leto<strong class="font-weight-bold text-white">
+                                    Double Bang 5</strong><span> 2018</span></h6>
+                            </div>                        
                         </div>
                         <div class="items">
-                            <img src="img/luv.jpg" alt="">
+                            <div class="hover hover-5 text-white rounded"><img src="img/luv.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Lil Uzi Vert<strong class="font-weight-bold text-white">
+                                    Futball Shuffle </strong><span> 2020</span></h6>
+                            </div>
                         </div>
                         <div class="items">
-                            <img src="img/MILS.jpg" alt="">
+                             <div class="hover hover-5 text-white rounded"><img src="img/Sch.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Sch<strong class="font-weight-bold text-white">
+                                    Poupée Russe </strong><span> 2017</span></h6>
+                            </div>
                         </div>
                         <div class="items">
-                            <img src="img/roddy.jpg" alt="">
+                            <div class="hover hover-5 text-white rounded"><img src="img/roddy.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Roddy Rich<strong class="font-weight-bold text-white">
+                                     Tip toe</strong><span> 2020</span></h6>
+                            </div>
                         </div>
                         <div class="items">
-                            <img src="img/Sch.jpg" alt="">
+                            <div class="hover hover-5 text-white rounded"><img src="img/Spri.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Spri(ft 4Keus)<strong class="font-weight-bold text-white">
+                                     Night and Day</strong><span> 2020</span></h6>
+                            </div>
                         </div>
-                        <div class="items">
-                            <img src="img/Spri.jpg" alt="">
-                        </div>
+
                     </div>
 
                     <div class="slider-btn rounded-circle">
