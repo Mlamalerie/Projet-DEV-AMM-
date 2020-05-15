@@ -506,6 +506,7 @@ else {
                     ?>
 
                     <?= "<br>".$r['beat_title']." "?><?= $r['beat_author']." "?><?= $r['beat_year']." ---"?>
+                
 
                     <?php
 

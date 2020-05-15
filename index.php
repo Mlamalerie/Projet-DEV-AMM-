@@ -89,6 +89,7 @@ $_SESSION['ici_index_bool'] = true;
                 </div>
             </div>
         </header>
+        <script src="assets/js/search.js"></script>
         <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
         <?php
         if(isset($_SESSION['user_id'])) {
@@ -182,17 +183,16 @@ $_SESSION['ici_index_bool'] = true;
                                      Night and Day</strong><span> 2020</span></h6>
                             </div>
                         </div>
-
                     </div>
-
+                    
                     <div class="slider-btn rounded-circle">
                         <span class="prev1 position-top"><i class="fas fa-chevron-left"></i></span>
                         <span class="next1 position-top right-0"><i class="fas fa-chevron-right"></i></span>
                     </div>
+
+                    
                 </div>
             </div>      
-
-
         </section>
 
         <!-- Section 2-->
@@ -407,7 +407,7 @@ $_SESSION['ici_index_bool'] = true;
             <div class="container py-5">
                 <div class="row py-4">
 
-                    <div id='boxocial' class="col-lg-4 col-md-6 mb-4 mb-lg-0  "><img src="img/logo.png" alt="" width="180" class="mb-3">
+                    <div id='boxocial' class="col-lg-4 col-md-6 mb-4 mb-lg-0  "><!--<img src="img/logo.png" alt="" width="180" class="mb-3">-->
                         <p class="font-italic text-mute">Retrouvez-nous également sur les réseaux sociaux</p>
                         <ul class="list-inline mt-4 footer__social">
                             <li class=" "><a href="#0"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
@@ -463,7 +463,7 @@ $_SESSION['ici_index_bool'] = true;
         require_once('assets/skeleton/endLinkScripts.php');
         ?>
         <!--     RECHERCHE  -->
-        <script src="assets/js/search.js"></script>
+        
         
         <!--        COMPTE A REBOURS -->
         <script src="assets/js/comptearebours.js"></script>

@@ -116,7 +116,25 @@ $_SESSION['ici_index_bool'] = false;
         <div class="profil_card rounded-circle text-center">
             <img src="img/user.png">
             <span>Pseudo</span>
-        </div>
+        </div><br/>
+        
+        <?php
+            foreach($resu as $r){
+
+        ?>
+        
+                    
+        <?php
+                        echo "<div class='items'>
+                            <div class='hover hover-5 text-white rounded'><img src='".$r['beat_image']."' alt=''>
+                                <div class='hover-overlay'></div>
+                                <div class='link_icon'><i class='far fa-play-circle'></i></div>
+                                <h6 class='hover-5-title text-uppercase font-weight-light mb-0'>".$r['beat_author']."<strong class='font-weight-bold text-white'>".$r['beat_title']."
+                                </strong><span>".$r['beat_year']."</span></h6>
+                            </div>
+                        </div>"
+        ?>
+        
         
         <!--    SLIDES JS SCRIPT    -->
         
