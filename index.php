@@ -77,7 +77,7 @@ $_SESSION['ici_index_bool'] = true;
                                 <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
 
 
-                                <a onclick="goSearch()" href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                                <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
                             </div>
                         </form>
 
