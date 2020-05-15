@@ -23,9 +23,11 @@ $_SESSION['ici_index_bool'] = true;
 
         <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">
 
+
         <!--Slides-->
         <link rel="stylesheet" href="assets/css/slick.css">
         <link rel="stylesheet" href="assets/css/slide.css">
+
 
 
 
@@ -114,6 +116,7 @@ $_SESSION['ici_index_bool'] = true;
         <!--   ************************** SECTION 1  ***********************  -->
         <!-- ******* Section 1 -->
         <section class="py-5 d-flex align-items-center" id="one">
+
             <div class="container-fluid">
                 <div class="mx-auto" id="tendances">
                     <h2 class="h1 mb-4 text-center text-white">Tendances</h2>
@@ -125,6 +128,7 @@ $_SESSION['ici_index_bool'] = true;
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
                                 <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Laylow<strong class="font-weight-bold text-white">
                                     BURNING MAN</strong><span> 2020</span></h6>
+
                             </div>
                         </div>
                         <div class="items">
@@ -273,6 +277,7 @@ $_SESSION['ici_index_bool'] = true;
                 </div>
             </div>
         </section>
+
         <!-- Section 4 -->
         <section class="py-5 d-flex align-items-center" id="four">
             <div class="container py-5">
@@ -387,18 +392,6 @@ $_SESSION['ici_index_bool'] = true;
             </div>
         </section>
 
-
-
-
-        <div id="aplayer"></div>
-
-
-
-
-
-
-
-
         <!--   *************************************************************  -->
         <!--   ************************** FOOTER  **************************  -->
 
@@ -408,6 +401,7 @@ $_SESSION['ici_index_bool'] = true;
                 <div class="row py-4">
 
                     <div id='boxocial' class="col-lg-4 col-md-6 mb-4 mb-lg-0  "><!--<img src="img/logo.png" alt="" width="180" class="mb-3">-->
+
                         <p class="font-italic text-mute">Retrouvez-nous également sur les réseaux sociaux</p>
                         <ul class="list-inline mt-4 footer__social">
                             <li class=" "><a href="#0"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
@@ -455,16 +449,24 @@ $_SESSION['ici_index_bool'] = true;
                     <p class="text-mute mb-0 py-2">© 2020 WeBeats All rights reserved.</p>
                 </div>
             </div>
+
         </footer>
         <!-- End -->
+
+
+
+
+
+
+        <script src="assets/js/search.js"></script>
 
 
         <?php
         require_once('assets/skeleton/endLinkScripts.php');
         ?>
         <!--     RECHERCHE  -->
-        
-        
+
+       
         <!--        COMPTE A REBOURS -->
         <script src="assets/js/comptearebours.js"></script>
         <!--    END     COMPTE A REBOURS -->

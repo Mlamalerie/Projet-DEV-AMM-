@@ -14,7 +14,6 @@ if(isset($_GET['q']) && !empty($_GET['q'])) {
     $weqexiste = true;
 }else{
     $weqexiste = false;
-
 }
 // $_GET[GENRE
 if (isset($_GET['Genre']) && !empty($_GET['Genre'])) {
@@ -61,11 +60,16 @@ $asc_desc = $_GET['asc_desc'];
 if (isset($_GET['Price']) && !empty($_GET['Price'])) {
     $wepriceexiste = true;
     if ($_GET['Price'] == "free") {
+        $jeveuxdesfreebeats = true;
         $borneprixinf = 0;
         $borneprixsup = 0;
-    }else {
 
-
+    }
+    else {
+        $jeveuxdesfreebeats = false;
+        $bornes = explode('-',$_GET['Price']);
+        $borneprixinf = $bornes[0];
+        $borneprixsup = $bornes[1];
     }
 }
 else {
@@ -79,7 +83,7 @@ if($weqexiste) {
 
     $xxx = (String) trim(($_GET['q']));
 
-    //*** recherche dans tout les genres
+    //*** recherche dans TOUT les genres
 
     if(($wegenreexiste && $_GET['Genre'] == "All") || !$wegenreexiste) {
         print_r("##");
@@ -93,7 +97,7 @@ if($weqexiste) {
                                                         FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
                                                         LIKE ?  ) base
-                                                        WHERE beat_price = 0
+                                                        WHERE $borneprixinf <= beat_price AND beat_price <= $borneprixsup  
                                                         ORDER BY $trierpar $asc_desc");
         }
 
@@ -110,6 +114,8 @@ if($weqexiste) {
 
     //*** recherche dans un genre précis
     else {
+
+        //condition de prix
         if($wepriceexiste){
             foreach($listeGenres as $gr){
 
@@ -124,7 +130,7 @@ if($weqexiste) {
 
             }
 
-        }
+        } 
 
         // pas de condition de prix
         else {
@@ -152,28 +158,58 @@ if($weqexiste) {
 } //si bay recherche vide mais Genre pas vide
 else if ($wegenreexiste) {
 
-    if(in_array($_GET['Genre'],$listeGenres)) {
+    // si condition de prix
+    if ($wepriceexiste){
+        if(in_array($_GET['Genre'],$listeGenres)) {
+            print_r("<br> >->-> ");
 
-        foreach($listeGenres as $gr){
-            print_r("<br> > ");
-            print_r($gr);
+            foreach($listeGenres as $gr){
 
-            if($_GET['Genre'] == $gr) {
-                print_r("- ");
-                $req = $BDD->prepare("SELECT *
+                if($_GET['Genre'] == $gr) {
+                    print_r("- ");
+                    $req = $BDD->prepare("SELECT *
+                         FROM beat
+                         WHERE beat_genre = '$gr' AND ($borneprixinf <= beat_price AND beat_price <= $borneprixsup )
+                         ORDER BY $trierpar $asc_desc");
+                    //break;break;
+                }
+            }
+        }
+        else {
+            print_r("+ ");
+            $req = $BDD->prepare("SELECT *
+                            FROM beat
+                            WHERE $borneprixinf <= beat_price AND beat_price <= $borneprixsup
+                            ORDER BY $trierpar $asc_desc");
+
+        }
+
+    }
+
+    // si pas de condition de prix
+    else{
+        if(in_array($_GET['Genre'],$listeGenres)) {
+            print_r("<br> >->-> ");
+
+            foreach($listeGenres as $gr){
+
+                if($_GET['Genre'] == $gr) {
+                    print_r("- ");
+                    $req = $BDD->prepare("SELECT *
                          FROM beat
                          WHERE beat_genre = '$gr'
                          ORDER BY $trierpar $asc_desc");
-                //break;break;
+                    //break;break;
+                }
             }
         }
-    }
-    else {
-        print_r("+ ");
-        $req = $BDD->prepare("SELECT *
+        else {
+            print_r("+ ");
+            $req = $BDD->prepare("SELECT *
                             FROM beat
                             ORDER BY $trierpar $asc_desc");
 
+        }
     }
 
     $req->execute(array());
@@ -184,17 +220,23 @@ else if ($wegenreexiste) {
 
 // si genre vide et q vide
 else {
-    $req = $BDD->prepare("SELECT *
+    if ($wepriceexiste){
+        $req = $BDD->prepare("SELECT *
+                            FROM beat
+                            WHERE $borneprixinf <= beat_price AND beat_price <= $borneprixsup
+                            ORDER BY $trierpar $asc_desc");
+    
+    }else {
+        $req = $BDD->prepare("SELECT *
                             FROM beat
                             ORDER BY $trierpar $asc_desc");
+        
+    }
 
     $req->execute(array());
     $resu = $req->fetchAll();
     print_r("****-");
 }
-
-
-
 
 
 
@@ -302,7 +344,7 @@ else {
                                 <?php } ?>
 
                                 <?php if ($wepriceexiste)  { ?>
-                                <input id='valprice' type='hidden' name='sort' value='<?= $_GET['Price'] ?>'/>
+                                <input id='valprice' type='hidden' name='Price' value='<?= $_GET['Price'] ?>'/>
                                 <?php } ?>
 
                                 <!-- *DIV BAZOUKA D'ENVOIE du genre* -->
@@ -318,7 +360,7 @@ else {
                             <form action="search.php" id="formPrice">
                                 <h4 class="text-white">PRIX </h4>
                                 <span onclick="goPrice(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
-                                     <!--   icon croix ou rond -->
+                                    <!--   icon croix ou rond -->
                                     <?php if($wepriceexiste && $_GET['Price'] == "free") { ?>
                                     <i class="fas fa-times-circle"></i>
                                     <?php } else { ?> 
@@ -332,46 +374,6 @@ else {
                                 </span>
 
 
-
-                                <!-- Fourchete de prix -->
-                                <!--
-<div class="wrapper fourchettes2prix">
-<div class="container">
-
-<div class="slider-wrapper">
-<div id="slider-range"></div>
-
-<div class="range-wrapper">
-<div class="range"></div>
-<div class="range-alert">+</div>
-
-<div class="gear-wrapper">
-<div class="gear-large gear-one">
-<div class="gear-tooth"></div>
-<div class="gear-tooth"></div>
-<div class="gear-tooth"></div>
-<div class="gear-tooth"></div>
-</div>
-<div class="gear-large gear-two">
-<div class="gear-tooth"></div>
-<div class="gear-tooth"></div>
-<div class="gear-tooth"></div>
-<div class="gear-tooth"></div>
-</div>
-</div>
-
-</div>
-
-<div class="marker marker-0"><sup>$</sup>10,000</div>
-<div class="marker marker-25"><sup>$</sup>35,000</div>
-<div class="marker marker-50"><sup>$</sup>60,000</div>
-<div class="marker marker-75"><sup>$</sup>85,000</div>
-<div class="marker marker-100"><sup>$</sup>110,000+</div>
-</div>
-
-</div>
-</div>
--->
 
                                 <!-- garder la variable de recherche -->
                                 <?php if ($weqexiste)  { ?>
@@ -389,7 +391,46 @@ else {
                                 <!-- *DIV BAZOUKA D'ENVOIE du price* -->
                                 <div id="iciprice">  <span id="weweprice"></span></div>
 
-                            </form>          
+
+                            </form>  
+
+                            <form action="search.php" id="formPrice2">
+
+
+
+                                <!-- Fourchete de prix -->
+
+                                <div class="wrapper fourchettes2prix mt-4">
+                                    <div class="container">
+
+                                        <div class="slider-wrapper">
+                                            <div id="slider-range"></div>
+                                            <div class="range mt-3"></div>
+                                            <div class="range-wrapper">
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- garder la variable de recherche -->
+                                <?php if ($weqexiste)  { ?>
+                                <input id='valq3' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
+                                <?php } ?>
+                                <!-- garder la variable de genre -->
+                                <?php if ($wegenreexiste)  { ?>
+                                <input id='valGenre3' type='hidden' name='Genre' value='<?= $_GET['Genre'] ?>'/>
+                                <?php } ?>
+                                <!-- garder la variable de trie -->
+                                <?php if ($wesortexiste)  { ?>
+                                <input id='valsort3' type='hidden' name='sort' value='<?= $_GET['sort'] ?>'/>
+                                <?php } ?>
+
+                            </form> 
+
+
                         </div>
 
 
@@ -400,7 +441,9 @@ else {
 
                 </div>
                 <!--   *************************************************************  -->
-                <!--   ************************** RESULTAT **************************  -->
+                <!--   ************************** RESULTAT**************************  -->
+                <!--   *************************************************************  -->
+                <!--   *************************************************************  -->
                 <div class="col-lg-8 mb-5 col-md-8 col-xl-9 m-0 " style="background-color : yellow;">
 
 
@@ -440,8 +483,10 @@ else {
 
 
 
-                    <!-- Demo Content-->
-                    <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : cyan;">
+                    <!--   *************************************************************  -->
+                    <!--   ************************** RESULTAT BEAT **************************  -->
+
+                    <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : blue;">
 
                         <div class=" container-fluid ligneCardMusic">
                             <?php
@@ -458,14 +503,14 @@ else {
 
                                 </div>
 
-                                <div class=" d-flex col-sm-6 align-middle  " style="background-color : blue; flex-direction : row;">
+                                <div class=" d-flex col-sm-6 align-middle  " style="background-color : cyan; flex-direction : row;">
 
-                                    <span class='TitleCardMusic'><?=$r['beat_title']?> </span>
-                                    <span class='authorCardMusic'><?=$r['beat_author']?> </span>
+                                    <span class='TitleCardMusic'><?=$r['beat_title']?> - </span>
+                                    <span class='authorCardMusic'><?=$r['beat_author']?> / </span>
                                     <span class='GenreCardMusic'><?=$r['beat_genre']?> </span>
 
                                     <div style="background-color : green;"> 
-                                        <span> (Likes ) </span>
+                                        <span> (<?=$r['beat_like']?> ) </span>
 
                                         <a class="btn btn-danger" href="#" role="button"><?=$r['beat_price']?> €</a><?=$r['beat_dateupload']?> ---
 
@@ -514,13 +559,17 @@ else {
 
                     ?>
 
+                    <!--   *************************************************************  -->
+                    <!--   ************************** RESULTAT USER **************************  -->
+                    <div id="resultuser"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : blue;">
 
 
-
+                    </div>
 
 
                 </div>
                 <!--   END divResultat -->
+
 
             </div>
         </div>
@@ -530,6 +579,9 @@ else {
 
 
         <script src="assets/js/search.js"></script>
+        <?php 
+
+        ?>
 
 
 
@@ -539,7 +591,145 @@ else {
         <!-- JS de Fourchette -->
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <script src="assets/js/fourchette2prix.js"></script>
+
+
+        <script>
+            <?php 
+
+
+
+
+            ?>
+
+            $(function() {
+
+                // Initiate Slider
+                $('#slider-range').slider({
+                    range: true,
+                    min: 5,
+                    max: 100,
+                    step: 5,
+                    values: [
+
+                        <?php if($wepriceexiste && ($_GET['Price'] != "free")){
+    print_r($borneprixinf);
+    print_r(",");print_r($borneprixsup);}
+
+                        else { 
+
+                            print_r("5,100");
+                        } ?>
+
+                    ]
+                });
+
+                // Move the range wrapper into the generated divs
+                $('.ui-slider-range').append($('.range-wrapper'));
+
+                // Apply initial values to the range container
+                $('.range').html('<input id="rangeBorneInf" class="range-value" type="text" value="' + $('#slider-range').slider("values",0 ).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"><span class="range-divider"></span><input id="rangeBorneSup" class="range-value" type="text" value="' + $("#slider-range").slider("values", 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"> <input name="Price" type="hidden" value="'+$('#slider-range').slider("values", 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '-' + $("#slider-range").slider("values", 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"> ');
+
+                // Show the gears on press of the handles0
+                $('.ui-slider-handle, .ui-slider-range').on('mousedown', function() {
+                    $('.gear-large').addClass('active');
+
+                });
+
+                $('.ui-slider-handle, .ui-slider-range').on('mouseup', function(){
+                    let ok = true;
+                    $("#formPrice2").submit();
+
+                });
+
+
+
+
+                // Hide the gears when the mouse is released
+                // Done on document just incase the user hovers off of the handle
+                $(document).on('mouseup', function() {
+                    if ($('.gear-large').hasClass('active')) {
+                        $('.gear-large').removeClass('active');
+                    }
+                });
+
+                // Rotate the gears
+                var gearOneAngle = 0,
+                    gearTwoAngle = 0,
+                    rangeWidth = $('.ui-slider-range').css('width');
+
+                $('.gear-one').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+                $('.gear-two').css('transform', 'rotate(' + gearTwoAngle + 'deg)');
+
+                $('#slider-range').slider({
+                    slide: function(event, ui) {
+
+                        // Update the range container values upon sliding
+                        let inputenvoie2 = '<input name="Price" type="hidden" value="'+ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '-' +  ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '">';
+
+
+                        $('.range').html('<input id="rangeBorneInf" class="range-value" type="text" value="'  + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"><span class="range-divider"></span><input id="rangeBorneSup" class="range-value" type="text" value="' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"> '
+
+                                         + inputenvoie2
+
+                                        );
+
+                        // Get old value
+                        var previousVal = parseInt($(this).data('value'));
+
+                        // Save new value
+                        $(this).data({
+                            'value': parseInt(ui.value)
+                        });
+
+                        // Figure out which handle is being used
+                        if (ui.values[0] == ui.value) {
+
+                            // Left handle
+                            if (previousVal > parseInt(ui.value)) {
+                                // value decreased
+                                gearOneAngle -= 7;
+                                $('.gear-one').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+                            } else {
+                                // value increased
+                                gearOneAngle += 7;
+                                $('.gear-one').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+                            }
+
+                        } else {
+
+                            // Right handle
+                            if (previousVal > parseInt(ui.value)) {
+                                // value decreased
+                                gearOneAngle -= 7;
+                                $('.gear-two').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+                            } else {
+                                // value increased
+                                gearOneAngle += 7;
+                                $('.gear-two').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+                            }
+
+                        }
+
+                        if (ui.values[1] === 105) {
+                            if (!$('.range-alert').hasClass('active')) {
+                                $('.range-alert').addClass('active');
+                            }
+                        } else {
+                            if ($('.range-alert').hasClass('active')) {
+                                $('.range-alert').removeClass('active');
+                            }
+                        }
+                    }
+                });
+
+                // Prevent the range container from moving the slider
+                $('.range, .range-alert').on('mousedown', function(event) {
+                    event.stopPropagation();
+                });
+
+            });
+
+        </script>
         <!--   END JS de fourchette      -->
 
     </body>
