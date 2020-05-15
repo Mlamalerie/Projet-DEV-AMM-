@@ -10,6 +10,7 @@
             <span class="navbar-toggler-icon"></span> 
         </button>
         <!--   Barre de recherche     -->
+        <!--   Barre de recherche     -->
         <?php 
         $jesuissurindex = $_SESSION['ici_index_bool'];
 
@@ -71,10 +72,10 @@
                 }else{
                 ?>
                 <li class="nav-item ">
-                    <a class="nav-link" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
+                    <a class="nav-link btn" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+                    <a class="nav-link btn" href="#">Accueil <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item dropdown ">
@@ -101,7 +102,7 @@
                     <a class="nav-link btn" href="connexion.php">Se connecter</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn-danger rounded-pill btninscription btn" href="inscription.php">S'inscrire</a>
+                    <a class="nav-link rounded-pill btn btninscription" href="inscription.php">S'inscrire</a>
                 </li>
 
                 <?php

@@ -1,4 +1,25 @@
 
+function goSearcheuh() {
+    console.log("*goSearch*");
+
+    var ok = false;
+    var champs = document.getElementById('searchbar');
+    var baysearch = champs.value.trim();
+
+
+
+
+    ok = (baysearch != "");
+    console.log(champs,baysearch,ok);
+    ok = false;
+    if (ok) {
+
+        document.getElementById("searchform").submit();
+    }
+
+}
+
+
 function goGenre(bay){
 
 
@@ -91,7 +112,7 @@ function goPrice(bay) {
 
 function goPrice2range(){
 
-console.log("**");
+    console.log("**");
 
 }
 function goTrier(bay){

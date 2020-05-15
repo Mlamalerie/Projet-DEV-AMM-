@@ -18,10 +18,11 @@ $_SESSION['ici_index_bool'] = false;
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
-<!--        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> -->
+        <!--        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> -->
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/test_zone.css">
         <link rel="stylesheet" type="text/css" href="assets/css/MusicPlayerMlamali.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/button-style2ouf.css">
         <title>TEST ZONE</title>
     </head>
     <body>
@@ -30,7 +31,7 @@ $_SESSION['ici_index_bool'] = false;
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('assets/skeleton/menu.php');
+        require_once('assets/skeleton/navbar.php');
         ?>
 
 
@@ -57,6 +58,14 @@ $_SESSION['ici_index_bool'] = false;
                 <a onclick="goSearch()" href="#" class="search_icon"><i class="fas fa-search"></i></a>
             </div>
         </form>
+
+
+        <div class="buttons">
+            <button class="boutonstyle2ouf"> Hover Me</button>
+<!--            <button class="boutonstyle2ouf"> Hover Me</button>-->
+           
+        </div>
+
 
         <nav id="MusicPlayer" class="navbar-light bg-dark fixed-bottom">
             <div class="container-fluid p-2 px-5" style="background-color:yellow;">

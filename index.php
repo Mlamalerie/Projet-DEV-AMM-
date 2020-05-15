@@ -20,6 +20,7 @@ $_SESSION['ici_index_bool'] = true;
         <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar-index-turfu.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar_responsive.css">
 
         <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">
 
@@ -44,7 +45,7 @@ $_SESSION['ici_index_bool'] = true;
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('assets/skeleton/menu.php');
+        require_once('assets/skeleton/navbar.php');
         ?>
 
 

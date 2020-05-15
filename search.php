@@ -260,8 +260,8 @@ else {
 
 
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">
+<!--        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">-->
+<!--        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">-->
         <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
 
@@ -605,7 +605,7 @@ else {
                 // Initiate Slider
                 $('#slider-range').slider({
                     range: true,
-                    min: 5,
+                    min: 0,
                     max: 100,
                     step: 5,
                     values: [
@@ -616,7 +616,7 @@ else {
 
                         else { 
 
-                            print_r("5,100");
+                            print_r("0,100");
                         } ?>
 
                     ]
