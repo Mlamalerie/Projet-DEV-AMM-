@@ -4,191 +4,340 @@ session_start();
 include_once("assets/db/connexiondb.php");
 
 print_r($_GET);
-$listeGenres = ['Hip Hop','Trap','Afro','Deep','House','DanceHall','Soul','Pop','Rock','Techno','Reggae','World','Jazz'];
+$listeGenres = ['Hip Hop','Trap','Afro','Deep','Pop','Rock','Reggae'];
 sort($listeGenres);
 $_SESSION["listeGenres"] = $listeGenres;
 
 
-if (isset($_GET['Genre']) && !empty($_GET['Genre'])) {
-    $wegenreexiste = true;
 
-}
-else {
-    $wegenreexiste = false;
-}
-
-// SORT
-if (isset($_GET['sort']) && !empty($_GET['sort'])) {
-    $wesortexiste = true;
-
-    if($_GET['sort'] == "populaire") {
-        $_GET['trierpar'] = "beat_like";
-        $_GET['asc_desc'] = "DESC";
-
-    } else if($_GET['sort'] == "prixcr") {
-        $_GET['trierpar'] = "beat_price";
-        $_GET['asc_desc'] = "ASC";
-
-    } else if($_GET['sort'] == "prixdecr") {
-        $_GET['trierpar'] = "beat_price";
-        $_GET['asc_desc'] = "DESC";
-
-    } else {
-        $_GET['trierpar'] = "beat_dateupload";
-        $_GET['asc_desc'] = "DESC";
-
+{
+    // $_GET[TYPE
+    if(isset($_GET['Type']) && !empty($_GET['Type'])) {
+        $wetypeexiste = true;
+        print_r("type existeuuh");
+        if ($_GET['Type'] == "users") {
+            $jechercheunboug = true;
+        }
+        else {
+            $jechercheunboug = false;
+        }
+    }else{
+        print_r("type existe pas");
+        $wetypeexiste = false;
+        $jechercheunboug = false;
+    }
+    // $_GET[Q
+    if(isset($_GET['q']) && !empty($_GET['q'])) {
+        $weqexiste = true;
+    }else{
+        $weqexiste = false;
+    }
+    // $_GET[GENRE
+    if (isset($_GET['Genre']) && !empty($_GET['Genre'])) {
+        $wegenreexiste = true;
+    }
+    else {
+        $wegenreexiste = false;
     }
 
-
-} else {
-    $wesortexiste = false;
-    $_GET['trierpar'] = "beat_dateupload";
-    $_GET['asc_desc'] = "DESC";
-
-}
-$trierpar = $_GET['trierpar'];
-$asc_desc = $_GET['asc_desc'];
-
-// PRICE
-if (isset($_GET['Price']) && !empty($_GET['Price'])) {
-    $wepriceexiste = true;
-    if ($_GET['Price'] == "free") {
-        $borneprixinf = 0;
-        $borneprixsup = 0;
-    }else {
+    // $_GET[SORT
+    if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+        $wesortexiste = true;
+        if(!$jechercheunboug){
 
 
+            if($_GET['sort'] == "populaire") {
+                $_GET['trierpar'] = "beat_like";
+                $_GET['asc_desc'] = "DESC";
 
+            } else if($_GET['sort'] == "prixcr") {
+                $_GET['trierpar'] = "beat_price";
+                $_GET['asc_desc'] = "ASC";
+
+            } else if($_GET['sort'] == "prixdecr") {
+                $_GET['trierpar'] = "beat_price";
+                $_GET['asc_desc'] = "DESC";
+
+            } else {
+                $_GET['trierpar'] = "beat_dateupload";
+                $_GET['asc_desc'] = "DESC";
+            }
+
+
+        } 
+        else if ($jechercheunboug){
+            if($_GET['sort'] == "alphacr") {
+                $_GET['trierpar'] = "user_pseudo";
+                $_GET['asc_desc'] = "ASC";
+
+            } else if($_GET['sort'] == "alphadecr") {
+                $_GET['trierpar'] = "user_pseudo";
+                $_GET['asc_desc'] = "DESC";
+
+
+            }
+
+
+        }
+    } // sort par défaut
+    else {
+        $wesortexiste = false;
+        if(!$jechercheunboug){
+            $_GET['trierpar'] = "beat_dateupload";
+            $_GET['asc_desc'] = "DESC";
+        } else if ($jechercheunboug) {
+            $_GET['trierpar'] = "user_pseudo";
+            $_GET['asc_desc'] = "ASC";
+
+        }
+
+    }
+    $trierpar = $_GET['trierpar'];
+    $asc_desc = $_GET['asc_desc'];
+
+    // $_GET[PRICE
+    if (isset($_GET['Price']) && !empty($_GET['Price'])) {
+        $wepriceexiste = true;
+        if ($_GET['Price'] == "free") {
+            $jeveuxdesfreebeats = true;
+            $borneprixinf = 0;
+            $borneprixsup = 0;
+        }
+        else {
+            $jeveuxdesfreebeats = false;
+            $bornes = explode('-',$_GET['Price']);
+            $borneprixinf = $bornes[0];
+            $borneprixsup = $bornes[1];
+        }
+    }
+    else {
+        $wepriceexiste = false;
 
     }
 }
-else {
-    $wepriceexiste = false;
 
-}
 
-//******************************************************
-// si on recherche un truc
-if(isset($_GET['q']) && !empty($_GET['q'])) {
+//DANS LES INSTRU
+if ($wetypeexiste && !$jechercheunboug) {
+    //******************************************************
+    // si on recherche un truc
+    if($weqexiste) {
 
-    $xxx = (String) trim(($_GET['q']));
+        $xxx = (String) trim(($_GET['q']));
 
-    //*** recherche dans tout les genres 
-    if($_GET['Genre'] == "All") {
-        print_r("##");
+        //*** recherche dans TOUT les genres
 
-        // selection des free beats
-        if ($wepriceexiste){
+        if(($wegenreexiste && $_GET['Genre'] == "All") || !$wegenreexiste) {
             print_r("##");
 
-            print_r("<br> FREEBEATZ+");
-            $req = $BDD->prepare("SELECT * FROM (       SELECT *
+            // selection des free beats
+            if ($wepriceexiste){
+                print_r("##");
+
+                print_r("<br> FREEBEATZ+");
+                $req = $BDD->prepare("SELECT * FROM (       SELECT *
                                                         FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
                                                         LIKE ?  ) base
-                                                        WHERE beat_price = 0
+                                                        WHERE $borneprixinf <= beat_price AND beat_price <= $borneprixsup  
                                                         ORDER BY $trierpar $asc_desc");
-        }
+            }
 
-        //si ya pas de condition de prix
-        else {
-            print_r("<br> FREEBEATZ--");
-            $req = $BDD->prepare("SELECT *
+            //si ya pas de condition de prix
+            else {
+                print_r("<br> FREEBEATZ--");
+                $req = $BDD->prepare("SELECT *
                                                         FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
                                                         LIKE ?
                                                         ORDER BY $trierpar $asc_desc");
-        }
-    } 
+            }
+        } 
 
-    //*** recherche dans un genre précis
-    else {
-        if($wepriceexiste){
-            foreach($listeGenres as $gr){
+        //*** recherche dans un genre précis
+        else {
 
-                if($_GET['Genre'] == (htmlspecialchars($gr))) {
-                    $req = $BDD->prepare("SELECT * FROM (
+            //condition de prix
+            if($wepriceexiste){
+                foreach($listeGenres as $gr){
+
+                    if($wegenreexiste && $_GET['Genre'] == $gr ) {
+                        $req = $BDD->prepare("SELECT * FROM (
                                                         SELECT * FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
                                                         LIKE ? ) base
                                         WHERE beat_genre = '$gr' AND ($borneprixinf <= beat_price AND beat_price <= $borneprixsup )
                                         ORDER BY $trierpar $asc_desc");
-                } 
+                    } 
 
-            }
+                }
 
-        }
+            } 
 
-        // pas de condition de prix
-        else {
-            foreach($listeGenres as $gr){
+            // pas de condition de prix
+            else {
+                foreach($listeGenres as $gr){
 
-                if($_GET['Genre'] == (htmlspecialchars($gr))) {
-                    $req = $BDD->prepare("SELECT * FROM (
+                    if($wegenreexiste && $_GET['Genre'] == $gr) {
+                        $req = $BDD->prepare("SELECT * FROM (
                                                         SELECT * FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
                                                         LIKE ? ) base
                                         WHERE beat_genre = '$gr'
                                         ORDER BY $trierpar $asc_desc");
 
-                } 
+                    } 
 
+                }
             }
+
         }
 
-    }
 
+        $req->execute(array("%".$xxx."%"));
+        $resuBEATS = $req->fetchAll();
 
-    $req->execute(array("%".$xxx."%"));
-    $resu = $req->fetchAll();
+    } //si bay recherche vide mais Genre pas vide
+    else if ($wegenreexiste) {
 
-} //si bay recherche vide mais Genre pas vide
-else if ($wegenreexiste) {
+        // si condition de prix
+        if ($wepriceexiste){
+            if(in_array($_GET['Genre'],$listeGenres)) {
+                print_r("<br> >->-> ");
 
+                foreach($listeGenres as $gr){
 
-    if(in_array($_GET['Genre'],$listeGenres)) {
-
-        foreach($listeGenres as $gr){
-            print_r("<br> > ");
-            print_r($gr);
-
-            if($_GET['Genre'] == (htmlspecialchars($gr))) {
-                print_r("- ");
+                    if($_GET['Genre'] == $gr) {
+                        print_r("- ");
+                        $req = $BDD->prepare("SELECT *
+                         FROM beat
+                         WHERE beat_genre = '$gr' AND ($borneprixinf <= beat_price AND beat_price <= $borneprixsup )
+                         ORDER BY $trierpar $asc_desc");
+                        //break;break;
+                    }
+                }
+            }
+            else {
+                print_r("+ ");
                 $req = $BDD->prepare("SELECT *
+                            FROM beat
+                            WHERE $borneprixinf <= beat_price AND beat_price <= $borneprixsup
+                            ORDER BY $trierpar $asc_desc");
+
+            }
+
+        }
+
+        // si pas de condition de prix
+        else{
+            if(in_array($_GET['Genre'],$listeGenres)) {
+                print_r("<br> >->-> ");
+
+                foreach($listeGenres as $gr){
+
+                    if($_GET['Genre'] == $gr) {
+                        print_r("- ");
+                        $req = $BDD->prepare("SELECT *
                          FROM beat
                          WHERE beat_genre = '$gr'
                          ORDER BY $trierpar $asc_desc");
-                //break;break;
+                        //break;break;
+                    }
+                }
+            }
+            else {
+                print_r("+ ");
+                $req = $BDD->prepare("SELECT *
+                            FROM beat
+                            ORDER BY $trierpar $asc_desc");
+
             }
         }
-    }
+
+        $req->execute(array());
+        $resuBEATS = $req->fetchAll();
+
+
+    } 
+
+    // si genre vide et q vide
     else {
-        print_r("+ ");
-        $req = $BDD->prepare("SELECT *
+        if ($wepriceexiste){
+            $req = $BDD->prepare("SELECT *
+                            FROM beat
+                            WHERE $borneprixinf <= beat_price AND beat_price <= $borneprixsup
+                            ORDER BY $trierpar $asc_desc");
+
+        }else {
+            $req = $BDD->prepare("SELECT *
                             FROM beat
                             ORDER BY $trierpar $asc_desc");
 
+        }
+
+        $req->execute(array());
+        $resuBEATS = $req->fetchAll();
+        print_r("****-");
     }
 
-    $req->execute(array());
-    $resu = $req->fetchAll();
-
-
-} 
-
-// si genre vide et q vide
-else {
-    $req = $BDD->prepare("SELECT *
-                            FROM beat
-                            ORDER BY $trierpar $asc_desc");
-
-    $req->execute(array());
-    $resu = $req->fetchAll();
-    print_r("****-");
 }
 
 
 
+//DANS LES USESR
+else if ($wetypeexiste && $jechercheunboug){
+
+    if($weqexiste) {
+        print_r("GANGA");
+        $xxx = (String) trim(($_GET['q']));
+        $req = $BDD->prepare("SELECT *
+                            FROM user
+                            WHERE CONCAT(user_pseudo,user_description)
+                            LIKE ?
+                            ORDER BY $trierpar $asc_desc");
+
+
+
+        $req->execute(array("%".$xxx."%"));
+        $resuUSERS = $req->fetchAll();
+
+
+
+    } else {
+        $req = $BDD->prepare("SELECT *
+                            FROM user
+                            ORDER BY $trierpar $asc_desc");
+
+        $req->execute(array());
+        $resuUSERS = $req->fetchAll();
+
+    }
+
+
+
+}
+
+//DANS TOUTES CATEGORIES
+else if (!$wetypeexiste) {
+
+
+
+    $req = $BDD->prepare("SELECT *
+                            FROM user
+                            ORDER BY user_pseudo ASC");
+
+    $req->execute(array());
+    $resuUSERS = $req->fetchAll();
+
+    $req = $BDD->prepare("SELECT *
+                            FROM beat
+                            ORDER BY beat_title ASC");
+
+    $req->execute(array());
+    $resuBEATS = $req->fetchAll();
+
+
+}
 
 
 
@@ -220,6 +369,7 @@ else {
 
 
 
+
         <title>Search</title>
     </head>
     <body>
@@ -229,9 +379,7 @@ else {
         <?php
         //require_once('assets/skeleton/menu.php');
         ?>
-        <!--   *************************************************************  -->
-        <!--   ************************** TEST TECHERCHE MLAMALI  **************************  -->
-        Ici c'est l'index des connecté
+
         <?php
         if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
             print_r($_SESSION);
@@ -239,9 +387,6 @@ else {
             echo "Pas de connexion";
         }
         ?>
-
-
-
 
 
         <div class="rounded container-fluid mb-0">
@@ -252,16 +397,73 @@ else {
                     <!--   ************************** MENU VERTICAL **************************  -->
 
                     <nav id="menuvertical" class="nav flex-column bg-white shadow-sm font-italic rounded p-3">
-                        <form id='formMenuvertical' action="search.php">
 
 
-                            <div class="list-group">
-                                <h4 class="text-white display-6">GENRES</h4>
-                                <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
+                        <div class="list-group">
+                            <h4 class="text-white">Type </h4>
+                            <form action="search.php" id="formType">
+
+                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer " >
+                                    <!--   icon croix ou rond -->
+                                    <?php if(!$wetypeexiste) { ?>
+                                    <i class="far  fa-dot-circle mr-2"></i>
+                                    <?php } else { ?> 
+                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <?php } ?>
+                                    <span id="" >All Catégories</span>
+
+                                </span>
+
+                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer " >
+                                    <!--   icon croix ou rond -->
+                                    <?php if($wetypeexiste && $_GET['Type'] == "users") { ?>
+                                    <i class="far  fa-dot-circle mr-2"></i>
+                                    <?php } else { ?> 
+                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <?php } ?>
+                                    <span id="" >Musiciens</span>
+
+                                </span>
+
+                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer " >
+                                    <!--   icon croix ou rond -->
+                                    <?php if($wetypeexiste && $_GET['Type'] == "beats") { ?>
+                                    <i class="far  fa-dot-circle mr-2"></i>
+                                    <?php } else { ?> 
+                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <?php } ?>
+                                    <span id="" >Instrumentals</span>
+
+                                </span>
 
 
-                                    <?php if($wegenreexiste && $_GET['Genre'] == "All") { ?>
-                                    <i class="fas fa-times-circle"></i>
+
+                                <!-- *DIV BAZOUKA D'ENVOIE du Type* -->
+                                <div id="icitype">  <span id="wewetype"></span></div>
+
+                                <!-- garder la variable de recherche -->
+                                <?php if ($weqexiste)  { ?>
+                                <input id='valq11' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
+                                <?php } ?>
+
+
+                            </form>  
+
+
+                        </div>
+
+                        <?php if($wetypeexiste && !$jechercheunboug) { ?>
+                        <!-- ***** GENRES -->
+                        <div class="list-group">
+                            <h4 class="text-white display-6">GENRES</h4>
+                            <form id='formGenre' action="search.php">
+
+                                <!-- -All Genres-  -->
+                                <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer " >
+
+                                    <!--   icon croix ou rond -->
+                                    <?php if(!$wegenreexiste) { ?>
+                                    <i class="far  fa-dot-circle mr-2"></i>
                                     <?php } else { ?> 
                                     <i class="fa fa-circle-o mr-2 icon_activer"></i>
                                     <?php } ?>
@@ -270,9 +472,11 @@ else {
                                     <!--                                    <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>-->
                                 </span>
 
-                                <?php foreach($listeGenres as $gr){
+                                <?php foreach($listeGenres as $gr){ 
                                 ?>
-                                <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
+                                <!-- -Coulissage de tout les autres genres -  -->
+                                <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer " >
+                                    <!--   icon croix ou rond -->
                                     <?php if($wegenreexiste && $_GET['Genre'] == $gr) { ?>
                                     <i class="fas fa-times-circle"></i>
                                     <?php } else { ?> 
@@ -282,105 +486,147 @@ else {
                                 </span>
 
                                 <?php
+
 }
                                 ?>
 
-
-                                <?php if (!empty($_GET['q']))  { ?>
-                                <input id='valq' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
+                                <!-- garder la variable de Type -->
+                                <?php if ($wetypeexiste)  { ?>
+                                <input id='valType22' type='hidden' name='Type' value='<?= $_GET['Type'] ?>'/>
                                 <?php } ?>
 
+                                <!-- garder la variable de recherche -->
+                                <?php if ($weqexiste)  { ?>
+                                <input id='valq22' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
+
+                                <?php } ?>
+
+                                <!-- *DIV BAZOUKA D'ENVOIE du genre* -->
+                                <div id="icigenre">  <span id="wewegenre"></span></div>
+
+                                <!-- garder la variable de trie -->
                                 <?php if ($wesortexiste)  { ?>
-                                <input id='valq' type='hidden' name='sort' value='<?= $_GET['sort'] ?>'/>
+                                <input id='valsort22' type='hidden' name='sort' value='<?= $_GET['sort'] ?>'/>
                                 <?php } ?>
 
-                                <?php if ($wegenreexiste) { ?>
-                                <input id='valGenreMenu' type='hidden' name='Genre' value='<?= $_GET['Genre'] ?>'/>
-                                <?php } else {?>
-                                <input id='valGenreMenu' type='hidden' name='Genre' value=''/> 
+                                <?php if ($wepriceexiste)  { ?>
+                                <input id='valprice22' type='hidden' name='Price' value='<?= $_GET['Price'] ?>'/>
                                 <?php } ?>
 
-                            </div> 
 
-                            <div class="list-group">
 
-                                <h4 class="text-white">PRIX </h4>
-                                <span onclick="goPrice(this)" class="nav-link px-4 rounded-pill activer spanGenre" >
+
+                            </form>
+
+                        </div> 
+
+                        <!-- ***** PRIX -->
+                        <div class="list-group">
+                            <h4 class="text-white">PRIX </h4>
+                            <form action="search.php" id="formPrice">
+
+                                <!-- -All Prix-  -->
+                                <span onclick="goPrice(this)" class="nav-link px-4 rounded-pill activer " >
+
+                                    <!--   icon croix ou rond -->
+                                    <?php if(!$wepriceexiste) { ?>
+                                    <i class="far  fa-dot-circle mr-2 "></i>
+                                    <?php } else { ?> 
                                     <i class="fa fa-circle-o mr-2 icon_activer"></i>
-                                    <span id="price_Price" >Free Beats</span>
+                                    <?php } ?>
 
-
-                                    <input id='valPriceFreeMenu' type='hidden' name='Price' value='free'/>
-
+                                    <span>All Prix</span>
+                                    <!--                                    <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>-->
                                 </span>
 
 
+                                <span onclick="goPrice(this)" class="nav-link px-4 rounded-pill activer " >
+                                    <!--   icon croix ou rond -->
+                                    <?php if($wepriceexiste && $_GET['Price'] == "free") { ?>
+                                    <i class="fas fa-times-circle"></i>
+                                    <?php } else { ?> 
+                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <?php } ?>
+                                    <span id="price_Price" >Free Beats</span>
+
+                                </span>
+
+                                <!-- garder la variable de Type -->
+                                <?php if ($wetypeexiste)  { ?>
+                                <input id='valType33' type='hidden' name='Type' value='<?= $_GET['Type'] ?>'/>
+                                <?php } ?>
+
+                                <!-- garder la variable de recherche -->
+                                <?php if ($weqexiste)  { ?>
+                                <input id='valq33' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
+                                <?php } ?>
+                                <!-- garder la variable de genre -->
+                                <?php if ($wegenreexiste)  { ?>
+                                <input id='valGenre33' type='hidden' name='Genre' value='<?= $_GET['Genre'] ?>'/>
+                                <?php } ?>
+                                <!-- garder la variable de trie -->
+                                <?php if ($wesortexiste)  { ?>
+                                <input id='valsort33' type='hidden' name='sort' value='<?= $_GET['sort'] ?>'/>
+                                <?php } ?>
+
+                                <!-- *DIV BAZOUKA D'ENVOIE du price* -->
+                                <div id="iciprice">  <span id="weweprice"></span></div>
+
+
+                            </form>  
+
+                            <form action="search.php" id="formPrice2">
 
                                 <!-- Fourchete de prix -->
-                                <!--
-<div class="wrapper fourchettes2prix">
-<div class="container">
+                                <div class="wrapper fourchettes2prix mt-4">
+                                    <div class="container">
 
-<div class="slider-wrapper">
-<div id="slider-range"></div>
+                                        <div class="slider-wrapper">
+                                            <div id="slider-range"></div>
+                                            <div class="range mt-3"></div>
+                                            <div class="range-wrapper">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-<div class="range-wrapper">
-<div class="range"></div>
-<div class="range-alert">+</div>
+                                <!-- garder la variable de Type -->
+                                <?php if ($wetypeexiste)  { ?>
+                                <input id='valType44' type='hidden' name='Type' value='<?= $_GET['Type'] ?>'/>
+                                <?php } ?>
 
-<div class="gear-wrapper">
-<div class="gear-large gear-one">
-<div class="gear-tooth"></div>
-<div class="gear-tooth"></div>
-<div class="gear-tooth"></div>
-<div class="gear-tooth"></div>
-</div>
-<div class="gear-large gear-two">
-<div class="gear-tooth"></div>
-<div class="gear-tooth"></div>
-<div class="gear-tooth"></div>
-<div class="gear-tooth"></div>
-</div>
-</div>
+                                <!-- garder la variable de recherche -->
+                                <?php if ($weqexiste)  { ?>
+                                <input id='valq44' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
+                                <?php } ?>
+                                <!-- garder la variable de genre -->
+                                <?php if ($wegenreexiste)  { ?>
+                                <input id='valGenre44' type='hidden' name='Genre' value='<?= $_GET['Genre'] ?>'/>
+                                <?php } ?>
+                                <!-- garder la variable de trie -->
+                                <?php if ($wesortexiste)  { ?>
+                                <input id='valsort44' type='hidden' name='sort' value='<?= $_GET['sort'] ?>'/>
+                                <?php } ?>
 
-</div>
-
-<div class="marker marker-0"><sup>$</sup>10,000</div>
-<div class="marker marker-25"><sup>$</sup>35,000</div>
-<div class="marker marker-50"><sup>$</sup>60,000</div>
-<div class="marker marker-75"><sup>$</sup>85,000</div>
-<div class="marker marker-100"><sup>$</sup>110,000+</div>
-</div>
-
-</div>
-</div>
--->
-                            </div>
+                            </form> 
 
 
-                        </form>
+                        </div>
+
+                        <?php } ?>
+
+
                     </nav>
-                    <!--   END Menu vertical      -->
+                    <!--   END <nav> Menu vertical      -->
 
 
                 </div>
                 <!--   *************************************************************  -->
-                <!--   ************************** RESULTAT **************************  -->
+                <!--   ************************** RESULTAT**************************  -->
+                <!--   *************************************************************  -->
+                <!--   *************************************************************  -->
                 <div class="col-lg-8 mb-5 col-md-8 col-xl-9 m-0 " style="background-color : yellow;">
-                    <form id="formTrie" action="search.php">
-                        <select id='sort' name="sort" class="custom-select " onchange="goTrier()">
-                            <option value="nouveaute" <?php if($wesortexiste && $_GET['sort'] == 'nouveaute'){?> selected <?php } ?>>Nouveautés en premier </option>
-                            <option value="populaire"  <?php if($wesortexiste && $_GET['sort'] == 'populaire'){?> selected <?php } ?> >Popularité </option>
-                            <option value="prixcr" <?php if($wesortexiste && $_GET['sort'] == 'prixcr'){?> selected <?php } ?>>Prix croissant </option>
-                            <option value="prixdecr"  <?php if($wesortexiste && $_GET['sort'] == 'prixdecr'){?> selected <?php } ?>>Prix décroissant </option>
-                        </select>
-                        <?php if (!empty($_GET['q']))  { ?>
-                        <input id='valq' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
-                        <?php } ?>
-                        <?php if (!empty($_GET['Genre']))  { ?>
-                        <input id='valGenreMenu' type='hidden' name='Genre' value='<?= $_GET['Genre'] ?>'/>
-                        <?php } ?>
-                    </form>
+
 
                     <?php if (!empty($_GET['q']))  { ?>
                     <div class="row mb-5">
@@ -394,15 +640,59 @@ else {
                     </div>
                     <?php } ?>
 
+                    <!--   *************************************************************  -->
+                    <!--   ************************** RESULTAT BEAT **************************  -->
 
-                    <!-- Demo Content-->
-                    <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : cyan;">
+                    <?php if (!$jechercheunboug) { ?>
+                    <?php if (($wetypeexiste && !$jechercheunboug)) { ?>
+                    <form id="formTrie" action="search.php">
+
+                        <!-- garder la variable de Type -->
+                        <?php if ($wetypeexiste)  { ?>
+                        <input id='valType55' type='hidden' name='Type' value='<?= $_GET['Type'] ?>'/>
+                        <?php } ?>
+                        <!-- garder la variable de recherche -->
+                        <?php if ($weqexiste)  { ?>
+                        <input id='valq55' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
+                        <?php } ?>
+                        <!-- garder la variable de genre -->
+                        <?php if ($wegenreexiste)  { ?>
+                        <input id='valGenre55' type='hidden' name='Genre' value='<?= $_GET['Genre'] ?>'/>
+                        <?php } ?>
+                        <!-- garder la variable de prix -->
+                        <?php if ($wepriceexiste)  { ?>
+                        <input id='valprice55' type='hidden' name='Price' value='<?= $_GET['Price'] ?>'/>
+                        <?php } ?>
+
+
+
+                        <select id='sort' name="sort" class="custom-select " onchange="goTrier()">
+
+                            <option value="nouveaute" <?php if($wesortexiste && $_GET['sort'] == 'nouveaute'){?> selected <?php } ?>>Nouveautés en premier </option>
+                            <option value="populaire"  <?php if($wesortexiste && $_GET['sort'] == 'populaire'){?> selected <?php } ?> >Popularité </option>
+                            <option value="prixcr" <?php if($wesortexiste && $_GET['sort'] == 'prixcr'){?> selected <?php } ?>>Prix croissant </option>
+                            <option value="prixdecr"  <?php if($wesortexiste && $_GET['sort'] == 'prixdecr'){?> selected <?php } ?>>Prix décroissant </option>
+
+
+
+                        </select>
+
+
+
+                    </form>
+                    <?php } ?>
+
+
+
+
+
+                    <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : blue;">
 
                         <div class=" container-fluid ligneCardMusic">
                             <?php
-
-                            $i = 1;
-                            foreach($resu as $r){
+                                                 if (isset($resuBEATS)) {
+                                                     $i = 1;
+                                                     foreach($resuBEATS as $r){
                             ?>
                             <div class="row justify-content-center p-0 mx-auto mb-2 rounded"  style="background-color : pink;">
                                 <?= $i ?>
@@ -413,14 +703,14 @@ else {
 
                                 </div>
 
-                                <div class=" d-flex col-sm-6 align-middle  " style="background-color : blue; flex-direction : row;">
+                                <div class=" d-flex col-sm-6 align-middle  " style="background-color : cyan; flex-direction : row;">
 
-                                    <span class='TitleCardMusic'><?=$r['beat_title']?> </span>
-                                    <span class='authorCardMusic'><?=$r['beat_author']?> </span>
+                                    <span class='TitleCardMusic'><?=$r['beat_title']?> - </span>
+                                    <span class='authorCardMusic'><?=$r['beat_author']?> / </span>
                                     <span class='GenreCardMusic'><?=$r['beat_genre']?> </span>
 
                                     <div style="background-color : green;"> 
-                                        <span> (Likes ) </span>
+                                        <span> (<?=$r['beat_like']?> ) </span>
 
                                         <a class="btn btn-danger" href="#" role="button"><?=$r['beat_price']?> €</a><?=$r['beat_dateupload']?> ---
 
@@ -435,7 +725,8 @@ else {
                             </div>
                             <?php
                                 $i++;
-                            }
+                                                     }
+                                                 }
 
 
                             ?>
@@ -445,106 +736,75 @@ else {
 
 
                     </div>
+
                     <!--  END div blue -->
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">First item</li>
-                        <li class="list-group-item">Second item</li>
-                        <li class="list-group-item">Third item</li>
-                        <li class="list-group-item">Fourth item</li>
-                    </ul> 
+                    <!--
+<ul class="list-group list-group-horizontal">
+<li class="list-group-item">First item</li>
+<li class="list-group-item">Second item</li>
+<li class="list-group-item">Third item</li>
+<li class="list-group-item">Fourth item</li>
+</ul> 
+-->
 
                     <p class="lead font-italic mb-0">"Lorem ipsumnisi."</p>
 
-                    <?php
-                    foreach($resu as $r){
+                    <?php }?>
+                    <!--   *************************************************************  -->
+                    <!--   ************************** RESULTAT USER **************************  -->
+                    <?php if ($jechercheunboug) { ?>
+                    <?php if (($wetypeexiste && $jechercheunboug)) { ?>
+                    <form id="formTrie2" action="search.php">
 
-                    ?>
+                        <!-- garder la variable de Type -->
+                        <?php if ($wetypeexiste)  { ?>
+                        <input id='valType55' type='hidden' name='Type' value='<?= $_GET['Type'] ?>'/>
+                        <?php } ?>
+                        <!-- garder la variable de recherche -->
+                        <?php if ($weqexiste)  { ?>
+                        <input id='valq55' type='hidden' name='q' value='<?= $_GET['q'] ?>'/>
+                        <?php } ?>
+                        <!-- garder la variable de genre -->
+                        <?php if ($wegenreexiste)  { ?>
+                        <input id='valGenre55' type='hidden' name='Genre' value='<?= $_GET['Genre'] ?>'/>
+                        <?php } ?>
+                        <!-- garder la variable de prix -->
+                        <?php if ($wepriceexiste)  { ?>
+                        <input id='valprice55' type='hidden' name='Price' value='<?= $_GET['Price'] ?>'/>
+                        <?php } ?>
+                        <select id='sortuser' name="sort" class="custom-select " onchange="goTrier2()">
 
-                    <?= "<br>".$r['beat_title']." "?><?= $r['beat_author']." "?><?= $r['beat_year']." ---"?>
-
-                    <?php
-
-                    }
-
-                    ?>
 
 
+                            <option value="alphacr" <?php if($wesortexiste && $_GET['sort'] == 'alphacr'){?> selected <?php } ?>>Ordre Alphabétique (A - Z) </option>
+                            <option value="alphadecr" <?php if($wesortexiste && $_GET['sort'] == 'alphadecr'){?> selected <?php } ?>>Ordre Alphabétique (Z - A) </option>
 
+
+                        </select>
+                    </form>
+                    <?php } ?>
+                    <div id="resultuser"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : blue;">
+                        <?php  if (isset($resuUSERS)) {foreach($resuUSERS as $r){ ?>
+
+                        <?= "<br>".$r['user_pseudo']." "?><?= $r['user_description']." ---"?>
+
+                        <?php }} ?>
+
+
+
+                    </div>
+                    
+                    <?php } ?>
 
 
 
                 </div>
-                <!--   END divResultat -->
+                <!--   END divResultat Jaune -->
+
 
             </div>
         </div>
-        <!--   END MENU + RESULTAT -->
-
-
-
-
-        <script>
-
-
-            function goGenre(bay){
-
-
-                console.log();
-                gr = bay.children[1].innerHTML;
-
-                // for (var i = 0; i < bay.children)
-                console.log("bay",bay.children);
-
-                console.log("gr",gr);
-                ok = false;
-
-
-                console.log(gr);
-                if (gr == "All Genres") {
-                    gr = "All";
-                }
-
-
-                valGenreMenu = document.getElementById('valGenreMenu');
-                valGenreMenu.value = gr;
-
-                if (ok) {
-                    document.getElementById('formMenuvertical').submit();
-
-                }
-
-
-
-
-            }
-            function goTrier(bay){
-                ok = true;
-                if (ok) {
-                    document.getElementById('formTrie').submit();
-
-                }
-
-            }
-
-            function goPrice(bay) {
-
-                ok = true;
-                valGenreMenu = document.getElementById('valGenreMenu');
-                console.log("goprice",valPriceFreeMenu.value);
-
-                if (ok) {
-                    document.getElementById('formMenuvertical').submit();
-
-                }
-
-
-
-            }
-
-
-
-        </script>
-
+        <!--   END MENU + RESULTAT (Tout le container)-->
 
 
         <?php
@@ -553,8 +813,325 @@ else {
         <!-- JS de Fourchette -->
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <script src="assets/js/fourchette2prix.js"></script>
+        <script>
+
+            $(function() {
+
+                // Initiate Slider
+                $('#slider-range').slider({
+                    range: true,
+                    min: 0,
+                    max: 100,
+                    step: 5,
+                    values: [
+
+                        <?php if($wepriceexiste && ($_GET['Price'] != "free")){
+    print_r($borneprixinf);
+    print_r(",");print_r($borneprixsup);}
+
+                        else { 
+
+                            print_r("0,100");
+                        } ?>
+
+                    ]
+                });
+
+                // Move the range wrapper into the generated divs
+                $('.ui-slider-range').append($('.range-wrapper'));
+
+                // Apply initial values to the range container
+                $('.range').html('<input id="rangeBorneInf" class="range-value" type="text" value="' + $('#slider-range').slider("values",0 ).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"><span class="range-divider"></span><input id="rangeBorneSup" class="range-value" type="text" value="' + $("#slider-range").slider("values", 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"> <input name="Price" type="hidden" value="'+$('#slider-range').slider("values", 0).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '-' + $("#slider-range").slider("values", 1).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"> ');
+
+                // Show the gears on press of the handles0
+                $('.ui-slider-handle, .ui-slider-range').on('mousedown', function() {
+                    $('.gear-large').addClass('active');
+
+                });
+
+                $('.ui-slider-handle, .ui-slider-range').on('mouseup', function(){
+                    let ok = true;
+                    $("#formPrice2").submit();
+
+                });
+
+
+
+
+                // Hide the gears when the mouse is released
+                // Done on document just incase the user hovers off of the handle
+                $(document).on('mouseup', function() {
+                    if ($('.gear-large').hasClass('active')) {
+                        $('.gear-large').removeClass('active');
+                    }
+                });
+
+                // Rotate the gears
+                var gearOneAngle = 0,
+                    gearTwoAngle = 0,
+                    rangeWidth = $('.ui-slider-range').css('width');
+
+                $('.gear-one').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+                $('.gear-two').css('transform', 'rotate(' + gearTwoAngle + 'deg)');
+
+                $('#slider-range').slider({
+                    slide: function(event, ui) {
+
+                        // Update the range container values upon sliding
+                        let inputenvoie2 = '<input name="Price" type="hidden" value="'+ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '-' +  ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '">';
+
+
+                        $('.range').html('<input id="rangeBorneInf" class="range-value" type="text" value="'  + ui.values[0].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"><span class="range-divider"></span><input id="rangeBorneSup" class="range-value" type="text" value="' + ui.values[1].toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + '"> '
+
+                                         + inputenvoie2
+
+                                        );
+
+                        // Get old value
+                        var previousVal = parseInt($(this).data('value'));
+
+                        // Save new value
+                        $(this).data({
+                            'value': parseInt(ui.value)
+                        });
+
+                        // Figure out which handle is being used
+                        if (ui.values[0] == ui.value) {
+
+                            // Left handle
+                            if (previousVal > parseInt(ui.value)) {
+                                // value decreased
+                                gearOneAngle -= 7;
+                                $('.gear-one').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+                            } else {
+                                // value increased
+                                gearOneAngle += 7;
+                                $('.gear-one').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+                            }
+
+                        } else {
+
+                            // Right handle
+                            if (previousVal > parseInt(ui.value)) {
+                                // value decreased
+                                gearOneAngle -= 7;
+                                $('.gear-two').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+                            } else {
+                                // value increased
+                                gearOneAngle += 7;
+                                $('.gear-two').css('transform', 'rotate(' + gearOneAngle + 'deg)');
+                            }
+
+                        }
+
+                        if (ui.values[1] === 105) {
+                            if (!$('.range-alert').hasClass('active')) {
+                                $('.range-alert').addClass('active');
+                            }
+                        } else {
+                            if ($('.range-alert').hasClass('active')) {
+                                $('.range-alert').removeClass('active');
+                            }
+                        }
+                    }
+                });
+
+                // Prevent the range container from moving the slider
+                $('.range, .range-alert').on('mousedown', function(event) {
+                    event.stopPropagation();
+                });
+
+            });
+
+        </script>
         <!--   END JS de fourchette      -->
+        <script >
+
+
+            function goType(bay) {
+
+
+                ok = true;
+                // si il ya l'icon rond rempli alors 
+                if ("fa-dot-circle" == bay.children[0].classList[1] ) {
+                    console.log("rond rempli");
+                    ok = false; // ne rien envoyer
+
+                } // si il ya l'icon croix alors 
+                else if ("fa-dot-circle" == bay.children[0].classList[1] ) {
+                    console.log("rond rempli");
+                    ok = false;
+
+                }
+                // si il ya l'icon rond alors 
+                else {
+                    console.log("rond");
+                    let okok = true;
+                    // recuperer le genre
+                    let ty = bay.children[1].innerHTML;
+
+                    if (ty == "Musiciens"){ty = 'users'};
+                    if (ty == "Instrumentals"){ty = 'beats'};
+
+                    console.log("ty : ",ty);
+                    if (ty == 'All Catégories'){okok = false;}
+
+
+                    if (okok){
+                        // cration d'un input
+
+                        let ici = document.getElementById('icitype');
+                        let avant = document.getElementById('wewetype');
+
+                        if (ici.children.length < 2) {
+                            let input = document.createElement('input');
+                            input.id = 'valTypeMenu';
+                            input.type = 'hidden';
+                            input.name = 'Type';
+
+                            // poser le genre sur le input d'envoie
+                            input.value = ty;
+
+                            ici.insertBefore(input,avant);
+                        }
+                    }
+
+                }
+
+
+                if (ok) {
+                    document.getElementById('formType').submit();
+
+                }
+
+
+
+
+            }
+
+            function goGenre(bay){
+
+                ok = true;
+                // si il ya l'icon rond rempli alors 
+                if ("fa-dot-circle" == bay.children[0].classList[1] ) {
+                    console.log("rond rempli");
+                    ok = false; // ne rien envoyer
+
+                } // si il ya l'icon croix alors 
+                else if ("fa-times-circle" == bay.children[0].classList[1] ) {
+                    console.log("croix"); // envoyer du vide
+
+                }
+                // si il ya l'icon rond alors 
+                else {
+                    console.log("rond");
+                    let okok = true;
+
+                    // recuperer le genre
+                    gr = bay.children[1].innerHTML;
+                    console.log("gr : ",gr);
+                    if (gr == 'All Genres'){okok = false;}
+
+
+
+                    if (okok){
+                        // cration d'un input
+
+                        let ici = document.getElementById('icigenre');
+                        let avant = document.getElementById('wewegenre');
+
+                        if (ici.children.length < 2) {
+                            let input = document.createElement('input');
+                            input.id = 'valGenreMenu';
+                            input.type = 'hidden';
+                            input.name = 'Genre';
+
+                            // poser le genre sur le input d'envoie
+                            input.value = gr;
+
+                            ici.insertBefore(input,avant);
+                        }
+                    }
+
+                }
+
+
+                if (ok) {
+                    document.getElementById('formGenre').submit();
+
+                }
+            }
+
+
+            function goPrice(bay) {
+                ok = true;
+                // si il ya l'icon rond rempli alors 
+                if ("fa-dot-circle" == bay.children[0].classList[1] ) {
+                    console.log("rond rempli");
+                    ok = false; // ne rien envoyer
+
+                }
+                // si il ya l'icon croix alors
+                else if ("fa-times-circle" == bay.children[0].classList[1] ) {
+                    console.log("croix");
+
+                }
+                // si il ya l'icon rond alors 
+                else {
+                    console.log("rond");
+                    okok = true;
+                    // recuperer le genre
+                    fr = bay.children[1].innerHTML;
+                    console.log("fr : ",fr);
+                    if (fr == "Free Beats") {fr = "free";}
+                    if (fr == "All Prix") {okok = false;}
+                    if (okok){
+                        // cration d'un input
+
+                        let ici = document.getElementById('iciprice');
+                        let avant = document.getElementById('weweprice');
+
+                        if (ici.children.length < 2) {
+                            let input = document.createElement('input');
+                            input.id = 'valPriceMenu3';
+                            input.type = 'hidden';
+                            input.name = 'Price';
+
+                            // poser le genre sur le input d'envoie
+                            input.value = fr;
+                            ici.insertBefore(input,avant);
+                        }
+                    }
+
+                }
+
+                if (ok) {
+                    document.getElementById('formPrice').submit();
+
+                }
+
+
+
+            }
+
+            function goTrier(bay){
+                ok = true;
+                if (ok) {
+                    document.getElementById('formTrie').submit();
+
+                }
+
+            }
+            function goTrier2(bay){
+                ok = true;
+                if (ok) {
+                    document.getElementById('formTrie2').submit();
+
+                }
+
+            }
+
+        </script>
 
     </body>
 </html>

@@ -19,12 +19,12 @@ function playPause() {
         const song = document.querySelector('#song'),
         thumbnail = document.querySelector('#thumbnail');
 
-        pPause.src = "./assets/icons/pause.png"
+        pPause.src = "./assets/icons/pause.png";
         
         song.play();
         playing = false;
     } else {
-        pPause.src = "./assets/icons/play.png"
+        pPause.src = "./assets/icons/play.png";
         
         song.pause();
         playing = true;

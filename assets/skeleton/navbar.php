@@ -1,36 +1,36 @@
 
+<?php $jesuissurindex = $_SESSION['ici_index_bool']; ?>
 
-<div class="boxnav">
+   
+   <div class="boxnav">
     <nav id='LANAVBAR' class="navbar navbar-expand-lg navbar-light fixed-top" >
         <a class="navbar-brand" href="#">
-            <img src="https://getbootstrap.com/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+           <?php if (!$jesuissurindex){ ?>
+            <img src='assets/img/icon/compact-disc.svg' width="35" height="35" alt="">
+            <?php } else { ?>
+            <img src='assets/img/icon/compact-disc2.svg' width="35" height="35" alt="">
+            <?php } ?>
         </a>
         <a class="navbar-brand" href="index.php">WeBeats</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span> 
         </button>
         <!--   Barre de recherche     -->
+        <!--   Barre de recherche     -->
         <?php 
-        $jesuissurindex = $_SESSION['ici_index_bool'];
+        
 
         if (!$jesuissurindex) { ?>
         <form id="searchform" method="get" action="search.php">
             <div class="input-group searchbar">
 
-                <select name="Genre" class="custom-select ">
-                    <option value="All" selected class="dropdown-item">All Genres</option>
-                    <?php 
-            $listeGenres = $_SESSION['listeGenres'];
-            foreach($listeGenres as $gr){
+                <select name="Type" class="custom-select ">
+                    <option value="beats" selected class="dropdown-item">All beats</option>
+                   
 
-                $grgood = (htmlspecialchars($gr));
-                    ?>
+                    <option value="users" class="dropdown-item">All users </option>
 
-                    <option value="<?= $grgood?>" class="dropdown-item"><?= $gr?></option>
-
-                    <?php
-            }
-                    ?>
+                   
                 </select>
 
 
@@ -71,10 +71,10 @@
                 }else{
                 ?>
                 <li class="nav-item ">
-                    <a class="nav-link" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
+                    <a class="nav-link btn" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+                    <a class="nav-link btn" href="#">Accueil <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item dropdown ">
@@ -101,7 +101,7 @@
                     <a class="nav-link btn" href="connexion.php">Se connecter</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn-danger rounded-pill btninscription btn" href="inscription.php">S'inscrire</a>
+                    <a class="nav-link rounded-pill btn btninscription" href="inscription.php">S'inscrire</a>
                 </li>
 
                 <?php
