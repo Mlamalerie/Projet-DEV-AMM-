@@ -377,7 +377,7 @@ else if (!$wetypeexiste) {
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
         <?php
-        //require_once('assets/skeleton/menu.php');
+        require_once('assets/skeleton/navbar.php');
         ?>
 
         <?php
@@ -643,7 +643,7 @@ else if (!$wetypeexiste) {
                     <!--   *************************************************************  -->
                     <!--   ************************** RESULTAT BEAT **************************  -->
 
-                    <?php if (!$jechercheunboug) { ?>
+                    <?php if (!$jechercheunboug || (!$wetypeexiste)) { ?>
                     <?php if (($wetypeexiste && !$jechercheunboug)) { ?>
                     <form id="formTrie" action="search.php">
 
@@ -690,9 +690,9 @@ else if (!$wetypeexiste) {
 
                         <div class=" container-fluid ligneCardMusic">
                             <?php
-                                                 if (isset($resuBEATS)) {
-                                                     $i = 1;
-                                                     foreach($resuBEATS as $r){
+                                                  if (isset($resuBEATS)) {
+                                                      $i = 1;
+                                                      foreach($resuBEATS as $r){
                             ?>
                             <div class="row justify-content-center p-0 mx-auto mb-2 rounded"  style="background-color : pink;">
                                 <?= $i ?>
@@ -725,8 +725,8 @@ else if (!$wetypeexiste) {
                             </div>
                             <?php
                                 $i++;
-                                                     }
-                                                 }
+                                                      }
+                                                  }
 
 
                             ?>
@@ -752,7 +752,7 @@ else if (!$wetypeexiste) {
                     <?php }?>
                     <!--   *************************************************************  -->
                     <!--   ************************** RESULTAT USER **************************  -->
-                    <?php if ($jechercheunboug) { ?>
+                    <?php if ($jechercheunboug || (!$wetypeexiste)) { ?>
                     <?php if (($wetypeexiste && $jechercheunboug)) { ?>
                     <form id="formTrie2" action="search.php">
 
@@ -793,7 +793,7 @@ else if (!$wetypeexiste) {
 
 
                     </div>
-                    
+
                     <?php } ?>
 
 
@@ -946,7 +946,24 @@ else if (!$wetypeexiste) {
         </script>
         <!--   END JS de fourchette      -->
         <script >
+           
+            function goSearch() {
+                let ok = true;
+                let champs = document.getElementById('searchbar');
 
+
+                if (champs.value.trim().length == 0) {
+                     ok = false; 
+
+                }
+               
+                if (ok) {
+                    document.getElementById('searchform').submit();
+
+                }
+
+
+            }
 
             function goType(bay) {
 

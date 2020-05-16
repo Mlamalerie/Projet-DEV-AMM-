@@ -25,7 +25,8 @@
             <div class="input-group searchbar">
 
                 <select name="Type" class="custom-select ">
-                    <option value="beats" selected class="dropdown-item">All beats</option>
+                   
+                    <option value="beats" class="dropdown-item">All beats</option>
                    
 
                     <option value="users" class="dropdown-item">All users </option>
