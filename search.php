@@ -322,20 +322,49 @@ else if ($wetypeexiste && $jechercheunboug){
 else if (!$wetypeexiste) {
 
 
+    if($weqexiste){
+         $xxx = (String) trim(($_GET['q']));
+    
 
-    $req = $BDD->prepare("SELECT *
+        $req = $BDD->prepare("SELECT *
+                            FROM user
+                            WHERE CONCAT(user_pseudo,user_description)
+                            
+                            LIKE ?
+                            ORDER BY user_pseudo ASC");
+
+        $req->execute(array("%".$xxx."%"));
+        $resuUSERS = $req->fetchAll();
+
+        $req = $BDD->prepare("SELECT *
+                            FROM beat
+                            WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
+                            LIKE ?
+                            ORDER BY beat_title ASC");
+
+        $req->execute(array("%".$xxx."%"));
+        $resuBEATS = $req->fetchAll();
+
+
+    }
+
+
+    else {
+
+        $req = $BDD->prepare("SELECT *
                             FROM user
                             ORDER BY user_pseudo ASC");
 
-    $req->execute(array());
-    $resuUSERS = $req->fetchAll();
+        $req->execute(array());
+        $resuUSERS = $req->fetchAll();
 
-    $req = $BDD->prepare("SELECT *
+        $req = $BDD->prepare("SELECT *
                             FROM beat
                             ORDER BY beat_title ASC");
 
-    $req->execute(array());
-    $resuBEATS = $req->fetchAll();
+        $req->execute(array());
+        $resuBEATS = $req->fetchAll();
+    }
 
 
 }
@@ -1226,10 +1255,10 @@ else if (!$wetypeexiste) {
 
             songIndex = 0;
             songs = <?=returnMusicListStr("songs", $resuBEATS); ?>  //Stockage des audios
-            thumbnails = <?=returnMusicListStr("thumbnails", $resuBEATS); ?> //Stockage des covers
-            songArtists = <?=returnMusicListStr("artists", $resuBEATS); ?> //Stockage Noms Artistes
-            songTitles = <?=returnMusicListStr("titles", $resuBEATS); ?> //Stockage Titres
-            /*
+                thumbnails = <?=returnMusicListStr("thumbnails", $resuBEATS); ?> //Stockage des covers
+                songArtists = <?=returnMusicListStr("artists", $resuBEATS); ?> //Stockage Noms Artistes
+                songTitles = <?=returnMusicListStr("titles", $resuBEATS); ?> //Stockage Titres
+                /*
 let playing = true;
 function playPause(songIndex) {
     if (playing) {
@@ -1248,7 +1277,7 @@ function playPause(songIndex) {
 */
 
 
-            let playing = true;
+                let playing = true;
             function playPause(songIndex) {
                 song.src = songs[songIndex];
                 thumbnail.src = thumbnails[songIndex];
