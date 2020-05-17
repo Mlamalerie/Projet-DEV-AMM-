@@ -1,7 +1,13 @@
 <?php
 session_start();
 
+$_SESSION['ici_index_bool'] = false;
 
+// si une connection est détecter : (ta rien a faire ici mec)
+if(!isset($_SESSION['user_id'])){
+    header('Location: test_zone.php');
+    exit;
+}
 ?>
 
 
@@ -14,9 +20,9 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
        <?php
-        require_once('skeleton/headLinkCSS.html');
+        require_once('assets/skeleton/headLinkCSS.html');
         ?>
-        <link rel="stylesheet" type="text/css" href="css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         
         
         <title>Dash BOard</title>
@@ -25,22 +31,22 @@ session_start();
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
         <?php
-        require_once('skeleton/menu.php');
+        require_once('assets/skeleton/navbar.php');
         ?>
 
-        Ici c'est l'index des connectés
+       <br><br><br><br> Ici c'est l'index des connectés
         <?php
         if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
             print_r($_SESSION);
         } else{
-            echo "Pas de connexion";
+            print_r("<br/><br/><br><br>Pas de connexion");
         }
         ?>
         
 
 
         <?php
-        require_once('skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.php');
         ?>
         
         

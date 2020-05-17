@@ -1,4 +1,4 @@
-#boxnav {
+.boxnav {
     top : 0;
     z-index: 600;
 }
@@ -104,3 +104,11 @@
     background: white;
     color: rgba(121, 6, 247, 0.9);
 }
+
+
+img#iconPanier,img#iconUpload ,img#iconUser {
+    width: 1.6rem;
+     
+}
+
+

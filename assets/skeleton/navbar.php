@@ -1,43 +1,44 @@
 
+<?php $jesuissurindex = $_SESSION['ici_index_bool']; ?>
+
 
 <div class="boxnav">
     <nav id='LANAVBAR' class="navbar navbar-expand-lg navbar-light fixed-top" >
         <a class="navbar-brand" href="#">
-            <img src="https://getbootstrap.com/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+            <?php if (!$jesuissurindex){ ?>
+            <img src='assets/img/icon/compact-disc.svg' width="35" height="35" alt="">
+            <?php } else { ?>
+            <img src='assets/img/icon/compact-disc2.svg' width="35" height="35" alt="">
+            <?php } ?>
         </a>
         <a class="navbar-brand" href="index.php">WeBeats</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span> 
         </button>
         <!--   Barre de recherche     -->
+        <!--   Barre de recherche     -->
         <?php 
-        $jesuissurindex = $_SESSION['ici_index_bool'];
+
 
         if (!$jesuissurindex) { ?>
         <form id="searchform" method="get" action="search.php">
             <div class="input-group searchbar">
 
-                <select name="Genre" class="custom-select ">
-                    <option value="All" selected class="dropdown-item">All Genres</option>
-                    <?php 
-            $listeGenres = $_SESSION['listeGenres'];
-            foreach($listeGenres as $gr){
+                <select name="Type" class="custom-select ">
 
-                $grgood = (htmlspecialchars($gr));
-                    ?>
+                    <option value="beats" class="dropdown-item">All beats</option>
 
-                    <option value="<?= $grgood?>" class="dropdown-item"><?= $gr?></option>
 
-                    <?php
-            }
-                    ?>
+                    <option value="users" class="dropdown-item">All users </option>
+
+
                 </select>
 
 
                 <input id='searchbar' class="search_input form-control  mr-sm-" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
 
                 <div class="input-group-append">
-                    <a onclick="goSearch()" href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                    <button onclick="goSearch()" href="#" class="search_icon"><i class="fas fa-search"></i></button>
                 </div>
 
 
@@ -61,20 +62,44 @@
                 <?php
                 // si je detecte une connexion alors
                 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
+
                 ?>
                 <li class="nav-item">
-                    <a class="nav-link btn" href="deconnexion.php">Déconnexion</a>
+                    <a class="nav-link btn" href="#"><img id="iconUpload" src="assets/img/icon/ui.svg"> Uploader </a>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link btn" href="#" data-toggle="modal" data-target="#exampleModalLong"><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> Panier </button>
+                </li>
+
+                
+
+
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <img id="iconUser" src="assets/img/user.png">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                        <a class="dropdown-item  " href="#"> Mon Profil </a>
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="deconnexion.php">Déconnexion</a>
+                    </div>
                 </li>
 
 
                 <?php
-                }else{
+                }
+                // si je detecte pas de connection
+                else{
                 ?>
                 <li class="nav-item ">
-                    <a class="nav-link" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
+                    <a class="nav-link btn" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
                 </li>
+
+                <?php if($jesuissurindex) { ?>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+                    <a class="nav-link btn" href="#">Accueil <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item dropdown ">
@@ -96,12 +121,12 @@
                         <a class="dropdown-item" href="#">Free Beats</a>
                     </div>
                 </li>
-
+                <?php } ?>
                 <li class="nav-item">
                     <a class="nav-link btn" href="connexion.php">Se connecter</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn-danger rounded-pill btninscription btn" href="inscription.php">S'inscrire</a>
+                    <a class="nav-link rounded-pill btn btninscription" href="inscription.php">S'inscrire</a>
                 </li>
 
                 <?php

@@ -15,14 +15,18 @@ $_SESSION['ici_index_bool'] = false;
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
-<!--        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> -->
+        <!--        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> -->
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/test_zone.css">
         <link rel="stylesheet" type="text/css" href="assets/css/MusicPlayerMlamali.css">
+
         
         <!--  Slides Link      -->
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
        
+
+        <link rel="stylesheet" type="text/css" href="assets/css/button-style2ouf.css">
+
         <title>TEST ZONE</title>
     </head>
     <body>
@@ -31,8 +35,29 @@ $_SESSION['ici_index_bool'] = false;
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('assets/skeleton/menu.php');
+        require_once('assets/skeleton/navbar.php');
         ?>
+        
+        <!-- Modal -->
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
         Ici c'est l'index des connecté
@@ -58,6 +83,14 @@ $_SESSION['ici_index_bool'] = false;
                 <a onclick="goSearch()" href="#" class="search_icon"><i class="fas fa-search"></i></a>
             </div>
         </form>
+
+
+        <div class="buttons">
+            <button class="boutonstyle2ouf"> Hover Me</button>
+<!--            <button class="boutonstyle2ouf"> Hover Me</button>-->
+           
+        </div>
+
 
         <nav id="MusicPlayer" class="navbar-light bg-dark fixed-bottom">
             <div class="container-fluid p-2 px-5" style="background-color:yellow;">

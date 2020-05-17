@@ -164,7 +164,7 @@ if(!empty($_POST)){
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('assets/skeleton/menu.php');
+        require_once('assets/skeleton/navbar.php');
 
         ?>
 

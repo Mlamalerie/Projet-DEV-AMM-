@@ -20,8 +20,12 @@ $_SESSION['ici_index_bool'] = true;
         <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar-index-turfu.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar_responsive.css">
 
         <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">
+
+        <!--  Audio player de mathieu   -->
+        <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
 
 
         <!--Slides-->
@@ -50,7 +54,14 @@ $_SESSION['ici_index_bool'] = true;
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('assets/skeleton/menu.php');
+        require_once('assets/skeleton/navbar.php');
+        ?>
+
+        <!--   *************************************************************  -->
+        <!--   ************************** MUSIC PLAYER  **************************  -->
+
+        <?php
+        require_once('assets/skeleton/AudioPlayer/audioplayer.php');
         ?>
 
 
@@ -74,6 +85,9 @@ $_SESSION['ici_index_bool'] = true;
                         <a href="test_zone.php"
                            ><button type="button" class="btn btn-danger btninscription">Test</button></a><br/>
 
+                        <button type="button" class="btn btn-danger btninscription">Test1</button>
+                        <button type="button" class="btn btn-danger btninscription">Test2</button>
+                        <button type="button" class="btn btn-danger btninscription">Test3</button>
 
                         <form id="searchform" method="get" action="search.php">
                             <input type="hidden" name="Genre" value="All">
@@ -83,7 +97,7 @@ $_SESSION['ici_index_bool'] = true;
                                 <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
 
 
-                                <a onclick="goSearch()" href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                                <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
                             </div>
                         </form>
 
@@ -113,7 +127,7 @@ $_SESSION['ici_index_bool'] = true;
 
 
         <!--   *************************************************************  -->
-        <!--   ************************** SECTION 1  ***********************  -->
+        <!--   ************************** SECTIONS  ***********************  -->
         <!-- ******* Section 1 -->
         <section class="py-5 d-flex align-items-center" id="one">
 
@@ -420,6 +434,7 @@ $_SESSION['ici_index_bool'] = true;
             </div>
         </section>
 
+
         <!--   *************************************************************  -->
         <!--   ************************** FOOTER  **************************  -->
 
@@ -482,7 +497,10 @@ $_SESSION['ici_index_bool'] = true;
         <!-- End -->
 
 
-
+       
+       
+<!--  JS du MusicPlayer  -->
+        <script id="scriptDuPlayer" src="assets/skeleton/AudioPlayer/audioplayer.js"></script>
 
 
 
@@ -501,6 +519,8 @@ $_SESSION['ici_index_bool'] = true;
         
         <!-- SCRIPT SLIDES       -->
         <script src="assets/js/slide.js"></script>
+
+
 
 
     </body>
