@@ -24,13 +24,14 @@
 .box {
     position: absolute;
     /*height: 10%;*/
-    width: 99%;
+/*    width: 99%;*/
     background: -webkit-linear-gradient(45deg, rgb(40, 40, 40), #9C27B0);
     z-index: 4;
     bottom: 0;
 }
 
 .navplayer{
+
     
 }
 

@@ -1,6 +1,7 @@
 
 <?php
 session_start();
+$_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
 
 print_r($_GET);
@@ -713,15 +714,9 @@ else if (!$wetypeexiste) {
                                         <span> (<?=$r['beat_like']?> ) </span>
 
                                         <a class="btn btn-danger" href="#" role="button"><?=$r['beat_price']?> €</a><?=$r['beat_dateupload']?> ---
-
-
                                     </div>
 
-
                                 </div>
-
-
-
                             </div>
                             <?php
                                 $i++;
@@ -1012,7 +1007,6 @@ else if (!$wetypeexiste) {
                             ici.insertBefore(input,avant);
                         }
                     }
-
                 }
 
 

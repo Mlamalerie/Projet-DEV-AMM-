@@ -2,7 +2,7 @@
 /* ******* IMPORT ******* */
 /*********************************************/
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap');
 
 
 /* **************************************************** */
@@ -14,7 +14,13 @@
     --base-color3: #ff3aff;
 
 
-    --base-police1: 'Poppins', sans-serif;
+    --base-police1: 'Quicksand', sans-serif;
 
     --base-taille1: 16px;
+}
+
+body,html {
+    
+  font-family: var(--base-police1);
+    
 }
