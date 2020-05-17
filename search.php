@@ -342,10 +342,6 @@ else if (!$wetypeexiste) {
 
 
 
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -362,6 +358,9 @@ else if (!$wetypeexiste) {
 
 
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+           <!--  Audio player de mathieu   -->
+        <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
+        
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">
         <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">
@@ -379,6 +378,13 @@ else if (!$wetypeexiste) {
         <!--   ************************** NAVBAR  **************************  -->
         <?php
         require_once('assets/skeleton/navbar.php');
+        ?>
+        
+        <!--   *************************************************************  -->
+        <!--   ************************** MUSIC PLAYER  **************************  -->
+
+        <?php
+        require_once('assets/skeleton/AudioPlayer/audioplayer.php');
         ?>
 
         <?php
@@ -699,7 +705,7 @@ else if (!$wetypeexiste) {
                                 <?= $i ?>
 
                                 <div class="col-sm-2 p-0  " style="background-color : red;">
-                                    <img  src="img/Laylow.jpg" width="80"  >
+                                    <img  src="img/Laylow.jpg" width="80"  alt="" >
 
 
                                 </div>
@@ -1143,6 +1149,9 @@ else if (!$wetypeexiste) {
             }
 
         </script>
+         <!-- JS du player -->
+        <script id="scriptDuPlayer" src="assets/js/player.js"></script>
+        <!--   END JS du Player     -->
 
     </body>
 </html>
