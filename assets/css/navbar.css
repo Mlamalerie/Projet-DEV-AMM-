@@ -106,18 +106,9 @@
 }
 
 
-img#iconPanier {
+img#iconPanier,img#iconUpload ,img#iconUser {
     width: 1.6rem;
-    
+     
 }
 
-img#iconUpload {
-    width: 1.6rem;
-    
-}
-
-img#iconUser {
-    width: 1.6rem;
-    
-}
 

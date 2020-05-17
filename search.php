@@ -3,7 +3,7 @@
 session_start();
 $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
-
+print_r('<br><br><br><br><br><br><br>');
 print_r($_GET);
 $listeGenres = ['Hip Hop','Trap','Afro','Deep','Pop','Rock','Reggae'];
 sort($listeGenres);
@@ -358,12 +358,12 @@ else if (!$wetypeexiste) {
 
 
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
-           <!--  Audio player de mathieu   -->
+        <!--  Audio player de mathieu   -->
         <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
-        
+
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">
+        <!--        <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">-->
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
 
 
@@ -379,7 +379,7 @@ else if (!$wetypeexiste) {
         <?php
         require_once('assets/skeleton/navbar.php');
         ?>
-        
+
         <!--   *************************************************************  -->
         <!--   ************************** MUSIC PLAYER  **************************  -->
 
@@ -691,21 +691,74 @@ else if (!$wetypeexiste) {
 
 
 
+                    <?php
+                                                                      function returnMusicListStr($bay, $resuBEATS){
+                                                                          $str = "[";
+                                                                          if ($bay == 'songs') {
 
+                                                                              foreach($resuBEATS as $r) {
+                                                                                  $pose = $r['beat_source'];
+
+                                                                                  $str .= "'./audio/$pose',";
+
+                                                                              }
+
+                                                                          } else if ($bay == 'thumbnails'){
+                                                                              foreach($resuBEATS as $r) {
+                                                                                  $pose = $r['beat_cover'];
+
+                                                                                  $str .= "'./img/$pose',";
+                                                                              }
+                                                                          }
+                                                                          else if ($bay == 'artists'){
+                                                                              foreach($resuBEATS as $r) {
+                                                                                  $pose = $r['beat_author'];
+
+                                                                                  $str .= "'$pose',";
+                                                                              }
+                                                                          }else if ($bay == 'titles'){
+                                                                              foreach($resuBEATS as $r) {
+                                                                                  $pose = $r['beat_title'];
+
+                                                                                  $str .= "'$pose',";
+                                                                              }
+                                                                          }
+                                                                          // ici effacer la virgule en + puis c bon
+                                                                          $str = substr($str,0,-1);
+                                                                          $str .= "]";
+
+                                                                          return $str;
+
+
+                                                                      }
+                                                                      print_r("<br><br> **************************");
+                                                                      $test = returnMusicListStr("titles", $resuBEATS);
+                                                                      print_r($test);
+
+                    ?>
 
                     <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : blue;">
 
                         <div class=" container-fluid ligneCardMusic">
                             <?php
-                                                  if (isset($resuBEATS)) {
-                                                      $i = 1;
-                                                      foreach($resuBEATS as $r){
+                                                                      if (isset($resuBEATS)) {
+                                                                          $i = 1;
+                                                                          foreach($resuBEATS as $r){
                             ?>
                             <div class="row justify-content-center p-0 mx-auto mb-2 rounded"  style="background-color : pink;">
                                 <?= $i ?>
 
                                 <div class="col-sm-2 p-0  " style="background-color : red;">
-                                    <img  src="img/Laylow.jpg" width="80"  alt="" >
+                                    <div class="">
+                                        <div class="hover hover-5 text-white rounded"><img src="img/<?=$r['beat_cover']?>" alt="">
+                                            <div class="hover-overlay"></div>
+
+                                            <div class="link_icon" onclick="playPause(<?=$i-1 ?>)">
+                                                <i class="far fa-play-circle"></i>
+                                            </div>
+
+                                        </div>
+                                    </div>
 
 
                                 </div>
@@ -723,11 +776,12 @@ else if (!$wetypeexiste) {
                                     </div>
 
                                 </div>
+
                             </div>
                             <?php
                                 $i++;
-                                                      }
-                                                  }
+                                                                          }
+                                                                      }
 
 
                             ?>
@@ -947,17 +1001,17 @@ else if (!$wetypeexiste) {
         </script>
         <!--   END JS de fourchette      -->
         <script >
-           
+
             function goSearch() {
                 let ok = true;
                 let champs = document.getElementById('searchbar');
 
 
                 if (champs.value.trim().length == 0) {
-                     ok = false; 
+                    ok = false; 
 
                 }
-               
+
                 if (ok) {
                     document.getElementById('searchform').submit();
 
@@ -1149,8 +1203,139 @@ else if (!$wetypeexiste) {
             }
 
         </script>
-         <!-- JS du player -->
-        <script id="scriptDuPlayer" src="assets/js/player.js"></script>
+
+
+
+
+
+
+        <!-- JS du player -->
+        <script id="scriptDuPlayer">
+
+            const thumbnail = document.querySelector('#thumbnail'); // album cover 
+            const song = document.querySelector('#song'); // audio 
+
+            const songArtist = document.querySelector('.song-artist'); // element où noms artistes apparaissent
+            const songTitle = document.querySelector('.song-title'); // element où titre apparait
+            const progressBar = document.querySelector('#progress-bar'); // element où progress bar apparait
+            let pPause = document.querySelector('#play-pause'); // element où images play pause apparaissent
+
+            let mouseDown = false;
+
+
+
+            songIndex = 0;
+            songs = <?=returnMusicListStr("songs", $resuBEATS); ?>  //Stockage des audios
+            thumbnails = <?=returnMusicListStr("thumbnails", $resuBEATS); ?> //Stockage des covers
+            songArtists = <?=returnMusicListStr("artists", $resuBEATS); ?> //Stockage Noms Artistes
+            songTitles = <?=returnMusicListStr("titles", $resuBEATS); ?> //Stockage Titres
+            /*
+let playing = true;
+function playPause(songIndex) {
+    if (playing) {
+        const song = document.querySelector('#song'),
+        thumbnail = document.querySelector('#thumbnail');
+        pPause.src = "./assets/icon/pause.png"
+        song.play();
+        playing = false;
+    } else {
+        pPause.src = "./assets/icon/play.png"
+        song.pause();
+        playing = true;
+    }
+}
+
+*/
+
+
+            let playing = true;
+            function playPause(songIndex) {
+                song.src = songs[songIndex];
+                thumbnail.src = thumbnails[songIndex];
+                songArtist.innerHTML = songArtists[songIndex];
+                songTitle.innerHTML = songTitles[songIndex];
+                if (playing) {
+                    pPause.src = "./assets/icon/pause.png"
+                    song.play();
+                    playing = false;
+                } else {
+                    pPause.src = "./assets/icon/play.png"
+                    song.pause();
+                    playing = true;
+                }
+            }
+
+
+
+            // joue automatiquement le son suivant
+            song.addEventListener('ended', function(){
+                nextSong();
+            });
+
+            function nextSong() {
+                songIndex++;
+                if (songIndex > songs.length -1) {
+                    songIndex = 0;
+                };
+                song.src = songs[songIndex];
+                thumbnail.src = thumbnails[songIndex];
+                if((songArtists[songIndex] != null) && (songTitles[songIndex] != null)){
+                    songArtist.innerHTML = songArtists[songIndex];
+                    songTitle.innerHTML = songTitles[songIndex];
+                }
+                playing = true;
+                playPause(songIndex);
+            }
+
+            function previousSong() {
+                songIndex--;
+                if (songIndex < 0) {
+                    songIndex = songs.length -1;
+                };
+                song.src = songs[songIndex];
+                thumbnail.src = thumbnails[songIndex];
+                if((songArtists[songIndex] != null) && (songTitles[songIndex] != null)){
+                    songArtist.innerHTML = songArtists[songIndex];
+                    songTitle.innerHTML = songTitles[songIndex];
+                }
+                playing = true;
+                playPause(songIndex);
+            }
+
+            // maj de la durée max du son, maj temps actuel
+            function updateProgressValue() {
+                progressBar.max = song.duration;
+                progressBar.value = song.currentTime;
+                document.querySelector('.currentTime').innerHTML = (formatTime(Math.floor(song.currentTime)));
+                if (document.querySelector('.durationTime').innerHTML === "NaN:NaN") {
+                    document.querySelector('.durationTime').innerHTML = "0:00";
+                } else {
+                    document.querySelector('.durationTime').innerHTML = (formatTime(Math.floor(song.duration)));
+                }
+            };
+
+
+            // conversion du temps en minutes/secondes dans le lecteur
+            function formatTime(seconds) {
+                let min = Math.floor((seconds / 60));
+                let sec = Math.floor(seconds - (min * 60));
+                if (sec < 10){ 
+                    sec  = `0${sec}`;
+                };
+                return `${min}:${sec}`;
+            };
+
+            // actualisation du lecteur en fct du temps(demi-secondes)
+            setInterval(updateProgressValue, 500);
+
+            // Valeur de la bar qd curseur est glissé sans lecture
+            function changeProgressBar() {
+                song.currentTime = progressBar.value;
+            };
+
+
+
+        </script>
         <!--   END JS du Player     -->
 
     </body>

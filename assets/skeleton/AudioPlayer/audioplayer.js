@@ -11,14 +11,14 @@ let mouseDown = false;
 
 
 songIndex = 0;
-songs = ['./audio/go_legend.mp3','./audio/futsal_shuffle_2020.mp3','./audio/tip_toe.mp3']; //Stockage des audios
-thumbnails = ['./img/bigmetro.jpg', './img/luv.jpg', './img/roddy.jpg']; //Stockage des covers
-songArtists = ['Big Sean & Metro Boomin(ft. Travis Scott)', 'Lil Uzi Vert', 'Roddy Rich']; //Stockage Noms Artistes
-songTitles = ["Go Legend", "Futsal Shuffle 2020", "Tip Toe"]; //Stockage Titres
+songs = ['./audio/high_fashion.mp3','./audio/DB5.mp3','./audio/Malcolm.mp3']; //Stockage des audios
+thumbnails = ['./img/roddy.jpg', './img/DB5.jpg', './img/MILS.jpg']; //Stockage des covers
+songArtists = ['Roddy Rich', 'Leto', 'Ninho']; //Stockage Noms Artistes
+songTitles = ["High Fashion", "Double Bang 5", "Malcolm"]; //Stockage Titres
 
-/*
+
 let playing = true;
-function playPause(songIndex) {
+function playPause() {
     if (playing) {
         const song = document.querySelector('#song'),
         thumbnail = document.querySelector('#thumbnail');
@@ -31,28 +31,6 @@ function playPause(songIndex) {
         playing = true;
     }
 }
-
-*/
-
-
-let playing = true;
-function playPause(songIndex) {
-    song.src = songs[songIndex];
-    thumbnail.src = thumbnails[songIndex];
-    songArtist.innerHTML = songArtists[songIndex];
-    songTitle.innerHTML = songTitles[songIndex];
-    if (playing) {
-        pPause.src = "./assets/icon/pause.png"
-        song.play();
-        playing = false;
-    } else {
-        pPause.src = "./assets/icon/play.png"
-        song.pause();
-        playing = true;
-    }
-}
-
-
 
 // joue automatiquement le son suivant
 song.addEventListener('ended', function(){
@@ -71,7 +49,7 @@ function nextSong() {
         songTitle.innerHTML = songTitles[songIndex];
     }
     playing = true;
-    playPause(songIndex);
+    playPause();
 }
 
 function previousSong() {
@@ -86,7 +64,7 @@ function previousSong() {
         songTitle.innerHTML = songTitles[songIndex];
     }
     playing = true;
-    playPause(songIndex);
+    playPause();
 }
 
 // maj de la durée max du son, maj temps actuel

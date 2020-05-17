@@ -68,8 +68,11 @@
                     <a class="nav-link btn" href="#"><img id="iconUpload" src="assets/img/icon/ui.svg"> Uploader </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn" href="#"><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> Panier </a>
+                    <button class="nav-link btn" href="#" data-toggle="modal" data-target="#exampleModalLong"><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> Panier </button>
                 </li>
+
+                
+
 
                 <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
@@ -83,7 +86,7 @@
                         <a class="dropdown-item" href="deconnexion.php">Déconnexion</a>
                     </div>
                 </li>
-               
+
 
                 <?php
                 }
@@ -93,7 +96,7 @@
                 <li class="nav-item ">
                     <a class="nav-link btn" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
                 </li>
-                
+
                 <?php if($jesuissurindex) { ?>
                 <li class="nav-item ">
                     <a class="nav-link btn" href="#">Accueil <span class="sr-only">(current)</span></a>
@@ -116,7 +119,7 @@
                         <a class="dropdown-item" href="#">Free Beats</a>
                     </div>
                 </li>
-<?php } ?>
+                <?php } ?>
                 <li class="nav-item">
                     <a class="nav-link btn" href="connexion.php">Se connecter</a>
                 </li>
