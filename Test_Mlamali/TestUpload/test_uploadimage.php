@@ -7,11 +7,10 @@ print_r($_POST);
 print_r("$ <br>");
 if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
     print_r("$$ <br>");
-    
+
     $tmp_name = $_FILES['upload']['tmp_name'];
-     $name = $_FILES['upload']['name'];
+    $name = $_FILES['upload']['name'];
     
-    $name = "Mlamali.jpg";
     $nomduboug = "Wanabilini";
     $upd->uploadAudio($tmp_name,$name, $nomduboug);
     print_r("$$$$ <br>");
@@ -131,7 +130,7 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
                     <!-- Upload image input-->
                     <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                         <form id='formUpload1' action="" method="get" enctype="multipart/form-data">
-                           
+
                             <input id="upload" type="file" onchange="readURL(this);goFile(this);" class="form-control border-0">
                         </form>
                         <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>

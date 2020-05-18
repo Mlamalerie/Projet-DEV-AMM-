@@ -19,9 +19,24 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
     $tmp_name = $_FILES['upload']['tmp_name'];
      $name = $_FILES['upload']['name'];
     
-    $name = "Mlamali.jpg";
-    $upd->upload($tmp_name,$name,$_SESSION['user_pseudo']);
-    print_r("$$$$ <br>");
+     $nomduboug = $_SESSION['user_pseudo'];
+    $idduboug = $_SESSION['user_id'];
+    $date = date("Ymd-His");
+    
+    $direction = $upd->uploadAudio($tmp_name,$name,$nomduboug,$idduboug,$date);
+    
+    if ($direction == 'error1'){
+        err_upload = "Ce fichier n'est pas un fichier audio !"
+        
+    } else {
+        $_SESSION['go_direction_upload'] = $direction; 
+        header('Location: upload.php');
+        exit;
+        
+    }
+    
+    echo 'ILESTOU :'.$ilestou;
+   
 }
 ?>
 
@@ -55,7 +70,6 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
         ?>
 
         <!-- Modal UPLOAD -->
-        <!-- Modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
