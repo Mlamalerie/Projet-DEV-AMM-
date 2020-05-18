@@ -4,7 +4,7 @@ session_start();
 $_SESSION['ici_index_bool'] = false;
 ?>
 
-<!-- POUR MODAL UPLOAD.php -->
+
 <?php
 require 'assets/functions/uploadFile.php';
 
@@ -41,7 +41,6 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -57,7 +56,14 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/test_zone.css">
         <link rel="stylesheet" type="text/css" href="assets/css/MusicPlayerMlamali.css">
+
+        
+        <!--  Slides Link      -->
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+       
+
         <link rel="stylesheet" type="text/css" href="assets/css/button-style2ouf.css">
+
         <title>TEST ZONE</title>
     </head>
     <body>
@@ -170,6 +176,21 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
             }
 
         </script>
-
+        
+        
+        <div class="profil_card rounded-circle text-center">
+            <img src="img/user.png">
+            <span>Pseudo</span>
+        </div><br/>
+        
+        
+        
+        <!--    SLIDES JS SCRIPT    -->
+        
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <script src="assets/js/slide.js"></script>
+        
+        
+        
     </body>
 </html>
