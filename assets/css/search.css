@@ -3,15 +3,15 @@
     cursor: pointer;
     
 }
-
+ 
 /* PETIT MUSIC CARD */
-.hover {
-    height: 90%;
+.hover { 
+    height: 90%; 
   width: 90%;
   overflow: hidden;
   position: relative;
   padding-bottom: 60%;
-}
+} 
 
 .hover-overlay {
   width: 100%;
