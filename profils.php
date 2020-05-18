@@ -1,6 +1,6 @@
 <?php
 session_start();
-<<<<<<< HEAD
+
 include('assets/db/connexiondb.php'); 
 
 /*print_r($_GET);*/
@@ -22,27 +22,11 @@ $afficher_profil = $req->fetch();
 
 /*print_r($afficher_profil);*/
 
-=======
 
-include('assets/db/connexiondb.php');
-/*active ça si tu veux pas te voir dans la lsite si t'es connecté*/
-/*if(isset($_SESSION['id'])){
-    $afficher_membres =$BDD->prepare("SELECT * FROM user WHERE id <> ?");
-} 
-else{
-    $afficher_membres =$BDD->prepare("SELECT * FROM user");
-}*/
-
-$afficher_membres =$BDD->prepare("SELECT * FROM user");
-
-/*$afficher_membres->execute(array($_SESSION['user_id']));*/
-$afficher_membres->execute();
->>>>>>> 085a840e42c390420dd35bdd68cdde9814048176
 ?>
 
 
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html lang="fr">
     <head>
         <meta charset="utf-8">
@@ -75,23 +59,12 @@ $afficher_membres->execute();
             }
             
         </style>
-=======
-<html>
-    <head>
-        <?php
-        require_once('assets/skeleton/headLinkCSS.html');
-        ?>
-        <title>Profils</title>
-        <link rel="stylesheet" type="text/css" src="assets/css/profils.css">
 
-
-
->>>>>>> 085a840e42c390420dd35bdd68cdde9814048176
     </head>
     <body>
         <div class="container">
             <div class="row">
-<<<<<<< HEAD
+
                
                 <div class="col-md-4" style="width: 150px;height: 150px; padding: 10px;display:inline-block;width:15%";>
                     <img src="img/<?=$afficher_profil['user_image']?>" style="width: 150px;height: 150px;">
@@ -119,30 +92,6 @@ $afficher_membres->execute();
                 
             </div>
         </div>                                                                   
-=======
-                <?php
-                foreach($afficher_membres as $am){
-                    echo "<div class='col-sm-3'>".$am['user_pseudo'];
-                }
-                ?>
-            </div>
-        </div>
 
-
-
-
-
-
-
-
-
-
-
-
-        <?php
-        require_once('assets/skeleton/endLinkScripts.php');
-        ?>
-
->>>>>>> 085a840e42c390420dd35bdd68cdde9814048176
     </body>
 </html>
