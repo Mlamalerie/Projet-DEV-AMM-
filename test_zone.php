@@ -5,6 +5,7 @@ $_SESSION['ici_index_bool'] = false;
 ?>
 
 
+
 <?php
 require 'assets/functions/uploadFile.php';
 
@@ -41,6 +42,7 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
 ?>
 
 
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -57,10 +59,10 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
         <link rel="stylesheet" type="text/css" href="assets/css/test_zone.css">
         <link rel="stylesheet" type="text/css" href="assets/css/MusicPlayerMlamali.css">
 
-        
+
         <!--  Slides Link      -->
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-       
+
 
         <link rel="stylesheet" type="text/css" href="assets/css/button-style2ouf.css">
 
@@ -68,12 +70,36 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
     </head>
     <body>
         <br><br><br><br><br><br><br>
-        <!--   *************************************************************  -->
-        <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('assets/skeleton/navbar.php');
-        ?>
+        require 'assets/functions/uploadFile.php';
+
+        $upd = new uploadFile();
+        print_r("$ <br><br><br><br>rg<br>");
+        print_r($upd);
+        print_r($_POST);
+
+        if (isset($_POST['submit_upload']) && !empty($_POST['submit_upload']) ) {
+            print_r("$$ <br>");
+
+            $tmp_name = $_FILES['upload']['tmp_name'];
+            $name = $_FILES['upload']['name'];
+
+            $nomduboug = $_SESSION['user_pseudo'];
+            $idduboug = $_SESSION['user_id'];
+            $date = date("Ymd-His");
+
+            $destination = $upd->uploadAudio($tmp_name,$name,$nomduboug,$idduboug,$date);
+            echo $destination;
+
+
+            $_SESSION['destinationdubayupload'] = $destination; 
+            header('Location: edit-newupload.php');
+            exit;
+
+        }
+
+        ?> 
 
         <!-- Modal UPLOAD -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -90,7 +116,7 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
                         <form id='formUpload1' action="" method="post" enctype="multipart/form-data">
 
                             <input name="upload" type="file" class="form-control border-0">
-                            <input type="submit" name="Envoyer" value='SUBMIt'>
+                            <input type="submit" name="submit_upload" value='SUBMIt'>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -101,6 +127,16 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
             </div>
         </div>
 
+        <!--   *************************************************************  -->
+        <!--   ************************** NAVBAR  **************************  -->
+
+        <?php
+        require_once('assets/skeleton/navbar.php');
+        ?>
+
+
+
+
 
         Ici c'est l'index des connecté
         <?php
@@ -110,17 +146,10 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
             echo "Pas de connexion";
         }
         ?>
-        <fieldset>
-            <legend> ok </legend>
-            <form action="" method="post" enctype="multipart/form-data">
 
-                <input id="" type="file" name="upload" class="form-control border-0">
-                <input type="submit" name="Sub"  value="Envoyer"> 
-            </form>
-        </fieldset>
         <?php 
         var_dump($_FILES);
-        print_r($_POST)
+
         ?>
 
         <form id="searchform" method="get" action="search.php">
@@ -151,7 +180,7 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
 
 
         <?php
-            require_once('assets/skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.php');
         ?>
         <script>
 
@@ -176,21 +205,21 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
             }
 
         </script>
-        
-        
+
+
         <div class="profil_card rounded-circle text-center">
             <img src="img/user.png">
             <span>Pseudo</span>
         </div><br/>
-        
-        
-        
+
+
+
         <!--    SLIDES JS SCRIPT    -->
-        
+
         <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
         <script src="assets/js/slide.js"></script>
-        
-        
-        
+
+
+
     </body>
 </html>

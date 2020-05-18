@@ -64,6 +64,10 @@
                 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
 
                 ?>
+                <li class="nav-item ">
+                    <a class="nav-link btn" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
+                </li>
+                
                 <li class="nav-item">
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#exampleModalCenter"><img id="iconUpload" src="assets/img/icon/ui.svg"> Uploader </button>
                 </li>
