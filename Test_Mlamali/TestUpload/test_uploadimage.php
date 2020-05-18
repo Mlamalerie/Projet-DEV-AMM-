@@ -1,3 +1,25 @@
+<?php
+require 'uploadFile.php';
+
+$upd = new uploadFile();
+print_r($upd);
+print_r($_POST);
+print_r("$ <br>");
+if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
+    print_r("$$ <br>");
+    
+    $tmp_name = $_FILES['upload']['tmp_name'];
+     $name = $_FILES['upload']['name'];
+    
+    $name = "Mlamali.jpg";
+    $nomduboug = "Wanabilini";
+    $upd->uploadAudio($tmp_name,$name, $nomduboug);
+    print_r("$$$$ <br>");
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,10 +35,14 @@
         <link rel="apple-touch-icon" href="">
 
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/boot=strap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/boot=strap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
         <!-- Link to your css file -->
         <link rel="stylesheet" href="">
+
         <style>
             /*
             *
@@ -73,13 +99,12 @@
                 background-image: linear-gradient(147deg, #757f9a 0%, #d7dde8 100%);
             }
 
+            /*
         </style>
-
     </head>
 
     <body>
         <!-- Start coding here -->
-
         <div class="container py-5">
 
             <!-- For demo purpose -->
@@ -97,14 +122,25 @@
 
             <div class="row py-4">
                 <div class="col-lg-6 mx-auto">
+                    <form id='formUpload1' action="" method="post" enctype="multipart/form-data">
+
+                        <input name="upload" type="file" class="form-control border-0">
+                        <input type="submit" name="Envoyer" value='SUBMIt'>
+                    </form>
 
                     <!-- Upload image input-->
                     <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                        <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
+                        <form id='formUpload1' action="" method="get" enctype="multipart/form-data">
+                           
+                            <input id="upload" type="file" onchange="readURL(this);goFile(this);" class="form-control border-0">
+                        </form>
                         <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
                         <div class="input-group-append">
+
                             <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+
                         </div>
+
                     </div>
 
                     <!-- Uploaded image area-->
@@ -114,7 +150,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Coding End -->
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -123,7 +158,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
         <script>
-          /*  ==========================================
+            /*  ==========================================
                 SHOW UPLOADED IMAGE
                     * ========================================== */
             function readURL(input) {
@@ -139,7 +174,7 @@
                 }
             }
 
-         
+
 
             /*  ==========================================
     SHOW UPLOADED IMAGE NAME
@@ -147,7 +182,9 @@
             var input = document.getElementById( 'upload' );
             var infoArea = document.getElementById( 'upload-label' );
 
+
             input.addEventListener( 'change', showFileName );
+
             function showFileName( event ) {
                 var input = event.srcElement;
                 var fileName = input.files[0].name;
@@ -157,3 +194,6 @@
         </script>
     </body>
 </html>
+<?php 
+var_dump($_FILES);
+?>

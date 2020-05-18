@@ -323,13 +323,13 @@ else if (!$wetypeexiste) {
 
 
     if($weqexiste){
-         $xxx = (String) trim(($_GET['q']));
-    
+        $xxx = (String) trim(($_GET['q']));
+
 
         $req = $BDD->prepare("SELECT *
                             FROM user
                             WHERE CONCAT(user_pseudo,user_description)
-                            
+
                             LIKE ?
                             ORDER BY user_pseudo ASC");
 
@@ -366,6 +366,21 @@ else if (!$wetypeexiste) {
         $resuBEATS = $req->fetchAll();
     }
 
+
+}
+
+if (isset($resuBEATS) && !empty($resuBEATS)){
+    $yadesresultatsBEATS = true;
+
+} else {
+    $yadesresultatsBEATS = false;
+
+}
+if (isset($resuUSERS) && !empty($resuUSERS)){
+    $yadesresultatsUSERS = true;
+
+} else {
+    $yadesresultatsUSERS = false;
 
 }
 
@@ -670,7 +685,26 @@ else if (!$wetypeexiste) {
 
                             <h1 class="display-4">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
 
-                            <p class="lead mb-0">(Nombre de résultat)</p>
+                            <p class="lead mb-0">
+                                <?php 
+   
+                                                    if ($yadesresultatsUSERS && $yadesresultatsBEATS) {
+                                                         $obj1 = count($resuBEATS)."beats trouvé";
+                                                    $obj2 = count($resuUSERS)."personnes trouvées";
+                                                        print_r($obj1);
+                                                        print_r($obj2);
+                                                    } else if ($yadesresultatsUSERS) {
+                                                    
+                                                    $obj2 = count($resuUSERS)."personnes trouvées";
+                                                        print_r($obj2);
+                                                    } else if ($yadesresultatsBEATS) {
+                                                         $obj1 = count($resuBEATS)."beats trouvé";
+                                                
+                                                        print_r($obj1);
+                                                    }
+                                ?> 
+
+                            </p>
 
                         </div>
                     </div>
@@ -680,6 +714,7 @@ else if (!$wetypeexiste) {
                     <!--   ************************** RESULTAT BEAT **************************  -->
 
                     <?php if (!$jechercheunboug || (!$wetypeexiste)) { ?>
+
                     <?php if (($wetypeexiste && !$jechercheunboug)) { ?>
                     <form id="formTrie" action="search.php">
 
@@ -718,59 +753,15 @@ else if (!$wetypeexiste) {
                     </form>
                     <?php } ?>
 
-
-
                     <?php
-                                                                      function returnMusicListStr($bay, $resuBEATS){
-                                                                          $str = "[";
-                                                                          if ($bay == 'songs') {
-
-                                                                              foreach($resuBEATS as $r) {
-                                                                                  $pose = $r['beat_source'];
-
-                                                                                  $str .= "'./audio/$pose',";
-
-                                                                              }
-
-                                                                          } else if ($bay == 'thumbnails'){
-                                                                              foreach($resuBEATS as $r) {
-                                                                                  $pose = $r['beat_cover'];
-
-                                                                                  $str .= "'./img/$pose',";
-                                                                              }
-                                                                          }
-                                                                          else if ($bay == 'artists'){
-                                                                              foreach($resuBEATS as $r) {
-                                                                                  $pose = $r['beat_author'];
-
-                                                                                  $str .= "'$pose',";
-                                                                              }
-                                                                          }else if ($bay == 'titles'){
-                                                                              foreach($resuBEATS as $r) {
-                                                                                  $pose = $r['beat_title'];
-
-                                                                                  $str .= "'$pose',";
-                                                                              }
-                                                                          }
-                                                                          // ici effacer la virgule en + puis c bon
-                                                                          $str = substr($str,0,-1);
-                                                                          $str .= "]";
-
-                                                                          return $str;
-
-
-                                                                      }
-                                                                      print_r("<br><br> **************************");
-                                                                      $test = returnMusicListStr("titles", $resuBEATS);
-                                                                      print_r($test);
-
+                                                                      include("assets/functions/fctforaudioplayer.php");$test = returnMusicListStr("titles", $resuBEATS);print_r($test);
                     ?>
 
                     <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : blue;">
 
                         <div class=" container-fluid ligneCardMusic">
                             <?php
-                                                                      if (isset($resuBEATS)) {
+                                                                      if ($yadesresultatsBEATS) {
                                                                           $i = 1;
                                                                           foreach($resuBEATS as $r){
                             ?>

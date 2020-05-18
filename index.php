@@ -84,7 +84,7 @@ $_SESSION['ici_index_bool'] = true;
                         <button type="button" class="btn btn-danger btninscription">Test3</button>
 
                         <form id="searchform" method="get" action="search.php">
-                            <input type="hidden" name="Genre" value="All">
+                           
 
                             <div class="searchbar ">
 

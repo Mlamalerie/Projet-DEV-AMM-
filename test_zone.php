@@ -4,6 +4,26 @@ session_start();
 $_SESSION['ici_index_bool'] = false;
 ?>
 
+<!-- POUR MODAL UPLOAD.php -->
+<?php
+require 'assets/functions/uploadFile.php';
+
+$upd = new uploadFile();
+print_r("$ <br><br><br><br>rg<br>");
+print_r($upd);
+print_r($_POST);
+
+if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
+    print_r("$$ <br>");
+    
+    $tmp_name = $_FILES['upload']['tmp_name'];
+     $name = $_FILES['upload']['name'];
+    
+    $name = "Mlamali.jpg";
+    $upd->upload($tmp_name,$name,$_SESSION['user_pseudo']);
+    print_r("$$$$ <br>");
+}
+?>
 
 
 
@@ -33,27 +53,33 @@ $_SESSION['ici_index_bool'] = false;
         <?php
         require_once('assets/skeleton/navbar.php');
         ?>
-        
+
+        <!-- Modal UPLOAD -->
         <!-- Modal -->
-                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                        <form id='formUpload1' action="" method="post" enctype="multipart/form-data">
+
+                            <input name="upload" type="file" class="form-control border-0">
+                            <input type="submit" name="Envoyer" value='SUBMIt'>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
+            </div>
+        </div>
 
 
         Ici c'est l'index des connecté
@@ -64,6 +90,19 @@ $_SESSION['ici_index_bool'] = false;
             echo "Pas de connexion";
         }
         ?>
+        <fieldset>
+            <legend> ok </legend>
+            <form action="" method="post" enctype="multipart/form-data">
+
+                <input id="" type="file" name="upload" class="form-control border-0">
+                <input type="submit" name="Sub"  value="Envoyer"> 
+            </form>
+        </fieldset>
+        <?php 
+        var_dump($_FILES);
+        print_r($_POST)
+        ?>
+
         <form id="searchform" method="get" action="search.php">
             <select name="Genre" class="custom-select">-->
                 <option value="All" selected >ALL</option>
@@ -83,38 +122,18 @@ $_SESSION['ici_index_bool'] = false;
 
         <div class="buttons">
             <button class="boutonstyle2ouf"> Hover Me</button>
-<!--            <button class="boutonstyle2ouf"> Hover Me</button>-->
-           
+            <!--            <button class="boutonstyle2ouf"> Hover Me</button>-->
+
         </div>
 
 
-        <nav id="MusicPlayer" class="navbar-light bg-dark fixed-bottom">
-            <div class="container-fluid p-2 px-5" style="background-color:yellow;">
-                <div class="row">
-                    <div class="d-flex align-items-center justify-content-center" style="background-color:red;">
-                        <a class="navbar-brand" >
-                            <i id="logoPlay" onclick=" changeIcon()" class="fas fa-play " style="color : purple;"></i>
-                        </a>
 
-                    </div>
-                    <div class="" style="background-color:blue;">2/3 </div>
-                    <div class="" style="background-color:green;">3/3        </div>
-                </div>
-            </div>
-
-        </nav>
 
 
         <?php
-        require_once('assets/skeleton/endLinkScripts.php');
+            require_once('assets/skeleton/endLinkScripts.php');
         ?>
         <script>
-            function changeIcon(){
-                let ici = document.getElementById("logoPlay")
-                console.log(ici.node);
-                //ici.classList.remove("fa-play");
-                //console.log(ici);
-            }
 
             function goSearch() {
                 console.log("*goSearch*");
