@@ -1,17 +1,22 @@
 body {
-    height: 10px;
-    background: rgba(255, 214, 121, 0.92);
-    
+
+    background: #f7f6ef;
+    /*
+    background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
+    background: linear-gradient(to right, #f2e2da, #fff5fe);
+    overflow-x: hidden;
+    */
+
 }
 .login,
-.image {
-  min-height: 100vh;
+.image { 
+    min-height: 100vh; 
 }
 
 .bg-image {
-  background-image: url('https://res.cloudinary.com/mhmd/image/upload/v1555917661/art-colorful-contemporary-2047905_dxtao7.jpg');
-  background-size: cover;
-  background-position: center center;
+    background-image: url('https://res.cloudinary.com/mhmd/image/upload/v1555917661/art-colorful-contemporary-2047905_dxtao7.jpg');
+    background-size: cover;
+    background-position: center center;
 }
 
 label {
@@ -21,8 +26,8 @@ label {
 select {
 
     text-align: center;
-  text-align-last: center;    
-  
+    text-align-last: center;    
+
 }
 
 
@@ -30,11 +35,30 @@ select {
     justify-items: center;
     align-items: center;
     text-align: center;
-    
+
 }
 
+
+::placeholder {
+    color: #d4b0de!important;
+    font-size: 0.95em;
+}
 .spanAlertchamp {
+    margin-left: 25%;
     color: red!important;
     font-size: 0.8rem;
-    
+
+}
+
+.iconGradient { 
+    width: 20px; 
+    margin-right: 5px;
+    margin-bottom: 8px;
+}
+
+.iconLOGO {
+    display:block;
+    margin:auto;
+    width: 6em;
+
 }

@@ -4,8 +4,8 @@ include_once("assets/db/connexiondb.php"); // inclure le fichier pour se connect
 
 // si une connection est détecter : (ta rien a faire ici mec)
 if(isset($_SESSION['user_id'])){
-//    header('Location: dashboard.php');
-//    exit;
+    //    header('Location: dashboard.php');
+    //    exit;
 }
 
 
@@ -24,14 +24,16 @@ if(!empty($_POST)){
         $motdepasse = (String) trim($motdepasse);
         $motdepasseverif = (String) trim($motdepasseverif);
 
+
+        $ville = (String) trim($ville);
         $pays = (int) $pays;
 
-//        $naiss_jour = (int) $naiss_jour;
-//        $naiss_mois = (int) $naiss_mois;
-//        $naiss_annees = (int) $naiss_annees;
-//
-//        $date_naissance = (String) null;
-        
+        //        $naiss_jour = (int) $naiss_jour;
+        //        $naiss_mois = (int) $naiss_mois;
+        //        $naiss_annees = (int) $naiss_annees;
+        //
+        //        $date_naissance = (String) null;
+
         // le svg de l'icon erreur
         $icon = " <svg class='bi bi-exclamation-circle' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
                                             <path fill-rule='evenodd' d='M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z' clip-rule='evenodd'/>
@@ -43,7 +45,13 @@ if(!empty($_POST)){
             $ok = false;
             $err_pseudo = "Veuillez renseigner ce champ !";
 
-        } else { // ensuite on verifie si ce pseudo existe déja ou pas
+        } else if (strlen($pseudo) < 2) {
+
+            $ok = false;
+            $err_pseudo = "Ce pseudo est trop petit !";
+        }
+
+        else { // ensuite on verifie si ce pseudo existe déja ou pas
             $req = $BDD->prepare("SELECT user_id
                             FROM user
                             WHERE user_pseudo = ? 
@@ -67,16 +75,20 @@ if(!empty($_POST)){
             $err_motdepasse = "Veuillez renseigner ce champ !";
 
         } else if ($motdepasse != $motdepasseverif && $ok){
-             $ok = false;
+            $ok = false;
             $err_motdepasse = "Vous n'avez pas rentréee le mm mot de passeverif !";
         }
-        
+
         //*** Verification du mail
         if(empty($email)) { // si vide
             $ok = false;
             $err_email = "Veuillez renseigner ce champ !";
 
-        }else { // ensuite on verifie si ce mail a déja été pris
+        } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { // si invalide
+            $ok = false;
+            $err_email = "Adresse e-mail invalide !";
+
+        } else { // ensuite on verifie si ce mail a déja été pris
             $req = $BDD->prepare("SELECT user_id
                             FROM user
                             WHERE user_email = ? 
@@ -90,34 +102,48 @@ if(!empty($_POST)){
             }
         }
 
-//        //*** Verification date de naissance
-//        if($naiss_jour < 1 || $naiss_jour > 31) {
-//            $ok = false;
-//            $err_naiss_jour = "Veuillez renseigner ce champ !";
-//
-//        }
-//        if($naiss_mois < 1 || $naiss_mois > 12){
-//            $ok = false;
-//            $err_naiss_mois = "Veuillez renseigner ce champ !";
-//
-//        }
-//        $aaa_debut = 1950; $aaa_n = 70;
-//
-//        if($naiss_annees < 1900 || $naiss_annees > 2020 ){
-//            $ok = false;
-//            $err_naiss_annees = "Veuillez renseigner ce champ !";
-//
-//        }
-//        if (!checkdate($naiss_jour,$naiss_mois,$naiss_annees)){
-//            $ok = false;
-//            $err_date = "Date fausse !";
-//
-//        }else {
-//            $date_naissance = $naiss_annees .'-'. $naiss_mois.'-'.$naiss_jour;
-//
-//        }
-//        
-      //*** Verification du Pays
+        //*** Verification du ville
+        if(empty($ville)) { // si vide
+            $ok = false;
+            $err_ville = "Veuillez renseigner ce champ !";
+
+        } else if (strlen($ville) < 5) {
+
+            $ok = false;
+            $err_ville = "Ce ville est trop petit !";
+        } else if (!ctype_alpha($ville)) {
+
+            $ok = false;
+            $err_ville = "Veuilez saisir seulement des lettres";
+        }
+        //        //*** Verification date de naissance
+        //        if($naiss_jour < 1 || $naiss_jour > 31) {
+        //            $ok = false;
+        //            $err_naiss_jour = "Veuillez renseigner ce champ !";
+        //
+        //        }
+        //        if($naiss_mois < 1 || $naiss_mois > 12){
+        //            $ok = false;
+        //            $err_naiss_mois = "Veuillez renseigner ce champ !";
+        //
+        //        }
+        //        $aaa_debut = 1950; $aaa_n = 70;
+        //
+        //        if($naiss_annees < 1900 || $naiss_annees > 2020 ){
+        //            $ok = false;
+        //            $err_naiss_annees = "Veuillez renseigner ce champ !";
+        //
+        //        }
+        //        if (!checkdate($naiss_jour,$naiss_mois,$naiss_annees)){
+        //            $ok = false;
+        //            $err_date = "Date fausse !";
+        //
+        //        }else {
+        //            $date_naissance = $naiss_annees .'-'. $naiss_mois.'-'.$naiss_jour;
+        //
+        //        }
+        //        
+        //*** Verification du Pays
         $req = $BDD->prepare("SELECT id 
                             FROM pays
                             WHERE code = ?");
@@ -136,13 +162,13 @@ if(!empty($_POST)){
 
 
             // preparer requete
-            $req = $BDD->prepare("INSERT INTO user (user_pseudo,user_email,user_password,user_datenaissance,user_pays,user_dateinscription,user_dateconnexion) VALUES (?, ?, ?, ?, ?, ?, ?)"); 
+            $req = $BDD->prepare("INSERT INTO user (user_pseudo,user_email,user_password,user_ville,user_pays,user_dateinscription,user_dateconnexion) VALUES (?, ?, ?, ?, ?, ?, ?)"); 
 
-            $req->execute(array($pseudo,$email,$motdepasse,$date_naissance,$pays,$date_inscription,$date_inscription));
-            
-             $_SESSION['user_pseudo'] = $pseudo;
-$_SESSION['user_email'] = $email;
-            
+            $req->execute(array($pseudo,$email,$motdepasse,$ville,$pays,$date_inscription,$date_inscription));
+
+            $_SESSION['user_pseudo'] = $pseudo;
+            $_SESSION['user_email'] = $email;
+
             header('Location: dashboard.php');
             exit;
 
@@ -162,12 +188,13 @@ $_SESSION['user_email'] = $email;
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-      <?php
+        <?php
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/inscription-connexion.css">
-        
+        <link rel="stylesheet" type="text/css" href="assets/css/button-style2ouf.css">
+
         <title>Inscription</title>
     </head>
     <body>
@@ -175,7 +202,7 @@ $_SESSION['user_email'] = $email;
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-       // require_once('assets/skeleton/navbar.php');
+        // require_once('assets/skeleton/navbar.php');
 
         ?>
 
@@ -193,15 +220,22 @@ $_SESSION['user_email'] = $email;
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-10 col-xl-7 mx-auto">
-                                    <h3 class="display-4">Inscription</h3>
-                                    <p class="text-muted mb-4">Créez un compte WeBeats et commencez à vendre vos composition !</p>
-                                    
+
+                                    <object class="iconLOGO" data="assets/img/icon/compact-disc.svg" type="image/svg+xml"></object>
+                                    <h3 class="display-4 text-center">Inscription.</h3>
+                                    <p class="text-muted mb-4 ">Créez un compte WeBeats et commencez à vendre vos composition !</p>
+
+
                                     <form method="post">
-                                       
+
                                         <!--PSEUDO-->
-                                        <div class="form-group mb-3 ">
-                                            
-                                            <label for="pseudo">Votre Pseudo </label>
+                                        <div class="form-group mb-2  ">
+
+                                            <div class="row">
+                                                <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
+                                                <label for="pseudo"> Pseudo </label>
+                                            </div>
+                                            <input type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="pseudo" name="pseudo" placeholder="Mettez un pseudo pour votre profil"  value="<?php if(isset($pseudo)){echo $pseudo;}?>" autofocus>
                                             <?php
                                             if(isset($err_pseudo)){
                                                 echo "<span class='spanAlertchamp'> ";
@@ -209,37 +243,52 @@ $_SESSION['user_email'] = $email;
                                                 echo "</span> ";
                                             } 
                                             ?>
-                                            <input type="text" class="form-control rounded-pill border-0 shadow-sm px-4" id="pseudo" name="pseudo" placeholder="Mettez un pseudo pour votre profil"  value="<?php if(isset($pseudo)){echo $pseudo;}?>" autofocus>
                                         </div>
                                         <!--EMAIL-->
                                         <div class="form-group mb-4">
-                                           
-                                            <label for="email">Votre Adresse Email</label>
-                                             <?php
+                                            <div class="row">
+                                                <object class="iconGradient" data="assets/img/icon/envelope.svg" type="image/svg+xml"></object>
+                                                <label for="email"> Adresse Email</label>
+                                            </div>
+                                            <input type="email" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="email" name="email" aria-describedby="emailHelp" placeholder="Tapez votre e-mail" value="<?php if(isset($email)){echo $email;}?>">
+
+                                            <?php
 
                                             if(isset($err_email)){
                                                 echo "<span class='spanAlertchamp'> ";
                                                 echo $icon . $err_email ;
                                                 echo "</span> ";
-                                            } 
+                                            } else {
                                             ?>
-                                            <input type="email" class="form-control rounded-pill border-0 shadow-sm px-4" id="email" name="email" aria-describedby="emailHelp" placeholder="Tapez votre e-mail" value="<?php if(isset($email)){echo $email;}?>">
-                                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            <small id="emailHelp" class="form-text text-muted text-center">Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre.</small>
+                                            <?php
+                                            }
+                                            ?>
                                         </div>
+
                                         <!--MOT DE PASSE-->
                                         <div class="form-group">
-                                            
-                                            <label for="motdepasse">Mot de passe</label>
+                                            <div class="row">
+                                                <object class="iconGradient" data="assets/img/icon/lock.svg" type="image/svg+xml"></object>
+                                                <label for="motdepasse">Mot de passe</label>
+                                            </div>
+                                            <input type="password" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="motdepasse" name ="motdepasse" placeholder="Tapez votre mot de passe" value="<?php if(isset($motdepasse)){echo $motdepasse;}?>">
                                             <?php
 
                                             if(isset($err_motdepasse)){
-                                                echo "<br> <span class='spanAlertchamp'> ";
+                                                echo " <span class='spanAlertchamp'> ";
                                                 echo  $icon . $err_motdepasse ;
-                                                echo "</span> ";
+                                                echo "</span> <br>";
                                             } 
                                             ?>
-                                            <input type="password" class="mb-2 form-control rounded-pill border-0 shadow-sm px-4" id="motdepasse" name ="motdepasse" placeholder="Tapez votre mot de passe" value="<?php if(isset($motdepasse)){echo $motdepasse;}?>">
-                                            
+
+                                            <div class="row">
+                                                <object class="mt-2 iconGradient" data="assets/img/icon/lock.svg" type="image/svg+xml"></object>
+                                                <label for="motdepasseverif">Confirmez le mot de passe</label>
+
+                                            </div>
+                                            <input type="password" class=" mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="motdepasseverif" name ="motdepasseverif" placeholder="Tapez à nouveau votre mot de passe" value="<?php if(isset($motdepasseverif)){echo $motdepasseverif;}?>">
+
                                             <?php
 
                                             if(isset($err_motdepasseverif)){
@@ -248,15 +297,31 @@ $_SESSION['user_email'] = $email;
                                                 echo "</span> ";
                                             } 
                                             ?>
-                                            <input type="password" class=" form-control rounded-pill border-0 shadow-sm px-4" id="motdepasseverif" name ="motdepasseverif" placeholder="ReTapez votre mot de passe" value="<?php if(isset($motdepasseverif)){echo $motdepasseverif;}?>">
-                                            
-                                            
+
+
                                         </div>
 
-                                      
-                                        <!--PAYS-->
+
                                         <div class="form-group">
-                                            <label for="pays">Votre Pays</label>
+                                            <!--VILLE-->
+                                            <div class="row">
+                                                <object class="iconGradient" data="assets/img/icon/map.svg" type="image/svg+xml"></object>
+                                                <label for="pseudo"> Ville </label>
+                                            </div>
+
+                                            <input type="text" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ville" name="ville" placeholder="Ou habiter vous ?"  value="<?php if(isset($ville)){echo $ville;}?>" autofocus>
+                                            <?php
+                                            if(isset($err_ville)){
+                                                echo "<span class='spanAlertchamp'> ";
+                                                echo $icon . $err_ville ;
+                                                echo "</span> <br>";
+                                            } 
+                                            ?>
+                                            <!--PAYS-->
+                                            <div class="row">
+                                                <object class="iconGradient" data="assets/img/icon/compass.svg" type="image/svg+xml"></object>
+                                                <label for="pays">Votre Pays</label>
+                                            </div>
                                             <select name="pays" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
                                                 <?php
                                                 if(isset($pays)){
@@ -288,9 +353,15 @@ $_SESSION['user_email'] = $email;
 
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary btn-block mt-3 rounded-pill shadow-sm" name="inscription">C'est parti</button>
+                                        <div class="custom-control custom-checkbox mb-3">
+                                            <input id="customCheck1" type="checkbox" checked class="custom-control-input">
+                                            <label for="customCheck1" class="custom-control-label">J'ai lu et j'accepte les <a href="">conditions d'utilisation</a> et la <a href="">politique de confidentialité</a></label>
+                                        </div>
+                                        <div class="buttons">
+                                            <button type="submit" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="inscription">C'est parti</button>
+                                        </div>
                                     </form>
-                                    <p class="text-muted mb-4">Vous avez déjà un compte? <a href="connexion.php">Connectez vous</a></p>
+                                    <p class="text-muted mb-4">Vous avez déjà un compte ? <a href="connexion.php">Connectez vous</a></p>
                                 </div>
                             </div>
                         </div><!-- End -->
