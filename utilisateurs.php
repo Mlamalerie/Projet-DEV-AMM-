@@ -26,7 +26,7 @@ $afficher_membres->execute();
         <?php        require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <link rel="stylesheet" type="text/css" src="assets/css/utilisateurs.css">
-        <title>Profils</title>
+        <title>All Users</title>
 
         <style>
 
@@ -59,7 +59,7 @@ $afficher_membres->execute();
             .profile-name{
                 font-size:25px;
                 font-weight : bold; 
-                margin 27px 0px 0px 120px;
+                margin: 27px 0px 0px 120px;
             }
             .msg-btn{
                 margin:10px 0px 40px 0px; 
@@ -114,7 +114,7 @@ $afficher_membres->execute();
                     </div>
 
                     <div class="profile-name">
-                        <?=$am['user_pseudo']?>
+                          <?=$am['user_pseudo']?>
                     </div>
                     <button class="msg-btn">DM</button>
                     <button class="follow-btn">Follow</button>
