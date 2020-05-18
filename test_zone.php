@@ -26,7 +26,7 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
     $direction = $upd->uploadAudio($tmp_name,$name,$nomduboug,$idduboug,$date);
     
     if ($direction == 'error1'){
-        err_upload = "Ce fichier n'est pas un fichier audio !"
+        $err_upload = "Ce fichier n'est pas un fichier audio !";
         
     } else {
         $_SESSION['go_direction_upload'] = $direction; 
