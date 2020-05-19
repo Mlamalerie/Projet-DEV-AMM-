@@ -6,6 +6,41 @@ $_SESSION['ici_index_bool'] = false;
 
 
 
+<?php
+require 'assets/functions/uploadFile.php';
+
+$upd = new uploadFile();
+print_r("$ <br><br><br><br>rg<br>");
+print_r($upd);
+print_r($_POST);
+
+if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
+    print_r("$$ <br>");
+    
+    $tmp_name = $_FILES['upload']['tmp_name'];
+     $name = $_FILES['upload']['name'];
+    
+     $nomduboug = $_SESSION['user_pseudo'];
+    $idduboug = $_SESSION['user_id'];
+    $date = date("Ymd-His");
+    
+    $direction = $upd->uploadAudio($tmp_name,$name,$nomduboug,$idduboug,$date);
+    
+    if ($direction == 'error1'){
+        $err_upload = "Ce fichier n'est pas un fichier audio !";
+        
+    } else {
+        $_SESSION['go_direction_upload'] = $direction; 
+        header('Location: upload.php');
+        exit;
+        
+    }
+    
+    echo 'ILESTOU :'.$ilestou;
+   
+}
+?>
+
 
 
 <!DOCTYPE html>
