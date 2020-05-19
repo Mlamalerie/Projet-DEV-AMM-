@@ -285,7 +285,7 @@ if ($wetypeexiste && !$jechercheunboug) {
 
 
 
-//DANS LES USESR
+//DANS LES USERS
 else if ($wetypeexiste && $jechercheunboug){
 
     if($weqexiste) {
