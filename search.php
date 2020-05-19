@@ -1347,7 +1347,7 @@ function playPause(songIndex) {
             };
 
             // actualisation du lecteur en fct du temps(demi-secondes)
-            setInterval(updateProgressValue, 500);
+            setInterval(updateProgressValue, 50);
 
             // Valeur de la bar qd curseur est glissé sans lecture
             function changeProgressBar() {

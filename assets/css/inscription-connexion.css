@@ -1,6 +1,6 @@
 body {
 
-    background: #f7f6ef;
+    background: #faf2e8;
     /*
     background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
     background: linear-gradient(to right, #f2e2da, #fff5fe);
@@ -40,7 +40,7 @@ select {
 
 
 ::placeholder {
-    color: #d4b0de!important;
+    color: #868686!important;
     font-size: 0.95em;
 }
 .spanAlertchamp {
