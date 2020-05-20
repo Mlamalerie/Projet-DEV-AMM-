@@ -4,8 +4,8 @@ include_once("assets/db/connexiondb.php"); // inclure le fichier pour se connect
 
 // si une connection est détecter : (ta rien a faire ici mec)
 if(isset($_SESSION['user_id'])){
-    //    header('Location: dashboard.php');
-    //    exit;
+        header('Location: dashboard.php');
+       exit;
 }
 
 
@@ -45,7 +45,7 @@ if(!empty($_POST)){
             $ok = false;
             $err_pseudo = "Veuillez renseigner ce champ !";
 
-        } else if (strlen($pseudo) < 2) {
+        } else if (strlen($pseudo) < 3) {
 
             $ok = false;
             $err_pseudo = "Ce pseudo est trop petit !";
@@ -154,23 +154,35 @@ if(!empty($_POST)){
             $ok = false;
             $err_pays = "Veuillez renseigner ce champ !";
         }
+        
+        if(!isset($verif_pays['id'])){ // si 
+            $ok = false;
+            $err_pays = "Veuillez renseigner ce champ !";
+        }
+        
+        if(empty($checkmala)) { // si vide
+            $ok = false;
+            $err_checkmala = "Veuillez renseigner ce champ !";
+
+        }
 
         if($ok) {
 
             $date_inscription = date("Y-m-d H:i:s"); 
+            $statut = 1;
             $motdepasse = crypt($motdepasse, '$6$rounds=5000$grzgirjzgrpzhte95grzegruoRZPrzg8$');
 
 
             // preparer requete
-            $req = $BDD->prepare("INSERT INTO user (user_pseudo,user_email,user_password,user_ville,user_pays,user_dateinscription,user_dateconnexion) VALUES (?, ?, ?, ?, ?, ?, ?)"); 
+            $req = $BDD->prepare("INSERT INTO user (user_pseudo,user_email,user_password,user_ville,user_pays,user_dateinscription,user_dateconnexion,user_statut) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"); 
 
-            $req->execute(array($pseudo,$email,$motdepasse,$ville,$pays,$date_inscription,$date_inscription));
+            $req->execute(array($pseudo,$email,$motdepasse,$ville,$pays,$date_inscription,$date_inscription,$statut));
 
             $_SESSION['user_pseudo'] = $pseudo;
             $_SESSION['user_email'] = $email;
 
             header('Location: dashboard.php');
-            exit;
+           exit;
 
         }
 
@@ -323,7 +335,7 @@ if(!empty($_POST)){
                                                 <object class="iconGradient" data="assets/img/icon/compass.svg" type="image/svg+xml"></object>
                                                 <label for="pays">Votre Pays</label>
                                             </div>
-                                            <select name="pays" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
+                                            <select id='pays' name="pays" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
                                                 <?php
                                                 if(isset($pays)){
                                                     $req = $BDD->prepare("SELECT code,nom_fr_fr
@@ -353,9 +365,11 @@ if(!empty($_POST)){
                                             </select>
 
                                         </div>
+                                        
+
 
                                         <div class="custom-control custom-checkbox mb-3">
-                                            <input id="customCheck1" type="checkbox" checked class="custom-control-input">
+                                            <input name="checkmala" id="customCheck1" type="checkbox" class="custom-control-input">
                                             <label for="customCheck1" class="custom-control-label">J'ai lu et j'accepte les <a href="">conditions d'utilisation</a> et la <a href="">politique de confidentialité</a></label>
                                         </div>
                                         <div class="buttons">
@@ -386,6 +400,9 @@ if(!empty($_POST)){
 
 
         <script type="text/javascript">
+            
+            
+            
             const topics = ["!", "design"];
             const topic = document.querySelector('.topics');
             

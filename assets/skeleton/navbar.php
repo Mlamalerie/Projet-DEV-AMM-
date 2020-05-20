@@ -72,7 +72,7 @@
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#exampleModalCenter"><img id="iconUpload" src="assets/img/icon/ui.svg"> Uploader </button>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn" href="#" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> Panier </a>
+                    <button class="nav-link btn" href="#" data-toggle="modal" data-target="#modalPanier"><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> Panier </button>
                 </li>
 
 
