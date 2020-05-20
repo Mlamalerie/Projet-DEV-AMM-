@@ -84,7 +84,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-                        <a class="dropdown-item  " href="#"> Mon Profil </a>
+                        <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"> Mon Profil </a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="deconnexion.php">Déconnexion</a>

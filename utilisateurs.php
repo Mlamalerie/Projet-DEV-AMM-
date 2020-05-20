@@ -1,19 +1,20 @@
 <?php
 session_start();
+$_SESSION['ici_index_bool'] = false;
 
 include('assets/db/connexiondb.php');
 /*active ça si tu veux pas te voir dans la liste si t'es connecté*/
-/*if(isset($_SESSION['id'])){
-    $afficher_membres =$BDD->prepare("SELECT * FROM user WHERE id <> ?");
+if(isset($_SESSION['user_id'])){
+    $afficher_membres =$BDD->prepare("SELECT * FROM user WHERE user_id <> ?");
+    $afficher_membres->execute(array($_SESSION['user_id']));
 } 
 else{
     $afficher_membres =$BDD->prepare("SELECT * FROM user");
-}*/
+    $afficher_membres->execute();
+}
 
-$afficher_membres =$BDD->prepare("SELECT * FROM user");
 
-/*$afficher_membres->execute(array($_SESSION['user_id']));*/
-$afficher_membres->execute();
+/*$afficher_membres->execute();*/
 ?>
 
 
@@ -25,6 +26,7 @@ $afficher_membres->execute();
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?php        require_once('assets/skeleton/headLinkCSS.html');
         ?>
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" src="assets/css/utilisateurs.css">
         <title>All Users</title>
 
@@ -102,6 +104,12 @@ $afficher_membres->execute();
 
     </head>
     <body>
+         <!--   ************************** NAVBAR  **************************  -->
+
+        <?php
+        require_once('assets/skeleton/navbar.php');
+        ?>
+        <br/><br/><br/><br/>
 
         <div class="container">
             <div class="row">
