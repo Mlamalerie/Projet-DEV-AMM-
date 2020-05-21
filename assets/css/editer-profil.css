@@ -63,9 +63,15 @@ select {
 
 }
 
-.iconModif {
-    width: 25px; 
+.iconDone {
+    width: 20px;   
 }
+.spanDone{
+    font-size: 1.1rem; 
+    color: limegreen; 
+} 
+
+
 
 
  /*Rounded tabs */

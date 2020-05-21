@@ -71,14 +71,8 @@
                 <li class="nav-item">
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#exampleModalCenter"><img id="iconUpload" src="assets/img/icon/ui.svg"> Uploader </button>
                 </li>
-                <li class="nav-item">
-                    <button class="nav-link btn" href="#" data-toggle="modal" data-target="#modalPanier"><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> Panier </button>
-                </li>
-
-
-
-
-                <li class="nav-item dropdown ">
+                
+                  <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <img id="iconUser" src="assets/img/user.png">
                     </a>
@@ -91,6 +85,15 @@
                         <a class="dropdown-item" href="deconnexion.php">Déconnexion</a>
                     </div>
                 </li>
+                
+                <li class="nav-item">
+                    <button class="nav-link btn" href="#" data-toggle="modal" data-target="#modalPanier"><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> Panier </button>
+                </li>
+
+
+
+
+              
 
 
                 <?php

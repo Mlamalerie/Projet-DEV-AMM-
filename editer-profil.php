@@ -32,30 +32,62 @@ $basesexe = $afficher_profil['user_sexe'];
 $basedate_naissance = $afficher_profil['user_datenaissance'];
 $baseimage = $afficher_profil['user_image'];
 
+$activetabinfoprofil = true;
+$activetabemail = false;
+$activetabmdp = false;
+$activetabinfoperso = false;
+
+$toutestboninfoprofil = false;
+$toutestbonemail = false;
+$toutestbonmdp = false;
+$toutestboninfoperso = false;
 if(!empty($_POST)){
 
     extract($_POST); // si pas vide alors extraire le tableau, grace a ça on pourra directemet mettre le nom de la varilable en dur
     $ok = true;
-    $icon = " <svg class='bi bi-exclamation-circle' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+    $icon = " <svg class='mr-1 my-1 bi bi-exclamation-circle' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
                                             <path fill-rule='evenodd' d='M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z' clip-rule='evenodd'/>
                                             <path d='M7.002 11a1 1 0 112 0 1 1 0 01-2 0zM7.1 4.995a.905.905 0 111.8 0l-.35 3.507a.552.552 0 01-1.1 0L7.1 4.995z'/>
                                         </svg>";
-
+    $activetabinfoprofil = false;
     // si le bouton saveprofil a été cliqué
     if (isset($_POST['savechangeinfoprofil'])){
+        $activetabinfoprofil = true;
 
         $okpseudonotsame = false;
         if($pseudo != $basepseudo){
             $okpseudonotsame = true;
             $pseudo = (String) trim($pseudo);
+            //*** Verification du pseudo
             if(empty($pseudo)) { // si vide
                 $ok = false;
                 $err_pseudo = "Veuillez renseigner ce champ !";
 
-            } else if (strlen($pseudo) < 3) {
+            } else if (strlen($pseudo) <= 3) {
 
                 $ok = false;
                 $err_pseudo = "Ce pseudo est trop petit !";
+            }
+            else if (ctype_digit($pseudo)) {
+
+                $ok = false;
+                $err_pseudo = "Vous êtes obliger de mettre au moins une lettre dans votre pseudo";
+            }
+
+            else if (substr_count($pseudo, ' ') >= 3) {
+
+                $ok = false;
+                $err_pseudo = "Votre pseudo ne peut contenir au plus 2 espaces";
+            }
+            else if (!ctype_alnum(implode("",explode(' ',$pseudo)))) {
+
+                $ok = false;
+                $err_pseudo = "Votre pseudo ne doit contenir que des lettres ou des chiffres";
+            }
+            else if (strlen($pseudo) > 25) {
+
+                $ok = false;
+                $err_pseudo = "Ce pseudo est trop grand ! Vous avez saisie ".(strlen($pseudo) - 25)." caractère en trop";
             }
 
             else { // ensuite on verifie si ce pseudo existe déja ou pas
@@ -68,7 +100,7 @@ if(!empty($_POST)){
 
                 if(isset($user['user_id'])){
                     $ok = false;
-                    $err_pseudo = "Ce pseudo existe déjé !";
+                    $err_pseudo = "Ce pseudo est déjà pris ! Choisissez en un autre. ";
                 }
             }
         }
@@ -77,14 +109,14 @@ if(!empty($_POST)){
         if($description != $basedescription){
             $okdescriptionnotsame = true;
             $description = (String) trim($description);
-            if(empty($description)) { // si vide
-                $ok = false;
-                $err_description = "Veuillez renseigner ce champ !";
+            if (strlen(implode("",explode(' ',$description))) > 140) {
 
+                $ok = false;
+                $err_description = "TRop grand";
             }
         }
-        
-        
+
+
         if($ok) {
 
             if($okpseudonotsame){$basepseudo = $pseudo;}
@@ -97,14 +129,128 @@ if(!empty($_POST)){
             $req->execute(array($pseudo,$description,$baseid));
 
 
-            $toutestboninfoprofil = "Vos information ont bien été modifié !";
+            $toutestboninfoprofil = true;
 
-            echo $toutestboninfoprofil;
-            //header('editer-profil.php?profil_id='.$baseid);
 
         }
 
-    }
+    } // End saveinfoprofil
+
+    $activetabemail = false;
+    // si le bouton saveemail a été cliqué
+    if (isset($_POST['savechangeemail'])){
+        $activetabemail = true;
+        echo "<br>* ";
+        //** Verification du mail 
+        $okemailnotsame = false;
+        if($email != $baseemail){ // si l'email est different alors la on peut commencer a le tester
+            echo "<br>** ";
+            $okemailnotsame = true;
+            $email = (String) trim($email);
+            //*** Verification du mail
+            if(empty($email)) { // si vide
+                $ok = false;
+                $err_email = "Veuillez renseigner ce champ !";
+
+            } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { // si invalide
+                $ok = false;
+                $err_email = "Adresse e-mail invalide !";
+
+            } else { // ensuite on verifie si ce mail a déja été pris
+                $req = $BDD->prepare("SELECT user_id
+                            FROM user
+                            WHERE user_email = ? 
+                                ");
+                $req->execute(array($email));
+                $user = $req->fetch();
+
+                if(isset($user['user_id'])){
+                    $ok = false;
+                    $err_email = "Cette e-mail existe déjé !";
+                }
+            }
+        }
+
+        if(empty($votremotdepasse4email)) { // si vide
+            $ok = false;
+            $err_votremotdepasse4email = "Veuillez renseigner ce champ après avoir saisie votre nouvel email !";
+
+        } else if (crypt($votremotdepasse4email, '$6$rounds=5000$grzgirjzgrpzhte95grzegruoRZPrzg8$') != $basemotdepasse) {
+            $ok = false;
+            $err_votremotdepasse4email = "Vous n'aviez pas bien saisie votre mot de passe ! Resaisissez un email puis le bon mot de passe cette fois ci...";
+        }
+
+
+        if($ok) {
+
+            if($okemailnotsame){$baseemail = $email;}
+            // preparer requete
+            $req = $BDD->prepare("UPDATE user
+            SET user_email = ?
+            WHERE user_id = ?"); 
+
+            $req->execute(array($email,$baseid));
+
+
+            $toutestbonemail = true;
+
+        }
+
+    } // End savechangemeail
+
+    $activetabmdp = false;
+    // si le bouton savemdp a été cliqué
+    if (isset($_POST['savechangemdp'])){
+        $activetabmdp = true;
+
+        if(empty($ancienmotdepasse)) { // si le champ ancien mot de passe est vide
+            $ok = false;
+            $err_ancienmotdepasse = "Veuillez renseigner ce champ !";
+
+        } else if (crypt($ancienmotdepasse, '$6$rounds=5000$grzgirjzgrpzhte95grzegruoRZPrzg8$') != $basemotdepasse) {
+            $ok = false;
+            $err_ancienmotdepasse = "Ce n'est pas votre ancien mot de passe";
+        }
+
+        //** Verification du Nouveau mot de passe
+        if(crypt($nouveaumotdepasse, '$6$rounds=5000$grzgirjzgrpzhte95grzegruoRZPrzg8$') != $basemotdepasse){
+            $oknewmdpnotsame = true;
+            $nouveaumotdepasse = (String) trim($nouveaumotdepasse);
+
+            if(empty($nouveaumotdepasse)) { // si le champ mot de passe est vide
+                $ok = false;
+                $err_nouveaumotdepasse = "Veuillez renseigner ce champ !";
+
+            } else if(strlen($nouveaumotdepasse) < 5) { // si le champ mot de passe est vide
+                $ok = false;
+                $err_nouveaumotdepasse = "Ce mot de passe est trop petit ! ";
+
+            }
+        } else{
+            $ok = false;
+            $oknewmdpnotsame = false;
+            $err_nouveaumotdepasse = "Euh chakal c'est le mmmot de passe";
+            //mettre icon qui change en ampoule
+
+        }
+
+        if($ok) {
+
+            if($oknewmdpnotsame){$basemotdepasse = $nouveaumotdepasse;}
+
+            // preparer requete
+            $req = $BDD->prepare("UPDATE user
+            SET user_password = ?
+            WHERE user_id = ?"); 
+
+            $req->execute(array(crypt($nouveaumotdepasse, '$6$rounds=5000$grzgirjzgrpzhte95grzegruoRZPrzg8$'),$baseid));
+
+
+            $toutestbonmdp = true;
+
+        }
+
+    } // End savechangemeail
 
 
 }
@@ -123,65 +269,9 @@ if(!empty($_POST)){
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <link rel="stylesheet" type="text/css" href="assets/css/editer-profil.css">
-        <!--
-<style>
-.container{
-background: #7728b2;
-color: white;
-}
-.infos{
-background: red;
-}
-.msg-btn{
-margin:10px 0px 40px 0px; 
-background:rgba(121, 6, 247,1);
-border: 1px solid rgba(121, 6, 247,0.5); 
-padding:10px 25px; 
-color: #ffffff; 
-border-radius: 3px; 
-cursor:pointer; 
-}
-.follow-btn{
-margin:10px 0px 40px 0px;
-border: 1px solid rgba(121, 6, 247,0.5); 
-padding:10px 25px; 
-border-radius: 3px; cursor:pointer; 
-margin-left:10px; 
-background: white;
-color:rgba(121, 6, 247,1);
-}
-.infos-privee-btn{
-margin:10px 0px 40px 0px;
-margin-left:10px;
-background: #000000;
-color:rgba(121, 6, 247,1);
-padding:10px 25px; 
-border-radius: 3px; cursor:pointer; 
-
-}
-.infos-privee-btn a{
-text-decoration: none;
-color:rgba(121, 6, 247,1);
-}
-.editer-btn{
-margin:10px 0px 40px 0px;
-margin-left:10px;
-background: grey;
-color:rgba(121, 6, 247,1);
-
-border-radius: 3px; cursor:pointer; 
-
-}
-.editer-btn a{
-text-decoration: none;
-color:rgba(121, 6, 247,1);
-}
-</style>
--->
 
     </head>
     <body>
-
 
         <div class="container py-5">
             <!-- For demo purpose -->
@@ -201,21 +291,21 @@ color:rgba(121, 6, 247,1);
                 <!-- TITTRE DES TAB -->
                 <ul id="myTab" role="tablist" class="nav nav-tabs nav-pills flex-column flex-sm-row text-center bg-light border-0 rounded-nav">
                     <li class="nav-item flex-sm-fill">
-                        <a id="home-tab" data-toggle="tab" href="#tabinfoprofil" role="tab" aria-controls="tabinfoprofil" aria-selected="true" class="nav-link border-0 text-uppercase font-weight-bold active">Information du profil </a>
+                        <a id="home-tab" data-toggle="tab" href="#tabinfoprofil" role="tab" aria-controls="tabinfoprofil" aria-selected="true" class="nav-link border-0 text-uppercase font-weight-bold <?php if($activetabinfoprofil){ ?> active <?php } ?>">Information du profil </a>
                     </li>
                     <li class="nav-item flex-sm-fill">
-                        <a id="profile-tab" data-toggle="tab" href="#tabemail" role="tab" aria-controls="tabemail" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">Email</a>
+                        <a id="profile-tab" data-toggle="tab" href="#tabemail" role="tab" aria-controls="tabemail" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold <?php if($activetabemail){ ?> active <?php } ?>">Email</a>
                     </li>
                     <li class="nav-item flex-sm-fill">
-                        <a id="contact-tab" data-toggle="tab" href="#tabmotdepasse" role="tab" aria-controls="tabmotdepasse" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">Mot de passe </a>
+                        <a id="contact-tab" data-toggle="tab" href="#tabmotdepasse" role="tab" aria-controls="tabmotdepasse" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold <?php if($activetabmdp){ ?> active <?php } ?>">Mot de passe </a>
                     </li>
                     <li class="nav-item flex-sm-fill">
-                        <a id="contact-tab" data-toggle="tab" href="#tabinfoperso" role="tab" aria-controls="tabinfoperso" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">Infos personnels</a>
+                        <a id="contact-tab" data-toggle="tab" href="#tabinfoperso" role="tab" aria-controls="tabinfoperso" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold <?php if($activetabinfoperso){ ?> active <?php } ?>">Infos personnels</a>
                     </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <!--  TAB INFO DU PROFIL   -->
-                    <div id="tabinfoprofil" role="tabpanel" aria-labelledby="info-profil-tab" class="tab-pane fade px-4 py-5 show active">
+                    <div id="tabinfoprofil" role="tabpanel" aria-labelledby="info-profil-tab" class="tab-pane fade px-4 py-5 <?php if($activetabinfoprofil){ ?> show active <?php } ?>">
 
                         <form method="post">
                             <!--PSEUDO-->
@@ -240,9 +330,9 @@ color:rgba(121, 6, 247,1);
 
                                 <div class="row">
                                     <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                    <label for="description"> description </label>
+                                    <label for="description"> Bio </label>
                                 </div>
-                                <input  onkeyup="goBtnSave(this,1)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="description" name="description" placeholder="Mettez un description pour votre profil"  value="<?=$basedescription?>" autofocus>
+                                <input  onkeyup="goBtnSave(this,1)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="description" name="description" placeholder=""  value="<?=$basedescription?>" autofocus>
                                 <?php
     if(isset($err_description)){
         echo "<span class='spanAlertchamp'> ";
@@ -254,12 +344,23 @@ color:rgba(121, 6, 247,1);
 
                             <input id="btnsave1" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="savechangeinfoprofil" value="Sauvegarder changement">
 
+                            <?php
+                            if($toutestboninfoprofil){ 
+                            ?>
+                            <div class="divDone">
+                                <span class="spanDone"> Vos modiffication ont bien été enregistrer </span>
+                                <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
+                            </div>
+                            <?php
+                            }
+                            ?>
+
 
                         </form>
                     </div>
 
                     <!--  TAB EMAIL   -->
-                    <div id="tabemail" role="tabpanel" aria-labelledby="email-tab" class="tab-pane fade px-4 py-5">
+                    <div id="tabemail" role="tabpanel" aria-labelledby="email-tab" class="tab-pane fade px-4 py-5 <?php if($activetabemail){ ?> show active <?php } ?> ">
                         <form method="post">
 
                             <div class="form-group mb-4">
@@ -268,6 +369,13 @@ color:rgba(121, 6, 247,1);
                                     <label for="email"> Adresse Email</label>
                                 </div>
                                 <input onkeyup="goBtnSave(this,2)" type="email" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="email" name="email" aria-describedby="emailHelp" placeholder="Tapez votre e-mail" value="<?=$baseemail?>">
+                                <?php
+    if(isset($err_email)){
+        echo "<span class='spanAlertchamp'> ";
+        echo $icon . $err_email ;
+        echo "</span> ";
+    } 
+                                ?>
 
 
                             </div>
@@ -278,15 +386,36 @@ color:rgba(121, 6, 247,1);
                                     <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
                                     <label for="votremotdepasse4email"> saisir Mot de passe </label>
                                 </div>
-                                <input onkeyup="goBtnSave(this,2)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="votremotdepasse4email" name="votremotdepasse4email" placeholder="" autofocus>
+                                <input onkeyup="goBtnSave(this,2)" type="password" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="votremotdepasse4email" name="votremotdepasse4email" placeholder="" autofocus  disabled>
+
+                                <?php
+                                if(isset($err_votremotdepasse4email)){
+                                    echo "<span class='spanAlertchamp'> ";
+                                    echo $icon . $err_votremotdepasse4email ;
+                                    echo "</span> ";
+                                } 
+                                ?>
 
                             </div>
-                            <input id="btnsave2" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="inscription" value="Sauvegarder changement">
+                            <input id="btnsave2" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="savechangeemail" value="Sauvegarder changement">
+
+
+
                         </form>
+                        <?php
+                        if($toutestbonemail){ 
+                        ?>
+                        <div>
+                            <span class="spanDone"> Vos modiffication ont bien été enregistrer </span>
+                            <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
+                        </div>
+                        <?php
+                        }
+                        ?>
 
                     </div>
                     <!-- TAB MDP   -->
-                    <div id="tabmotdepasse" role="tabpanel" aria-labelledby="password-tab" class="tab-pane fade px-4 py-5">
+                    <div id="tabmotdepasse" role="tabpanel" aria-labelledby="password-tab" class="tab-pane fade px-4 py-5<?php if($activetabmdp){ ?> show active <?php } ?>">
                         <form method="post">
                             <!--ANCIEN MOT DE PASSE -->
                             <div class="form-group mb-2  ">
@@ -296,6 +425,14 @@ color:rgba(121, 6, 247,1);
                                     <label for="ancienmotdepasse"> Ancien Mot de passe </label>
                                 </div>
                                 <input onkeyup="goBtnSave(this,3)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ancienmotdepasse" name="ancienmotdepasse" placeholder="" autofocus>
+
+                                <?php
+                                if(isset($err_ancienmotdepasse)){
+                                    echo "<span class='spanAlertchamp'> ";
+                                    echo $icon . $err_ancienmotdepasse ;
+                                    echo "</span> ";
+                                } 
+                                ?>
 
                             </div>
 
@@ -307,75 +444,95 @@ color:rgba(121, 6, 247,1);
                                     <label for="nouveaumotdepasse"> nouveau Mot de passe </label>
                                 </div>
                                 <input onkeyup="goBtnSave(this,3)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="nouveaumotdepasse" name="nouveaumotdepasse" placeholder="" autofocus>
+                                <?php
+                                if(isset($err_nouveaumotdepasse)){
+                                    echo "<span class='spanAlertchamp'> ";
+                                    echo $icon . $err_nouveaumotdepasse ;
+                                    echo "</span> ";
+                                } 
+                                ?>
+
 
                             </div>
 
-                            <input id="btnsave3" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="inscription" value="Sauvegarder changement">
+                            <input id="btnsave3" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="savechangemdp" value="Sauvegarder changement">
 
 
                         </form>
+
+                        <?php
+                        if($toutestbonmdp){ 
+                        ?>
+                        <div>
+                            <span class="spanDone"> Vos modiffication ont bien été enregistrer </span>
+                            <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
+                        </div>
+                        <?php
+                        }
+                        ?>
                     </div>
-                    <!-- TAB MDP INFO PERSO  -->
-                    <div id="tabinfoperso" role="tabpanel" aria-labelledby="info-perso-tab" class="tab-pane fade px-4 py-5">
-                        <!-- SEXE -->
-                        <div class="custom-control custom-radio mb-3 ">
-                            <div  class="form-check form-check-inline">
-                                <input onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioHomme" value="M" <?php if(isset($basesexe) && ($basesexe == "M")) { ?> checked <?php } ?>>
-                                <label  class="custom-control-label form-check-label" for="radioHomme">HOMME</label>
+                    <!-- TAB INFO PERSO  -->
+                    <div id="tabinfoperso" role="tabpanel" aria-labelledby="info-perso-tab" class="tab-pane fade px-4 py-5 <?php if($activetabinfoperso){ ?> show active <?php } ?>">
+                        <form method="post">
+                            <!-- SEXE -->
+                            <div class="custom-control custom-radio mb-3 ">
+                                <div  class="form-check form-check-inline">
+                                    <input onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioHomme" value="M" <?php if(isset($basesexe) && ($basesexe == "M")) { ?> checked <?php } ?>>
+                                    <label  class="custom-control-label form-check-label" for="radioHomme">HOMME</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioFemme" value="F">
+                                    <label  class="custom-control-label form-check-label" for="radioFemme" <?php if(isset($basesexe) && ($basesexe == "F")) { ?> checked <?php } ?>>FEMME</label>
+                                </div>
+
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioFemme" value="F">
-                                <label  class="custom-control-label form-check-label" for="radioFemme" <?php if(isset($basesexe) && ($basesexe == "F")) { ?> checked <?php } ?>>FEMME</label>
+
+                            <!--PRENOM-->
+                            <div class="form-group mb-2  ">
+
+                                <div class="row">
+                                    <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
+                                    <label for="prenom"> Prenom </label>
+                                </div>
+                                <input onkeyup="goBtnSave(this,4)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="prenom" name="prenom" placeholder="Mettez un prenom pour votre profil"  value="<?=$baseprenom?>" autofocus>
+
+                            </div>
+                            <!--NOM-->
+                            <div class="form-group mb-2  ">
+
+                                <div class="row">
+                                    <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
+                                    <label for="nom"> NOM </label>
+                                </div>
+                                <input onkeyup="goBtnSave(this,4)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="nom" name="nom" placeholder="Mettez un nom pour votre profil"  value="<?=$basenom?>" autofocus>
+
+                            </div>
+                            <!--DATE-->
+                            <div class="form-group mb-2  ">
+
+                                <div class="row">
+                                    <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
+                                    <label for="datenaissance"> DATE </label>
+                                </div>
+                                <input onchange="goBtnSave(this,4)" type="date" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="datenaissance" name="datenaissance" value="<?= $basedate_naissance ?>" autofocus>
+
                             </div>
 
-                        </div>
-
-                        <!--PRENOM-->
-                        <div class="form-group mb-2  ">
-
+                            <!--VILLE-->
                             <div class="row">
-                                <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                <label for="prenom"> Prenom </label>
+                                <object class="iconGradient" data="assets/img/icon/map.svg" type="image/svg+xml"></object>
+                                <label for="ville"> Ville </label>
                             </div>
-                            <input onkeyup="goBtnSave(this,4)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="prenom" name="prenom" placeholder="Mettez un prenom pour votre profil"  value="<?=$baseprenom?>" autofocus>
 
-                        </div>
-                        <!--NOM-->
-                        <div class="form-group mb-2  ">
+                            <input onkeyup="goBtnSave(this,4)" type="text" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ville" name="ville" placeholder="Ou habiter vous ?"  value="<?=$baseville?>" autofocus>
 
+                            <!--PAYS-->
                             <div class="row">
-                                <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                <label for="nom"> NOM </label>
+                                <object class="iconGradient" data="assets/img/icon/compass.svg" type="image/svg+xml"></object>
+                                <label for="pays">Votre Pays</label>
                             </div>
-                            <input onkeyup="goBtnSave(this,4)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="nom" name="nom" placeholder="Mettez un nom pour votre profil"  value="<?=$basenom?>" autofocus>
-
-                        </div>
-                        <!--DATE-->
-                        <div class="form-group mb-2  ">
-
-                            <div class="row">
-                                <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                <label for="datenaissance"> DATE </label>
-                            </div>
-                            <input onchange="goBtnSave(this,4)" type="date" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="datenaissance" name="datenaissance" value="<?= $basedate_naissance ?>" autofocus>
-
-                        </div>
-
-                        <!--VILLE-->
-                        <div class="row">
-                            <object class="iconGradient" data="assets/img/icon/map.svg" type="image/svg+xml"></object>
-                            <label for="ville"> Ville </label>
-                        </div>
-
-                        <input onkeyup="goBtnSave(this,4)" type="text" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ville" name="ville" placeholder="Ou habiter vous ?"  value="<?=$baseville?>" autofocus>
-
-                        <!--PAYS-->
-                        <div class="row">
-                            <object class="iconGradient" data="assets/img/icon/compass.svg" type="image/svg+xml"></object>
-                            <label for="pays">Votre Pays</label>
-                        </div>
-                        <select onchange="goBtnSave(this,4)" id='pays' name="pays" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
-                            <?php
+                            <select onchange="goBtnSave(this,4)" id='pays' name="pays" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
+                                <?php
     if(isset($basepays)){
         $req = $BDD->prepare("SELECT code,nom_fr_fr
                             FROM pays 
@@ -383,26 +540,33 @@ color:rgba(121, 6, 247,1);
                             ");
         $req->execute(array($basepays));
         $voir_pays = $req->fetch();
-                            ?>
-                            <option value="<?= $voir_pays['code'] ?>"> <?= mb_strtoupper($voir_pays['nom_fr_fr']) ?> </option>
+                                ?>
+                                <option value="<?= $voir_pays['code'] ?>"> <?= mb_strtoupper($voir_pays['nom_fr_fr']) ?> </option>
 
-                            <?php
+                                <?php
     }
 
-                                   $req = $BDD->prepare("SELECT code,nom_fr_fr  
+                                       $req = $BDD->prepare("SELECT code,nom_fr_fr  
                             FROM pays 
                              ORDER BY pays.nom_fr_fr ASC");
-                                   $req->execute();
-                                   $voir_pays = $req->fetchAll();
+                                       $req->execute();
+                                       $voir_pays = $req->fetchAll();
 
-                                   foreach($voir_pays as $vp) {
-                            ?>     
-                            <option value="<?= $vp['code'] ?>"> <?= mb_strtoupper($vp['nom_fr_fr']) ?> </option>
-                            <?php
-                                   }
-                            ?>
-                        </select>
-                        <input id="btnsave4" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="inscription" value="Sauvegarder changement">
+                                       foreach($voir_pays as $vp) {
+                                ?>     
+                                <option value="<?= $vp['code'] ?>"> <?= mb_strtoupper($vp['nom_fr_fr']) ?> </option>
+                                <?php
+                                       }
+                                ?>
+                            </select>
+
+                            <p class="custom-control custom-switch">
+                                <input  name="role" class="custom-control-input" id="role" type="checkbox" checked>
+                                <label class="custom-control-label " for="simpleacheteur"> Activer mode artiste </label>
+                            </p>
+
+                            <input id="btnsave4" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="savechangeinfoperso" value="Sauvegarder changement">
+                        </form>
 
                     </div>
                 </div>
@@ -419,7 +583,8 @@ color:rgba(121, 6, 247,1);
         <script>
 
             function goBtnSave(bay,numero){
-
+                $('.spanDone').remove();
+                $('.iconDone').remove();
                 let btnsave = document.getElementById('btnsave'+numero);
                 console.log(btnsave);
 
@@ -441,26 +606,29 @@ color:rgba(121, 6, 247,1);
 
                 if (numero == 2) {
                     let cemail = document.getElementById('email').value.trim();
-                    let cmdp = document.getElementById('votremotdepasse4email').value;
+                    let cmdp = document.getElementById('votremotdepasse4email');
+
                     let okemail = cemail != "<?=$baseemail?>";
 
 
 
                     okokafficherbouton = okemail;  
-                    console.log(okokafficherbouton , okemail);
-
+                    if (okemail) {
+                        cmdp.disabled = false;
+                    } else{
+                        cmdp.disabled = true;
+                    }
+                    console.log(okokafficherbouton , okemail,cmdp);
 
                 } 
 
                 if (numero == 3) {
                     let coldmdp = document.getElementById('ancienmotdepasse').value;
                     let cnewmdp = document.getElementById('nouveaumotdepasse').value;
+                    let okoldmdp = coldmdp.length > 0; let oknewmdp = cnewmdp.length > 0; 
 
-                    let okoldmdp = coldmdp != "<?=$basepseudo?>";
-                    let oknewmdp = cnewmdp != "<?=trim($basedescription)?>";
-
-                    okokafficherbouton = okoldmdp || oknewmdp;  
-                    console.log(okokafficherbouton , okpseudo , okbio);
+                    okokafficherbouton = okoldmdp && oknewmdp;  
+                    console.log(okokafficherbouton , okoldmdp , oknewmdp);
 
 
                 } 
@@ -476,7 +644,7 @@ color:rgba(121, 6, 247,1);
                         csexe = "M";
                     } else {
                         csexe = "F";
-                    }
+                    } 
 
                     let cnom = document.getElementById('nom').value.trim();
                     let cprenom = document.getElementById('prenom').value.trim();
@@ -485,6 +653,9 @@ color:rgba(121, 6, 247,1);
                     let cpays = document.getElementById('pays').value;
 
                     let oksexe = csexe != "<?=$basesexe?>";
+                    if ("<?=$basesexe?>" == "") {
+                        oksexe = false;
+                    }
                     let oknom = cnom != "<?=$basenom?>";
                     let okprenom = cprenom != "<?=$baseprenom?>";
                     let okdate = cdate != "<?=$basedate_naissance?>";
@@ -493,11 +664,14 @@ color:rgba(121, 6, 247,1);
 
 
 
-                    okokafficherbouton = oksexe || oknom || okprenom || okdate || okville || okpays;  
-                    console.log(okokafficherbouton ,oksexe , oknom , okprenom ,okdate , okville , okpays);
+
+                    okokafficherbouton = oksexe || oknom || okprenom || okdate || okville || okpays ;  
+                    console.log(okokafficherbouton ,"<?=$basesexe?>",oksexe , oknom , okprenom ,okdate , okville , okpays);
 
 
                 } 
+
+                let okerreurphp = "<?=isset($err_pseudo)?>" == 1;
 
                 console.log("okokafficherbouton",okokafficherbouton);
                 // apparition disparition du bouton okok=true=apparrition

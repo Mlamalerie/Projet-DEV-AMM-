@@ -88,6 +88,10 @@ if(!empty($_POST)){
             $ok = false;
             $err_motdepasse = "Veuillez renseigner ce champ !";
 
+        } else if(strlen($motdepasse) < 5) { // si le champ mot de passe est vide
+            $ok = false;
+            $err_motdepasse = "Ce mot de passe est trop petit ! ";
+
         } else if ($motdepasse != $motdepasseverif && $ok){
             $ok = false;
             $err_motdepasse = "Vous n'avez pas rentréee le mm mot de passeverif !";
