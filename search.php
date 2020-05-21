@@ -687,21 +687,21 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                             <p class="lead mb-0">
                                 <?php 
-   
-                                                    if ($yadesresultatsUSERS && $yadesresultatsBEATS) {
-                                                         $obj1 = count($resuBEATS)."beats trouvé";
-                                                    $obj2 = count($resuUSERS)."personnes trouvées";
-                                                        print_r($obj1);
-                                                        print_r($obj2);
-                                                    } else if ($yadesresultatsUSERS) {
-                                                    
-                                                    $obj2 = count($resuUSERS)."personnes trouvées";
-                                                        print_r($obj2);
-                                                    } else if ($yadesresultatsBEATS) {
-                                                         $obj1 = count($resuBEATS)."beats trouvé";
-                                                
-                                                        print_r($obj1);
-                                                    }
+
+    if ($yadesresultatsUSERS && $yadesresultatsBEATS) {
+        $obj1 = count($resuBEATS)."beats trouvé";
+        $obj2 = count($resuUSERS)."personnes trouvées";
+        print_r($obj1);
+        print_r($obj2);
+    } else if ($yadesresultatsUSERS) {
+
+        $obj2 = count($resuUSERS)."personnes trouvées";
+        print_r($obj2);
+    } else if ($yadesresultatsBEATS) {
+        $obj1 = count($resuBEATS)."beats trouvé";
+
+        print_r($obj1);
+    }
                                 ?> 
 
                             </p>
@@ -779,7 +779,6 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                                         </div>
                                     </div>
-
 
                                 </div>
 
@@ -1226,10 +1225,6 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
         </script>
 
 
-
-
-
-
         <!-- JS du player -->
         <script id="scriptDuPlayer">
 
@@ -1246,30 +1241,12 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
             songIndex = 0;
-            songs = <?=returnMusicListStr("songs", $resuBEATS); ?>  //Stockage des audios
-                thumbnails = <?=returnMusicListStr("thumbnails", $resuBEATS); ?> //Stockage des covers
-                songArtists = <?=returnMusicListStr("artists", $resuBEATS); ?> //Stockage Noms Artistes
-                songTitles = <?=returnMusicListStr("titles", $resuBEATS); ?> //Stockage Titres
-                /*
-let playing = true;
-function playPause(songIndex) {
-    if (playing) {
-        const song = document.querySelector('#song'),
-        thumbnail = document.querySelector('#thumbnail');
-        pPause.src = "./assets/icon/pause.png"
-        song.play();
-        playing = false;
-    } else {
-        pPause.src = "./assets/icon/play.png"
-        song.pause();
-        playing = true;
-    }
-}
+            songs = <?=returnMusicListStr("songs", $resuBEATS); ?>;  //Stockage des audios
+            thumbnails = <?=returnMusicListStr("thumbnails", $resuBEATS); ?>; //Stockage des covers
+            songArtists = <?=returnMusicListStr("artists", $resuBEATS); ?>; //Stockage Noms Artistes
+            songTitles = <?=returnMusicListStr("titles", $resuBEATS); ?>; //Stockage Titres
 
-*/
-
-
-                let playing = true;
+            let playing = true;
             function playPause(songIndex) {
                 song.src = songs[songIndex];
                 thumbnail.src = thumbnails[songIndex];

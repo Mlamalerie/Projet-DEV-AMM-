@@ -43,42 +43,52 @@ if(!empty($_POST)){
 
     // si le bouton saveprofil a été cliqué
     if (isset($_POST['savechangeinfoprofil'])){
-        $pseudo = (String) trim($pseudo);
-        $description = (String) trim($description);
 
-        if(empty($pseudo)) { // si vide
-            $ok = false;
-            $err_pseudo = "Veuillez renseigner ce champ !";
+        $okpseudonotsame = false;
+        if($pseudo != $basepseudo){
+            $okpseudonotsame = true;
+            $pseudo = (String) trim($pseudo);
+            if(empty($pseudo)) { // si vide
+                $ok = false;
+                $err_pseudo = "Veuillez renseigner ce champ !";
 
-        } else if (strlen($pseudo) < 3) {
+            } else if (strlen($pseudo) < 3) {
 
-            $ok = false;
-            $err_pseudo = "Ce pseudo est trop petit !";
-        }
+                $ok = false;
+                $err_pseudo = "Ce pseudo est trop petit !";
+            }
 
-        else { // ensuite on verifie si ce pseudo existe déja ou pas
-            $req = $BDD->prepare("SELECT user_id
+            else { // ensuite on verifie si ce pseudo existe déja ou pas
+                $req = $BDD->prepare("SELECT user_id
                             FROM user
                             WHERE user_pseudo = ? 
                                 ");
-            $req->execute(array($pseudo));
-            $user = $req->fetch();
+                $req->execute(array($pseudo));
+                $user = $req->fetch();
 
-            if(isset($user['user_id'])){
-                $ok = false;
-                $err_pseudo = "Ce pseudo existe déjé !";
+                if(isset($user['user_id'])){
+                    $ok = false;
+                    $err_pseudo = "Ce pseudo existe déjé !";
+                }
             }
         }
-        if(empty($description)) { // si vide
-            $ok = false;
-            $err_description = "Veuillez renseigner ce champ !";
 
+        $okdescriptionnotsame = false;
+        if($description != $basedescription){
+            $okdescriptionnotsame = true;
+            $description = (String) trim($description);
+            if(empty($description)) { // si vide
+                $ok = false;
+                $err_description = "Veuillez renseigner ce champ !";
+
+            }
         }
-
+        
+        
         if($ok) {
 
-            $basepseudo = $pseudo;
-            $basedescription = $description;
+            if($okpseudonotsame){$basepseudo = $pseudo;}
+            if($okdescriptionnotsame){$basedescription = $description;}
             // preparer requete
             $req = $BDD->prepare("UPDATE user
             SET user_pseudo = ? ,user_description = ?
@@ -90,7 +100,7 @@ if(!empty($_POST)){
             $toutestboninfoprofil = "Vos information ont bien été modifié !";
 
             echo $toutestboninfoprofil;
-            header('editer-profil.php?profil_id='.$baseid);
+            //header('editer-profil.php?profil_id='.$baseid);
 
         }
 
@@ -499,7 +509,7 @@ color:rgba(121, 6, 247,1);
 
             }
 
-            
+
 
         </script>
     </body>

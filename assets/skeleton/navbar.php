@@ -137,24 +137,7 @@
                 <?php
                 }
                 ?>
-                <!-- User account -->
-                <!--
-<div class="pull-right">
-
-<div class="dropdown user-account">
-<a class="dropdown-toggle" href="#" data-toggle="dropdown">
-<img src="img/user.png" width='50' alt="avatar">
-</a>
-
-<ul class="dropdown-menu dropdown-menu-right">
-<li><a href="EditProfile.php">Edit Profile</a></li>
-<li><a href="deconnexion.php">Logout</a></li>
-</ul>
-</div>
-
-</div>
--->
-                <!-- END User account -->
+                
 
 
             </ul>

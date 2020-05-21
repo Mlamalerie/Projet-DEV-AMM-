@@ -2,9 +2,9 @@
 session_start();
 include_once("assets/db/connexiondb.php"); // inclure le fichier pour se connecter à la base de donnée
 include_once("fichierfct.php");
-
+print_r($_SESSION);
 // si une connection est détecter : (ta rien a faire ici mec)
-if(isset($_SESSION['user_id'])){
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
     header('Location: test_zone.php');
     exit;
 }
@@ -47,7 +47,7 @@ if(!empty($_POST)){
 
             if(!isset($user['user_id'])){
                 $ok = false;
-                $err_email = "Veuillez renseigner ce champ";
+                $err_email = "nda";
             }
         }
 
@@ -60,7 +60,7 @@ if(!empty($_POST)){
 
         if(!isset($verif_user['user_id'])) {
             $ok = false;
-            $err_email = "Veuillez renseigner ce champ";
+            $err_email = "tu mens";
 
         }
 
