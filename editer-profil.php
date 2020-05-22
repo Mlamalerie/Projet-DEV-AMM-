@@ -17,7 +17,7 @@ $req = $BDD->prepare("SELECT *
 
 $req->execute(array($baseid));
 $afficher_profil = $req->fetch();
-print_r($afficher_profil['user_pseudo']);
+
 $basepseudo = $afficher_profil['user_pseudo'];
 $baseemail = $afficher_profil['user_email'];
 $basemotdepasse = $afficher_profil['user_password'];
@@ -29,6 +29,7 @@ $baseprenom = $afficher_profil['user_prenom'];
 $basedescription = $afficher_profil['user_description'];
 
 $basesexe = $afficher_profil['user_sexe'];
+var_dump($basesexe);
 $basedate_naissance = $afficher_profil['user_datenaissance'];
 $baseimage = $afficher_profil['user_image'];
 
@@ -250,10 +251,141 @@ if(!empty($_POST)){
 
         }
 
-    } // End savechangemeail
+    } // End savechangemdp
+
+    $activetabinfoperso = false;
+    // si le bouton saveprofil a été cliqué
+    if (isset($_POST['savechangeinfoperso'])){
+        $activetabinfoperso = true;
+
+        $oksexenotsame = false;
+        if(isset($sexe) && $sexe != $basesexe){
+            $oksexenotsame = true;
+
+            //*** Verification du sexe
+            if (($sexe != 'M') &&  ($sexe != 'F') && ($sexe != "0")) {
+
+                $ok = false;
+                $err_sexe = "ERREUR";
+            }
+        }
+
+        $okprenomnotsame = false;
+        if($prenom != $baseprenom){
+            $okprenomnotsame = true;
+            $prenom = (String) trim($prenom);
+
+            //*** Verification du prenom
+            if (strlen($prenom) > 30) {
+
+                $ok = false;
+                $err_prenom = "Ce pseudo est trop grand ! Il y a ".(strlen($prenom) - 30)." caractère en trop";
+            }else if(!ctype_alpha(implode("",explode(' ',$prenom)))){
+                $ok = false;
+                $err_prenom = "Pas de chiffre !";
+            }
+        }
+
+        $oknomnotsame = false;
+        if($nom != $basenom){
+            $oknomnotsame = true;
+            $nom = (String) trim($nom);
+            //*** Verification du nom
+            if (strlen($nom) > 30) {
+
+                $ok = false;
+                $err_nom = "Ce nom est trop grand ! Il y a ".(strlen($nom) - 30)." caractère en trop";
+            }else if(!ctype_alpha(implode("",explode(' ',$nom)))){
+                $ok = false;
+                $err_nom = "Pas de chiffre !";
+
+            }
+        }
+        $okdatenaissancenotsame = false;
+        if($datenaissance != $basedate_naissance) {
+            $okdatenaissancenotsame = true;
+
+            //*** Verification du date
+            $dateuh = explode('-',$datenaissance);
+            print_r($datenaissance);
+            print_r($dateuh);
+
+            if (!checkdate($dateuh[1], $dateuh[2], $dateuh[0])) {
+
+                $ok = false;
+                $err_datenaissance = "Date fausse";
+            } 
+
+        }
+        $okvillenotsame = false;
+        if($ville != $baseville) {
+            $okvillenotsame = true;
+
+            //*** Verification du ville
+            if(empty($ville)) { // si vide
+                $ok = false;
+                $err_ville = "Veuillez renseigner ce champ !";
+
+            } else if (strlen($ville) < 3) {
+
+                $ok = false;
+                $err_ville = "Ce ville est trop petit !";
+            } else if (!ctype_alpha(implode("",explode(' ',$ville)))) {
+
+                $ok = false;
+                $err_ville = "Veuilez saisir seulement des lettres sans acents";
+            }
+        }
+
+        $okpaysnotsame = false;
+        if($pays != $basepays) {
+            $okpaysnotsame = true;
+
+            //*** Verification du Pays
+            $req = $BDD->prepare("SELECT id 
+                            FROM pays
+                            WHERE code = ?");
+            $req->execute(array($pays));
+            $verif_pays = $req->fetch();
+
+            if(!isset($verif_pays['id'])){ // si 
+                $ok = false;
+                $err_pays = "Veuillez renseigner ce champ !";
+            }
+        }
 
 
-}
+
+
+        if($ok) {
+
+
+            // preparer requete
+            $req = $BDD->prepare("UPDATE user
+            SET  user_sexe = ? ,user_prenom = ?, user_nom = ?, user_datenaissance = ?, user_ville = ?, user_pays = ?
+            WHERE user_id = ?"); 
+
+            $req->execute(array($sexe,$prenom,$nom,$datenaissance,$ville,$pays,$baseid));
+
+
+
+
+            if($oknomnotsame) {$basenom = $nom;}
+            if($oksexenotsame) {$basesexe = $sexe;}
+            if($okprenomnotsame) {$baseprenom = $prenom;}
+            if($okdatenaissancenotsame) {$basedate_naissance = $datenaissance;}
+            if($okvillenotsame){$baseville = $ville;}
+            if($okpaysnotsame){$basepays = $pays;}
+
+
+            $toutestboninfoperso = true;
+
+
+        }
+
+    } // End saveinfoperso
+
+} // end post
 
 
 ?>
@@ -424,7 +556,7 @@ if(!empty($_POST)){
                                     <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
                                     <label for="ancienmotdepasse"> Ancien Mot de passe </label>
                                 </div>
-                                <input onkeyup="goBtnSave(this,3)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ancienmotdepasse" name="ancienmotdepasse" placeholder="" autofocus>
+                                <input onkeyup="goBtnSave(this,3)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ancienmotdepasse" name="ancienmotdepasse" placeholder="" autofocus <?php if(isset($_POST['ancienmotdepasse']) && !$toutestbonmdp){ ?> value="<?= $_POST['ancienmotdepasse'] ?>" <?php }?> >
 
                                 <?php
                                 if(isset($err_ancienmotdepasse)){
@@ -443,7 +575,7 @@ if(!empty($_POST)){
                                     <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
                                     <label for="nouveaumotdepasse"> nouveau Mot de passe </label>
                                 </div>
-                                <input onkeyup="goBtnSave(this,3)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="nouveaumotdepasse" name="nouveaumotdepasse" placeholder="" autofocus>
+                                <input onkeyup="goBtnSave(this,3)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="nouveaumotdepasse" name="nouveaumotdepasse" placeholder="" autofocus >
                                 <?php
                                 if(isset($err_nouveaumotdepasse)){
                                     echo "<span class='spanAlertchamp'> ";
@@ -477,13 +609,21 @@ if(!empty($_POST)){
                             <!-- SEXE -->
                             <div class="custom-control custom-radio mb-3 ">
                                 <div  class="form-check form-check-inline">
-                                    <input onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioHomme" value="M" <?php if(isset($basesexe) && ($basesexe == "M")) { ?> checked <?php } ?>>
+                                    <input name="sexe" onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioHomme" value="M" <?php if(isset($basesexe) && ($basesexe == "M")) { ?> checked <?php } ?>>
                                     <label  class="custom-control-label form-check-label" for="radioHomme">HOMME</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioFemme" value="F">
+                                    <input  name="sexe" onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioFemme" value="F">
                                     <label  class="custom-control-label form-check-label" for="radioFemme" <?php if(isset($basesexe) && ($basesexe == "F")) { ?> checked <?php } ?>>FEMME</label>
                                 </div>
+
+                                <?php
+                                if(isset($err_sexe)){
+                                    echo "<span class='spanAlertchamp'> ";
+                                    echo $icon . $err_sexe ;
+                                    echo "</span> ";
+                                } 
+                                ?>
 
                             </div>
 
@@ -495,6 +635,13 @@ if(!empty($_POST)){
                                     <label for="prenom"> Prenom </label>
                                 </div>
                                 <input onkeyup="goBtnSave(this,4)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="prenom" name="prenom" placeholder="Mettez un prenom pour votre profil"  value="<?=$baseprenom?>" autofocus>
+                                <?php
+    if(isset($err_prenom)){
+        echo "<span class='spanAlertchamp'> ";
+        echo $icon . $err_prenom ;
+        echo "</span> ";
+    } 
+                                ?>
 
                             </div>
                             <!--NOM-->
@@ -506,6 +653,14 @@ if(!empty($_POST)){
                                 </div>
                                 <input onkeyup="goBtnSave(this,4)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="nom" name="nom" placeholder="Mettez un nom pour votre profil"  value="<?=$basenom?>" autofocus>
 
+                                <?php
+    if(isset($err_nom)){
+        echo "<span class='spanAlertchamp'> ";
+        echo $icon . $err_nom ;
+        echo "</span> ";
+    } 
+                                ?>
+
                             </div>
                             <!--DATE-->
                             <div class="form-group mb-2  ">
@@ -515,176 +670,210 @@ if(!empty($_POST)){
                                     <label for="datenaissance"> DATE </label>
                                 </div>
                                 <input onchange="goBtnSave(this,4)" type="date" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="datenaissance" name="datenaissance" value="<?= $basedate_naissance ?>" autofocus>
-
-                            </div>
-
-                            <!--VILLE-->
-                            <div class="row">
-                                <object class="iconGradient" data="assets/img/icon/map.svg" type="image/svg+xml"></object>
-                                <label for="ville"> Ville </label>
-                            </div>
-
-                            <input onkeyup="goBtnSave(this,4)" type="text" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ville" name="ville" placeholder="Ou habiter vous ?"  value="<?=$baseville?>" autofocus>
-
-                            <!--PAYS-->
-                            <div class="row">
-                                <object class="iconGradient" data="assets/img/icon/compass.svg" type="image/svg+xml"></object>
-                                <label for="pays">Votre Pays</label>
-                            </div>
-                            <select onchange="goBtnSave(this,4)" id='pays' name="pays" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
                                 <?php
-    if(isset($basepays)){
-        $req = $BDD->prepare("SELECT code,nom_fr_fr
+    if(isset($err_datenaissance)){
+        echo "<span class='spanAlertchamp'> ";
+        echo $icon . $err_datenaissance ;
+        echo "</span> ";
+    } 
+                                ?>
+
+                            </div>
+                            <div class="form-group mb-2  ">
+                                <!--VILLE-->
+                                <div class="row">
+                                    <object class="iconGradient" data="assets/img/icon/map.svg" type="image/svg+xml"></object>
+                                    <label for="ville"> Ville </label>
+                                </div>
+
+                                <input onkeyup="goBtnSave(this,4)" type="text" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ville" name="ville" placeholder="Ou habiter vous ?"  value="<?=$baseville?>" autofocus>
+                                <?php
+    if(isset($err_ville)){
+        echo "<span class='spanAlertchamp'> ";
+        echo $icon . $err_ville ;
+        echo "</span> ";
+    } 
+                                ?>
+                                <!--PAYS-->
+                                <div class="row">
+                                    <object class="iconGradient" data="assets/img/icon/compass.svg" type="image/svg+xml"></object>
+                                    <label for="pays">Votre Pays</label>
+                                </div>
+                                <select onchange="goBtnSave(this,4)" id='pays' name="pays" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
+                                    <?php
+                                    if(isset($basepays)){
+                                        $req = $BDD->prepare("SELECT code,nom_fr_fr
                             FROM pays 
                             WHERE code = ?
                             ");
-        $req->execute(array($basepays));
-        $voir_pays = $req->fetch();
-                                ?>
-                                <option value="<?= $voir_pays['code'] ?>"> <?= mb_strtoupper($voir_pays['nom_fr_fr']) ?> </option>
+                                        $req->execute(array($basepays));
+                                        $voir_pays = $req->fetch();
+                                    ?>
+                                    <option value="<?= $voir_pays['code'] ?>"> <?= mb_strtoupper($voir_pays['nom_fr_fr']) ?> </option>
 
-                                <?php
-    }
+                                    <?php
+                                    }
 
-                                       $req = $BDD->prepare("SELECT code,nom_fr_fr  
+                                    $req = $BDD->prepare("SELECT code,nom_fr_fr  
                             FROM pays 
                              ORDER BY pays.nom_fr_fr ASC");
-                                       $req->execute();
-                                       $voir_pays = $req->fetchAll();
+                                    $req->execute();
+                                    $voir_pays = $req->fetchAll();
 
-                                       foreach($voir_pays as $vp) {
-                                ?>     
-                                <option value="<?= $vp['code'] ?>"> <?= mb_strtoupper($vp['nom_fr_fr']) ?> </option>
+                                    foreach($voir_pays as $vp) {
+                                    ?>     
+                                    <option value="<?= $vp['code'] ?>"> <?= mb_strtoupper($vp['nom_fr_fr']) ?> </option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+
+
+
                                 <?php
-                                       }
+                                if(isset($err_pays)){
+                                    echo "<span class='spanAlertchamp'> ";
+                                    echo $icon . $err_pays ;
+                                    echo "</span> ";
+                                } 
                                 ?>
-                            </select>
 
+                            </div>
                             <p class="custom-control custom-switch">
-                                <input  name="role" class="custom-control-input" id="role" type="checkbox" checked>
+                                <input  name="rolee" class="custom-control-input" id="rolee" type="checkbox" checked>
                                 <label class="custom-control-label " for="simpleacheteur"> Activer mode artiste </label>
                             </p>
 
                             <input id="btnsave4" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="savechangeinfoperso" value="Sauvegarder changement">
                         </form>
-
+                        <?php
+                        if($toutestboninfoperso){ 
+                        ?>
+                        <div>
+                            <span class="spanDone"> Vos modiffication ont bien été enregistrer </span>
+                            <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
+                        </div>
                     </div>
+                    <?php
+                        }
+                    ?>
+
                 </div>
-                <!-- End rounded tabs -->
             </div>
+            <!-- End rounded tabs -->
         </div>
 
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
-        <script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
+    <script>
 
-            function goBtnSave(bay,numero){
-                $('.spanDone').remove();
-                $('.iconDone').remove();
-                let btnsave = document.getElementById('btnsave'+numero);
-                console.log(btnsave);
-
-
-                console.log(bay.id);
-                let okokafficherbouton = false;
-                if (numero == 1) {
-                    let cpseudo = document.getElementById('pseudo').value.trim();
-                    let cbio = document.getElementById('description').value.trim();
-                    let okpseudo = cpseudo != "<?=$basepseudo?>";
-                    let okbio = cbio != "<?=trim($basedescription)?>";
+        function goBtnSave(bay,numero){
+            $('.spanDone').remove();
+            $('.iconDone').remove();
+            let btnsave = document.getElementById('btnsave'+numero);
+            console.log(btnsave);
 
 
-                    okokafficherbouton = okpseudo || okbio;  
-                    console.log(okokafficherbouton , okpseudo , okbio);
+            console.log(bay.id);
+            let okokafficherbouton = false;
+            if (numero == 1) {
+                let cpseudo = document.getElementById('pseudo').value.trim();
+                let cbio = document.getElementById('description').value.trim();
+                let okpseudo = cpseudo != "<?=$basepseudo?>";
+                let okbio = cbio != "<?=trim($basedescription)?>";
 
 
+                okokafficherbouton = okpseudo || okbio;  
+                console.log(okokafficherbouton , okpseudo , okbio);
+
+
+            } 
+
+            if (numero == 2) {
+                let cemail = document.getElementById('email').value.trim();
+                let cmdp = document.getElementById('votremotdepasse4email');
+
+                let okemail = cemail != "<?=$baseemail?>";
+
+
+
+                okokafficherbouton = okemail;  
+                if (okemail) {
+                    cmdp.disabled = false;
+                } else{
+                    cmdp.disabled = true;
+                }
+                console.log(okokafficherbouton , okemail,cmdp);
+
+            } 
+
+            if (numero == 3) {
+                let coldmdp = document.getElementById('ancienmotdepasse').value;
+                let cnewmdp = document.getElementById('nouveaumotdepasse').value;
+                let okoldmdp = coldmdp.length > 0; let oknewmdp = cnewmdp.length > 0; 
+
+                okokafficherbouton = okoldmdp && oknewmdp;  
+                console.log(okokafficherbouton , okoldmdp , oknewmdp);
+
+
+            } 
+
+
+            if (numero == 4) {
+
+                let radioH = document.getElementById('radioHomme');
+                let radioF = document.getElementById('radioFemme');
+
+                let csexe;
+                if (radioH.checked){
+                    csexe = "M";
+                } else if(radioF.checked) {
+                    csexe = "F";
                 } 
 
-                if (numero == 2) {
-                    let cemail = document.getElementById('email').value.trim();
-                    let cmdp = document.getElementById('votremotdepasse4email');
+                let cnom = document.getElementById('nom').value.trim();
+                let cprenom = document.getElementById('prenom').value.trim();
+                let cdate = document.getElementById('datenaissance').value;
+                let cville = document.getElementById('ville').value.trim();
+                let cpays = document.getElementById('pays').value;
 
-                    let okemail = cemail != "<?=$baseemail?>";
-
-
-
-                    okokafficherbouton = okemail;  
-                    if (okemail) {
-                        cmdp.disabled = false;
-                    } else{
-                        cmdp.disabled = true;
-                    }
-                    console.log(okokafficherbouton , okemail,cmdp);
-
-                } 
-
-                if (numero == 3) {
-                    let coldmdp = document.getElementById('ancienmotdepasse').value;
-                    let cnewmdp = document.getElementById('nouveaumotdepasse').value;
-                    let okoldmdp = coldmdp.length > 0; let oknewmdp = cnewmdp.length > 0; 
-
-                    okokafficherbouton = okoldmdp && oknewmdp;  
-                    console.log(okokafficherbouton , okoldmdp , oknewmdp);
-
-
-                } 
-
-
-                if (numero == 4) {
-
-                    let radioH = document.getElementById('radioHomme');
-                    let radioF = document.getElementById('radioFemme');
-
-                    let csexe;
-                    if (radioH.checked){
-                        csexe = "M";
-                    } else {
-                        csexe = "F";
-                    } 
-
-                    let cnom = document.getElementById('nom').value.trim();
-                    let cprenom = document.getElementById('prenom').value.trim();
-                    let cdate = document.getElementById('datenaissance').value;
-                    let cville = document.getElementById('ville').value.trim();
-                    let cpays = document.getElementById('pays').value;
-
-                    let oksexe = csexe != "<?=$basesexe?>";
-                    if ("<?=$basesexe?>" == "") {
-                        oksexe = false;
-                    }
-                    let oknom = cnom != "<?=$basenom?>";
-                    let okprenom = cprenom != "<?=$baseprenom?>";
-                    let okdate = cdate != "<?=$basedate_naissance?>";
-                    let okville = cville != "<?=$baseville?>";
-                    let okpays = cpays != "<?=$basepays?>";
+                let oksexe = csexe != "<?=$basesexe?>";
+                if ("<?=$basesexe?>" == "") {
+                    oksexe = false;
+                }
+                let oknom = cnom != "<?=$basenom?>";
+                let okprenom = cprenom != "<?=$baseprenom?>";
+                let okdate = cdate != "<?=$basedate_naissance?>";
+                let okville = cville != "<?=$baseville?>";
+                let okpays = cpays != "<?=$basepays?>";
 
 
 
 
-                    okokafficherbouton = oksexe || oknom || okprenom || okdate || okville || okpays ;  
-                    console.log(okokafficherbouton ,"<?=$basesexe?>",oksexe , oknom , okprenom ,okdate , okville , okpays);
+                okokafficherbouton = oksexe || oknom || okprenom || okdate || okville || okpays ;  
+                console.log(okokafficherbouton ,csexe,"<?=$basesexe?>",oksexe , oknom , okprenom ,okdate , okville , okpays);
 
 
-                } 
+            } 
 
-                let okerreurphp = "<?=isset($err_pseudo)?>" == 1;
+            let okerreurphp = "<?=isset($err_pseudo)?>" == 1;
 
-                console.log("okokafficherbouton",okokafficherbouton);
-                // apparition disparition du bouton okok=true=apparrition
-                if (okokafficherbouton) {btnsave.type = 'submit';} else {btnsave.type = 'hidden';}
+            console.log("okokafficherbouton",okokafficherbouton);
+            // apparition disparition du bouton okok=true=apparrition
+            if (okokafficherbouton) {btnsave.type = 'submit';} else {btnsave.type = 'hidden';}
 
 
 
 
 
-            }
+        }
 
 
 
-        </script>
+    </script>
     </body>
 </html>

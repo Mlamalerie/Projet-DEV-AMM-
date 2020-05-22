@@ -129,10 +129,10 @@ if(!empty($_POST)){
 
             $ok = false;
             $err_ville = "Ce ville est trop petit !";
-        } else if (!ctype_alpha($ville)) {
+        } else if (!ctype_alpha(implode("",explode(' ',$ville)))) {
 
             $ok = false;
-            $err_ville = "Veuilez saisir seulement des lettres";
+            $err_ville = "Veuilez saisir seulement des lettres sans accent";
         }
 
         //*** Verification du Pays
@@ -157,12 +157,13 @@ if(!empty($_POST)){
 
             $date_inscription = date("Y-m-d H:i:s"); 
             $statut = 1;
+            $sexe = "0";
             $motdepasse = crypt($motdepasse, '$6$rounds=5000$grzgirjzgrpzhte95grzegruoRZPrzg8$');
 
             // preparer requete
-            $req = $BDD->prepare("INSERT INTO user (user_pseudo,user_email,user_password,user_ville,user_pays,user_dateinscription,user_dateconnexion,user_statut) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"); 
+            $req = $BDD->prepare("INSERT INTO user (user_pseudo,user_email,user_password,user_ville,user_pays,user_dateinscription,user_dateconnexion,user_statut,user_sexe) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)"); 
 
-            $req->execute(array($pseudo,$email,$motdepasse,$ville,$pays,$date_inscription,$date_inscription,$statut));
+            $req->execute(array($pseudo,$email,$motdepasse,$ville,$pays,$date_inscription,$date_inscription,$statut,$sexe));
 
             $_SESSION['user_pseudo'] = $pseudo;
             $_SESSION['user_email'] = $email;
