@@ -30,6 +30,7 @@ $basedescription = $afficher_profil['user_description'];
 
 $basesexe = $afficher_profil['user_sexe'];
 var_dump($basesexe);
+$baserole = $afficher_profil['user_role'];
 $basedate_naissance = $afficher_profil['user_datenaissance'];
 $baseimage = $afficher_profil['user_image'];
 
@@ -258,16 +259,24 @@ if(!empty($_POST)){
     if (isset($_POST['savechangeinfoperso'])){
         $activetabinfoperso = true;
 
-        $oksexenotsame = false;
-        if(isset($sexe) && $sexe != $basesexe){
-            $oksexenotsame = true;
 
-            //*** Verification du sexe
-            if (($sexe != 'M') &&  ($sexe != 'F') && ($sexe != "0")) {
 
-                $ok = false;
-                $err_sexe = "ERREUR";
+
+        if(isset($sexe)) {
+            $oksexenotsame = false;
+            if($sexe != $basesexe){
+                $oksexenotsame = true;
+
+                //*** Verification du sexe
+                if (($sexe != 'M') &&  ($sexe != 'F') && ($sexe != "0")) {
+
+                    $ok = false;
+                    $err_sexe = "ERREUR";
+                }
             }
+        } else {
+            $oksexenotsame = false;
+            $sexe = "0";
         }
 
         $okprenomnotsame = false;
@@ -316,7 +325,7 @@ if(!empty($_POST)){
                 $err_datenaissance = "Date fausse";
             } 
 
-        }
+        } 
         $okvillenotsame = false;
         if($ville != $baseville) {
             $okvillenotsame = true;
@@ -353,6 +362,20 @@ if(!empty($_POST)){
                 $err_pays = "Veuillez renseigner ce champ !";
             }
         }
+        //*** Verification du role
+        if(isset($roleee)) {
+
+            $role = 2;
+
+        } else {
+            $role = 1;
+
+        }
+
+        $okrolenotsame = false;
+        if($role != $baserole) {
+            $okrolenotsame = true;
+        }
 
 
 
@@ -362,21 +385,21 @@ if(!empty($_POST)){
 
             // preparer requete
             $req = $BDD->prepare("UPDATE user
-            SET  user_sexe = ? ,user_prenom = ?, user_nom = ?, user_datenaissance = ?, user_ville = ?, user_pays = ?
+            SET  user_sexe = ? ,user_prenom = ?, user_nom = ?, user_datenaissance = ?, user_ville = ?, user_pays = ?,user_role = ?
             WHERE user_id = ?"); 
 
-            $req->execute(array($sexe,$prenom,$nom,$datenaissance,$ville,$pays,$baseid));
+            $req->execute(array($sexe,$prenom,$nom,$datenaissance,$ville,$pays,$role,$baseid));
 
 
 
 
             if($oknomnotsame) {$basenom = $nom;}
-            if($oksexenotsame) {$basesexe = $sexe;}
+            if($oksexenotsame) {echo $sexe; $basesexe = $sexe;}
             if($okprenomnotsame) {$baseprenom = $prenom;}
             if($okdatenaissancenotsame) {$basedate_naissance = $datenaissance;}
             if($okvillenotsame){$baseville = $ville;}
             if($okpaysnotsame){$basepays = $pays;}
-
+            if($okrolenotsame){$baserole = $role;}
 
             $toutestboninfoperso = true;
 
@@ -613,8 +636,8 @@ if(!empty($_POST)){
                                     <label  class="custom-control-label form-check-label" for="radioHomme">HOMME</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input  name="sexe" onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioFemme" value="F">
-                                    <label  class="custom-control-label form-check-label" for="radioFemme" <?php if(isset($basesexe) && ($basesexe == "F")) { ?> checked <?php } ?>>FEMME</label>
+                                    <input  name="sexe" onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioFemme" value="F" <?php if(isset($basesexe) && ($basesexe == "F")) { ?> checked <?php } ?>>
+                                    <label  class="custom-control-label form-check-label" for="radioFemme" >FEMME</label>
                                 </div>
 
                                 <?php
@@ -739,9 +762,17 @@ if(!empty($_POST)){
                                 ?>
 
                             </div>
-                            <p class="custom-control custom-switch">
-                                <input  name="rolee" class="custom-control-input" id="rolee" type="checkbox" checked>
-                                <label class="custom-control-label " for="simpleacheteur"> Activer mode artiste </label>
+
+                            <p class="custom-control custom-switch m-0">
+                                <input onchange="goBtnSave(this,4)" name="roleee" class="custom-control-input" id="roleee" type="checkbox" <?php if(isset($baserole) && ($baserole == 2)) { ?> checked <?php } ?> >
+                                <label class="custom-control-label font-italic" for="roleee">Mode Produceur activé </label>
+                                <?php
+                                if(isset($err_sexe)){
+                                    echo "<span class='spanAlertchamp'> ";
+                                    echo $icon . $err_role ;
+                                    echo "</span> ";
+                                } 
+                                ?>
                             </p>
 
                             <input id="btnsave4" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="savechangeinfoperso" value="Sauvegarder changement">
@@ -764,116 +795,124 @@ if(!empty($_POST)){
         </div>
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
-    <script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
+        <script>
 
-        function goBtnSave(bay,numero){
-            $('.spanDone').remove();
-            $('.iconDone').remove();
-            let btnsave = document.getElementById('btnsave'+numero);
-            console.log(btnsave);
-
-
-            console.log(bay.id);
-            let okokafficherbouton = false;
-            if (numero == 1) {
-                let cpseudo = document.getElementById('pseudo').value.trim();
-                let cbio = document.getElementById('description').value.trim();
-                let okpseudo = cpseudo != "<?=$basepseudo?>";
-                let okbio = cbio != "<?=trim($basedescription)?>";
+            function goBtnSave(bay,numero){
+                $('.spanDone').remove();
+                $('.iconDone').remove();
+                let btnsave = document.getElementById('btnsave'+numero);
+                console.log(btnsave);
 
 
-                okokafficherbouton = okpseudo || okbio;  
-                console.log(okokafficherbouton , okpseudo , okbio);
+                console.log(bay.id);
+                let okokafficherbouton = false;
+                if (numero == 1) {
+                    let cpseudo = document.getElementById('pseudo').value.trim();
+                    let cbio = document.getElementById('description').value.trim();
+                    let okpseudo = cpseudo != "<?=$basepseudo?>";
+                    let okbio = cbio != "<?=trim($basedescription)?>";
 
 
-            } 
-
-            if (numero == 2) {
-                let cemail = document.getElementById('email').value.trim();
-                let cmdp = document.getElementById('votremotdepasse4email');
-
-                let okemail = cemail != "<?=$baseemail?>";
+                    okokafficherbouton = okpseudo || okbio;  
+                    console.log(okokafficherbouton , okpseudo , okbio);
 
 
-
-                okokafficherbouton = okemail;  
-                if (okemail) {
-                    cmdp.disabled = false;
-                } else{
-                    cmdp.disabled = true;
-                }
-                console.log(okokafficherbouton , okemail,cmdp);
-
-            } 
-
-            if (numero == 3) {
-                let coldmdp = document.getElementById('ancienmotdepasse').value;
-                let cnewmdp = document.getElementById('nouveaumotdepasse').value;
-                let okoldmdp = coldmdp.length > 0; let oknewmdp = cnewmdp.length > 0; 
-
-                okokafficherbouton = okoldmdp && oknewmdp;  
-                console.log(okokafficherbouton , okoldmdp , oknewmdp);
-
-
-            } 
-
-
-            if (numero == 4) {
-
-                let radioH = document.getElementById('radioHomme');
-                let radioF = document.getElementById('radioFemme');
-
-                let csexe;
-                if (radioH.checked){
-                    csexe = "M";
-                } else if(radioF.checked) {
-                    csexe = "F";
                 } 
 
-                let cnom = document.getElementById('nom').value.trim();
-                let cprenom = document.getElementById('prenom').value.trim();
-                let cdate = document.getElementById('datenaissance').value;
-                let cville = document.getElementById('ville').value.trim();
-                let cpays = document.getElementById('pays').value;
+                if (numero == 2) {
+                    let cemail = document.getElementById('email').value.trim();
+                    let cmdp = document.getElementById('votremotdepasse4email');
 
-                let oksexe = csexe != "<?=$basesexe?>";
-                if ("<?=$basesexe?>" == "") {
-                    oksexe = false;
-                }
-                let oknom = cnom != "<?=$basenom?>";
-                let okprenom = cprenom != "<?=$baseprenom?>";
-                let okdate = cdate != "<?=$basedate_naissance?>";
-                let okville = cville != "<?=$baseville?>";
-                let okpays = cpays != "<?=$basepays?>";
+                    let okemail = cemail != "<?=$baseemail?>";
 
 
 
+                    okokafficherbouton = okemail;  
+                    if (okemail) {
+                        cmdp.disabled = false;
+                    } else{
+                        cmdp.disabled = true;
+                    }
+                    console.log(okokafficherbouton , okemail,cmdp);
 
-                okokafficherbouton = oksexe || oknom || okprenom || okdate || okville || okpays ;  
-                console.log(okokafficherbouton ,csexe,"<?=$basesexe?>",oksexe , oknom , okprenom ,okdate , okville , okpays);
+                } 
 
+                if (numero == 3) {
+                    let coldmdp = document.getElementById('ancienmotdepasse').value;
+                    let cnewmdp = document.getElementById('nouveaumotdepasse').value;
+                    let okoldmdp = coldmdp.length > 0; let oknewmdp = cnewmdp.length > 0; 
 
-            } 
-
-            let okerreurphp = "<?=isset($err_pseudo)?>" == 1;
-
-            console.log("okokafficherbouton",okokafficherbouton);
-            // apparition disparition du bouton okok=true=apparrition
-            if (okokafficherbouton) {btnsave.type = 'submit';} else {btnsave.type = 'hidden';}
-
-
-
-
-
-        }
-
+                    okokafficherbouton = okoldmdp && oknewmdp;  
+                    console.log(okokafficherbouton , okoldmdp , oknewmdp);
 
 
-    </script>
+                } 
+
+
+                if (numero == 4) {
+
+                    let radioH = document.getElementById('radioHomme');
+                    let radioF = document.getElementById('radioFemme');
+
+                    let csexe;
+                    if (radioH.checked){
+                        csexe = "M";
+                    } else if(radioF.checked) {
+                        csexe = "F";
+                    } 
+
+                    let cnom = document.getElementById('nom').value.trim();
+                    let cprenom = document.getElementById('prenom').value.trim();
+                    let cdate = document.getElementById('datenaissance').value;
+                    let cville = document.getElementById('ville').value.trim();
+                    let cpays = document.getElementById('pays').value;
+                    let croleee = document.getElementById('roleee').checked;
+                    if(croleee) {
+                        crole = "2";
+                    } else{
+                        crole = "1";
+                    }
+
+
+                    let oksexe = csexe != "<?=$basesexe?>";
+                    if ("<?=$basesexe?>" == "") {
+                        oksexe = false;
+                    }
+                    let oknom = cnom != "<?=$basenom?>";
+                    let okprenom = cprenom != "<?=$baseprenom?>";
+                    let okdate = cdate != "<?=$basedate_naissance?>";
+                    let okville = cville != "<?=$baseville?>";
+                    let okpays = cpays != "<?=$basepays?>";
+
+                    let okrole = crole != "<?=$baserole?>";
+
+
+
+                    okokafficherbouton = okrole || oksexe || oknom || okprenom || okdate || okville || okpays ;  
+                    console.log(okokafficherbouton ,crole,"<?=$baserole?>",okrole,oksexe , oknom , okprenom ,okdate , okville , okpays);
+
+
+                } 
+
+                let okerreurphp = "<?=isset($err_pseudo)?>" == 1;
+
+                console.log("okokafficherbouton",okokafficherbouton);
+                // apparition disparition du bouton okok=true=apparrition
+                if (okokafficherbouton) {btnsave.type = 'submit';} else {btnsave.type = 'hidden';}
+
+
+
+
+
+            }
+
+
+
+        </script>
     </body>
 </html>
