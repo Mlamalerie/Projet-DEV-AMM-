@@ -11,128 +11,113 @@ class uploadFile{
         $filename = strtolower($nn['filename']);
         $ext =  strtolower($nn['extension']);
 
-
+        // si le fichier est un bien un fichier audio
         if (in_array($ext,$formataudio)){
 
             $name = $idduboug.'-'.strtolower($nomduboug).'-'.strtolower($filename).'.'.$ext;
 
 
-            $dir = 'datausers/';
+            $dir = 'data/'.$idduboug.'-'.$nomduboug.'/beats/';
+
             // Vérifie si le répertoire existe :
-            if (!is_dir("datausers")) { 
-                mkdir("datausers",0777);
-                echo 'Le répertoire datausers vient d\'être créé!';      
+            if (!is_dir("data")) { 
+                mkdir("data",0777);
+                echo 'Le répertoire data vient d\'être créé!';      
             }
 
             // Vérifie si le répertoire existe :
-            if (!is_dir("datausers/".$nomduboug)) { 
-                mkdir("datausers/".$nomduboug,0777);
-                echo 'Le répertoire '.$nomduboug.' vient d\'être créé!';      
+            if (!is_dir("data/".$idduboug.'-'.$nomduboug)) { 
+                mkdir("data/".$idduboug.'-'.$nomduboug,0777);
+                echo 'Le répertoire '.$idduboug.'-'.$nomduboug.' vient d\'être créé!';      
             }
 
-            if (!is_dir("datausers/".$nomduboug.'/beats')){ 
-                mkdir("datausers/".$nomduboug.'/beats',0777);
+            if (!is_dir("data/".$idduboug.'-'.$nomduboug.'/beats')){ 
+                mkdir("data/".$idduboug.'-'.$nomduboug.'/beats',0777);
                 echo 'Le répertoire tracks vient d\'être créé!'; 
             }
 
-            $direction = 'datausers/'.$nomduboug.'/beats/'.$name;
-            echo "DIRECTION :".$direction;
-
-
+            //localisation du fichier
             $direction = $dir.basename($name);
-            echo "DIRECTION22 :".$direction;
 
+            // PLACER
             if(move_uploaded_file($tmp_name,$direction)){
                 echo "<br><br>FICHIER ENVOYER AVEC SUCCES <br>";
-                $path_parts = pathinfo($direction);
-                echo $path_parts['dirname'], "*<br>";
-                echo $path_parts['basename'], "**<br>";
-                echo $path_parts['extension'], "***<br>";
-                echo $path_parts['filename'], "****<br>";
+                return $direction;
 
-            }else
-            {
-                $direction = 'error2';
+            }
+            // Erreur de placement
+            else{
+                return 'error2';
 
             }
 
-
-
-            return $direction;
         } 
+        // ce n'est pas un fichier audio
         else {
+
             return 'error1';
 
 
         }
-    }
-
-    function uploadImage($tmp_name,$name,$nomduboug,$idduboug,$date){
-        $formatautorise = array('jpg','jpe','jpeg','png');
+    } // END function uploadAudio
+    
+    function uploadImage($tmp_name,$name,$nomduboug,$idduboug){
+        $formatImage = array('png','jpg','jpeg');
 
         $nn = pathinfo($name);
-        $filename = strtolower($nn['filename']);
+        $filename = "photo";
         $ext =  strtolower($nn['extension']);
 
-
-        if (in_array($ext,$formatautorise)){
+        // si le fichier est un bien un fichier Image
+        if (in_array($ext,$formatImage)){
 
             $name = $idduboug.'-'.strtolower($nomduboug).'-'.strtolower($filename).'.'.$ext;
 
 
-            $dir = 'datausers/'.$nomduboug.'/images/'.$name;
-            // Vérifie si le répertoire existe :
-            if (!is_dir("datausers")) { 
-                mkdir("datausers",0777);
-                echo 'Le répertoire datausers vient d\'être créé!';      
-            }
+            $dir = 'data/'.$idduboug.'-'.$nomduboug.'/images/';
 
             // Vérifie si le répertoire existe :
-            if (!is_dir("datausers/".$nomduboug)) { 
-                mkdir("datausers/".$nomduboug,0777);
-                echo 'Le répertoire '.$nomduboug.' vient d\'être créé!';      
+            if (!is_dir("data")) { 
+                mkdir("data",0777);
+                echo 'Le répertoire data vient d\'être créé!';      
             }
 
-            if (!is_dir("datausers/".$nomduboug.'/images')){ 
-                mkdir("datausers/".$nomduboug.'/images',0777);
-                echo 'Le répertoire tracks vient d\'être créé!'; 
+            // Vérifie si le répertoire existe :
+            if (!is_dir("data/".$idduboug.'-'.$nomduboug)) { 
+                mkdir("data/".$idduboug.'-'.$nomduboug,0777);
+                echo 'Le répertoire '.$idduboug.'-'.$nomduboug.' vient d\'être créé!';      
             }
 
-            $direction = 'datausers/'.$nomduboug.'/images/'.$name;
-            echo "DIRECTION :".$direction;
+            if (!is_dir("data/".$idduboug.'-'.$nomduboug.'/images')){ 
+                mkdir("data/".$idduboug.'-'.$nomduboug.'/images',0777);
+                echo 'Le répertoire images vient d\'être créé!'; 
+            }
 
-
+            //localisation du fichier
             $direction = $dir.basename($name);
-            echo "DIRECTION22 :".$direction;
 
+            // PLACER
             if(move_uploaded_file($tmp_name,$direction)){
-                echo "<br><br>FICHIER ENVOYER AVEC SUCCES <br>";
-                $path_parts = pathinfo($direction);
-                echo $path_parts['dirname'], "*<br>";
-                echo $path_parts['basename'], "**<br>";
-                echo $path_parts['extension'], "***<br>";
-                echo $path_parts['filename'], "****<br>";
+                
+                return $direction;
 
-            }else
-            {
-                $direction = 'error2';
+            }
+            // Erreur de placement
+            else{
+                return 'error2';
 
             }
 
-
-
-            return $direction;
         } 
+        // ce n'est pas un fichier Image
         else {
+
             return 'error1';
 
 
         }
+    } // END function uploadImage
 
-
-
-
-    }
 }
 
 

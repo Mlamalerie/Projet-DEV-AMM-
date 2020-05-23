@@ -56,7 +56,7 @@ select {
     margin-bottom: 8px;
 } 
 
-.iconLOGO {
+#imgduboug {
     display:block;
     margin:auto;
     width: 6em;
@@ -83,7 +83,16 @@ select {
 }
 
 @media (min-width: 576px) {
-  .rounded-nav .nav-link {
+  .rounded-nav .nav-link { 
     border-radius: 50rem !important;
   }
+}
+
+.roundedImage{  
+    overflow:hidden; 
+    -webkit-border-radius:75%;
+    -moz-border-radius:75%; 
+    border-radius:75%;
+    min-width:140px;
+    height:140px; 
 }

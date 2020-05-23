@@ -8,7 +8,6 @@ print_r("<br>");
 print_r($_POST);
 // ta rien a faire ici si c pas toi le boug
 
-
 $baseid = (int) $_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
 
 $req = $BDD->prepare("SELECT * 
@@ -43,14 +42,18 @@ $toutestboninfoprofil = false;
 $toutestbonemail = false;
 $toutestbonmdp = false;
 $toutestboninfoperso = false;
+$toutestbonimage = false;
+
+$icon = " <svg class='mr-1 my-1 bi bi-exclamation-circle' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+                                            <path fill-rule='evenodd' d='M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z' clip-rule='evenodd'/>
+                                            <path d='M7.002 11a1 1 0 112 0 1 1 0 01-2 0zM7.1 4.995a.905.905 0 111.8 0l-.35 3.507a.552.552 0 01-1.1 0L7.1 4.995z'/>
+                                        </svg>";
+
 if(!empty($_POST)){
 
     extract($_POST); // si pas vide alors extraire le tableau, grace a ça on pourra directemet mettre le nom de la varilable en dur
     $ok = true;
-    $icon = " <svg class='mr-1 my-1 bi bi-exclamation-circle' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-                                            <path fill-rule='evenodd' d='M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z' clip-rule='evenodd'/>
-                                            <path d='M7.002 11a1 1 0 112 0 1 1 0 01-2 0zM7.1 4.995a.905.905 0 111.8 0l-.35 3.507a.552.552 0 01-1.1 0L7.1 4.995z'/>
-                                        </svg>";
+
     $activetabinfoprofil = false;
     // si le bouton saveprofil a été cliqué
     if (isset($_POST['savechangeinfoprofil'])){
@@ -430,16 +433,98 @@ if(!empty($_POST)){
 
         <div class="container py-5">
             <!-- For demo purpose -->
-            <div class="row mb-5">
-                <div class="col-lg-8 text-white py-4 text-center mx-auto">
-                    <h1 class="display-4">Bootstrap 4 tabs</h1>
-                    <p class="lead mb-0">Build a few custom styled tab variants using Bootstrap 4.</p>
-                    <p class="lead">Snippet by <a href="https://bootstrapious.com/snippets" class="text-white">
-                        Bootstrapious</a>
-                    </p>
+            <div class="row mb-1">
+                <div class="col-lg-8 py-4 text-center mx-auto">
+
+                    <img onclick="getfile();" id="imgduboug" src="<?=$baseimage ?>" alt=""  class="img-fluid  mb-3 img-thumbnail roundedImage shadow-sm">
+                    <h5 class="mb-0"><?=$basepseudo ?> </h5><span class="small text-uppercase text-muted">Cliquer sur l'image pour la changer</span>
+                    <?php 
+
+    //var_dump($_FILES);
+    require_once 'assets/functions/uploadFile.php';
+
+                         $upd = new uploadFile();
+
+                         if(isset($_FILES['fileUploadImage'])) {
+                             if($_FILES['fileUploadImage']['size'] != 0) { 
+                                 // FICHIER RECU
+                                 //                                var_dump($_FILES['fileUploadImage']);
+                                 $tmp_name = $_FILES['fileUploadImage']['tmp_name'];
+                                 $name = $_FILES['fileUploadImage']['name'];
+
+                                 $nomduboug = $basepseudo;
+                                 $idduboug = $baseid;
+
+
+                                 $destination = $upd->uploadImage($tmp_name,$name,$nomduboug,$idduboug);
+                                 echo $destination;
+                                 if ($destination == "error1") { 
+                                     $err_uploadimage = " ERREUR : Ceci n'est pas une image";
+
+                                 }
+                                 else if ($destination == "error2") {
+                                     $err_uploadimage = "ERREUR : Pour des raisons inconnues votre image n'a pas été uploader";
+
+                                 } else {
+                                     $toutestbonimage = true;
+
+                                     // preparer requete
+                                     $req = $BDD->prepare("UPDATE user
+            SET  user_image = ?
+            WHERE user_id = ?"); 
+
+                                     $req->execute(array($destination,$baseid));
+
+                                     $baseimage = $destination;
+
+
+
+                                 }
+                             } else {
+                                 $err_uploadimage = "fichier taille 0";
+                             }
+                         }
+
+
+                    ?>
+
+                    <form id='formUpload1' action="" method="post" enctype="multipart/form-data">
+
+                        <input id="hiddenfile" type="file" style="display:none;" name='fileUploadImage' onchange="submit()" class="form-control border-0">
+                    </form>
+
+                    <?php
+                    if(isset($err_uploadimage)){
+                        echo "<span class='spanAlertchamp'> ";
+                        echo $icon . $err_uploadimage ;
+                        echo "</span> ";
+                    } 
+                    ?>
+                    <?php
+                    if($toutestbonimage){ 
+                    ?>
+                    <div class="divDone">
+                        <span class="spanDone"> Vos modifications ont bien été enregistrer </span>
+                        <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                    <script type="text/javascript">
+                        function getfile(){
+                            document.getElementById('hiddenfile').click();
+                        }
+
+                    </script>
+
+
+
+
+
                 </div>
             </div>
-            <!-- End -->
+            <!-- End div du haut-->
+
 
 
             <div class="p-5 bg-white rounded shadow mb-5">
@@ -487,7 +572,9 @@ if(!empty($_POST)){
                                     <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
                                     <label for="description"> Bio </label>
                                 </div>
-                                <input  onkeyup="goBtnSave(this,1)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="description" name="description" placeholder=""  value="<?=$basedescription?>" autofocus>
+
+                                <textarea onkeyup="goBtnSave(this,1)" id="description" name="description" class="form-control shadow-sm" value="<?=$basedescription?>"><?=$basedescription?></textarea>
+
                                 <?php
     if(isset($err_description)){
         echo "<span class='spanAlertchamp'> ";
@@ -503,7 +590,7 @@ if(!empty($_POST)){
                             if($toutestboninfoprofil){ 
                             ?>
                             <div class="divDone">
-                                <span class="spanDone"> Vos modiffication ont bien été enregistrer </span>
+                                <span class="spanDone"> Vos modifications ont bien été enregistrer </span>
                                 <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
                             </div>
                             <?php
@@ -561,7 +648,7 @@ if(!empty($_POST)){
                         if($toutestbonemail){ 
                         ?>
                         <div>
-                            <span class="spanDone"> Vos modiffication ont bien été enregistrer </span>
+                            <span class="spanDone"> Vos modifications ont bien été enregistrer </span>
                             <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
                         </div>
                         <?php
@@ -619,7 +706,7 @@ if(!empty($_POST)){
                         if($toutestbonmdp){ 
                         ?>
                         <div>
-                            <span class="spanDone"> Vos modiffication ont bien été enregistrer </span>
+                            <span class="spanDone"> Vos modifications ont bien été enregistrer </span>
                             <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
                         </div>
                         <?php
@@ -781,7 +868,7 @@ if(!empty($_POST)){
                         if($toutestboninfoperso){ 
                         ?>
                         <div>
-                            <span class="spanDone"> Vos modiffication ont bien été enregistrer </span>
+                            <span class="spanDone"> Vos modifications ont bien été enregistrer </span>
                             <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
                         </div>
                     </div>
