@@ -60,7 +60,7 @@ class uploadFile{
 
         }
     } // END function uploadAudio
-    
+
     function uploadImage($tmp_name,$name,$nomduboug,$idduboug){
         $formatImage = array('png','jpg','jpeg');
 
@@ -96,9 +96,10 @@ class uploadFile{
             //localisation du fichier
             $direction = $dir.basename($name);
 
+
             // PLACER
             if(move_uploaded_file($tmp_name,$direction)){
-                
+
                 return $direction;
 
             }

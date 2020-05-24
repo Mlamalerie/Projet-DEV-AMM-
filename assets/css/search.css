@@ -88,4 +88,15 @@
 
 
 
+.roundedImage{   
+    overflow:hidden; 
+    -webkit-border-radius:75%; 
+    -moz-border-radius:75%; 
+    border-radius:75%;
+    width:140px;
+    height:140px; 
+}
+
+
+
 

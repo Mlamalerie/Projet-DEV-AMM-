@@ -504,7 +504,7 @@ if(!empty($_POST)){
                     if($toutestbonimage){ 
                     ?>
                     <div class="divDone">
-                        <span class="spanDone"> Vos modifications ont bien été enregistrer </span>
+                        <span class="spanDone"> Vos modifications ont bien été enregistrer. </span>
                         <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
                     </div>
                     <?php
