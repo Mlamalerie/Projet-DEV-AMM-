@@ -471,7 +471,9 @@ $_SESSION['ici_index_bool'] = true;
             onchange="changeProgressBar()"
         />
 
+        <a href="?action=add">
         <button type="button" class="btn btn-light btn-buy">Acheter</button>
+        </a>
 
         <div class="currentTime"></div>
         <div class="durationTime"></div>
