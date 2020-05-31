@@ -1,19 +1,19 @@
 button.boutonstyle2ouf{
   position: relative;
-  height: 60px;
-  width: 200px;
-  margin: 0 35px;
+/*  height: 65px;*/
+  width: 100%;
+/*  margin: 0 30;*/
   border-radius: 50px;
   border: none;
   outline: none;
-  background: #111;
+  background: #03a9f4;
   color: #fff;
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.5s;
+  cursor: pointer; 
+  transition: background 0.5s; 
 }
 button.boutonstyle2ouf:first-child:hover{
   background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
@@ -27,19 +27,19 @@ button.boutonstyle2ouf:first-child:before,
 button.boutonstyle2ouf:last-child:before{
   content: '';
   position: absolute;
-  background: inherit;
+  background: inherit; 
   top: -5px;
   right: -5px;
-  bottom: -5px;
+  bottom: -5px; 
   left: -5px;
-  border-radius: 50px;
+/*  border-radius: 50px;*/
   filter: blur(20px);
   opacity: 0;
   transition: opacity 0.5s;
 }
 button.boutonstyle2ouf:first-child:hover:before,
 button.boutonstyle2ouf:last-child:hover:before{
-  opacity: 1;
+  opacity: 0.2;
   z-index: -1;
 }
 button.boutonstyle2ouf:hover{

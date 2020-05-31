@@ -2,9 +2,9 @@
 session_start();
 include_once("assets/db/connexiondb.php"); // inclure le fichier pour se connecter à la base de donnée
 include_once("fichierfct.php");
-
+print_r($_SESSION);
 // si une connection est détecter : (ta rien a faire ici mec)
-if(isset($_SESSION['user_id'])){
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
     header('Location: test_zone.php');
     exit;
 }
@@ -47,7 +47,7 @@ if(!empty($_POST)){
 
             if(!isset($user['user_id'])){
                 $ok = false;
-                $err_email = "Veuillez renseigner ce champ";
+                $err_email = "nda";
             }
         }
 
@@ -60,7 +60,7 @@ if(!empty($_POST)){
 
         if(!isset($verif_user['user_id'])) {
             $ok = false;
-            $err_email = "Veuillez renseigner ce champ";
+            $err_email = "tu mens";
 
         }
 
@@ -82,6 +82,10 @@ if(!empty($_POST)){
             $_SESSION['user_pseudo'] = $verif_user['user_pseudo'];
             $_SESSION['user_email'] = $verif_user['user_email'];
 
+            $listeGenres = ['Hip Hop','Trap','Afro','Deep','Pop','Rock','Reggae'];
+            sort($listeGenres);
+            $_SESSION['listeGenres'] = $listeGenres ;
+
             header('Location: dashboard.php');
             exit;
         }
@@ -101,8 +105,8 @@ if(!empty($_POST)){
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css">
         <link rel="stylesheet" type="text/css" href="assets/css/inscription-connexion.css">
-         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
-        
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+
         <title>Connexion</title>
     </head>
     <body>

@@ -17,29 +17,29 @@ if (substr($destination,0,-1) == "error") {
 
 }
 else {
-    
-    
-    
-    
-    
-    
+
+$ok = false;
+
+
+
+
     if($ok) {
 
-            $date_upload = date("Y-m-d H:i:s"); 
+        $date_upload = date("Y-m-d H:i:s"); 
 
-            // preparer requete
-            $req = $BDD->prepare("INSERT INTO beat (beat_title,beat_author,beat_format,beat_genre,beat_description,beat_year,beat_price,beat_dateupload,beat_cover,beat_tags,beat_source) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
+        // preparer requete
+        $req = $BDD->prepare("INSERT INTO beat (beat_title,beat_author,beat_format,beat_genre,beat_description,beat_year,beat_price,beat_dateupload,beat_cover,beat_tags,beat_source) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
 
-            $req->execute(array($title,$author,$format,$genre,$description,$year,$price,$dateupload,$cover,$tags,$source));
-            
-             $_SESSION['user_pseudo'] = $pseudo;
+        $req->execute(array($title,$author,$format,$genre,$description,$year,$price,$dateupload,$cover,$tags,$source));
 
-            header('Location: index.php');
-            exit;
+        $_SESSION['user_pseudo'] = $pseudo;
 
-        }
-    
-    
+        header('Location: index.php');
+        exit;
+
+    }
+
+
 }
 
 ?>
@@ -57,8 +57,8 @@ else {
         <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
         <!--        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> -->
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
-       
-        <title>TEST ZONE</title>
+
+        <title>New upload</title>
     </head>
     <body>
         <br><br><br><br><br><br><br>
@@ -68,27 +68,27 @@ else {
         <?php
         require_once('assets/skeleton/navbar.php');
         ?>;
-<?php
+        <?php
         if (substr($destination,0,-1) == "error") { ?>
-            ERREUUUUURURURURUR
-            
-     <?php   }
+        ERREUUUUURURURURUR
+
+        <?php   }
         else { ?>
-           
-           <?= $destination ?>
-           
-            <?php
-            
+
+        <?= $destination ?>
+
+        <?php
+
             $annulationupload = false;
-            if ($annulationupload){
-            unlink($destination);
-            }
-        }
+              if ($annulationupload){
+                  unlink($destination);
+              }
+             }
         ?>
 
 
 
-       
+
         <?php
         if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
             echo "Connection détecté";
@@ -96,13 +96,13 @@ else {
             echo "Pas de connexion";
         }
         ?>
-        
-        
-        
-     
+
+
+
+
 
         <?php
-            require_once('assets/skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.php');
         ?>
         <script>
 
