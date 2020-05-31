@@ -83,7 +83,7 @@
                                echo $ac['message'];
                            }
                             else{
-                                echo '  <b>Dites lui ntm !</b>  ';
+                                echo '  <b>Dites lui bonjour !</b>  ';
                             }
                             
                             ?>

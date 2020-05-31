@@ -23,7 +23,7 @@ if(isset($_SESSION['user_id'])){
     $req->execute(array(':id1' => $id, ':id2' =>$_SESSION['user_id']));
 }
 else{
-    $req = $BDD->prepare("SELECT u.*, r.id_demandeur, r.id_demandeur, r.statut,r.id_bloqueur
+    $req = $BDD->prepare("SELECT u.*
         FROM user u
         WHERE u.user_id = :id1");
 
@@ -160,7 +160,7 @@ if(!empty($_POST)){
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('assets/skeleton/navbar.php');
+        //require_once('assets/skeleton/navbar.php');
         ?>
         <br/><br/><br/><br/>
         <div class="container">
@@ -186,26 +186,28 @@ if(!empty($_POST)){
 
 
                 <?php
-    if($_SESSION['user_id']==$afficher_profil['user_id']){/*on peut voir ces boutons seulement sur notre compte*/
+    /*on peut voir ces boutons seulement sur notre compte et si on est connecté*/
+    if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
+        if( $_SESSION['user_id']==$afficher_profil['user_id'] ){
                 ?>
-                <button class="infos-privee-btn"><a href="privee.php?profil_id=<?= $afficher_profil['user_id']?>" >Infos privée</a></button>
+                <button class="infos-privee-btn"><a href="privee.php?profil_id=<?= $afficher_profil['user_id']?>" >Infos privée</a></button>()
 
                 <button class="editer-btn"><a href="editer-profil.php?profil_id=<?= $afficher_profil['user_id']?>" >Editer</a></button>
                 <?php
-    }
-                         else{
+        } else {/*si on est juste connecté et qu'on regarde le profil d'un autre*/
                 ?>
                 <div class="col-md-4" style="display:inline-block;width:30%;margin-left:5%">
                     <button class="msg-btn" href=""> <a href="message.php?profil_id=<?= $afficher_profil['user_id'] ?>" style="color:white">
                         DM
                         </a></button>   
                     <?php
-                         }
+        }
+    }
                     ?>
 
 
                     <div>
-                        <?= $afficher_profil['user_nbfollowers'] ?> Follower(s)
+                        <?= count(explode(',',$afficher_profil['user_followers'])) ?> Follower(s)
                     </div>
                 </div>
 
