@@ -65,6 +65,10 @@
 
                 ?>
                 <li class="nav-item ">
+                    <a class="nav-link btn" href="messagerie.php">Messagerie<span class="sr-only">(current)</span></a>
+                </li>
+                
+                <li class="nav-item ">
                     <a class="nav-link btn" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
                 </li>
                 

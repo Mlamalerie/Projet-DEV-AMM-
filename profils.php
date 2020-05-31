@@ -71,7 +71,7 @@ if(!empty($_POST)){
 
         $req=$BDD->prepare("INSERT INTO relation (id_demandeur,id_receveur,statut,id_bloqueur) VALUES (?,?,?,?)");
         $req->execute(array($_SESSION['user_id'],$afficher_profil['user_id'],3,$afficher_profil['user_id']));
-        /*c'est comme delete mais on insère juste l'id de du profil bloqué*/ /*on suppose que le statut 3 est une demande bloqué*/
+        /*c'est comme unfollow mais on insère juste l'id de du profil bloqué*/ /*on suppose que le statut 3 est une demande bloqué*/
 
 
         header('Location: profils.php?profil_id='.$afficher_profil['user_id']);
@@ -95,9 +95,9 @@ if(!empty($_POST)){
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Mon profil</title>
+        <title>Profil de <?= $afficher_profil['user_pseudo'] ?></title>
         <?php
-        require_once('assets/skeleton/headLinkCSS.html');
+    require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 
@@ -181,27 +181,29 @@ if(!empty($_POST)){
                         <li>Ce compte a été crée le : <?= $afficher_profil['user_dateinscription'] ?></li>                                         
                     </ul>
                 </div>
-                
-                
-                
-                    
-                    <?php
-                        if($_SESSION['user_id']==$afficher_profil['user_id']){/*on peut voir ces boutons seulement sur notre compte*/
-                     ?>
-                    <button class="infos-privee-btn"><a href="privee.php?profil_id=<?= $afficher_profil['user_id']?>" >Infos privée</a></button>
 
-                    <button class="editer-btn"><a href="editer-profil.php?profil_id=<?= $afficher_profil['user_id']?>" >Editer</a></button>
-                    <?php
-                        }
+
+
+
+                <?php
+    if($_SESSION['user_id']==$afficher_profil['user_id']){/*on peut voir ces boutons seulement sur notre compte*/
+                ?>
+                <button class="infos-privee-btn"><a href="privee.php?profil_id=<?= $afficher_profil['user_id']?>" >Infos privée</a></button>
+
+                <button class="editer-btn"><a href="editer-profil.php?profil_id=<?= $afficher_profil['user_id']?>" >Editer</a></button>
+                <?php
+    }
                          else{
-                    ?>
-                     <div class="col-md-4" style="display:inline-block;width:30%;margin-left:5%">
-                    <button class="msg-btn">DM</button>   
+                ?>
+                <div class="col-md-4" style="display:inline-block;width:30%;margin-left:5%">
+                    <button class="msg-btn" href=""> <a href="message.php?profil_id=<?= $afficher_profil['user_id'] ?>" style="color:white">
+                        DM
+                        </a></button>   
                     <?php
                          }
                     ?>
-                    
-                    
+
+
                     <div>
                         <?= $afficher_profil['user_nbfollowers'] ?> Follower(s)
                     </div>
@@ -212,42 +214,42 @@ if(!empty($_POST)){
         </div>
         <div>
             <?php
-             if(isset($_SESSION['user_id'])&& $_SESSION['user_id']!=$afficher_profil['user_id']){
+    if(isset($_SESSION['user_id'])&& $_SESSION['user_id']!=$afficher_profil['user_id']){
             ?>    
             <form method="post" class="follow-btn">
                 <?php
-                    if(!isset($afficher_profil['statut'])){
+        if(!isset($afficher_profil['statut'])){
                 ?>
                 <input type="submit" name="user-follow" value="Follow" class="follow-btn">
                 <?php
-                    }
+        }
                 ?>
                 <?php
-                    if(isset($afficher_profil['statut']) && $afficher_profil['statut']<3 && $afficher_profil['id_demandeur']==$_SESSION['user_id']){
+        if(isset($afficher_profil['statut']) && $afficher_profil['statut']<3 && $afficher_profil['id_demandeur']==$_SESSION['user_id']){
                 ?>
                 <input type="submit" name="user-unfollow" value="Unfollow" class="follow-btn">
                 <?php
-                    }
-                    if((isset($afficher_profil['statut'])||$afficher_profil['statut']==NULL) && $afficher_profil['statut']<3){
+        }
+        if((isset($afficher_profil['statut'])||$afficher_profil['statut']==NULL) && $afficher_profil['statut']<3){
                 ?>
                 <input type="submit" name="user-bloquer" value="Bloquer" class="follow-btn">
-                 <?php
-                    }
-                    else if($afficher_profil['id_bloqueur'] != $_SESSION['user_id']){
+                <?php
+        }
+        else if($afficher_profil['id_bloqueur'] != $_SESSION['user_id']){
                 ?>
                 <input type="submit" name="user-debloquer" value="Débloquer" class="follow-btn">
                 <?php
-                    }
-                    else{
+        }
+        else{
                 ?>
                 <div>Vous avez été bloqué par cet utilisateur</div>
                 <?php
-                      }
+        }
                 ?>
             </form>
             <?php
-        }
-        ?> 
+    }
+            ?> 
         </div>                     
 
     </body>
