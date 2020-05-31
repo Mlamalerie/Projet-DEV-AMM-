@@ -77,10 +77,12 @@
                         <img id="iconUser" src="assets/img/user.png">
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
                         <span class="dropdown-item  "> <?= $_SESSION['user_pseudo'] ?> </span>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item  " href="#"> Mon Profil </a>
+                       <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"> Mon Profil </a>
                         <a class="dropdown-item  " href="#"> Mes Tracks </a>
+
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="deconnexion.php">Déconnexion</a>
                     </div>
