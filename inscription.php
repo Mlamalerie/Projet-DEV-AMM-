@@ -147,12 +147,13 @@ if(!empty($_POST)){
             $err_pays = "Veuillez renseigner ce champ !";
         }
 
+          //*** Verification du du checkbox
         if(empty($checkmala)) { // si vide
             $ok = false;
             $err_checkmala = "Veuillez renseigner ce champ !";
 
         }
-        //*** Verification du du checkbox
+      
         if($ok) {
 
             $date_inscription = date("Y-m-d H:i:s"); 
