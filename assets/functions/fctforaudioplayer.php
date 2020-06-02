@@ -6,7 +6,7 @@ function returnMusicListStr($bay, $resuBEATS){
         foreach($resuBEATS as $r) {
             $pose = $r['beat_source'];
 
-            $str .= "'./audio/$pose',";
+            $str .= "'audio/$pose',";
 
         }
 
@@ -14,7 +14,7 @@ function returnMusicListStr($bay, $resuBEATS){
         foreach($resuBEATS as $r) {
             $pose = $r['beat_cover'];
 
-            $str .= "'./img/$pose',";
+            $str .= "'$pose',";
         }
     }
     else if ($bay == 'artists'){

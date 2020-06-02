@@ -770,7 +770,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                                 <div class="col-sm-2 p-0  " style="background-color : red;">
                                     <div class="">
-                                        <div class="hover hover-5 text-white rounded"><img src="img/<?=$r['beat_cover']?>" alt="">
+                                        <div class="hover hover-5 text-white rounded"><img src="<?=$r['beat_cover']?>" alt="">
                                             <div class="hover-overlay"></div>
 
                                             <div class="link_icon" onclick="playPause(<?=$i-1 ?>)">
@@ -864,12 +864,27 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                         <div class="col-xl-3 col-sm-6 mb-5 text-center">
                             <div class="bg-white rounded shadow-sm py-3 px-3"><img src="<?=$r['user_image'] ?> " alt=""  class="img-fluid roundedImage mb-3 img-thumbnail shadow-sm">
                                 <h5 class="mb-0"><?=$r['user_pseudo'] ?> </h5>
-                                <span class="small text-uppercase text-muted"><?=$r['user_ville'] ?><span class="text-uppercase ">(<?=$r['user_pays'] ?>)</span></span>
-                                
+                                <span class="small  text-muted"><?=$r['user_ville'] ?>
+                                    <span class="text-uppercase ">
+                                        <?php
+
+    //*** Verification du Pays
+    $req = $BDD->prepare("SELECT * 
+                            FROM pays
+                            WHERE code = ?");
+                                                                                 $req->execute(array($r['user_pays'] ));
+                                                                                 $aff_pays = $req->fetch();
+
+                                                                                echo '('.$aff_pays['nom_fr_fr'].')';
+                                        ?>
+
+                                    </span>
+                                </span>
+
                             </div>
                         </div>
 
-                      
+
 
                         <?php }} ?>
 
