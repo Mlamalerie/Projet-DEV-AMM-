@@ -4,6 +4,14 @@ include_once("assets/db/connexiondb.php"); // inclure le fichier pour se connect
 $_SESSION['ici_index_bool'] = false;
 ?>
 
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -585,6 +593,78 @@ $_SESSION['ici_index_bool'] = false;
                 </div>
             </div>
         </div>
+
+
+
+
+        <!--   *************************************************************  -->
+        <!--   ************************** MODAL PANIER  **************************  -->
+
+
+        <div class="modal fade" id="ModalPanier" tabindex="-1" role="dialog" aria-labelledby="ModalPanierLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ModalPanierLabel">Panier WeBeats</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                
+                <div class="table-responsive">
+                   <table class="table table-bordered">
+                      <tr>
+                         <th width="40%">Nom de l'article</th>
+                         
+                         <th width="20%">Prix</th>
+                         
+                         <th width="5%">Action</th>
+                      </tr>
+                      <?php
+                      if(!empty($_SESSION["shopping_cart"]))
+                      {
+                         $total = 0;
+                         foreach($_SESSION["shopping_cart"] as $keys => $values)
+                         {
+                      ?>
+                      <tr>
+                         <td><?php echo $values["item_name"]; ?></td>
+                         
+                         
+                         <td><?php echo number_format($values["item_price"], 2);?> &euro;</td>
+                         <td><a href="test.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Retirer</span></a></td>
+                      </tr>
+                      <?php
+                            $total = $total + ($values["item_price"]);
+                         }
+                      ?>
+                      <tr>
+                         <td colspan="3" align="right">Total</td>
+                         <td align="right"><?php echo number_format($total, 2); ?> &euro;</td>
+                         <td></td>
+                      </tr>
+                      <?php
+                      }
+                      ?>
+                         
+                   </table>
+                </div>
+
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <a href="affichagepanier.php?action=add&id=<?php echo $row["id"]; ?>"><button type="button" class="btn btn-primary">Valider</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
 
 
 
