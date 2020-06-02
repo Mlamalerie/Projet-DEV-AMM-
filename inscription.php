@@ -1,12 +1,11 @@
 <?php
 session_start();
 include_once("assets/db/connexiondb.php"); // inclure le fichier pour se connecter à la base de donnée
-include_once("fichierfct.php");
 
 // si une connection est détecter : (ta rien a faire ici mec)
 if(isset($_SESSION['user_id'])){
-    header('Location: dashboard.php');
-    exit;
+//    header('Location: dashboard.php');
+//    exit;
 }
 
 
@@ -19,29 +18,32 @@ if(!empty($_POST)){
     $ok = true;
 
     if(isset($_POST['inscription'])){
+        //*** Saisies :
         $pseudo = (String) trim($pseudo);
         $email = (String) strtolower(trim($email));
         $motdepasse = (String) trim($motdepasse);
+        $motdepasseverif = (String) trim($motdepasseverif);
 
         $pays = (int) $pays;
 
-        $naiss_jour = (int) $naiss_jour;
-        $naiss_mois = (int) $naiss_mois;
-        $naiss_annees = (int) $naiss_annees;
-
-        $date_naissance = (String) null;
+//        $naiss_jour = (int) $naiss_jour;
+//        $naiss_mois = (int) $naiss_mois;
+//        $naiss_annees = (int) $naiss_annees;
+//
+//        $date_naissance = (String) null;
         
+        // le svg de l'icon erreur
         $icon = " <svg class='bi bi-exclamation-circle' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
                                             <path fill-rule='evenodd' d='M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z' clip-rule='evenodd'/>
                                             <path d='M7.002 11a1 1 0 112 0 1 1 0 01-2 0zM7.1 4.995a.905.905 0 111.8 0l-.35 3.507a.552.552 0 01-1.1 0L7.1 4.995z'/>
                                         </svg>";
 
-        // Verification pseudo motdepasse et email
-        if(empty($pseudo)) {
+        //*** Verification du pseudo
+        if(empty($pseudo)) { // si vide
             $ok = false;
             $err_pseudo = "Veuillez renseigner ce champ !";
 
-        } else {
+        } else { // ensuite on verifie si ce pseudo existe déja ou pas
             $req = $BDD->prepare("SELECT user_id
                             FROM user
                             WHERE user_pseudo = ? 
@@ -54,16 +56,27 @@ if(!empty($_POST)){
                 $err_pseudo = "Ce pseudo existe déjé !";
             }
         }
+        //*** Verification du mot de passe
+        if(empty($motdepasseverif)) { // si le champ mot de passe est vide
+            $ok = false;
+            $err_motdepasseverif = "Veuillez renseigner ce champ !";
+
+        }
         if(empty($motdepasse)) { // si le champ mot de passe est vide
             $ok = false;
             $err_motdepasse = "Veuillez renseigner ce champ !";
 
+        } else if ($motdepasse != $motdepasseverif && $ok){
+             $ok = false;
+            $err_motdepasse = "Vous n'avez pas rentréee le mm mot de passeverif !";
         }
-        if(empty($email)) {
+        
+        //*** Verification du mail
+        if(empty($email)) { // si vide
             $ok = false;
             $err_email = "Veuillez renseigner ce champ !";
 
-        }else {
+        }else { // ensuite on verifie si ce mail a déja été pris
             $req = $BDD->prepare("SELECT user_id
                             FROM user
                             WHERE user_email = ? 
@@ -77,44 +90,41 @@ if(!empty($_POST)){
             }
         }
 
-        // verification date de naissance
-
-        if($naiss_jour < 1 || $naiss_jour > 31) {
-            $ok = false;
-            $err_naiss_jour = "Veuillez renseigner ce champ !";
-
-        }
-        if($naiss_mois < 1 || $naiss_mois > 12){
-            $ok = false;
-            $err_naiss_mois = "Veuillez renseigner ce champ !";
-
-        }
-        $aaa_debut = 1950; $aaa_n = 70;
-
-        if($naiss_annees < 1900 || $naiss_annees > 2020 ){
-            $ok = false;
-            $err_naiss_annees = "Veuillez renseigner ce champ !";
-
-        }
-
-        if (!checkdate($naiss_jour,$naiss_mois,$naiss_annees)){
-            $ok = false;
-            $err_date = "Date fausse !";
-
-        }else {
-            $date_naissance = $naiss_annees .'-'. $naiss_mois.'-'.$naiss_jour;
-
-        }
-        // veri pays 
-
+//        //*** Verification date de naissance
+//        if($naiss_jour < 1 || $naiss_jour > 31) {
+//            $ok = false;
+//            $err_naiss_jour = "Veuillez renseigner ce champ !";
+//
+//        }
+//        if($naiss_mois < 1 || $naiss_mois > 12){
+//            $ok = false;
+//            $err_naiss_mois = "Veuillez renseigner ce champ !";
+//
+//        }
+//        $aaa_debut = 1950; $aaa_n = 70;
+//
+//        if($naiss_annees < 1900 || $naiss_annees > 2020 ){
+//            $ok = false;
+//            $err_naiss_annees = "Veuillez renseigner ce champ !";
+//
+//        }
+//        if (!checkdate($naiss_jour,$naiss_mois,$naiss_annees)){
+//            $ok = false;
+//            $err_date = "Date fausse !";
+//
+//        }else {
+//            $date_naissance = $naiss_annees .'-'. $naiss_mois.'-'.$naiss_jour;
+//
+//        }
+//        
+      //*** Verification du Pays
         $req = $BDD->prepare("SELECT id 
                             FROM pays
                             WHERE code = ?");
         $req->execute(array($pays));
         $verif_pays = $req->fetch();
 
-
-        if(!isset($verif_pays['id'])){
+        if(!isset($verif_pays['id'])){ // si 
             $ok = false;
             $err_pays = "Veuillez renseigner ce champ !";
         }
@@ -131,7 +141,8 @@ if(!empty($_POST)){
             $req->execute(array($pseudo,$email,$motdepasse,$date_naissance,$pays,$date_inscription,$date_inscription));
             
              $_SESSION['user_pseudo'] = $pseudo;
-
+$_SESSION['user_email'] = $email;
+            
             header('Location: dashboard.php');
             exit;
 
@@ -164,7 +175,7 @@ if(!empty($_POST)){
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('assets/skeleton/menu.php');
+       // require_once('assets/skeleton/navbar.php');
 
         ?>
 
@@ -183,11 +194,14 @@ if(!empty($_POST)){
                             <div class="row">
                                 <div class="col-lg-10 col-xl-7 mx-auto">
                                     <h3 class="display-4">Inscription</h3>
-                                    <p class="text-muted mb-4">Create a login split page using Bootstrap 4.</p>
+                                    <p class="text-muted mb-4">Créez un compte WeBeats et commencez à vendre vos composition !</p>
+                                    
                                     <form method="post">
                                        
                                         <!--PSEUDO-->
                                         <div class="form-group mb-3 ">
+                                            
+                                            <label for="pseudo">Votre Pseudo </label>
                                             <?php
                                             if(isset($err_pseudo)){
                                                 echo "<span class='spanAlertchamp'> ";
@@ -195,12 +209,13 @@ if(!empty($_POST)){
                                                 echo "</span> ";
                                             } 
                                             ?>
-                                            <label for="pseudo">Votre Pseudo </label>
                                             <input type="text" class="form-control rounded-pill border-0 shadow-sm px-4" id="pseudo" name="pseudo" placeholder="Mettez un pseudo pour votre profil"  value="<?php if(isset($pseudo)){echo $pseudo;}?>" autofocus>
                                         </div>
                                         <!--EMAIL-->
                                         <div class="form-group mb-4">
-                                            <?php
+                                           
+                                            <label for="email">Votre Adresse Email</label>
+                                             <?php
 
                                             if(isset($err_email)){
                                                 echo "<span class='spanAlertchamp'> ";
@@ -208,67 +223,37 @@ if(!empty($_POST)){
                                                 echo "</span> ";
                                             } 
                                             ?>
-                                            <label for="email">Votre Adresse Email</label>
                                             <input type="email" class="form-control rounded-pill border-0 shadow-sm px-4" id="email" name="email" aria-describedby="emailHelp" placeholder="Tapez votre e-mail" value="<?php if(isset($email)){echo $email;}?>">
                                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                         </div>
                                         <!--MOT DE PASSE-->
                                         <div class="form-group">
+                                            
+                                            <label for="motdepasse">Mot de passe</label>
                                             <?php
 
                                             if(isset($err_motdepasse)){
-                                                echo "<span class='spanAlertchamp'> ";
+                                                echo "<br> <span class='spanAlertchamp'> ";
                                                 echo  $icon . $err_motdepasse ;
                                                 echo "</span> ";
                                             } 
                                             ?>
-                                            <label for="motdepasse">Mot de passe</label>
-                                            <input type="password" class="form-control rounded-pill border-0 shadow-sm px-4" id="motdepasse" name ="motdepasse" placeholder="Tapez votre mot de passe">
-                                        </div>
-
-                                        <!--DATE DE NAISSANCE-->
-                                        <div id="divNaissance" class="form-group btn-group dropup">
+                                            <input type="password" class="mb-2 form-control rounded-pill border-0 shadow-sm px-4" id="motdepasse" name ="motdepasse" placeholder="Tapez votre mot de passe" value="<?php if(isset($motdepasse)){echo $motdepasse;}?>">
+                                            
                                             <?php
 
-                                            if(isset($err_naiss_jour)){
-                                                echo $err_naiss_jour;
+                                            if(isset($err_motdepasseverif)){
+                                                echo "<span class=' spanAlertchamp'> ";
+                                                echo  $icon . $err_motdepasseverif ;
+                                                echo "</span> ";
                                             } 
-                                            if(isset($err_naiss_mois)){
-                                                echo $err_naiss_mois;
-                                            }
-                                            if(isset($err_naiss_annes)){
-                                                echo $err_naiss_annes;
-                                            }
-                                            if(isset($err_date)){
-                                                echo $err_date;
-                                            }
                                             ?>
-                                            <select name="naiss_jour" class="form-control rounded-pill custom-select ">
-                                                <?php
-
-                                                listannee(1,31);
-                                                ?>
-                                            </select>
-                                            <select name="naiss_mois" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
-                                                <option value="1">Janvier </option>
-                                                <option value="2">Février </option>
-                                                <option value="3">Mars </option>
-                                                <option value="4">Avril </option>
-                                                <option value="5">Mai</option>
-                                                <option value="6">Juin </option>
-                                                <option value="7">Juillet </option>
-                                                <option value="8">Aout </option>
-                                                <option value="9">Septembre </option>
-                                                <option value="10">Octobre </option>
-                                                <option value="11">Novembre </option>
-                                                <option value="12">Décembre </option>
-                                            </select>
-                                            <select name="naiss_annees" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
-                                                <?php
-                                                listannee(1950,70);
-                                                ?>
-                                            </select> 
+                                            <input type="password" class=" form-control rounded-pill border-0 shadow-sm px-4" id="motdepasseverif" name ="motdepasseverif" placeholder="ReTapez votre mot de passe" value="<?php if(isset($motdepasseverif)){echo $motdepasseverif;}?>">
+                                            
+                                            
                                         </div>
+
+                                      
                                         <!--PAYS-->
                                         <div class="form-group">
                                             <label for="pays">Votre Pays</label>
@@ -283,8 +268,6 @@ if(!empty($_POST)){
                                                     $voir_pays = $req->fetch();
                                                 ?>
                                                 <option value="<?= $voir_pays['code'] ?>"> <?= mb_strtoupper($voir_pays['nom_fr_fr']) ?> </option>
-
-
 
                                                 <?php
                                                 }
@@ -305,8 +288,9 @@ if(!empty($_POST)){
 
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary btn-block mt-5 rounded-pill shadow-sm" name="inscription">C'est parti</button>
+                                        <button type="submit" class="btn btn-primary btn-block mt-3 rounded-pill shadow-sm" name="inscription">C'est parti</button>
                                     </form>
+                                    <p class="text-muted mb-4">Vous avez déjà un compte? <a href="connexion.php">Connectez vous</a></p>
                                 </div>
                             </div>
                         </div><!-- End -->

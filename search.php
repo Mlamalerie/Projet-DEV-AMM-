@@ -1,8 +1,9 @@
 
 <?php
 session_start();
+$_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
-
+print_r('<br><br><br><br><br><br><br>');
 print_r($_GET);
 $listeGenres = ['Hip Hop','Trap','Afro','Deep','Pop','Rock','Reggae'];
 sort($listeGenres);
@@ -284,7 +285,7 @@ if ($wetypeexiste && !$jechercheunboug) {
 
 
 
-//DANS LES USESR
+//DANS LES USERS
 else if ($wetypeexiste && $jechercheunboug){
 
     if($weqexiste) {
@@ -321,27 +322,67 @@ else if ($wetypeexiste && $jechercheunboug){
 else if (!$wetypeexiste) {
 
 
+    if($weqexiste){
+        $xxx = (String) trim(($_GET['q']));
 
-    $req = $BDD->prepare("SELECT *
+
+        $req = $BDD->prepare("SELECT *
+                            FROM user
+                            WHERE CONCAT(user_pseudo,user_description)
+
+                            LIKE ?
+                            ORDER BY user_pseudo ASC");
+
+        $req->execute(array("%".$xxx."%"));
+        $resuUSERS = $req->fetchAll();
+
+        $req = $BDD->prepare("SELECT *
+                            FROM beat
+                            WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
+                            LIKE ?
+                            ORDER BY beat_title ASC");
+
+        $req->execute(array("%".$xxx."%"));
+        $resuBEATS = $req->fetchAll();
+
+
+    }
+
+
+    else {
+
+        $req = $BDD->prepare("SELECT *
                             FROM user
                             ORDER BY user_pseudo ASC");
 
-    $req->execute(array());
-    $resuUSERS = $req->fetchAll();
+        $req->execute(array());
+        $resuUSERS = $req->fetchAll();
 
-    $req = $BDD->prepare("SELECT *
+        $req = $BDD->prepare("SELECT *
                             FROM beat
                             ORDER BY beat_title ASC");
 
-    $req->execute(array());
-    $resuBEATS = $req->fetchAll();
+        $req->execute(array());
+        $resuBEATS = $req->fetchAll();
+    }
 
 
 }
 
+if (isset($resuBEATS) && !empty($resuBEATS)){
+    $yadesresultatsBEATS = true;
 
+} else {
+    $yadesresultatsBEATS = false;
 
+}
+if (isset($resuUSERS) && !empty($resuUSERS)){
+    $yadesresultatsUSERS = true;
 
+} else {
+    $yadesresultatsUSERS = false;
+
+}
 
 
 
@@ -361,9 +402,12 @@ else if (!$wetypeexiste) {
 
 
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+        <!--  Audio player de mathieu   -->
+        <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
+
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">
+        <!--        <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">-->
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
 
 
@@ -377,7 +421,14 @@ else if (!$wetypeexiste) {
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
         <?php
-        //require_once('assets/skeleton/menu.php');
+        require_once('assets/skeleton/navbar.php');
+        ?>
+
+        <!--   *************************************************************  -->
+        <!--   ************************** MUSIC PLAYER  **************************  -->
+
+        <?php
+        require_once('assets/skeleton/AudioPlayer/audioplayer.php');
         ?>
 
         <?php
@@ -634,7 +685,26 @@ else if (!$wetypeexiste) {
 
                             <h1 class="display-4">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
 
-                            <p class="lead mb-0">(Nombre de résultat)</p>
+                            <p class="lead mb-0">
+                                <?php 
+   
+                                                    if ($yadesresultatsUSERS && $yadesresultatsBEATS) {
+                                                         $obj1 = count($resuBEATS)."beats trouvé";
+                                                    $obj2 = count($resuUSERS)."personnes trouvées";
+                                                        print_r($obj1);
+                                                        print_r($obj2);
+                                                    } else if ($yadesresultatsUSERS) {
+                                                    
+                                                    $obj2 = count($resuUSERS)."personnes trouvées";
+                                                        print_r($obj2);
+                                                    } else if ($yadesresultatsBEATS) {
+                                                         $obj1 = count($resuBEATS)."beats trouvé";
+                                                
+                                                        print_r($obj1);
+                                                    }
+                                ?> 
+
+                            </p>
 
                         </div>
                     </div>
@@ -643,7 +713,8 @@ else if (!$wetypeexiste) {
                     <!--   *************************************************************  -->
                     <!--   ************************** RESULTAT BEAT **************************  -->
 
-                    <?php if (!$jechercheunboug) { ?>
+                    <?php if (!$jechercheunboug || (!$wetypeexiste)) { ?>
+
                     <?php if (($wetypeexiste && !$jechercheunboug)) { ?>
                     <form id="formTrie" action="search.php">
 
@@ -682,23 +753,32 @@ else if (!$wetypeexiste) {
                     </form>
                     <?php } ?>
 
-
-
-
+                    <?php
+                                                                      include("assets/functions/fctforaudioplayer.php");$test = returnMusicListStr("titles", $resuBEATS);print_r($test);
+                    ?>
 
                     <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : blue;">
 
                         <div class=" container-fluid ligneCardMusic">
                             <?php
-                                                 if (isset($resuBEATS)) {
-                                                     $i = 1;
-                                                     foreach($resuBEATS as $r){
+                                                                      if ($yadesresultatsBEATS) {
+                                                                          $i = 1;
+                                                                          foreach($resuBEATS as $r){
                             ?>
                             <div class="row justify-content-center p-0 mx-auto mb-2 rounded"  style="background-color : pink;">
                                 <?= $i ?>
 
                                 <div class="col-sm-2 p-0  " style="background-color : red;">
-                                    <img  src="img/Laylow.jpg" width="80"  >
+                                    <div class="">
+                                        <div class="hover hover-5 text-white rounded"><img src="img/<?=$r['beat_cover']?>" alt="">
+                                            <div class="hover-overlay"></div>
+
+                                            <div class="link_icon" onclick="playPause(<?=$i-1 ?>)">
+                                                <i class="far fa-play-circle"></i>
+                                            </div>
+
+                                        </div>
+                                    </div>
 
 
                                 </div>
@@ -713,20 +793,15 @@ else if (!$wetypeexiste) {
                                         <span> (<?=$r['beat_like']?> ) </span>
 
                                         <a class="btn btn-danger" href="#" role="button"><?=$r['beat_price']?> €</a><?=$r['beat_dateupload']?> ---
-
-
                                     </div>
 
-
                                 </div>
-
-
 
                             </div>
                             <?php
                                 $i++;
-                                                     }
-                                                 }
+                                                                          }
+                                                                      }
 
 
                             ?>
@@ -752,7 +827,7 @@ else if (!$wetypeexiste) {
                     <?php }?>
                     <!--   *************************************************************  -->
                     <!--   ************************** RESULTAT USER **************************  -->
-                    <?php if ($jechercheunboug) { ?>
+                    <?php if ($jechercheunboug || (!$wetypeexiste)) { ?>
                     <?php if (($wetypeexiste && $jechercheunboug)) { ?>
                     <form id="formTrie2" action="search.php">
 
@@ -776,6 +851,7 @@ else if (!$wetypeexiste) {
 
 
 
+
                             <option value="alphacr" <?php if($wesortexiste && $_GET['sort'] == 'alphacr'){?> selected <?php } ?>>Ordre Alphabétique (A - Z) </option>
                             <option value="alphadecr" <?php if($wesortexiste && $_GET['sort'] == 'alphadecr'){?> selected <?php } ?>>Ordre Alphabétique (Z - A) </option>
 
@@ -793,7 +869,7 @@ else if (!$wetypeexiste) {
 
 
                     </div>
-                    
+
                     <?php } ?>
 
 
@@ -947,6 +1023,23 @@ else if (!$wetypeexiste) {
         <!--   END JS de fourchette      -->
         <script >
 
+            function goSearch() {
+                let ok = true;
+                let champs = document.getElementById('searchbar');
+
+
+                if (champs.value.trim().length == 0) {
+                    ok = false; 
+
+                }
+
+                if (ok) {
+                    document.getElementById('searchform').submit();
+
+                }
+
+
+            }
 
             function goType(bay) {
 
@@ -995,7 +1088,6 @@ else if (!$wetypeexiste) {
                             ici.insertBefore(input,avant);
                         }
                     }
-
                 }
 
 
@@ -1132,6 +1224,140 @@ else if (!$wetypeexiste) {
             }
 
         </script>
+
+
+
+
+
+
+        <!-- JS du player -->
+        <script id="scriptDuPlayer">
+
+            const thumbnail = document.querySelector('#thumbnail'); // album cover 
+            const song = document.querySelector('#song'); // audio 
+
+            const songArtist = document.querySelector('.song-artist'); // element où noms artistes apparaissent
+            const songTitle = document.querySelector('.song-title'); // element où titre apparait
+            const progressBar = document.querySelector('#progress-bar'); // element où progress bar apparait
+            let pPause = document.querySelector('#play-pause'); // element où images play pause apparaissent
+
+            let mouseDown = false;
+
+
+
+            songIndex = 0;
+            songs = <?=returnMusicListStr("songs", $resuBEATS); ?>  //Stockage des audios
+                thumbnails = <?=returnMusicListStr("thumbnails", $resuBEATS); ?> //Stockage des covers
+                songArtists = <?=returnMusicListStr("artists", $resuBEATS); ?> //Stockage Noms Artistes
+                songTitles = <?=returnMusicListStr("titles", $resuBEATS); ?> //Stockage Titres
+                /*
+let playing = true;
+function playPause(songIndex) {
+    if (playing) {
+        const song = document.querySelector('#song'),
+        thumbnail = document.querySelector('#thumbnail');
+        pPause.src = "./assets/icon/pause.png"
+        song.play();
+        playing = false;
+    } else {
+        pPause.src = "./assets/icon/play.png"
+        song.pause();
+        playing = true;
+    }
+}
+
+*/
+
+
+                let playing = true;
+            function playPause(songIndex) {
+                song.src = songs[songIndex];
+                thumbnail.src = thumbnails[songIndex];
+                songArtist.innerHTML = songArtists[songIndex];
+                songTitle.innerHTML = songTitles[songIndex];
+                if (playing) {
+                    pPause.src = "./assets/icon/pause.png"
+                    song.play();
+                    playing = false;
+                } else {
+                    pPause.src = "./assets/icon/play.png"
+                    song.pause();
+                    playing = true;
+                }
+            }
+
+
+
+            // joue automatiquement le son suivant
+            song.addEventListener('ended', function(){
+                nextSong();
+            });
+
+            function nextSong() {
+                songIndex++;
+                if (songIndex > songs.length -1) {
+                    songIndex = 0;
+                };
+                song.src = songs[songIndex];
+                thumbnail.src = thumbnails[songIndex];
+                if((songArtists[songIndex] != null) && (songTitles[songIndex] != null)){
+                    songArtist.innerHTML = songArtists[songIndex];
+                    songTitle.innerHTML = songTitles[songIndex];
+                }
+                playing = true;
+                playPause(songIndex);
+            }
+
+            function previousSong() {
+                songIndex--;
+                if (songIndex < 0) {
+                    songIndex = songs.length -1;
+                };
+                song.src = songs[songIndex];
+                thumbnail.src = thumbnails[songIndex];
+                if((songArtists[songIndex] != null) && (songTitles[songIndex] != null)){
+                    songArtist.innerHTML = songArtists[songIndex];
+                    songTitle.innerHTML = songTitles[songIndex];
+                }
+                playing = true;
+                playPause(songIndex);
+            }
+
+            // maj de la durée max du son, maj temps actuel
+            function updateProgressValue() {
+                progressBar.max = song.duration;
+                progressBar.value = song.currentTime;
+                document.querySelector('.currentTime').innerHTML = (formatTime(Math.floor(song.currentTime)));
+                if (document.querySelector('.durationTime').innerHTML === "NaN:NaN") {
+                    document.querySelector('.durationTime').innerHTML = "0:00";
+                } else {
+                    document.querySelector('.durationTime').innerHTML = (formatTime(Math.floor(song.duration)));
+                }
+            };
+
+
+            // conversion du temps en minutes/secondes dans le lecteur
+            function formatTime(seconds) {
+                let min = Math.floor((seconds / 60));
+                let sec = Math.floor(seconds - (min * 60));
+                if (sec < 10){ 
+                    sec  = `0${sec}`;
+                };
+                return `${min}:${sec}`;
+            };
+
+            // actualisation du lecteur en fct du temps(demi-secondes)
+            setInterval(updateProgressValue, 500);
+
+            // Valeur de la bar qd curseur est glissé sans lecture
+            function changeProgressBar() {
+                song.currentTime = progressBar.value;
+            };
+
+
+
+        </script>
+        <!--   END JS du Player     -->
 
     </body>
 </html>

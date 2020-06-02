@@ -5,7 +5,7 @@ include_once("fichierfct.php");
 
 // si une connection est détecter : (ta rien a faire ici mec)
 if(isset($_SESSION['user_id'])){
-    header('Location: dashboard.php');
+    header('Location: test_zone.php');
     exit;
 }
 
@@ -109,7 +109,7 @@ if(!empty($_POST)){
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
         <?php
-        require_once('assets/skeleton/menu.php');
+        require_once('assets/skeleton/navbar.php');
         ?>
 
         <div class="container-fluid">

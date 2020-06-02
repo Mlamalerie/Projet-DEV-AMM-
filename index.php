@@ -24,9 +24,16 @@ $_SESSION['ici_index_bool'] = true;
 
         <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">
 
-        <link rel="stylesheet" type="text/css" href="assets/css/player.css">
+        <!--  Audio player de mathieu   -->
+        <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
 
-                
+
+        <!--Slides-->
+        <link rel="stylesheet" href="assets/css/slick.css">
+        <link rel="stylesheet" href="assets/css/slide.css">
+
+
+
 
 
 
@@ -50,6 +57,13 @@ $_SESSION['ici_index_bool'] = true;
         require_once('assets/skeleton/navbar.php');
         ?>
 
+        <!--   *************************************************************  -->
+        <!--   ************************** MUSIC PLAYER  **************************  -->
+
+        <?php
+        require_once('assets/skeleton/AudioPlayer/audioplayer.php');
+        ?>
+
 
 
 
@@ -71,12 +85,12 @@ $_SESSION['ici_index_bool'] = true;
                         <a href="test_zone.php"
                            ><button type="button" class="btn btn-danger btninscription">Test</button></a><br/>
 
-                           <button type="button" class="btn btn-danger btninscription">Test1</button>
-                           <button type="button" class="btn btn-danger btninscription">Test2</button>
-                           <button type="button" class="btn btn-danger btninscription">Test3</button>
+                        <button type="button" class="btn btn-danger btninscription">Test1</button>
+                        <button type="button" class="btn btn-danger btninscription">Test2</button>
+                        <button type="button" class="btn btn-danger btninscription">Test3</button>
 
                         <form id="searchform" method="get" action="search.php">
-                            <input type="hidden" name="Genre" value="All">
+                           
 
                             <div class="searchbar ">
 
@@ -91,6 +105,7 @@ $_SESSION['ici_index_bool'] = true;
                 </div>
             </div>
         </header>
+        <script src="assets/js/search.js"></script>
         <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
         <?php
         if(isset($_SESSION['user_id'])) {
@@ -107,228 +122,199 @@ $_SESSION['ici_index_bool'] = true;
             <span id="d"></span>
 
 
+
         </div>
 
 
         <!--   *************************************************************  -->
-        <!--   ************************** SECTION 1  ***********************  -->
+        <!--   ************************** SECTIONS  ***********************  -->
         <!-- ******* Section 1 -->
         <section class="py-5 d-flex align-items-center" id="one">
-            <div class="row" id="tendances">
-                <div style="padding-left : 575px">
-                    <h2 class="h1 mb-4">Tendances</h2>
-                </div>
-                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators invisible" style="padding-left : 150px">
-                        <li data-target="#carouselExampleCaptions" data-slide-to="0" class=" rounded-circle active"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="1" class="rounded-circle"></li>
-                        <li data-target="#carouselExampleCaptions" data-slide-to="2" class="rounded-circle"></li>
-                    </ol>
 
-                    <div class="carousel-inner caroustyle">
+            <div class="container-fluid">
+                <div class="mx-auto" id="tendances">
+                    <h2 class="h1 mb-4 text-center text-white">Tendances</h2>
 
-                        <div class="carousel-item active">
-
-                            <div class="container row col-md-12" style="padding-left : 200px">
-
-                                <div class="col-md-3">
-                                    <div class="hover hover-5 text-white rounded"><img src="img/Laylow.jpg" alt="">
-                                        <div class="hover-overlay"></div>
-                                        <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                        <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Laylow<strong class="font-weight-bold text-white">
-                                            BURNING MAN</strong><span> 2020</span></h6>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="hover hover-5 text-white rounded"><img src="img/bigmetro.jpg" alt="">
-                                        <div class="hover-overlay"></div>
-                                        <div class="link_icon" onclick="playPause(0)"><i class="far fa-play-circle"></i></div>
-                                        <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Big Sean ft Travis Scott,Metro Boomin<strong class="font-weight-bold text-white"> Go Legend</strong><span> 2020</span></h6>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="hover hover-5 text-white rounded"><img src="img/luv.jpg" alt="">
-                                        <div class="hover-overlay"></div>
-                                        <div class="link_icon" onclick="playPause(1)"><i class="far fa-play-circle"></i></div>
-                                        <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Lil Uzi Vert<strong class="font-weight-bold text-white"> Futsal Shuffle 2020</strong><span> 2020</span></h6>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="hover hover-5 text-white rounded"><img src="img/roddy.jpg" alt="">
-                                        <div class="hover-overlay"></div>
-                                        <div class="link_icon" onclick="playPause(2)"><i class="far fa-play-circle"></i></div>
-                                        <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Roddy Rich<strong class="font-weight-bold text-white"> Tip Toe</strong><span> 2020</span></h6>
-                                    </div>
-                                </div>
+                    <div class="my_slides multiple-items">
+                        <div class="items">
+                            <div class="hover hover-5 text-white rounded"><img src="img/Laylow.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Laylow<strong class="font-weight-bold text-white">
+                                    BURNING MAN</strong><span> 2020</span></h6>
 
                             </div>
                         </div>
-
-                        <div class="carousel-item">
-                            <div class="container row col-md-12" style="padding-left : 200px">
-
-                                <div class="col-md-3">
-                                    <img src="img/roddy.jpg">
-                                    <h4>Titre</h4>
-                                    <p>Nom artiste</p>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <img src="img/bigmetro.jpg"  height="225">
-                                    <h4>Titre</h4>
-                                    <p>Nom artiste</p>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <img src="img/luv.jpg" height="225">
-                                    <h4>Titre</h4>
-                                    <p>Nom artiste</p>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <img src="img/roddy.jpg">
-                                    <h4>Titre</h4>
-                                    <p>Nom artiste</p>
-                                </div>
+                        <div class="items">
+                             <div class="hover hover-5 text-white rounded"><img src="img/bigmetro.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Big Sean(ft Travis Scott)<strong class="font-weight-bold text-white">
+                                    Go Legend</strong><span> 2020</span></h6>
                             </div>
                         </div>
-
-                        <div class="carousel-item">
-                            <div class="container row col-md-12" style="padding-left : 200px">
-
-                                <div class="col-md-3">
-                                    <img src="img/roddy.jpg">
-                                    <h4>Titre</h4>
-                                    <p>Nom artiste</p>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <img src="img/bigmetro.jpg"  height="225">
-                                    <h4>Titre</h4>
-                                    <p>Nom artiste</p>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <img src="img/luv.jpg" height="225">
-                                    <h4>Titre</h4>
-                                    <p>Nom artiste</p>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <img src="img/roddy.jpg">
-                                    <h4>Titre</h4>
-                                    <p>Nom artiste</p>
-                                </div>
+                        <div class="items">
+                            <div class="hover hover-5 text-white rounded"><img src="img/CG6.png" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">CG6<strong class="font-weight-bold text-white">
+                                    Nelson</strong><span> 2019</span></h6>
                             </div>
                         </div>
-
+                        <div class="items">
+                           <div class="hover hover-5 text-white rounded"><img src="img/DB5.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Leto<strong class="font-weight-bold text-white">
+                                    Double Bang 5</strong><span> 2018</span></h6>
+                            </div>                        
+                        </div>
+                        <div class="items">
+                            <div class="hover hover-5 text-white rounded"><img src="img/luv.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Lil Uzi Vert<strong class="font-weight-bold text-white">
+                                    Futball Shuffle </strong><span> 2020</span></h6>
+                            </div>
+                        </div>
+                        <div class="items">
+                             <div class="hover hover-5 text-white rounded"><img src="img/Sch.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Sch<strong class="font-weight-bold text-white">
+                                    Poupée Russe </strong><span> 2017</span></h6>
+                            </div>
+                        </div>
+                        <div class="items">
+                            <div class="hover hover-5 text-white rounded"><img src="img/roddy.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Roddy Rich<strong class="font-weight-bold text-white">
+                                     Tip toe</strong><span> 2020</span></h6>
+                            </div>
+                        </div>
+                        <div class="items">
+                            <div class="hover hover-5 text-white rounded"><img src="img/Spri.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Spri(ft 4Keus)<strong class="font-weight-bold text-white">
+                                     Night and Day</strong><span> 2020</span></h6>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-btn rounded-circle">
+                        <span class="prev1 position-top"><i class="fas fa-chevron-left"></i></span>
+                        <span class="next1 position-top right-0"><i class="fas fa-chevron-right"></i></span>
                     </div>
 
-                    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-
+                    
                 </div>
-            </div>          
-
-
+            </div>      
         </section>
 
         <!-- Section 2-->
         <section class="py-5 d-flex align-items-center" id="two">
-            <div class="container py-5">
-                <div class="row text-center">
-                    <div class="col-lg-9 mx-auto" id="topventes">
-                        <h2 class="h1 mb-4">TOP des ventes</h2>
+            <div class="container-fluid">
+                <div class="mx-auto" id="topventes">
+                    <h2 class="h1 mb-4 text-center text-white">TOP des ventes</h2>
 
-                        <div id="carouselExampleCaptions1" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleCaptions1" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleCaptions1" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleCaptions1" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
+                    <div class="my_slides multipleitems2">
+                         <div class="items">
+                            <div class="hover hover-5 text-white rounded"><img src="img/Laylow.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Laylow<strong class="font-weight-bold text-white">
+                                    BURNING MAN</strong><span> 2020</span></h6>
 
-                                <div class="carousel-item active">    
-                                    <img src="img/roddy.jpg" class="d-block w-100 image_sons"  alt="...">                                
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Nom de la prod : </h5>
-                                        <p>Nom du producteur : </p>
-                                        <a href="javascript:void();" class="album-poster" data-switch="3">
-                                            <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">                                    
-                                    <img src="img/bigmetro.jpg" class="d-block w-100 image_sons"  alt="...">                            
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Nom de la prod : </h5>
-                                        <p>Nom du producteur : </p>
-                                        <a href="javascript:void();" class="album-poster" data-switch="4">
-                                            <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay" ><i class="fa fa-play"></i></button>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="carousel-item">
-                                    <img src="img/luv.jpg" class="d-block w-100 image_sons"  alt="...">                                  
-                                    <div class="carousel-caption d-none d-md-block">
-                                        <h5>Nom de la prod : </h5>
-                                        <p>Nom du producteur : </p>
-                                        <a href="javascript:void();" class="album-poster" data-switch="5">
-                                            <button class="btn btn-danger btn-circle btn-circle-xl m-1 btnplay"  ><i class="fa fa-play"></i></button>
-                                        </a>
-                                    </div>
-                                </div>
                             </div>
-                            <a class="carousel-control-prev" href="#carouselExampleCaptions1" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleCaptions1" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
                         </div>
+                        <div class="items">
+                             <div class="hover hover-5 text-white rounded"><img src="img/bigmetro.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Big Sean(ft Travis Scott)<strong class="font-weight-bold text-white">
+                                    Go Legend</strong><span> 2020</span></h6>
+                            </div>
+                        </div>
+                        <div class="items">
+                            <div class="hover hover-5 text-white rounded"><img src="img/CG6.png" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">CG6<strong class="font-weight-bold text-white">
+                                    Nelson</strong><span> 2019</span></h6>
+                            </div>
+                        </div>
+                        <div class="items">
+                           <div class="hover hover-5 text-white rounded"><img src="img/DB5.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Leto<strong class="font-weight-bold text-white">
+                                    Double Bang 5</strong><span> 2018</span></h6>
+                            </div>                        
+                        </div>
+                        <div class="items">
+                            <div class="hover hover-5 text-white rounded"><img src="img/luv.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Lil Uzi Vert<strong class="font-weight-bold text-white">
+                                    Futball Shuffle </strong><span> 2020</span></h6>
+                            </div>
+                        </div>
+                        <div class="items">
+                             <div class="hover hover-5 text-white rounded"><img src="img/Sch.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Sch<strong class="font-weight-bold text-white">
+                                    Poupée Russe </strong><span> 2017</span></h6>
+                            </div>
+                        </div>
+                        <div class="items">
+                            <div class="hover hover-5 text-white rounded"><img src="img/roddy.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Roddy Rich<strong class="font-weight-bold text-white">
+                                     Tip toe</strong><span> 2020</span></h6>
+                            </div>
+                        </div>
+                        <div class="items">
+                            <div class="hover hover-5 text-white rounded"><img src="img/Spri.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Spri(ft 4Keus)<strong class="font-weight-bold text-white">
+                                     Night and Day</strong><span> 2020</span></h6>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="slider-btn rounded-circle">
+                        <span class="prev2 position-top"><i class="fas fa-chevron-left"></i></span>
+                        <span class="next2 position-top right-0"><i class="fas fa-chevron-right"></i></span>
                     </div>
                 </div>
-            </div>
+            </div>  
         </section>
 
         <!-- Section 3 -->
         <section class="py-5 d-flex align-items-center" id="three">
-            <div class="container py-5">
-                <div class="row text-center">
-                    <div class="col-lg-9 mx-auto" id="ccm">
-                        <h2 class="h1 mb-4  " >Comment ça marche?</h2>
+            <div class="container">
+                <div class="col-lg-9 mx-auto" id="ccm">
+                    <h2 class="h1 mb-4" >Comment ça marche?</h2>
 
-                        <div id="recherchez">
-                            <h3>Recherchez</h3>
-                            <p> Retrouvez de nombreuses productions au sein de notre catalogue.</p>
-                            <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/browse.svg">
-                        </div>
-                        <div id="achetez">
-                            <h3>Achetez</h3>
-                            <p>Choisissez la licence qui vous convient et ajoutez la au panier.</p>
-                            <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/buy.svg" width="100">
-                        </div>
-                        <div id="creez">
-                            <h3>Créez</h3>
-                            <p>Uploadez vos créations sur notre site et rejoignez de nombreux beatmakers</p>
-                            <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/create.svg">
-                        </div>
-
-
+                    <div id="recherchez">
+                        <h3>Recherchez</h3>
+                        <p> Retrouvez de nombreuses productions au sein de notre catalogue.</p>
+                        <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/browse.svg">
+                    </div>
+                    <div id="achetez">
+                        <h3>Achetez</h3>
+                        <p>Choisissez la licence qui vous convient et ajoutez la au panier.</p>
+                        <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/buy.svg" width="100">
+                    </div>
+                    <div id="creez">
+                        <h3>Créez</h3>
+                        <p>Uploadez vos créations sur notre site et rejoignez de nombreux beatmakers</p>
+                        <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/create.svg">
                     </div>
                 </div>
             </div>
@@ -493,8 +479,8 @@ $_SESSION['ici_index_bool'] = true;
             <div class="container py-5">
                 <div class="row py-4">
 
-                    <div id='boxocial' class="col-lg-4 col-md-6 mb-4 mb-lg-0  ">
-                        <!--                       <img src="img/logo.png" alt="" width="180" class="mb-3">-->
+                    <div id='boxocial' class="col-lg-4 col-md-6 mb-4 mb-lg-0  "><!--<img src="img/logo.png" alt="" width="180" class="mb-3">-->
+
                         <p class="font-italic text-mute">Retrouvez-nous également sur les réseaux sociaux</p>
                         <ul class="list-inline mt-4 footer__social">
                             <li class=" "><a href="#0"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
@@ -547,130 +533,10 @@ $_SESSION['ici_index_bool'] = true;
         <!-- End -->
 
 
-        <script>
-const thumbnail = document.querySelector('#thumbnail'); // album cover 
-const song = document.querySelector('#song'); // audio 
-
-const songArtist = document.querySelector('.song-artist'); // element où noms artistes apparaissent
-const songTitle = document.querySelector('.song-title'); // element où titre apparait
-const progressBar = document.querySelector('#progress-bar'); // element où progress bar apparait
-let pPause = document.querySelector('#play-pause'); // element où images play pause apparaissent
-
-let mouseDown = false;
-
-
-
-songIndex = 0;
-songs = ['./audio/go_legend.mp3','./audio/futsal_shuffle_2020.mp3','./audio/tip_toe.mp3']; //Stockage des audios
-thumbnails = ['./img/bigmetro.jpg', './img/luv.jpg', './img/roddy.jpg']; //Stockage des covers
-songArtists = ['Big Sean & Metro Boomin(ft. Travis Scott)', 'Lil Uzi Vert', 'Roddy Rich']; //Stockage Noms Artistes
-songTitles = ["Go Legend", "Futsal Shuffle 2020", "Tip Toe"]; //Stockage Titres
-
-/*
-let playing = true;
-function playPause(songIndex) {
-    if (playing) {
-        const song = document.querySelector('#song'),
-        thumbnail = document.querySelector('#thumbnail');
-        pPause.src = "./assets/icon/pause.png"
-        song.play();
-        playing = false;
-    } else {
-        pPause.src = "./assets/icon/play.png"
-        song.pause();
-        playing = true;
-    }
-}
-
-*/
-
-
-let playing = true;
-function playPause(songIndex) {
-    song.src = songs[songIndex];
-    thumbnail.src = thumbnails[songIndex];
-    songArtist.innerHTML = songArtists[songIndex];
-    songTitle.innerHTML = songTitles[songIndex];
-    if (playing) {
-        pPause.src = "./assets/icon/pause.png"
-        song.play();
-        playing = false;
-    } else {
-        pPause.src = "./assets/icon/play.png"
-        song.pause();
-        playing = true;
-    }
-}
-
-
-
-// joue automatiquement le son suivant
-song.addEventListener('ended', function(){
-    nextSong();
-});
-
-function nextSong() {
-    songIndex++;
-    if (songIndex > songs.length -1) {
-        songIndex = 0;
-    };
-    song.src = songs[songIndex];
-    thumbnail.src = thumbnails[songIndex];
-    if((songArtists[songIndex] != null) && (songTitles[songIndex] != null)){
-        songArtist.innerHTML = songArtists[songIndex];
-        songTitle.innerHTML = songTitles[songIndex];
-    }
-    playing = true;
-    playPause(songIndex);
-}
-
-function previousSong() {
-    songIndex--;
-    if (songIndex < 0) {
-        songIndex = songs.length -1;
-    };
-    song.src = songs[songIndex];
-    thumbnail.src = thumbnails[songIndex];
-    if((songArtists[songIndex] != null) && (songTitles[songIndex] != null)){
-        songArtist.innerHTML = songArtists[songIndex];
-        songTitle.innerHTML = songTitles[songIndex];
-    }
-    playing = true;
-    playPause(songIndex);
-}
-
-// maj de la durée max du son, maj temps actuel
-function updateProgressValue() {
-    progressBar.max = song.duration;
-    progressBar.value = song.currentTime;
-    document.querySelector('.currentTime').innerHTML = (formatTime(Math.floor(song.currentTime)));
-    if (document.querySelector('.durationTime').innerHTML === "NaN:NaN") {
-        document.querySelector('.durationTime').innerHTML = "0:00";
-    } else {
-        document.querySelector('.durationTime').innerHTML = (formatTime(Math.floor(song.duration)));
-    }
-};
-
-
-// conversion du temps en minutes/secondes dans le lecteur
-function formatTime(seconds) {
-    let min = Math.floor((seconds / 60));
-    let sec = Math.floor(seconds - (min * 60));
-    if (sec < 10){ 
-        sec  = `0${sec}`;
-    };
-    return `${min}:${sec}`;
-};
-
-// actualisation du lecteur en fct du temps(demi-secondes)
-setInterval(updateProgressValue, 500);
-
-// Valeur de la bar qd curseur est glissé sans lecture
-function changeProgressBar() {
-    song.currentTime = progressBar.value;
-};
-
-        </script>
+       
+       
+<!--  JS du MusicPlayer  -->
+        <script id="scriptDuPlayer" src="assets/skeleton/AudioPlayer/audioplayer.js"></script>
 
 
 
@@ -682,12 +548,15 @@ function changeProgressBar() {
         ?>
         <!--     RECHERCHE  -->
 
-
+       
         <!--        COMPTE A REBOURS -->
         <script src="assets/js/comptearebours.js"></script>
         <!--    END     COMPTE A REBOURS -->
-
         
+        <!-- SCRIPT SLIDES       -->
+        <script src="assets/js/slide.js"></script>
+
+
 
 
     </body>
