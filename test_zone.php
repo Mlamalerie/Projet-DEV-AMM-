@@ -177,7 +177,7 @@ $_SESSION['ici_index_bool'] = false;
         ?> 
 
         <!-- Modal UPLOAD modal fade -->
-        <div  class=" " id="modalUpload" tabindex="-1" role="dialog" aria-labelledby="modalUploadTitle" aria-hidden="true">
+        <div  class=" modal fade" id="modalUpload" tabindex="-1" role="dialog" aria-labelledby="modalUploadTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content ">
                     <div class="modal-header">
