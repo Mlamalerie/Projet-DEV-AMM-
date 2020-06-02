@@ -9,7 +9,7 @@
         header('Location: /'); 
         exit;
     }
-    
+
     $req = $BDD ->prepare("SELECT u.user_pseudo, u.user_id, m.message, m.date_message, m.id_from, m.lu
     FROM(
    SELECT IF(r.id_demandeur=:id, r.id_receveur, r.id_demandeur) id_user, MAX(m.id) max_id 
@@ -57,7 +57,6 @@
                    <table>
                     <?php
                         foreach($afficher_conversation as $ac){
-                            
                     ?>
                     <tr>
                         <td>

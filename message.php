@@ -17,6 +17,17 @@ if($get_id <= 0){
     exit;
 }
 
+$req= $BDD -> prepare("SELECT id 
+                    FROM relation 
+                    WHERE ((id_demandeur,id_receveur)=(:id1,:id2) OR (id_demandeur,id_receveur)=(:id2,:id1)) AND statut = :statut");/*sécurité pour  les personnes bloquées (on peut pas envoyer ou recevoir leur mssg) */
+$req->execute(array('id1'=>$_SESSION['user_id'], 'id2' => $get_id, 'statut' => 1));/*statut 1 est un utilisateur non bloqué*/
+
+$verif_relation=$req->fetch();
+if(!isset($verif_relation['id'])){
+    header('Location: messagerie.php'); 
+    exit;
+}
+
 $req= $BDD -> prepare("SELECT * 
                     FROM messagerie 
                     WHERE ((id_from,id_to)=(:id1,:id2) OR (id_from, id_to)=(:id2,:id1)) 

@@ -862,10 +862,10 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                         <?php  if (isset($resuUSERS)) {foreach($resuUSERS as $r){ ?>
                         <!-- Team item-->
                         <div class="col-xl-3 col-sm-6 mb-5 text-center">
-                            <div class="bg-white rounded shadow-sm py-3 px-3"><img src="<?=$r['user_image'] ?> " alt=""  class="img-fluid roundedImage mb-3 img-thumbnail shadow-sm">
-                                <h5 class="mb-0"><?=$r['user_pseudo'] ?> </h5>
+                            <div class="bg-white rounded shadow-sm py-3 px-3"><a href="profils.php?profil_id=<?= $r['user_id']?>"><img src="img/<?=$r['user_image'] ?> " alt=""  class="img-fluid roundedImage mb-3 img-thumbnail shadow-sm">
+                                <h5 class="mb-0"><a href="profils.php?profil_id=<?= $r['user_id']?>"> <?=$r['user_pseudo'] ?></a> </h5>
                                 <span class="small text-uppercase text-muted"><?=$r['user_ville'] ?><span class="text-uppercase ">(<?=$r['user_pays'] ?>)</span></span>
-                                
+                                </a>
                             </div>
                         </div>
 
