@@ -862,6 +862,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                         <?php  if (isset($resuUSERS)) {foreach($resuUSERS as $r){ ?>
                         <!-- Team item-->
                         <div class="col-xl-3 col-sm-6 mb-5 text-center">
+
                             <div class="bg-white rounded shadow-sm py-3 px-3"><img src="<?=$r['user_image'] ?> " alt=""  class="img-fluid roundedImage mb-3 img-thumbnail shadow-sm">
                                 <h5 class="mb-0"><?=$r['user_pseudo'] ?> </h5>
                                 <span class="small  text-muted"><?=$r['user_ville'] ?>
@@ -875,11 +876,12 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                                                                  $req->execute(array($r['user_pays'] ));
                                                                                  $aff_pays = $req->fetch();
 
-                                                                                echo '('.$aff_pays['nom_fr_fr'].')';
+                                                                                 echo '('.$aff_pays['nom_fr_fr'].')';
                                         ?>
 
                                     </span>
                                 </span>
+
 
                             </div>
                         </div>

@@ -190,7 +190,7 @@ if(!empty($_POST)){
     if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
         if( $_SESSION['user_id']==$afficher_profil['user_id'] ){
                 ?>
-                <button class="infos-privee-btn"><a href="privee.php?profil_id=<?= $afficher_profil['user_id']?>" >Infos privée</a></button>()
+                <button class="infos-privee-btn"><a href="privee.php?profil_id=<?= $afficher_profil['user_id']?>" >Infos privée</a></button>
 
                 <button class="editer-btn"><a href="editer-profil.php?profil_id=<?= $afficher_profil['user_id']?>" >Editer</a></button>
                 <?php
@@ -204,8 +204,6 @@ if(!empty($_POST)){
         }
     }
                     ?>
-
-
                     <div>
                         <?= count(explode(',',$afficher_profil['user_followers'])) ?> Follower(s)
                     </div>
