@@ -526,10 +526,18 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                 </tr>
                                 <tr>
                                 <tr>
-                                    <td>caca ?></td>
+                                    <td>
+                                        <div id="titreBeats">
+                                        C'est le titre
+                                        </div>
+                                    </td>
 
 
-                                    <td>2 &euro;</td>
+                                    <td>
+                                        <div>
+                                        C'est le prix en &euro;
+                                        </div>
+                                    </td>
                                     <td><span class="text-danger">Retirer</span></td>
                                 </tr>
                                 <tr>
