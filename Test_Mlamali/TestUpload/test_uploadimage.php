@@ -1,21 +1,4 @@
-<?php
-require 'uploadFile.php';
 
-$upd = new uploadFile();
-print_r($upd);
-print_r($_POST);
-print_r("$ <br>");
-if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
-    print_r("$$ <br>");
-
-    $tmp_name = $_FILES['upload']['tmp_name'];
-    $name = $_FILES['upload']['name'];
-    
-    $nomduboug = "Wanabilini";
-    $upd->uploadAudio($tmp_name,$name, $nomduboug);
-    print_r("$$$$ <br>");
-}
-?>
 
 
 
@@ -121,17 +104,12 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
 
             <div class="row py-4">
                 <div class="col-lg-6 mx-auto">
-                    <form id='formUpload1' action="" method="post" enctype="multipart/form-data">
-
-                        <input name="upload" type="file" class="form-control border-0">
-                        <input type="submit" name="Envoyer" value='SUBMIt'>
-                    </form>
-
+    
                     <!-- Upload image input-->
                     <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                        <form id='formUpload1' action="" method="get" enctype="multipart/form-data">
+                        <form id='formUpload1' action="" method="post" enctype="multipart/form-data">
 
-                            <input id="upload" type="file" onchange="readURL(this);goFile(this);" class="form-control border-0">
+                            <input id="upload" type="file" name='test' onkeypress="submit()" class="form-control border-0">
                         </form>
                         <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
                         <div class="input-group-append">

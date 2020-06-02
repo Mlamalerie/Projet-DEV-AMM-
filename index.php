@@ -32,21 +32,6 @@ $_SESSION['ici_index_bool'] = true;
         <link rel="stylesheet" href="assets/css/slick.css">
         <link rel="stylesheet" href="assets/css/slide.css">
 
-
-
-
-
-
-        <!--        LOGo -->
-        <link rel="shortcut icon" href="img/bigmetro.jpg">
-
-        <!--        PACK DE ICON -->
-        <script src="https://kit.fontawesome.com/8157870d7a.js" crossorigin="anonymous"></script>
-
-
-
-
-
         <title>WeBeats</title>
     </head>
     <body>

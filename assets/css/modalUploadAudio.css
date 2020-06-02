@@ -1,0 +1,12 @@
+#uploadAudio, #uploadCover {
+    opacity: 0;
+}
+
+#uploadAudio-label, #uploadCover-label { 
+    position: absolute;
+    top: 50%; 
+    left: 1rem;
+    transform: translateY(-50%); 
+}
+
+

@@ -687,21 +687,21 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                             <p class="lead mb-0">
                                 <?php 
-   
-                                                    if ($yadesresultatsUSERS && $yadesresultatsBEATS) {
-                                                         $obj1 = count($resuBEATS)."beats trouvé";
-                                                    $obj2 = count($resuUSERS)."personnes trouvées";
-                                                        print_r($obj1);
-                                                        print_r($obj2);
-                                                    } else if ($yadesresultatsUSERS) {
-                                                    
-                                                    $obj2 = count($resuUSERS)."personnes trouvées";
-                                                        print_r($obj2);
-                                                    } else if ($yadesresultatsBEATS) {
-                                                         $obj1 = count($resuBEATS)."beats trouvé";
-                                                
-                                                        print_r($obj1);
-                                                    }
+
+    if ($yadesresultatsUSERS && $yadesresultatsBEATS) {
+        $obj1 = count($resuBEATS)."beats trouvé";
+        $obj2 = count($resuUSERS)."personnes trouvées";
+        print_r($obj1);
+        print_r($obj2);
+    } else if ($yadesresultatsUSERS) {
+
+        $obj2 = count($resuUSERS)."personnes trouvées";
+        print_r($obj2);
+    } else if ($yadesresultatsBEATS) {
+        $obj1 = count($resuBEATS)."beats trouvé";
+
+        print_r($obj1);
+    }
                                 ?> 
 
                             </p>
@@ -779,7 +779,6 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                                         </div>
                                     </div>
-
 
                                 </div>
 
@@ -861,8 +860,16 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     <?php } ?>
                     <div id="resultuser"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : blue;">
                         <?php  if (isset($resuUSERS)) {foreach($resuUSERS as $r){ ?>
+                        <!-- Team item-->
+                        <div class="col-xl-3 col-sm-6 mb-5 text-center">
+                            <div class="bg-white rounded shadow-sm py-3 px-3"><a href="profils.php?profil_id=<?= $r['user_id']?>"><img src="img/<?=$r['user_image'] ?> " alt=""  class="img-fluid roundedImage mb-3 img-thumbnail shadow-sm">
+                                <h5 class="mb-0"><a href="profils.php?profil_id=<?= $r['user_id']?>"> <?=$r['user_pseudo'] ?></a> </h5>
+                                <span class="small text-uppercase text-muted"><?=$r['user_ville'] ?><span class="text-uppercase ">(<?=$r['user_pays'] ?>)</span></span>
+                                </a>
+                            </div>
+                        </div>
 
-                        <?= "<br>".$r['user_pseudo']." "?><?= $r['user_description']." ---"?>
+                      
 
                         <?php }} ?>
 
@@ -1226,10 +1233,6 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
         </script>
 
 
-
-
-
-
         <!-- JS du player -->
         <script id="scriptDuPlayer">
 
@@ -1246,30 +1249,12 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
             songIndex = 0;
-            songs = <?=returnMusicListStr("songs", $resuBEATS); ?>  //Stockage des audios
-                thumbnails = <?=returnMusicListStr("thumbnails", $resuBEATS); ?> //Stockage des covers
-                songArtists = <?=returnMusicListStr("artists", $resuBEATS); ?> //Stockage Noms Artistes
-                songTitles = <?=returnMusicListStr("titles", $resuBEATS); ?> //Stockage Titres
-                /*
-let playing = true;
-function playPause(songIndex) {
-    if (playing) {
-        const song = document.querySelector('#song'),
-        thumbnail = document.querySelector('#thumbnail');
-        pPause.src = "./assets/icon/pause.png"
-        song.play();
-        playing = false;
-    } else {
-        pPause.src = "./assets/icon/play.png"
-        song.pause();
-        playing = true;
-    }
-}
+            songs = <?=returnMusicListStr("songs", $resuBEATS); ?>;  //Stockage des audios
+            thumbnails = <?=returnMusicListStr("thumbnails", $resuBEATS); ?>; //Stockage des covers
+            songArtists = <?=returnMusicListStr("artists", $resuBEATS); ?>; //Stockage Noms Artistes
+            songTitles = <?=returnMusicListStr("titles", $resuBEATS); ?>; //Stockage Titres
 
-*/
-
-
-                let playing = true;
+            let playing = true;
             function playPause(songIndex) {
                 song.src = songs[songIndex];
                 thumbnail.src = thumbnails[songIndex];
@@ -1347,7 +1332,7 @@ function playPause(songIndex) {
             };
 
             // actualisation du lecteur en fct du temps(demi-secondes)
-            setInterval(updateProgressValue, 500);
+            setInterval(updateProgressValue, 50);
 
             // Valeur de la bar qd curseur est glissé sans lecture
             function changeProgressBar() {
