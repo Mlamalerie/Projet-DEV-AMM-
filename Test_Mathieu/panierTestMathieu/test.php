@@ -163,11 +163,11 @@ if(isset($_GET["action"]))
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ModalPanier" tabindex="-1" role="dialog" aria-labelledby="ModalPanierLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Panier WeBeats</h5>
+            <h5 class="modal-title" id="ModalPanierLabel">Panier WeBeats</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -212,15 +212,6 @@ if(isset($_GET["action"]))
                      
                </table>
             </div>
-
-
-
-
-
-
-
-
-
 
 
 

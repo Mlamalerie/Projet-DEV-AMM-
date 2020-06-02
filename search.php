@@ -440,6 +440,127 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
         ?>
 
 
+
+
+
+        <?php
+        $connect = mysqli_connect("localhost", "root", "", "test");
+
+        if(isset($_POST["add_to_cart"]))
+        {
+            if(isset($_SESSION["shopping_cart"]))
+            {
+                $item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
+                if(!in_array($_GET["id"], $item_array_id))
+                {
+                    $count = count($_SESSION["shopping_cart"]);
+                    $item_array = array(
+                        'item_id'         => $_GET["id"],
+                        'item_name'       => $_POST["hidden_name"],
+                        'item_price'      => $_POST["hidden_price"],
+
+                    );
+                    $_SESSION["shopping_cart"][$count] = $item_array;
+                }
+                else
+                {
+                    echo '<script>alert("Article déja ajouté au panier")</script>';
+                }
+            }
+            else
+            {
+                $item_array = array(
+                    'item_id'         => $_GET["id"],
+                    'item_name'       => $_POST["hidden_name"],
+                    'item_price'      => $_POST["hidden_price"],
+
+                );
+                $_SESSION["shopping_cart"][0] = $item_array;
+            }
+        }
+
+        if(isset($_GET["action"]))
+        {
+            if($_GET["action"] == "delete")
+            {
+                foreach($_SESSION["shopping_cart"] as $keys => $values)
+                {
+                    if($values["item_id"] == $_GET["id"])
+                    {
+                        unset($_SESSION["shopping_cart"][$keys]);
+                        //echo '<script>alert("Item Removed")</script>';
+                        echo '<script>window.location="search.php"</script>';
+                    }
+                }
+            }
+        }
+        ?>
+
+
+
+
+
+        <!--   *************************************************************  -->
+        <!--   ************************** MODAL PANIER  **************************  -->
+
+
+        <div class="" id="ModalPanier" tabindex="-1" role="dialog" aria-labelledby="ModalPanierLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalPanierLabel">Panier WeBeats</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th width="40%">Nom de l'article</th>
+
+                                    <th width="20%">Prix</th>
+
+                                    <th width="5%">Action</th>
+                                </tr>
+                                <tr>
+                                <tr>
+                                    <td>caca ?></td>
+
+
+                                    <td>2 &euro;</td>
+                                    <td><span class="text-danger">Retirer</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" align="right">Total</td>
+                                    <td align="right">2 &euro;</td>
+                                    
+                                </tr>
+                               
+
+                            </table>
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <a href="affichagepanier.php?action=add&id=<?php echo $row["id"]; ?>"><button type="button" class="btn btn-primary">Valider</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
         <div class="rounded container-fluid mb-0">
             <div class="row ">
 
@@ -791,7 +912,26 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                     <div style="background-color : green;"> 
                                         <span> (<?=$r['beat_like']?> ) </span>
 
-                                        <a class="btn btn-danger" href="#" role="button"><?=$r['beat_price']?> €</a><?=$r['beat_dateupload']?> ---
+
+                                        <button onclick="go2Panier(<?=$r['beat_title']?>,<?=$r['beat_author']?>, <?=$r['beat_price']?>)" class="btn btn-danger"> <?=$r['beat_price']?> €</button> 
+
+                                        <script>
+                                            function go2Panier(b_title,b_author,b_price) {
+                                                // titre, prix
+
+                                                // deposer b_
+
+                                            }
+
+                                        </script>
+
+
+
+                                        ---
+                                        <?=$r['beat_dateupload']?>
+
+
+
                                     </div>
 
                                 </div>
@@ -869,7 +1009,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                             </div>
                         </div>
 
-                      
+
 
                         <?php }} ?>
 
