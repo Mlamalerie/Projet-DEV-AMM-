@@ -12,22 +12,23 @@ if (!isset($_GET['profil_id'])){
     exit;
 }
 
-$id = (int)$_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
+$id_receveur = (int)$_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
+$id_demandeur=$_SESSION['user_id'];
 
-if(isset($_SESSION['user_id'])){
+if(isset($id_demandeur)){
     $req = $BDD->prepare("SELECT u.*, r.id_demandeur, r.id_receveur, r.statut,r.id_bloqueur
         FROM user u
-        LEFT JOIN relation r ON (id_receveur = u.user_id AND id_demandeur = :id2) OR (id_receveur = :id2 AND id_demandeur =u.user_id)
+        LEFT JOIN relation r ON (id_receveur = u.user_id AND id_demandeur = :id2)
         WHERE u.user_id = :id1");
 
-    $req->execute(array(':id1' => $id, ':id2' =>$_SESSION['user_id']));
+    $req->execute(array(':id1' => $id_receveur, ':id2' =>$id_demandeur));
 }
 else{
     $req = $BDD->prepare("SELECT u.*
         FROM user u
         WHERE u.user_id = :id1");
 
-    $req->execute(array(':id1' => $id));
+    $req->execute(array(':id1' => $id_receveur));
 }
 
 $afficher_profil = $req->fetch();
@@ -39,50 +40,48 @@ if(!empty($_POST)){
 
 
     if(isset($_POST['user-follow'])){
-        $req = $BDD->prepare("SELECT id FROM relation WHERE (id_receveur = ? AND id_demandeur = ?) OR (id_receveur = ? AND id_demandeur = ?)"); 
+        $req = $BDD->prepare("SELECT id FROM relation WHERE (id_demandeur = ? AND id_receveur = ?)"); 
 
-        $req->execute(array($afficher_profil['user_id'], $_SESSION['user_id'], $_SESSION['user_id'],$afficher_profil['user_id']));
+        $req->execute(array( $id_demandeur,$id_receveur ));
 
         $verif_relation = $req->fetch();
 
-        if(isset($verif_relation['id'])){/*qd on a déja envoyé une demande on ne plus en envoyer a la mm personne*/
+        if(isset($verif_relation['id'])){/*follow existe*/
             $valid=false;
         }
         if($valid){
             $req=$BDD->prepare("INSERT INTO relation (id_demandeur,id_receveur,statut) VALUES (?,?,?)");
-            $req->execute(array($_SESSION['user_id'],$afficher_profil['user_id'],1));
+            $req->execute(array($id_demandeur,$id_receveur,1));
+            
         }
 
-        header('Location: profils.php?profil_id='.$afficher_profil['user_id']);
+        header('Location: profils.php?profil_id='.$id_receveur);
         exit;
     }
 
     else if(isset($_POST['user-unfollow'])){
-        $req=$BDD->prepare("DELETE FROM relation  WHERE (id_receveur = ? AND id_demandeur = ?) OR (id_receveur = ? AND id_demandeur = ?)");
-        $req->execute(array($_SESSION['user_id'],$afficher_profil['user_id'],1));
-        $req->execute(array($afficher_profil['user_id'], $_SESSION['user_id'], $_SESSION['user_id'],$afficher_profil['user_id']));
-        header('Location: profils.php?profil_id='.$afficher_profil['user_id']);
+        $req=$BDD->prepare("DELETE FROM relation  WHERE (id_receveur = ? AND id_demandeur = ?)");
+        $req->execute(array($id_receveur,$id_demandeur));
+        header('Location: profils.php?profil_id='.$id_receveur);
         exit;
     }
     else if(isset($_POST['user-bloquer'])){
         $req=$BDD->prepare("DELETE FROM relation  WHERE (id_receveur = ? AND id_demandeur = ?) OR (id_receveur = ? AND id_demandeur = ?)");
-        $req->execute(array($_SESSION['user_id'],$afficher_profil['user_id'],1)); /*on suppose que le statut 1 est une demande en attente*/
-        $req->execute(array($afficher_profil['user_id'], $_SESSION['user_id'], $_SESSION['user_id'],$afficher_profil['user_id']));
+        
+        $req->execute(array($id_receveur, $id_demandeur, $id_demandeur,$id_receveur));
 
-        $req=$BDD->prepare("INSERT INTO relation (id_demandeur,id_receveur,statut,id_bloqueur) VALUES (?,?,?,?)");
-        $req->execute(array($_SESSION['user_id'],$afficher_profil['user_id'],3,$afficher_profil['user_id']));
+        $req=$BDD->prepare("INSERT INTO relation (id_demandeur,id_receveur,statut) VALUES (?,?,?)");
+        $req->execute(array($id_demandeur,$id_receveur,3));
         /*c'est comme unfollow mais on insère juste l'id de du profil bloqué*/ /*on suppose que le statut 3 est une demande bloqué*/
 
 
-        header('Location: profils.php?profil_id='.$afficher_profil['user_id']);
+        header('Location: profils.php?profil_id='.$id_receveur);
         exit;
     } 
     else if(isset($_POST['user-debloquer'])){
-        $req=$BDD->prepare("DELETE FROM relation  WHERE (id_receveur = ? AND id_demandeur = ?) OR (id_receveur = ? AND id_demandeur = ?)");
-        $req->execute(array($_SESSION['user_id'],$afficher_profil['user_id'],1));
-        $req->execute(array($afficher_profil['user_id'], $_SESSION['user_id'], $_SESSION['user_id'],$afficher_profil['user_id']));
-
-        header('Location: profils.php?profil_id='.$afficher_profil['user_id']);
+        $req=$BDD->prepare("DELETE FROM relation  WHERE (id_demandeur = ? AND id_receveur = ? AND statut = ?)");
+        $req->execute(array($id_demandeur,$id_receveur,3));
+        header('Location: profils.php?profil_id='.$id_receveur);
         exit;
     } 
 }
@@ -188,16 +187,16 @@ if(!empty($_POST)){
                 <?php
     /*on peut voir ces boutons seulement sur notre compte et si on est connecté*/
     if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
-        if( $_SESSION['user_id']==$afficher_profil['user_id'] ){
+        if( $id_demandeur==$id_receveur ){
                 ?>
-                <button class="infos-privee-btn"><a href="privee.php?profil_id=<?= $afficher_profil['user_id']?>" >Infos privée</a></button>
+                <button class="infos-privee-btn"><a href="privee.php?profil_id=<?= $id_receveur?>" >Infos privée</a></button>
 
-                <button class="editer-btn"><a href="editer-profil.php?profil_id=<?= $afficher_profil['user_id']?>" >Editer</a></button>
+                <button class="editer-btn"><a href="editer-profil.php?profil_id=<?= $id_receveur?>" >Editer</a></button>
                 <?php
         } else {/*si on est juste connecté et qu'on regarde le profil d'un autre*/
                 ?>
                 <div class="col-md-4" style="display:inline-block;width:30%;margin-left:5%">
-                    <button class="msg-btn" href=""> <a href="message.php?profil_id=<?= $afficher_profil['user_id'] ?>" style="color:white">
+                    <button class="msg-btn" href=""> <a href="message.php?profil_id=<?= $id_receveur ?>" style="color:white">
                         DM
                         </a></button>   
                     <?php
@@ -207,6 +206,7 @@ if(!empty($_POST)){
                     <div>
                         <?= count(explode(',',$afficher_profil['user_followers'])) ?> Follower(s)
                     </div>
+                    <?php// var_dump($afficher_profil); ?>
                 </div>
 
 
@@ -214,28 +214,39 @@ if(!empty($_POST)){
         </div>
         <div>
             <?php
-    if(isset($_SESSION['user_id'])&& $_SESSION['user_id']!=$afficher_profil['user_id']){
+    if(isset($id_demandeur)&& $id_demandeur!=$id_receveur){
             ?>    
             <form method="post" class="follow-btn">
                 <?php
-        if(!isset($afficher_profil['statut'])){
-                ?>
+        
+        // tu le follow pas
+        if(!isset($afficher_profil['statut'])){/*si il nya aucun lien*/ 
+              echo "Zero lien" ; ?>
                 <input type="submit" name="user-follow" value="Follow" class="follow-btn">
                 <?php
         }
-                ?>
-                <?php
-        if(isset($afficher_profil['statut']) && $afficher_profil['statut']<3 && $afficher_profil['id_demandeur']==$_SESSION['user_id']){
-                ?>
+        // si c'est tu le follow
+        else if(isset($afficher_profil['statut']) && $afficher_profil['id_demandeur']==$id_demandeur && $afficher_profil['statut']<3){
+            
+            echo "We tu follow";
+            ?>
                 <input type="submit" name="user-unfollow" value="Unfollow" class="follow-btn">
                 <?php
+                
         }
-        if((isset($afficher_profil['statut'])||$afficher_profil['statut']==NULL) && $afficher_profil['statut']<3){
+        // si il te follow
+        else if(isset($afficher_profil['statut']) && $afficher_profil['id_receveur']==$id_demandeur && $afficher_profil['statut']<3){
+            echo "cC'est lui qui te follow follow";
+              
+        } 
+                                                                                                               }
+        if((isset($afficher_profil['statut'])||$afficher_profil['statut']==NULL) && $afficher_profil['statut']<3){echo "pas bloqué";
                 ?>
                 <input type="submit" name="user-bloquer" value="Bloquer" class="follow-btn">
                 <?php
         }
-        else if($afficher_profil['id_bloqueur'] != $_SESSION['user_id']){
+        else if(isset($afficher_profil['statut']) && $afficher_profil['statut'] == 3 && $afficher_profil['id_demandeur'] == $id_demandeur){
+            echo "bloqué la";
                 ?>
                 <input type="submit" name="user-debloquer" value="Débloquer" class="follow-btn">
                 <?php
@@ -247,9 +258,7 @@ if(!empty($_POST)){
         }
                 ?>
             </form>
-            <?php
-    }
-            ?> 
+            
         </div>                     
 
     </body>
