@@ -89,7 +89,35 @@ if(!empty($_POST)){
     } 
 }
 
+// req1 seletionne toutes les relations où on le follow
+$req1 = $BDD->prepare("SELECT *
+                        FROM relation
+                        WHERE id_receveur = ? AND statut = 1");
+$req1->execute(array($id_receveur));
+// compter les resulter, count la tableau
+$nb_follow=0;
+echo '^f=berd"';
+$resuRELA = $req1->fetchAll();
+
+print_r($resuRELA);
+foreach($resuRELA as $rr){
+    
+    foreach($rr as $key => $value){
+    
+    if($key =='statut' && $value== 1){
+        
+        $nb_follow++;
+    }   
+} 
+}
+    
+    
+    
+//$nb_follow = count()
+
+
 ?>
+
 
 
 <!DOCTYPE html>
@@ -207,7 +235,7 @@ if(!empty($_POST)){
     }
                     ?>
                     <div>
-                        <?= count(explode(',',$afficher_profil['user_followers'])) ?> Follower(s)
+                        <?= $nb_follow ?> Follower(s)
                     </div>                    
                 </div>
             </div>
@@ -217,7 +245,7 @@ if(!empty($_POST)){
 
 
             <?php
-    
+
 
 
     if(isset($id_demandeur)&& $id_demandeur!=$id_receveur){ // si c'est pas ton compte affichafe des bouton
