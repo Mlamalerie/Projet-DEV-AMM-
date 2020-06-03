@@ -22,29 +22,40 @@
 
         if (!$jesuissurindex) { ?>
         <form id="searchform" method="get" action="search.php">
-            <div class="input-group searchbar">
+            <div class="input-group">
 
-                <select name="Type" class="custom-select ">
-
-                    <option value="beats" class="dropdown-item">All beats</option>
+                <div class="input-group mb-4 border rounded-pill p-1">
 
 
-                    <option value="users" class="dropdown-item">All users </option>
 
 
-                </select>
+                    <div class="input-group-prepend border-0">
+
+                        <select name="Type" class="custom-select ">
+
+                            <option value="beats" class="dropdown-item">All beats</option>
 
 
-                <input id='searchbar' class="search_input form-control  mr-sm-" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
+                            <option value="users" class="dropdown-item">All users </option>
 
-                <div class="input-group-append">
-                    <button onclick="goSearch()" href="#" class="search_icon"><i class="fas fa-search"></i></button>
+
+                        </select>
+
+                        <button onclick="goSearch()" id="button-search" type="button" class="btn btn-link text-info search_icon"><i class="fa fa-search"></i></button>
+                    </div>
+                    <input id='searchbar'
+                           type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-describedby="button-search" class="form-control searchbar bg-none border-0">
                 </div>
+
+
+
 
 
 
             </div>
         </form>
+
+
 
 
         <?php  
@@ -64,10 +75,12 @@
                 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
 
                 ?>
+
+
                 <li class="nav-item ">
                     <a class="nav-link btn" href="messagerie.php">Messagerie<span class="sr-only">(current)</span></a>
                 </li>
-                
+
                 <li class="nav-item ">
                     <a class="nav-link btn" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
                 </li>
@@ -75,8 +88,8 @@
                 <li class="nav-item">
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#modalUpload"><img id="iconUpload" src="assets/img/icon/ui.svg"> Uploader </button>
                 </li>
-                
-                  <li class="nav-item dropdown ">
+
+                <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <img id="iconUser" src="assets/img/user.png">
                     </a>
@@ -84,14 +97,14 @@
 
                         <span class="dropdown-item  "> <?= $_SESSION['user_pseudo'] ?> </span>
                         <div class="dropdown-divider"></div>
-                       <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"> Mon Profil </a>
+                        <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"> Mon Profil </a>
                         <a class="dropdown-item  " href="#"> Mes Tracks </a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="deconnexion.php">Déconnexion</a>
                     </div>
                 </li>
-                
+
                 <li class="nav-item">
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#ModalPanier" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> Panier </button>
                 </li>
@@ -99,7 +112,7 @@
 
 
 
-              
+
 
 
                 <?php
@@ -146,7 +159,7 @@
                 <?php
                 }
                 ?>
-                
+
 
 
             </ul>
