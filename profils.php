@@ -96,10 +96,10 @@ $req1 = $BDD->prepare("SELECT *
 $req1->execute(array($id_receveur));
 // compter les resulter, count la tableau
 $nb_follow=0;
-echo '^f=berd"';
+
 $resuRELA = $req1->fetchAll();
 
-print_r($resuRELA);
+//print_r($resuRELA);
 foreach($resuRELA as $rr){
     
     foreach($rr as $key => $value){

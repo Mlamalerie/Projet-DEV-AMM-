@@ -983,7 +983,11 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     </form>
                     <?php } ?>
                     <div id="resultuser"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : blue;">
-                        <?php  if (isset($resuUSERS)) {foreach($resuUSERS as $r){ ?>
+                        <?php  if (isset($resuUSERS)) {
+                                    foreach($resuUSERS as $r){ ?>
+                        
+                        <?php           if ($r['user_id']!=$_SESSION['user_id']){?>
+                        
                         <!-- Team item-->
                         <div class="col-xl-3 col-sm-6 mb-5 text-center">
 
@@ -1012,9 +1016,10 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                             </div>
                         </div>
 
+                        <?php            } ?>
 
-
-                        <?php }} ?>
+                        <?php        }
+                                } ?>
 
 
 
