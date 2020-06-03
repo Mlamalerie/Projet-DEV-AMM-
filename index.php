@@ -67,8 +67,6 @@ $_SESSION['ici_index_bool'] = true;
                         <p class="lead mb-0">Découvrez et Partagez les prods de vos choix</p>
                         <p class="lead mb-0">Pour pouvoir acheter ou vendre des prods  <a href="inscription.php"><button type="button" class="btn btn-danger btninscription" >Inscrivez-vous</button></a></p><br/>
 
-                        
-
                         <form id="searchform" method="get" action="search.php">
                            
 

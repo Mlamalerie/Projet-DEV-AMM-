@@ -6,7 +6,7 @@ function returnMusicListStr($bay, $resuBEATS){
         foreach($resuBEATS as $r) {
             $pose = $r['beat_source'];
 
-            $str .= "'./audio/$pose',";
+            $str .= "'audio/$pose',";
 
         }
 
@@ -14,7 +14,7 @@ function returnMusicListStr($bay, $resuBEATS){
         foreach($resuBEATS as $r) {
             $pose = $r['beat_cover'];
 
-            $str .= "'./img/$pose',";
+            $str .= "'$pose',";
         }
     }
     else if ($bay == 'artists'){
@@ -29,11 +29,18 @@ function returnMusicListStr($bay, $resuBEATS){
 
             $str .= "'$pose',";
         }
-    }
+    } else if ($bay == 'prices'){
+        foreach($resuBEATS as $r) {
+            $pose = $r['beat_price'];
+
+            $str .= "'$pose',";
+        }
+    } 
     // ici effacer la virgule en + puis c bon
     $str = substr($str,0,-1);
     $str .= "]";
 
+    
     return $str;
 
 
