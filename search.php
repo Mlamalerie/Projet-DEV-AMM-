@@ -516,37 +516,24 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     <div class="modal-body">
 
                         <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th width="40%">Nom de l'article</th>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="p-2 px-3 text-uppercase">Product</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Price</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Remove</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbodypanier">
 
-                                    <th width="20%">Prix</th>
 
-                                    <th width="5%">Action</th>
-                                </tr>
-                                <tr>
-                                <tr>
-                                    <td>
-                                        <div id="titreBeats">
-                                        C'est le titre
-                                        </div>
-                                    </td>
-
-
-                                    <td>
-                                        <div>
-                                        C'est le prix en &euro;
-                                        </div>
-                                    </td>
-                                    <td><span class="text-danger">Retirer</span></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" align="right">Total</td>
-                                    <td align="right">2 &euro;</td>
-                                    
-                                </tr>
-                               
-
+                                </tbody>
                             </table>
                         </div>
 
@@ -555,16 +542,13 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        <a href="affichagepanier.php?action=add&id=<?php echo $row["id"]; ?>"><button type="button" class="btn btn-primary">Valider</button></a>
+                        <!--                        <a href="affichagepanier.php?action=add&id=<?php echo $row["id"]; ?>">-->
+                        <button type="button" class="btn btn-primary">Valider</button>
+                        <!--                        </a>-->
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
 
 
 
@@ -921,17 +905,9 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                         <span> (<?=$r['beat_like']?> ) </span>
 
 
-                                        <button onclick="go2Panier(<?=$r['beat_title']?>,<?=$r['beat_author']?>, <?=$r['beat_price']?>)" class="btn btn-danger"> <?=$r['beat_price']?> €</button> 
+                                        <button onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>'); this.value" class="btn btn-danger"> <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup> <?=$r['beat_price']?>€</button> 
 
-                                        <script>
-                                            function go2Panier(b_title,b_author,b_price) {
-                                                // titre, prix
 
-                                                // deposer b_
-
-                                            }
-
-                                        </script>
 
 
 
@@ -1404,6 +1380,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
             const thumbnail = document.querySelector('#thumbnail'); // album cover 
             const song = document.querySelector('#song'); // audio 
 
+            const btnAcheterPrice = document.querySelector('#btn-player-acheter');
             const songArtist = document.querySelector('.song-artist'); // element où noms artistes apparaissent
             const songTitle = document.querySelector('.song-title'); // element où titre apparait
             const progressBar = document.querySelector('#progress-bar'); // element où progress bar apparait
@@ -1418,13 +1395,27 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
             thumbnails = <?=returnMusicListStr("thumbnails", $resuBEATS); ?>; //Stockage des covers
             songArtists = <?=returnMusicListStr("artists", $resuBEATS); ?>; //Stockage Noms Artistes
             songTitles = <?=returnMusicListStr("titles", $resuBEATS); ?>; //Stockage Titres
-
+            songPrices = <?=returnMusicListStr("prices", $resuBEATS); ?>; //Stockage price
             let playing = true;
             function playPause(songIndex) {
                 song.src = songs[songIndex];
                 thumbnail.src = thumbnails[songIndex];
                 songArtist.innerHTML = songArtists[songIndex];
                 songTitle.innerHTML = songTitles[songIndex];
+
+                let prixprix;
+                if(parseFloat(songPrices[songIndex]) == 0.00){
+                    prixprix = "FREE";
+
+                } else {
+                    prixprix = songPrices[songIndex] +"€";
+                }
+                btnAcheterPrice.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>"+ prixprix ;
+                console.log(btnAcheterPrice);
+                btnAcheterPrice.setAttribute('onclick',"go2Panier(this,'" + songTitles[songIndex] + "','" + songArtists[songIndex] + "', '"+ songPrices[songIndex] +"', '" + thumbnails[songIndex] + "');");
+                btnAcheterPrice.setAttribute('class','btn btn-danger');
+
+
                 if (playing) {
                     pPause.src = "./assets/icon/pause.png"
                     song.play();
@@ -1508,6 +1499,6 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
         </script>
         <!--   END JS du Player     -->
-
+        <script src='assets/js/panier.js'></script>
     </body>
 </html>
