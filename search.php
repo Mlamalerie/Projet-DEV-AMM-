@@ -516,7 +516,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     <div class="modal-body">
 
                         <div class="table-responsive">
-                            <input type="text" name="sendbeatspanier" id="sendbeatspanier">
+
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -532,6 +532,43 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                     </tr>
                                 </thead>
                                 <tbody id="tbodypanier">
+                                    <?php 
+                                    $req = $BDD->prepare("SELECT *
+                            FROM panier
+                            WHERE panier_user_id = ?");
+                                    $req->execute(array($_SESSION['user_id']));
+                                    $resuPANIER = $req->fetchAll();
+
+                                    foreach($resuPANIER as $p) {
+
+                                        $req = $BDD->prepare("SELECT *
+                                            FROM beat
+                                            WHERE beat_id = ?");
+                                        $req->execute(array($p['panier_beat_id']));
+                                        $resuPAN = $req->fetchAll();
+                                        foreach($resuPAN as $b) {
+
+
+                                    ?> 
+                                    <tr>
+
+                                        <th scope='row' class='border-0'>
+                                            <div class='p-2'>
+                                                <img src='<?=$b['beat_cover'] ?>' alt='' width='70' class='img-fluid rounded shadow-sm'>
+                                                <div class='ml-3 d-inline-block align-middle'> <h5 class='mb-0'> <a href='#' class='text-dark d-inline-block align-middle'><?=$b['beat_title'] ?></a></h5> <span class='text-muted font-weight-normal font-italic d-block'><?=$b['beat_author'] ?></span> 
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td class='border-0 align-middle'><strong><?=$b['beat_price'] ?></strong></td>
+                                        <td class='border-0 align-middle'>
+                                            <span class='text-dark' onclick="suppr2Panier(this,'<?=$b['beat_price'] ?>','<?=$b['beat_id'] ?>');"><i class='fa fa-trash'></i></span>
+                                        </td>
+                                    </tr>
+                                    <?php
+
+                                        }
+                                    }
+                                    ?>
 
 
                                 </tbody>
@@ -905,10 +942,12 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                     <div style="background-color : green;"> 
                                         <span> (<?=$r['beat_like']?> ) </span>
 
-                                        <button onclick="majBDDPanier()">oktest</button>
+                                        <!--                                        <button onclick="majBDDPanier()">oktest</button>-->
 
 
-                                        <button onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>','<?=$r['beat_id']?>');" class="btn btn-danger"> <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup> <?=$r['beat_price']?>€</button> 
+                                        <button id='btnbeat-<?=$r['beat_id']?>' onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>','<?=$r['beat_id']?>');" class="btn btn-danger">
+                                            <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup><?=$r['beat_price']?>€
+                                        </button> 
 
 
 
@@ -940,29 +979,35 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                                 xmlhttp.open("GET",ou,true);
                                                 xmlhttp.send();
                                             }
+                                            function creer1TR(b_title,b_author,b_price,b_cover,idbeat) {
+                                                let tbody = document.getElementById('tbodypanier');
+                                                let strID =  b_title + b_author + b_price + b_cover;
+                                                strID = strID.trim();
+                                                console.log(strID);
+                                                let tr = document.createElement('tr');
+                                                let str = "<th scope='row' class='border-0'> <div class='p-2'> <img src='" + b_cover + "' alt='' width='70' class='img-fluid rounded shadow-sm'> <div class='ml-3 d-inline-block align-middle'> <h5 class='mb-0'> <a href='#' class='text-dark d-inline-block align-middle'>" + b_title + "</a></h5> <span class='text-muted font-weight-normal font-italic d-block'>" + b_author + "</span> </div></div></th><td class='border-0 align-middle'><strong>" + b_price + "</strong></td>";
+                                                str += "<td class='border-0 align-middle'><span class='text-dark'><i class='fa fa-trash'></i></span></td>";
+                                                // note : faire du css sur le span pour faire faux lien style
+                                                tr.innerHTML = str ;
+
+                                                tr.children[2].children[0].setAttribute('onclick','suppr2Panier(this,"' + b_price + '","' + idbeat + '");');
+                                                console.log('ùù');
+                                                tbody.appendChild(tr);
+                                                return strID;
+
+                                            }
 
                                             function go2Panier(btn,b_title,b_author,b_price,b_cover,idbeat) {
 
                                                 let textIn = "Dans Panier";
                                                 console.log(btn.innerHTML , textIn, (btn.value != textIn))
                                                 // titre, prix
-                                                let tbody = document.getElementById('tbodypanier');
+
                                                 if (btn.innerHTML != textIn) {
-                                                    let strID =  b_title + b_author + b_price + b_cover;
-                                                    strID = strID.trim();
-                                                    console.log(strID);
-                                                    let tr = document.createElement('tr');
-                                                    let str = "<th scope='row' class='border-0'> <div class='p-2'> <img src='" + b_cover + "' alt='' width='70' class='img-fluid rounded shadow-sm'> <div class='ml-3 d-inline-block align-middle'> <h5 class='mb-0'> <a href='#' class='text-dark d-inline-block align-middle'>" + b_title + "</a></h5> <span class='text-muted font-weight-normal font-italic d-block'>" + b_author + "</span> </div></div></th><td class='border-0 align-middle'><strong>" + b_price + "</strong></td>";
-                                                    str += "<td class='border-0 align-middle'><span class='text-dark'><i class='fa fa-trash'></i></span></td>";
-                                                    // note : faire du css sur le span pour faire faux lien style
-                                                    tr.innerHTML = str ;
 
-                                                    tr.children[2].children[0].setAttribute('onclick','suppr2Panier(this, "'+ strID +'","' + b_price + '","' + idbeat + '");');
-                                                    console.log('ùù');
-                                                    tbody.appendChild(tr);
-
+                                                    let strID = creer1TR(b_title,b_author,b_price,b_cover,idbeat)
                                                     btn.innerHTML = textIn;
-                                                    btn.id = strID;
+                                                    //btn.id = strID;
 
                                                     ajoutBDDPanier(idbeat);
 
@@ -975,7 +1020,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
                                             }
-                                            function suppr2Panier(icon,dubay,euro,idsuppr) {
+                                            function suppr2Panier(icon,euro,idsuppr) {
                                                 console.log("**suppr");
                                                 let tr = icon.parentNode.parentNode;
                                                 let ici = icon.parentNode.parentNode.parentNode;
@@ -983,8 +1028,8 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                                 ici.removeChild(tr);
 
 
-                                                let btn = document.getElementById(dubay);
-                                                console.log("*",btn); 
+                                                let btn = document.getElementById('btnbeat-'+idsuppr.toString());
+                                                console.log("*",'btnbeat-'+idsuppr,btn); 
 
                                                 btn.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>" + euro + "€";
                                                 supprBDDPanier(idsuppr);
