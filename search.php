@@ -515,6 +515,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     <div class="modal-body">
 
                         <div class="table-responsive">
+                           <input type="text" name="sendbeatspanier" id="sendbeatspanier">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -903,11 +904,75 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                     <div style="background-color : green;"> 
                                         <span> (<?=$r['beat_like']?> ) </span>
 
+                                        <button onclick="majBDDPanier()">oktest</button>
+                                        
+                                        <button onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>');go2inputSend('<?=$r['beat_id']?>')" class="btn btn-danger"> <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup> <?=$r['beat_price']?>€</button> 
 
-                                        <button onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>'); this.value" class="btn btn-danger"> <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup> <?=$r['beat_price']?>€</button> 
+<div id="txtHint"></div>
 
 
+                                        <script >
+                                            function go2inputSend(id1beat) { // ajout et enlever dans la value de l'inot
+                                                "sendbeatspanier"
+                                                value += // 2-4-5-6-7-55
+                                                
+                                            }
+                                            function majBDDPanier() {
+                                                console.log("pan");
+                                                var xmlhttp = new XMLHttpRequest();
+                                                xmlhttp.onreadystatechange = function() {
+                                                    if (this.readyState == 4 && this.status == 200) {
+                                                        document.getElementById("txtHint").innerHTML = this.responseText;
+                                                    }
+                                                };
+                                                xmlhttp.open("GET","sendPanierBDD.php?qq=1-2",true);
+                                                xmlhttp.send();
+                                            }
 
+                                            function go2Panier(btn,b_title,b_author,b_price,b_cover) {
+
+                                                let textIn = "Dans Panier";
+                                                console.log(btn.innerHTML , textIn, (btn.value != textIn))
+                                                // titre, prix
+                                                let tbody = document.getElementById('tbodypanier');
+                                                if (btn.innerHTML != textIn) {
+                                                    let strID =  b_title + b_author + b_price + b_cover;
+                                                    strID = strID.trim();
+                                                    console.log(strID);
+                                                    let tr = document.createElement('tr');
+                                                    let str = "<th scope='row' class='border-0'> <div class='p-2'> <img src='" + b_cover + "' alt='' width='70' class='img-fluid rounded shadow-sm'> <div class='ml-3 d-inline-block align-middle'> <h5 class='mb-0'> <a href='#' class='text-dark d-inline-block align-middle'>" + b_title + "</a></h5> <span class='text-muted font-weight-normal font-italic d-block'>" + b_author + "</span> </div></div></th><td class='border-0 align-middle'><strong>" + b_price + "</strong></td>";
+                                                    str += "<td class='border-0 align-middle'><span class='text-dark'><i class='fa fa-trash'></i></span></td>";
+                                                    // note : faire du css sur le span pour faire faux lien style
+                                                    tr.innerHTML = str ;
+
+                                                    tr.children[2].children[0].setAttribute('onclick','suppr2Panier(this, "'+ strID +'","' + b_price + '");');
+                                                    console.log('ùù');
+                                                    tbody.appendChild(tr);
+
+                                                    btn.innerHTML = textIn;
+                                                    btn.id = strID;
+                                                    //                    btn.classList.add(strID);
+                                                } else {
+                                                    console.log('ee');
+
+                                                }
+
+
+                                            }
+                                            function suppr2Panier(icon,dubay,euro) {
+                                                console.log("**suppr");
+                                                let tr = icon.parentNode.parentNode;
+                                                let ici = icon.parentNode.parentNode.parentNode;
+                                                console.log(tr,ici);
+                                                ici.removeChild(tr);
+
+
+                                                let btn = document.getElementById(dubay);
+                                                console.log("*",btn); 
+
+                                                btn.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>" + euro + "€";
+                                            }
+                                        </script>
 
 
                                         ---
@@ -1402,17 +1467,17 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                 songArtist.innerHTML = songArtists[songIndex];
                 songTitle.innerHTML = songTitles[songIndex];
 
-                let prixprix;
-                if(parseFloat(songPrices[songIndex]) == 0.00){
-                    prixprix = "FREE";
-
-                } else {
-                    prixprix = songPrices[songIndex] +"€";
-                }
-                btnAcheterPrice.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>"+ prixprix ;
-                console.log(btnAcheterPrice);
-                btnAcheterPrice.setAttribute('onclick',"go2Panier(this,'" + songTitles[songIndex] + "','" + songArtists[songIndex] + "', '"+ songPrices[songIndex] +"', '" + thumbnails[songIndex] + "');");
-                btnAcheterPrice.setAttribute('class','btn btn-danger');
+                //                let prixprix;
+                //                if(parseFloat(songPrices[songIndex]) == 0.00){
+                //                    prixprix = "FREE";
+                //
+                //                } else {
+                //                    prixprix = songPrices[songIndex] +"€";
+                //                }
+                //                btnAcheterPrice.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>"+ prixprix ;
+                //                console.log(btnAcheterPrice);
+                //                btnAcheterPrice.setAttribute('onclick',"go2Panier(this,'" + songTitles[songIndex] + "','" + songArtists[songIndex] + "', '"+ songPrices[songIndex] +"', '" + thumbnails[songIndex] + "');");
+                //                btnAcheterPrice.setAttribute('class','btn btn-danger');
 
 
                 if (playing) {
@@ -1498,6 +1563,5 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
         </script>
         <!--   END JS du Player     -->
-        <script src='assets/js/panier.js'></script>
     </body>
 </html>
