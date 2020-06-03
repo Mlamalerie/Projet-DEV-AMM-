@@ -516,7 +516,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     <div class="modal-body">
 
                         <div class="table-responsive">
-                           <input type="text" name="sendbeatspanier" id="sendbeatspanier">
+                            <input type="text" name="sendbeatspanier" id="sendbeatspanier">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -906,33 +906,42 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                         <span> (<?=$r['beat_like']?> ) </span>
 
                                         <button onclick="majBDDPanier()">oktest</button>
-                                        
-                                        <button onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>');go2inputSend('<?=$r['beat_id']?>')" class="btn btn-danger"> <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup> <?=$r['beat_price']?>€</button> 
 
-<div id="txtHint"></div>
+
+                                        <button onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>','<?=$r['beat_id']?>');" class="btn btn-danger"> <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup> <?=$r['beat_price']?>€</button> 
+
+
 
 
                                         <script >
-                                            function go2inputSend(id1beat) { // ajout et enlever dans la value de l'inot
-                                                let input = document.getElementById("sendbeatspanier");
-                                                
-                                                
-                                                input.value += '.'
-                                                
-                                            }
-                                            function majBDDPanier() {
-                                                console.log("pan");
+
+                                            function ajoutBDDPanier(idbeat) {
+                                                console.log("ajoutBDD");
                                                 var xmlhttp = new XMLHttpRequest();
-                                                xmlhttp.onreadystatechange = function() {
-                                                    if (this.readyState == 4 && this.status == 200) {
-                                                        document.getElementById("txtHint").innerHTML = this.responseText;
-                                                    }
-                                                };
-                                                xmlhttp.open("GET","sendPanierBDD.php?qq=1-2",true);
+
+                                                let idboug = <?= $_SESSION['user_id'] ?>; 
+                                                let ou = "sendPanierBDD.php?qq="
+                                                ou += idboug.toString();
+                                                ou += "-" + idbeat.toString();
+                                                console.log(ou);
+                                                xmlhttp.open("GET",ou,true);
                                                 xmlhttp.send();
                                             }
 
-                                            function go2Panier(btn,b_title,b_author,b_price,b_cover) {
+                                            function supprBDDPanier(idbeat) {
+                                                console.log("supprBDD");
+                                                var xmlhttp = new XMLHttpRequest();
+
+                                                let idboug = <?= $_SESSION['user_id'] ?>; 
+                                                let ou = "deletePanierBDD.php?qq="
+                                                ou += idboug.toString();
+                                                ou += "-" + idbeat.toString();
+                                                console.log(ou);
+                                                xmlhttp.open("GET",ou,true);
+                                                xmlhttp.send();
+                                            }
+
+                                            function go2Panier(btn,b_title,b_author,b_price,b_cover,idbeat) {
 
                                                 let textIn = "Dans Panier";
                                                 console.log(btn.innerHTML , textIn, (btn.value != textIn))
@@ -948,12 +957,16 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                                     // note : faire du css sur le span pour faire faux lien style
                                                     tr.innerHTML = str ;
 
-                                                    tr.children[2].children[0].setAttribute('onclick','suppr2Panier(this, "'+ strID +'","' + b_price + '");');
+                                                    tr.children[2].children[0].setAttribute('onclick','suppr2Panier(this, "'+ strID +'","' + b_price + '","' + idbeat + '");');
                                                     console.log('ùù');
                                                     tbody.appendChild(tr);
 
                                                     btn.innerHTML = textIn;
                                                     btn.id = strID;
+
+                                                    ajoutBDDPanier(idbeat);
+
+
                                                     //                    btn.classList.add(strID);
                                                 } else {
                                                     console.log('ee');
@@ -962,7 +975,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
                                             }
-                                            function suppr2Panier(icon,dubay,euro) {
+                                            function suppr2Panier(icon,dubay,euro,idsuppr) {
                                                 console.log("**suppr");
                                                 let tr = icon.parentNode.parentNode;
                                                 let ici = icon.parentNode.parentNode.parentNode;
@@ -974,6 +987,9 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                                 console.log("*",btn); 
 
                                                 btn.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>" + euro + "€";
+                                                supprBDDPanier(idsuppr);
+
+
                                             }
                                         </script>
 
