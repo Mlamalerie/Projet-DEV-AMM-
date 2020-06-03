@@ -96,16 +96,18 @@ if(!empty($_POST)){
             }
 
             else { // ensuite on verifie si ce pseudo existe déja ou pas
-                $req = $BDD->prepare("SELECT user_id
+                $req = $BDD->prepare("SELECT user_id,user_pseudo
                             FROM user
                             WHERE user_pseudo = ? 
                                 ");
                 $req->execute(array($pseudo));
                 $user = $req->fetch();
 
-                if(isset($user['user_id']) && strtolower($user['user_id']) == strtolower($basepseudo) ) {
+                if(isset($user['user_id'])) {
+                    if(strtolower($user['user_pseudo']) != strtolower($basepseudo) ) {
                     $ok = false;
                     $err_pseudo = "Ce pseudo est déjà pris ! Choisissez en un autre. ";
+                    }
                 }
             }
         }
