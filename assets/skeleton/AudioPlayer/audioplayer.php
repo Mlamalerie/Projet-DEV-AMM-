@@ -19,7 +19,7 @@
                        onchange="changeProgressBar()"
                        />
 
-                <button type="button" class="btn btn-danger " id='btn-player-acheter'>Acheter</button>
+<!--                <button type="button" class="btn btn-danger " id='btn-player-acheter'>Acheter</button>-->
 
                 <div class="currentTime"></div>
                 <div class="durationTime"></div>
