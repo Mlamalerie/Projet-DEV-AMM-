@@ -33,7 +33,7 @@ else{
 
 $afficher_profil = $req->fetch();
 
-/*print_r($afficher_profil);*/
+
 if(!empty($_POST)){
     extract($_POST);
     $valid=(boolean) true;
@@ -70,8 +70,8 @@ if(!empty($_POST)){
         
         $req->execute(array($id_receveur, $id_demandeur, $id_demandeur,$id_receveur));
 
-        $req=$BDD->prepare("INSERT INTO relation (id_demandeur,id_receveur,statut) VALUES (?,?,?)");
-        $req->execute(array($id_demandeur,$id_receveur,3));
+        $req=$BDD->prepare("INSERT INTO relation (id_demandeur,id_receveur, statut, id_bloqueur) VALUES (?,?,?,?)");
+        $req->execute(array($id_demandeur,$id_receveur,3,$id_receveur));
         /*c'est comme unfollow mais on insère juste l'id de du profil bloqué*/ /*on suppose que le statut 3 est une demande bloqué*/
 
 
@@ -79,8 +79,8 @@ if(!empty($_POST)){
         exit;
     } 
     else if(isset($_POST['user-debloquer'])){
-        $req=$BDD->prepare("DELETE FROM relation  WHERE (id_demandeur = ? AND id_receveur = ? AND statut = ?)");
-        $req->execute(array($id_demandeur,$id_receveur,3));
+        $req=$BDD->prepare("DELETE FROM relation  WHERE (id_demandeur = ? AND id_receveur = ? AND statut = ? AND id_bloqueur = ?)");
+        $req->execute(array($id_demandeur,$id_receveur,3,$id_receveur));
         header('Location: profils.php?profil_id='.$id_receveur);
         exit;
     } 
@@ -205,30 +205,29 @@ if(!empty($_POST)){
                     ?>
                     <div>
                         <?= count(explode(',',$afficher_profil['user_followers'])) ?> Follower(s)
-                    </div>
-                    <?php// var_dump($afficher_profil); ?>
+                    </div>                    
                 </div>
-
-
             </div>
         </div>
         <div>
             <?php
-    if(isset($id_demandeur)&& $id_demandeur!=$id_receveur){
+  
+    if(isset($id_demandeur)&& $id_demandeur!=$id_receveur && $afficher_profil['id_bloqueur']!=$id_receveur){
+    
             ?>    
             <form method="post" class="follow-btn">
                 <?php
         
         // tu le follow pas
         if(!isset($afficher_profil['statut'])){/*si il nya aucun lien*/ 
-              echo "Zero lien" ; ?>
+                ?>
                 <input type="submit" name="user-follow" value="Follow" class="follow-btn">
                 <?php
         }
         // si c'est tu le follow
         else if(isset($afficher_profil['statut']) && $afficher_profil['id_demandeur']==$id_demandeur && $afficher_profil['statut']<3){
             
-            echo "We tu follow";
+            echo "<div>Vous le suivez</div>";
             ?>
                 <input type="submit" name="user-unfollow" value="Unfollow" class="follow-btn">
                 <?php
@@ -236,26 +235,30 @@ if(!empty($_POST)){
         }
         // si il te follow
         else if(isset($afficher_profil['statut']) && $afficher_profil['id_receveur']==$id_demandeur && $afficher_profil['statut']<3){
-            echo "cC'est lui qui te follow follow";
-              
+            echo "<div>Il vou suit</div>";             
         } 
-                                                                                                               }
-        if((isset($afficher_profil['statut'])||$afficher_profil['statut']==NULL) && $afficher_profil['statut']<3){echo "pas bloqué";
+                                                                                                               
+        if((isset($afficher_profil['statut'])||$afficher_profil['statut']==NULL) && $afficher_profil['statut']<3){
                 ?>
                 <input type="submit" name="user-bloquer" value="Bloquer" class="follow-btn">
                 <?php
         }
         else if(isset($afficher_profil['statut']) && $afficher_profil['statut'] == 3 && $afficher_profil['id_demandeur'] == $id_demandeur){
-            echo "bloqué la";
+            echo "<div>Vous avez bloqué cet utilisateur</div>";
                 ?>
                 <input type="submit" name="user-debloquer" value="Débloquer" class="follow-btn">
                 <?php
         }
-        else{
+        
+                ?>
+                <?php
+    
+    }
+    else if($afficher_profil['id_bloqueur']==$id_receveur){
                 ?>
                 <div>Vous avez été bloqué par cet utilisateur</div>
                 <?php
-        }
+    }
                 ?>
             </form>
             
