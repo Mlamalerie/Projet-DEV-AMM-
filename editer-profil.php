@@ -103,7 +103,7 @@ if(!empty($_POST)){
                 $req->execute(array($pseudo));
                 $user = $req->fetch();
 
-                if(isset($user['user_id'])){
+                if(isset($user['user_id']) && strtolower($user['user_id']) == strtolower($basepseudo) ) {
                     $ok = false;
                     $err_pseudo = "Ce pseudo est déjà pris ! Choisissez en un autre. ";
                 }

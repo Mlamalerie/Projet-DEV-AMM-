@@ -914,8 +914,10 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                                         <script >
                                             function go2inputSend(id1beat) { // ajout et enlever dans la value de l'inot
-                                                "sendbeatspanier"
-                                                value += // 2-4-5-6-7-55
+                                                let input = document.getElementById("sendbeatspanier");
+                                                
+                                                
+                                                input.value += '.'
                                                 
                                             }
                                             function majBDDPanier() {
