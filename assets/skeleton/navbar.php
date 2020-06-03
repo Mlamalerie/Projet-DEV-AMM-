@@ -1,4 +1,3 @@
-
 <?php $jesuissurindex = $_SESSION['ici_index_bool']; ?>
 
 
@@ -106,7 +105,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <button class="nav-link btn" href="#" data-toggle="modal" data-target="#ModalPanier" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> Panier </button>
+                    <button class="nav-link btn" data-toggle="modal" data-target="#ModalPanier" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> Panier </button>
                 </li>
 
 

@@ -522,7 +522,7 @@ $_SESSION['ici_index_bool'] = true;
 
 
         <?php
-        //require_once('assets/skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.php');
         ?>
         <!--     RECHERCHE  -->
 
