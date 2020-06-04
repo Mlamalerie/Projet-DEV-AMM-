@@ -550,6 +550,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                                     ?> 
                                     <tr>
+                                       
 
                                         <th scope='row' class='border-0'>
                                             <div class='p-2'>
@@ -950,8 +951,15 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                                                     </div>
                                                     <!--                                                    -->
+                                                    
                                                     <div class="ml-3 d-inline-block align-middle " >
-                                                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle"><?=$r['beat_title']?></a></h5><span class="text-muted font-weight-normal font-italic d-block"><?=$r['beat_author']?></span>
+                                                        <h5 class="mb-0"> <a href="view-beat.php?id=<?= $r['beat_id']?>" class="text-dark d-inline-block align-middle"><?=$r['beat_title']?></a>
+                                                        </h5>
+                                                        
+                                                        <a href="profils.php?profil_id=<?= $r['beat_author_id']?>" class="text-dark d-inline-block align-middle"><span class="text-muted font-weight-normal font-italic d-block">
+                                                            <?=$r['beat_author']?>
+                                                        </span>
+                                                        </a>
                                                     </div>
                                                 </div>
 
@@ -1141,14 +1149,20 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     </form>
                     <?php } ?>
                     <div id="resultuser"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : blue;">
-                        <?php  if (isset($resuUSERS)) {foreach($resuUSERS as $r){ ?>
+                        <?php  if (isset($resuUSERS)) {
+                                    foreach($resuUSERS as $r){ ?>
+                        
+                        <?php           if ($r['user_id']!=$_SESSION['user_id']){?>
+                        
                         <!-- Team item-->
                         <div class="col-xl-3 col-sm-6 mb-5 text-center">
 
-                            <div class="bg-white rounded shadow-sm py-3 px-3"><img src="<?=$r['user_image'] ?> " alt=""  class="img-fluid roundedImage mb-3 img-thumbnail shadow-sm">
-                                <h5 class="mb-0"><?=$r['user_pseudo'] ?> </h5>
+                            <div class="bg-white rounded shadow-sm py-3 px-3"><a href="profils.php?profil_id=<?= $r['user_id']?>">
+                               <img src="img/<?=$r['user_image'] ?>" alt=""  class="img-fluid roundedImage mb-3 img-thumbnail shadow-sm">
+                                <h5 class="mb-0"><a href="profils.php?profil_id=<?= $r['user_id']?>"><?=$r['user_pseudo'] ?></a></h5>
                                 <span class="small  text-muted"><?=$r['user_ville'] ?>
                                     <span class="text-uppercase ">
+                                       
                                         <?php
 
     //*** Verification du Pays
@@ -1164,13 +1178,14 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                     </span>
                                 </span>
 
-
+                                </a>
                             </div>
                         </div>
 
+                        <?php            } ?>
 
-
-                        <?php }} ?>
+                        <?php        }
+                                } ?>
 
 
 

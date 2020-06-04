@@ -46,7 +46,7 @@ if(!empty($_POST)){
         else if (ctype_digit($pseudo)) {
 
             $ok = false;
-            $err_pseudo = "Vous êtes obliger de mettre au moins une lettre dans votre pseudo";
+            $err_pseudo = "Vous êtes obligé de mettre au moins une lettre dans votre pseudo";
         }
         
         else if (substr_count($pseudo, ' ') >= 3) {
@@ -62,7 +62,7 @@ if(!empty($_POST)){
         else if (strlen($pseudo) > 25) {
 
             $ok = false;
-            $err_pseudo = "Ce pseudo est trop grand ! Vous avez ".(strlen($pseudo) - 25)." caractère en trop";
+            $err_pseudo = "Ce pseudo est trop grand ! Vous avez ".(strlen($pseudo) - 25)." caractère(s) en trop";
         }
 
         else { // ensuite on verifie si ce pseudo existe déja ou pas
@@ -75,7 +75,7 @@ if(!empty($_POST)){
 
             if(isset($user['user_id'])){
                 $ok = false;
-                $err_pseudo = "Ce pseudo est déjà pris ! Choisissez en un autre. ";
+                $err_pseudo = "Ce pseudo est déjà pris ! Choisissez-en un autre. ";
             }
         }
         //*** Verification du mot de passe
@@ -94,7 +94,7 @@ if(!empty($_POST)){
 
         } else if ($motdepasse != $motdepasseverif && $ok){
             $ok = false;
-            $err_motdepasse = "Vous n'avez pas rentréee le même mot de passe !";
+            $err_motdepasse = "Vous n'avez pas rentré le même mot de passe !";
         }
 
         //*** Verification du mail
@@ -132,7 +132,7 @@ if(!empty($_POST)){
         } else if (!ctype_alpha(implode("",explode(' ',$ville)))) {
 
             $ok = false;
-            $err_ville = "Veuilez saisir uniquement des lettres (sans accent)";
+            $err_ville = "Veuillez saisir seulement des lettres sans caractères spéciaux et sans chiffres";
         }
 
         //*** Verification du Pays
@@ -381,7 +381,7 @@ if(!empty($_POST)){
                                             <button type="submit" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="inscription">C'est parti</button>
                                         </div>
                                     </form>
-                                    <p class="text-muted mb-4">Vous avez déjà un compte ? <a href="connexion.php">Connectez vous</a></p>
+                                    <p class="text-muted mb-4">Avez-vous déjà un compte ? <a href="connexion.php">Connectez-vous</a></p>
                                 </div>
                             </div>
                         </div><!-- End -->
