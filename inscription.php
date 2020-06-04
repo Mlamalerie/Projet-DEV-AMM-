@@ -94,7 +94,7 @@ if(!empty($_POST)){
 
         } else if ($motdepasse != $motdepasseverif && $ok){
             $ok = false;
-            $err_motdepasse = "Vous n'avez pas rentréee le mm mot de passeverif !";
+            $err_motdepasse = "Vous n'avez pas rentréee le même mot de passe !";
         }
 
         //*** Verification du mail
@@ -116,7 +116,7 @@ if(!empty($_POST)){
 
             if(isset($user['user_id'])){
                 $ok = false;
-                $err_email = "Cette e-mail existe déjé !";
+                $err_email = "Cet e-mail existe déjà !";
             }
         }
 
@@ -128,11 +128,11 @@ if(!empty($_POST)){
         } else if (strlen($ville) < 3) {
 
             $ok = false;
-            $err_ville = "Ce ville est trop petit !";
+            $err_ville = "Cette ville est trop petit !";
         } else if (!ctype_alpha(implode("",explode(' ',$ville)))) {
 
             $ok = false;
-            $err_ville = "Veuilez saisir seulement des lettres sans accent";
+            $err_ville = "Veuilez saisir uniquement des lettres (sans accent)";
         }
 
         //*** Verification du Pays
@@ -222,9 +222,9 @@ if(!empty($_POST)){
                                 <div class="col-lg-10 col-xl-7 mx-auto">
 
                                     <a href="index.php"><img class="iconLOGO" src="assets/img/icon/compact-disc.svg" type="image/svg+xml"></a>
-                                    <h3 class="display-4 text-center">Inscription.</h3>
+                                    <h3 class="display-4 text-center">Inscription</h3>
 
-                                    <p class="text-muted mb-4 "><span class="topics"></span> Créez un compte WeBeats et commencez à vendre vos composition !</p>
+                                    <p class="text-muted mb-4 "><span class="topics"></span> Créez un compte WeBeats pour commncer à acheter de Beats et vendre les vôtres !</p>
 
 
                                     <form method="post">
@@ -318,7 +318,7 @@ if(!empty($_POST)){
                                                 <label for="ville"> Ville </label>
                                             </div>
 
-                                            <input type="text" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ville" name="ville" placeholder="Ou habiter vous ?"  value="<?php if(isset($ville)){echo $ville;}?>" autofocus>
+                                            <input type="text" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ville" name="ville" placeholder="Où habitez-vous ?"  value="<?php if(isset($ville)){echo $ville;}?>" autofocus>
                                             <?php
                                             if(isset($err_ville)){
                                                 echo "<span class='spanAlertchamp'> ";

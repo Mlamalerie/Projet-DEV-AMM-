@@ -76,13 +76,13 @@ if(!empty($_POST)){
             else if (ctype_digit($pseudo)) {
 
                 $ok = false;
-                $err_pseudo = "Vous êtes obliger de mettre au moins une lettre dans votre pseudo";
+                $err_pseudo = "Le pseudo doit contenir au moins une lettre";
             }
 
             else if (substr_count($pseudo, ' ') >= 3) {
 
                 $ok = false;
-                $err_pseudo = "Votre pseudo ne peut contenir au plus 2 espaces";
+                $err_pseudo = "Votre pseudo ne peut contenir plus de 2 espaces";
             }
             else if (!ctype_alnum(implode("",explode(' ',$pseudo)))) {
 
@@ -92,7 +92,7 @@ if(!empty($_POST)){
             else if (strlen($pseudo) > 25) {
 
                 $ok = false;
-                $err_pseudo = "Ce pseudo est trop grand ! Vous avez saisie ".(strlen($pseudo) - 25)." caractère en trop";
+                $err_pseudo = "Ce pseudo est trop grand ! Vous avez saisi ".(strlen($pseudo) - 25)." caractère(s) de trop";
             }
 
             else { // ensuite on verifie si ce pseudo existe déja ou pas
@@ -117,7 +117,7 @@ if(!empty($_POST)){
             if (strlen(implode("",explode(' ',$description))) > 140) {
 
                 $ok = false;
-                $err_description = "TRop grand";
+                $err_description = "Trop grand";
             }
         }
 
@@ -178,11 +178,11 @@ if(!empty($_POST)){
 
         if(empty($votremotdepasse4email)) { // si vide
             $ok = false;
-            $err_votremotdepasse4email = "Veuillez renseigner ce champ après avoir saisie votre nouvel email !";
+            $err_votremotdepasse4email = "Veuillez renseigner ce champ après avoir saisi votre nouvel email !";
 
         } else if (crypt($votremotdepasse4email, '$6$rounds=5000$grzgirjzgrpzhte95grzegruoRZPrzg8$') != $basemotdepasse) {
             $ok = false;
-            $err_votremotdepasse4email = "Vous n'aviez pas bien saisie votre mot de passe ! Resaisissez un email puis le bon mot de passe cette fois ci...";
+            $err_votremotdepasse4email = "Vous n'aviez pas bien saisi votre mot de passe ! Veuillez ressaisir un email et votre mot de passe";
         }
 
 
@@ -234,7 +234,7 @@ if(!empty($_POST)){
         } else{
             $ok = false;
             $oknewmdpnotsame = false;
-            $err_nouveaumotdepasse = "Euh chakal c'est le mmmot de passe";
+            $err_nouveaumotdepasse = "Mot de passe identique !";
             //mettre icon qui change en ampoule
 
         }
@@ -291,7 +291,7 @@ if(!empty($_POST)){
             if (strlen($prenom) > 30) {
 
                 $ok = false;
-                $err_prenom = "Ce pseudo est trop grand ! Il y a ".(strlen($prenom) - 30)." caractère en trop";
+                $err_prenom = "Ce pseudo est trop grand ! Il y a ".(strlen($prenom) - 30)." caractère(s) en trop";
             }else if(!ctype_alpha(implode("",explode(' ',$prenom)))){
                 $ok = false;
                 $err_prenom = "Pas de chiffre !";
@@ -306,7 +306,7 @@ if(!empty($_POST)){
             if (strlen($nom) > 30) {
 
                 $ok = false;
-                $err_nom = "Ce nom est trop grand ! Il y a ".(strlen($nom) - 30)." caractère en trop";
+                $err_nom = "Ce nom est trop grand ! Il y a ".(strlen($nom) - 30)." caractère(s) en trop";
             }else if(!ctype_alpha(implode("",explode(' ',$nom)))){
                 $ok = false;
                 $err_nom = "Pas de chiffre !";
@@ -325,7 +325,7 @@ if(!empty($_POST)){
             if (!checkdate($dateuh[1], $dateuh[2], $dateuh[0])) {
 
                 $ok = false;
-                $err_datenaissance = "Date fausse";
+                $err_datenaissance = "Date incorrecte";
             } 
 
         } 
@@ -345,7 +345,7 @@ if(!empty($_POST)){
             } else if (!ctype_alpha(implode("",explode(' ',$ville)))) {
 
                 $ok = false;
-                $err_ville = "Veuilez saisir seulement des lettres sans acents";
+                $err_ville = "Veuilez saisir uniquement des lettres (sans acents)";
             }
         }
 
@@ -431,6 +431,7 @@ if(!empty($_POST)){
     </head>
     <body>
 
+
         <div class="container py-5">
             <!-- For demo purpose -->
             <div class="row mb-1">
@@ -463,7 +464,7 @@ if(!empty($_POST)){
 
                                  }
                                  else if ($destination == "error2") {
-                                     $err_uploadimage = "ERREUR : Pour des raisons inconnues votre image n'a pas été uploader";
+                                     $err_uploadimage = "ERREUR : Image non sauvegardée...";
 
                                  } else {
                                      $toutestbonimage = true;
@@ -504,7 +505,7 @@ if(!empty($_POST)){
                     if($toutestbonimage){ 
                     ?>
                     <div class="divDone">
-                        <span class="spanDone"> Vos modifications ont bien été enregistrer. </span>
+                        <span class="spanDone"> Vos modifications ont bien été enregistrées. </span>
                         <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
                     </div>
                     <?php
@@ -590,7 +591,7 @@ if(!empty($_POST)){
                             if($toutestboninfoprofil){ 
                             ?>
                             <div class="divDone">
-                                <span class="spanDone"> Vos modifications ont bien été enregistrer </span>
+                                <span class="spanDone"> Vos modifications ont bien été enregistrées </span>
                                 <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
                             </div>
                             <?php
@@ -626,7 +627,7 @@ if(!empty($_POST)){
 
                                 <div class="row">
                                     <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                    <label for="votremotdepasse4email"> saisir Mot de passe </label>
+                                    <label for="votremotdepasse4email"> Saisir Mot de passe </label>
                                 </div>
                                 <input onkeyup="goBtnSave(this,2)" type="password" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="votremotdepasse4email" name="votremotdepasse4email" placeholder="" autofocus  disabled>
 
@@ -648,7 +649,7 @@ if(!empty($_POST)){
                         if($toutestbonemail){ 
                         ?>
                         <div>
-                            <span class="spanDone"> Vos modifications ont bien été enregistrer </span>
+                            <span class="spanDone"> Vos modifications ont bien été enregistrées</span>
                             <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
                         </div>
                         <?php
@@ -683,7 +684,7 @@ if(!empty($_POST)){
 
                                 <div class="row">
                                     <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                    <label for="nouveaumotdepasse"> nouveau Mot de passe </label>
+                                    <label for="nouveaumotdepasse"> Nouveau Mot de passe </label>
                                 </div>
                                 <input onkeyup="goBtnSave(this,3)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="nouveaumotdepasse" name="nouveaumotdepasse" placeholder="" autofocus >
                                 <?php
@@ -706,7 +707,7 @@ if(!empty($_POST)){
                         if($toutestbonmdp){ 
                         ?>
                         <div>
-                            <span class="spanDone"> Vos modifications ont bien été enregistrer </span>
+                            <span class="spanDone"> Vos modifications ont bien été enregistrées </span>
                             <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
                         </div>
                         <?php
@@ -868,7 +869,7 @@ if(!empty($_POST)){
                         if($toutestboninfoperso){ 
                         ?>
                         <div>
-                            <span class="spanDone"> Vos modifications ont bien été enregistrer </span>
+                            <span class="spanDone"> Vos modifications ont bien été enregistrées </span>
                             <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
                         </div>
                     </div>
