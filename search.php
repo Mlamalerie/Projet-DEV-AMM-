@@ -930,9 +930,9 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                                     }
                                                 ?>
                                                 <?php if ($oktaliker) { ?>
-                                                <span onclick="goLikeuh(this)" class="text-dark coeur_active"><i class="fas fa-heart"></i></span>
+                                                <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class="text-dark coeur_active"><i class="fas fa-heart"></i></span>
                                                 <?php    } else { ?> 
-                                                <span onclick="goLikeuh(this)" class="text-dark"><i class="far fa-heart"></i></span>
+                                                <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class="text-dark"><i class="far fa-heart"></i></span>
                                                 <?php } ?>
                                             </td>
                                             <?php } ?>
@@ -1059,7 +1059,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                             } 
 
                                             function liker(modemode,idbeat) {
-                                                console.logBDD("ajoutBDD");
+                                                console.log("liker");
                                                 var xmlhttp = new XMLHttpRequest();
 
                                                 let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
@@ -1072,7 +1072,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 xmlhttp.send();
                                             }
 
-                                            function goLikeuh(bay) {
+                                            function goLikeuh(bay,idbeat) {
                                                 console.log(bay);
                                                 console.log();
                                                 let coeur_1 =" <svg class='svg-inline--fa fa-heart fa-w-16' aria-hidden='true' focusable='false' data-prefix='fas' data-icon='heart' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' data-fa-i2svg=''><path fill='currentColor' d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'></path></svg>";
@@ -1082,11 +1082,13 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 if(bay.classList.contains('coeur_active')) {
                                                     bay.innerHTML = "<i class='far fa-heart'></i>";
                                                     bay.classList.remove('coeur_active');
+                                                    liker("dislikedislike",idbeat) ;
 
 
                                                 } else {
                                                     bay.innerHTML = "<i class='fas fa-heart'></i>"
                                                     bay.classList.add('coeur_active');
+                                                    liker("dlikedlike",idbeat) ;
                                                 }
                                             }
 
