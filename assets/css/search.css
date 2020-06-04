@@ -4,15 +4,21 @@
     
 }
  
+:root{
+    --taille-img : 80px;
+    
+}
 /* PETIT MUSIC CARD */
-.hover { 
-    height: 90%; 
-  width: 90%;
+.hover {  
+    height: var(--taille-img ); 
+  width: var(--taille-img );  
   overflow: hidden;
   position: relative;
-  padding-bottom: 60%;
+  padding-bottom: var(--taille-img ); 
+    
+    
 } 
-
+ 
 .hover-overlay {
   width: 100%;
   height: 100%;
@@ -53,13 +59,15 @@
   background: rgba(0, 0, 0, 0.8);
 }
 
+/*
 .hover-5:hover .hover-5-title {
   bottom: 0;
-}
+} 
 
 .hover-5:hover::after {
   bottom: 0;
 }
+*/
 
 .link_icon{/*bloc contenant le play*/
     position: absolute;
@@ -73,18 +81,24 @@
     z-index: 100;
 }
 
-.fa-play-circle{/*le play caché*/
-    font-size: 50px;
-    color: rgba(121, 6, 247, 0.9);
+.playplay-btn{/*le play caché*/
+    display:block;
+    margin:auto;
+     
+    font-size: 40px;
+    color: rgba(121, 6, 247, 0.9); 
     opacity: 0;
 }
 
-.fa-play-circle:hover{/*le play apparait qd on passe dessus*/
-    font-size: 50px;
-    color: rgba(121, 6, 247, 0.9);
+.playplay-btn:hover{/*le play apparait qd on passe dessus*/
+    display:block;
+    margin:auto;
+    margin-top: 10%;
+    font-size: 40px;
+    color: #ff0000;
     opacity: 1;
     z-index: 100;
-}
+} 
 
 
 
