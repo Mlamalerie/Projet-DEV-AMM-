@@ -1,4 +1,5 @@
 
+
 <?php $jesuissurindex = $_SESSION['ici_index_bool']; 
 
 // si je detecte une connexion alors
@@ -8,6 +9,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
 }
 
 ?>
+
 
 
 <div class="boxnav">
@@ -30,29 +32,40 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
 
         if (!$jesuissurindex) { ?>
         <form id="searchform" method="get" action="search.php">
-            <div class="input-group searchbar">
+            <div class="input-group">
 
-                <select name="Type" class="custom-select ">
-
-                    <option value="beats" class="dropdown-item">All beats</option>
+                <div class="input-group mb-4 border rounded-pill p-1">
 
 
-                    <option value="users" class="dropdown-item">All users </option>
 
 
-                </select>
+                    <div class="input-group-prepend border-0">
+
+                        <select name="Type" class="custom-select ">
+
+                            <option value="beats" class="dropdown-item">All beats</option>
 
 
-                <input id='searchbar' class="search_input form-control  mr-sm-" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
+                            <option value="users" class="dropdown-item">All users </option>
 
-                <div class="input-group-append">
-                    <button onclick="goSearch()" href="#" class="search_icon"><i class="fas fa-search"></i></button>
+
+                        </select>
+
+                        <button onclick="goSearch()" id="button-search" type="button" class="btn btn-link text-info search_icon"><i class="fa fa-search"></i></button>
+                    </div>
+                    <input id='searchbar'
+                           type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-describedby="button-search" class="form-control searchbar bg-none border-0">
                 </div>
+
+
+
 
 
 
             </div>
         </form>
+
+
 
 
         <?php  
@@ -72,6 +85,8 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
                 if($connect){
 
                 ?>
+
+
                 <li class="nav-item ">
                     <a class="nav-link btn" href="messagerie.php">Messagerie<span class="sr-only">(current)</span></a>
                 </li>
@@ -101,7 +116,9 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
                 </li>
 
                 <li class="nav-item">
+
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#ModalPanier" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> <span id="span_nb_panier" class="badge badge-primary px-2 rounded-pill ml-2"></span> </button>
+
                 </li>
 
 

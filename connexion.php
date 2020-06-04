@@ -60,7 +60,7 @@ if(!empty($_POST)){
 
         if(!isset($verif_user['user_id'])) {
             $ok = false;
-            $err_email = "tu mens";
+            $err_email = " Adresse e-mail ou mot de passe invalide";
 
         }
 
@@ -131,7 +131,7 @@ if(!empty($_POST)){
                             <div class="row">
                                 <div class="col-lg-10 col-xl-7 mx-auto">
                                     <h3 class="display-4">Connexion</h3>
-                                    <p class="text-muted mb-4">Create a login split page using Bootstrap 4.</p>
+                                    <p class="text-muted mb-4">Connectez-vous pour accéder à des fonctionnalités supplémentaires !</p>
                                     <form method="post">
 
 
@@ -147,7 +147,7 @@ if(!empty($_POST)){
                                             ?>
                                             <label for="email">Votre Adresse Email</label>
                                             <input type="email" class="form-control rounded-pill border-0 shadow-sm px-4" id="email" name="email" aria-describedby="emailHelp" placeholder="Tapez votre e-mail" value="<?php if(isset($email)){echo $email;}?>">
-                                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            <small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre.</small>
                                         </div>
                                         <!--MOT DE PASSE-->
                                         <div class="form-group">
@@ -167,7 +167,7 @@ if(!empty($_POST)){
 
 
 
-                                        <button type="submit" class="btn btn-primary" name="connexion">Submit</button>
+                                        <button type="submit" class="btn btn-primary" name="connexion">Connectez-vous</button>
                                     </form>
                                     <p class="text-muted mb-4">Vous n'avez pas de compte ? <a href="inscription.php">Inscrivez vous</a></p>
                                 </div>
