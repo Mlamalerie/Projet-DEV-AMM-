@@ -2,6 +2,8 @@
 session_start();
 include_once("assets/db/connexiondb.php"); // inclure le fichier pour se connecter à la base de donnée
 $_SESSION['ici_index_bool'] = false;
+
+
 ?>
 
 

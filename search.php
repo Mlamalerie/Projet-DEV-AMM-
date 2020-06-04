@@ -427,111 +427,15 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
         <title>Search</title>
     </head>
-    <body onload=" refreshNbPanier() ">
+    <body onload=" refreshNbPanier();refreshAllBeats() ">
+
+
 
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
         <?php
         require_once('assets/skeleton/navbar.php');
         ?>
-
-
-
-        <!--   *************************************************************  -->
-        <!--   ************************** MODAL PANIER  **************************  -->
-        <div class="modal fade" id="ModalPanier" tabindex="-1" role="dialog" aria-labelledby="ModalPanierLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ModalPanierLabel">Panier WeBeats</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span class="croixquit d-flex justify-content-center rounded" aria-hidden="true"><i class="fas fa-times"></i></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="table-responsive">
-
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="p-2 px-3 text-uppercase">Product</div>
-                                        </th>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Price</div>
-                                        </th>
-                                        <th scope="col" class="border-0 bg-light">
-                                            <div class="py-2 text-uppercase">Remove</div>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <?php if($okconnectey) { ?>
-                                <tbody id="tbodypanier">
-                                    <?php 
-    $req = $BDD->prepare("SELECT *
-                            FROM panier
-                            WHERE panier_user_id = ?");
-    $req->execute(array($_SESSION['user_id']));
-    $resuPANIER = $req->fetchAll();
-
-    foreach($resuPANIER as $p) {
-
-        $req = $BDD->prepare("SELECT *
-                                            FROM beat
-                                            WHERE beat_id = ?");
-        $req->execute(array($p['panier_beat_id']));
-        $resuPAN = $req->fetchAll();
-
-        foreach($resuPAN as $b) {
-
-
-
-
-                                    ?> 
-                                    <tr>
-
-
-                                        <th scope='row' class='border-0'>
-                                            <div class='p-2'>
-                                                <img src='<?=$b['beat_cover'] ?>' alt='' width='70' class='img-fluid rounded shadow-sm'>
-                                                <div class='ml-3 d-inline-block align-middle'> <h5 class='mb-0'> <a href='#' class='text-dark d-inline-block align-middle'><?=$b['beat_title'] ?></a></h5> <span class='text-muted font-weight-normal font-italic d-block'><?=$b['beat_author'] ?></span> 
-                                                </div>
-                                            </div>
-                                        </th>
-                                        <td class='border-0 align-middle'><strong><?php if($b['beat_price'] != 0.00) { echo $b['beat_price']; } else { echo "FREE";} ?></strong></td>
-                                        <td class='border-0 align-middle'>
-                                            <span class='text-dark' onclick="suppr2Panier(this,'<?=$b['beat_price'] ?>','<?=$b['beat_id'] ?>');"><i class='fa fa-trash'></i></span>
-                                        </td>
-                                    </tr>
-                                    <?php
-
-        }
-    }
-
-
-                                    ?>
-
-                                    <?php    } ?>
-
-                                </tbody>
-                            </table>
-
-                        </div>
-
-
-
-                    </div>
-                    <div class="modal-footer" >
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
 
         <div class="rounded container-fluid mb-0">
             <div class="row ">
@@ -917,7 +821,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                             <?php if($okconnectey) { ?>
                                             <td class="border-0 align-middle">
 
-                                                <?=$r['beat_like']?>
+                                                <span id="span_nbLike-<?=$r['beat_id']?>"><?=$r['beat_like']?></span>
 
                                                 <?php
                                             $oktaliker = false;
@@ -993,6 +897,8 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                         ?>
                                         <script >
+
+
                                             function affichePasserCommande(ok){
                                                 let mdf = document.getElementsByClassName('modal-footer');
                                                 let aa = document.getElementById("passercommandes");
@@ -1058,12 +964,50 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 window.location.replace("connexion.php");
                                             } 
 
+                                            function refreshBeatBDD(idbeat) {
+                                                console.log("refreshliker");
+                                                var xmlhttp = new XMLHttpRequest();
+
+                                                let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
+                                                let ou = "refreshBDDbeat.php?qq=";
+
+                                                ou += idbeat.toString(); // id du beat
+                                                console.log(ou);
+                                                xmlhttp.open("GET",ou,true);
+                                                xmlhttp.send();
+                                            }
+
+
+
+                                            function refreshAllBeats(){
+
+                                                <?php
+                                                                      $req = $BDD->prepare("SELECT beat_id FROM beat ");
+                                                                      $req->execute(array());
+                                                                      $listeBeats = $req->fetchAll();
+
+                                                                      foreach($listeBeats as $b) {
+                                                                          
+                                                ?> 
+                                                refreshBeatBDD(<?= $b['beat_id']?>); 
+                                                <?php
+                                                                      }
+                                                ?>
+
+
+                                            }
+
+
+
+
+
+
                                             function liker(modemode,idbeat) {
                                                 console.log("liker");
                                                 var xmlhttp = new XMLHttpRequest();
 
                                                 let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
-                                                let ou = "goLikeBDD.php?qq="
+                                                let ou = "goLikeBDD.php?qq=";
                                                 ou += modemode; // mode like ou dislike
                                                 ou += "-" + idboug.toString();
                                                 ou += "-" + idbeat.toString(); // id du beat
@@ -1075,20 +1019,25 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                             function goLikeuh(bay,idbeat) {
                                                 console.log(bay);
                                                 console.log();
-                                                let coeur_1 =" <svg class='svg-inline--fa fa-heart fa-w-16' aria-hidden='true' focusable='false' data-prefix='fas' data-icon='heart' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' data-fa-i2svg=''><path fill='currentColor' d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'></path></svg>";
-                                                let coeur_0 = "<svg class='svg-inline--fa fa-heart fa-w-16' aria-hidden='true' focusable='false' data-prefix='far' data-icon='heart' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' data-fa-i2svg=''><path fill='currentColor' d='M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z'></path></svg>";
+                                                let spannb = document.getElementById('span_nbLike-'+idbeat);
+                                                let n = spannb.innerHTML;
+                                                console.log(n);
 
                                                 // si le bay est liker
                                                 if(bay.classList.contains('coeur_active')) {
                                                     bay.innerHTML = "<i class='far fa-heart'></i>";
                                                     bay.classList.remove('coeur_active');
                                                     liker("dislikedislike",idbeat) ;
+                                                    refreshBeatBDD(idbeat);
+                                                    spannb.innerHTML = parseInt(n) - 1;
 
 
                                                 } else {
                                                     bay.innerHTML = "<i class='fas fa-heart'></i>"
                                                     bay.classList.add('coeur_active');
-                                                    liker("dlikedlike",idbeat) ;
+                                                    liker("likelike",idbeat);
+                                                    refreshBeatBDD(idbeat);
+                                                    spannb.innerHTML = parseInt(n) + 1;
                                                 }
                                             }
 
@@ -1110,7 +1059,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 var xmlhttp = new XMLHttpRequest();
 
                                                 let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
-                                                let ou = "deletePanierBDD.php?qq="
+                                                let ou = "deletePanierBDD.php?qq=";
                                                 ou += idboug.toString();
                                                 ou += "-" + idbeat.toString();
                                                 console.log(ou);

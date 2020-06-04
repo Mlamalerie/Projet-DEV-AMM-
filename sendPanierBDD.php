@@ -3,18 +3,38 @@
 <?php
 include_once("assets/db/connexiondb.php");
 $qq = explode('-',$_GET['qq']);
-// id du boug
-$idboug = intval($qq[0]);$idbeat = intval($qq[1]);
+
+$idboug = intval($qq[0]);
+$idbeat = intval($qq[1]);
 
 $ok = true;
 
-if (($idboug < 1)){ // si pas positif et si pas chiffre
-    $ok = false;
-} 
-if (($idbeat < 1)){
-    $ok = false;
-} 
+//*** Verification du boug
+$req = $BDD->prepare("SELECT user_pseudo 
+                            FROM user
+                            WHERE user_id = ?");
+$req->execute(array($idboug));
+$verif_bg = $req->fetch();
 
+if(!isset($verif_bg['user_pseudo'])){  
+    echo "#bougexistepas#";
+    $ok = false;
+
+}
+
+
+//*** Verification du beat
+$req = $BDD->prepare("SELECT beat_title 
+                            FROM beat
+                            WHERE beat_id = ?");
+$req->execute(array($idbeat));
+$verif_b = $req->fetch();
+
+if(!isset($verif_b['beat_title'])){  
+    echo "#beatexistepas#";
+    $ok = false;
+
+}
 { // ensuite on verifie si ce beat est deja dans panier
     $req = $BDD->prepare("SELECT id
                             FROM panier
@@ -25,7 +45,7 @@ if (($idbeat < 1)){
 
     if(isset($p['id'])){
         $ok = false;
-        echo "Cette beat existe déjé !";
+        echo "Cette beat est déjà dans le panier !";
     }
 }
 

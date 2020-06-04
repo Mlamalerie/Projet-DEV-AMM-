@@ -7,12 +7,39 @@ $mode = $qq[0]; $idboug = intval($qq[1]);$idbeat = intval($qq[2]);
 
 $ok = true;
 
-//if (($mode != 1)){ // si pas positif et si pas chiffre
-//    $ok = false;
-//} 
-if (($idbeat < 1)){
+//*** verif mode
+if($mode != 'likelike' && $mode != "dislikedislike"){  
+    echo "#modeexistepas#";
     $ok = false;
-} 
+
+}
+
+//*** Verification du boug
+$req = $BDD->prepare("SELECT user_pseudo 
+                            FROM user
+                            WHERE user_id = ?");
+$req->execute(array($idboug));
+$verif_bg = $req->fetch();
+
+if(!isset($verif_bg['user_pseudo'])){  
+    echo "#bougexistepas#";
+    $ok = false;
+
+}
+
+
+//*** Verification du beat
+$req = $BDD->prepare("SELECT beat_title 
+                            FROM beat
+                            WHERE beat_id = ?");
+$req->execute(array($idbeat));
+$verif_b = $req->fetch();
+
+if(!isset($verif_b['beat_title'])){  
+    echo "#beatexistepas#";
+    $ok = false;
+
+}
 
 
 if($mode == "likelike") {
@@ -26,7 +53,7 @@ if($mode == "likelike") {
 
     if(isset($p['id'])){
         $ok = false;
-        echo "Cette beat existe déjé !";
+        echo "Cette beat est deja liké !";
     }
 }
 
@@ -48,7 +75,7 @@ if($mode == "likelike") {
 
     if(!isset($p['id'])){
         $ok = false;
-        echo "Cette beat existe pas !";
+        echo "Cette beat n'est pas liké donc tu veux quoi ?";
     }
 }
 

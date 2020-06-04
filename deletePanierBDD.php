@@ -4,18 +4,12 @@
 include_once("assets/db/connexiondb.php");
 $qq = explode('-',$_GET['qq']);
 // id du boug
-$idboug = intval($qq[0]);$idbeat = intval($qq[1]);
+$idboug = intval($qq[0]);
+$idbeat = intval($qq[1]);
 
 $ok = true;
 
-if (($idboug < 1)){ // si pas positif et si pas chiffre
-    $ok = false;
-} 
-if (($idbeat < 1)){
-    $ok = false;
-} 
-
-{ // ensuite on verifie si ce beat existe
+{ // ensuite on verifie si ce beat et est dans le panier existe
     $req = $BDD->prepare("SELECT id
                             FROM panier
                             WHERE panier_user_id = ? AND panier_beat_id = ?
@@ -25,7 +19,7 @@ if (($idbeat < 1)){
 
     if(!isset($p['id'])){
         $ok = false;
-        echo "Cette beat existe pas";
+        echo "Cette beat n'est pas dans le panier";
     }
 }
 
