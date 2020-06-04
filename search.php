@@ -516,6 +516,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     <div class="modal-body">
 
                         <div class="table-responsive">
+
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -531,6 +532,43 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                     </tr>
                                 </thead>
                                 <tbody id="tbodypanier">
+                                    <?php 
+                                    $req = $BDD->prepare("SELECT *
+                            FROM panier
+                            WHERE panier_user_id = ?");
+                                    $req->execute(array($_SESSION['user_id']));
+                                    $resuPANIER = $req->fetchAll();
+
+                                    foreach($resuPANIER as $p) {
+
+                                        $req = $BDD->prepare("SELECT *
+                                            FROM beat
+                                            WHERE beat_id = ?");
+                                        $req->execute(array($p['panier_beat_id']));
+                                        $resuPAN = $req->fetchAll();
+                                        foreach($resuPAN as $b) {
+
+
+                                    ?> 
+                                    <tr>
+
+                                        <th scope='row' class='border-0'>
+                                            <div class='p-2'>
+                                                <img src='<?=$b['beat_cover'] ?>' alt='' width='70' class='img-fluid rounded shadow-sm'>
+                                                <div class='ml-3 d-inline-block align-middle'> <h5 class='mb-0'> <a href='#' class='text-dark d-inline-block align-middle'><?=$b['beat_title'] ?></a></h5> <span class='text-muted font-weight-normal font-italic d-block'><?=$b['beat_author'] ?></span> 
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td class='border-0 align-middle'><strong><?=$b['beat_price'] ?></strong></td>
+                                        <td class='border-0 align-middle'>
+                                            <span class='text-dark' onclick="suppr2Panier(this,'<?=$b['beat_price'] ?>','<?=$b['beat_id'] ?>');"><i class='fa fa-trash'></i></span>
+                                        </td>
+                                    </tr>
+                                    <?php
+
+                                        }
+                                    }
+                                    ?>
 
 
                                 </tbody>
@@ -542,9 +580,8 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        <!--                        <a href="affichagepanier.php?action=add&id=<?php echo $row["id"]; ?>">-->
                         <button type="button" class="btn btn-primary">Valider</button>
-                        <!--                        </a>-->
+
                     </div>
                 </div>
             </div>
@@ -866,68 +903,182 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     </form>
                     <?php } ?>
 
-                    <?php
-                                                                      include("assets/functions/fctforaudioplayer.php");$test = returnMusicListStr("titles", $resuBEATS);print_r($test);
-                    ?>
 
-                    <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : blue;">
+
+                    <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100    bg-primary" >
 
                         <div class=" container-fluid ligneCardMusic">
-                            <?php
+
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <!--
+<tr>
+<th scope="col" class="border-0 bg-light">
+<div class="py-0  text-uppercase">n</div>
+</th>
+<th scope="col" class="border-0 bg-light">
+<div class="p-2 px-3 text-uppercase"> image</div>
+</th>
+
+<th scope="col" class="border-0 bg-light">
+<div class="py-2 text-uppercase">like</div>
+</th>
+<th scope="col" class="border-0 bg-light">
+<div class="py-2 text-uppercase">carte</div>
+</th>
+</tr>
+-->
+                                    </thead>
+                                    <tbody>
+                                        <?php
                                                                       if ($yadesresultatsBEATS) {
                                                                           $i = 1;
                                                                           foreach($resuBEATS as $r){
-                            ?>
-                            <div class="row justify-content-center p-0 mx-auto mb-2 rounded"  style="background-color : pink;">
-                                <?= $i ?>
+                                        ?>
+                                        <tr>
+                                            <td class="pr-0 border-0 align-middle"><strong><?= $i ?></strong></td>
+                                            <th scope="row" class="border-0 ">
+                                                <div class="p-0 ">
+                                                    <div class="hover hover-5 text-white rounded d-inline-block align-middle">
+                                                        <img src="<?=$r['beat_cover']?>" alt="" width="70" class="img-fluid rounded shadow-sm">
+                                                        <div class="hover-overlay d-inline-block"></div>
 
-                                <div class="col-sm-2 p-0  " style="background-color : red;">
-                                    <div class="">
-                                        <div class="hover hover-5 text-white rounded"><img src="<?=$r['beat_cover']?>" alt="">
-                                            <div class="hover-overlay"></div>
+                                                        <div class="link_icon" onclick="playPause(<?=$i-1 ?>)">
+                                                            <i class="fa fa-play-circle playplay-btn"></i>
+                                                        </div>
 
-                                            <div class="link_icon" onclick="playPause(<?=$i-1 ?>)">
-                                                <i class="far fa-play-circle"></i>
-                                            </div>
+                                                    </div>
+                                                    <!--                                                    -->
+                                                    <div class="ml-3 d-inline-block align-middle " >
+                                                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle"><?=$r['beat_title']?></a></h5><span class="text-muted font-weight-normal font-italic d-block"><?=$r['beat_author']?></span>
+                                                    </div>
+                                                </div>
 
-                                        </div>
-                                    </div>
+                                            </th>
 
-                                </div>
+                                            <td class="border-0 align-middle"><?=$r['beat_like']?><a href="#" class="text-dark"><i class="far fa-heart"></i></a></td>
+                                            <td class="border-0 align-middle">
 
-                                <div class=" d-flex col-sm-6 align-middle  " style="background-color : cyan; flex-direction : row;">
+                                                <button id='btnbeat-<?=$r['beat_id']?>' onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>','<?=$r['beat_id']?>');" class="btn btn-danger">
+                                                    <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup><?=$r['beat_price']?>€
+                                                </button>
 
-                                    <span class='TitleCardMusic'><?=$r['beat_title']?> - </span>
-                                    <span class='authorCardMusic'><?=$r['beat_author']?> / </span>
-                                    <span class='GenreCardMusic'><?=$r['beat_genre']?> </span>
-
-                                    <div style="background-color : green;"> 
-                                        <span> (<?=$r['beat_like']?> ) </span>
-
-
-                                        <button onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>'); this.value" class="btn btn-danger"> <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup> <?=$r['beat_price']?>€</button> 
-
-
-
+                                            </td>
 
 
-                                        ---
-                                        <?=$r['beat_dateupload']?>
-
-
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <?php
-                                $i++;
+                                        </tr>
+                                        <?php
+                                            $i++;
                                                                           }
                                                                       }
 
+                                        ?>
+                                        <script >
+                                            
+                                            function liker(idbeat) {
+                                                console.log("ajoutBDD");
+                                                var xmlhttp = new XMLHttpRequest();
 
-                            ?>
+                                                let idboug = <?= $_SESSION['user_id'] ?>; 
+                                                let ou = "sendPanierBDD.php?qq="
+                                                ou += idboug.toString(); // mode like ou dislike
+                                                ou += "-" + idbeat.toString(); // id du beat
+                                                console.log(ou);
+                                                xmlhttp.open("GET",ou,true);
+                                                xmlhttp.send();
+                                            }
+
+                                            function ajoutBDDPanier(idbeat) {
+                                                console.log("ajoutBDD");
+                                                var xmlhttp = new XMLHttpRequest();
+
+                                                let idboug = <?= $_SESSION['user_id'] ?>; 
+                                                let ou = "sendPanierBDD.php?qq="
+                                                ou += idboug.toString();
+                                                ou += "-" + idbeat.toString();
+                                                console.log(ou);
+                                                xmlhttp.open("GET",ou,true);
+                                                xmlhttp.send();
+                                            }
+
+                                            function supprBDDPanier(idbeat) {
+                                                console.log("supprBDD");
+                                                var xmlhttp = new XMLHttpRequest();
+
+                                                let idboug = <?= $_SESSION['user_id'] ?>; 
+                                                let ou = "deletePanierBDD.php?qq="
+                                                ou += idboug.toString();
+                                                ou += "-" + idbeat.toString();
+                                                console.log(ou);
+                                                xmlhttp.open("GET",ou,true);
+                                                xmlhttp.send();
+                                            }
+                                            function creer1TR(b_title,b_author,b_price,b_cover,idbeat) {
+                                                let tbody = document.getElementById('tbodypanier');
+                                                let strID =  b_title + b_author + b_price + b_cover;
+                                                strID = strID.trim();
+                                                console.log(strID);
+                                                let tr = document.createElement('tr');
+                                                let str = "<th scope='row' class='border-0'> <div class='p-2'> <img src='" + b_cover + "' alt='' width='70' class='img-fluid rounded shadow-sm'> <div class='ml-3 d-inline-block align-middle'> <h5 class='mb-0'> <a href='#' class='text-dark d-inline-block align-middle'>" + b_title + "</a></h5> <span class='text-muted font-weight-normal font-italic d-block'>" + b_author + "</span> </div></div></th><td class='border-0 align-middle'><strong>" + b_price + "</strong></td>";
+                                                str += "<td class='border-0 align-middle'><span class='text-dark'><i class='fa fa-trash'></i></span></td>";
+                                                // note : faire du css sur le span pour faire faux lien style
+                                                tr.innerHTML = str ;
+
+                                                tr.children[2].children[0].setAttribute('onclick','suppr2Panier(this,"' + b_price + '","' + idbeat + '");');
+                                                console.log('ùù');
+                                                tbody.appendChild(tr);
+                                                return strID;
+
+                                            }
+
+                                            function go2Panier(btn,b_title,b_author,b_price,b_cover,idbeat) {
+
+                                                let textIn = "Dans Panier";
+                                                console.log(btn.innerHTML , textIn, (btn.value != textIn))
+                                                // titre, prix
+
+                                                if (btn.innerHTML != textIn) {
+
+                                                    let strID = creer1TR(b_title,b_author,b_price,b_cover,idbeat)
+                                                    btn.innerHTML = textIn;
+                                                    //btn.id = strID;
+
+                                                    ajoutBDDPanier(idbeat);
+
+
+                                                    //                    btn.classList.add(strID);
+                                                } else {
+                                                    console.log('ee');
+
+                                                }
+
+
+                                            }
+                                            function suppr2Panier(icon,euro,idsuppr) {
+                                                console.log("**suppr");
+                                                let tr = icon.parentNode.parentNode;
+                                                let ici = icon.parentNode.parentNode.parentNode;
+                                                console.log(tr,ici);
+                                                ici.removeChild(tr);
+
+
+                                                let btn = document.getElementById('btnbeat-'+idsuppr.toString());
+                                                console.log("*",'btnbeat-'+idsuppr,btn); 
+
+                                                btn.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>" + euro + "€";
+                                                supprBDDPanier(idsuppr);
+
+
+                                            }
+                                        </script>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
                         </div>
                         <!--  END -->
 
@@ -1382,6 +1533,9 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
         <!-- JS du player -->
+        <?php
+        include("assets/functions/fctforaudioplayer.php");
+        ?>
         <script id="scriptDuPlayer">
 
             const thumbnail = document.querySelector('#thumbnail'); // album cover 
@@ -1410,17 +1564,17 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                 songArtist.innerHTML = songArtists[songIndex];
                 songTitle.innerHTML = songTitles[songIndex];
 
-                let prixprix;
-                if(parseFloat(songPrices[songIndex]) == 0.00){
-                    prixprix = "FREE";
-
-                } else {
-                    prixprix = songPrices[songIndex] +"€";
-                }
-                btnAcheterPrice.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>"+ prixprix ;
-                console.log(btnAcheterPrice);
-                btnAcheterPrice.setAttribute('onclick',"go2Panier(this,'" + songTitles[songIndex] + "','" + songArtists[songIndex] + "', '"+ songPrices[songIndex] +"', '" + thumbnails[songIndex] + "');");
-                btnAcheterPrice.setAttribute('class','btn btn-danger');
+                //                let prixprix;
+                //                if(parseFloat(songPrices[songIndex]) == 0.00){
+                //                    prixprix = "FREE";
+                //
+                //                } else {
+                //                    prixprix = songPrices[songIndex] +"€";
+                //                }
+                //                btnAcheterPrice.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>"+ prixprix ;
+                //                console.log(btnAcheterPrice);
+                //                btnAcheterPrice.setAttribute('onclick',"go2Panier(this,'" + songTitles[songIndex] + "','" + songArtists[songIndex] + "', '"+ songPrices[songIndex] +"', '" + thumbnails[songIndex] + "');");
+                //                btnAcheterPrice.setAttribute('class','btn btn-danger');
 
 
                 if (playing) {
@@ -1506,6 +1660,5 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
         </script>
         <!--   END JS du Player     -->
-        <script src='assets/js/panier.js'></script>
     </body>
 </html>
