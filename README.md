@@ -111,7 +111,3 @@ Contient également le dossier skeleton qui comporte le fichier navbar.php, les 
 Contient les photos de profils et les Beats uploadés des membres du site.
 
 
-## Auteurs
-
-Site réalisé par Mlamali SAIS SALIMO, Ari RAJAOFERA et Mathieu CISSE.  
-Site réalisé dans le cadre de réalisation de projet de l'EISTI. 
