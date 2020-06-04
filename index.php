@@ -532,6 +532,7 @@ $_SESSION['ici_index_bool'] = true;
         <!--    END     COMPTE A REBOURS -->
         
         <!-- SCRIPT SLIDES       -->
+        <script src="assets/js/slick.min.js"></script>
         <script src="assets/js/slide.js"></script>
 
 

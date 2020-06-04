@@ -551,6 +551,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                                     ?> 
                                     <tr>
+                                       
 
                                         <th scope='row' class='border-0'>
                                             <div class='p-2'>
@@ -951,8 +952,15 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                                                     </div>
                                                     <!--                                                    -->
+                                                    
                                                     <div class="ml-3 d-inline-block align-middle " >
-                                                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle"><?=$r['beat_title']?></a></h5><span class="text-muted font-weight-normal font-italic d-block"><?=$r['beat_author']?></span>
+                                                        <h5 class="mb-0"> <a href="view-beat.php?id=<?= $r['beat_id']?>" class="text-dark d-inline-block align-middle"><?=$r['beat_title']?></a>
+                                                        </h5>
+                                                        
+                                                        <a href="profils.php?profil_id=<?= $r['beat_author_id']?>" class="text-dark d-inline-block align-middle"><span class="text-muted font-weight-normal font-italic d-block">
+                                                            <?=$r['beat_author']?>
+                                                        </span>
+                                                        </a>
                                                     </div>
                                                 </div>
 

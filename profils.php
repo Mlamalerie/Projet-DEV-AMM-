@@ -239,16 +239,12 @@ foreach($resuRELA as $rr){
                     </div>                    
                 </div>
             </div>
-        </div>
-        <div>
-
-
-
+            
             <?php
 
 
 
-    if(isset($id_demandeur)&& $id_demandeur!=$id_receveur){ // si c'est pas ton compte affichafe des bouton
+    if(isset($id_demandeur)&& $id_demandeur!=$id_receveur){ // si c'est pas ton compte affichage des bouton
 
         // Si le profil vous a bloqué
         if(isset($afficher_profil['statut']) && $afficher_profil['id_demandeur']==$id_receveur && $afficher_profil['statut'] == 3){
@@ -258,10 +254,10 @@ foreach($resuRELA as $rr){
         } else {
 
             ?>    
-            <form method="post" class="follow-btn">
+            <form method="post" >
                 <?php
-            echo '//'. $afficher_profil['id_demandeur'] .'-'. $afficher_profil['id_receveur'] .'-'. $afficher_profil['statut']  .'//<br>';
-            echo '//**'.$id_demandeur.'-'. $id_receveur.'//';
+            /* echo '//'. $afficher_profil['id_demandeur'] .'-'. $afficher_profil['id_receveur'] .'-'. $afficher_profil['statut']  .'//<br>';
+            echo '//**'.$id_demandeur.'-'. $id_receveur.'//';*/
 
             //** ON AFFICHE PAS CA SI TU LA BLOQU2 ! :
             if(isset($afficher_profil['statut']) && $afficher_profil['statut'] == 3 && $afficher_profil['id_demandeur']==$id_demandeur){
@@ -312,6 +308,21 @@ foreach($resuRELA as $rr){
         }
     }
             ?>
+            
+            
+            
+            
+            
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        <div>
         </div>                     
 
     </body>
