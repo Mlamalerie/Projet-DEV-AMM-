@@ -169,6 +169,7 @@ if(!empty($_POST)){
 
                                         <button type="submit" class="btn btn-primary" name="connexion">Submit</button>
                                     </form>
+                                    <p class="text-muted mb-4">Vous n'avez pas de compte ? <a href="inscription.php">Inscrivez vous</a></p>
                                 </div>
                             </div>
                         </div><!-- End -->
