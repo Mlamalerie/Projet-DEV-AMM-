@@ -436,12 +436,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         require_once('assets/skeleton/navbar.php');
         ?>
 
-        <!--   *************************************************************  -->
-        <!--   ************************** MUSIC PLAYER  **************************  -->
 
-        <?php
-        require_once('assets/skeleton/AudioPlayer/audioplayer.php');
-        ?>
 
         <!--   *************************************************************  -->
         <!--   ************************** MODAL PANIER  **************************  -->
@@ -455,7 +450,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                         </button>
                     </div>
                     <div class="modal-body">
-                        <?php if($okconnectey) { ?>
+
                         <div class="table-responsive">
 
                             <table class="table">
@@ -472,6 +467,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                         </th>
                                     </tr>
                                 </thead>
+                                <?php if($okconnectey) { ?>
                                 <tbody id="tbodypanier">
                                     <?php 
     $req = $BDD->prepare("SELECT *
@@ -503,7 +499,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 </div>
                                             </div>
                                         </th>
-                                        <td class='border-0 align-middle'><strong><?=$b['beat_price'] ?></strong></td>
+                                        <td class='border-0 align-middle'><strong><?php if($b['beat_price'] != 0.00) { echo $b['beat_price']; } else { echo "FREE";} ?></strong></td>
                                         <td class='border-0 align-middle'>
                                             <span class='text-dark' onclick="suppr2Panier(this,'<?=$b['beat_price'] ?>','<?=$b['beat_id'] ?>');"><i class='fa fa-trash'></i></span>
                                         </td>
@@ -516,11 +512,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                     ?>
 
-
+                                    <?php    } ?>
 
                                 </tbody>
                             </table>
-                            <?php    } ?>
+
                         </div>
 
 
@@ -792,13 +788,20 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         print_r($obj2);
     } else if ($yadesresultatsUSERS) {
 
-        $obj2 = count($resuUSERS)."personnes trouvées";
-        print_r($obj2);
+        $obj1 = count($resuUSERS)."personnes trouvées";
+        print_r($obj1);
     } else if ($yadesresultatsBEATS) {
         $obj1 = count($resuBEATS)."beats trouvé";
 
         print_r($obj1);
+    } else {
+        $obj1 = "Rien trouvé";
+
+        print_r($obj1);
+
     }
+
+
                                 ?> 
 
                             </p>
@@ -905,23 +908,31 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                             </th>
 
-                                            <td class="border-0 align-middle"><?=$r['beat_like']?><a href="#" class="text-dark"><i class="far fa-heart"></i></a></td>
+                                            <td class="border-0 align-middle">
+                                            
+                                            <?=$r['beat_like']?><span onclick="liker('dislikedislike',<?=$r['beat_id']?>) " class="text-dark"><i class="far fa-heart"></i></span>
+                                            
+                                            </td>
                                             <td class="border-0 align-middle">
 
                                                 <?php 
-                                            $req = $BDD->prepare("SELECT *
+                                            $okdejadanspanier = false;
+
+                                                                              if($okconnectey) {
+                                                                                  $req = $BDD->prepare("SELECT *
                                                                                         FROM panier
                                                                                         WHERE panier_user_id = ? AND panier_beat_id = ?");
-                                                                              $req->execute(array($_SESSION['user_id'],$r['beat_id']));
+                                                                                  $req->execute(array($_SESSION['user_id'],$r['beat_id']));
 
 
-                                                                              $aff = $req->fetch();
+                                                                                  $aff = $req->fetch();
 
-                                                                              $okdejadanspanier = false;
 
-                                                                              if(isset($aff['id'])){
-                                                                                  $okdejadanspanier = true;
 
+                                                                                  if(isset($aff['id'])){
+                                                                                      $okdejadanspanier = true;
+
+                                                                                  }
                                                                               }
                                                 ?>
 
@@ -938,7 +949,8 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
 
                                                     <?php if(!$okdejadanspanier) { ?>
-                                                    <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup><?=$r['beat_price']?>€
+                                                    <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup>
+                                                    <?php if($r['beat_price'] != 0.00) { echo $r['beat_price'].'€'; } else {echo "FREE";} ?>
                                                     <?php } ?>
                                                 </button>
                                                 <?php  if($okdejadanspanier) {?>
@@ -962,6 +974,10 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 let mdf = document.getElementsByClassName('modal-footer');
                                                 let aa = document.getElementById("passercommandes");
 
+                                                okyarien = false;
+                                                if(mdf[0].children.length == 0){
+                                                    okyarien = true;
+                                                }
 
                                                 if(ok){
 
@@ -975,7 +991,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                     a.appendChild(btn);
                                                     console.log(a);
 
-                                                    if(mdf[0].children.length == 0){
+                                                    if( okyarien){
                                                         mdf[0].appendChild(a);
                                                     }
 
@@ -984,11 +1000,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 }else {
                                                     let a = document.getElementById("passercommandes");
 
+                                                    if(!okyarien){
+                                                        let ca = a.parentNode;
 
-                                                    let ca = a.parentNode;
-
-                                                    ca.removeChild(a);
-
+                                                        ca.removeChild(a);
+                                                    }
 
                                                 }
 
@@ -1005,7 +1021,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                     affichePasserCommande(true);
                                                 } else {
                                                     ici.innerHTML = "";
-                                                    tbody.innerHTML = "<span>Vous n\'avez pas d\'articles dans le panier</span>";
+
                                                     affichePasserCommande(false);
                                                 }
                                                 console.log(nb,ici);
@@ -1017,15 +1033,16 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                             function goConnexionStp() {
                                                 window.location.replace("connexion.php");
-                                            }
+                                            } 
 
-                                            function liker(idbeat) {
+                                            function liker(modemode,idbeat) {
                                                 console.log("ajoutBDD");
                                                 var xmlhttp = new XMLHttpRequest();
 
                                                 let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
-                                                let ou = "sendPanierBDD.php?qq="
-                                                ou += idboug.toString(); // mode like ou dislike
+                                                let ou = "goLikeBDD.php?qq="
+                                                ou += modemode; // mode like ou dislike
+                                                ou += "-" + idboug.toString();
                                                 ou += "-" + idbeat.toString(); // id du beat
                                                 console.log(ou);
                                                 xmlhttp.open("GET",ou,true);
@@ -1063,7 +1080,12 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 strID = strID.trim();
                                                 console.log(strID);
                                                 let tr = document.createElement('tr');
-                                                let str = "<th scope='row' class='border-0'> <div class='p-2'> <img src='" + b_cover + "' alt='' width='70' class='img-fluid rounded shadow-sm'> <div class='ml-3 d-inline-block align-middle'> <h5 class='mb-0'> <a href='#' class='text-dark d-inline-block align-middle'>" + b_title + "</a></h5> <span class='text-muted font-weight-normal font-italic d-block'>" + b_author + "</span> </div></div></th><td class='border-0 align-middle'><strong>" + b_price + "</strong></td>";
+
+                                                let prix = b_price.toString();
+                                                if (b_price == 0){
+                                                    prix = "FREE";
+                                                } 
+                                                let str = "<th scope='row' class='border-0'> <div class='p-2'> <img src='" + b_cover + "' alt='' width='70' class='img-fluid rounded shadow-sm'> <div class='ml-3 d-inline-block align-middle'> <h5 class='mb-0'> <a href='#' class='text-dark d-inline-block align-middle'>" + b_title + "</a></h5> <span class='text-muted font-weight-normal font-italic d-block'>" + b_author + "</span> </div></div></th><td class='border-0 align-middle'><strong>" + prix + "</strong></td>";
                                                 str += "<td class='border-0 align-middle'><span class='text-dark'><i class='fa fa-trash'></i></span></td>";
                                                 // note : faire du css sur le span pour faire faux lien style
                                                 tr.innerHTML = str ;
@@ -1108,9 +1130,14 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 let btn = document.getElementById('btnbeat-'+idsuppr.toString());
                                                 console.log("*",'btnbeat-'+idsuppr,btn); 
 
-                                                btn.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>" + euro + "€";
+                                                if(btn != null) {
+                                                    if(parseFloat(euro) == 0.00) {euro = "FREE";} else {euro += "€"}
+                                                    btn.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>" + euro ;
+
+                                                }
                                                 supprBDDPanier(idsuppr);
                                                 refreshNbPanier();
+
 
                                             }
                                         </script>
@@ -1565,7 +1592,12 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
         </script>
 
+        <!--   *************************************************************  -->
+        <!--   ************************** MUSIC PLAYER  **************************  -->
 
+        <?php
+        require_once('assets/skeleton/AudioPlayer/audioplayer.php');
+        ?>
         <!-- JS du player -->
         <?php
         include("assets/functions/fctforaudioplayer.php");
@@ -1593,6 +1625,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
             songPrices = <?=returnMusicListStr("prices", $resuBEATS); ?>; //Stockage price
             let playing = true;
             function playPause(songIndex) {
+                document.getElementById('audioplayer').setAttribute('style','');
                 song.src = songs[songIndex];
                 thumbnail.src = thumbnails[songIndex];
                 songArtist.innerHTML = songArtists[songIndex];

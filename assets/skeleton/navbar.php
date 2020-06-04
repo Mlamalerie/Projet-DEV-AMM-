@@ -1,5 +1,13 @@
 
-<?php $jesuissurindex = $_SESSION['ici_index_bool']; ?>
+<?php $jesuissurindex = $_SESSION['ici_index_bool']; 
+
+// si je detecte une connexion alors
+$connect = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
+    $connect = true;
+}
+
+?>
 
 
 <div class="boxnav">
@@ -61,13 +69,13 @@
             <ul class="navbar-nav ml-md-auto" >
                 <?php
                 // si je detecte une connexion alors
-                if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
+                if($connect){
 
                 ?>
                 <li class="nav-item ">
                     <a class="nav-link btn" href="messagerie.php">Messagerie<span class="sr-only">(current)</span></a>
                 </li>
-                
+
                 <li class="nav-item ">
                     <a class="nav-link btn" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
                 </li>
@@ -75,8 +83,8 @@
                 <li class="nav-item">
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#modalUpload"><img id="iconUpload" src="assets/img/icon/ui.svg"> Uploader </button>
                 </li>
-                
-                  <li class="nav-item dropdown ">
+
+                <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <img id="iconUser" src="assets/img/user.png">
                     </a>
@@ -84,14 +92,14 @@
 
                         <span class="dropdown-item  "> <?= $_SESSION['user_pseudo'] ?> </span>
                         <div class="dropdown-divider"></div>
-                       <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"> Mon Profil </a>
+                        <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"> Mon Profil </a>
                         <a class="dropdown-item  " href="#"> Mes Tracks </a>
 
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="deconnexion.php">Déconnexion</a>
+                        <a class="dropdown-item" href="deconnexion.php"><i class="fas fa-power-off"></i>Déconnexion</a>
                     </div>
                 </li>
-                
+
                 <li class="nav-item">
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#ModalPanier" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> <span id="span_nb_panier" class="badge badge-primary px-2 rounded-pill ml-2"></span> </button>
                 </li>
@@ -99,7 +107,7 @@
 
 
 
-              
+
 
 
                 <?php
@@ -146,7 +154,7 @@
                 <?php
                 }
                 ?>
-                
+
 
 
             </ul>
@@ -156,7 +164,7 @@
 </div>
 
 
-       
+
 
 
 
