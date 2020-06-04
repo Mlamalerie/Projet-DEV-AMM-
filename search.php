@@ -960,9 +960,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                         <script >
                                             function affichePasserCommande(ok){
                                                 let mdf = document.getElementsByClassName('modal-footer');
+                                                let aa = document.getElementById("passercommandes");
 
 
                                                 if(ok){
+
                                                     let a = document.createElement('a');
                                                     a.setAttribute('href','#');
                                                     a.setAttribute('id','passercommandes');
@@ -973,7 +975,10 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                     a.appendChild(btn);
                                                     console.log(a);
 
-                                                    mdf[0].appendChild(a);
+                                                    if(mdf[0].children.length == 0){
+                                                        mdf[0].appendChild(a);
+                                                    }
+
 
 
                                                 }else {
