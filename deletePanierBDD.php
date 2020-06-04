@@ -15,7 +15,7 @@ if (($idbeat < 1)){
     $ok = false;
 } 
 
-{ // ensuite on verifie si ce beat est deja dans panier
+{ // ensuite on verifie si ce beat existe
     $req = $BDD->prepare("SELECT id
                             FROM panier
                             WHERE panier_user_id = ? AND panier_beat_id = ?
@@ -23,18 +23,19 @@ if (($idbeat < 1)){
     $req->execute(array($idboug,$idbeat));
     $p = $req->fetch();
 
-    if(isset($p['id'])){
+    if(!isset($p['id'])){
         $ok = false;
-        echo "Cette beat existe déjé !";
+        echo "Cette beat existe pas";
     }
 }
 
 if($ok){
 
-    $req = $BDD->prepare("INSERT INTO panier (panier_beat_id,panier_user_id) VALUES (?, ?)"); 
-    $req->execute(array($idbeat,$idboug));
+    $req = $BDD->prepare("DELETE FROM panier 
+ WHERE panier_user_id = ? AND panier_beat_id = ?"); 
+    $req->execute(array($idboug,$idbeat));
 
-    echo "*** sendPanier ***";
+    echo "*** deletePanier ***";
 }
 
 ?>

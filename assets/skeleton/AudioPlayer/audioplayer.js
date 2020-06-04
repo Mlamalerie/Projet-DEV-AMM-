@@ -8,8 +8,6 @@ let pPause = document.querySelector('#play-pause'); // element où images play p
 
 let mouseDown = false;
 
-
-
 songIndex = 0;
 songs = ['./audio/high_fashion.mp3','./audio/DB5.mp3','./audio/Malcolm.mp3']; //Stockage des audios
 thumbnails = ['./img/roddy.jpg', './img/DB5.jpg', './img/MILS.jpg']; //Stockage des covers
@@ -21,7 +19,7 @@ let playing = true;
 function playPause() {
     if (playing) {
         const song = document.querySelector('#song'),
-        thumbnail = document.querySelector('#thumbnail');
+              thumbnail = document.querySelector('#thumbnail');
         pPause.src = "./assets/icon/pause.png"
         song.play();
         playing = false;
@@ -97,3 +95,4 @@ setInterval(updateProgressValue, 500);
 function changeProgressBar() {
     song.currentTime = progressBar.value;
 };
+
