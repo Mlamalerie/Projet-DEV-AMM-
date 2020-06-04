@@ -420,6 +420,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">
         <!--        <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">-->
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/modalPanier.css">
 
 
 
@@ -427,7 +428,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
         <title>Search</title>
     </head>
-    <body>
+    <body onload=" refreshNbPanier() ">
 
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
@@ -442,18 +443,15 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         require_once('assets/skeleton/AudioPlayer/audioplayer.php');
         ?>
 
-
         <!--   *************************************************************  -->
         <!--   ************************** MODAL PANIER  **************************  -->
-
-
-        <div class="" id="ModalPanier" tabindex="-1" role="dialog" aria-labelledby="ModalPanierLabel" aria-hidden="true">
+        <div class="modal fade" id="ModalPanier" tabindex="-1" role="dialog" aria-labelledby="ModalPanierLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="ModalPanierLabel">Panier WeBeats</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span class="croixquit d-flex justify-content-center rounded" aria-hidden="true"><i class="fas fa-times"></i></span>
                         </button>
                     </div>
                     <div class="modal-body">
@@ -489,7 +487,10 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                             WHERE beat_id = ?");
         $req->execute(array($p['panier_beat_id']));
         $resuPAN = $req->fetchAll();
+
         foreach($resuPAN as $b) {
+
+
 
 
                                     ?> 
@@ -511,7 +512,10 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
         }
     }
+
+
                                     ?>
+
 
 
                                 </tbody>
@@ -522,9 +526,8 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        <button type="button" class="btn btn-primary">Valider</button>
+                    <div class="modal-footer" >
+
 
                     </div>
                 </div>
@@ -928,27 +931,20 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                         onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>','<?=$r['beat_id']?>');" <?php }else { ?> onclick="goConnexionStp();"  <?php } ?>
 
                                                         class="btn btn-danger"
-                                                       
+
 
                                                         >
 
 
 
-                                                    <?php
-                                                                              if(!$okdejadanspanier) { 
-                                                    ?>
+                                                    <?php if(!$okdejadanspanier) { ?>
                                                     <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup><?=$r['beat_price']?>€
                                                     <?php } ?>
                                                 </button>
-                                                 <?php  if($okdejadanspanier) { 
-                                                        ?>
-                                                        <script>
-                                                            
-                                                           document.getElementById('btnbeat-<?=$r['beat_id']?>').innerHTML = 'Dans le panier';
-                                                
-                                                </script>
-                                                        <?php } ?>
-                                                
+                                                <?php  if($okdejadanspanier) {?>
+                                                <script>document.getElementById('btnbeat-<?=$r['beat_id']?>').innerHTML = 'Dans le panier';</script>
+                                                <?php } ?>
+
 
                                             </td>
 
@@ -962,6 +958,58 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                         ?>
                                         <script >
+                                            function affichePasserCommande(ok){
+                                                let mdf = document.getElementsByClassName('modal-footer');
+
+
+                                                if(ok){
+                                                    let a = document.createElement('a');
+                                                    a.setAttribute('href','#');
+                                                    a.setAttribute('id','passercommandes');
+                                                    let btn = document.createElement('button');
+                                                    btn.setAttribute('type','button');
+                                                    btn.setAttribute('class','btn btn-primary');
+                                                    btn.innerHTML = "PAsser Commandes"
+                                                    a.appendChild(btn);
+                                                    console.log(a);
+
+                                                    mdf[0].appendChild(a);
+
+
+                                                }else {
+                                                    let a = document.getElementById("passercommandes");
+
+
+                                                    let ca = a.parentNode;
+
+                                                    ca.removeChild(a);
+
+
+                                                }
+
+                                            }
+                                            function refreshNbPanier() {
+                                                let tbody = document.getElementById("tbodypanier");
+                                                let ici = document.getElementById("span_nb_panier");
+                                                let nb = tbody.children.length;
+                                                console.log(nb,ici);
+
+                                                console.log(nb,ici);
+                                                if (nb != 0) {
+                                                    ici.innerHTML = nb;
+                                                    affichePasserCommande(true);
+                                                } else {
+                                                    ici.innerHTML = "";
+                                                    tbody.innerHTML = "<span>Vous n\'avez pas d\'articles dans le panier</span>";
+                                                    affichePasserCommande(false);
+                                                }
+                                                console.log(nb,ici);
+
+
+
+
+                                            }
+
                                             function goConnexionStp() {
                                                 window.location.replace("connexion.php");
                                             }
@@ -1038,10 +1086,9 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
 
                                                     //                    btn.classList.add(strID);
-                                                } else {
-                                                    console.log('ee');
+                                                } 
 
-                                                }
+                                                refreshNbPanier();
 
 
                                             }
@@ -1058,7 +1105,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                                 btn.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>" + euro + "€";
                                                 supprBDDPanier(idsuppr);
-
+                                                refreshNbPanier();
 
                                             }
                                         </script>
