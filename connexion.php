@@ -81,6 +81,7 @@ if(!empty($_POST)){
             $_SESSION['user_id'] = $verif_user['user_id'];
             $_SESSION['user_pseudo'] = $verif_user['user_pseudo'];
             $_SESSION['user_email'] = $verif_user['user_email'];
+            $_SESSION['user_role'] = $verif_user['user_role'];
 
             $listeGenres = ['Hip Hop','Trap','Afro','Deep','Pop','Rock','Reggae'];
             sort($listeGenres);

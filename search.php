@@ -490,7 +490,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                     ?> 
                                     <tr>
-                                       
+
 
                                         <th scope='row' class='border-0'>
                                             <div class='p-2'>
@@ -901,14 +901,14 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                                     </div>
                                                     <!--                                                    -->
-                                                    
+
                                                     <div class="ml-3 d-inline-block align-middle " >
                                                         <h5 class="mb-0"> <a href="view-beat.php?id=<?= $r['beat_id']?>" class="text-dark d-inline-block align-middle"><?=$r['beat_title']?></a>
                                                         </h5>
-                                                        
+
                                                         <a href="profils.php?profil_id=<?= $r['beat_author_id']?>" class="text-dark d-inline-block align-middle"><span class="text-muted font-weight-normal font-italic d-block">
                                                             <?=$r['beat_author']?>
-                                                        </span>
+                                                            </span>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -1094,18 +1094,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 console.log("ajoutBDD");
                                                 var xmlhttp = new XMLHttpRequest();
 
-<<<<<<< HEAD
                                                 let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
-=======
-<<<<<<< HEAD
-                                        <script >
-                                            
-                                            
-                                            function majBDDPanier() {
-                                                console.log("pan");
-=======
-                                                let idboug = <?= $_SESSION['user_id'] ?>; 
->>>>>>> a4613f90279ceb9b1134a92d57ff6bd8a93b89d0
                                                 let ou = "sendPanierBDD.php?qq="
                                                 ou += idboug.toString();
                                                 ou += "-" + idbeat.toString();
@@ -1116,7 +1105,6 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                             function supprBDDPanier(idbeat) {
                                                 console.log("supprBDD");
->>>>>>> b6636eb44436bf2c96c06bed1be910a61d80c351
                                                 var xmlhttp = new XMLHttpRequest();
 
                                                 let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
@@ -1256,31 +1244,34 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                     <?php } ?>
                     <div id="resultuser"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : blue;">
                         <?php  if (isset($resuUSERS)) {
-                                    foreach($resuUSERS as $r){ ?>
-                        
-                       
-                        
+    foreach($resuUSERS as $r){ 
+
+        if($r['user_role'] == 2 || $r['user_role'] == 0) {
+                        ?>
+
+
+
                         <!-- Team item-->
                         <div class="col-xl-3 col-sm-6 mb-5 text-center">
 
 
                             <div class=" rounded shadow-sm py-3 px-3"><a href="profils.php?profil_id=<?= $r['user_id']?>">
-                               <img src="<?=$r['user_image'] ?>" alt=""  class="img-fluid roundedImage mb-3 img-thumbnail shadow-sm">
+                                <img src="<?=$r['user_image'] ?>" alt=""  class="img-fluid roundedImage mb-3 img-thumbnail shadow-sm">
                                 <h5 class="mb-0"><a href="profils.php?profil_id=<?= $r['user_id']?>"><?=$r['user_pseudo'] ?></a></h5>
 
                                 <span class="small  text-muted"><?=$r['user_ville'] ?>
                                     <span class="text-uppercase ">
-                                       
+
                                         <?php
 
-    //*** Verification du Pays
-    $req = $BDD->prepare("SELECT * 
+                            //*** Verification du Pays
+                            $req = $BDD->prepare("SELECT * 
                             FROM pays
                             WHERE code = ?");
-                                                                                 $req->execute(array($r['user_pays'] ));
-                                                                                 $aff_pays = $req->fetch();
+            $req->execute(array($r['user_pays'] ));
+            $aff_pays = $req->fetch();
 
-                                                                                 echo '('.$aff_pays['nom_fr_fr'].')';
+            echo '('.$aff_pays['nom_fr_fr'].')';
                                         ?>
 
                                     </span>
@@ -1290,10 +1281,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                             </div>
                         </div>
 
-                       
 
-                        <?php        }
-                                } ?>
+
+                        <?php    }    
+    }
+} ?>
 
 
 

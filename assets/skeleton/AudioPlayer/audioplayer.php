@@ -1,5 +1,5 @@
 
-<nav class="audioplayer navplayer  fixed-bottom" style="display:none">        
+<nav id='audioplayer' class=" navplayer  fixed-bottom" style="display:none">        
     <audio src="./audio/go_legend.mp3" id="song"></audio>
     <div class="box">     
         <img src="./img/bigmetro.jpg" id="thumbnail" />

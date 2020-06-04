@@ -55,9 +55,15 @@ if(!empty($_POST)){
             $err_pseudo = "Votre pseudo ne peut contenir au plus 2 espaces";
         }
         else if (!ctype_alnum(implode("",explode(' ',$pseudo)))) {
-
-            $ok = false;
-            $err_pseudo = "Votre pseudo ne doit contenir que des lettres ou des chiffres";
+//            $ps = explode('',$pseudo);
+//            for ($i = 0; $i < strlen($pseudo); $i++) {
+//                if($pseudo[i] ;
+//            }
+//            print_r($ps);
+//            if(!in_array('_',$ps)) {
+                $ok = false;
+                $err_pseudo = "Votre pseudo ne doit contenir que des lettres ou des chiffres";
+//            }
         }
         else if (strlen($pseudo) > 25) {
 
@@ -142,7 +148,7 @@ if(!empty($_POST)){
         $req->execute(array($pays));
         $verif_pays = $req->fetch();
 
-      
+
         if($pays == -1){
             echo "$$";
             $ok = false;
