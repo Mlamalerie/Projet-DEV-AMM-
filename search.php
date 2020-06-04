@@ -384,9 +384,20 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 }
 
-
-
 ?>
+
+
+<?php
+$okconnectey = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
+    print_r($_SESSION);
+    $okconnectey = true;
+} else{
+    echo "Pas de connexion";
+}
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -431,74 +442,6 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
         require_once('assets/skeleton/AudioPlayer/audioplayer.php');
         ?>
 
-        <?php
-        if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
-            print_r($_SESSION);
-        } else{
-            echo "Pas de connexion";
-        }
-        ?>
-
-
-
-
-
-        <?php
-        $connect = mysqli_connect("localhost", "root", "", "test");
-
-        if(isset($_POST["add_to_cart"]))
-        {
-            if(isset($_SESSION["shopping_cart"]))
-            {
-                $item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
-                if(!in_array($_GET["id"], $item_array_id))
-                {
-                    $count = count($_SESSION["shopping_cart"]);
-                    $item_array = array(
-                        'item_id'         => $_GET["id"],
-                        'item_name'       => $_POST["hidden_name"],
-                        'item_price'      => $_POST["hidden_price"],
-
-                    );
-                    $_SESSION["shopping_cart"][$count] = $item_array;
-                }
-                else
-                {
-                    echo '<script>alert("Article déja ajouté au panier")</script>';
-                }
-            }
-            else
-            {
-                $item_array = array(
-                    'item_id'         => $_GET["id"],
-                    'item_name'       => $_POST["hidden_name"],
-                    'item_price'      => $_POST["hidden_price"],
-
-                );
-                $_SESSION["shopping_cart"][0] = $item_array;
-            }
-        }
-
-        if(isset($_GET["action"]))
-        {
-            if($_GET["action"] == "delete")
-            {
-                foreach($_SESSION["shopping_cart"] as $keys => $values)
-                {
-                    if($values["item_id"] == $_GET["id"])
-                    {
-                        unset($_SESSION["shopping_cart"][$keys]);
-                        //echo '<script>alert("Item Removed")</script>';
-                        echo '<script>window.location="search.php"</script>';
-                    }
-                }
-            }
-        }
-        ?>
-
-
-
-
 
         <!--   *************************************************************  -->
         <!--   ************************** MODAL PANIER  **************************  -->
@@ -514,7 +457,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                         </button>
                     </div>
                     <div class="modal-body">
-
+                        <?php if($okconnectey) { ?>
                         <div class="table-responsive">
 
                             <table class="table">
@@ -533,20 +476,20 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                 </thead>
                                 <tbody id="tbodypanier">
                                     <?php 
-                                    $req = $BDD->prepare("SELECT *
+    $req = $BDD->prepare("SELECT *
                             FROM panier
                             WHERE panier_user_id = ?");
-                                    $req->execute(array($_SESSION['user_id']));
-                                    $resuPANIER = $req->fetchAll();
+    $req->execute(array($_SESSION['user_id']));
+    $resuPANIER = $req->fetchAll();
 
-                                    foreach($resuPANIER as $p) {
+    foreach($resuPANIER as $p) {
 
-                                        $req = $BDD->prepare("SELECT *
+        $req = $BDD->prepare("SELECT *
                                             FROM beat
                                             WHERE beat_id = ?");
-                                        $req->execute(array($p['panier_beat_id']));
-                                        $resuPAN = $req->fetchAll();
-                                        foreach($resuPAN as $b) {
+        $req->execute(array($p['panier_beat_id']));
+        $resuPAN = $req->fetchAll();
+        foreach($resuPAN as $b) {
 
 
                                     ?> 
@@ -566,13 +509,14 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                     </tr>
                                     <?php
 
-                                        }
-                                    }
+        }
+    }
                                     ?>
 
 
                                 </tbody>
                             </table>
+                            <?php    } ?>
                         </div>
 
 
@@ -961,27 +905,72 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                             <td class="border-0 align-middle"><?=$r['beat_like']?><a href="#" class="text-dark"><i class="far fa-heart"></i></a></td>
                                             <td class="border-0 align-middle">
 
-                                                <button id='btnbeat-<?=$r['beat_id']?>' onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>','<?=$r['beat_id']?>');" class="btn btn-danger">
+                                                <?php 
+                                            $req = $BDD->prepare("SELECT *
+                                                                                        FROM panier
+                                                                                        WHERE panier_user_id = ? AND panier_beat_id = ?");
+                                                                              $req->execute(array($_SESSION['user_id'],$r['beat_id']));
+
+
+                                                                              $aff = $req->fetch();
+
+                                                                              $okdejadanspanier = false;
+
+                                                                              if(isset($aff['id'])){
+                                                                                  $okdejadanspanier = true;
+
+                                                                              }
+                                                ?>
+
+                                                <button id='btnbeat-<?=$r['beat_id']?>' 
+
+                                                        <?php if($okconnectey) { ?>
+                                                        onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>','<?=$r['beat_id']?>');" <?php }else { ?> onclick="goConnexionStp();"  <?php } ?>
+
+                                                        class="btn btn-danger"
+                                                       
+
+                                                        >
+
+
+
+                                                    <?php
+                                                                              if(!$okdejadanspanier) { 
+                                                    ?>
                                                     <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup><?=$r['beat_price']?>€
+                                                    <?php } ?>
                                                 </button>
+                                                 <?php  if($okdejadanspanier) { 
+                                                        ?>
+                                                        <script>
+                                                            
+                                                           document.getElementById('btnbeat-<?=$r['beat_id']?>').innerHTML = 'Dans le panier';
+                                                
+                                                </script>
+                                                        <?php } ?>
+                                                
 
                                             </td>
 
 
+
                                         </tr>
                                         <?php
-                                            $i++;
+                                                                              $i++;
                                                                           }
                                                                       }
 
                                         ?>
                                         <script >
-                                            
+                                            function goConnexionStp() {
+                                                window.location.replace("connexion.php");
+                                            }
+
                                             function liker(idbeat) {
                                                 console.log("ajoutBDD");
                                                 var xmlhttp = new XMLHttpRequest();
 
-                                                let idboug = <?= $_SESSION['user_id'] ?>; 
+                                                let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
                                                 let ou = "sendPanierBDD.php?qq="
                                                 ou += idboug.toString(); // mode like ou dislike
                                                 ou += "-" + idbeat.toString(); // id du beat
@@ -994,7 +983,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                                 console.log("ajoutBDD");
                                                 var xmlhttp = new XMLHttpRequest();
 
-                                                let idboug = <?= $_SESSION['user_id'] ?>; 
+                                                let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
                                                 let ou = "sendPanierBDD.php?qq="
                                                 ou += idboug.toString();
                                                 ou += "-" + idbeat.toString();
@@ -1007,7 +996,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                                 console.log("supprBDD");
                                                 var xmlhttp = new XMLHttpRequest();
 
-                                                let idboug = <?= $_SESSION['user_id'] ?>; 
+                                                let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
                                                 let ou = "deletePanierBDD.php?qq="
                                                 ou += idboug.toString();
                                                 ou += "-" + idbeat.toString();
@@ -1035,7 +1024,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                                             function go2Panier(btn,b_title,b_author,b_price,b_cover,idbeat) {
 
-                                                let textIn = "Dans Panier";
+                                                let textIn = "Dans le panier";
                                                 console.log(btn.innerHTML , textIn, (btn.value != textIn))
                                                 // titre, prix
 
@@ -1138,7 +1127,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                         <!-- Team item-->
                         <div class="col-xl-3 col-sm-6 mb-5 text-center">
 
-                            <div class="bg-white rounded shadow-sm py-3 px-3"><img src="<?=$r['user_image'] ?> " alt=""  class="img-fluid roundedImage mb-3 img-thumbnail shadow-sm">
+                            <div class=" rounded shadow-sm py-2 px-2"><img src="<?=$r['user_image'] ?> " alt=""  class="img-fluid roundedImage mb-3 img-thumbnail shadow-sm">
                                 <h5 class="mb-0"><?=$r['user_pseudo'] ?> </h5>
                                 <span class="small  text-muted"><?=$r['user_ville'] ?>
                                     <span class="text-uppercase ">
