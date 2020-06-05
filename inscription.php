@@ -48,16 +48,22 @@ if(!empty($_POST)){
             $ok = false;
             $err_pseudo = "Vous êtes obligé de mettre au moins une lettre dans votre pseudo";
         }
-        
+
         else if (substr_count($pseudo, ' ') >= 3) {
 
             $ok = false;
             $err_pseudo = "Votre pseudo ne peut contenir au plus 2 espaces";
         }
         else if (!ctype_alnum(implode("",explode(' ',$pseudo)))) {
-
-            $ok = false;
-            $err_pseudo = "Votre pseudo ne doit contenir que des lettres ou des chiffres";
+//            $ps = explode('',$pseudo);
+//            for ($i = 0; $i < strlen($pseudo); $i++) {
+//                if($pseudo[i] ;
+//            }
+//            print_r($ps);
+//            if(!in_array('_',$ps)) {
+                $ok = false;
+                $err_pseudo = "Votre pseudo ne doit contenir que des lettres ou des chiffres";
+//            }
         }
         else if (strlen($pseudo) > 25) {
 
@@ -94,7 +100,7 @@ if(!empty($_POST)){
 
         } else if ($motdepasse != $motdepasseverif && $ok){
             $ok = false;
-            $err_motdepasse = "Vous n'avez pas rentré le même mot de passe dans celui que vous avez choisi et dans la confirmation !";
+            $err_motdepasse = "Vous n'avez pas rentré le même mot de passe !";
         }
 
         //*** Verification du mail
@@ -116,7 +122,7 @@ if(!empty($_POST)){
 
             if(isset($user['user_id'])){
                 $ok = false;
-                $err_email = "Cette e-mail existe déjà !";
+                $err_email = "Cet e-mail existe déjà !";
             }
         }
 
@@ -128,7 +134,7 @@ if(!empty($_POST)){
         } else if (strlen($ville) < 3) {
 
             $ok = false;
-            $err_ville = "Ce ville est trop petit !";
+            $err_ville = "Cette ville est trop petit !";
         } else if (!ctype_alpha(implode("",explode(' ',$ville)))) {
 
             $ok = false;
@@ -142,18 +148,24 @@ if(!empty($_POST)){
         $req->execute(array($pays));
         $verif_pays = $req->fetch();
 
-        if(!isset($verif_pays['id'])){ // si 
+
+        if($pays == -1){
+            echo "$$";
+            $ok = false;
+            $err_pays = "oh !";
+        }
+        else if(!isset($verif_pays['id'])){ // si 
             $ok = false;
             $err_pays = "Veuillez renseigner ce champ !";
         }
 
-          //*** Verification du du checkbox
+        //*** Verification du du checkbox
         if(empty($checkmala)) { // si vide
             $ok = false;
             $err_checkmala = "Veuillez renseigner ce champ !";
 
         }
-      
+
         if($ok) {
 
             $date_inscription = date("Y-m-d H:i:s"); 
@@ -222,9 +234,9 @@ if(!empty($_POST)){
                                 <div class="col-lg-10 col-xl-7 mx-auto">
 
                                     <a href="index.php"><img class="iconLOGO" src="assets/img/icon/compact-disc.svg" type="image/svg+xml"></a>
-                                    <h3 class="display-4 text-center">Inscription.</h3>
+                                    <h3 class="display-4 text-center">Inscription</h3>
 
-                                    <p class="text-muted mb-4 "><span class="topics"></span> Créez un compte WeBeats et commencez à vendre vos composition !</p>
+                                    <p class="text-muted mb-4 "><span class="topics"></span> Créez un compte WeBeats pour commncer à acheter de Beats et vendre les vôtres !</p>
 
 
                                     <form method="post">
@@ -235,9 +247,9 @@ if(!empty($_POST)){
                                             <div class="row">
                                                 <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
                                                 <label for="pseudo"> Pseudo </label>
-<!--                                                  <small id="arobasepseudo" class="ml-5 form-text text-muted text-center">  </small>-->
+                                                <!--                                                  <small id="arobasepseudo" class="ml-5 form-text text-muted text-center">  </small>-->
                                             </div>
-                                           
+
                                             <input type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="pseudo" name="pseudo" placeholder="Mettez un pseudo pour votre profil"  value="<?php if(isset($pseudo)){echo $pseudo;}?>" autofocus>
                                             <?php
                                             if(isset($err_pseudo)){
@@ -250,8 +262,8 @@ if(!empty($_POST)){
                                             <?php
                                             }
                                             ?>
-                                            
-                                           
+
+
                                         </div>
                                         <!--EMAIL-->
                                         <div class="form-group mb-4">
@@ -318,7 +330,7 @@ if(!empty($_POST)){
                                                 <label for="ville"> Ville </label>
                                             </div>
 
-                                            <input type="text" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ville" name="ville" placeholder="Ou habiter vous ?"  value="<?php if(isset($ville)){echo $ville;}?>" autofocus>
+                                            <input type="text" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ville" name="ville" placeholder="Où habitez-vous ?"  value="<?php if(isset($ville)){echo $ville;}?>" autofocus>
                                             <?php
                                             if(isset($err_ville)){
                                                 echo "<span class='spanAlertchamp'> ";
@@ -343,7 +355,13 @@ if(!empty($_POST)){
                                                 ?>
                                                 <option value="<?= $voir_pays['code'] ?>"> <?= mb_strtoupper($voir_pays['nom_fr_fr']) ?> </option>
 
+
+
                                                 <?php
+                                                } else { ?>
+                                                <option value="-1"> Selectionner votre pays </option>
+
+                                                <?php  
                                                 }
 
                                                 $req = $BDD->prepare("SELECT code,nom_fr_fr  
@@ -359,6 +377,13 @@ if(!empty($_POST)){
                                                 }
                                                 ?>
                                             </select>
+                                            <?php
+                                            if(isset($err_pays)){
+                                                echo "<span class='spanAlertchamp'> ";
+                                                echo $icon . $err_pays ;
+                                                echo "</span> <br>";
+                                            } 
+                                            ?>
 
 
                                         </div>
@@ -397,7 +422,7 @@ if(!empty($_POST)){
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        
+
 
     </body>
 </html>

@@ -11,29 +11,35 @@ include('assets/db/connexiondb.php');
 //    header('Location: utilisateurs.php'); 
 //    exit;
 //}
+$okconnectey = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])) {
+    $okconnectey = true;
 
-$id_receveur = (int)$_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
-$id_demandeur=$_SESSION['user_id'];
+}
 
-//*/*/*/*/*/*/
+    $id_receveur = (int)$_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
+if($okconnectey) {
+    $id_demandeur=$_SESSION['user_id'];
+}
+    //*/*/*/*/*/*/
 
-if(isset($id_demandeur)){
-    $req = $BDD->prepare("SELECT u.*, r.id_demandeur, r.id_receveur, r.statut
+    if(isset($id_demandeur)){
+        $req = $BDD->prepare("SELECT u.*, r.id_demandeur, r.id_receveur, r.statut
         FROM user u
         LEFT JOIN relation r ON (id_receveur = u.user_id AND id_demandeur = :id2) OR (statut = 3 AND id_demandeur = u.user_id)
         WHERE u.user_id = :id1");
 
-    $req->execute(array(':id1' => $id_receveur, ':id2' =>$id_demandeur));
-}
-else{
-    $req = $BDD->prepare("SELECT u.*
+        $req->execute(array(':id1' => $id_receveur, ':id2' =>$id_demandeur));
+    }
+    else{
+        $req = $BDD->prepare("SELECT u.*
         FROM user u
         WHERE u.user_id = :id1");
 
-    $req->execute(array(':id1' => $id_receveur));
-}
+        $req->execute(array(':id1' => $id_receveur));
+    }
 
-$afficher_profil = $req->fetch();
+    $afficher_profil = $req->fetch();
 
 
 if(!empty($_POST)){
@@ -101,18 +107,18 @@ $resuRELA = $req1->fetchAll();
 
 //print_r($resuRELA);
 foreach($resuRELA as $rr){
-    
+
     foreach($rr as $key => $value){
-    
-    if($key =='statut' && $value== 1){
-        
-        $nb_follow++;
-    }   
-} 
+
+        if($key =='statut' && $value== 1){
+
+            $nb_follow++;
+        }   
+    } 
 }
-    
-    
-    
+
+
+
 //$nb_follow = count()
 
 
@@ -198,7 +204,7 @@ foreach($resuRELA as $rr){
 
 
                 <div class="col-md-4" style="width: 150px;height: 150px; padding: 10px;display:inline-block;width:15%";>
-                    <img src="img/<?=$afficher_profil['user_image']?>" style="width: 150px;height: 150px;">
+                    <img src="<?=$afficher_profil['user_image']?>" style="width: 150px;height: 150px;">
                 </div>
 
                 <div class="col-md-4 infos" style="display:inline-block;width:40%;margin-left:5%">
@@ -239,7 +245,7 @@ foreach($resuRELA as $rr){
                     </div>                    
                 </div>
             </div>
-            
+
             <?php
 
 
@@ -308,20 +314,20 @@ foreach($resuRELA as $rr){
         }
     }
             ?>
-            
-            
-            
-            
-            
+
+
+
+
+
         </div>
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
         <div>
         </div>                     
 

@@ -1,5 +1,15 @@
 
-<?php $jesuissurindex = $_SESSION['ici_index_bool']; ?>
+
+<?php $jesuissurindex = $_SESSION['ici_index_bool']; 
+
+// si je detecte une connexion alors
+$connect = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
+    $connect = true;
+}
+
+?>
+
 
 
 <div class="boxnav">
@@ -22,29 +32,40 @@
 
         if (!$jesuissurindex) { ?>
         <form id="searchform" method="get" action="search.php">
-            <div class="input-group searchbar">
+            <div class="input-group">
 
-                <select name="Type" class="custom-select ">
-
-                    <option value="beats" class="dropdown-item">All beats</option>
+                <div class="input-group mb-4 border rounded-pill p-1">
 
 
-                    <option value="users" class="dropdown-item">All users </option>
 
 
-                </select>
+                    <div class="input-group-prepend border-0">
+
+                        <select name="Type" class="custom-select ">
+
+                            <option value="beats" class="dropdown-item">All beats</option>
 
 
-                <input id='searchbar' class="search_input form-control  mr-sm-" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
+                            <option value="users" class="dropdown-item">All users </option>
 
-                <div class="input-group-append">
-                    <button onclick="goSearch()" href="#" class="search_icon"><i class="fas fa-search"></i></button>
+
+                        </select>
+
+                        <button onclick="goSearch()" id="button-search" type="button" class="btn btn-link text-info search_icon"><i class="fa fa-search"></i></button>
+                    </div>
+                    <input id='searchbar'
+                           type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-describedby="button-search" class="form-control searchbar bg-none border-0">
                 </div>
+
+
+
 
 
 
             </div>
         </form>
+
+
 
 
         <?php  
@@ -61,13 +82,15 @@
             <ul class="navbar-nav ml-md-auto" >
                 <?php
                 // si je detecte une connexion alors
-                if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
+                if($connect){
 
                 ?>
+
+
                 <li class="nav-item ">
                     <a class="nav-link btn" href="messagerie.php">Messagerie<span class="sr-only">(current)</span></a>
                 </li>
-                
+
                 <li class="nav-item ">
                     <a class="nav-link btn" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
                 </li>
@@ -75,8 +98,8 @@
                 <li class="nav-item">
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#modalUpload"><img id="iconUpload" src="assets/img/icon/ui.svg"> Uploader </button>
                 </li>
-                
-                  <li class="nav-item dropdown ">
+
+                <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <img id="iconUser" src="assets/img/user.png">
                     </a>
@@ -84,22 +107,24 @@
 
                         <span class="dropdown-item  "> <?= $_SESSION['user_pseudo'] ?> </span>
                         <div class="dropdown-divider"></div>
-                       <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"> Mon Profil </a>
+                        <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"> Mon Profil </a>
                         <a class="dropdown-item  " href="#"> Mes Tracks </a>
 
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="deconnexion.php">Déconnexion</a>
+                        <a class="dropdown-item" href="deconnexion.php"><i class="fas fa-power-off"></i>Déconnexion</a>
                     </div>
                 </li>
-                
+
                 <li class="nav-item">
-                    <button class="nav-link btn" href="#" data-toggle="modal" data-target="#ModalPanier" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> Panier </button>
+
+                    <button class="nav-link btn" href="#" data-toggle="modal" data-target="#ModalPanier" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> <span id="span_nb_panier" class="badge badge-primary px-2 rounded-pill ml-2"></span> </button>
+
                 </li>
 
 
 
 
-              
+
 
 
                 <?php
@@ -146,7 +171,7 @@
                 <?php
                 }
                 ?>
-                
+
 
 
             </ul>
@@ -154,4 +179,102 @@
     </nav>
 
 </div>
+
+
+ <!--   *************************************************************  -->
+        <!--   ************************** MODAL PANIER  **************************  -->
+        <div class="modal fade" id="ModalPanier" tabindex="-1" role="dialog" aria-labelledby="ModalPanierLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalPanierLabel">Panier WeBeats</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="croixquit d-flex justify-content-center rounded" aria-hidden="true"><i class="fas fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="table-responsive">
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="p-2 px-3 text-uppercase">Product</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Price</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Remove</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <?php if($connect) { ?>
+                                <tbody id="tbodypanier">
+                                    <?php 
+    $req = $BDD->prepare("SELECT *
+                            FROM panier
+                            WHERE panier_user_id = ?");
+    $req->execute(array($_SESSION['user_id']));
+    $resuPANIER = $req->fetchAll();
+
+    foreach($resuPANIER as $p) {
+
+        $req = $BDD->prepare("SELECT *
+                                            FROM beat
+                                            WHERE beat_id = ?");
+        $req->execute(array($p['panier_beat_id']));
+        $resuPAN = $req->fetchAll();
+
+        foreach($resuPAN as $b) {
+
+
+
+
+                                    ?> 
+                                    <tr>
+
+
+                                        <th scope='row' class='border-0'>
+                                            <div class='p-2'>
+                                                <img src='<?=$b['beat_cover'] ?>' alt='' width='70' class='img-fluid rounded shadow-sm'>
+                                                <div class='ml-3 d-inline-block align-middle'> <h5 class='mb-0'> <a href='#' class='text-dark d-inline-block align-middle'><?=$b['beat_title'] ?></a></h5> <span class='text-muted font-weight-normal font-italic d-block'><?=$b['beat_author'] ?></span> 
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td class='border-0 align-middle'><strong><?php if($b['beat_price'] != 0.00) { echo $b['beat_price']; } else { echo "FREE";} ?></strong></td>
+                                        <td class='border-0 align-middle'>
+                                            <span class='text-dark' onclick="suppr2Panier(this,'<?=$b['beat_price'] ?>','<?=$b['beat_id'] ?>');"><i class='fa fa-trash'></i></span>
+                                        </td>
+                                    </tr>
+                                    <?php
+
+        }
+    }
+
+
+                                    ?>
+
+                                    <?php    } ?>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer" >
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
 

@@ -10,26 +10,28 @@
 }
 /* PETIT MUSIC CARD */
 .hover {  
-    height: var(--taille-img ); 
-  width: var(--taille-img );  
-  overflow: hidden;
-  position: relative;
-  padding-bottom: var(--taille-img ); 
-    
+    height: var(--taille-img );  
+  width: var(--taille-img );   
+  overflow: hidden;  
+  position: relative; 
+  padding-bottom: var(--taille-img );  
+     
     
 } 
- 
+  
 .hover-overlay {
   width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 90;
+  height: 100%;  
+  position: absolute; 
+  top: 0;  
+  left: 0; 
+  z-index: 90; 
   transition: all 0.4s;
+      
+    background: rgba(0, 0, 0, 0.05);  
 }
 
-.hover img {
+.hover img { 
   width: 100%;
   position: absolute;
   top: 0;
@@ -37,9 +39,6 @@
   transition: all 0.3s;
 } 
 
-.hover-overlay {
-  background: rgba(0, 0, 0, 0.4);
-} 
 
 .hover-5-title {
   position: absolute;
