@@ -57,11 +57,11 @@
             }
 
             function caBaisse() { 
-                son.volume = 0.2;
+                son.volume -= 0.1;
             } 
 
             function caMonte() { 
-                son.volume = 1.0;
+                son.volume += 0.1;
             } 
 
 
