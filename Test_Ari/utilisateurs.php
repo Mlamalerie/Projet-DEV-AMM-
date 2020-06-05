@@ -2,7 +2,7 @@
 session_start();
 $_SESSION['ici_index_bool'] = false;
 
-include('assets/db/connexiondb.php');
+include('../assets/db/connexiondb.php');
 /*active ça si tu veux pas te voir dans la liste si t'es connecté*/
 if(isset($_SESSION['user_id'])){
     $req =$BDD->prepare("SELECT * FROM user");
@@ -23,22 +23,22 @@ $afficher_membres=$req->fetchAll();
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <?php        require_once('assets/skeleton/headLinkCSS.html');
+        <?php        require_once('../assets/skeleton/headLinkCSS.html');
         ?>
         
         <!--    Lien pour défiler les pages    -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
         
         
-        <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
-        <link rel="stylesheet" type="text/css" src="assets/css/allutilisateurs.css">
+        <link rel="stylesheet" type="text/css" href="../assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" src="../assets/css/allutilisateurs.css">
         <title>All Users</title>
     </head>
 <body>
          <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('assets/skeleton/navbar.php');
+        require_once('../assets/skeleton/navbar.php');
         ?>
         <br/><br/><br/><br/>
 
@@ -115,7 +115,7 @@ $afficher_membres=$req->fetchAll();
 
            <!--      SCRIPTS      -->
     <?php 
-         require_once('assets/skeleton/endLinkScripts.php');
+         require_once('../assets/skeleton/endLinkScripts.php');
     ?>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script> 
