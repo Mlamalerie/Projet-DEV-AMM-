@@ -1000,14 +1000,6 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                             function ajoutBDDPanier(idbeat) {
                                                 console.log("ajoutBDD");
                                                 var xmlhttp = new XMLHttpRequest();
-
-<<<<<<< HEAD
-                                        <script >
-                                            
-                                            
-                                            function majBDDPanier() {
-                                                console.log("pan");
-=======
                                                 let idboug = <?= $_SESSION['user_id'] ?>; 
                                                 let ou = "sendPanierBDD.php?qq="
                                                 ou += idboug.toString();
@@ -1019,7 +1011,6 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                                             function supprBDDPanier(idbeat) {
                                                 console.log("supprBDD");
->>>>>>> b6636eb44436bf2c96c06bed1be910a61d80c351
                                                 var xmlhttp = new XMLHttpRequest();
 
                                                 let idboug = <?= $_SESSION['user_id'] ?>; 

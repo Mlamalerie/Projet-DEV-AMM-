@@ -15,6 +15,11 @@ L'installation de la base de données est indispensable au bon fonctionnement du
 Sur [phpmyadmin](http://localhost/phpmyadmin), installer les différentes bases de données situées dans le dossier BDD.  
 Connectez-vous avec l'identifiant 'root' et sans mot de passe.
 
+## Confirmation de votre commande
+
+La confirmation de votre commande se fera à partir d'une simulation de PayPal.
+Pour confirmer votre commande, entrer le mail : webeats@buy.com et le mot de passe : 12345678.
+
 ## Structure du Projet
 
 ```bash
