@@ -143,7 +143,7 @@ if(!empty($_POST)){
                                             ?>
                                             <label for="email">Votre Adresse Email</label>
                                             <input type="email" class="form-control rounded-pill border-0 shadow-sm px-4" id="email" name="email" aria-describedby="emailHelp" placeholder="Tapez votre e-mail" value="<?php if(isset($email)){echo $email;}?>">
-                                            <small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre.</small>
+                                           
                                         </div>
                                         <!--MOT DE PASSE-->
                                         <div class="form-group">
