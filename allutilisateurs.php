@@ -117,10 +117,32 @@ $afficher_membres=$req->fetchAll();
                                             <?=$am['user_statut']?>
                                         </td>
                                         <td>
-                                         
+                                           <?php
+                                            $req1 = $BDD->prepare("SELECT *
+                                                                    FROM relation
+                                                                    WHERE id_receveur = ? AND statut = 1");
+                                            $req1->execute(array($am['user_id']));
+                                            $nb_follow=0;
+
+                                            $resuRELA = $req1->fetchAll();
+                                            foreach($resuRELA as $rr){
+
+                                                foreach($rr as $key => $value){
+
+                                                    if($key =='statut' && $value== 1){
+
+                                                        $nb_follow++;
+                                                    }   
+                                                } 
+                                            }
+                                        
+                                        ?> 
+                                        <?= $nb_follow ?>
                                         </td>
                                         <td>
-                                            >
+                                            <button class="btn">Supprimer</button>
+                                            <button class="btn">Modifier</button>
+                                            <button class="btn">Désactiver</button>
                                         </td>
                                     </tr>
                                     <?php 
