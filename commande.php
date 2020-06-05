@@ -113,6 +113,8 @@ if (isset($_POST['AppliquerRedu'])) {
                                 <?php if(isset($reduction)) { ?> 
                                 <span>Reduction bien appliqué <?=($reduction*100)."%" ?></span>
 
+                                <?php } else if (isset($_POST['AppliquerRedu'])) { ?>
+                                <span class="text-danger">NAda mgl</span>
                                 <?php } ?>
                             </div>
 
@@ -176,6 +178,7 @@ if (isset($_POST['AppliquerRedu'])) {
                                     <a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Confirmer</a>
                                 </form>
                                 <?php require_once("assets/functions/js-panier.php"); ?>
+                                <span id="waitRedirigey"></span>
                             </div>
                         </div>
                     </div>

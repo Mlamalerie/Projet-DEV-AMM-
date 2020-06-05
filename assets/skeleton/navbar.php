@@ -1,6 +1,7 @@
 
 
-<?php $jesuissurindex = $_SESSION['ici_index_bool']; 
+<?php 
+$jesuissurindex = $_SESSION['ici_index_bool']; 
 
 ?>
 

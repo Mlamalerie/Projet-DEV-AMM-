@@ -111,12 +111,7 @@ if(!empty($_POST)){
         <title>Connexion</title>
     </head>
     <body>
-        <!--   *************************************************************  -->
-        <!--   ************************** NAVBAR  **************************  -->
-        <?php
-        require_once('assets/skeleton/navbar.php');
-        ?>
-
+      
         <div class="container-fluid">
             <div class="row no-gutter">
                 <!-- The image half -->

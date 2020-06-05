@@ -6,7 +6,7 @@
 /* *********************** */
 /* ******* NAV BAR ******* */
 :root {
-    --couleurdark: rgb(27, 21, 33);
+    --couleurdark: rgb(27, 21, 33); 
     --basepolice: ;   
     --base-border-radius : 10px;
     --couleur1: var(--base-color1);

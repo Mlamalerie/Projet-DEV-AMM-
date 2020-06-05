@@ -863,7 +863,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                                               }
                                                                           }
                                                 ?>
-                                                <?php if($r['beat_author_id'] != $_SESSION['user_id']) { ?>
+                                                <?php if(($okconnectey && $r['beat_author_id'] != $_SESSION['user_id']) || !$okconnectey) { ?>
                                                 <button id='btnbeat-<?=$r['beat_id']?>' 
 
                                                         <?php if($okconnectey) { ?>
