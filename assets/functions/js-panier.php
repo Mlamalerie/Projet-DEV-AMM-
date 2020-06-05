@@ -172,10 +172,10 @@
 
 
         let btn = document.getElementById('btnbeat-'+idsuppr.toString());
-        console.log("*",'btnbeat-'+idsuppr,btn); 
+        console.log("*",'btnbeat-'+idsuppr,euro,btn); 
 
         if(btn != null) {
-            if(parseFloat(euro) == 0.00) {roro = "FREE";} else {roro += "€"}
+            if(parseFloat(euro) == 0.00) {roro = "FREE";} else {roro = euro + "€"}
             btn.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>" + roro ;
 
         }

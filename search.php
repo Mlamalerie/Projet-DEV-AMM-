@@ -787,11 +787,9 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                                                      if ($yadesresultatsBEATS) {
-                                                                          $i = 1;
-                                                                          foreach($resuBEATS as $r){
+                                                                      if ($yadesresultatsBEATS) {$i = 1;foreach($resuBEATS as $r){
                                         ?>
-                                        <tr>
+                                        <tr class="border rounded ">
                                             <td class="pr-0 border-0 align-middle"><strong><?= $i ?></strong></td>
                                             <th scope="row" class="border-0 ">
                                                 <div class="p-0 ">
@@ -818,6 +816,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 </div>
 
                                             </th>
+                                            <!-- **LIKE -->
                                             <?php if($okconnectey) { ?>
                                             <td class="border-0 align-middle">
 
@@ -840,29 +839,31 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 <?php } ?>
                                             </td>
                                             <?php } ?>
+
+                                            <!-- **AJOUTER PANIER -->
                                             <td class="border-0 align-middle">
 
                                                 <?php 
-                                                                              $okdejadanspanier = false;
+                                                                          $okdejadanspanier = false;
 
-                                                                              if($okconnectey) {
-                                                                                  $req = $BDD->prepare("SELECT *
+                                                                          if($okconnectey) {
+                                                                              $req = $BDD->prepare("SELECT *
                                                                                         FROM panier
                                                                                         WHERE panier_user_id = ? AND panier_beat_id = ?");
-                                                                                  $req->execute(array($_SESSION['user_id'],$r['beat_id']));
+                                                                              $req->execute(array($_SESSION['user_id'],$r['beat_id']));
 
 
-                                                                                  $aff = $req->fetch();
+                                                                              $aff = $req->fetch();
 
 
 
-                                                                                  if(isset($aff['id'])){
-                                                                                      $okdejadanspanier = true;
+                                                                              if(isset($aff['id'])){
+                                                                                  $okdejadanspanier = true;
 
-                                                                                  }
                                                                               }
+                                                                          }
                                                 ?>
-
+                                                <?php if($r['beat_author_id'] != $_SESSION['user_id']) { ?>
                                                 <button id='btnbeat-<?=$r['beat_id']?>' 
 
                                                         <?php if($okconnectey) { ?>
@@ -879,7 +880,10 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                     <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup>
                                                     <?php if($r['beat_price'] != 0.00) { echo $r['beat_price'].'€'; } else {echo "FREE";} ?>
                                                     <?php } ?>
+
                                                 </button>
+                                                <?php } ?>
+
                                                 <?php  if($okdejadanspanier) {?>
                                                 <script>document.getElementById('btnbeat-<?=$r['beat_id']?>').innerHTML = 'Dans le panier';</script>
                                                 <?php } ?>
@@ -891,9 +895,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                         </tr>
                                         <?php
-                                                                              $i++;
-                                                                          }
-                                                                      }
+                                                                          $i++;}}
 
                                         ?>
                                         <script >
@@ -936,18 +938,18 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 }
 
                                             }
-                                         function goConnexionStp() {
+                                            function goConnexionStp() {
                                                 window.location.replace("connexion.php");
                                             } 
 
-                                            
-     
+
+
                                         </script>
-                                        
+
                                         <?php require_once("assets/functions/js-refreshBDD.php"); ?>
                                         <?php require_once("assets/functions/js-liker.php"); ?>
                                         <?php require_once("assets/functions/js-panier.php"); ?>
-                                   
+
 
                                     </tbody>
                                 </table>
@@ -962,18 +964,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                     </div>
 
                     <!--  END div blue -->
-                    <!--
-<ul class="list-group list-group-horizontal">
-<li class="list-group-item">First item</li>
-<li class="list-group-item">Second item</li>
-<li class="list-group-item">Third item</li>
-<li class="list-group-item">Fourth item</li>
-</ul> 
--->
+
 
                     <p class="lead font-italic mb-0">"Lorem ipsumnisi."</p>
 
-                    <?php }?>
+                    <?php } //end je cherche une prod ?>
                     <!--   *************************************************************  -->
                     <!--   ************************** RESULTAT USER **************************  -->
                     <?php if ($jechercheunboug || (!$wetypeexiste)) { ?>
