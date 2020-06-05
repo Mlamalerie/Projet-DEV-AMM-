@@ -21,7 +21,11 @@
     LEFT JOIN user u ON u.user_id = DM.id_user
     ORDER BY m.date_message DESC");
 
-    $req->execute(array('id'=>$_SESSION['user_id']));    
+    $req->execute(array('id'=>$_SESSION['user_id']));  
+
+    /*$req=$BDD->prepare("SELECT * FROM relation (id_demandeur, statut) VALUES (?,?)");
+    $req->execute(array($_SESSION['user_id'],3));   pour enlever les bloqués de la messagerie*/
+
     $afficher_conversation= $req ->fetchAll();
 
 
@@ -57,6 +61,7 @@
                    <table>
                     <?php
                         foreach($afficher_conversation as $ac){
+                            /*if($ac['statut']!=3){ enlever bloqués messagerie*/
                     ?>
                     <tr>
                         <td>
@@ -96,6 +101,7 @@
                         </td>
                     </tr>
                     <?php 
+                  /*  } */           
                         }
                     ?>
                     </table>

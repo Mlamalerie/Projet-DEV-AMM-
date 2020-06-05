@@ -31,7 +31,7 @@ if(!isset($verif_relation['id'])){
 $req= $BDD -> prepare("SELECT * 
                     FROM messagerie 
                     WHERE ((id_from,id_to)=(:id1,:id2) OR (id_from, id_to)=(:id2,:id1)) 
-                    ORDER BY date_message DESC
+                    ORDER BY date_message ASC
                     LIMIT 25");/*affichage limité à 25 messages*/
 $req->execute(array('id1'=>$_SESSION['user_id'], 'id2' => $get_id));
 
@@ -122,13 +122,7 @@ if(!empty($_POST)){
                             <input type="text" name="id" value ="<?= $am['id'] ?>" class="d-none">
                             <input type="submit" name="supprimer" value="Supprimer">
                         </form>
-                        <!--si on veut signaler un mssg-->
-                        <select>
-                            <option>Agression</option>
-                            <option>Contenant choquant</option>
-                            <option selected>Signaler(pour un abus par défaut)</option>
-                            <option>Atteinte à la pudeur</option>
-                        </select>
+                       
                       
                     </div>
                     <?php
@@ -137,6 +131,13 @@ if(!empty($_POST)){
                     ?>
                     <div>
                         <?= $am['message'] ?> <!--le message qu'on reçoit-->
+                         <!--si on veut signaler un mssg-->
+                        <select>
+                            <option>Agression</option>
+                            <option>Contenant choquant</option>
+                            <option selected>Signaler(pour un abus par défaut)</option>
+                            <option>Atteinte à la pudeur</option>
+                        </select>
                     </div>
                     <?php 
                         }
@@ -151,11 +152,11 @@ if(!empty($_POST)){
                     ?>
                     <form method="post">
                         <textarea placeholder="Votre message..." name="message"></textarea>
+                        <br/>
                         <input type="submit" name="envoyer" value="Envoyer"/>
+                        <input type="submit" name="bloquer" value="Supprimer la conversation"/>
                     </form>
-                    <form method="post">
-                        <input type="submit" name="bloquer" value="Bloquer"/>
-                    </form>
+                   
                 </div>
             </div>
         </div>
