@@ -897,8 +897,6 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                         ?>
                                         <script >
-
-
                                             function affichePasserCommande(ok){
                                                 let mdf = document.getElementsByClassName('modal-footer');
                                                 let aa = document.getElementById("passercommandes");
@@ -911,12 +909,12 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 if(ok){
 
                                                     let a = document.createElement('a');
-                                                    a.setAttribute('href','#');
+                                                    a.setAttribute('href','commande.php');
                                                     a.setAttribute('id','passercommandes');
                                                     let btn = document.createElement('button');
                                                     btn.setAttribute('type','button');
                                                     btn.setAttribute('class','btn btn-primary');
-                                                    btn.innerHTML = "PAsser Commandes"
+                                                    btn.innerHTML = "Passer Commandes"
                                                     a.appendChild(btn);
                                                     console.log(a);
 
@@ -938,201 +936,18 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                 }
 
                                             }
-                                            function refreshNbPanier() {
-                                                let tbody = document.getElementById("tbodypanier");
-                                                let ici = document.getElementById("span_nb_panier");
-                                                let nb = tbody.children.length;
-                                                console.log(nb,ici);
-
-                                                console.log(nb,ici);
-                                                if (nb != 0) {
-                                                    ici.innerHTML = nb;
-                                                    affichePasserCommande(true);
-                                                } else {
-                                                    ici.innerHTML = "";
-
-                                                    affichePasserCommande(false);
-                                                }
-                                                console.log(nb,ici);
-
-
-
-
-                                            }
-
-                                            function goConnexionStp() {
+                                         function goConnexionStp() {
                                                 window.location.replace("connexion.php");
                                             } 
 
-                                            function refreshBeatBDD(idbeat) {
-                                                console.log("refreshliker");
-                                                var xmlhttp = new XMLHttpRequest();
-
-                                                let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
-                                                let ou = "refreshBDDbeat.php?qq=";
-
-                                                ou += idbeat.toString(); // id du beat
-                                                console.log(ou);
-                                                xmlhttp.open("GET",ou,true);
-                                                xmlhttp.send();
-                                            }
-
-
-
-                                            function refreshAllBeats(){
-
-                                                <?php
-                                                                      $req = $BDD->prepare("SELECT beat_id FROM beat ");
-                                                                      $req->execute(array());
-                                                                      $listeBeats = $req->fetchAll();
-
-                                                                      foreach($listeBeats as $b) {
-                                                                          
-                                                ?> 
-                                                refreshBeatBDD(<?= $b['beat_id']?>); 
-                                                <?php
-                                                                      }
-                                                ?>
-
-
-                                            }
-
-
-
-
-
-
-                                            function liker(modemode,idbeat) {
-                                                console.log("liker");
-                                                var xmlhttp = new XMLHttpRequest();
-
-                                                let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
-                                                let ou = "goLikeBDD.php?qq=";
-                                                ou += modemode; // mode like ou dislike
-                                                ou += "-" + idboug.toString();
-                                                ou += "-" + idbeat.toString(); // id du beat
-                                                console.log(ou);
-                                                xmlhttp.open("GET",ou,true);
-                                                xmlhttp.send();
-                                            }
-
-                                            function goLikeuh(bay,idbeat) {
-                                                console.log(bay);
-                                                console.log();
-                                                let spannb = document.getElementById('span_nbLike-'+idbeat);
-                                                let n = spannb.innerHTML;
-                                                console.log(n);
-
-                                                // si le bay est liker
-                                                if(bay.classList.contains('coeur_active')) {
-                                                    bay.innerHTML = "<i class='far fa-heart'></i>";
-                                                    bay.classList.remove('coeur_active');
-                                                    liker("dislikedislike",idbeat) ;
-                                                    refreshBeatBDD(idbeat);
-                                                    spannb.innerHTML = parseInt(n) - 1;
-
-
-                                                } else {
-                                                    bay.innerHTML = "<i class='fas fa-heart'></i>"
-                                                    bay.classList.add('coeur_active');
-                                                    liker("likelike",idbeat);
-                                                    refreshBeatBDD(idbeat);
-                                                    spannb.innerHTML = parseInt(n) + 1;
-                                                }
-                                            }
-
-                                            function ajoutBDDPanier(idbeat) {
-                                                console.log("ajoutBDD");
-                                                var xmlhttp = new XMLHttpRequest();
-
-                                                let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
-                                                let ou = "sendPanierBDD.php?qq="
-                                                ou += idboug.toString();
-                                                ou += "-" + idbeat.toString();
-                                                console.log(ou);
-                                                xmlhttp.open("GET",ou,true);
-                                                xmlhttp.send();
-                                            }
-
-                                            function supprBDDPanier(idbeat) {
-                                                console.log("supprBDD");
-                                                var xmlhttp = new XMLHttpRequest();
-
-                                                let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
-                                                let ou = "deletePanierBDD.php?qq=";
-                                                ou += idboug.toString();
-                                                ou += "-" + idbeat.toString();
-                                                console.log(ou);
-                                                xmlhttp.open("GET",ou,true);
-                                                xmlhttp.send();
-                                            }
-                                            function creer1TR(b_title,b_author,b_price,b_cover,idbeat) {
-                                                let tbody = document.getElementById('tbodypanier');
-                                                let strID =  b_title + b_author + b_price + b_cover;
-                                                strID = strID.trim();
-                                                console.log(strID);
-                                                let tr = document.createElement('tr');
-
-                                                let prix = b_price.toString();
-                                                if (b_price == 0){
-                                                    prix = "FREE";
-                                                } 
-                                                let str = "<th scope='row' class='border-0'> <div class='p-2'> <img src='" + b_cover + "' alt='' width='70' class='img-fluid rounded shadow-sm'> <div class='ml-3 d-inline-block align-middle'> <h5 class='mb-0'> <a href='#' class='text-dark d-inline-block align-middle'>" + b_title + "</a></h5> <span class='text-muted font-weight-normal font-italic d-block'>" + b_author + "</span> </div></div></th><td class='border-0 align-middle'><strong>" + prix + "</strong></td>";
-                                                str += "<td class='border-0 align-middle'><span class='text-dark'><i class='fa fa-trash'></i></span></td>";
-                                                // note : faire du css sur le span pour faire faux lien style
-                                                tr.innerHTML = str ;
-
-                                                tr.children[2].children[0].setAttribute('onclick','suppr2Panier(this,"' + b_price + '","' + idbeat + '");');
-                                                console.log('ùù');
-                                                tbody.appendChild(tr);
-                                                return strID;
-
-                                            }
-
-                                            function go2Panier(btn,b_title,b_author,b_price,b_cover,idbeat) {
-
-                                                let textIn = "Dans le panier";
-                                                console.log(btn.innerHTML , textIn, (btn.value != textIn))
-                                                // titre, prix
-
-                                                if (btn.innerHTML != textIn) {
-
-                                                    let strID = creer1TR(b_title,b_author,b_price,b_cover,idbeat)
-                                                    btn.innerHTML = textIn;
-                                                    //btn.id = strID;
-
-                                                    ajoutBDDPanier(idbeat);
-
-
-                                                    //                    btn.classList.add(strID);
-                                                } 
-
-                                                refreshNbPanier();
-
-
-                                            }
-                                            function suppr2Panier(icon,euro,idsuppr) {
-                                                console.log("**suppr");
-                                                let tr = icon.parentNode.parentNode;
-                                                let ici = icon.parentNode.parentNode.parentNode;
-                                                console.log(tr,ici);
-                                                ici.removeChild(tr);
-
-
-                                                let btn = document.getElementById('btnbeat-'+idsuppr.toString());
-                                                console.log("*",'btnbeat-'+idsuppr,btn); 
-
-                                                if(btn != null) {
-                                                    if(parseFloat(euro) == 0.00) {euro = "FREE";} else {euro += "€"}
-                                                    btn.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>" + euro ;
-
-                                                }
-                                                supprBDDPanier(idsuppr);
-                                                refreshNbPanier();
-
-
-                                            }
+                                            
+     
                                         </script>
+                                        
+                                        <?php require_once("assets/functions/js-refreshBDD.php"); ?>
+                                        <?php require_once("assets/functions/js-liker.php"); ?>
+                                        <?php require_once("assets/functions/js-panier.php"); ?>
+                                   
 
                                     </tbody>
                                 </table>
