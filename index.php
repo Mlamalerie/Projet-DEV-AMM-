@@ -8,9 +8,7 @@ $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     
     $okconnectey = true;
-} else{
-    echo "Pas de connexion";
-}
+} 
 ?>
 
 <!DOCTYPE html>

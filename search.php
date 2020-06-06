@@ -1007,7 +1007,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                         <?php  if (isset($resuUSERS)) {
     foreach($resuUSERS as $r){ 
 
-        if($r['user_role'] == 2 || $r['user_role'] == 0) {
+        if( ($r['user_role'] == 2 || $r['user_role'] == 0) && ($r['user_statut'] == 1) ) {
                         ?>
 
 

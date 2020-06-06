@@ -1,14 +1,30 @@
 <?php
 session_start();
-
+$_SESSION['ici_index_bool'] = false;
 include('assets/db/connexiondb.php'); 
 
 print_r($_GET);
 print_r("<br>");
 print_r($_POST);
-// ta rien a faire ici si c pas toi le boug
 
 $baseid = (int) $_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
+
+$okconnectey = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
+    $okconnectey = true;
+} else {
+    header('Location: connexion.php');
+    exit;
+}
+// ta rien a faire ici si c pas toi le boug
+if(empty($baseid)){
+    header('Location: editer-profil.php?profil_id='.$_SESSION['user_id']);
+    exit;
+}
+if($_SESSION['user_id'] != $baseid && $_SESSION['user_role'] != 0 ){
+    header('Location: editer-profil.php?profil_id='.$_SESSION['user_id']);
+    exit;
+}
 
 $req = $BDD->prepare("SELECT * 
     FROM user 
@@ -428,12 +444,15 @@ if(!empty($_POST)){
         <?php
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/editer-profil.css">
 
     </head>
     <body>
 
-
+        <?php
+        require_once('assets/skeleton/navbar.php');
+        ?>
         <div class="container py-5">
             <!-- For demo purpose -->
             <div class="row mb-1">

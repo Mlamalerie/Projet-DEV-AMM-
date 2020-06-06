@@ -20,55 +20,34 @@ $jesuissurindex = $_SESSION['ici_index_bool'];
         </button>
         <!--   Barre de recherche     -->
         <!--   Barre de recherche     -->
-        <?php 
+        <?php if (!$jesuissurindex) { ?>
+
+        <form id="searchform" method="get" action="search.php" class="form-inline nav-brand " style="margin-bottom: 0px;">
+
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <select name="Type" class=" rounded-pill btn-block shadow-sm custom-select" >
+
+                        <option value="beats" class="dropdown-item">All beats</option>
 
 
-        if (!$jesuissurindex) { ?>
-        <form id="searchform" method="get" action="search.php">
-            <div class="input-group">
-
-                <div class="input-group mb-4 border rounded-pill p-1">
+                        <option value="users" class="dropdown-item">All users </option>
 
 
-
-
-                    <div class="input-group-prepend border-0">
-
-                        <select name="Type" class="custom-select ">
-
-                            <option value="beats" class="dropdown-item">All beats</option>
-
-
-                            <option value="users" class="dropdown-item">All users </option>
-
-
-                        </select>
-
-                        <button onclick="goSearch()" id="button-search" type="button" class="btn btn-link text-info search_icon"><i class="fa fa-search"></i></button>
-                    </div>
-                    <input id='searchbar'
-                           type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-describedby="button-search" class="form-control searchbar bg-none border-0">
+                    </select>
                 </div>
+                <div class="form-group col-md-9">
+                    <input id="exampleFormControlInput6" type="email" placeholder="What're you searching for?" class="form-control form-control-underlined">
+                </div>
+            </div>s
+            <!--
 
-
-
-
-
-
-            </div>
+<button onclick="goSearch()" id="button-search" type="button" class="btn btn-link text-info search_icon"><i class="fa fa-search"></i></button>
+<input id='searchbar'
+type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-describedby="button-search" class="form-control searchbar bg-none border-0">
+-->
         </form>
-
-
-
-
-        <?php  
-        }
-
-
-
-
-
-        ?>
+        <?php } ?>
 
         <!--            Menu droite -->
         <div class="collapse navbar-collapse" id="navbarNavDropdown">

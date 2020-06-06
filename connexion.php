@@ -51,7 +51,7 @@ if(!empty($_POST)){
             }
         }
 
-        $req = $BDD->prepare("SELECT user_id
+        $req = $BDD->prepare("SELECT user_id,user_statut
                             FROM user
                             WHERE user_email = ? AND user_password = ?
                                 ");
@@ -62,6 +62,14 @@ if(!empty($_POST)){
             $ok = false;
             $err_email = " Adresse e-mail ou mot de passe invalide";
 
+        } else {
+            if($verif_user['user_statut'] == 0) {
+            $ok = false;
+            $err_email = " Pour des raisons, votre compte à été désactivé.";
+            }
+
+            
+            
         }
 
         if($ok){//tout est bon on a bien l'utilisateur
