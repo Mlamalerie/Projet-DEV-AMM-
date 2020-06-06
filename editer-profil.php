@@ -874,7 +874,10 @@ if(!empty($_POST)){
 
                             <p class="custom-control custom-switch m-0">
                                 <input onchange="goBtnSave(this,4)" name="roleee" class="custom-control-input" id="roleee" type="checkbox" <?php if(isset($baserole) && ($baserole == 2)) { ?> checked <?php } ?> >
-                                <label class="custom-control-label font-italic" for="roleee">Mode Produceur activé </label>
+                                <label class="custom-control-label font-italic" for="roleee">Mode Produceur activé *</label>
+                                <br/>
+                                <label>*Activez ce mode si vous ne souhaitez pas être visible par les autres membres de WeBeatz.
+                                <br/>On ne pourra pas vous trouver à partir de la barre de recherche.</label>
                                 <?php
                                 if(isset($err_sexe)){
                                     echo "<span class='spanAlertchamp'> ";
