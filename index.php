@@ -1,18 +1,16 @@
 <?php
 session_start();
-
+include_once("assets/db/connexiondb.php");
 $_SESSION['ici_index_bool'] = true;
 ?>
-
 <?php
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
-    print_r($_SESSION);
+    
     $okconnectey = true;
-} else{
-    echo "Pas de connexion";
-}
+} 
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -28,7 +26,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar-index-turfu.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/navbar_responsive.css">
+
 
         <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">
 
@@ -40,9 +38,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <link rel="stylesheet" href="assets/css/slick.css">
         <link rel="stylesheet" href="assets/css/slide.css">
 
-        <title>WeBeats</title>
+        <title>WeBeatz</title>
     </head>
     <body>
+        
+
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
 
@@ -76,7 +76,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                         <p class="lead mb-0">Pour pouvoir acheter ou vendre des prods  <a href="inscription.php"><button type="button" class="btn btn-danger btninscription" >Inscrivez-vous</button></a></p><br/>
 
                         <form id="searchform" method="get" action="search.php">
-                           
+
 
                             <div class="searchbar ">
 
@@ -93,7 +93,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         </header>
         <script src="assets/js/search.js"></script>
         <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
-   
+
         <div id="countdown">
             Temps restant pour le projet :
             <span id="d"></span>
@@ -123,7 +123,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                             </div>
                         </div>
                         <div class="items">
-                             <div class="hover hover-5 text-white rounded"><img src="img/bigmetro.jpg" alt="">
+                            <div class="hover hover-5 text-white rounded"><img src="img/bigmetro.jpg" alt="">
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
                                 <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Big Sean(ft Travis Scott)<strong class="font-weight-bold text-white">
@@ -139,7 +139,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                             </div>
                         </div>
                         <div class="items">
-                           <div class="hover hover-5 text-white rounded"><img src="img/DB5.jpg" alt="">
+                            <div class="hover hover-5 text-white rounded"><img src="img/DB5.jpg" alt="">
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
                                 <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Leto<strong class="font-weight-bold text-white">
@@ -155,7 +155,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                             </div>
                         </div>
                         <div class="items">
-                             <div class="hover hover-5 text-white rounded"><img src="img/Sch.jpg" alt="">
+                            <div class="hover hover-5 text-white rounded"><img src="img/Sch.jpg" alt="">
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
                                 <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Sch<strong class="font-weight-bold text-white">
@@ -167,7 +167,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
                                 <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Roddy Rich<strong class="font-weight-bold text-white">
-                                     Tip toe</strong><span> 2020</span></h6>
+                                    Tip toe</strong><span> 2020</span></h6>
                             </div>
                         </div>
                         <div class="items">
@@ -175,17 +175,17 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
                                 <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Spri(ft 4Keus)<strong class="font-weight-bold text-white">
-                                     Night and Day</strong><span> 2020</span></h6>
+                                    Night and Day</strong><span> 2020</span></h6>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="slider-btn rounded-circle">
                         <span class="prev1 position-top"><i class="fas fa-chevron-left"></i></span>
                         <span class="next1 position-top right-0"><i class="fas fa-chevron-right"></i></span>
                     </div>
 
-                    
+
                 </div>
             </div>      
         </section>
@@ -197,7 +197,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                     <h2 class="h1 mb-4 text-center text-white">TOP des ventes</h2>
 
                     <div class="my_slides multipleitems2">
-                         <div class="items">
+                        <div class="items">
                             <div class="hover hover-5 text-white rounded"><img src="img/Laylow.jpg" alt="">
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
@@ -207,7 +207,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                             </div>
                         </div>
                         <div class="items">
-                             <div class="hover hover-5 text-white rounded"><img src="img/bigmetro.jpg" alt="">
+                            <div class="hover hover-5 text-white rounded"><img src="img/bigmetro.jpg" alt="">
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
                                 <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Big Sean(ft Travis Scott)<strong class="font-weight-bold text-white">
@@ -223,7 +223,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                             </div>
                         </div>
                         <div class="items">
-                           <div class="hover hover-5 text-white rounded"><img src="img/DB5.jpg" alt="">
+                            <div class="hover hover-5 text-white rounded"><img src="img/DB5.jpg" alt="">
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
                                 <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Leto<strong class="font-weight-bold text-white">
@@ -239,7 +239,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                             </div>
                         </div>
                         <div class="items">
-                             <div class="hover hover-5 text-white rounded"><img src="img/Sch.jpg" alt="">
+                            <div class="hover hover-5 text-white rounded"><img src="img/Sch.jpg" alt="">
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
                                 <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Sch<strong class="font-weight-bold text-white">
@@ -251,7 +251,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
                                 <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Roddy Rich<strong class="font-weight-bold text-white">
-                                     Tip toe</strong><span> 2020</span></h6>
+                                    Tip toe</strong><span> 2020</span></h6>
                             </div>
                         </div>
                         <div class="items">
@@ -259,7 +259,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
                                 <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Spri(ft 4Keus)<strong class="font-weight-bold text-white">
-                                     Night and Day</strong><span> 2020</span></h6>
+                                    Night and Day</strong><span> 2020</span></h6>
                             </div>
                         </div>
                     </div>
@@ -411,41 +411,6 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
             </div>
         </section>
 
-        
-
-    <nav class="navplayer fixed-bottom">        
-        <audio src="./audio/go_legend.mp3" id="song"></audio>
-        <div class="box">     
-        <img src="./img/bigmetro.jpg" id="thumbnail" />
-        
-        <img src="./assets/icon/play.png" onclick="playPause(songIndex)" id="play-pause" />
-        <img src="./assets/icon/forward.png" onclick="nextSong()" id="next-song" />
-        <img src="./assets/icon/backward.png" onclick="previousSong()" id="previous-song" />
-
-        <div class="song-artist">WeBeats</div>
-        <div class="song-title"></div>
-
-        <input 
-            type="range" 
-            id="progress-bar" 
-            min="0" 
-            max="" 
-            value="0" 
-            onchange="changeProgressBar()"
-        />
-
-        <a href="?action=add">
-        <button type="button" class="btn btn-light btn-buy">Acheter</button>
-        </a>
-
-        <div class="currentTime"></div>
-        <div class="durationTime"></div>
-    </div>
-    </nav>
-
-
-
-
 
 
         <!--   *************************************************************  -->
@@ -510,9 +475,9 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <!-- End -->
 
 
-       
-       
-<!--  JS du MusicPlayer  -->
+
+
+        <!--  JS du MusicPlayer  -->
         <script id="scriptDuPlayer" src="assets/skeleton/AudioPlayer/audioplayer.js"></script>
 
 
@@ -525,11 +490,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         ?>
         <!--     RECHERCHE  -->
 
-       
+
         <!--        COMPTE A REBOURS -->
         <script src="assets/js/comptearebours.js"></script>
         <!--    END     COMPTE A REBOURS -->
-        
+
         <!-- SCRIPT SLIDES       -->
         <script src="assets/js/slick.min.js"></script>
         <script src="assets/js/slide.js"></script>

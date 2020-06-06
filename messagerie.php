@@ -31,6 +31,17 @@
 
 ?>
 
+<?php
+$okconnectey = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
+    
+    $okconnectey = true;
+} else{
+    header('Location: index.php');
+    exit;
+}
+?>
+
 
 <!DOCTYPE html>
 

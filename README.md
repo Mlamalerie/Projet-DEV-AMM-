@@ -20,6 +20,13 @@ Connectez-vous avec l'identifiant 'root' et sans mot de passe.
 La confirmation de votre commande se fera à partir d'une simulation de PayPal.
 Pour confirmer votre commande, entrer le mail : webeats@buy.com et le mot de passe : 12345678.
 
+## Réseaux sociaux
+
+gmail: webeatzprod@gmail.com ; mot de passe: Webeatz123! 
+facebook : idem
+instagram : idem
+twitter : idem
+
 ## Structure du Projet
 
 ```bash

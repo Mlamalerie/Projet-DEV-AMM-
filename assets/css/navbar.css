@@ -1,4 +1,4 @@
- .boxnav {
+.boxnav {
     top : 0;
     z-index: 600;
 }
@@ -6,7 +6,7 @@
 /* *********************** */
 /* ******* NAV BAR ******* */
 :root {
-    --couleurdark: rgb(27, 21, 33);
+    --couleurdark: rgb(27, 21, 33); 
     --basepolice: ;   
     --base-border-radius : 10px;
     --couleur1: var(--base-color1);
@@ -73,20 +73,20 @@
 /* BARRE DE RECHERCHE */
 .searchbar {
     background-color: none;
-  border-width: 0;
-  border-bottom-width: 1px;
-  border-radius: 0;
-  padding-left: 0;
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-radius: 0;
+    padding-left: 0;
 }
 
 .searchbar:focus{ 
-  box-shadow: none; 
+    box-shadow: none; 
 }
 
 .searchbar::placeholder{
-  font-size: 0.95rem;
-  color: #aaa;
-  font-style: italic;   
+    font-size: 0.95rem;
+    color: #aaa;
+    font-style: italic;   
 }
 
 
@@ -95,7 +95,21 @@
 
 img#iconPanier,img#iconUpload ,img#iconUser {
     width: 1.6rem;
-     
+
 }
+
+.compteurPanier 
+{
+    background-color: #b800d0;
+    position: absolute;
+ 
+    transform: scale(1.2);
+    transform-origin: top right;
+    right: .25rem;
+    margin-top: -.99rem;
+
+   
+}
+
 
 

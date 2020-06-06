@@ -1,6 +1,6 @@
 <script id="fonctionsPanier">
-    function redir(){
-        self.location.href="search.php";
+    function redir(str){
+        self.location.href=str;
     }
     function afficherConfirmerDansCommande(){
         let tbody = document.getElementById("tbodypanier");
@@ -10,8 +10,9 @@
         if (nb != 0) {
             btn.style = "display : ;"
         } else {
-            setTimeout(redir,5000);
+            setTimeout(redir("search.php"),5000);
             btn.style = "display : none ;"
+            document.getElementById('waitRedirigey').innerHTML = "Votre panier est vide, Vous allez être redirigé dans 5sec.. vers une autre page pour le remplir";
 
         }
 
@@ -172,10 +173,10 @@
 
 
         let btn = document.getElementById('btnbeat-'+idsuppr.toString());
-        console.log("*",'btnbeat-'+idsuppr,btn); 
+        console.log("*",'btnbeat-'+idsuppr,euro,btn); 
 
         if(btn != null) {
-            if(parseFloat(euro) == 0.00) {roro = "FREE";} else {roro += "€"}
+            if(parseFloat(euro) == 0.00) {roro = "FREE";} else {roro = euro + "€"}
             btn.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>" + roro ;
 
         }

@@ -51,7 +51,7 @@ if(!empty($_POST)){
             }
         }
 
-        $req = $BDD->prepare("SELECT user_id
+        $req = $BDD->prepare("SELECT user_id,user_statut
                             FROM user
                             WHERE user_email = ? AND user_password = ?
                                 ");
@@ -62,6 +62,14 @@ if(!empty($_POST)){
             $ok = false;
             $err_email = " Adresse e-mail ou mot de passe invalide";
 
+        } else {
+            if($verif_user['user_statut'] == 0) {
+            $ok = false;
+            $err_email = " Pour des raisons, votre compte à été désactivé.";
+            }
+
+            
+            
         }
 
         if($ok){//tout est bon on a bien l'utilisateur
@@ -111,12 +119,7 @@ if(!empty($_POST)){
         <title>Connexion</title>
     </head>
     <body>
-        <!--   *************************************************************  -->
-        <!--   ************************** NAVBAR  **************************  -->
-        <?php
-        require_once('assets/skeleton/navbar.php');
-        ?>
-
+      
         <div class="container-fluid">
             <div class="row no-gutter">
                 <!-- The image half -->
@@ -148,7 +151,7 @@ if(!empty($_POST)){
                                             ?>
                                             <label for="email">Votre Adresse Email</label>
                                             <input type="email" class="form-control rounded-pill border-0 shadow-sm px-4" id="email" name="email" aria-describedby="emailHelp" placeholder="Tapez votre e-mail" value="<?php if(isset($email)){echo $email;}?>">
-                                            <small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre.</small>
+                                           
                                         </div>
                                         <!--MOT DE PASSE-->
                                         <div class="form-group">

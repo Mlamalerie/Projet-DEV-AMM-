@@ -2,12 +2,6 @@
 session_start();
 $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
-$prix = $_POST['khalassCa'];
-print_r($_POST);
-if($prix == 0){     
-    header('Location: bravo.php');      
-    exit(); 
-}
 ?>
 
 <?php
@@ -54,6 +48,19 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                 background: linear-gradient(to right, #eecda3, #ef629f);
                 min-height: 100vh;
             }
+
+
+            .btn-fini {
+                color: #fff;
+                background-color: #c700ff;
+                border-color: #da00ff;
+            }
+            .btn-fini:hover {
+                color: #fff;
+                background-color: #7d129b;
+                border-color: #7d129b;
+            }
+
         </style>
 
 
@@ -64,8 +71,8 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <div class="px-4 px-lg-0">
             <!-- For demo purpose -->
             <div class="container text-white py-5 text-center">
-                <h1 class="display-4">Panier WeBeats</h1>
-                <p class="lead mb-0">Confirmation de commande</p>
+                <h1 class="display-4">WeBeatz</h1>
+                <p class="lead mb-0">Merci de votre confiance</p>
             </div>
             <!-- End -->
 
@@ -77,45 +84,18 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                             <!-- Shopping cart table -->
                             <div class="table-responsive">
                                 <table class="table">
-                                    <div>Montant à payer : <?php echo $prix; ?> &euro; </div>
+                                    <div> Votre commande a bien été effectuée. Vous recevrez un mail de confirmation de votre achat contenant votre commande à l'adresse <?php echo $_SESSION['user_email']; ?> </div>
+                                    <br/>
+                                    <a href="search.php">
+                                        <button type="submit" class="btn btn-primary btn-fini rounded-pill">Continuer à chercher</button>
+                                    </a>
+                                    <a href="index.php">
+                                        <button type="submit" class="btn btn-primary btn-fini rounded-pill">Retourner à l'accueil</button>
+                                    </a>
                                 </table>
                             </div>
 
 
-                            <div id="paypal-button-container"></div>
-                            <script src="https://www.paypal.com/sdk/js?client-id=Ae0hwalIu4jYQfJOup2Toy5iQHgLlK84Upq3nYmfD6y7UeQgyJDRrFOv-yI2IJZXUXhiXKhhPMhph1XV&currency=EUR" data-sdk-integration-source="button-factory"></script>
-                            <script>
-                                paypal.Buttons({
-                                    style: {
-                                        shape: 'pill',
-                                        color: 'blue',
-                                        layout: 'horizontal',
-                                        label: 'pay',
-
-                                    },
-                                    createOrder: function(data, actions) {
-                                        return actions.order.create({
-                                            purchase_units: [{
-                                                amount: {
-                                                    value: '<?php echo $prix; ?>'
-                                                }
-                                            }]
-                                        });
-                                    },
-                                    onApprove: function(data, actions) {
-                                        return actions.order.capture().then(function(details) {
-                                            alert('Transaction effectuée ! ';
-                                            setTimeout(redir("bravo.php"),2000);
-                                        });
-                                    }
-                                }).render('#paypal-button-container');
-                            </script>
-
-
-
-
-
-                            <!-- End -->
                         </div>
                     </div>
 

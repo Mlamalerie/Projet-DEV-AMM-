@@ -71,6 +71,13 @@ if (isset($_POST['AppliquerRedu'])) {
     <body onload="actualiserTOTALTOTAL()">
 
 
+
+
+
+
+
+
+
         <div class="px-4 px-lg-0">
             <!-- For demo purpose -->
             <div class="container text-white py-5 text-center">
@@ -106,6 +113,8 @@ if (isset($_POST['AppliquerRedu'])) {
                                 <?php if(isset($reduction)) { ?> 
                                 <span>Reduction bien appliquée <?=($reduction*100)."%" ?></span>
 
+                                <?php } else if (isset($_POST['AppliquerRedu'])) { ?>
+                                <span class="text-danger">NAda mgl</span>
                                 <?php } ?>
                             </div>
 
@@ -166,11 +175,10 @@ if (isset($_POST['AppliquerRedu'])) {
                                 </ul> 
                                 <form id='formConfirmer' action="confirmation.php" method="post">
                                     <input type="hidden" name="khalassCa" id="khalassCa">
-                                    <input name="" type="text" />
-                                    <input type="button" value="Bouton cliquer">
-                                    <a type="submit" href="confirmation.php" class="btn btn-dark rounded-pill py-2 btn-block">Confirmer</a>
+                                    <button type="button" onclick="document.getElementById('formConfirmer').submit()" href="confirmation.php" class="btn btn-dark rounded-pill py-2 btn-block">Confirmer</button>
                                 </form>
                                 <?php require_once("assets/functions/js-panier.php"); ?>
+                                <span id="waitRedirigey"></span>
                             </div>
                         </div>
                     </div>
@@ -189,7 +197,7 @@ if (isset($_POST['AppliquerRedu'])) {
 
 
                     ?>
-
+                                  
                 
                 </div>
             </div>

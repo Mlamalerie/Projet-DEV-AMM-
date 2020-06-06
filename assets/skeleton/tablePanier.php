@@ -1,3 +1,5 @@
+           <!--    TABLE DU PANIER -->
+
 <div class="table-responsive">
 
     <table class="table">
@@ -37,21 +39,32 @@
 
 
             ?> 
-            <tr>
+
+            <tr class="rounded border-bottom border-light">
+
 
 
                 <th scope='row' class='border-0'>
                     <div class='p-2'>
                         <img src='<?=$b['beat_cover'] ?>' alt='' width='70' class='img-fluid rounded shadow-sm'>
-                        <div class='ml-3 d-inline-block align-middle'> <h5 class='mb-0'> <a href='#' class='text-dark d-inline-block align-middle'><?=$b['beat_title'] ?></a></h5> <span class='text-muted font-weight-normal font-italic d-block'><?=$b['beat_author'] ?></span> 
+                        <div class='ml-3 d-inline-block align-middle'> 
+                            <h5 class='mb-0'> <a href="view-beat.php?id=<?= $b['beat_id']?>" class='text-dark d-inline-block align-middle'><?=$b['beat_title'] ?></a>
+                            </h5>
+                            <a href="profils.php?profil_id=<?= $b['beat_author_id']?>" class="text-dark d-inline-block align-middle"> <span class='text-muted font-weight-normal font-italic d-block'><?=$b['beat_author'] ?></span></a> 
                         </div>
                     </div>
                 </th>
-                <td class='border-0 align-middle'><strong><?php if($b['beat_price'] != 0.00) { echo $b['beat_price']; } else { echo "FREE";} ?></strong></td>
+                <td class='border-0 align-middle'><strong><?php if($b['beat_price'] != 0.00) { echo $b['beat_price']; } else { echo "FREE";} ?></strong>
+                </td>
+
                 <td class='border-0 align-middle'>
                     <span class='text-dark' onclick="suppr2Panier(this,'<?=$b['beat_price'] ?>','<?=$b['beat_id'] ?>');"><i class='fa fa-trash'></i></span>
                 </td>
+
+
             </tr>
+
+
             <?php
 
         }
