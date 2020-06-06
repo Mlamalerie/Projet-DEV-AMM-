@@ -8,6 +8,7 @@ $listeGenres = ['Hip Hop','Trap','R&B','Soul','Afro','Deep','Pop','Rock','Reggae
 sort($listeGenres);
 $_SESSION["listeGenres"] = $listeGenres;
 
+print(var_dump($_SERVER));
 
 
 {

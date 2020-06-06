@@ -4,7 +4,7 @@ class uploadFile{
 
 
 
-    function uploadAudio($tmp_name,$name,$nomduboug,$idduboug,$idubeat){
+    function uploadAudio($tmp_name,$name,$nomduboug,$idduboug){
         $formataudio = array('mp3','ogg','wav','wma','m4a');
 
         $nn = pathinfo($name);
@@ -14,7 +14,7 @@ class uploadFile{
         // si le fichier est un bien un fichier audio
         if (in_array($ext,$formataudio)){
 
-            $name = $idduboug.'-beat-'.$iddubeat.'.'.$ext;
+            $name = $idduboug.'-beat-x.'.$ext;
 
 
             $dir = 'data/'.$idduboug.'-'.$nomduboug.'/beats/';
@@ -41,23 +41,16 @@ class uploadFile{
 
             // PLACER
             if(move_uploaded_file($tmp_name,$direction)){
-                echo "<br><br>FICHIER ENVOYER AVEC SUCCES <br>";
                 return $direction;
-
             }
             // Erreur de placement
             else{
                 return 'error2';
-
             }
-
         } 
         // ce n'est pas un fichier audio
         else {
-
             return 'error1';
-
-
         }
     } // END function uploadAudio
 

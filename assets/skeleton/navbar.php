@@ -24,22 +24,22 @@ $jesuissurindex = $_SESSION['ici_index_bool'];
 
         <form id="searchform" method="get" action="search.php" class="form-inline nav-brand " style="margin-bottom: 0px;">
 
-               
-                <div class="form-group row mr-2">
-                    <input id='searchbar'
-                           type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-describedby="button-search" class="form-control rounded-pill form-control-underlined ">
-                    <div class="input-group-append">
-                        <select name="Type" class=" rounded-pill btn-block shadow-sm custom-select" >
 
-                            <option value="beats" class="dropdown-item">All beats</option>
+            <div class="form-group row mr-2">
+                <input id='searchbar'
+                       type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-describedby="button-search" class="form-control rounded-pill form-control-underlined ">
+                <div class="input-group-append">
+                    <select name="Type" class=" rounded-pill btn-block shadow-sm custom-select" >
 
-
-                            <option value="users" class="dropdown-item">All users</option>
+                        <option value="beats" class="dropdown-item">All beats</option>
 
 
-                        </select>
-                    </div>
-              
+                        <option value="users" class="dropdown-item">All users</option>
+
+
+                    </select>
+                </div>
+
             </div>
             <!--
 
@@ -235,157 +235,165 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
 <!--   *************************************************************  -->
 <!--   ************************** MODAL UPLOAD  **************************  -->
-        <div  class=" modal fade" id="modalUpload" tabindex="-1" role="dialog" aria-labelledby="modalUploadTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content ">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Uploader</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form id='formUpload1' action="edit-newupload.php" method="post" enctype="multipart/form-data">
-
-                        <div class="modal-body" id="modalBodyUpload">
-
-                            <!-- FICHIER -->
-                            <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-
-                                <input accept=".mp3, .wav" onchange="gogoUpload();" id="uploadAudio" name="uploadAudio" type="file" class="form-control border-0">
 
 
-                                <label id="uploadAudio-label" for="uploadAudio" class="font-weight-light text-muted">Choose Audio file</label>
-                                <div class="input-group-append">
+<div  class=" modal fade" id="modalUpload" tabindex="-1" role="dialog" aria-labelledby="modalUploadTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Uploader</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id='formUpload1' action="edit-newupload.php" method="post" enctype="multipart/form-data">
 
-                                    <label for="uploadAudio" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                <div class="modal-body" id="modalBodyUpload">
 
-                                </div>
+                    <!-- FICHIER -->
+                    <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
 
-                                <script>
-                                    var inputAudio = document.getElementById( 'uploadAudio' );
-                                    var infoAreaAudio = document.getElementById('uploadAudio-label');
-
-
-                                    inputAudio.addEventListener( 'change', showFileNameAudio );
-
-                                    function showFileNameAudio( event ) {
-                                        var inputAudio = event.srcElement;
-                                        var fileName = inputAudio.files[0].name;
-                                        infoAreaAudio.innerHTML = ': ' + fileName;
-
-                                    }
-
-                                </script>
-
-                            </div>
+                        <input accept=".mp3, .wav" onchange="gogoUpload();" id="uploadAudio" name="uploadAudio" type="file" class="form-control border-0">
 
 
-                            <span id="spanErreurUpload" class="text-danger d-none"> </span>
+                        <label id="uploadAudio-label" for="uploadAudio" class="font-weight-light text-muted">Choose Audio file</label>
+                        <div class="input-group-append">
 
-                            <br>
-                            <input id="submit_upload" onclick="document.getElementById('formUpload1').submit();" name="submit_upload" class="btn btn-primary d-none" value="uploadMoiCa">
+                            <label for="uploadAudio" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i>
+                                <small class="text-uppercase font-weight-bold text-muted">Choose file</small>
+                            </label>
+
                         </div>
-                        <!--
+
+                        <script>
+                            var inputAudio = document.getElementById( 'uploadAudio' );
+                            var infoAreaAudio = document.getElementById('uploadAudio-label');
+
+
+                            inputAudio.addEventListener( 'change', showFileNameAudio );
+
+                            function showFileNameAudio( event ) {
+                                var inputAudio = event.srcElement;
+                                var fileName = inputAudio.files[0].name;
+                                infoAreaAudio.innerHTML = ': ' + fileName;
+
+                            }
+
+                        </script>
+
+                    </div>
+
+
+                    <span id="spanErreurUpload" class="text-danger d-none"> </span>
+
+                    <br>
+                    
+                </div>
+                <!--
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
 
 </div>
 -->
-                    </form>
-                    <?php 
+            </form>
+            <?php 
 
 
-                    ?>
-                    <script>
+            ?>
+            <script>
 
 
-                        function isAlphanumeric(string)
-                        {
-                            for ( var i = 0; i < string.length; i++ )
-                            {
-                                ch = string.charAt(i);
+                function isAlphanumeric(string)
+                {
+                    for ( var i = 0; i < string.length; i++ )
+                    {
+                        ch = string.charAt(i);
 
-                                if (!(ch >= '0' && ch <= '9') && 	// Numeric (0-9)
-                                    !(ch >= 'A' && ch <= 'Z') && 		// Upper alpha (A-Z)
-                                    !(ch >= 'a' && ch <= 'z') && !(ch == " " || ch == "é" || ch == 'è') ) 			// Lower alpha (a-z)
-                                    return false;
-                            }
-                            return true;
+                        if (!(ch >= '0' && ch <= '9') && 	// Numeric (0-9)
+                            !(ch >= 'A' && ch <= 'Z') && 		// Upper alpha (A-Z)
+                            !(ch >= 'a' && ch <= 'z') && !(ch == " " || ch == "é" || ch == 'è') ) 			// Lower alpha (a-z)
+                            return false;
+                    }
+                    return true;
+                }
+
+                function isNumeric(string)
+                {
+                    for ( var i = 0; i < string.length; i++ )
+                    {
+                        ch = string.charAt(i);
+
+                        if (!(ch >= '0' && ch <= '9')	// Numeric (0-9)
+                           ) 			
+                            return false;
+                    }
+                    return true;
+                }
+
+
+                function gogoUpload(){
+
+                    let submit = document.getElementById('submit_upload');
+
+                    let upload = document.getElementById("uploadAudio").value.split('.');
+                    let ext = upload[upload.length - 1].toLowerCase();
+                    let erreurUpload = document.getElementById('spanErreurUpload');
+                    //                                console.log(upload.length,ext);
+
+                    //** UPLOADER FICHIER AUDIO
+                    formatAudio = ["mp3","wav"];
+                    okaffichesubmit = true;
+                    if (formatAudio.indexOf(ext) == -1 ) { // si pas un fichier audio
+                        okaffichesubmit = false;
+                        if(upload.length < 2) { 
+                            erreurUpload.classList.add("d-none"); //ne pas afficher l'erreur si rien a été uploader
+                        } else {
+                            erreurUpload.classList.remove("d-none");
+                            erreurUpload.innerHTML = "Ce n'est pas un audio";
                         }
 
-                        function isNumeric(string)
-                        {
-                            for ( var i = 0; i < string.length; i++ )
-                            {
-                                ch = string.charAt(i);
+                    } else { // si bien audio alors
+                        erreurUpload.classList.add("d-none"); // pas afficher message d'erreur
+                        //                                    console.log("**",erreur);
+                    }
 
-                                if (!(ch >= '0' && ch <= '9')	// Numeric (0-9)
-                                   ) 			
-                                    return false;
-                            }
-                            return true;
+
+                    let ici = document.getElementById('modalBodyUpload');
+                    let btn = document.getElementById('submit_upload');
+                    console.log("$",btn);
+                    if( okaffichesubmit) {
+
+
+                        if (btn == null) {
+
+                        let btn = document.createElement('input');
+                        btn.setAttribute('id','submit_upload');
+                        btn.setAttribute('name','submit_upload');
+                        btn.setAttribute('onclick',"document.getElementById('formUpload1').submit();");
+                        btn.setAttribute('class',"btn btn-primary");
+                        btn.setAttribute('value',"uploadMoiCa");
+                        ici.appendChild(btn);
                         }
 
 
-                        function gogoUpload(){
-
-                            let submit = document.getElementById('submit_upload');
-
-                            let upload = document.getElementById("uploadAudio").value.split('.');
-                            let ext = upload[upload.length - 1].toLowerCase();
-                            let erreurUpload = document.getElementById('spanErreurUpload');
-                            //                                console.log(upload.length,ext);
-
-                            //** UPLOADER FICHIER AUDIO
-                            formatAudio = ["mp3","wav"];
-                            okaffichesubmit = true;
-                            if (formatAudio.indexOf(ext) == -1 ) { // si pas un fichier audio
-                                okaffichesubmit = false;
-                                if(upload.length < 2) { 
-                                    erreurUpload.classList.add("d-none"); //ne pas afficher l'erreur si rien a été uploader
-                                } else {
-                                    erreurUpload.classList.remove("d-none");
-                                    erreurUpload.innerHTML = "Ce n'est pas un audio";
-                                }
-
-                            } else { // si bien audio alors
-                                erreurUpload.classList.add("d-none"); // pas afficher message d'erreur
-                                //                                    console.log("**",erreur);
-                            }
-
-
-                            let ici = document.getElementById('modalBodyUpload');
-                            if( okaffichesubmit) {
-
-                                let btn = document.createElement('input');
-                                btn.setAttribute('id','submit_upload');
-                                btn.setAttribute('name','submit_upload');
-                                btn.setAttribute('onclick',"document.getElementById('formUpload1').submit();");
-                                btn.setAttribute('class',"btn btn-primary");
-                                btn.setAttribute('value',"uploadMoiCa");
-                                ici.appendChild(btn);
-
-
-
-                            } else {
-                                let btn = document.getElementById('submit_upload');
-
-                                if (btn != null) {
-                                    ici.removeChild(btn);
-                                }
-
-                            }
-                            
-
-
+                    } else {
+                        
+                        if (btn != null) {
+                            ici.removeChild(btn);
                         }
 
-                    </script>
+                    }
 
-                </div>
-            </div>
+
+
+                }
+
+            </script>
+
         </div>
+    </div>
+</div>
 
 
 

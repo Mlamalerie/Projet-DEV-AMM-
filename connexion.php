@@ -73,8 +73,10 @@ if(!empty($_POST)){
         }
 
         if($ok){//tout est bon on a bien l'utilisateur
-            $req = $BDD->prepare("INSERT INTO user (dateconnexion) VALUES (?)");
-            $req->execute(array(date("Y-m-d H:i:s") ));
+            $req = $BDD->prepare("UPDATE user
+            SET user_dateconnexion = ?
+            WHERE user_id = ?");
+            $req->execute(array(date("Y-m-d H:i:s"),$verif_user['user_id']));
 
 
             // selectionne tout les info de l'user
@@ -95,8 +97,10 @@ if(!empty($_POST)){
             sort($listeGenres);
             $_SESSION['listeGenres'] = $listeGenres ;
 
-            header('Location: dashboard.php');
-            exit;
+           // header('Location: dashboard.php');
+          
+            echo "<script> history.go(-2); </script>";
+             exit;
         }
     }
 }
