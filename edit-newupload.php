@@ -5,12 +5,14 @@ $_SESSION['ici_index_bool'] = false;
 
 print_r("$ <br><br><br><br>rg<br>");
 print_r($_SESSION);
+print_r($_FILES);
 
-// ta rien a faire la
-//if (!isset($_SESSION['destinationdubayupload'])) {
-//     header('Location: test_zone.php');
-//            exit;
-//}
+
+$okconnectey = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
+    
+    $okconnectey = true;
+} 
 
 $destination = $_SESSION['destinationdubayupload'];
 if (substr($destination,0,-1) == "error") { 
