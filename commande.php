@@ -91,8 +91,8 @@ if (isset($_POST['AppliquerRedu'])) {
                     <div class="row">
                         <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
 
-                            <?php require_once('assets/skeleton/tablePanier.php'); ?>
-                            
+                            <?php require_once('assets/skeleton/tablePanier.php'); ?> 
+
                         </div>
                     </div>
 
@@ -111,7 +111,7 @@ if (isset($_POST['AppliquerRedu'])) {
                                 </form>
 
                                 <?php if(isset($reduction)) { ?> 
-                                <span>Reduction bien appliqué <?=($reduction*100)."%" ?></span>
+                                <span>Reduction bien appliquée <?=($reduction*100)."%" ?></span>
 
                                 <?php } else if (isset($_POST['AppliquerRedu'])) { ?>
                                 <span class="text-danger">NAda mgl</span>
@@ -166,16 +166,16 @@ if (isset($_POST['AppliquerRedu'])) {
 
 
                                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted  text-uppercase">Total</strong>
-                                        <h5 class="font-weight-bold" id="TOTALTOTAL"></h5>
+                                        <h5 class="font-weight-bold" id="TOTALTOTAL" ></h5>
                                     </li>
 
                                     <script>
 
                                     </script>
-                                </ul>
-                                <form id='formConfirmer' action="" method="post">
+                                </ul> 
+                                <form id='formConfirmer' action="confirmation.php" method="post">
                                     <input type="hidden" name="khalassCa" id="khalassCa">
-                                    <a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Confirmer</a>
+                                    <button type="button" onclick="document.getElementById('formConfirmer').submit()" href="confirmation.php" class="btn btn-dark rounded-pill py-2 btn-block">Confirmer</button>
                                 </form>
                                 <?php require_once("assets/functions/js-panier.php"); ?>
                                 <span id="waitRedirigey"></span>
@@ -197,12 +197,8 @@ if (isset($_POST['AppliquerRedu'])) {
 
 
                     ?>
-
-                    <script>
-
-
-                    </script>
-
+                                  
+                
                 </div>
             </div>
         </div>

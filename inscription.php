@@ -169,7 +169,7 @@ if(!empty($_POST)){
         if($ok) {
 
             $date_inscription = date("Y-m-d H:i:s"); 
-            $statut = 1;
+            $statut = 2;
             $sexe = "0";
             $motdepasse = crypt($motdepasse, '$6$rounds=5000$grzgirjzgrpzhte95grzegruoRZPrzg8$');
 

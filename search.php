@@ -4,7 +4,7 @@ $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
 print_r('<br><br><br><br><br><br><br>');
 print_r($_GET);
-$listeGenres = ['Hip Hop','Trap','Afro','Deep','Pop','Rock','Reggae'];
+$listeGenres = ['Hip Hop','Trap','R&B','Soul','Afro','Deep','Pop','Rock','Reggae'];
 sort($listeGenres);
 $_SESSION["listeGenres"] = $listeGenres;
 
@@ -328,7 +328,6 @@ else if (!$wetypeexiste) {
         $req = $BDD->prepare("SELECT *
                             FROM user
                             WHERE CONCAT(user_pseudo,user_description)
-
                             LIKE ?
                             ORDER BY user_pseudo ASC");
 
@@ -775,7 +774,6 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 <th scope="col" class="border-0 bg-light">
 <div class="p-2 px-3 text-uppercase"> image</div>
 </th>
-
 <th scope="col" class="border-0 bg-light">
 <div class="py-2 text-uppercase">like</div>
 </th>
