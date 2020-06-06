@@ -74,15 +74,12 @@ $jesuissurindex = $_SESSION['ici_index_bool'];
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-md-auto" >
                 <?php
-
-
-
                 // si je detecte une connexion alors
                 if($okconnectey) {
                 ?>
 
                 <li class="nav-item ">
-                    <a class="nav-link btn" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
+                    <a class="nav-link btn" href="test_zone.php">Test_Zone<span class="sr-only">(current)</span></a>
                 </li>
 
 
@@ -92,49 +89,69 @@ $jesuissurindex = $_SESSION['ici_index_bool'];
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#modalUpload"><img id="iconUpload" src="assets/img/icon/ui.svg"> Uploader </button>
                 </li>
                 <?php } ?>
-                <li class="nav-item ">
-                    <a class="nav-link btn" href="messagerie.php"><img id="iconPanier" src="assets/img/icon/chat-box.svg"></a>
-                </li>
 
+                <?php if(!$jesuissurindex) { ?>
                 <li class="nav-item dropdown no-arrow mx-1">
                     <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-envelope fa-fw"></i>
+                        <img id="iconPanier" src="assets/img/icon/chat-box.svg">
                         <!-- Counter - Messages -->
                         <span class="badge badge-danger badge-counter">7</span>
                     </a>
                     <!-- Dropdown - Messages -->
-                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                    <div class=" dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                         <h6 class="dropdown-header">
                             Mes messages
                         </h6>
                         <?php 
-                    
-                    ?>
+                    include('assets/functions/datediff.php');
+                    $req = $BDD->prepare("SELECT *
+                            FROM messagerie
+                            WHERE id_to = ?
+                            ORDER BY date_message DESC
+                             LIMIT 5");
+                    $req->execute(array($_SESSION['user_id']));
+                    $resuMESS = $req->fetchAll();
+
+                    foreach($resuMESS as $m) {
+                        ?>
+
+                        <?php  $req = $BDD->prepare("SELECT *
+                            FROM user
+                            WHERE user_id = ?");
+                        $req->execute(array($m['id_from']));
+                        $user = $req->fetch();
+                        $date1 = new DateTime( $m['date_message']);
+                        $date2 = new DateTime(date("Y-m-d H:i:s"));
+                        $recent = dateDiff($date1, $date2);
+
+                        ?>
                         <a class="dropdown-item d-flex align-items-center" href="#">
                             <div class="dropdown-list-image mr-3">
-                                <img class="rounded-circle" src="" alt="">
+                                <img class="rounded-circle" width="30" src="<?= $user['user_image']?>" alt="">
                                 <div class="status-indicator bg-success"></div>
                             </div>
                             <div class="font-weight-bold">
-                                <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-                                <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                <div class="text-truncate"><?= $m['message']?></div>
+
+                                <div class="small text-gray-500"><?= $user['user_pseudo']?> · <?=$recent?></div>
                             </div>
                         </a>
-                        
-                       
-                        
+                        <?php } ?>
+
+
                         <a class="dropdown-item text-center small text-gray-500" href="messagerie.php">Read More Messages</a>
                     </div>
                 </li>
+                <?php } ?>
 
                 <div class="topbar-divider d-none d-sm-block"></div>
 
                 <!-- DEROULANT PROFIL-->
-                <li class="nav-item dropdown no-arrow show ">
+                <li class="nav-item dropdown no-arrow ">
                     <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <span class="mr-2 d-none d-lg-inline "><?= $_SESSION['user_pseudo'] ?></span> <img id="iconUser" src="assets/img/user.png">
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in show" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 
                         <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
                         <a class="dropdown-item  " href="#"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
@@ -211,8 +228,6 @@ $jesuissurindex = $_SESSION['ici_index_bool'];
     </nav>
 
 </div>
-
-
 <?php if(!$jesuissurindex) { ?>
 <!--   *************************************************************  -->
 <!--   ************************** MODAL PANIER  **************************  -->
@@ -240,5 +255,7 @@ $jesuissurindex = $_SESSION['ici_index_bool'];
 
 
 <?php } ?>
+
+
 
 
