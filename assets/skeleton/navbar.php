@@ -1,4 +1,9 @@
-<?php $jesuissurindex = $_SESSION['ici_index_bool']; ?>
+
+
+<?php $jesuissurindex = $_SESSION['ici_index_bool']; 
+
+?>
+
 
 
 <div class="boxnav">
@@ -71,7 +76,7 @@
             <ul class="navbar-nav ml-md-auto" >
                 <?php
                 // si je detecte une connexion alors
-                if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
+                if($okconnectey){
 
                 ?>
 
@@ -100,12 +105,14 @@
                         <a class="dropdown-item  " href="#"> Mes Tracks </a>
 
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="deconnexion.php">Déconnexion</a>
+                        <a class="dropdown-item" href="deconnexion.php"><i class="fas fa-power-off"></i>Déconnexion</a>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <button class="nav-link btn" data-toggle="modal" data-target="#ModalPanier" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> Panier </button>
+
+                    <button class="nav-link btn" href="#" data-toggle="modal" data-target="#ModalPanier" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> <span id="span_nb_panier" class="badge badge-primary px-2 rounded-pill ml-2"></span> </button>
+
                 </li>
 
 
@@ -166,4 +173,33 @@
     </nav>
 
 </div>
+
+
+ <!--   *************************************************************  -->
+        <!--   ************************** MODAL PANIER  **************************  -->
+        <div class="modal fade" id="ModalPanier" tabindex="-1" role="dialog" aria-labelledby="ModalPanierLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalPanierLabel">Panier WeBeats</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="croixquit d-flex justify-content-center rounded" aria-hidden="true"><i class="fas fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                      <?php require_once('assets/skeleton/tablePanier.php'); ?>
+
+                    </div>
+                    <div class="modal-footer" >
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
 

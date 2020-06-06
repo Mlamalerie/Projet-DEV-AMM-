@@ -1,18 +1,24 @@
 <?php
 session_start();
+$_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
-
-
-$icon = " <svg class='mr-1 my-1 bi bi-exclamation-circle' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-                                            <path fill-rule='evenodd' d='M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z' clip-rule='evenodd'/>
-                                            <path d='M7.002 11a1 1 0 112 0 1 1 0 01-2 0zM7.1 4.995a.905.905 0 111.8 0l-.35 3.507a.552.552 0 01-1.1 0L7.1 4.995z'/>
-                                        </svg>";
-
-
-
-
+require_once 'IPNPaypal.class.php';
+use PaypalIPN;
+$ipn = new PayPalIPN();	
+$prix = $_POST['khalassCa'];
 ?>
 
+<?php
+$okconnectey = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
+    print_r($_SESSION);
+    $okconnectey = true;
+} else{
+    echo "Pas de connexion";
+}
+?>
+
+<?php require_once("assets/functions/js-panier.php"); ?>
 
 !DOCTYPE html>
 <html>
@@ -69,58 +75,45 @@ $icon = " <svg class='mr-1 my-1 bi bi-exclamation-circle' width='1em' height='1e
                             <!-- Shopping cart table -->
                             <div class="table-responsive">
                                 <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" class="border-0 bg-light">
-                                                <div class="p-2 px-3 text-uppercase">Beats</div>
-                                            </th>
-                                            <th scope="col" class="border-0 bg-light">
-                                                <div class="py-2 text-uppercase">Prix</div>
-                                            </th>
-                                            <th scope="col" class="border-0 bg-light">
-                                                <div class="py-2 text-uppercase">Action</div> 
-                                            </th>
-                                        </tr>
-                                    </thead>
-
-
-
-
-
-
-
+                                    <div>Montant à payer : <?php echo $prix; ?> &euro; </div>
                                 </table>
                             </div>
+
+
+                            <div id="paypal-button-container"></div>
+                            <script src="https://www.paypal.com/sdk/js?client-id=Ae0hwalIu4jYQfJOup2Toy5iQHgLlK84Upq3nYmfD6y7UeQgyJDRrFOv-yI2IJZXUXhiXKhhPMhph1XV&currency=EUR" data-sdk-integration-source="button-factory"></script>
+                            <script>
+                                paypal.Buttons({
+                                    style: {
+                                        shape: 'pill',
+                                        color: 'blue',
+                                        layout: 'horizontal',
+                                        label: 'pay',
+
+                                    },
+                                    createOrder: function(data, actions) {
+                                        return actions.order.create({
+                                            purchase_units: [{
+                                                amount: {
+                                                    value: '<?php echo $prix; ?>'
+                                                }
+                                            }]
+                                        });
+                                    },
+                                    onApprove: function(data, actions) {
+                                        return actions.order.capture().then(function(details) {
+                                            alert('Transaction effectuée par ' + details.payer.name.given_name + '!');
+                                            
+                                        });
+                                    }
+                                }).render('#paypal-button-container');
+                            </script>
+
+                           
+
+                           
+                           
                             <!-- End -->
-                        </div>
-                    </div>
-
-                    <div class="row py-5 p-4 bg-white rounded shadow-sm">
-                        <div class="col-lg-6">
-                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Code de réduction</div>
-                            <div class="p-4">
-                                <p class="font-italic mb-4">Si vous en possédez un, entrez votre code ci-dessous</p>
-                                <div class="input-group mb-4 border rounded-pill p-2">
-                                    <input type="text" placeholder="Appliquer le code" aria-describedby="button-addon3" class="form-control border-0">
-                                    <div class="input-group-append border-0">
-                                        <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Appliquer</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Récapitulatif de votre commande </div>
-                            <div class="p-4">
-                                <p class="font-italic mb-4">Attention : aucun remboursement possible après confirmation de votre commande</p>
-                                <ul class="list-unstyled mb-4">
-                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Prix </strong><strong>$390.00</strong></li>
-                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Réduction appliquée</strong><strong>$10.00</strong></li>
-                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                                        <h5 class="font-weight-bold">$400.00</h5>
-                                    </li>
-                                </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Confirmer</a>
-                            </div>
                         </div>
                     </div>
 

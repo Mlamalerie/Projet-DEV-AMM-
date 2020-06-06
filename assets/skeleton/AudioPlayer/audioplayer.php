@@ -1,4 +1,5 @@
-<nav class="navplayer  fixed-bottom">        
+
+<nav id='audioplayer' class=" navplayer  fixed-bottom" style="display:none">        
     <audio src="./audio/go_legend.mp3" id="song"></audio>
     <div class="box">     
         <img src="./img/bigmetro.jpg" id="thumbnail" />
@@ -7,6 +8,7 @@
         <img src="./assets/icon/backward.png" onclick="previousSong()" id="previous-song" />
         <div class="song-artist">WeBeats</div>
         <div class="song-title"></div>
+
         <input 
                type="range" 
                id="progress-bar" 
@@ -15,7 +17,7 @@
                value="0" 
                onchange="changeProgressBar()"
                />
-        <!--                <button type="button" class="btn btn-danger " id='btn-player-acheter'>Acheter</button>-->
+
 
 
         <button type="button" onclick="caMute()">
@@ -49,17 +51,17 @@
 
             // Change le son
             var son = document.getElementById("song");
-            
+
             function caMute(){
                 son.volume = 0;
             }
-            
+
             function caBaisse() { 
-                son.volume = 0.2;
+                son.volume -= 0.1;
             } 
 
             function caMonte() { 
-                son.volume = 1.0;
+                son.volume += 0.1;
             } 
 
 

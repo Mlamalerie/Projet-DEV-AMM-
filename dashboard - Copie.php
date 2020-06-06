@@ -23,9 +23,9 @@ if(!isset($_SESSION['user_id'])){
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+<!--   STYLE DASHBOARD     -->
+        <link href="assets/css/dashboard.css" rel="stylesheet">
         
-        
-    <link rel="stylesheet" type="text/css" href="assets/css/dashboard.css">
         
         <title>Dash BOard</title>
     </head>

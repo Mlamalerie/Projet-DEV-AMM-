@@ -4,7 +4,15 @@ session_start();
 $_SESSION['ici_index_bool'] = true;
 ?>
 
-
+<?php
+$okconnectey = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
+    print_r($_SESSION);
+    $okconnectey = true;
+} else{
+    echo "Pas de connexion";
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -85,16 +93,7 @@ $_SESSION['ici_index_bool'] = true;
         </header>
         <script src="assets/js/search.js"></script>
         <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
-        <?php
-        if(isset($_SESSION['user_id'])) {
-            print_r($_SESSION);
-        } else{
-            echo "Pas de connexion <br>";
-
-
-
-        }
-        ?>
+   
         <div id="countdown">
             Temps restant pour le projet :
             <span id="d"></span>
