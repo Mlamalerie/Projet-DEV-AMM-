@@ -1,5 +1,3 @@
-
-
 <?php 
 $jesuissurindex = $_SESSION['ici_index_bool']; 
 
@@ -105,7 +103,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                         $recent = dateDiff($date1, $date2);
 
                         ?>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="message.php?profil_id=<?= $user['user_id'] ?>">
                             <div class="dropdown-list-image mr-3">
                                 <img class="rounded-circle" width="30" src="<?= $user['user_image']?>" alt="">
                                 <div class="status-indicator bg-success"></div>
@@ -134,11 +132,23 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 
                         <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
+                        
+                        <?php 
+                            if($_SESSION['user_role']==0){   
+                        ?>
+                        <a class="dropdown-item  " href="all-utilisateurs.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Admin Studio</a>
+                        <?php
+                            }
+                        ?>
+                        
+                        
+                        
                         <a class="dropdown-item  " href="#"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="deconnexion.php"><i class="fas fa-power-off mr-2"></i>Déconnexion</a>
-                    </div>
+                        </div>
+                    
                 </li>
 
                 <!--  PANIER -->

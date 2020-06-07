@@ -9,6 +9,15 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     
     $okconnectey = true;
 } 
+
+$req = $BDD->prepare("SELECT * 
+                    FROM beat
+                    ORDER BY beat_dateupload DESC
+                    LIMIT 7 ");
+$req->execute(array());
+$resuTENDANCES=$req->fetchAll();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -113,71 +122,22 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                     <h2 class="h1 mb-4 text-center text-white">Tendances</h2>
 
                     <div class="my_slides multiple-items">
+                       
+                        <?php
+                            foreach($resuTENDANCES as $rT){
+            
+                        ?>
                         <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/Laylow.jpg" alt="">
+                            <div class="hover hover-5 text-white rounded"><img src="<?= $rT['beat_cover']?>" alt="">
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Laylow<strong class="font-weight-bold text-white">
-                                    BURNING MAN</strong><span> 2020</span></h6>
-
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0"><?= $rT['beat_author']?><strong class="font-weight-bold text-white">
+                                  <?= $rT['beat_title']?></strong><span> <?= $rT['beat_year']?></span></h6>
                             </div>
                         </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/bigmetro.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Big Sean(ft Travis Scott)<strong class="font-weight-bold text-white">
-                                    Go Legend</strong><span> 2020</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/CG6.png" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">CG6<strong class="font-weight-bold text-white">
-                                    Nelson</strong><span> 2019</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/DB5.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Leto<strong class="font-weight-bold text-white">
-                                    Double Bang 5</strong><span> 2018</span></h6>
-                            </div>                        
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/luv.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Lil Uzi Vert<strong class="font-weight-bold text-white">
-                                    Futball Shuffle </strong><span> 2020</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/Sch.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Sch<strong class="font-weight-bold text-white">
-                                    Poupée Russe </strong><span> 2017</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/roddy.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Roddy Rich<strong class="font-weight-bold text-white">
-                                    Tip toe</strong><span> 2020</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/Spri.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Spri(ft 4Keus)<strong class="font-weight-bold text-white">
-                                    Night and Day</strong><span> 2020</span></h6>
-                            </div>
-                        </div>
+                        
+                       <?php } ?>
+                      
                     </div>
 
                     <div class="slider-btn rounded-circle">

@@ -786,7 +786,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                                                      if ($yadesresultatsBEATS) {$i = 1;foreach($resuBEATS as $r){
+                                            if ($yadesresultatsBEATS) {$i = 1;foreach($resuBEATS as $r){
                                         ?>
                                         <tr class="border rounded ">
                                             <td class="pr-0 border-0 align-middle"><strong><?= $i ?></strong></td>

@@ -15,7 +15,10 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         exit;
 
     }
-} 
+} else {
+    header('Location: index.php');
+            exit;
+}
 
 print_r($_POST);
 
@@ -56,7 +59,9 @@ if(isset($_POST['inputOption'])) {
             WHERE user_id = ?"); 
             $req->execute(array(0,$id_user));
 
-            header('Location: allutilisateurs');
+            
+             header('Location: all-utilisateurs');
+
             exit;
         }
 
@@ -69,7 +74,8 @@ if(isset($_POST['inputOption'])) {
             WHERE user_id = ?"); 
             $req->execute(array(1,$id_user));
 
-            header('Location: allutilisateurs');
+             header('Location: all-utilisateurs');
+
             exit;
         }
 
@@ -79,7 +85,7 @@ if(isset($_POST['inputOption'])) {
             $req = $BDD->prepare("DELETE FROM user
             WHERE user_id = ?"); 
             $req->execute(array($id_user));
-            header('Location: allutilisateurs');
+            header('Location: all-utilisateurs');
             exit;
 
         }
@@ -106,7 +112,7 @@ if(isset($_POST['inputOption'])) {
 
 
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
-        <link rel="stylesheet" type="text/css" src="assets/css/allutilisateurs.css">
+        <link rel="stylesheet" type="text/css" src="assets/css/all-utilisateurs.css">
         <title>All Users</title>
         <style>
             tr {
@@ -208,7 +214,7 @@ if(isset($_POST['inputOption'])) {
                                         </td>
 
                                         <td class="text-center align-middle">
-                                            <span><?=$am['user_pseudo']?></span>
+                                            <a href="profils.php?profil_id=<?= $am['user_id'] ?>"><span><?=$am['user_pseudo']?></span></a>
                                         </td>
                                         <td class="text-center align-middle">
                                             <span><?=$am['user_email']?></span>

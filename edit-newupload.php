@@ -182,9 +182,12 @@ if (!empty($_POST)) {
 
            
             echo $fichier;
-            if(rename($fichier,$dir.basename($_SESSION['user_id']."-beat-x.mp3"))) {
+            if(rename($fichier,$dir.basename($_SESSION['user_id']."-beat-".$bb['beat_id'].".".$ext))) {
                 echo 'rennneeaame';
                 unset($_SESSION['destination']);
+                
+                echo "<script> alert('".$fichier."') </script>";
+                echo "<script> alert('".$_SESSION['user_id']."-beat-".$bb['beat_id'].".".$ext."') </script>";
             }
             
             
