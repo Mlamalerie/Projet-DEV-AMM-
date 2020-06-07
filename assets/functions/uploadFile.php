@@ -4,7 +4,7 @@ class uploadFile{
 
 
 
-    function uploadAudio($tmp_name,$name,$nomduboug,$idduboug){
+    function uploadAudio($tmp_name,$name,$nomduboug,$idduboug,$idbeat){
         $formataudio = array('mp3','ogg','wav','wma','m4a');
 
         $nn = pathinfo($name);
@@ -14,7 +14,7 @@ class uploadFile{
         // si le fichier est un bien un fichier audio
         if (in_array($ext,$formataudio)){
 
-            $name = $idduboug.'-beat-x.'.$ext;
+            $name = $idduboug.'-beat-'.$idbeat.'.'.$ext;
 
 
             $dir = 'data/'.$idduboug.'-'.$nomduboug.'/beats/';
@@ -111,8 +111,8 @@ class uploadFile{
 
         }
     } // END function uploadImage
-    
-        function uploadCoverBeats($tmp_name,$name,$title,$nomduboug,$idduboug,$idbeat){
+
+    function uploadCoverBeats($tmp_name,$name,$title,$nomduboug,$idduboug,$idbeat){
         $formatImage = array('png','jpg','jpeg');
 
         $nn = pathinfo($name);
@@ -124,7 +124,7 @@ class uploadFile{
             $name = $idduboug.'-'.strtolower($nomduboug).'-cover_beat-'.$idbeat.'.'.$ext;
 
 
-            $dir = 'data/'.$idduboug.'-'.$nomduboug.'/beats/cover/';
+            $dir = 'data/'.$idduboug.'-'.$nomduboug.'/images/cover/';
 
             // Vérifie si le répertoire existe :
             if (!is_dir("data")) { 
@@ -138,12 +138,12 @@ class uploadFile{
                 echo 'Le répertoire '.$idduboug.'-'.$nomduboug.' vient d\'être créé!';      
             }
 
-            if (!is_dir("data/".$idduboug.'-'.$nomduboug.'/beats')){ 
-                mkdir("data/".$idduboug.'-'.$nomduboug.'/beats',0777);
-                echo 'Le répertoire beats vient d\'être créé!'; 
+            if (!is_dir("data/".$idduboug.'-'.$nomduboug.'/images')){ 
+                mkdir("data/".$idduboug.'-'.$nomduboug.'/images',0777);
+                echo 'Le répertoire imagesvient d\'être créé!'; 
             }
-            if (!is_dir("data/".$idduboug.'-'.$nomduboug.'/beats/cover')){ 
-                mkdir("data/".$idduboug.'-'.$nomduboug.'/beats/cover',0777);
+            if (!is_dir("data/".$idduboug.'-'.$nomduboug.'/images/cover')){ 
+                mkdir("data/".$idduboug.'-'.$nomduboug.'/images/cover',0777);
                 echo 'Le répertoire cover vient d\'être créé!'; 
             }
 

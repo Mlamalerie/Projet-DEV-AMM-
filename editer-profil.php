@@ -142,7 +142,7 @@ if(!empty($_POST)){
 
         if($ok) {
 
-            if($okpseudonotsame){$basepseudo = $pseudo;}
+            if($okpseudonotsame){$oldpseudo = $basepseudo;$basepseudo = $pseudo;}
             if($okdescriptionnotsame){$basedescription = $description;}
             // preparer requete
             $req = $BDD->prepare("UPDATE user
@@ -153,6 +153,7 @@ if(!empty($_POST)){
 
 
             $toutestboninfoprofil = true;
+            $_SESSION['user_pseudo'] = $basepseudo;
 
 
         }
@@ -216,6 +217,7 @@ if(!empty($_POST)){
 
 
             $toutestbonemail = true;
+            $_SESSION['user_email'] = $baseemail;
 
         }
 
@@ -423,6 +425,7 @@ if(!empty($_POST)){
             if($okrolenotsame){$baserole = $role;}
 
             $toutestboninfoperso = true;
+            $_SESSION['user_role'] = $baserole;
 
 
         }
@@ -462,7 +465,6 @@ if(!empty($_POST)){
                     <h5 class="mb-0"><?=$basepseudo ?> </h5><span class="small text-uppercase text-muted">Cliquer sur l'image pour la changer</span>
                     <?php 
 
-    //var_dump($_FILES);
     require_once 'assets/functions/uploadFile.php';
 
                          $upd = new uploadFile();
@@ -587,6 +589,7 @@ if(!empty($_POST)){
                                 ?>
                             </div>
 
+
                             <!--BIO-->
                             <div class="form-group mb-2  ">
 
@@ -614,6 +617,22 @@ if(!empty($_POST)){
                             <div class="divDone">
                                 <span class="spanDone"> Vos modifications ont bien été enregistrées </span>
                                 <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
+
+                                <script>
+                                    majmajFolder("<?= $baseid.'-'.$oldpseudo?>","<?= $baseid.'-'.$basepseudo?>");
+                                    function majmajFolder(oldold,newnew) {
+                                        console.log("**malFolder");
+                                        var xmlhttp = new XMLHttpRequest();
+
+
+                                        let ou = "data/majFolder.php?old="
+                                        ou += oldold;
+                                        ou += "&new=" + newnew;
+                                        console.log(ou);
+                                        xmlhttp.open("GET",ou,true);
+                                        xmlhttp.send();
+                                    }
+                                </script>
                             </div>
                             <?php
                             }
@@ -877,7 +896,7 @@ if(!empty($_POST)){
                                 <label class="custom-control-label font-italic" for="roleee">Mode Produceur activé *</label>
                                 <br/>
                                 <label>*Activez ce mode si vous ne souhaitez pas être visible par les autres membres de WeBeatz.
-                                <br/>On ne pourra pas vous trouver à partir de la barre de recherche.</label>
+                                    <br/>On ne pourra pas vous trouver à partir de la barre de recherche.</label>
                                 <?php
                                 if(isset($err_sexe)){
                                     echo "<span class='spanAlertchamp'> ";

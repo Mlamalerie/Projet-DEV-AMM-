@@ -304,34 +304,6 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
             <script>
 
 
-                function isAlphanumeric(string)
-                {
-                    for ( var i = 0; i < string.length; i++ )
-                    {
-                        ch = string.charAt(i);
-
-                        if (!(ch >= '0' && ch <= '9') && 	// Numeric (0-9)
-                            !(ch >= 'A' && ch <= 'Z') && 		// Upper alpha (A-Z)
-                            !(ch >= 'a' && ch <= 'z') && !(ch == " " || ch == "é" || ch == 'è') ) 			// Lower alpha (a-z)
-                            return false;
-                    }
-                    return true;
-                }
-
-                function isNumeric(string)
-                {
-                    for ( var i = 0; i < string.length; i++ )
-                    {
-                        ch = string.charAt(i);
-
-                        if (!(ch >= '0' && ch <= '9')	// Numeric (0-9)
-                           ) 			
-                            return false;
-                    }
-                    return true;
-                }
-
-
                 function gogoUpload(){
 
                     let submit = document.getElementById('submit_upload');

@@ -8,7 +8,6 @@ $listeGenres = ['Hip Hop','Trap','R&B','Soul','Afro','Deep','Pop','Rock','Reggae
 sort($listeGenres);
 $_SESSION["listeGenres"] = $listeGenres;
 
-print(var_dump($_SERVER));
 
 
 {
@@ -420,6 +419,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <!--        <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">-->
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
         <link rel="stylesheet" type="text/css" href="assets/css/modalPanier.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/modalUploadAudio.css">
 
 
 
