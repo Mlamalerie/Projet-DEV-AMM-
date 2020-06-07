@@ -3,7 +3,7 @@ session_start();
 $_SESSION['ici_index_bool'] = false;
 
 include('assets/db/connexiondb.php');
-
+/*active ça si tu veux pas te voir dans la liste si t'es connecté*/
 if(isset($_SESSION['user_id'])){
     $req =$BDD->prepare("SELECT * FROM user");
     $req->execute(array());
@@ -15,6 +15,74 @@ else{
 
 $afficher_membres=$req->fetchAll();
 
+$okconnectey = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
+
+    $okconnectey = true;
+} 
+
+print_r($_POST);
+
+
+
+if(isset($_POST['inputOption'])) {
+    $id_user=$_POST['inputOption_user_id'];
+    $ok = true;
+
+
+    //*** Verification du id
+    $req = $BDD->prepare("SELECT user_pseudo 
+                            FROM user
+                            WHERE user_id = ?");
+    $req->execute(array($id_user));
+    $verif_u = $req->fetch();
+    if(!isset($verif_u['user_pseudo'])){ 
+        $ok = false;
+        echo '###';
+    }
+
+
+    if($_POST['inputOption']== "desac") {
+
+        if($ok) {
+            $req = $BDD->prepare("UPDATE user
+            SET user_statut = ?
+            WHERE user_id = ?"); 
+            $req->execute(array(0,$id_user));
+            
+             header('Location: allutilisateurs');
+            exit;
+        }
+
+
+    }
+    else if($_POST['inputOption']== "act") {
+        if($ok) {
+            $req = $BDD->prepare("UPDATE user
+            SET user_statut = ?
+            WHERE user_id = ?"); 
+            $req->execute(array(1,$id_user));
+            
+             header('Location: allutilisateurs');
+            exit;
+        }
+
+    }
+    else if($_POST['inputOption']== "suppr"){
+        if($ok){
+             $req = $BDD->prepare("DELETE FROM user
+            WHERE user_id = ?"); 
+            $req->execute(array($id_user));
+            header('Location: allutilisateurs');
+            exit;
+            
+        }
+    }
+
+}
+
+
+
 ?>
 
 
@@ -24,28 +92,28 @@ $afficher_membres=$req->fetchAll();
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <?php        
-            require_once('assets/skeleton/headLinkCSS.html');
+        <?php        require_once('assets/skeleton/headLinkCSS.html');
         ?>
 
         <!--    Lien pour défiler les pages    -->
-         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
 
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" src="assets/css/allutilisateurs.css">
         <title>All Users</title>
-
         <style>
-            .roundedImage {  /*image arrondie*/
-                overflow:hidden; 
-                -webkit-border-radius:75%;
-                -moz-border-radius:75%; 
-                border-radius:75%;
-            }
+            tr {
+                height: 5px;
+                padding: none;
 
-            #user_tableau, .btn{
-                font-size: 12px;
+            }
+            tbody tr td{
+                font-size: 10px;
+                height: 5px;
+            }
+            thead tr th{
+                font-size: 15px;
             }
         </style>
     </head>
@@ -53,9 +121,11 @@ $afficher_membres=$req->fetchAll();
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-            require_once('assets/skeleton/navbar.php');
+
+        //require_once('assets/skeleton/navbar.php');
         ?>
         <br/><br/><br/><br/>
+
 
 
         <div class="row py-5">
@@ -63,21 +133,27 @@ $afficher_membres=$req->fetchAll();
                 <div class="card rounded shadow border-0">
                     <div class="card-body p-5 bg-white rounded">
                         <div class="table-responsive">
-                            <table id="user_tableau" style="width:100%" class="table table-striped table-bordered">
+                            <table id="example" style="width:100%" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Role</th>  
-                                        <th>Image</th>    
-                                        <th>Pseudo</th>
-                                        <th>E-Mail</th>
-                                        <th>Sexe</th>
-                                        <th>Date de naissance</th>
-                                        <th>Pays</th>
-                                        <th>Ville</th>
-                                        <th>Date d'inscription</th>
-                                        <th>Statut</th>
-                                        <th>Nombre de follow(s)</th>
-                                        <th>Options</th>
+                                        <th class="text-center align-middle" >Options</th>
+                                        <th class="text-center align-middle">Image</th>
+                                        <th class="text-center align-middle" >Role</th>  
+
+                                        <th class="text-center align-middle" >Pseudo</th>
+                                        <th class="text-center align-middle" >E-Mail</th>
+                                        <th class="text-center align-middle" >Date d'inscription</th>
+
+                                        <th class="text-center align-middle" >Date de naissance</th>
+                                        <th class="text-center align-middle" >Sexe</th>
+
+                                        <th class="text-center align-middle" >Pays</th>
+                                        <th class="text-center align-middle" >Ville</th>
+
+                                        <th class="text-center align-middle" >Statut</th>
+                                        <th class="text-center align-middle" >Nombre de follow(s)</th>
+
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -86,64 +162,119 @@ $afficher_membres=$req->fetchAll();
                                     foreach($afficher_membres as $am){
                                     ?>
                                     <tr>
-                                        <td>
-                                            <?=$am['user_role']?>
-                                        </td>
-                                        <td>
-                                            <img src="<?=$am['user_image']?>" style="height : 50px; width : 50px;" class="img-fluid mb-3 roundedImage shadow-sm">
-                                        </td>   
-                                        <td>
-                                            <?=$am['user_pseudo']?>
-                                        </td>
-                                        <td>
-                                            <?=$am['user_email']?>
-                                        </td>
-                                        <td>
-                                            <?=$am['user_sexe']?>
-                                        </td>
-                                        <td>
-                                            <?=$am['user_datenaissance']?>
-                                        </td>
-                                        <td>
-                                            <?=$am['user_pays']?>
-                                        </td>
-                                        <td>
-                                            <?=$am['user_ville']?>
-                                        </td>
-                                        <td>
-                                            <?=$am['user_dateinscription']?>
-                                        </td>
-                                        <td>
-                                            <?=$am['user_statut']?>
-                                        </td>
-                                        <td>
-                                           <?php
-                                            $req1 = $BDD->prepare("SELECT *
-                                                                    FROM relation
-                                                                    WHERE id_receveur = ? AND statut = 1");
-                                            $req1->execute(array($am['user_id']));
-                                            $nb_follow=0;
+                                        <td class="text-center align-middle">
+                                           
+                                           
+                                            <div class="row">
+                                               
+                                                <a href="editer-profil.php?profil_id=<?= $am['user_id'] ?>"><button class="btn">Modifier</button></a>                                           
+                                                
+                                                <?php 
+                                                if($am['user_id']!=$_SESSION['user_id']){
+                                                ?>
+                                               <?php 
+                                                    if($am['user_statut'] == 1) {
+                                                ?>
+                                                <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['user_id'] ?>', '<?= $am['user_pseudo']?>')" value='desac'>Désactiver</button>
+                                                <?php
+                                                    }
+                                                    else{
+                                                ?>
+                                                 <button class="btn"  data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['user_id'] ?>', '<?= $am['user_pseudo']?>')" value='act'>Activer</button>
+                                                <?php
+                                                    }
+                                                ?>
+                                                
+                                                <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['user_id'] ?>','<?= $am['user_pseudo']?>')" value="suppr">Supprimer</button>
+                                                <?php
+                                                    }
+                                                ?>
 
-                                            $resuRELA = $req1->fetchAll();
-                                            foreach($resuRELA as $rr){
-
-                                                foreach($rr as $key => $value){
-
-                                                    if($key =='statut' && $value== 1){
-
-                                                        $nb_follow++;
-                                                    }   
-                                                } 
-                                            }
-                                        
-                                        ?> 
-                                        <?= $nb_follow ?>
+                                            </div>
                                         </td>
-                                        <td>
-                                            <button class="btn">Supprimer</button>
-                                            <button class="btn">Modifier</button>
-                                            <button class="btn">Désactiver</button>
+                                        <td  class="text-center align-middle">
+                                            <img src="<?=$am['user_image']?>" style="height : 25px; width : 25px;" class="img-fluid mb-3 roundedImage shadow-sm">
+                                        </td>  
+                                        <td class="text-center align-middle">
+                                            <span><?=$am['user_role']?></span>
                                         </td>
+
+                                        <td class="text-center align-middle">
+                                            <span><?=$am['user_pseudo']?></span>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <span><?=$am['user_email']?></span>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <span><?=$am['user_dateinscription']?></span>
+                                        </td>
+
+                                        <td class="text-center align-middle">
+                                            <span><?=$am['user_datenaissance']?></span>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <span><?=$am['user_sexe']?></span>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <span><?=$am['user_pays']?></span>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <span><?=$am['user_ville']?></span>
+                                        </td>
+
+                                        <td class="text-center align-middle">
+                                            <span><?=$am['user_statut']?></span>
+                                        </td>
+                                        <td class="text-center align-middle">
+                                            <?php
+                                        $req1 = $BDD->prepare("SELECT *
+                                                                FROM relation
+                                                                WHERE id_receveur = ? AND statut = 1");
+                                        $req1->execute(array($am['user_id']));
+
+                                        $nb_follow=0;
+
+                                        $resuRELA = $req1->fetchAll();
+
+                                        foreach($resuRELA as $rr){
+
+                                            foreach($rr as $key => $value){
+
+                                                if($key =='statut' && $value== 1){
+
+                                                    $nb_follow++;
+                                                }   
+                                            } 
+                                        }
+                                        echo "<span>".$nb_follow."</span>";
+
+                                            ?>
+                                        </td>
+
+
+                                        <script type="text/javascript">
+                                            function goInputOption(bay,idd,blaz){
+                                                let mode = bay.value;
+                                                console.log(mode,idd);
+
+                                                var p = document.getElementById('phraseConfirm');
+                                                var iO = document.getElementById('inputOption');
+                                                var iO_id = document.getElementById('inputOption_user_id');
+
+                                                iO.value = mode;
+                                                iO_id.value = idd;
+                                                
+                                                if(mode == 'desac' ) {
+                                                    p.innerHTML = "desactiver le compte de " + blaz + " ?";
+                                                } else if(mode == 'act' ) {
+                                                    p.innerHTML = "activer le compte de " + blaz + " ?";
+                                                }
+                                                else if (mode == 'suppr'){
+                                                    p.innerHTML = "supprimer le compte de " + blaz + " ?";   
+                                                }
+                                                console.log(iO,iO_id);
+                                            } 
+                                        </script>
                                     </tr>
                                     <?php 
                                     }
@@ -151,6 +282,33 @@ $afficher_membres=$req->fetchAll();
 
                                 </tbody>
                             </table>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="desac_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Êtes vous sûr de vouloir <span id="phraseConfirm"></span>
+                                            <form method="post" id="formOptionConfirm" action="">
+                                                <input type="hidden" name="inputOption" id="inputOption">
+                                                <input type="hidden" name="inputOption_user_id" id="inputOption_user_id">
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                            <button onclick="document.getElementById('formOptionConfirm').submit()" type="button" class="btn btn-primary">Oui</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- END Modal -->
                         </div>
                     </div>
                 </div>
@@ -170,5 +328,7 @@ $afficher_membres=$req->fetchAll();
                 });
             });
         </script>
+
+
     </body>
 </html>
