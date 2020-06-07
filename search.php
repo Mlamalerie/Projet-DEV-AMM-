@@ -4,7 +4,7 @@ $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
 print_r('<br><br><br><br><br><br><br>');
 print_r($_GET);
-$listeGenres = ['Hip Hop','Trap','R&B','Soul','Afro','Deep','Pop','Rock','Reggae'];
+$listeGenres = ['Hip Hop','Trap','R&B','Soul','Afro','Deep','Pop','Rock','Reggae','Zouk','Dance','Latino','Old School','Pop','Pop/Funk','Orchestral'];
 sort($listeGenres);
 $_SESSION["listeGenres"] = $listeGenres;
 
