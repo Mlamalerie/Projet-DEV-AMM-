@@ -15,6 +15,10 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     $okconnectey = true;
 } 
 
+if(empty($_FILES)) {
+
+}
+ 
 
 require_once 'assets/functions/uploadFile.php';
 
@@ -171,28 +175,33 @@ if (!empty($_POST)) {
             $req = $BDD->prepare("INSERT INTO beat (beat_title,beat_author,beat_author_id,beat_format,beat_genre,beat_description,beat_year,beat_price,beat_dateupload,beat_tags,beat_source) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
 
             $req->execute(array($b_title,$_SESSION['user_pseudo'],$_SESSION['user_id'],$ext,$b_genre,$b_description,$b_year,$b_price,$date_upload,$b_tags,$destination));
-            
-            
+
+
             $req = $BDD->prepare("SELECT beat_id FROM beat WHERE (beat_title = ? AND beat_author = ? AND beat_author_id = ? AND beat_format = ? AND beat_genre = ? AND beat_description = ? AND beat_year = ? AND beat_price = ? AND beat_dateupload = ? AND beat_tags = ? AND beat_source = ?) "); 
 
             $req->execute(array($b_title,$_SESSION['user_pseudo'],$_SESSION['user_id'],$ext,$b_genre,$b_description,$b_year,$b_price,$date_upload,$b_tags,$destination));
             $bb = $req->fetch();
 
 
+            if(isset($bb)) {
 
-           
-            echo $fichier;
-            if(rename($fichier,$dir.basename($_SESSION['user_id']."-beat-".$bb['beat_id'].".".$ext))) {
-                echo 'rennneeaame';
-                unset($_SESSION['destination']);
+                echo $fichier;
+                if(rename($fichier,$dir.basename($_SESSION['user_id']."-beat-".$bb['beat_id'].".".$ext))) {
+                    echo 'rennneeaame';
+                    unset($_SESSION['destination']);
+                    header('Location: view-beat.php?beat_id='.$bb['beat_id']);
+                exit;
+
+                    echo "<script> alert('".$fichier."') </script>";
+                    echo "<script> alert('".$_SESSION['user_id']."-beat-".$bb['beat_id'].".".$ext."') </script>";
+                }
+
+
                 
-                echo "<script> alert('".$fichier."') </script>";
-                echo "<script> alert('".$_SESSION['user_id']."-beat-".$bb['beat_id'].".".$ext."') </script>";
+
+            }else {
+                echo'not bb';
             }
-            
-            
-           //  header('Location: view-beat.php?$beat_id='.$bb['beat_id']);
-          //  exit;
 
 
 
@@ -629,9 +638,9 @@ if(isset($err_upload)) {
 
 
         <?php
-                                      
 
-                                       
+
+
              }
         ?>
 
