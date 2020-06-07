@@ -10,7 +10,7 @@ $idbeat = intval($qq);
 $ok = true;
 
 //*** Verification du beat
-$req = $BDD->prepare("SELECT beat_title 
+$req = $BDD->prepare("SELECT beat_title,beat_author_id 
                             FROM beat
                             WHERE beat_id = ?");
 $req->execute(array($idbeat));
@@ -21,8 +21,6 @@ if(!isset($verif_b['beat_title'])){
     $ok = false;
 
 }
-
-
 
 // compter nb like
 $req = $BDD->prepare("SELECT id
@@ -35,6 +33,24 @@ $p = $req->fetchAll();
 
 echo '#'.count($p);
 
+// maj athor
+
+
+$req = $BDD->prepare("SELECT user_pseudo
+                            FROM user
+                            WHERE user_id = ?
+                                ");
+$req->execute(array($verif_b['beat_author_id']));
+$user = $req->fetch();
+
+print_r($user);
+if(!isset($user['user_pseudo'])){  
+    echo "#authorexistepas#";
+    $ok = false;
+
+}
+
+
 
 if($ok){
     $nb = count($p);
@@ -43,7 +59,15 @@ if($ok){
             WHERE beat_id = ?"); 
     $req->execute(array($nb,$idbeat));
 
-    echo "*** refreshlike ***";
+    echo "<br> *** refreshlike ***";
+    
+    $nb = count($p);
+    $req = $BDD->prepare("UPDATE beat
+            SET beat_author = ?
+            WHERE beat_id = ?"); 
+    $req->execute(array($user['user_pseudo'],$idbeat));
+
+    echo "<br> *** refreshAuthor***";
 } else {
     echo "erreur";
 }

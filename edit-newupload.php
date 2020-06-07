@@ -20,7 +20,10 @@ require_once 'assets/functions/uploadFile.php';
 $icon = " <svg class='mr-1 my-1 bi bi-exclamation-circle' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
                                             <path fill-rule='evenodd' d='M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z' clip-rule='evenodd'/>
                                             <path d='M7.002 11a1 1 0 112 0 1 1 0 01-2 0zM7.1 4.995a.905.905 0 111.8 0l-.35 3.507a.552.552 0 01-1.1 0L7.1 4.995z'/>
-                                        </svg>";
+                                  </svg>";
+$temaEtape1 = true;
+$temaEtape2 = false;
+$temaEtape3 = false;
 
 $upd = new uploadFile();
 if (isset($_POST['submit_upload']))  {
@@ -31,28 +34,29 @@ if (isset($_POST['submit_upload']))  {
             $tmp_name = $_FILES['uploadAudio']['tmp_name'];
             $name = $_FILES['uploadAudio']['name'];
 
+
             $nomduboug = $_SESSION['user_pseudo'];
             $idduboug = $_SESSION['user_id'];
 
-            $idbeatx = 1;
-            $continuecherche = true;
-            do {
-                $req = $BDD->prepare("SELECT beat_title
-                                        FROM beat
-                                        WHERE beat_id = ? 
-                                            ");
-                $req->execute(array($idbeatx));
-                $b = $req->fetch();
+            //            $idbeatx = 1;
+            //            $continuecherche = true;
+            //            do {
+            //                $req = $BDD->prepare("SELECT beat_title
+            //                                        FROM beat
+            //                                        WHERE beat_id = ? 
+            //                                            ");
+            //                $req->execute(array($idbeatx));
+            //                $b = $req->fetch();
+            //
+            //                if(!isset($b['user_id'])){
+            //                    $continuecherche = false;
+            //                    echo "YES";
+            //                } else {
+            //                    $idbeatx++;
+            //                }
+            //            } while($continuecherche);
 
-                if(!isset($b['user_id'])){
-                    $continuecherche = false;
-                    echo "YES";
-                } else {
-                    $idbeatx++;
-                }
-            } while($continuecherche);
-
-            $destination = $upd->uploadAudio($tmp_name,$name,$nomduboug,$idduboug,$idbeatx);
+            $destination = $upd->uploadAudio($tmp_name,$name,$nomduboug,$idduboug);
 
 
         }
@@ -69,17 +73,16 @@ if (isset($_POST['submit_upload']))  {
             $okaudioposer = false;
 
         } else if( $destination[5] == "1") { 
-            $err_upload = "Taille 0";
+            $err_upload = "ceci n'est pas un audio";
             $okaudioposer = false;
 
         }else if( $destination[5] == "2") { 
-            $err_upload = "Taille 0";
+            $err_upload = "erreur inconnu";
             $okaudioposer = false;
 
         }
 
     } else {
-        $_SESSION['idbeatx'] = $idbeatx;
 
     }
 } else if (!empty($_POST)) {
@@ -95,58 +98,68 @@ if (isset($_POST['submit_upload']))  {
         $b_tags = (String) $b_tags;
         $b_genre = (String) $b_genre;
         $b_price = (float) $b_price;
+
+        $temaEtape1 = false;
+        $temaEtape2 = false;
+        $temaEtape3 = false;
+
+        if(isset($_POST['freebay'])) {
+            $b_price = 0.00;
+        } else {
+            if(empty($b_price)) {
+                $ok = false;
+                $err_b_price = "Veuillez renseigner ce champ !"; $temaEtape3 = true;
+
+            }
+        }
+
+
         $b_year = (int) $b_year;
-
         if(empty($b_title)) {
-            $ok = false;
-            $err_b_title = "Veuillez renseigner ce champ !";
-            
-            $temaEtape1 = true;
+            $ok = false; $err_b_title = "Veuillez renseigner ce champ !"; $temaEtape1 = true;
 
         } 
-        if(empty($b_description)) {
-            $ok = false;
-            $err_b_description = "Veuillez renseigner ce champ !";
+        if(empty($b_description)) {$ok = false;$err_b_description = "Veuillez renseigner ce champ !"; $temaEtape1 = true;} 
+        if(empty($b_tags)) {$ok = false;$err_b_tags = "Veuillez renseigner ce champ !"; $temaEtape1 = true;
 
-        } 
-        if(empty($b_tags)) {
-            $ok = false;
-            $err_b_tags = "Veuillez renseigner ce champ !";
-
-        } 
+                           } 
         if(empty($b_genre)) {
             $ok = false;
-            $err_b_genre = "Veuillez renseigner ce champ !";
+            $err_b_genre = "Veuillez renseigner ce champ !"; $temaEtape2 = true;
 
         }
-        if(empty($b_price)) {
-            $ok = false;
-            $err_b_price = "Veuillez renseigner ce champ !";
 
-        }
         if(empty($b_year)) {
             $ok = false;
-            $err_b_year = "Veuillez renseigner ce champ !";
+            $err_b_year = "Veuillez renseigner ce champ !";  $temaEtape2 = true;
 
         }
 
         if($ok) {
             echo "€€OOOOK";
 
-            //        $date_upload = date("Y-m-d H:i:s"); 
-            //
-            //        // preparer requete
-            //        $req = $BDD->prepare("INSERT INTO beat (beat_title,beat_author,beat_format,beat_genre,beat_description,beat_year,beat_price,beat_dateupload,beat_cover,beat_tags,beat_source) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
-            //
-            //        $req->execute(array($title,$author,$format,$genre,$description,$year,$price,$dateupload,$cover,$tags,$source));
-            //
-            //        $_SESSION['user_pseudo'] = $pseudo;
-            //
-            //        header('Location: index.php');
-            //        exit;
+            $date_upload = date("Y-m-d H:i:s"); 
+            $destination = "data/".$_SESSION['user_id']."-".$_SESSION['user_pseudo']."/beats/".$_SESSION['user_id']."-beat-x.mp3";
+
+            $nn = pathinfo($destination);
+            $ext =  strtolower($nn['extension']);
 
 
 
+            // preparer requete
+            $req = $BDD->prepare("INSERT INTO beat (beat_title,beat_author,beat_author_id,beat_format,beat_genre,beat_description,beat_year,beat_price,beat_dateupload,beat_tags,beat_source) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
+
+            $req->execute(array($b_title,$_SESSION['user_pseudo'],$_SESSION['user_id'],$ext,$b_genre,$b_description,$b_year,$b_price,$date_upload,$b_tags,$destination));
+
+
+
+            header('Location: search.php');
+            exit;
+
+
+
+        } else {
+            echo "not";
         }
 
     }
@@ -204,17 +217,17 @@ if(isset($err_upload)) {
                     <div class="col-md-3">
                         <!-- Tabs nav -->
                         <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link mb-3 p-3 shadow active" id="u1-tab" data-toggle="pill" href="#u1" role="tab" aria-controls="u1" aria-selected="true">
+                            <a class="nav-link mb-3 p-3 shadow <?php if($temaEtape1){ ?>active <?php } ?> " id="u1-tab" data-toggle="pill" href="#u1" role="tab" aria-controls="u1" aria-selected="true">
                                 <i class="fa fa-user-circle-o mr-2"></i>
                                 <span class="font-weight-bold small text-uppercase">1 : TITRE &amp; DESCRIPTION </span>
                             </a>
 
-                            <a class="nav-link mb-3 p-3 shadow" id="u2-tab" data-toggle="pill" href="#u2" role="tab" aria-controls="u2" aria-selected="false">
+                            <a class="nav-link mb-3 p-3 shadow <?php if($temaEtape2){ ?>active <?php } ?>" id="u2-tab" data-toggle="pill" href="#u2" role="tab" aria-controls="u2" aria-selected="false">
                                 <i class="fa fa-calendar-minus-o mr-2"></i>
                                 <span class="font-weight-bold small text-uppercase">2 : INFO INDISPENSABLE </span>
                             </a>
 
-                            <a class="nav-link mb-3 p-3 shadow" id="u3-tab" data-toggle="pill" href="#u3" role="tab" aria-controls="u3" aria-selected="false">
+                            <a class="nav-link mb-3 p-3 shadow <?php if($temaEtape3){ ?>active <?php } ?>" id="u3-tab" data-toggle="pill" href="#u3" role="tab" aria-controls="u3" aria-selected="false">
                                 <i class="fa fa-star mr-2"></i>
                                 <span class="font-weight-bold small text-uppercase">3 : PRIX</span>
                             </a>
@@ -238,7 +251,7 @@ if(isset($err_upload)) {
 
 
                                 <!--  **TITRE ET DESCRIPTION -->
-                                <div class="tab-pane fade shadow rounded bg-white show active p-5" id="u1" role="tabpanel" aria-labelledby="u1-tab">
+                                <div class="tab-pane fade shadow rounded bg-white <?php if($temaEtape1){ ?> show active <?php } ?> p-5" id="u1" role="tabpanel" aria-labelledby="u1-tab">
                                     <h4 class="font-italic mb-4">Personal information</h4>
 
                                     <div class="row">
@@ -287,7 +300,7 @@ if(isset($err_upload)) {
                                     <span id="spanErreurTags" class="text-danger d-none"> </span>
                                 </div>
                                 <!--  ** info +++ -->
-                                <div class="tab-pane fade shadow rounded bg-white p-5" id="u2" role="tabpanel" aria-labelledby="u2-tab">
+                                <div class="tab-pane fade shadow rounded bg-white <?php if($temaEtape2){ ?> show active <?php } ?> p-5" id="u2" role="tabpanel" aria-labelledby="u2-tab">
                                     <h4 class="font-italic mb-4">Bookings</h4>
 
                                     <!--GENRE-->
@@ -330,11 +343,11 @@ if(isset($err_upload)) {
 
                                 </div>
                                 <!--  ** PRIX -->
-                                <div class="tab-pane fade shadow rounded bg-white p-5" id="u3" role="tabpanel" aria-labelledby="u3-tab">
+                                <div class="tab-pane fade shadow rounded bg-white <?php if($temaEtape3){ ?> show active <?php } ?> p-5" id="u3" role="tabpanel" aria-labelledby="u3-tab">
                                     <h4 class="font-italic mb-4">Reviews</h4>
                                     <!--PRICE-->
                                     <p class="custom-control custom-switch m-0">
-                                        <input onchange="gogoUpload2()" name="freebay" class="custom-control-input" id="freebay" type="checkbox" <?php if(isset($_POST['freebay']) || $b_price == 0.00){ ?> checked <?php } ?> >
+                                        <input onchange="gogoUpload2()" name="freebay" class="custom-control-input" id="freebay" type="checkbox" <?php if(isset($_POST['freebay']) || (isset($b_price) && $b_price == 0.00)){ ?> checked <?php } ?> >
                                         <label class="custom-control-label " for="freebay"> FREE BEAT</label>
 
                                     </p>
@@ -544,7 +557,7 @@ if(isset($err_upload)) {
 
                             ok1 = ok1 && (title.value.trim().length > 0) && (description.value.trim().length > 0) && (tags.value.trim().length > 0);
                             ok2 = ok2 && (genre.value.trim().length > 0) && (document.getElementById('b_year').value.length != 0);
-                            ok3 = ok3 && (document.getElementById('b_price').value.length != 0);
+                            ok3 = ok3;
 
 
 

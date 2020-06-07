@@ -4,7 +4,7 @@ class uploadFile{
 
 
 
-    function uploadAudio($tmp_name,$name,$nomduboug,$idduboug,$idbeat){
+    function uploadAudio($tmp_name,$name,$nomduboug,$idduboug){
         $formataudio = array('mp3','ogg','wav','wma','m4a');
 
         $nn = pathinfo($name);
@@ -14,7 +14,7 @@ class uploadFile{
         // si le fichier est un bien un fichier audio
         if (in_array($ext,$formataudio)){
 
-            $name = $idduboug.'-beat-'.$idbeat.'.'.$ext;
+            $name = $idduboug.'-beat-x.'.$ext;
 
 
             $dir = 'data/'.$idduboug.'-'.$nomduboug.'/beats/';
