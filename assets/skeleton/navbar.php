@@ -1,5 +1,3 @@
-
-
 <?php 
 $jesuissurindex = $_SESSION['ici_index_bool']; 
 
@@ -14,7 +12,7 @@ $jesuissurindex = $_SESSION['ici_index_bool'];
             <img src='assets/img/icon/compact-disc2.svg' width="35" height="35" alt="">
             <?php } ?>
         </a>
-        <a class="navbar-brand" href="index.php">WeBeats</a>
+        <a class="navbar-brand" href="index.php">WeBeatz</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span> 
         </button>
@@ -24,22 +22,23 @@ $jesuissurindex = $_SESSION['ici_index_bool'];
 
         <form id="searchform" method="get" action="search.php" class="form-inline nav-brand " style="margin-bottom: 0px;">
 
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <select name="Type" class=" rounded-pill btn-block shadow-sm custom-select" >
+               
+                <div class="form-group row mr-2">
+                    <input id='searchbar'
+                           type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-describedby="button-search" class="form-control rounded-pill form-control-underlined ">
+                    <div class="input-group-append">
+                        <select name="Type" class=" rounded-pill btn-block shadow-sm custom-select" >
 
-                        <option value="beats" class="dropdown-item">All beats</option>
+                            <option value="beats" class="dropdown-item">All beats</option>
 
 
-                        <option value="users" class="dropdown-item">All users </option>
+                            <option value="users" class="dropdown-item">All users</option>
 
 
-                    </select>
-                </div>
-                <div class="form-group col-md-9">
-                    <input id="exampleFormControlInput6" type="email" placeholder="What're you searching for?" class="form-control form-control-underlined">
-                </div>
-            </div>s
+                        </select>
+                    </div>
+              
+            </div>
             <!--
 
 <button onclick="goSearch()" id="button-search" type="button" class="btn btn-link text-info search_icon"><i class="fa fa-search"></i></button>
@@ -104,7 +103,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                         $recent = dateDiff($date1, $date2);
 
                         ?>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="message.php?profil_id=<?= $user['user_id'] ?>">
                             <div class="dropdown-list-image mr-3">
                                 <img class="rounded-circle" width="30" src="<?= $user['user_image']?>" alt="">
                                 <div class="status-indicator bg-success"></div>
@@ -133,11 +132,23 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 
                         <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
+                        
+                        <?php 
+                            if($_SESSION['user_role']==0){   
+                        ?>
+                        <a class="dropdown-item  " href="all-utilisateurs.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Admin Studio</a>
+                        <?php
+                            }
+                        ?>
+                        
+                        
+                        
                         <a class="dropdown-item  " href="#"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="deconnexion.php"><i class="fas fa-power-off mr-2"></i>Déconnexion</a>
-                    </div>
+                        </div>
+                    
                 </li>
 
                 <!--  PANIER -->
@@ -231,6 +242,163 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
         </div>
     </div>
 </div>
+
+<!--   *************************************************************  -->
+<!--   ************************** MODAL UPLOAD  **************************  -->
+        <div  class=" modal fade" id="modalUpload" tabindex="-1" role="dialog" aria-labelledby="modalUploadTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Uploader</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id='formUpload1' action="edit-newupload.php" method="post" enctype="multipart/form-data">
+
+                        <div class="modal-body" id="modalBodyUpload">
+
+                            <!-- FICHIER -->
+                            <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+
+                                <input accept=".mp3, .wav" onchange="gogoUpload();" id="uploadAudio" name="uploadAudio" type="file" class="form-control border-0">
+
+
+                                <label id="uploadAudio-label" for="uploadAudio" class="font-weight-light text-muted">Choose Audio file</label>
+                                <div class="input-group-append">
+
+                                    <label for="uploadAudio" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+
+                                </div>
+
+                                <script>
+                                    var inputAudio = document.getElementById( 'uploadAudio' );
+                                    var infoAreaAudio = document.getElementById('uploadAudio-label');
+
+
+                                    inputAudio.addEventListener( 'change', showFileNameAudio );
+
+                                    function showFileNameAudio( event ) {
+                                        var inputAudio = event.srcElement;
+                                        var fileName = inputAudio.files[0].name;
+                                        infoAreaAudio.innerHTML = ': ' + fileName;
+
+                                    }
+
+                                </script>
+
+                            </div>
+
+
+                            <span id="spanErreurUpload" class="text-danger d-none"> </span>
+
+                            <br>
+                            <input id="submit_upload" onclick="document.getElementById('formUpload1').submit();" name="submit_upload" class="btn btn-primary d-none" value="uploadMoiCa">
+                        </div>
+                        <!--
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+</div>
+-->
+                    </form>
+                    <?php 
+
+
+                    ?>
+                    <script>
+
+
+                        function isAlphanumeric(string)
+                        {
+                            for ( var i = 0; i < string.length; i++ )
+                            {
+                                ch = string.charAt(i);
+
+                                if (!(ch >= '0' && ch <= '9') && 	// Numeric (0-9)
+                                    !(ch >= 'A' && ch <= 'Z') && 		// Upper alpha (A-Z)
+                                    !(ch >= 'a' && ch <= 'z') && !(ch == " " || ch == "é" || ch == 'è') ) 			// Lower alpha (a-z)
+                                    return false;
+                            }
+                            return true;
+                        }
+
+                        function isNumeric(string)
+                        {
+                            for ( var i = 0; i < string.length; i++ )
+                            {
+                                ch = string.charAt(i);
+
+                                if (!(ch >= '0' && ch <= '9')	// Numeric (0-9)
+                                   ) 			
+                                    return false;
+                            }
+                            return true;
+                        }
+
+
+                        function gogoUpload(){
+
+                            let submit = document.getElementById('submit_upload');
+
+                            let upload = document.getElementById("uploadAudio").value.split('.');
+                            let ext = upload[upload.length - 1].toLowerCase();
+                            let erreurUpload = document.getElementById('spanErreurUpload');
+                            //                                console.log(upload.length,ext);
+
+                            //** UPLOADER FICHIER AUDIO
+                            formatAudio = ["mp3","wav"];
+                            okaffichesubmit = true;
+                            if (formatAudio.indexOf(ext) == -1 ) { // si pas un fichier audio
+                                okaffichesubmit = false;
+                                if(upload.length < 2) { 
+                                    erreurUpload.classList.add("d-none"); //ne pas afficher l'erreur si rien a été uploader
+                                } else {
+                                    erreurUpload.classList.remove("d-none");
+                                    erreurUpload.innerHTML = "Ce n'est pas un audio";
+                                }
+
+                            } else { // si bien audio alors
+                                erreurUpload.classList.add("d-none"); // pas afficher message d'erreur
+                                //                                    console.log("**",erreur);
+                            }
+
+
+                            let ici = document.getElementById('modalBodyUpload');
+                            if( okaffichesubmit) {
+
+                                let btn = document.createElement('input');
+                                btn.setAttribute('id','submit_upload');
+                                btn.setAttribute('name','submit_upload');
+                                btn.setAttribute('onclick',"document.getElementById('formUpload1').submit();");
+                                btn.setAttribute('class',"btn btn-primary");
+                                btn.setAttribute('value',"uploadMoiCa");
+                                ici.appendChild(btn);
+
+
+
+                            } else {
+                                let btn = document.getElementById('submit_upload');
+
+                                if (btn != null) {
+                                    ici.removeChild(btn);
+                                }
+
+                            }
+                            
+
+
+                        }
+
+                    </script>
+
+                </div>
+            </div>
+        </div>
+
+
+
 
 
 <?php } ?>

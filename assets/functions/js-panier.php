@@ -12,6 +12,7 @@
         } else {
             setTimeout(redir("search.php"),5000);
             btn.style = "display : none ;"
+           
             document.getElementById('waitRedirigey').innerHTML = "Votre panier est vide, Vous allez être redirigé dans 5sec.. vers une autre page pour le remplir";
 
         }
