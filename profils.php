@@ -119,8 +119,6 @@ foreach($resuRELA as $rr){
 
 
 
-//$nb_follow = count()
-
 
 ?>
 
@@ -226,12 +224,19 @@ foreach($resuRELA as $rr){
                     if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){
                         if( $id_demandeur==$id_receveur ){
                                 ?>
-                                <button class="infos-privee-btn"><a href="privee.php?profil_id=<?= $id_receveur?>" >Infos privée</a></button>
-
-                                <button class="editer-btn"><a href="editer-profil.php?profil_id=<?= $id_receveur?>" >Editer</a></button>
+                <a href="privee.php?profil_id=<?= $id_receveur?>"><button class="infos-privee-btn">Infos privée</button></a>
+                
+                <a href="editer-profil.php?profil_id=<?= $id_receveur?>" ><button class="editer-btn">Editer</button></a>
                                 <?php
-                        } else {/*si on est juste connecté et qu'on regarde le profil d'un autre*/
+                                    
+                        }
+                        else if( $afficher_profil['user_statut'] == 0 ){  echo " "; /*compte désacivé*/
+                        }
+                        
+                        else {/*si on est juste connecté et qu'on regarde le profil d'un autre*/
+                            
                                 ?>
+                                
                                 <div class="col-md-4" style="display:inline-block;width:30%;margin-left:5%">
                                     <button class="msg-btn" href=""> <a href="message.php?profil_id=<?= $id_receveur ?>" style="color:white">
                                         DM
@@ -255,9 +260,13 @@ foreach($resuRELA as $rr){
         // Si le profil vous a bloqué
         if(isset($afficher_profil['statut']) && $afficher_profil['id_demandeur']==$id_receveur && $afficher_profil['statut'] == 3){
             echo "Vous a bloqué";
-
-
-        } else {
+                } 
+        // Si le profil a été désactivé
+        else if(($afficher_profil['user_statut'] == 0)){
+            echo "Ce compte a été désactivé";
+            
+        }
+            else {
 
             ?>    
             <form method="post" >
@@ -265,7 +274,7 @@ foreach($resuRELA as $rr){
             /* echo '//'. $afficher_profil['id_demandeur'] .'-'. $afficher_profil['id_receveur'] .'-'. $afficher_profil['statut']  .'//<br>';
             echo '//**'.$id_demandeur.'-'. $id_receveur.'//';*/
 
-            //** ON AFFICHE PAS CA SI TU LA BLOQU2 ! :
+            //** ON AFFICHE PAS CA SI TU LA BLOQUé ou désactivé ! :
             if(isset($afficher_profil['statut']) && $afficher_profil['statut'] == 3 && $afficher_profil['id_demandeur']==$id_demandeur){
                 echo "###";
 
@@ -330,32 +339,21 @@ foreach($resuRELA as $rr){
                                 $yadesresultatsBEATS=true;
                             
                             
-                                 
-                                    if(isset($id_demandeur)&& $id_demandeur!=$id_receveur && isset($afficher_profil['statut']) && $afficher_profil['statut'] == 3 && $afficher_profil['id_demandeur']==$id_demandeur){ /* si on va sur le compte d'un utilisateur bloqué*/
+                                 /* si on va sur le compte d'un utilisateur bloqué et vous ne pouvez écouter les prods de qqn qui vous a bloqué ou encore si le compte a été desactivé*/
+                                    if(isset($id_demandeur)&& $id_demandeur!=$id_receveur && isset($afficher_profil['statut']) && $afficher_profil['statut'] == 3){ 
                                         echo "Vous ne pouvez pas écouté ses prods";
-                                    } 
+                                    }
+                                    elseif($afficher_profil['user_statut'] == 0){
+                                         echo "Vous ne pouvez pas écouté ses prods car son compte a été désactivé";
+                                    }
                                      else { 
                             ?>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
-                                        <!--
-<tr>
-<th scope="col" class="border-0 bg-light">
-<div class="py-0  text-uppercase">n</div>
-</th>
-<th scope="col" class="border-0 bg-light">
-<div class="p-2 px-3 text-uppercase"> image</div>
-</th>
-<th scope="col" class="border-0 bg-light">
-<div class="py-2 text-uppercase">like</div>
-</th>
-<th scope="col" class="border-0 bg-light">
-<div class="py-2 text-uppercase">carte</div>
-</th>
-</tr>
--->
+ 
                                     </thead>
+                    <!--               Affichage des beats                      -->
                                     <tbody>
                                         <?php
                                             if ($yadesresultatsBEATS) {$i = 1;foreach($resuBEATS as $r){
