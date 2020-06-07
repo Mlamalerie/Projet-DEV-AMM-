@@ -169,7 +169,7 @@ if(!empty($_POST)){
         if($ok) {
 
             $date_inscription = date("Y-m-d H:i:s"); 
-            $statut = 2;
+            $statut = 1;
             $sexe = "0";
             $motdepasse = crypt($motdepasse, '$6$rounds=5000$grzgirjzgrpzhte95grzegruoRZPrzg8$');
 
@@ -188,6 +188,7 @@ if(!empty($_POST)){
              $_SESSION['user_id'] = $u['user_id'];
             $_SESSION['user_pseudo'] = $pseudo;
             $_SESSION['user_email'] = $email;
+            $_SESSION['user_role'] = 2;
 
             header('Location: dashboard.php');
             exit;
