@@ -464,7 +464,8 @@ if(!empty($_POST)){
 
             $toutestboninfoperso = true;if($_SESSION['user_id'] == $baseid) {
             $_SESSION['user_role'] = $baserole;}
-
+header('Location: dashboard.php');
+            exit;
 
         }
 
@@ -664,7 +665,7 @@ if(!empty($_POST)){
                                         var xmlhttp = new XMLHttpRequest();
 
 
-                                        let ou = "data/majFolder.php?id="
+                                        let ou = "data/majUserBDD.php?id="
                                         ou += oldold;
                                         console.log(ou);
                                         xmlhttp.open("GET",ou,true);

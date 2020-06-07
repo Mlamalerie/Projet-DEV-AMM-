@@ -339,13 +339,14 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
                         if (btn == null) {
 
-                        let btn = document.createElement('input');
-                        btn.setAttribute('id','submit_upload');
-                        btn.setAttribute('name','submit_upload');
-                        btn.setAttribute('onclick',"document.getElementById('formUpload1').submit();");
-                        btn.setAttribute('class',"btn btn-primary");
-                        btn.setAttribute('value',"uploadMoiCa");
-                        ici.appendChild(btn);
+//                        let btn = document.createElement('input');
+//                        btn.setAttribute('id','submit_upload');
+//                        btn.setAttribute('name','submit_upload');
+//                        btn.setAttribute('onclick',"document.getElementById('formUpload1').submit();");
+//                        btn.setAttribute('class',"btn btn-primary");
+//                        btn.setAttribute('value',"uploadMoiCa");
+//                        ici.appendChild(btn);
+                            document.getElementById('formUpload1').submit();
                         }
 
 

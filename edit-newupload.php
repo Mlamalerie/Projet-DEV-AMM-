@@ -8,6 +8,7 @@ print_r($_SESSION);
 print_r($_FILES);print_r($_POST);
 
 
+
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
@@ -21,50 +22,51 @@ $icon = " <svg class='mr-1 my-1 bi bi-exclamation-circle' width='1em' height='1e
                                             <path fill-rule='evenodd' d='M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z' clip-rule='evenodd'/>
                                             <path d='M7.002 11a1 1 0 112 0 1 1 0 01-2 0zM7.1 4.995a.905.905 0 111.8 0l-.35 3.507a.552.552 0 01-1.1 0L7.1 4.995z'/>
                                   </svg>";
+
+
+
 $temaEtape1 = true;
 $temaEtape2 = false;
 $temaEtape3 = false;
 
+// UPLOADER
 $upd = new uploadFile();
-if (isset($_POST['submit_upload']))  {
-    if(isset($_FILES['uploadAudio'])) {
-        if($_FILES['uploadAudio']['size'] != 0) { 
-            // FICHIER RECU
-            var_dump($_FILES['uploadAudio']);
-            $tmp_name = $_FILES['uploadAudio']['tmp_name'];
-            $name = $_FILES['uploadAudio']['name'];
+if(isset($_FILES['uploadAudio'])) {
+    if($_FILES['uploadAudio']['size'] != 0) { 
+        // FICHIER RECU
+        var_dump($_FILES['uploadAudio']);
+        $tmp_name = $_FILES['uploadAudio']['tmp_name'];
+        $name = $_FILES['uploadAudio']['name'];
 
 
-            $nomduboug = $_SESSION['user_pseudo'];
-            $idduboug = $_SESSION['user_id'];
+        $nomduboug = $_SESSION['user_pseudo'];
+        $idduboug = $_SESSION['user_id'];
 
-            //            $idbeatx = 1;
-            //            $continuecherche = true;
-            //            do {
-            //                $req = $BDD->prepare("SELECT beat_title
-            //                                        FROM beat
-            //                                        WHERE beat_id = ? 
-            //                                            ");
-            //                $req->execute(array($idbeatx));
-            //                $b = $req->fetch();
-            //
-            //                if(!isset($b['user_id'])){
-            //                    $continuecherche = false;
-            //                    echo "YES";
-            //                } else {
-            //                    $idbeatx++;
-            //                }
-            //            } while($continuecherche);
+        //            $idbeatx = 1;
+        //            $continuecherche = true;
+        //            do {
+        //                $req = $BDD->prepare("SELECT beat_title
+        //                                        FROM beat
+        //                                        WHERE beat_id = ? 
+        //                                            ");
+        //                $req->execute(array($idbeatx));
+        //                $b = $req->fetch();
+        //
+        //                if(!isset($b['user_id'])){
+        //                    $continuecherche = false;
+        //                    echo "YES";
+        //                } else {
+        //                    $idbeatx++;
+        //                }
+        //            } while($continuecherche);
 
-            $destination = $upd->uploadAudio($tmp_name,$name,$nomduboug,$idduboug);
+        $destination = $upd->uploadAudio($tmp_name,$name,$nomduboug,$idduboug);
 
 
-        }
-        else {
-            $destination = "error0";
-        }
-
-    } 
+    }
+    else {
+        $destination = "error0";
+    }
 
     $okaudioposer = true;
     if (substr($destination,0,-1) == "error") { 
@@ -83,10 +85,18 @@ if (isset($_POST['submit_upload']))  {
         }
 
     } else {
+        $_SESSION['destination'] = $destination;
 
     }
-} else if (!empty($_POST)) {
 
+} 
+
+$dir = "data/".$_SESSION['user_id']."-".$_SESSION['user_pseudo']."/beats/";
+$fichier = $dir.basename($_SESSION['user_id']."-beat-x.mp3");
+
+
+if (!empty($_POST)) {
+    echo 'emppy';
     extract($_POST); // si pas vide alors extraire le tableau, grace a ça on pourra directemet mettre le nom de la varilable en dur
 
     $ok = true;
@@ -135,6 +145,16 @@ if (isset($_POST['submit_upload']))  {
 
         }
 
+        if($temaEtape1 && $temaEtape2) {
+            $temaEtape1 = false;
+        }else if($temaEtape1 && $temaEtape3) {
+            $temaEtape3 = false;
+        }else if($temaEtape2 && $temaEtape3) {
+            $temaEtape3 = false;
+        }else if($temaEtape1 && $temaEtape2 && $temaEtape3) {
+            $temaEtape2 = false;
+            $temaEtape3 = false;
+        }
         if($ok) {
             echo "€€OOOOK";
 
@@ -142,6 +162,7 @@ if (isset($_POST['submit_upload']))  {
             $destination = "data/".$_SESSION['user_id']."-".$_SESSION['user_pseudo']."/beats/".$_SESSION['user_id']."-beat-x.mp3";
 
             $nn = pathinfo($destination);
+            var_dump($nn);
             $ext =  strtolower($nn['extension']);
 
 
@@ -150,11 +171,25 @@ if (isset($_POST['submit_upload']))  {
             $req = $BDD->prepare("INSERT INTO beat (beat_title,beat_author,beat_author_id,beat_format,beat_genre,beat_description,beat_year,beat_price,beat_dateupload,beat_tags,beat_source) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
 
             $req->execute(array($b_title,$_SESSION['user_pseudo'],$_SESSION['user_id'],$ext,$b_genre,$b_description,$b_year,$b_price,$date_upload,$b_tags,$destination));
+            
+            
+            $req = $BDD->prepare("SELECT beat_id FROM beat WHERE (beat_title = ? AND beat_author = ? AND beat_author_id = ? AND beat_format = ? AND beat_genre = ? AND beat_description = ? AND beat_year = ? AND beat_price = ? AND beat_dateupload = ? AND beat_tags = ? AND beat_source = ?) "); 
+
+            $req->execute(array($b_title,$_SESSION['user_pseudo'],$_SESSION['user_id'],$ext,$b_genre,$b_description,$b_year,$b_price,$date_upload,$b_tags,$destination));
+            $bb = $req->fetch();
 
 
 
-            header('Location: search.php');
-            exit;
+           
+            echo $fichier;
+            if(rename($fichier,$dir.basename($_SESSION['user_id']."-beat-x.mp3"))) {
+                echo 'rennneeaame';
+                unset($_SESSION['destination']);
+            }
+            
+            
+           //  header('Location: view-beat.php?$beat_id='.$bb['beat_id']);
+          //  exit;
 
 
 
@@ -205,9 +240,14 @@ if(isset($err_upload)) {
         <a href=javascript:history.go(-1)>Retournez en arrière</a>
 
         <?php   }
-        else { ?>
 
-        <?= $destination ?>
+
+        else {?>
+
+        <?php if(isset($destination)) {echo $destination;}
+
+
+        ?>
         <section class="py-5 header">
             <div class="container py-4">
 
@@ -351,7 +391,7 @@ if(isset($err_upload)) {
                                         <label class="custom-control-label " for="freebay"> FREE BEAT</label>
 
                                     </p>
-                                    <input  onchange="gogoUpload2()" onkeyup="gogoUpload2()" type="number" step="0.01" min="1" max="10000" class="mb-2 text-center form-control rounded-pill  shadow-sm px-4" id="b_price" name="b_price" placeholder="Mettez un price pour votre profil"  value="<?php if(isset($b_price)){echo $b_price;}?>" autofocus>
+                                    <input  onchange="gogoUpload2()" onkeyup="gogoUpload2()" type="number" step="0.01" min="1" max="10000" class="mb-2 text-center form-control rounded-pill  shadow-sm px-4" id="b_price" name="b_price" placeholder="Mettez un price pour votre profil"  value="<?php if(isset($b_price) && !isset($_POST['freebay'])){echo $b_price;}?>" autofocus>
 
                                     <span id="spanErreurPrice" class="text-danger d-none"> </span>
 
@@ -366,6 +406,11 @@ if(isset($err_upload)) {
                         <div class="image-area mt-4"><img id="imageResult" src="assets/img/cover_default.jpg" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
 
                     </div>
+
+                    <form action="" method="post">
+
+                        <input type="submit" name="annuler_upload" value="Annuler" class="btn btn-primary">
+                    </form>
 
 
                     <script>
@@ -396,8 +441,6 @@ if(isset($err_upload)) {
                             }
                             return true;
                         }
-
-
 
                         function gogoUpload2(){
                             ok1 = true;
@@ -535,13 +578,14 @@ if(isset($err_upload)) {
                             let price = document.getElementById('b_price').value;
                             if(freebay.checked) {
                                 document.getElementById('b_price').classList.add('d-none');
+                                erreurPrice.classList.add("d-none");
                             } else {
                                 document.getElementById('b_price').classList.remove('d-none');
                                 //--price
                                 let price2 = parseFloat(price)
                                 console.log(price);
 
-                                if (price2 < 1 || price2 > 10000) {
+                                if (price2 < 1 || price2 > 10000){
                                     erreurPrice.classList.remove("d-none");
                                     erreurPrice.innerHTML = "Saisir un prix entre 1 et 10000";
 
@@ -580,12 +624,11 @@ if(isset($err_upload)) {
             </div>
         </section>
 
-        <?php
 
-                                        $annulationupload = false;
-              if ($annulationupload){
-                  unlink($destination);
-              }
+        <?php
+                                      
+
+                                       
              }
         ?>
 
