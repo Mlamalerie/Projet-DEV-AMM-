@@ -290,7 +290,7 @@ if(!empty($_POST)){
                                                 echo "</span> ";
                                             } else {
                                             ?>
-                                            <small id="emailHelp" class="form-text text-muted text-center">Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre.</small>
+                                            <small id="emailHelp" class="form-text text-muted text-center">Veuillez à bien rentrer votre e-mai car c'est sur ce dernier que vous allez recevoir vos achats si vous passez commande.</small>
                                             <?php
                                             }
                                             ?>

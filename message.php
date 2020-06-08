@@ -45,7 +45,7 @@ if(!empty($_POST)){
         $message=(String) trim($message);
         if(empty($message)){
             $valid=false;
-            $err_message="Mets un message ma gueule";
+            $err_message="Mets un message";
         }
 
         if($valid){
@@ -89,7 +89,7 @@ if(!empty($_POST)){
 <?php
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
-    
+
     $okconnectey = true;
 } else{
     header('Location: index.php');
@@ -109,6 +109,14 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 
         <style>
+            .selected-user {
+                width: 100%;
+                border: 3px solid #7728b2;
+                border-radius: 2%;
+            }
+            .under_msg{
+                margin-top: 100px;
+            }
 
         </style>
 
@@ -120,21 +128,20 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         require_once('assets/skeleton/navbar.php');
         ?>
         <br/><br/><br/><br/>
-        <div class="container">
+        
+        <div class="container selected-user">
             <div class="row">
                 <div class="col-sm-12">
                     <?php
                     foreach($afficher_message as $am){
                         if($am['id_from']==$_SESSION['user_id']){
                     ?>
-                    <div style="background:#7728b2; color:white;margin-left:25%"> <!--le message qu'on envoie-->
+                    <div style="background:#7728b2; color:white;margin-left:25%;"> <!--le message qu'on envoie-->
                         <?= $am['message'] ?> 
                         <form method="post"><!--si on veut supprimer un mssg-->
                             <input type="text" name="id" value ="<?= $am['id'] ?>" class="d-none">
                             <input type="submit" name="supprimer" value="Supprimer">
                         </form>
-                       
-                      
                     </div>
                     <?php
                         }
@@ -142,7 +149,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                     ?>
                     <div>
                         <?= $am['message'] ?> <!--le message qu'on reçoit-->
-                         <!--si on veut signaler un mssg-->
+                        <!--si on veut signaler un mssg-->
                         <select>
                             <option>Agression</option>
                             <option>Contenant choquant</option>
@@ -155,23 +162,67 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                     }
                     ?>
                 </div>
-                <div class="col-sm-12" style="margin-top: 50px">
+
+                <div class="col-sm-12" class="under_msg">
                     <?php
                     if(isset($err_message)){
                         echo $err_message;
                     }
                     ?>
+                    <br/>
                     <form method="post">
-                        <textarea placeholder="Votre message..." name="message"></textarea>
+                        <textarea class="form-control" rows="3" placeholder="Votre message..." name="message"></textarea>
                         <br/>
                         <input type="submit" name="envoyer" value="Envoyer"/>
                         <input type="submit" name="bloquer" value="Supprimer la conversation"/>
                     </form>
-                   
+
                 </div>
             </div>
         </div>
-        
+        <script type="text/javascript">
+            function goInputOption(bay,idd,blaz){
+                let mode = bay.value;
+                console.log(mode,idd);
+
+                var p = document.getElementById('phraseConfirm');
+                var iO = document.getElementById('inputOption');
+                var iO_id = document.getElementById('inputOption_message_id');
+
+                iO.value = mode;
+                iO_id.value = idd;
+
+                if (mode == 'suppr'){
+                    p.innerHTML = "supprimer le message " + blaz + " ?";   
+                }
+                console.log(iO,iO_id);
+            } 
+        </script>
+        <!-- Modal -->
+        <div class="modal fade" id="desac_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Êtes vous sûr de vouloir <span id="phraseConfirm"></span>
+                        <form method="post" id="formOptionConfirm" action="">
+                            <input type="hidden" name="inputOption" id="inputOption">
+                            <input type="hidden" name="inputOption_message_id" id="inputOption_message_id">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                        <button onclick="document.getElementById('formOptionConfirm').submit()" type="button" class="btn btn-primary">Oui</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Modal -->
 
     </body>
 </html> 

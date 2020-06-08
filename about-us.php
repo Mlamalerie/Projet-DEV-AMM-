@@ -77,11 +77,12 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
             <div class="container py-5">
                 <div class="row h-100 align-items-center py-5">
                     <div class="col-lg-6">
-                        <h1 class="display-4">About us page</h1>
-                        <p class="lead text-muted mb-0">Create a minimal about us page using Bootstrap 4.</p>
-                        <p class="lead text-muted">Snippet by <a href="https://bootstrapious.com/snippets" class="text-muted"> 
-                            <u>Bootstrapious</u></a>
-                        </p>
+                        <h1 class="display-4">A propos de nous</h1>
+                        <p class="lead text-muted mb-0">WeBeatz est né d'un projet commun entre trois étudiants de l'EISTI à Cergy-Pontoise.
+                        En créant WeBeatz, nous souhaitions faciliter les échanges entre les beatmakers et les chanteurs/rappeurs.<p/>
+                        <h2>Trouver les artistes de demain</h2>
+                        <p class="lead text-muted mb-0">Un de nos souhaits était de faire de WeBeatz un lieu de partage, où les musiciens pouvait poursuivre leur passion pour la musique, faire des rencontres, et gagner en visibilité. Faire de notre site où seront révélés les artistes de demain.<p/>
+                        
                     </div>
                     <div class="col-lg-6 d-none d-lg-block"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556834136/illus_kftyh4.png" alt="" class="img-fluid"></div>
                 </div>
@@ -94,8 +95,8 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
             <div class="container py-5">
                 <div class="row mb-4">
                     <div class="col-lg-5">
-                        <h2 class="display-4 font-weight-light">Our team</h2>
-                        <p class="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <h2 class="display-4 font-weight-light">Notre équipe</h2>
+                        <p class="font-italic text-muted">Les personnes ayant contribuées à la réalisation du site.</p>
                     </div>
                 </div>
 
@@ -131,21 +132,7 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
                     <!-- Team item-->
                     <div class="col-xl-3 col-sm-6 mb-5">
                         <div class="bg-white rounded shadow-sm py-5 px-4"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556834133/avatar-2_f8dowd.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-                            <h5 class="mb-0">Tom Sunderland</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
-                            <ul class="social mb-0 list-inline mt-3">
-                                <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
-                                <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- End-->
-
-                    <!-- Team item-->
-                    <div class="col-xl-3 col-sm-6 mb-5">
-                        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556834133/avatar-1_s02nlg.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-                            <h5 class="mb-0">John Tarly</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
+                            <h5 class="mb-0">Ari Rajaofera</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
                             <ul class="social mb-0 list-inline mt-3">
                                 <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
                                 <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
@@ -163,7 +150,7 @@ if (isset($_POST['Envoyer']) && !empty($_POST['Envoyer']) ) {
 
         <footer class="bg-light pb-5">
             <div class="container text-center">
-                <p class="font-italic text-muted mb-0">&copy; Copyrights Company.com All rights reserved.</p>
+                <p class="font-italic text-muted mb-0">&copy; 2020 WeBeats All rights reserved.</p>
             </div>
         </footer>
 

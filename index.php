@@ -75,14 +75,16 @@ $resuTENDANCES=$req->fetchAll();
         <header>
             <div class="overlay-sombre"></div>
             <video id="BACKGROUNDVIDEO1" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><!--fond d'écran animé-->
-                <source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4">
+                <source src="img/Nebula.mp4" type="video/mp4">
             </video>
             <div class="container h-100">
                 <div class="d-flex h-100 text-center align-items-center">
                     <div class="w-100 text-white">
-                        <h1 class="display-3">Développez vos sons</h1>
-                        <p class="lead mb-0">Découvrez et Partagez les prods de vos choix</p>
-                        <p class="lead mb-0">Pour pouvoir acheter ou vendre des prods  <a href="inscription.php"><button type="button" class="btn btn-danger btninscription" >Inscrivez-vous</button></a></p><br/>
+                        <h1 class="display-3">Bienvenue sur WeBeatz</h1>
+                        <p class="lead mb-0">Retrouvez les beats des meilleurs producteurs du moment</p>
+                        <p class="lead mb-0">Inscrivez-vous pour commencer à acheter ou vendre des prods <a href="inscription.php">
+                            <br/>
+                            <button type="button" class="btn btn-danger btninscription" >Inscrivez-vous</button></a></p><br/>
 
                         <form id="searchform" method="get" action="search.php">
 
@@ -120,7 +122,7 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container-fluid">
                 <div class="mx-auto" id="tendances">
                     <h2 class="h1 mb-4 text-center text-white">Tendances</h2>
-
+                    <p class="lead mb-0">Retrouvez les beats du moment</p>
                     <div class="my_slides multiple-items">
 
                         <?php
@@ -155,6 +157,7 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container-fluid">
                 <div class="mx-auto" id="topventes">
                     <h2 class="h1 mb-4 text-center text-white">TOP des ventes</h2>
+                    <p class="lead mb-0">Les meilleures ventes de beats</p>
 
                     <div class="my_slides multipleitems2">
                         <div class="items">
@@ -237,6 +240,7 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container">
                 <div class="col-lg-9 mx-auto" id="ccm">
                     <h2 class="h1 mb-4" >Comment ça marche?</h2>
+                    <p class="lead mb-0">Retrouvez les beats du moment</p>
 
                     <div id="recherchez">
                         <h3>Recherchez</h3>
@@ -416,9 +420,9 @@ $resuTENDANCES=$req->fetchAll();
 
                         <p class="font-italic text-mute">Retrouvez-nous également sur les réseaux sociaux</p>
                         <ul class="list-inline mt-4 footer__social">
-                            <li class=" "><a href="#0"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
-                            <li class=" "><a href="#0"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                            <li class=" "><a href="#0"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                            <li class=" "><a href="https://www.facebook.com/webeatz.prod.1"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                            <li class=" "><a href="https://twitter.com/webeatzprod"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                            <li class=" "><a href="https://www.instagram.com/webeatz/"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
                         </ul>
                     </div>
 
