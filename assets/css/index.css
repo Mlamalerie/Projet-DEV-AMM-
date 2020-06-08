@@ -12,7 +12,7 @@
 :root {
     --base-taille: 16px;
     --base-color1: #7728b2;
-    
+
     --base-color2: #ff00c4;
     --base-color3: #ff3aff;
     /*  --base-font-family: 'Roboto', sans-serif;*/
@@ -25,7 +25,7 @@ body {
 
 /*
 .btn:focus, .btn.focus {
-    box-shadow: 0 0 0 0.1rem rgba(20, 230, 214, 0.12);
+box-shadow: 0 0 0 0.1rem rgba(20, 230, 214, 0.12);
 }
 */
 
@@ -93,6 +93,7 @@ header .overlay-sombre {
     border-radius: 30px; /*forme arrondie de la barre*/
     padding: 10px;
 }
+
 .search_input{
     color: white;
     border: 0;
@@ -199,7 +200,6 @@ section:nth-of-type(5) {
 
 
 
-
 /* ------------------------------------------------------------------- 
  * ## section download
  * ------------------------------------------------------------------- */
@@ -262,49 +262,48 @@ section:nth-of-type(5) {
   vertical-align: bottom;
 }
 
-
 /******************************************/
 /******************FOOTER******************/
 #boxsocial{
-   
+
 }
 
 .footer__social {
-  list-style: none;
-  margin: -1.6rem 0 0 0;
+    list-style: none;
+    margin: -1.6rem 0 0 0;
 }
 
 .footer__social li {
-  display: inline-block;
-  font-size: 15px;
-  padding: 0;
-  margin-right: 4px;
-  
-  
+    display: inline-block;
+    font-size: 15px;
+    padding: 0;
+    margin-right: 4px;
+
+
 }
 
 .footer__social li a {
-  display: block;
-  line-height: 50px;
-  height: 50px;
-  width: 50px;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.03);
-  color: #ffffff;
-  border-radius: 50%;
-      transition: all 0.2s;
+    display: block;
+    line-height: 50px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.03);
+    color: #ffffff;
+    border-radius: 50%;
+    transition: all 0.2s;
     transition-timing-function: ease-in-out;
 }
 
 .footer__social li a:hover,
 .footer__social li a:focus,
 .footer__social li a:active {
-  background-color: #5b4f96;
-  color: #ffffff;
+    background-color: #5b4f96;
+    color: #ffffff;
 }
 
 .footer__social li:last-child {
-  margin-right: 0;
+    margin-right: 0;
 }
 
 #button-addon1, i {

@@ -51,21 +51,12 @@ if (isset($_POST['AppliquerRedu'])) {
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="Test_Mathieu/panierTestMathieu/affichagepanier.css">
+        <link rel="stylesheet" type="text/css" href="Test_Mathieu/panierTestMathieu/affichagepanier.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/commande.css">
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
-
-        <style>
-
-            body {
-                background: linear-gradient(to right, #5f3d79, #7327ad)!important;
-                background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
-                background: linear-gradient(to right, #eecda3, #ef629f);
-                min-height: 100vh;
-            }
-        </style>
         <title>Confirmation de votre commande | WeBeats</title>
     </head>
     <body onload="actualiserTOTALTOTAL()">
@@ -92,7 +83,7 @@ if (isset($_POST['AppliquerRedu'])) {
                         <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
 
                             <?php require_once('assets/skeleton/tablePanier.php'); ?> 
-
+                                <button type="button" onclick="document.location = 'search.php'" class="btn btn-dark rounded-pill py-2 btn-block btn-confirm">Continuer Shopping</button>
                         </div>
                     </div>
 
@@ -197,8 +188,8 @@ if (isset($_POST['AppliquerRedu'])) {
 
 
                     ?>
-                                  
-                
+
+
                 </div>
             </div>
         </div>
