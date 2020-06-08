@@ -86,7 +86,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     $req1->execute(array(3));   //pour enlever les bloqués de la messagerie
 
                     $relation_bloq=$req1->fetchAll(); 
-                   
+
 
                     include('assets/functions/datediff.php');
                     $req = $BDD->prepare("SELECT *
@@ -98,7 +98,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     $resuMESS = $req->fetchAll();
 
 
-$nbmess = 0;
+                    $nbmess = 0;
                     foreach($resuMESS as $m) {
                         ?>
 
@@ -122,7 +122,7 @@ $nbmess = 0;
 
 
                         if($okaffichemess){ 
-$nbmess++;
+                            $nbmess++;
 
                             $date1 = new DateTime( $m['date_message']);
                             $date2 = new DateTime(date("Y-m-d H:i:s"));
@@ -205,7 +205,32 @@ $nbmess++;
                 <li class="nav-item">
 
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#ModalPanier" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> <sup><span id="span_nb_panier" class="badge badge-primary px-1 rounded-pill ml-2 compteurPanier "></span> </sup></button>
+                    <script>
+ refreshNbPanier() ;
+                        function refreshNbPanier() {
+                            let tbody = document.getElementById("tbodypanier");
+                            let ici = document.getElementById("span_nb_panier");
 
+                            if (ici != null) {
+                                let nb = tbody.children.length;
+                                console.log(nb,ici);
+
+                                console.log(nb,ici);
+                                if (nb != 0) {
+                                    ici.innerHTML = nb;
+                                    affichePasserCommande(true);
+                                } else {
+                                    ici.innerHTML = "";
+
+                                    affichePasserCommande(false);
+                                }
+                                console.log(nb,ici);
+                            }
+                        }
+
+
+
+                    </script>
                 </li>
                 <?php } ?>
 

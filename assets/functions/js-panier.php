@@ -1,4 +1,6 @@
 <script id="fonctionsPanier">
+    
+    
     function redir(str){
         self.location.href=str;
     }
@@ -70,28 +72,7 @@
         actualiserTOTALTOTAL()
     }
 
-    function refreshNbPanier() {
-        let tbody = document.getElementById("tbodypanier");
-        let ici = document.getElementById("span_nb_panier");
-
-        if (ici != null) {
-            let nb = tbody.children.length;
-            console.log(nb,ici);
-
-            console.log(nb,ici);
-            if (nb != 0) {
-                ici.innerHTML = nb;
-                affichePasserCommande(true);
-            } else {
-                ici.innerHTML = "";
-
-                affichePasserCommande(false);
-            }
-            console.log(nb,ici);
-        }
-    }
-    
-   
+ 
 
     function ajoutBDDPanier(idbeat) {
         console.log("ajoutBDD");
