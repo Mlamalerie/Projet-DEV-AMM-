@@ -3,8 +3,27 @@ session_start();
 $_SESSION['ici_index_bool'] = false;
 
 include('assets/db/connexiondb.php');
+
+
+
+$okconnectey = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
+    $okconnectey = true;
+
+    if($_SESSION['user_role'] != 0){
+        echo "<script> history.go(-1); </script>";
+        exit;
+
+    }
+} else {
+    header('Location: index.php');
+            exit;
+}
+
+print_r($_POST);
+
 /*active ça si tu veux pas te voir dans la liste si t'es connecté*/
-if(isset($_SESSION['user_id'])){
+if($okconnectey){
     $req =$BDD->prepare("SELECT * FROM user");
     $req->execute(array());
 } 
@@ -12,17 +31,7 @@ else{
     $req =$BDD->prepare("SELECT * FROM user");
     $req->execute();
 }
-
 $afficher_membres=$req->fetchAll();
-
-$okconnectey = false;
-if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
-
-    $okconnectey = true;
-} 
-
-print_r($_POST);
-
 
 
 if(isset($_POST['inputOption'])) {
@@ -49,8 +58,10 @@ if(isset($_POST['inputOption'])) {
             SET user_statut = ?
             WHERE user_id = ?"); 
             $req->execute(array(0,$id_user));
+
             
              header('Location: all-utilisateurs');
+
             exit;
         }
 
@@ -62,20 +73,21 @@ if(isset($_POST['inputOption'])) {
             SET user_statut = ?
             WHERE user_id = ?"); 
             $req->execute(array(1,$id_user));
-            
+
              header('Location: all-utilisateurs');
+
             exit;
         }
 
     }
     else if($_POST['inputOption']== "suppr"){
         if($ok){
-             $req = $BDD->prepare("DELETE FROM user
+            $req = $BDD->prepare("DELETE FROM user
             WHERE user_id = ?"); 
             $req->execute(array($id_user));
             header('Location: all-utilisateurs');
             exit;
-            
+
         }
     }
 
@@ -163,34 +175,36 @@ if(isset($_POST['inputOption'])) {
                                     ?>
                                     <tr>
                                         <td class="text-center align-middle">
-                                           
-                                           
-                                            <div class="row">
-                                               
-                                                <a href="editer-profil.php?profil_id=<?= $am['user_id'] ?>"><button class="btn">Modifier</button></a>                                           
-                                                
+
+
+                                            <div  class="btn-group mr-2" role="group" >
+
+                                                <a href="editer-profil.php?profil_id=<?= $am['user_id'] ?>" title="Modifier les informations de <?= $am['user_pseudo']?>"><button class="btn"><span class="text-dark" ><i class="fas fa-pencil-alt"></i></span></button></a>                                           
+
                                                 <?php 
-                                                if($am['user_id']!=$_SESSION['user_id']){
+                                        if($am['user_id']!=$_SESSION['user_id']){
                                                 ?>
-                                               <?php 
-                                                    if($am['user_statut'] == 1) {
+                                                <?php 
+                                            if($am['user_statut'] == 1) {
                                                 ?>
-                                                <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['user_id'] ?>', '<?= $am['user_pseudo']?>')" value='desac'>Désactiver</button>
+                                                <a class="btn" title="Désactiver <?= $am['user_pseudo']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['user_id'] ?>', '<?= $am['user_pseudo']?>')" value='desac'><span class="text-dark" ><i class="fas fa-lightbulb"></i></span></a>
                                                 <?php
-                                                    }
-                                                    else{
+                                            }
+                                            else{
                                                 ?>
-                                                 <button class="btn"  data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['user_id'] ?>', '<?= $am['user_pseudo']?>')" value='act'>Activer</button>
+                                                <a class="btn" title="RéActiver <?= $am['user_pseudo']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['user_id'] ?>', '<?= $am['user_pseudo']?>')" value='act'><span class="text-dark" ><i class="far fa-lightbulb"></i></span></a>
                                                 <?php
-                                                    }
+                                            }
                                                 ?>
-                                                
-                                                <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['user_id'] ?>','<?= $am['user_pseudo']?>')" value="suppr">Supprimer</button>
+
+                                                <a class="btn" title="Supprimer <?= $am['user_pseudo']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['user_id'] ?>','<?= $am['user_pseudo']?>')" value="suppr"><span class="text-dark"><i class='fa fa-trash'></i></span>
+                                                </a>
                                                 <?php
-                                                    }
+                                        }
                                                 ?>
 
                                             </div>
+
                                         </td>
                                         <td  class="text-center align-middle">
                                             <img src="<?=$am['user_image']?>" style="height : 25px; width : 25px;" class="img-fluid mb-3 roundedImage shadow-sm">
@@ -227,7 +241,7 @@ if(isset($_POST['inputOption'])) {
                                         </td>
                                         <td class="text-center align-middle">
                                             <?php
-                                        $req1 = $BDD->prepare("SELECT *
+                                                    $req1 = $BDD->prepare("SELECT *
                                                                 FROM relation
                                                                 WHERE id_receveur = ? AND statut = 1");
                                         $req1->execute(array($am['user_id']));
@@ -263,7 +277,7 @@ if(isset($_POST['inputOption'])) {
 
                                                 iO.value = mode;
                                                 iO_id.value = idd;
-                                                
+
                                                 if(mode == 'desac' ) {
                                                     p.innerHTML = "desactiver le compte de " + blaz + " ?";
                                                 } else if(mode == 'act' ) {

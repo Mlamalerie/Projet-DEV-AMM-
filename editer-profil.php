@@ -6,6 +6,7 @@ include('assets/db/connexiondb.php');
 print_r($_GET);
 print_r("<br>");
 print_r($_POST);
+print_r($_SESSION);
 
 $baseid = (int) $_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
 
@@ -16,15 +17,10 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     header('Location: connexion.php');
     exit;
 }
-// ta rien a faire ici si c pas toi le boug
-if(empty($baseid)){
-    header('Location: editer-profil.php?profil_id='.$_SESSION['user_id']);
-    exit;
-}
-if($_SESSION['user_id'] != $baseid && $_SESSION['user_role'] != 0 ){
-    header('Location: editer-profil.php?profil_id='.$_SESSION['user_id']);
-    exit;
-}
+
+
+
+
 
 $req = $BDD->prepare("SELECT * 
     FROM user 
@@ -45,9 +41,37 @@ $basedescription = $afficher_profil['user_description'];
 
 $basesexe = $afficher_profil['user_sexe'];
 var_dump($basesexe);
-$baserole = $afficher_profil['user_role'];
+$baserole  = (int) $afficher_profil['user_role'];
+$okadmin = false;
+if ($baserole == 0){
+    $okadmin = true;
+
+}
+
 $basedate_naissance = $afficher_profil['user_datenaissance'];
 $baseimage = $afficher_profil['user_image'];
+
+
+
+// ta rien a faire ici si c pas toi le boug
+if(empty($baseid) ){
+    header('Location: editer-profil.php?profil_id='.$_SESSION['user_id']);
+    exit;
+} else if ( empty($afficher_profil)) {
+
+} else if($_SESSION['user_id'] != $baseid || $_SESSION['user_role'] != 0 ){
+
+    //   header('Location: editer-profil.php?profil_id='.$_SESSION['user_id']);
+    // exit;
+}
+
+if($baseid != $_SESSION['user_id']  ) {
+    if($okadmin && $_SESSION['user_role'] != 0 ){// si le compte à afficher est celui d'un admin et que tu n'es pa admin..
+        //   header('Location: editer-profil.php?profil_id='.$_SESSION['user_id']);
+        //   exit;
+    }
+}
+
 
 $activetabinfoprofil = true;
 $activetabemail = false;
@@ -142,7 +166,7 @@ if(!empty($_POST)){
 
         if($ok) {
 
-            if($okpseudonotsame){$basepseudo = $pseudo;}
+            if($okpseudonotsame){$oldpseudo = $basepseudo;$basepseudo = $pseudo;}
             if($okdescriptionnotsame){$basedescription = $description;}
             // preparer requete
             $req = $BDD->prepare("UPDATE user
@@ -153,6 +177,10 @@ if(!empty($_POST)){
 
 
             $toutestboninfoprofil = true;
+
+            if($_SESSION['user_id'] == $baseid) {
+                $_SESSION['user_pseudo'] = $basepseudo;
+            }
 
 
         }
@@ -215,7 +243,8 @@ if(!empty($_POST)){
             $req->execute(array($email,$baseid));
 
 
-            $toutestbonemail = true;
+            $toutestbonemail = true;if($_SESSION['user_id'] == $baseid) {
+            $_SESSION['user_email'] = $baseemail;}
 
         }
 
@@ -312,7 +341,7 @@ if(!empty($_POST)){
                 $err_prenom = "Ce pseudo est trop grand ! Il y a ".(strlen($prenom) - 30)." caractère(s) en trop";
             }else if(!ctype_alpha(implode("",explode(' ',$prenom)))){
                 $ok = false;
-                $err_prenom = "Pas de chiffre !";
+                $err_prenom = "Juste des lettres !";
             }
         }
 
@@ -327,26 +356,38 @@ if(!empty($_POST)){
                 $err_nom = "Ce nom est trop grand ! Il y a ".(strlen($nom) - 30)." caractère(s) en trop";
             }else if(!ctype_alpha(implode("",explode(' ',$nom)))){
                 $ok = false;
-                $err_nom = "Pas de chiffre !";
+                $err_nom = "Juste des letre
+                !";
 
             }
         }
         $okdatenaissancenotsame = false;
-        if($datenaissance != $basedate_naissance) {
-            $okdatenaissancenotsame = true;
+        if(empty($datenaissance)) {
+            $ok = false;
+            echo "ùù";
 
-            //*** Verification du date
-            $dateuh = explode('-',$datenaissance);
-            print_r($datenaissance);
-            print_r($dateuh);
+        }else {
+            if($datenaissance != $basedate_naissance) {
 
-            if (!checkdate($dateuh[1], $dateuh[2], $dateuh[0])) {
 
-                $ok = false;
-                $err_datenaissance = "Date incorrecte";
-            } 
+                $okdatenaissancenotsame = true;
 
-        } 
+
+
+                //*** Verification du date
+                $dateuh = explode('-',$datenaissance);
+                print_r($datenaissance);
+                print_r($dateuh);
+
+                if (!checkdate($dateuh[1], $dateuh[2], $dateuh[0])) {
+
+                    $ok = false;
+                    $err_datenaissance = "Date incorrecte";
+                } 
+
+
+            }  
+        }
         $okvillenotsame = false;
         if($ville != $baseville) {
             $okvillenotsame = true;
@@ -398,11 +439,10 @@ if(!empty($_POST)){
             $okrolenotsame = true;
         }
 
-
+        echo $datenaissance;
 
 
         if($ok) {
-
 
             // preparer requete
             $req = $BDD->prepare("UPDATE user
@@ -422,8 +462,10 @@ if(!empty($_POST)){
             if($okpaysnotsame){$basepays = $pays;}
             if($okrolenotsame){$baserole = $role;}
 
-            $toutestboninfoperso = true;
-
+            $toutestboninfoperso = true;if($_SESSION['user_id'] == $baseid) {
+            $_SESSION['user_role'] = $baserole;}
+header('Location: dashboard.php');
+            exit;
 
         }
 
@@ -451,7 +493,7 @@ if(!empty($_POST)){
     <body>
 
         <?php
-        require_once('assets/skeleton/navbar.php');
+        // require_once('assets/skeleton/navbar.php');
         ?>
         <div class="container py-5">
             <!-- For demo purpose -->
@@ -459,53 +501,53 @@ if(!empty($_POST)){
                 <div class="col-lg-8 py-4 text-center mx-auto">
 
                     <img onclick="getfile();" id="imgduboug" src="<?=$baseimage ?>" alt=""  class="img-fluid  mb-3 img-thumbnail roundedImage shadow-sm">
-                    <h5 class="mb-0"><?=$basepseudo ?> </h5><span class="small text-uppercase text-muted">Cliquer sur l'image pour la changer</span>
+                    <h5 class="mb-0"><?=$basepseudo ?> <?php if($okadmin) { ?> (ADMIN) <?php } ?> </h5>
+                    <span class="small text-uppercase text-muted">Cliquer sur l'image pour la changer</span>
                     <?php 
 
-    //var_dump($_FILES);
-    require_once 'assets/functions/uploadFile.php';
+                    require_once 'assets/functions/uploadFile.php';
 
-                         $upd = new uploadFile();
+                    $upd = new uploadFile();
 
-                         if(isset($_FILES['fileUploadImage'])) {
-                             if($_FILES['fileUploadImage']['size'] != 0) { 
-                                 // FICHIER RECU
-                                 //                                var_dump($_FILES['fileUploadImage']);
-                                 $tmp_name = $_FILES['fileUploadImage']['tmp_name'];
-                                 $name = $_FILES['fileUploadImage']['name'];
+                    if(isset($_FILES['fileUploadImage'])) {
+                        if($_FILES['fileUploadImage']['size'] != 0) { 
+                            // FICHIER RECU
+                            //                                var_dump($_FILES['fileUploadImage']);
+                            $tmp_name = $_FILES['fileUploadImage']['tmp_name'];
+                            $name = $_FILES['fileUploadImage']['name'];
 
-                                 $nomduboug = $basepseudo;
-                                 $idduboug = $baseid;
+                            $nomduboug = $basepseudo;
+                            $idduboug = $baseid;
 
 
-                                 $destination = $upd->uploadImage($tmp_name,$name,$nomduboug,$idduboug);
-                                 echo $destination;
-                                 if ($destination == "error1") { 
-                                     $err_uploadimage = " ERREUR : Ceci n'est pas une image";
+                            $destination = $upd->uploadImage($tmp_name,$name,$nomduboug,$idduboug);
+                            echo $destination;
+                            if ($destination == "error1") { 
+                                $err_uploadimage = " ERREUR : Ceci n'est pas une image";
 
-                                 }
-                                 else if ($destination == "error2") {
-                                     $err_uploadimage = "ERREUR : Image non sauvegardée...";
+                            }
+                            else if ($destination == "error2") {
+                                $err_uploadimage = "ERREUR : Image non sauvegardée...";
 
-                                 } else {
-                                     $toutestbonimage = true;
+                            } else {
+                                $toutestbonimage = true;
 
-                                     // preparer requete
-                                     $req = $BDD->prepare("UPDATE user
+                                // preparer requete
+                                $req = $BDD->prepare("UPDATE user
             SET  user_image = ?
             WHERE user_id = ?"); 
 
-                                     $req->execute(array($destination,$baseid));
+                                $req->execute(array($destination,$baseid));
 
-                                     $baseimage = $destination;
+                                $baseimage = $destination;
 
 
 
-                                 }
-                             } else {
-                                 $err_uploadimage = "fichier taille 0";
-                             }
-                         }
+                            }
+                        } else {
+                            $err_uploadimage = "fichier taille 0";
+                        }
+                    }
 
 
                     ?>
@@ -587,6 +629,7 @@ if(!empty($_POST)){
                                 ?>
                             </div>
 
+
                             <!--BIO-->
                             <div class="form-group mb-2  ">
 
@@ -614,6 +657,21 @@ if(!empty($_POST)){
                             <div class="divDone">
                                 <span class="spanDone"> Vos modifications ont bien été enregistrées </span>
                                 <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
+
+                                <script>
+                                    majmajFolder("<?= $baseid?>");
+                                    function majmajFolder(oldold) {
+                                        console.log("**malFolder");
+                                        var xmlhttp = new XMLHttpRequest();
+
+
+                                        let ou = "data/majUserBDD.php?id="
+                                        ou += oldold;
+                                        console.log(ou);
+                                        xmlhttp.open("GET",ou,true);
+                                        xmlhttp.send();
+                                    }
+                                </script>
                             </div>
                             <?php
                             }
@@ -801,7 +859,7 @@ if(!empty($_POST)){
                                     <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
                                     <label for="datenaissance"> DATE </label>
                                 </div>
-                                <input onchange="goBtnSave(this,4)" type="date" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="datenaissance" name="datenaissance" value="<?= $basedate_naissance ?>" autofocus>
+                                <input onchange="goBtnSave(this,4)" type="date" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="datenaissance"  name="datenaissance" value="<?= $basedate_naissance ?>" autofocus>
                                 <?php
     if(isset($err_datenaissance)){
         echo "<span class='spanAlertchamp'> ";
@@ -872,20 +930,22 @@ if(!empty($_POST)){
 
                             </div>
 
+                            <?php if  (!$okadmin) { ?>  
                             <p class="custom-control custom-switch m-0">
                                 <input onchange="goBtnSave(this,4)" name="roleee" class="custom-control-input" id="roleee" type="checkbox" <?php if(isset($baserole) && ($baserole == 2)) { ?> checked <?php } ?> >
                                 <label class="custom-control-label font-italic" for="roleee">Mode Produceur activé *</label>
                                 <br/>
                                 <label>*Activez ce mode si vous ne souhaitez pas être visible par les autres membres de WeBeatz.
-                                <br/>On ne pourra pas vous trouver à partir de la barre de recherche.</label>
+                                    <br/>On ne pourra pas vous trouver à partir de la barre de recherche.</label>
                                 <?php
-                                if(isset($err_sexe)){
-                                    echo "<span class='spanAlertchamp'> ";
-                                    echo $icon . $err_role ;
-                                    echo "</span> ";
-                                } 
+                                                   if(isset($err_sexe)){
+                                                       echo "<span class='spanAlertchamp'> ";
+                                                       echo $icon . $err_role ;
+                                                       echo "</span> ";
+                                                   } 
                                 ?>
                             </p>
+                            <?php } ?>
 
                             <input id="btnsave4" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="savechangeinfoperso" value="Sauvegarder changement">
                         </form>
@@ -904,9 +964,11 @@ if(!empty($_POST)){
                 </div>
             </div>
             <!-- End rounded tabs -->
+
+
         </div>
 
-
+        <?php if($_SESSION['user_role'] == 0) { ?> <div><a href="all-utilisateurs.php">Voir tous les utilisateurs.</a></div> <?php } ?>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

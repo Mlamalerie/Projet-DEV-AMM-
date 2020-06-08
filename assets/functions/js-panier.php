@@ -89,11 +89,9 @@
             }
             console.log(nb,ici);
         }
-
-
-
-
     }
+    
+   
 
     function ajoutBDDPanier(idbeat) {
         console.log("ajoutBDD");

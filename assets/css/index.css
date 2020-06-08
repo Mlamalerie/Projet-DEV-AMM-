@@ -199,6 +199,69 @@ section:nth-of-type(5) {
 
 
 
+
+/* ------------------------------------------------------------------- 
+ * ## section download
+ * ------------------------------------------------------------------- */
+.section-header {
+  max-width: 800px;
+}
+.s-download {
+  padding-top: 18.4rem;
+  background-color: #5b4f96;
+  color: rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+  position: relative;
+}
+
+.s-download .display-1,
+.s-download h3 {
+  color: #ffffff;
+}
+
+.s-download p.lead {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.s-download .download-badges {
+  list-style: none;
+  margin: 1.2rem 0 0 -6px;
+}
+
+.s-download .download-badges li {
+  display: inline-block;
+  margin: 0 6px;
+  padding-left: 0;
+}
+
+.s-download .download-badges li a {
+  display: block;
+  width: 232px;
+  height: 72px;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 232px 72px;
+}
+
+.s-download .download-badges li a.badge-appstore {
+  background-image: url("../images/appstore.png");
+}
+
+.s-download .download-badges li a.badge-googleplay {
+  background-image: url("../images/google-play.png");
+}
+
+.s-download .download-bottom-image {
+  margin-top: 11.2rem;
+}
+
+.s-download .download-bottom-image img {
+  vertical-align: bottom;
+}
+
 /******************************************/
 /******************FOOTER******************/
 #boxsocial{

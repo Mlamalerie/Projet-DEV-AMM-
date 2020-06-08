@@ -10,9 +10,11 @@
 :root {
 
     --base-color1: #7728b2;
-    --base-color2: #ff00c4;
+    --base-color2: #121619;
     --base-color3: #ff3aff;
 
+
+    --base-color2: #121619;
 
     --base-police1: 'Quicksand', sans-serif;
 
@@ -20,7 +22,7 @@
 }
 
 body,html {
-    
-  font-family: var(--base-police1);
-    
+
+    font-family: var(--base-police1);
+
 }

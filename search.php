@@ -419,6 +419,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <!--        <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">-->
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
         <link rel="stylesheet" type="text/css" href="assets/css/modalPanier.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/modalUploadAudio.css">
 
 
 

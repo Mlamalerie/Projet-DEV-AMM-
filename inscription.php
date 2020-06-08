@@ -55,15 +55,15 @@ if(!empty($_POST)){
             $err_pseudo = "Votre pseudo ne peut contenir au plus 2 espaces";
         }
         else if (!ctype_alnum(implode("",explode(' ',$pseudo)))) {
-//            $ps = explode('',$pseudo);
-//            for ($i = 0; $i < strlen($pseudo); $i++) {
-//                if($pseudo[i] ;
-//            }
-//            print_r($ps);
-//            if(!in_array('_',$ps)) {
-                $ok = false;
-                $err_pseudo = "Votre pseudo ne doit contenir que des lettres ou des chiffres";
-//            }
+            //            $ps = explode('',$pseudo);
+            //            for ($i = 0; $i < strlen($pseudo); $i++) {
+            //                if($pseudo[i] ;
+            //            }
+            //            print_r($ps);
+            //            if(!in_array('_',$ps)) {
+            $ok = false;
+            $err_pseudo = "Votre pseudo ne doit contenir que des lettres ou des chiffres";
+            //            }
         }
         else if (strlen($pseudo) > 25) {
 
@@ -169,7 +169,7 @@ if(!empty($_POST)){
         if($ok) {
 
             $date_inscription = date("Y-m-d H:i:s"); 
-            $statut = 2;
+            $statut = 1;
             $sexe = "0";
             $motdepasse = crypt($motdepasse, '$6$rounds=5000$grzgirjzgrpzhte95grzegruoRZPrzg8$');
 
@@ -178,8 +178,17 @@ if(!empty($_POST)){
 
             $req->execute(array($pseudo,$email,$motdepasse,$ville,$pays,$date_inscription,$date_inscription,$statut,$sexe));
 
+
+            $req = $BDD->prepare("SELECT user_id FROM user 
+            WHERE (user_pseudo = ? AND user_email = ? AND user_password = ? AND user_ville = ? AND user_pays = ? AND user_dateinscription = ? AND user_dateconnexion = ? AND user_statut = ? AND user_sexe = ? "); 
+
+            $req->execute(array($pseudo,$email,$motdepasse,$ville,$pays,$date_inscription,$date_inscription,$statut,$sexe));
+            $u = $req->fetch();
+            
+             $_SESSION['user_id'] = $u['user_id'];
             $_SESSION['user_pseudo'] = $pseudo;
             $_SESSION['user_email'] = $email;
+            $_SESSION['user_role'] = 2;
 
             header('Location: dashboard.php');
             exit;
@@ -281,7 +290,7 @@ if(!empty($_POST)){
                                                 echo "</span> ";
                                             } else {
                                             ?>
-                                            <small id="emailHelp" class="form-text text-muted text-center">Nous ne partagerons jamais votre e-mail avec quelqu'un d'autre.</small>
+                                            <small id="emailHelp" class="form-text text-muted text-center">Veuillez à bien rentrer votre e-mai car c'est sur ce dernier que vous allez recevoir vos achats si vous passez commande.</small>
                                             <?php
                                             }
                                             ?>
@@ -345,7 +354,7 @@ if(!empty($_POST)){
                                             </div>
                                             <select id='pays' name="pays" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
                                                 <?php
-                                                if(isset($pays)){
+                                                if(!empty($pays)){
                                                     $req = $BDD->prepare("SELECT code,nom_fr_fr
                             FROM pays 
                             WHERE code = ?
@@ -364,9 +373,7 @@ if(!empty($_POST)){
                                                 <?php  
                                                 }
 
-                                                $req = $BDD->prepare("SELECT code,nom_fr_fr  
-                            FROM pays 
-                             ORDER BY pays.nom_fr_fr ASC");
+                                                $req = $BDD->prepare("SELECT code,nom_fr_fr  FROM pays  ORDER BY pays.nom_fr_fr ASC");
                                                 $req->execute();
                                                 $voir_pays = $req->fetchAll();
 
@@ -391,7 +398,7 @@ if(!empty($_POST)){
 
 
                                         <div class="custom-control custom-checkbox mb-4">
-                                            <input name="checkmala" id="customCheck1" type="checkbox" class="custom-control-input">
+                                            <input name="checkmala" id="customCheck1" type="checkbox" class="custom-control-input" <?php if(isset($checkmala)) { ?> checked <?php } ?>>
                                             <label for="customCheck1" class="custom-control-label">J'ai lu et j'accepte les <a href="">conditions d'utilisation</a> et la <a href="">politique de confidentialité</a></label>
                                             <?php
                                             if(isset($err_checkmala)){

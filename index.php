@@ -32,7 +32,7 @@ $resuTENDANCES=$req->fetchAll();
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
 
-        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/index.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar-index-turfu.css">
 
@@ -124,22 +124,22 @@ $resuTENDANCES=$req->fetchAll();
                     <h2 class="h1 mb-4 text-center text-white">Tendances</h2>
                     <p class="lead mb-0">Retrouvez les beats du moment</p>
                     <div class="my_slides multiple-items">
-                       
+
                         <?php
-                            foreach($resuTENDANCES as $rT){
-            
+                        foreach($resuTENDANCES as $rT){
+
                         ?>
                         <div class="items">
                             <div class="hover hover-5 text-white rounded"><img src="<?= $rT['beat_cover']?>" alt="">
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
                                 <h6 class="hover-5-title text-uppercase font-weight-light mb-0"><?= $rT['beat_author']?><strong class="font-weight-bold text-white">
-                                  <?= $rT['beat_title']?></strong><span> <?= $rT['beat_year']?></span></h6>
+                                    <?= $rT['beat_title']?></strong><span> <?= $rT['beat_year']?></span></h6>
                             </div>
                         </div>
-                        
-                       <?php } ?>
-                      
+
+                        <?php } ?>
+
                     </div>
 
                     <div class="slider-btn rounded-circle">
@@ -376,7 +376,38 @@ $resuTENDANCES=$req->fetchAll();
         </section>
 
 
+        <!-- download
+================================================== -->
+        <section id="download" class="s-download target-section">
 
+            <div class="row section-header align-center mx-auto" data-aos="fade-up">
+
+                <?php
+                $req = $BDD->prepare("SELECT user_id 
+                    FROM user ");
+                $req->execute(array());
+                $AllU=$req->fetchAll();
+
+
+                ?>
+                <div class="col-full">
+                    <h5 class="display-1 inline">
+                        Join Our Community of <?= count($AllU) ?>+ Users.
+                    </h5>
+                    <p class="lead">
+                        Et nihil atque ex. Reiciendis et rerum ut voluptate. Omnis molestiae nemo est. 
+                        Ut quis enim rerum quia assumenda repudiandae non cumque qui. Amet repellat 
+                        omnis ea.
+                    </p>
+                </div>
+            </div> <!-- end section-header -->
+
+        </section> <!-- end s-download -->
+
+
+        <div class="go-top">
+            <a class="smoothscroll" title="Back to Top" href="#top"></a>
+        </div>
         <!--   *************************************************************  -->
         <!--   ************************** FOOTER  **************************  -->
 
@@ -464,7 +495,7 @@ $resuTENDANCES=$req->fetchAll();
         <script src="assets/js/slide.js"></script>
 
 
-
+        <script src="assets/js/main.js"></script>
 
     </body>
 </html>

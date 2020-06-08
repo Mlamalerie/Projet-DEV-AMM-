@@ -1,12 +1,12 @@
 
 <nav id='audioplayer' class=" navplayer  fixed-bottom" style="display:none">        
-    <audio src="./audio/go_legend.mp3" id="song"></audio>
+    <audio src="" id="song"></audio>
     <div class="box">     
-        <img src="./img/bigmetro.jpg" id="thumbnail" />
+        <img src="" id="thumbnail" />
         <img src="./assets/icon/play.png" onclick="playPause(songIndex)" id="play-pause" />
         <img src="./assets/icon/forward.png" onclick="nextSong()" id="next-song" />
         <img src="./assets/icon/backward.png" onclick="previousSong()" id="previous-song" />
-        <div class="song-artist">WeBeats</div>
+        <div class="song-artist"></div>
         <div class="song-title"></div>
 
         <input 
