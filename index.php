@@ -89,10 +89,9 @@ $resuTENDANCES=$req->fetchAll();
                         <form id="searchform" method="get" action="search.php">
 
 
-                            <div class="searchbar ">
+                            <div class="searchbar searchtest">
 
-                                <input id='searchbar' class=" text-center form-control rounded-pill 
-shadow-sm search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
+                                <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
 
 
                                 <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>

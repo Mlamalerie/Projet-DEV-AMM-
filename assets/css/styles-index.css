@@ -93,6 +93,7 @@ header .overlay-sombre {
     border-radius: 30px; /*forme arrondie de la barre*/
     padding: 10px;
 }
+
 .search_input{
     color: white;
     border: 0;
@@ -195,43 +196,6 @@ section:nth-of-type(5) {
 .fleches {/*couleur des boutons qui font coulisser les avis*/
     color: rgb(32, 227, 236)!important;
 }
-
-
-/* BARRE DE RECHERCHE */
-
-.searchbar{
-    height: 60px;
-    margin: auto; 
-    max-width: 83%; 
-    background-color: #353b48;
-    border-radius: 30px; /*forme arrondie de la barre*/
-    padding: 10px;
-}
-.search_input,.search_input:focus{
-    color: white;
-    border: 0;
-    outline: 0;
-    background: none;
-    /*    max-width:  90%; le curseur descend en bas*/
-    caret-color:rgba(121, 6, 247, 0.9);
-    line-height: 40px;
-}
-.search_icon{
-    height: 40px;
-    width: 40px;
-    float: right;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    color:white;
-    text-decoration:none;
-}
-.search_icon:hover{
-    background: white;
-    color: rgba(121, 6, 247, 0.9);
-}
-
 
 
 
