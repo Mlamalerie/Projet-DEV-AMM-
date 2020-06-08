@@ -844,25 +844,40 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                                 <?php 
                                                                           $okdejadanspanier = false;
-
+$okdejaacheter = false;
                                                                           if($okconnectey) {
-                                                                              $req = $BDD->prepare("SELECT *
-                                                                                        FROM panier
-                                                                                        WHERE panier_user_id = ? AND panier_beat_id = ?");
+                                                                               $req = $BDD->prepare("SELECT *
+                                                                                        FROM vente
+                                                                                        WHERE vente_user_id = ? AND vente_beat_id = ?");
                                                                               $req->execute(array($_SESSION['user_id'],$r['beat_id']));
 
 
-                                                                              $aff = $req->fetch();
+                                                                              $ach = $req->fetch();
+                                                                              
+
+                                                                              if(isset($ach['id'])){
+                                                                                  $okdejaacheter = true;
+                                                                              }else {
+                                                                                  $req = $BDD->prepare("SELECT *
+                                                                                        FROM panier
+                                                                                        WHERE panier_user_id = ? AND panier_beat_id = ?");
+                                                                                  $req->execute(array($_SESSION['user_id'],$r['beat_id']));
+
+
+                                                                                  $aff = $req->fetch();
 
 
 
-                                                                              if(isset($aff['id'])){
-                                                                                  $okdejadanspanier = true;
-
+                                                                                  if(isset($aff['id'])){
+                                                                                      $okdejadanspanier = true;
+                                                                                  }
                                                                               }
                                                                           }
                                                 ?>
-                                                <?php if(($okconnectey && $r['beat_author_id'] != $_SESSION['user_id']) || !$okconnectey) { ?>
+                                                <?php 
+                                                if(!$okdejaacheter) {
+                                                
+                                                if(($okconnectey && $r['beat_author_id'] != $_SESSION['user_id']) || !$okconnectey) { ?>
                                                 <button id='btnbeat-<?=$r['beat_id']?>' 
 
                                                         <?php if($okconnectey) { ?>
@@ -881,8 +896,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                     <?php } ?>
 
                                                 </button>
-                                                <?php } ?>
-
+                                                <?php } } else {?>
+                                                <a class="btn btn-danger" href="audio/<?= $r['beat_source']?>" download>
+                        <span class="text-white"><i class="fas fa-download"></i></span>
+                    </a>
+<?php } ?>
                                                 <?php  if($okdejadanspanier) {?>
                                                 <script>document.getElementById('btnbeat-<?=$r['beat_id']?>').innerHTML = 'Dans le panier';</script>
                                                 <?php } ?>
