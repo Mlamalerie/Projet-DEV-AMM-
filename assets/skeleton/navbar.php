@@ -69,18 +69,25 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                 <?php } ?>
 
                 <?php if(!$jesuissurindex) { ?>
-                <li class="nav-item dropdown no-arrow mx-1">
+                <li class="nav-item dropdown no-arrow mx-1" >
                     <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img id="iconPanier" src="assets/img/icon/chat-box.svg">
+
                         <!-- Counter - Messages -->
-                        <span class="badge badge-danger badge-counter">7</span>
+                        <span id="span_nb_mess" class="badge badge-danger rounded-pill "></span>
                     </a>
                     <!-- Dropdown - Messages -->
-                    <div class=" dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                    <div id="dropMess" class=" dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                         <h6 class="dropdown-header">
                             Mes messages
                         </h6>
                         <?php 
+                    $req1=$BDD->prepare("SELECT * FROM relation WHERE statut = ?");
+                    $req1->execute(array(3));   //pour enlever les bloqués de la messagerie
+
+                    $relation_bloq=$req1->fetchAll(); 
+                   
+
                     include('assets/functions/datediff.php');
                     $req = $BDD->prepare("SELECT *
                             FROM messagerie
@@ -90,6 +97,8 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     $req->execute(array($_SESSION['user_id']));
                     $resuMESS = $req->fetchAll();
 
+
+$nbmess = 0;
                     foreach($resuMESS as $m) {
                         ?>
 
@@ -98,12 +107,29 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                             WHERE user_id = ?");
                         $req->execute(array($m['id_from']));
                         $user = $req->fetch();
-                        $date1 = new DateTime( $m['date_message']);
-                        $date2 = new DateTime(date("Y-m-d H:i:s"));
-                        $recent = dateDiff($date1, $date2);
+
+
+
+                        $okaffichemess = true;
+
+                        foreach($relation_bloq as $rb) {
+
+                            if($m['id_from'] == $rb['id_receveur'] ||  $m['id_from'] == $rb['id_demandeur']    ) {
+
+                                $okaffichemess = false;
+                            }
+                        }
+
+
+                        if($okaffichemess){ 
+$nbmess++;
+
+                            $date1 = new DateTime( $m['date_message']);
+                            $date2 = new DateTime(date("Y-m-d H:i:s"));
+                            $recent = dateDiff($date1, $date2);
 
                         ?>
-                        <a class="dropdown-item d-flex align-items-center" href="message.php?profil_id=<?= $user['user_id'] ?>">
+                        <a class="dropdown-item d-flex align-items-center" href="message.php?profil_id=<?= $m['id_from'] ?>">
                             <div class="dropdown-list-image mr-3">
                                 <img class="rounded-circle" width="30" src="<?= $user['user_image']?>" alt="">
                                 <div class="status-indicator bg-success"></div>
@@ -114,11 +140,33 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                                 <div class="small text-gray-500"><?= $user['user_pseudo']?> · <?=$recent?></div>
                             </div>
                         </a>
-                        <?php } ?>
+                        <?php } 
+                    }
+                        ?>
 
 
                         <a class="dropdown-item text-center small text-gray-500" href="messagerie.php">Read More Messages</a>
                     </div>
+                    <script>
+                        refreshNbMess();
+                        function refreshNbMess() {
+
+                            let ici = document.getElementById("span_nb_mess");
+
+                            if (ici != null) {
+                                let nb = <?= $nbmess ?>;
+
+                                console.log(nb,ici);
+                                if (nb != 0) {
+                                    ici.innerHTML = nb;
+
+                                } else {
+                                    ici.innerHTML = "";
+                                }
+
+                            }
+                        }
+                    </script> 
                 </li>
                 <?php } ?>
 
@@ -132,23 +180,23 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 
                         <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
-                        
+
                         <?php 
-                            if($_SESSION['user_role']==0){   
+                    if($_SESSION['user_role']==0){   
                         ?>
                         <a class="dropdown-item  " href="all-utilisateurs.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Admin Studio</a>
                         <?php
-                            }
+                    }
                         ?>
-                        
-                        
-                        
+
+
+
                         <a class="dropdown-item  " href="#"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="deconnexion.php"><i class="fas fa-power-off mr-2"></i>Déconnexion</a>
-                        </div>
-                    
+                    </div>
+
                 </li>
 
                 <!--  PANIER -->
@@ -297,7 +345,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     <span id="spanErreurUpload" class="text-danger d-none"> </span>
 
                     <br>
-                    
+
                 </div>
                 <!--
 <div class="modal-footer">
@@ -349,19 +397,19 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
                         if (btn == null) {
 
-//                        let btn = document.createElement('input');
-//                        btn.setAttribute('id','submit_upload');
-//                        btn.setAttribute('name','submit_upload');
-//                        btn.setAttribute('onclick',"document.getElementById('formUpload1').submit();");
-//                        btn.setAttribute('class',"btn btn-primary");
-//                        btn.setAttribute('value',"uploadMoiCa");
-//                        ici.appendChild(btn);
+                            //                        let btn = document.createElement('input');
+                            //                        btn.setAttribute('id','submit_upload');
+                            //                        btn.setAttribute('name','submit_upload');
+                            //                        btn.setAttribute('onclick',"document.getElementById('formUpload1').submit();");
+                            //                        btn.setAttribute('class',"btn btn-primary");
+                            //                        btn.setAttribute('value',"uploadMoiCa");
+                            //                        ici.appendChild(btn);
                             document.getElementById('formUpload1').submit();
                         }
 
 
                     } else {
-                        
+
                         if (btn != null) {
                             ici.removeChild(btn);
                         }

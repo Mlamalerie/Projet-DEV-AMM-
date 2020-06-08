@@ -52,7 +52,7 @@ if(!empty($_POST)){
             $date_message=date("Y-m-d h:m:s");
             $req=$BDD->prepare("INSERT INTO messagerie (id_from,id_to, message,date_message,lu) VALUES (?,?,?,?,?)");
 
-            $req->execute(array($_SESSION['user_id'],$get_id,$message,$date_message,1));
+            $req->execute(array($_SESSION['user_id'],$get_id,$message,$date_message,0));
         }
 
         header('Location: message.php?profil_id='.$get_id);

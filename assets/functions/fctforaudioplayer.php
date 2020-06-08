@@ -40,7 +40,9 @@ function returnMusicListStr($bay, $resuBEATS){
     $str = substr($str,0,-1);
     $str .= "]";
 
-    
+    if($str == "]") {
+        $str = "[]";
+    }
     return $str;
 
 

@@ -10,12 +10,13 @@ if (!isset($_SESSION['user_id'])){/*si pas connecté*/
     exit;
 }
 
+print_r($_SESSION);
+
 $req = $BDD ->prepare("SELECT u.user_pseudo, u.user_id, m.message, m.date_message, m.id_from, m.id_to,m.lu
     FROM(
-   SELECT IF(r.id_demandeur=:id, r.id_receveur, r.id_demandeur) id_user, MAX(m.id) max_id 
-    FROM relation r 
+                        SELECT IF(r.id_demandeur=:id, r.id_receveur, r.id_demandeur) id_user, MAX(m.id) max_id FROM relation r 
     LEFT JOIN messagerie m ON ((m.id_from,m.id_to)=(r.id_demandeur,r.id_receveur) OR (m.id_from,m.id_to)=(r.id_receveur,r.id_demandeur)) 
-    WHERE (r.id_demandeur=:id or r.id_receveur=:id) 
+    WHERE (m.id_to=:id)
     GROUP BY IF(m.id_from=:id, m.id_to, m.id_from), r.id) AS DM
     LEFT JOIN messagerie m ON m.id = DM.max_id
     LEFT JOIN user u ON u.user_id = DM.id_user
@@ -29,11 +30,11 @@ $req->execute(array('id'=>$_SESSION['user_id']));
 
 $afficher_conversation= $req ->fetchAll();
 
-$req1=$BDD->prepare("SELECT * FROM relation WHERE id_demandeur = ? AND statut = ?");
-$req1->execute(array($_SESSION['user_id'],3));   //pour enlever les bloqués de la messagerie
+$req1=$BDD->prepare("SELECT * FROM relation WHERE statut = ?");
+$req1->execute(array(3));   //pour enlever les bloqués de la messagerie
 
 $relation_bloq=$req1->fetchAll(); 
-print_r($relation_bloq);
+
 ?>
 
 <?php
@@ -79,13 +80,16 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                        
                         foreach($afficher_conversation as $ac){
                             $okaffichemess = true;
+                           
                             foreach($relation_bloq as $rb) {
                              
-                                if($ac['user_id'] == $rb['id_receveur']) {
-                                    
+                                if($ac['user_id'] == $rb['id_receveur'] ||  $ac['user_id'] == $rb['id_demandeur']    ) {
+                                  
                                     $okaffichemess = false;
                                 }
                             }
+                            
+                            
                             if($okaffichemess){ //enlever bloqués messagerie
                         ?>
                         <tr>
@@ -99,7 +103,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                             <td>
                                 <?php
-                            if(($ac['id_from'] != $_SESSION['user_id']) && $ac['lu']==1){
+                            if(($ac['id_from'] != $_SESSION['user_id']) && $ac['lu']==0){
                                 ?>
                                 <b>Nouveau message</b>
                                 <?php
