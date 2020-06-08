@@ -239,8 +239,8 @@ $resuTENDANCES=$req->fetchAll();
         <section class="py-5 d-flex align-items-center" id="three">
             <div class="container">
                 <div class="col-lg-9 mx-auto" id="ccm">
-                    <h2 class="h1 mb-4" >Comment ça marche?</h2>
-                    <p class="lead mb-0">Retrouvez les beats du moment</p>
+                    <h2 class="h1 mb-4" txt-foter>Comment ça marche?</h2>
+                    <p class="lead mb-0">Découvrez de quelle manière fonctionne le site</p>
 
                     <div id="recherchez">
                         <h3>Recherchez</h3>
@@ -266,7 +266,7 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container py-5">
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto" id="bestprod">
-                        <h2 class="h1 mb-4">Meilleur Producteur</h2>
+                        <h2 class="h1 mb-4 txt-footer">Meilleur Producteur</h2>
                         <p class="font-italic mb-4 text-muted">Liste des profils des producteurs</p>
                         <table class="table table-dark">
                             <thead>
@@ -305,7 +305,7 @@ $resuTENDANCES=$req->fetchAll();
         <!-- Section 5 -->
         <section class="py-5 d-flex align-items-center" id="five">
             <div class="container">
-                <h2 class="h1 mb-4  ">Témoignages</h2>
+                <h2 class="h1 mb-4 txt-footer">Témoignages</h2>
                 <div class="row">
                     <div class="col-lg-10 col-xl-8 mx-auto">
                         <div class="p-5 rounded bloc_avis">
@@ -323,9 +323,9 @@ $resuTENDANCES=$req->fetchAll();
                                         <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-1_ffutqr.jpg" alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-italic lead  " > <i class="fa fa-quote-left mr-3 text-success guillemets" ></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                    <footer class="blockquote-footer">Someone famous in
-                                                        <cite title="Source Title">Source Title</cite>
+                                                    <p class="font-italic lead  " > <i class="fa fa-quote-left mr-3 text-success guillemets" ></i>Je suis tombé sur ce site par hasard en cherchant des prods sur internet et aujourd'hui je ne m'en passe plus !</p>
+                                                    <footer class="blockquote-footer">Employé à
+                                                    <cite>Chicken Spot</cite>
                                                     </footer>
                                                 </blockquote>
                                             </div>
@@ -336,10 +336,8 @@ $resuTENDANCES=$req->fetchAll();
                                         <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-3_hdxocq.jpg" alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-italic lead  "> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                    <footer class="blockquote-footer">Someone famous in
-                                                        <cite title="Source Title">Source Title</cite>
-                                                    </footer>
+                                                    <p class="font-italic lead  "> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>Etant beatmaker, j'apprécie réellement ce site qui permet de faciliter les liens entre les artistes.</p>
+                                                    <footer class="blockquote-footer">Ghost Killer Track</footer>
                                                 </blockquote>
                                             </div>
                                         </div>
@@ -349,10 +347,8 @@ $resuTENDANCES=$req->fetchAll();
                                         <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-2_gibm2s.jpg" alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-italic lead  "> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                    <footer class="blockquote-footer">Someone famous in
-                                                        <cite title="Source Title">Source Title</cite>
-                                                    </footer>
+                                                    <p class="font-italic lead  "> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>WeBeatz est mon site préféré ! J'ai découvert de nombreux beatmakers grâce à ce site !</p>
+                                                    <footer class="blockquote-footer">Hakim</footer>
                                                 </blockquote>
                                             </div>
                                         </div>
@@ -427,7 +423,7 @@ $resuTENDANCES=$req->fetchAll();
                     </div>
 
                     <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                        <h6 class="text-uppercase font-weight-bold mb-4  ">WeBeats</h6>
+                        <h6 class="text-uppercase font-weight-bold mb-4 txt-footer ">WeBeats</h6>
                         <ul class="list-unstyled mb-0">
                             <li class="mb-2"><a href="#" class="text-mute">A Propos</a></li>
                             <li class="mb-2"><a href="#" class="text-mute">Aide</a></li>
@@ -436,7 +432,7 @@ $resuTENDANCES=$req->fetchAll();
                         </ul>
                     </div>
                     <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                        <h6 class="text-uppercase font-weight-bold mb-4  ">Explorer</h6>
+                        <h6 class="text-uppercase font-weight-bold mb-4 txt-footer ">Explorer</h6>
                         <ul class="list-unstyled mb-0">
                             <li class="mb-2"><a href="#tendances" class="text-mute">Tendances</a></li>
                             <li class="mb-2"><a href="#topventes" class="text-mute">Top ventes</a></li>
@@ -445,7 +441,7 @@ $resuTENDANCES=$req->fetchAll();
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-lg-0">
-                        <h6 class="text-uppercase font-weight-bold mb-4  ">Newsletter</h6>
+                        <h6 class="text-uppercase font-weight-bold mb-4 txt-footer ">Newsletter</h6>
                         <p class="text-mute mb-4">Inscrivez-vous pour ne rien louper de notre Actualité !</p>
                         <div class="p-1 rounded border">
                             <div class="input-group">
@@ -481,7 +477,7 @@ $resuTENDANCES=$req->fetchAll();
 
 
         <?php
-        require_once('assets/skeleton/endLinkScripts.php');
+    require_once('assets/skeleton/endLinkScripts.php');
         ?>
         <!--     RECHERCHE  -->
 
