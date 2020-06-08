@@ -29,6 +29,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="Test_Mathieu/panierTestMathieu/affichagepanier.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/bravo.css">
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
@@ -38,34 +39,6 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <title>Confirmation de votre commande | WeBeats</title>
     </head>
     <body>
-
-
-        <style>
-
-            body {
-                background: linear-gradient(to right, #13161a, #7327ad)!important;
-                background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
-                background: linear-gradient(to right, #eecda3, #ef629f);
-                min-height: 100vh;
-            }
-
-
-            .btn-fini {
-                color: #fff;
-                background-color: #c700ff;
-                border-color: #da00ff;
-            }
-            .btn-fini:hover {
-                color: #fff;
-                background-color: #7d129b;
-                border-color: #7d129b;
-            }
-
-        </style>
-
-
-
-
 
 
         <div class="px-4 px-lg-0">
@@ -80,18 +53,19 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
-
+                            <?php require_once('assets/skeleton/tableCommande.php'); ?>
+                            <br/>
+                            <br/>
                             <!-- Shopping cart table -->
                             <div class="table-responsive">
                                 <table class="table">
-                                    <div> Votre commande a bien été effectuée. Vous recevrez un mail de confirmation de votre achat contenant votre commande à l'adresse <?php echo $_SESSION['user_email']; ?> </div>
+                                    <div> Votre commande a bien été effectuée. Vous recevrez un mail de confirmation à l'adresse <?php echo $_SESSION['user_email']; ?> </div>
                                     <br/>
-                                    <a href="search.php">
-                                        <button type="submit" class="btn btn-primary btn-fini rounded-pill">Continuer à chercher</button>
-                                    </a>
-                                    <a href="index.php">
-                                        <button type="submit" class="btn btn-primary btn-fini rounded-pill">Retourner à l'accueil</button>
-                                    </a>
+                                    <button type="submit" onclick="document.location = 'search.php'" class="btn btn-primary btn-fini rounded-pill">Continuer à chercher</button>
+                                    <br/>
+                                    <br/>
+                                    <button type="submit" onclick="document.location = 'index.php'" class="btn btn-primary btn-fini rounded-pill">Retourner à l'accueil</button>
+
                                 </table>
                             </div>
 

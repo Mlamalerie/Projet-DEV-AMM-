@@ -1,0 +1,16 @@
+body {
+    background: linear-gradient(to right, #13161a, #7327ad)!important;
+    background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
+    background: linear-gradient(to right, #eecda3, #ef629f);
+    min-height: 100vh;
+}
+.btn-fini {
+    color: #fff;
+    background-color: #c700ff;
+    border-color: #da00ff;
+}
+.btn-fini:hover {
+    color: #fff;
+    background-color: #7d129b;
+    border-color: #7d129b;
+}
