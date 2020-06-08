@@ -84,6 +84,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                             <div id="paypal-button-container"></div>
                             <script src="https://www.paypal.com/sdk/js?client-id=Ae0hwalIu4jYQfJOup2Toy5iQHgLlK84Upq3nYmfD6y7UeQgyJDRrFOv-yI2IJZXUXhiXKhhPMhph1XV&currency=EUR" data-sdk-integration-source="button-factory"></script>
+
                             <script>
                                 paypal.Buttons({
                                     style: {
@@ -104,14 +105,12 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                     },
                                     onApprove: function(data, actions) {
                                         return actions.order.capture().then(function(details) {
-                                            alert('Transaction effectuée ! ';
+                                            alert('Transaction effectuée !');
                                             setTimeout(redir("bravo.php"),2000);
                                         });
                                     }
                                 }).render('#paypal-button-container');
                             </script>
-
-
 
 
 
