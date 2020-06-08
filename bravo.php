@@ -12,6 +12,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 } else{
     echo "Pas de connexion";
 }
+
+
+
+$okkhalass = true;
+
 ?>
 
 <?php require_once("assets/functions/js-panier.php"); ?>
@@ -24,7 +29,9 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
         <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
-
+<?php
+        require_once('assets/skeleton/headLinkCSS.html');
+        ?>
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -53,7 +60,8 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
-                            <?php require_once('assets/skeleton/tableCommande.php'); ?>
+                           
+                            <?php if($okkhalass) {require_once('assets/skeleton/tableCommande.php'); } else {echo "tu veux douillez qui ?";}?>
                             <br/>
                             <br/>
                             <!-- Shopping cart table -->
@@ -61,7 +69,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                 <table class="table">
                                     <div> Votre commande a bien été effectuée. Vous recevrez un mail de confirmation à l'adresse <?php echo $_SESSION['user_email']; ?> </div>
                                     <br/>
-                                    <button type="submit" onclick="document.location = 'search.php'" class="btn btn-primary btn-fini rounded-pill">Continuer à chercher</button>
+                                    <button type="submit" onclick="document.location = 'search.php'" class="btn btn-primary btn-fini rounded-pill">Continuer mon shooping</button>
                                     <br/>
                                     <br/>
                                     <button type="submit" onclick="document.location = 'index.php'" class="btn btn-primary btn-fini rounded-pill">Retourner à l'accueil</button>

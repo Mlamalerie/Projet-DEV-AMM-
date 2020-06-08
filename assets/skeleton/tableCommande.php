@@ -8,9 +8,7 @@
                 <th scope="col" class="border-0 bg-light">
                     <div class="p-2 px-3 text-uppercase">Produits</div>
                 </th>
-                <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Prix</div>
-                </th>
+                
                 <th scope="col" class="border-0 bg-light">
                     <div class="py-2 text-uppercase">Télécharger</div>
                 </th>
@@ -54,12 +52,10 @@
                         </div>
                     </div>
                 </th>
-                <td class='border-0 align-middle'><strong><?php if($b['beat_price'] != 0.00) { echo $b['beat_price']; } else { echo "FREE";} ?></strong>
-                </td>
-
+              
                 <td class='border-0 align-middle'>
                     <a href="audio/<?= $b['beat_source']?>" download>
-                        <i class="fas fa-download"></i>
+                        <span class="text-black"><i class="fas fa-download"></i></span>
                     </a>
                 </td>
 
