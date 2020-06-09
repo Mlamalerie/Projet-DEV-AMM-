@@ -95,7 +95,7 @@ if(isset($_POST['inputOption'])) {
 
         <?php
 
-        //require_once('assets/skeleton/navbar.php');
+        require_once('assets/skeleton/navbar.php');
         ?>
         <br/><br/><br/><br/>
 

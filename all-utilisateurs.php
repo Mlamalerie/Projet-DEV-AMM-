@@ -127,14 +127,15 @@ if(isset($_POST['inputOption'])) {
             thead tr th{
                 font-size: 15px;
             }
+            body{
+                background-image: url(assets/img/space.jpg);
+            }
         </style>
     </head>
     <body>
         <!--   ************************** NAVBAR  **************************  -->
-
         <?php
-
-        //require_once('assets/skeleton/navbar.php');
+            require_once('assets/skeleton/navbar.php');
         ?>
         <br/><br/><br/><br/>
 

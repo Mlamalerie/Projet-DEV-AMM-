@@ -88,6 +88,7 @@ $relation_bloq=$req1->fetchAll();
             tr:nth-child(even) {
                 background-color: rgb(230,235,255);
             }
+             
         </style>
 
     </head>
