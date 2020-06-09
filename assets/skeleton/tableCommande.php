@@ -1,5 +1,8 @@
 <!--    TABLE DU PANIER -->
-
+<?php
+$lim = (int) $_GET['n'];
+unset
+?>
 <div class="table-responsive">
 
     <table class="table">
@@ -18,17 +21,19 @@
         <tbody id="tbodypanier">
             <?php 
     $req = $BDD->prepare("SELECT *
-                            FROM panier
-                            WHERE panier_user_id = ?");
+                            FROM vente
+                            WHERE vente_user_id = ? 
+                            ORDER BY vente_date DESC
+                            LIMIT $lim ");
     $req->execute(array($_SESSION['user_id']));
-    $resuPANIER = $req->fetchAll();
+    $resuACHAT = $req->fetchAll();
 
-    foreach($resuPANIER as $p) {
+    foreach($resuACHAT as $p) {
 
         $req = $BDD->prepare("SELECT *
                                             FROM beat
                                             WHERE beat_id = ?");
-        $req->execute(array($p['panier_beat_id']));
+        $req->execute(array($p['vente_beat_id']));
         $resuPAN = $req->fetchAll();
 
         foreach($resuPAN as $b) {

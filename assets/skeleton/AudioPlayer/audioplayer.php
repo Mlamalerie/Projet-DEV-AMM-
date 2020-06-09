@@ -73,3 +73,8 @@
         <div class="durationTime"></div>
     </div>
 </nav>
+
+<?php
+        require_once('assets/skeleton/AudioPlayer/js-audioplayer.php');
+        ?>
+

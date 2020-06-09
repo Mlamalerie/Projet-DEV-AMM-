@@ -41,8 +41,8 @@ if(isset($verif_b['beat_title']) && isset($verif_bg['user_pseudo'])){
 
     if($ok){
 
-        $req = $BDD->prepare("INSERT INTO vente (vente_beat_id,vente_user_id) VALUES (?, ?)"); 
-        $req->execute(array($idbeat,$idboug));
+        $req = $BDD->prepare("INSERT INTO vente (vente_beat_id,vente_user_id,vente_date) VALUES (?, ?,?)"); 
+        $req->execute(array($idbeat,$idboug, date("Y-m-d H:i:s")));
 
         echo "*** acheté ***";
     }
