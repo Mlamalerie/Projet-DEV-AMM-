@@ -70,14 +70,6 @@ foreach($resuPANIER as $p) {
 
 $prix = round($somme * (1-$reduction),2);
 
-if (isset( $_POST['khalassStp'])) {
-    $_SESSION['khalassStp'] = $prix ;
-} else {
-    header("Location : search.php");
-    exit;
-}
-
-
 //if($prix == 0){     
 //    header('Location: bravo.php?n='.$nb);      
 //    exit(); 
@@ -157,6 +149,8 @@ if (isset( $_POST['khalassStp'])) {
 
                             <!-- End -->
                             <script>
+
+                                <?php if ($prix != 0.00) { ?>
                                 paypal.Buttons({
                                     style: {
                                         shape: 'pill',
@@ -183,6 +177,11 @@ if (isset( $_POST['khalassStp'])) {
                                         });
                                     }
                                 }).render('#paypal-button-container');
+
+                                <?php } else {?>
+                                alert('free');
+                                ToutEstBonTransac('<?=$nb?>') ;
+                                <?php } ?>
                             </script>
                         </div>
                     </div>

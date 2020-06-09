@@ -13,6 +13,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     echo "Pas de connexion";
 }
 ?>
+
 <?php
 if (isset($_POST['AppliquerRedu'])) {
 
@@ -65,11 +66,6 @@ if (isset($_POST['AppliquerRedu'])) {
         <title>Confirmation de votre commande | WeBeats</title>
     </head>
     <body onload="actualiserTOTALTOTAL()">
-
-
-
-
-
 
 
 
