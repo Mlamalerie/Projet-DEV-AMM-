@@ -32,6 +32,9 @@ if (isset($_POST['AppliquerRedu'])) {
             $reduction = 0.5;
 
         }
+        $_SESSION['AppliquerRedu'] = $code;
+    } else {
+        unset($_SESSION['AppliquerRedu']);
     }
 
 }
@@ -167,9 +170,11 @@ if (isset($_POST['AppliquerRedu'])) {
 
                                     </script>
                                 </ul> 
-                                <form id='formConfirmer' action="commande.php" method="post">
+
+                                <form id='formConfirmer' action="paiement.php" method="post">
                                     <input type="hidden" name="khalassCa" id="khalassCa">
-                                    <button type="button" onclick="document.getElementById('formConfirmer').submit()" class="btn btn-dark rounded-pill py-2 btn-block">Confirmer</button>
+                                    <button type="button" onclick="document.getElementById('formConfirmer').submit()" href="confirmation.php" class="btn btn-dark rounded-pill py-2 btn-block" name='ConfirmCommande' value='Confirm'>Confirmer</button>
+
                                 </form>
 
                                 <div id="paypal-button-container"></div>

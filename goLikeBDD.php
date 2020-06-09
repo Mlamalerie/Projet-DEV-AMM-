@@ -13,7 +13,7 @@ $req = $BDD->prepare("SELECT beat_title
                             WHERE beat_id = ?");
 $req->execute(array($idbeat));
 $verif_b = $req->fetch();
-
+var_dump($verif_b);
 if(isset($verif_b['beat_title'])){
     //*** verif mode
     if(($mode == 'likelike' || $mode == "dislikedislike") ) {  
@@ -24,6 +24,7 @@ if(isset($verif_b['beat_title'])){
                             WHERE user_id = ?");
         $req->execute(array($idboug));
         $verif_bg = $req->fetch();
+var_dump($verif_bg);
 
         if(!isset($verif_bg['user_pseudo'])){  
             echo "#bougexistepas#";
