@@ -264,9 +264,13 @@ if(isset($_POST['inputOption'])) {
 
                                             ?>
                                         </td>
+                                    </tr>
+                                    <?php 
+                                    }
+                                    ?>
 
-
-                                        <script type="text/javascript">
+                                </tbody>
+                                <script type="text/javascript">
                                             function goInputOption(bay,mode,idd,blaz){
                                                
                         
@@ -288,12 +292,6 @@ if(isset($_POST['inputOption'])) {
                                                 
                                             } 
                                         </script>
-                                    </tr>
-                                    <?php 
-                                    }
-                                    ?>
-
-                                </tbody>
                             </table>
 
                             <!-- Modal -->

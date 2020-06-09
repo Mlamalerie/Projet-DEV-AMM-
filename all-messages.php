@@ -197,8 +197,13 @@ if(isset($_POST['inputOption'])) {
                                                 }
                                             ?>
                                         </td>
-   
-                                        <script type="text/javascript">
+                                    </tr>
+                                    <?php 
+                                    }
+                                    ?>
+
+                                </tbody>
+                                 <script type="text/javascript">
                                             function goInputOption(bay,idd,blaz){
                                                 let mode = bay.value;
                                                 console.log(mode,idd);
@@ -220,13 +225,6 @@ if(isset($_POST['inputOption'])) {
                                                 console.log(iO,iO_id);
                                             } 
                                         </script>
-                                       
-                                    </tr>
-                                    <?php 
-                                    }
-                                    ?>
-
-                                </tbody>
                             </table>
 
                             <!-- Modal -->
