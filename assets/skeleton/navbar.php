@@ -89,9 +89,12 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                    
 
                     include('assets/functions/datediff.php');
-                    $req = $BDD->prepare("SELECT *
+                    $req = $BDD->prepare("SELECT * FROM (
+                    SELECT *
                             FROM messagerie
-                            WHERE id_to = ?
+                            
+                            WHERE id_to = ? AND lu = 0
+                            ) base
                             ORDER BY date_message DESC
                              LIMIT 5");
                     $req->execute(array($_SESSION['user_id']));
@@ -129,7 +132,7 @@ $nbmess++;
                             $recent = dateDiff($date1, $date2);
 
                         ?>
-                        <a class="dropdown-item d-flex align-items-center" href="message.php?profil_id=<?= $m['id_from'] ?>">
+                        <a class="dropdown-item d-flex align-items-center" href="message.php?profil_id=<?= $m['id_from'] ?>-<?= $_SESSION['user_id']?>">
                             <div class="dropdown-list-image mr-3">
                                 <img class="rounded-circle" width="30" src="<?= $user['user_image']?>" alt="">
                                 <div class="status-indicator bg-success"></div>
@@ -145,7 +148,7 @@ $nbmess++;
                         ?>
 
 
-                        <a class="dropdown-item text-center small text-gray-500" href="messagerie.php">Read More Messages</a>
+                        <a class="dropdown-item text-center small text-gray-500" href="messagerie.php?id=<?= $_SESSION['user_id']?>">Read More Messages</a>
                     </div>
                     <script>
                         refreshNbMess();

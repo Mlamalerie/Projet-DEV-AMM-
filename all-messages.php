@@ -23,7 +23,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     $okconnectey = true;
 } 
 
-print_r($_POST);
+print_r($_SESSION);
 
 
 
@@ -53,6 +53,8 @@ if(isset($_POST['inputOption'])) {
     }
 
 }
+
+
 
 
 
@@ -113,8 +115,9 @@ if(isset($_POST['inputOption'])) {
                                         <th class="text-center align-middle">Messages</th>
                                         <th class="text-center align-middle" >Expéditeur</th>  
 
-                                        <th class="text-center align-middle" >Réceptionneur</th>
-                                        <th class="text-center align-middle" >Dtae d'envoi du message</th>
+                                        <th class="text-center align-middle" >Destinataire</th>
+                                        <th class="text-center align-middle" >Date d'envoi du message</th>
+                                        <th class="text-center align-middle" >Signalement</th>
                                     
                                     </tr>
                                 </thead>
@@ -126,7 +129,7 @@ if(isset($_POST['inputOption'])) {
                                     <tr>
                                         <td class="text-center align-middle">
                                             <div class="row"> 
-                                                <!--<a href="messagerie.php?id=<?= $am['user_id'] ?>">--><button class="btn">Accéder à la messagerie</button>                                                                           
+                                                <a href="messagerie.php?id=<?= $am['id_from'] ?>"> <button class="btn">Accéder à la messagerie</button></a>                                                                           
                                                 <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $am['message']?>')" value="suppr">Supprimer</button>
   
                                             </div>
@@ -135,14 +138,35 @@ if(isset($_POST['inputOption'])) {
                                             <?=$am['message']?>
                                         </td>  
                                         <td class="text-center align-middle">
-                                            <span><?=$am['id_from']?></span>
-                                        </td>
+                                           <?php
+                                            $req = $BDD->prepare("SELECT user_pseudo
+                                                                FROM user
+                                                                WHERE user_id = ?");
+                                            $req->execute(array($am['id_from']));
 
+                                            $a=$req->fetch(); 
+
+                                            ?>
+                                            <span><?=$a['user_pseudo']?></span>
+                                        </td>
+                                        
+                                        <?php
+                                            $req = $BDD->prepare("SELECT user_pseudo
+                                                                FROM user
+                                                                WHERE user_id = ?");
+                                            $req->execute(array($am['id_to']));
+
+                                            $a=$req->fetch(); 
+
+                                            ?>
                                         <td class="text-center align-middle">
-                                           <span><?=$am['id_to']?></span>
+                                           <span><?=$a['user_pseudo']?></span>
                                         </td>
                                         <td class="text-center align-middle">
                                             <span><?=$am['date_message']?></span>
+                                        </td>
+                                        <td>
+                                            
                                         </td>
    
                                         <script type="text/javascript">

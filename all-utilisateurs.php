@@ -187,17 +187,17 @@ if(isset($_POST['inputOption'])) {
                                                 <?php 
                                             if($am['user_statut'] == 1) {
                                                 ?>
-                                                <a class="btn" title="Désactiver <?= $am['user_pseudo']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['user_id'] ?>', '<?= $am['user_pseudo']?>')" value='desac'><span class="text-dark" ><i class="fas fa-lightbulb"></i></span></a>
+                                                <a class="btn" title="Désactiver <?= $am['user_pseudo']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'desac','<?= $am['user_id'] ?>', '<?= $am['user_pseudo']?>')" ><span class="text-dark" ><i class="fas fa-lightbulb"></i></span></a>
                                                 <?php
                                             }
                                             else{
                                                 ?>
-                                                <a class="btn" title="RéActiver <?= $am['user_pseudo']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['user_id'] ?>', '<?= $am['user_pseudo']?>')" value='act'><span class="text-dark" ><i class="far fa-lightbulb"></i></span></a>
+                                                <a class="btn" title="RéActiver <?= $am['user_pseudo']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'act','<?= $am['user_id'] ?>', '<?= $am['user_pseudo']?>')" ><span class="text-dark" ><i class="far fa-lightbulb"></i></span></a>
                                                 <?php
                                             }
                                                 ?>
 
-                                                <a class="btn" title="Supprimer <?= $am['user_pseudo']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['user_id'] ?>','<?= $am['user_pseudo']?>')" value="suppr"><span class="text-dark"><i class='fa fa-trash'></i></span>
+                                                <a class="btn" title="Supprimer <?= $am['user_pseudo']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'suppr','<?= $am['user_id'] ?>','<?= $am['user_pseudo']?>')" ><span class="text-dark"><i class='fa fa-trash'></i></span>
                                                 </a>
                                                 <?php
                                         }
@@ -267,10 +267,9 @@ if(isset($_POST['inputOption'])) {
 
 
                                         <script type="text/javascript">
-                                            function goInputOption(bay,idd,blaz){
-                                                let mode = bay.value;
-                                                console.log(mode,idd);
-
+                                            function goInputOption(bay,mode,idd,blaz){
+                                               
+                        
                                                 var p = document.getElementById('phraseConfirm');
                                                 var iO = document.getElementById('inputOption');
                                                 var iO_id = document.getElementById('inputOption_user_id');
@@ -286,7 +285,7 @@ if(isset($_POST['inputOption'])) {
                                                 else if (mode == 'suppr'){
                                                     p.innerHTML = "supprimer le compte de " + blaz + " ?";   
                                                 }
-                                                console.log(iO,iO_id);
+                                                
                                             } 
                                         </script>
                                     </tr>
