@@ -33,6 +33,7 @@ $resuTENDANCES=$req->fetchAll();
         ?>
 
         <link rel="stylesheet" type="text/css" href="assets/css/index.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/loading.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar-index-turfu.css">
 
@@ -47,9 +48,34 @@ $resuTENDANCES=$req->fetchAll();
         <link rel="stylesheet" href="assets/css/slick.css">
         <link rel="stylesheet" href="assets/css/slide.css">
 
+
+        <style>
+            .video-icon {
+                display: inline-block;
+                height: 5rem;
+                width: 5rem;
+                border-radius: 50%;
+                background-color: #793ea5;
+                background-image: url(assets/img/icon/icon-play.svg);
+                background-repeat: no-repeat;
+                background-position: 55% center;
+                background-size: 24px 27px;
+                -webkit-transition: background-color 0.3s ease-in-out;
+                transition: background-color 0.3s ease-in-out;
+            }
+        </style>
         <title>WeBeatz</title>
     </head>
     <body>
+        <!-- preloader
+================================================== -->
+        <div id="preloader">
+            <div id="loader" class="dots-jump">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
 
 
         <!--   *************************************************************  -->
@@ -67,7 +93,7 @@ $resuTENDANCES=$req->fetchAll();
         ?>
 
 
-
+      
 
         <!--   *************************************************************  -->
         <!--   ************************** HEADER  **************************  -->
@@ -80,11 +106,12 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container h-100">
                 <div class="d-flex h-100 text-center align-items-center">
                     <div class="w-100 text-white">
-                        <h1 class="display-3">Bienvenue sur WeBeatz</h1>
-                        <p class="lead mb-0">Retrouvez les beats des meilleurs producteurs du moment</p>
-                        <p class="lead mb-0">Inscrivez-vous pour commencer à acheter ou vendre des prods <a href="inscription.php">
-                            <br/>
-                            <button type="button" class="btn btn-danger btninscription" >Inscrivez-vous</button></a></p><br/>
+                        <div class="mb-4">  <span class="video-icon"></span>
+                            <h1 class="display-3">Bienvenue sur WeBeatz</h1>
+                            <p class="lead mb-0">Retrouvez les beats des meilleurs producteurs du moment</p>
+                            <p class="lead mb-0"><a href="incription.php" >Inscrivez-vous</a> pour commencer à acheter ou vendre des prods 
+
+                        </div>
 
                         <form id="searchform" method="get" action="search.php">
 
@@ -325,7 +352,7 @@ $resuTENDANCES=$req->fetchAll();
                                                 <blockquote class="blockquote border-0 p-0">
                                                     <p class="font-italic lead  " > <i class="fa fa-quote-left mr-3 text-success guillemets" ></i>Je suis tombé sur ce site par hasard en cherchant des prods sur internet et aujourd'hui je ne m'en passe plus !</p>
                                                     <footer class="blockquote-footer">Employé à
-                                                    <cite>Chicken Spot</cite>
+                                                        <cite>Chicken Spot</cite>
                                                     </footer>
                                                 </blockquote>
                                             </div>

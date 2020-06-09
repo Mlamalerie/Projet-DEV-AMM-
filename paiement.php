@@ -3,22 +3,20 @@ session_start();
 $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
 
-print_r($_POST);
-//if($prix == 0){     
-//    header('Location: bravo.php');      
-//    exit(); 
-//}
+
+
 ?>
 
 <?php
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
-print_r($_SESSION);
+    print_r($_SESSION);
     $okconnectey = true;
 } else{
     echo "Pas de connexion";
 }
 
+$reduction = 0.0;
 if (isset($_SESSION['AppliquerRedu'])) {
 
     print_r($_POST);
@@ -63,7 +61,7 @@ foreach($resuPANIER as $p) {
         print_r($b);
 
         {
-$nb++;
+            $nb++;
             $somme = $somme + $b['beat_price']; 
         }
 
@@ -73,7 +71,18 @@ $nb++;
 
 $prix = round($somme * (1-$reduction),2);
 
+if (isset( $_POST['khalassStp'])) {
+    $_SESSION['khalassStp'] = $prix ;
+} else {
+    header("Location : search.php");
+    exit;
+}
 
+
+//if($prix == 0){     
+//    header('Location: bravo.php?n='.$nb);      
+//    exit(); 
+//}
 
 
 ?>
@@ -145,74 +154,10 @@ $prix = round($somme * (1-$reduction),2);
                             <div id="paypal-button-container"></div>
                             <script src="https://www.paypal.com/sdk/js?client-id=Ae0hwalIu4jYQfJOup2Toy5iQHgLlK84Upq3nYmfD6y7UeQgyJDRrFOv-yI2IJZXUXhiXKhhPMhph1XV&currency=EUR" data-sdk-integration-source="button-factory"></script>
                             <?php require_once("assets/functions/js-panier.php"); ?>
+                            <?php require_once("assets/functions/js-paiement.php"); ?>
+
+                            <!-- End -->
                             <script>
-                                    
-                                function ajoutBDDVente(idbeat) {
-                                    console.log("ajoutVenteBDD");
-                                    var xmlhttp = new XMLHttpRequest();
-
-                                    let idboug = <?php if($okconnectey) { echo $_SESSION['user_id'];}else{echo 0;} ?>; 
-                                    let ou = "goVenteBDD.php?qq="
-                                    ou += idboug.toString();
-                                    ou += "-" + idbeat.toString();
-                                    console.log(ou);
-                                    xmlhttp.open("GET",ou,true);
-                                    xmlhttp.send();
-                                }
-
-
-                                function  ajoutToutPanierdansVente(){
-                                    <?php $req = $BDD->prepare("SELECT * FROM panier WHERE panier_user_id = ?");
-                                    $req->execute(array($_SESSION['user_id']));
-                                    $resuPANIER = $req->fetchAll();
-
-                                    foreach($resuPANIER as $p) {
-
-                                        $req = $BDD->prepare("SELECT *
-                                            FROM beat
-                                            WHERE beat_id = ?");
-                                        $req->execute(array($p['panier_beat_id']));
-                                        $resuPAN = $req->fetchAll();
-
-                                        foreach($resuPAN as $b) { ?>
-                                    ajoutBDDVente(<?= $b['beat_id'] ?>);
-
-                                    <?php  } 
-                                    } 
-                                    ?>
-
-                                }
-
-                                function  deleteAllPAnier(){
-                                    <?php $req = $BDD->prepare("SELECT * FROM panier WHERE panier_user_id = ?");
-                                    $req->execute(array($_SESSION['user_id']));
-                                    $resuPANIER = $req->fetchAll();
-
-                                    foreach($resuPANIER as $p) {
-
-                                        $req = $BDD->prepare("SELECT *
-                                            FROM beat
-                                            WHERE beat_id = ?");
-                                        $req->execute(array($p['panier_beat_id']));
-                                        $resuPAN = $req->fetchAll();
-
-                                        foreach($resuPAN as $b) { ?>
-                                    supprBDDPanier(<?= $b['beat_id'] ?>);
-
-                                    <?php  }
-                                      
-                                    } 
-                                    ?>
-
-
-                                }
-
-                                function ToutEstBonTransac() {
-                                    ajoutToutPanierdansVente();
-                                    deleteAllPAnier();
-
-                                }
-
                                 paypal.Buttons({
                                     style: {
                                         shape: 'pill',
@@ -233,18 +178,13 @@ $prix = round($somme * (1-$reduction),2);
                                     onApprove: function(data, actions) {
                                         return actions.order.capture().then(function(details) {
                                             alert('Transaction effectuée !');
-                                            let str = "bravo.php?n=";
-                                            str += +"<?=$nb?>";
-                                            setTimeout(redir(str,2000));
-                                            ToutEstBonTransac() ;
+
+                                            ToutEstBonTransac('<?=$nb?>') ;
+
                                         });
                                     }
                                 }).render('#paypal-button-container');
                             </script>
-
-
-
-                            <!-- End -->
                         </div>
                     </div>
 

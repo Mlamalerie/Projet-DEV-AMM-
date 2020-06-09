@@ -1,8 +1,5 @@
 <!--    TABLE DU PANIER -->
-<?php
-$lim = (int) $_GET['n'];
-unset
-?>
+
 <div class="table-responsive">
 
     <table class="table">
@@ -20,12 +17,21 @@ unset
         <?php if($okconnectey) { ?>
         <tbody id="tbodypanier">
             <?php 
+    if ($lim != 0){
     $req = $BDD->prepare("SELECT *
                             FROM vente
                             WHERE vente_user_id = ? 
                             ORDER BY vente_date DESC
                             LIMIT $lim ");
     $req->execute(array($_SESSION['user_id']));
+        } else {
+        $req = $BDD->prepare("SELECT *
+                            FROM vente
+                            WHERE vente_user_id = ? 
+                            ORDER BY vente_date DESC");
+    $req->execute(array($_SESSION['user_id']));
+        
+    }
     $resuACHAT = $req->fetchAll();
 
     foreach($resuACHAT as $p) {

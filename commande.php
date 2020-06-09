@@ -2,7 +2,6 @@
 session_start();
 $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
-$prix = $_POST['khalassCa'];
 ?>
 
 <?php
@@ -172,62 +171,22 @@ if (isset($_POST['AppliquerRedu'])) {
                                 </ul> 
 
                                 <form id='formConfirmer' action="paiement.php" method="post">
-                                    <input type="hidden" name="khalassCa" id="khalassCa">
+                                    <input type="hidden" name="khalassStp" id="khalassStp">
                                     <button type="button" onclick="document.getElementById('formConfirmer').submit()" href="confirmation.php" class="btn btn-dark rounded-pill py-2 btn-block" name='ConfirmCommande' value='Confirm'>Confirmer</button>
 
                                 </form>
 
                                 <div id="paypal-button-container"></div>
                                 <script src="https://www.paypal.com/sdk/js?client-id=Ae0hwalIu4jYQfJOup2Toy5iQHgLlK84Upq3nYmfD6y7UeQgyJDRrFOv-yI2IJZXUXhiXKhhPMhph1XV&currency=EUR" data-sdk-integration-source="button-factory"></script>
-                                <script>
-                                    paypal.Buttons({
-                                        style: {
-                                            shape: 'pill',
-                                            color: 'blue',
-                                            layout: 'horizontal',
-                                            label: 'pay',
-
-                                        },
-                                        createOrder: function(data, actions) {
-                                            return actions.order.create({
-                                                purchase_units: [{
-                                                    amount: {
-                                                        value: '<?php echo $prix; ?>'
-                                                    }
-                                                }]
-                                            });
-                                        },
-                                        onApprove: function(data, actions) {
-                                            return actions.order.capture().then(function(details) {
-                                                alert('Transaction effectuée !');
-                                            });
-                                        }
-                                    }).render('#paypal-button-container');
-                                </script>
-
-
+                            
 
                                 <?php require_once("assets/functions/js-panier.php"); ?>
-                                <span id="waitRedirigey"></span>
+                                <span class="text-dark" id="waitRedirigey"></span>
                             </div>
                         </div>
                     </div>
 
-                    <?php
-                    $req = $BDD->prepare("SELECT panier_beat_id
-                                                                                        FROM panier
-                                                                                        WHERE panier_user_id = ?");
-                    $req->execute(array($_SESSION['user_id']));
-                    $voir = $req->fetch();
-                    $paniervide = 1;
-                    if(isset($voir['panier_beat_id'])) {
-                        $paniervide = 0;
-
-                    }
-
-
-                    ?>
-
+                  
 
                 </div>
             </div>

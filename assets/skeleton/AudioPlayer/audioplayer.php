@@ -3,7 +3,9 @@
     <audio src="" id="song"></audio>
     <div class="box">     
         <img src="" id="thumbnail" />
+         
         <img src="./assets/icon/play.png" onclick="playPause(songIndex)" id="play-pause" />
+         <span class="video-icon" onclick="nextSong()" id="next-song" ></span>
         <img src="./assets/icon/forward.png" onclick="nextSong()" id="next-song" />
         <img src="./assets/icon/backward.png" onclick="previousSong()" id="previous-song" />
         <div class="song-artist"></div>

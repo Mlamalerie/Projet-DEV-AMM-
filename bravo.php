@@ -2,7 +2,7 @@
 session_start();
 $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
-  unset($_SESSION['AppliquerRedu']);
+
 ?>
 
 <?php
@@ -16,13 +16,18 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
 
 
-$okkhalass = true;
+$okkhalass = false;
+if(isset($_SESSION['khalassStp'])) {
+    $okkhalass = true;
+    unset($_SESSION['khalassStp']);
+    
+}
 
 ?>
 
-<?php require_once("assets/functions/js-panier.php"); ?>
 
-!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -30,7 +35,7 @@ $okkhalass = true;
 
         <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
-<?php
+        <?php
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
 
@@ -47,7 +52,9 @@ $okkhalass = true;
         <title>Confirmation de votre commande | WeBeats</title>
     </head>
     <body>
-
+    <?php require_once('assets/functions/js-paiement.php'); ?>
+    <?php require_once("assets/functions/js-panier.php"); ?>
+    
 
         <div class="px-4 px-lg-0">
             <!-- For demo purpose -->
@@ -61,8 +68,12 @@ $okkhalass = true;
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
-                           
-                            <?php if($okkhalass) {require_once('assets/skeleton/tableCommande.php'); } else {echo "tu veux douillez qui ?";}?>
+                            <?php
+                            $lim = (int) $_GET['n'];
+
+                            ?>
+
+                            <?php if($okkhalass){ require_once('assets/skeleton/tableAchats.php'); } else {echo "tu veux douillez qui ?";}?>
                             <br/>
                             <br/>
                             <!-- Shopping cart table -->
@@ -85,6 +96,7 @@ $okkhalass = true;
                 </div>
             </div>
         </div>
+        
 
 
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

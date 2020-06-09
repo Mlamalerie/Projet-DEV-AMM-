@@ -213,12 +213,20 @@ if(!empty($_POST)){
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/loading.css">
         <link rel="stylesheet" type="text/css" href="assets/css/inscription-connexion.css">
         <link rel="stylesheet" type="text/css" href="assets/css/button-style2ouf.css">
 
         <title>Inscription</title>
     </head>
     <body>
+        <!-- preloader
+================================================== -->
+       
+        <header>
+            
+        </header>
+        <section></section>
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
 

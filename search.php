@@ -4,7 +4,7 @@ $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
 print_r('<br><br><br><br><br><br><br>');
 print_r($_GET);
-$listeGenres = ['Hip Hop','Trap','R&B','Soul','Afro','Deep','Pop','Rock','Reggae','Zouk','Dance','Latino','Old School','Pop','Pop/Funk','Orchestral'];
+$listeGenres = ['Hip Hop','Trap','R&B','Soul','Afro','Deep','Pop/Funk','Rock','Reggae','Zouk & Kompa','Dance','Latino','Old School','Orchestral'];
 sort($listeGenres);
 $_SESSION["listeGenres"] = $listeGenres;
 
@@ -413,6 +413,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <!--  Audio player de mathieu   -->
         <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
+       
 
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">
@@ -421,13 +422,28 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <link rel="stylesheet" type="text/css" href="assets/css/modalPanier.css">
         <link rel="stylesheet" type="text/css" href="assets/css/modalUploadAudio.css">
 
-
+ <style>
+            .play-audio-icon {
+                display: inline-block;
+                height: 5rem;
+                width: 5rem;
+                border-radius: 50%;
+                background-color: #793ea5;
+                background-image: url(assets/img/icon/icon-play.svg);
+                background-repeat: no-repeat;
+                background-position: 55% center;
+                background-size: 24px 27px;
+                -webkit-transition: background-color 0.3s ease-in-out;
+                transition: background-color 0.3s ease-in-out;
+            }
+        </style>
 
 
 
         <title>Search</title>
     </head>
     <body onload=" refreshNbPanier();refreshAllBeats() ">
+
 
 
 
