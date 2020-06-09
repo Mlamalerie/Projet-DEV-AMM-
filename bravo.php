@@ -16,12 +16,12 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
 
 
-$okkhalass = false;
-if(isset($_SESSION['khalassStp'])) {
-    $okkhalass = true;
-    unset($_SESSION['khalassStp']);
-    
-}
+//$okkhalass = false;
+//if(isset($_SESSION['khalassStp'])) {
+//    $okkhalass = true;
+//    unset($_SESSION['khalassStp']);
+//    
+//}
 
 ?>
 
@@ -73,7 +73,7 @@ if(isset($_SESSION['khalassStp'])) {
 
                             ?>
 
-                            <?php if($okkhalass){ require_once('assets/skeleton/tableAchats.php'); } else {echo "tu veux douillez qui ?";}?>
+                            <?php require_once('assets/skeleton/tableAchats.php'); ?>
                             <br/>
                             <br/>
                             <!-- Shopping cart table -->

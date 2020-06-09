@@ -72,11 +72,13 @@ alert('ajoutPanier');
                                 }
 
                                 function ToutEstBonTransac(nb) {
+                                    ajoutToutPanierdansVente();
+                                    deleteAllPAnier();
+                                    
                                     let str = "bravo.php?n=";
                                     str += nb;
                                     setTimeout(redir(str,2000));
-                                    ajoutToutPabierdansVente();
-                                    deleteAllPAnier();
+                                    
 
                                 }
 
