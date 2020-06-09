@@ -78,8 +78,8 @@
     width: 50px;
     font-size: 12px;
     z-index: 100;
-}
-
+}  
+ 
 .playplay-btn{/*le play caché*/
     display:block;
     margin:auto;

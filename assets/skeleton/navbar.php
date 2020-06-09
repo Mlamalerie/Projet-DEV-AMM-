@@ -176,7 +176,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                 <li class="nav-item dropdown no-arrow ">
                     <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <span class="mr-2 d-none d-lg-inline "><?= $_SESSION['user_pseudo'] ?></span> 
-                        <img id="iconUser" src="assets/img/<?php $_SESSION['user_image']; ?> 
+                        <img id="iconUser" class="img-fluid roundedImage shadow-sm" src="<?= $_SESSION['user_image'] ?>" >
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 
