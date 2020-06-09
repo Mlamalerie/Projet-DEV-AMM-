@@ -81,7 +81,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                 <table class="table">
                                     <div> Votre commande a bien été effectuée. Vous recevrez un mail de confirmation à l'adresse <?php echo $_SESSION['user_email']; ?> </div>
                                     <br/>
-                                    <button type="submit" onclick="document.location = 'search.php'" class="btn btn-primary btn-fini rounded-pill">Continuer mon shooping</button>
+                                    <button type="submit" onclick="document.location = 'search.php'" class="btn btn-primary btn-fini rounded-pill">Continuer mon shopping</button>
                                     <br/>
                                     <br/>
                                     <button type="submit" onclick="document.location = 'index.php'" class="btn btn-primary btn-fini rounded-pill">Retourner à l'accueil</button>

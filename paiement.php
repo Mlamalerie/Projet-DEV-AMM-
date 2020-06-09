@@ -4,7 +4,6 @@ $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
 
 
-
 ?>
 
 <?php

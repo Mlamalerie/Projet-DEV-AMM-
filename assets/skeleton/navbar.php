@@ -191,7 +191,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
 
 
-                        <a class="dropdown-item  " href="#"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
+                        <a class="dropdown-item  " href="my-beats.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
                         
 
                         <div class="dropdown-divider"></div>
