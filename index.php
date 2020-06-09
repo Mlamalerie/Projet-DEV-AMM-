@@ -122,7 +122,7 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container-fluid">
                 <div class="mx-auto" id="tendances">
                     <h2 class="h1 mb-4 text-center text-white">Tendances</h2>
-                    <p class="lead mb-0">Retrouvez les beats du moment</p>
+                    <p class="lead mb-0 text-center text-white">Retrouvez les beats du moment</p>
                     <div class="my_slides multiple-items">
 
                         <?php
@@ -157,7 +157,7 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container-fluid">
                 <div class="mx-auto" id="topventes">
                     <h2 class="h1 mb-4 text-center text-white">TOP des ventes</h2>
-                    <p class="lead mb-0">Les meilleures ventes de beats</p>
+                    <p class="lead mb-0 text-white text-center">Les meilleures ventes de beats</p>
 
                     <div class="my_slides multipleitems2">
                         <div class="items">
@@ -239,20 +239,20 @@ $resuTENDANCES=$req->fetchAll();
         <section class="py-5 d-flex align-items-center" id="three">
             <div class="container">
                 <div class="col-lg-9 mx-auto" id="ccm">
-                    <h2 class="h1 mb-4" txt-foter>Comment ça marche?</h2>
-                    <p class="lead mb-0">Découvrez de quelle manière fonctionne le site</p>
+                    <h2 class="h1 mb-4 text-white text-center" >Comment ça marche?</h2>
+                    <p class="lead mb-0 text-white text-center">Découvrez de quelle manière fonctionne le site</p>
 
-                    <div id="recherchez">
+                    <div id="recherchez" class="text-center">
                         <h3>Recherchez</h3>
                         <p> Retrouvez de nombreuses productions au sein de notre catalogue.</p>
                         <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/browse.svg">
                     </div>
-                    <div id="achetez">
+                    <div id="achetez" class="text-center">
                         <h3>Achetez</h3>
                         <p>Choisissez la licence qui vous convient et ajoutez la au panier.</p>
                         <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/buy.svg" width="100">
                     </div>
-                    <div id="creez">
+                    <div id="creez" class="text-center">
                         <h3>Créez</h3>
                         <p>Uploadez vos créations sur notre site et rejoignez de nombreux beatmakers</p>
                         <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/create.svg">
@@ -266,7 +266,7 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container py-5">
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto" id="bestprod">
-                        <h2 class="h1 mb-4 txt-footer">Meilleur Producteur</h2>
+                        <h2 class="h1 mb-4 text-white text-center">Meilleur Producteur</h2>
                         <p class="font-italic mb-4 text-muted">Liste des profils des producteurs</p>
                         <table class="table table-dark">
                             <thead>
@@ -375,29 +375,24 @@ $resuTENDANCES=$req->fetchAll();
         <!-- download
 ================================================== -->
         <section id="download" class="s-download target-section">
-
-            <div class="row section-header align-center mx-auto" data-aos="fade-up">
+            <div class="row section-header align-left mx-auto" data-aos="fade-up">
 
                 <?php
                 $req = $BDD->prepare("SELECT user_id 
                     FROM user ");
                 $req->execute(array());
                 $AllU=$req->fetchAll();
-
-
                 ?>
                 <div class="col-full">
-                    <h5 class="display-1 inline">
-                        Join Our Community of <?= count($AllU) ?>+ Users.
+                    <h5 class="display-1 inline txt-nb">
+                        Rejoignez notre communauté de <?= count($AllU) ?>+ membres.
                     </h5>
                     <p class="lead">
-                        Et nihil atque ex. Reiciendis et rerum ut voluptate. Omnis molestiae nemo est. 
-                        Ut quis enim rerum quia assumenda repudiandae non cumque qui. Amet repellat 
-                        omnis ea.
+                        Venez partager votre talent et collaborez avec d'autres artistes.
                     </p>
                 </div>
             </div> <!-- end section-header -->
-
+            
         </section> <!-- end s-download -->
 
 

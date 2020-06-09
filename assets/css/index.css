@@ -262,6 +262,10 @@ section:nth-of-type(5) {
   vertical-align: bottom;
 }
 
+.txt-nb {
+    font-size: 4rem;
+}
+
 /******************************************/
 /******************FOOTER******************/
 #boxsocial{
