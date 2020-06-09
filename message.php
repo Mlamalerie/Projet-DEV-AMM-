@@ -177,7 +177,17 @@ else{
         <br/><br/><br/><br/>
 
         <div class="container selected-user">
-           <h1>Discussion avec <?= $user['user_pseudo']?></h1>
+          
+            <?php
+                        $req2 = $BDD->prepare("SELECT user_image
+                                                FROM user
+                                                 WHERE user_pseudo = ?");
+                        $req2->execute(array($user['user_pseudo']));
+
+                        $img_from=$req2->fetch(); 
+                        
+            ?>
+           <h1><img src="<?= $img_from['user_image'] ?>" class="rounded-circle" width="50" height="50">Discussion avec <a href="profils.php?profil_id=<?= $get_id ?>"><?= $user['user_pseudo']?></a></h1>
            <br/>
             <div class="row">
                 <div class="col-sm-12">
@@ -199,25 +209,36 @@ else{
                         ?>
 
                         <a class="btn" title="Supprimer <?= $am['message']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption_mess(this,'suppr','<?= $am['id'] ?>','<?= $a['user_pseudo']?>')" ><span class="text-dark"><i class='fa fa-trash'></i></span></a>
+                        <i class="fa fa-check-circle-o" aria-hidden="true"></i> <?= $am['date_message']?>
                     </div>
                     <?php
                         }
                         else{
                     ?>
                     <div>
-                        <div class=" p-2 rounded-pill border-0 shadow-sm"><?= $am['message'] ?></div> <!--le message qu'on reçoit-->
+                       <?php
+                        $req1 = $BDD->prepare("SELECT user_image
+                                                FROM user
+                                                 WHERE user_id = ?");
+                            $req1->execute(array($am['id_from']));
+
+                            $img_from=$req1->fetch(); 
+                        ?>
+                       
+                        <div class="p-2 rounded-pill border-0 shadow-sm"><img src="<?= $img_from['user_image'] ?>" class="rounded-circle" width="25" height="25"><span class="ml-3"><?= $am['message'] ?></span></div> <!--le message qu'on reçoit-->
                         <!--si on veut signaler un mssg-->
 
                         <?php
                         $req = $BDD->prepare("SELECT user_pseudo
                                                 FROM user
                                                  WHERE user_id = ?");
-                            $req->execute(array($am['id_to']));
+                            $req->execute(array($am['id_from']));
 
                             $a=$req->fetch(); 
 
                         ?>
                         <a class="btn" title="Signaler <?= $am['message']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption_mess(this,'signaler','<?= $am['id'] ?>', '<?= $a['user_pseudo']?>')" ><span class="text-dark" ><i class="fa fa-exclamation-circle" aria-hidden="true"></i></span></a>
+                         <i class="fa fa-check-circle-o" aria-hidden="true"></i> <?= $am['date_message']?>
 
                     </div>
                     <?php 

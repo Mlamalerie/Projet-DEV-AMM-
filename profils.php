@@ -336,21 +336,20 @@ if(isset($vousabloq['id_demandeur'])) {
                                 }
                             }
 
-
                             if(!$okvouslavezbloquer){
+                                
+                 ?>
+                <input type="submit" name="user-bloquer" value="Bloquer" class="follow-btn">
+                <?php
 
+               
+                            }
+                            else{
                 ?>
                 <input type="submit" name="user-debloquer" value="Débloquer" class="follow-btn">
                 <?php
                             }
-                            else {
                 ?>
-                <input type="submit" name="user-bloquer" value="Bloquer" class="follow-btn">
-                <?php
-                            }
-                ?>
-
-
             </form>
             <?php 
                         }

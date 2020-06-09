@@ -547,6 +547,13 @@ $resuTENDANCES=$req->fetchAll();
 
 
         <script src="assets/js/main.js"></script>
+        
+<!--
+            ************************** MUSIC PLAYER  **************************  
+        <?php
+            require_once('assets/skeleton/AudioPlayer/audioplayer.php');
+        ?>
+-->
 
     </body>
 </html>
