@@ -2,6 +2,7 @@
 session_start();
 $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
+
 ?>
 
 <?php
@@ -12,11 +13,21 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 } else{
     echo "Pas de connexion";
 }
+
+
+
+$okkhalass = false;
+if(isset($_SESSION['khalassStp'])) {
+    $okkhalass = true;
+    unset($_SESSION['khalassStp']);
+    
+}
+
 ?>
 
-<?php require_once("assets/functions/js-panier.php"); ?>
 
-!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -24,7 +35,9 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
         <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
-
+        <?php
+        require_once('assets/skeleton/headLinkCSS.html');
+        ?>
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -39,7 +52,9 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <title>Confirmation de votre commande | WeBeats</title>
     </head>
     <body>
-
+    <?php require_once('assets/functions/js-paiement.php'); ?>
+    <?php require_once("assets/functions/js-panier.php"); ?>
+    
 
         <div class="px-4 px-lg-0">
             <!-- For demo purpose -->
@@ -53,7 +68,12 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
-                            <?php require_once('assets/skeleton/tableCommande.php'); ?>
+                            <?php
+                            $lim = (int) $_GET['n'];
+
+                            ?>
+
+                            <?php if($okkhalass){ require_once('assets/skeleton/tableAchats.php'); } else {echo "tu veux douillez qui ?";}?>
                             <br/>
                             <br/>
                             <!-- Shopping cart table -->
@@ -61,7 +81,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                 <table class="table">
                                     <div> Votre commande a bien été effectuée. Vous recevrez un mail de confirmation à l'adresse <?php echo $_SESSION['user_email']; ?> </div>
                                     <br/>
-                                    <button type="submit" onclick="document.location = 'search.php'" class="btn btn-primary btn-fini rounded-pill">Continuer à chercher</button>
+                                    <button type="submit" onclick="document.location = 'search.php'" class="btn btn-primary btn-fini rounded-pill">Continuer mon shooping</button>
                                     <br/>
                                     <br/>
                                     <button type="submit" onclick="document.location = 'index.php'" class="btn btn-primary btn-fini rounded-pill">Retourner à l'accueil</button>
@@ -76,6 +96,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                 </div>
             </div>
         </div>
+        
 
 
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

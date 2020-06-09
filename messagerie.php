@@ -86,7 +86,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])) {
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        // require_once('assets/skeleton/navbar.php');
+         require_once('assets/skeleton/navbar.php');
         ?>
         <br/><br/><br/><br/>
         <div class="container">

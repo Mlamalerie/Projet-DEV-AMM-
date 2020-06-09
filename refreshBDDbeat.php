@@ -29,12 +29,20 @@ $req = $BDD->prepare("SELECT id
                                 ");
 $req->execute(array($idbeat));
 $p = $req->fetchAll();
+echo ' nblike#'.count($p);
+
+// compter nb ventes
+$req = $BDD->prepare("SELECT id
+                            FROM vente
+                            WHERE vente_beat_id = ?
+                                ");
+$req->execute(array($idbeat));
+$v = $req->fetchAll();
+echo ' nbvente#'.count($v);
 
 
-echo '#'.count($p);
 
 // maj athor
-
 
 $req = $BDD->prepare("SELECT user_pseudo
                             FROM user
@@ -53,6 +61,7 @@ if(!isset($user['user_pseudo'])){
 
 
 if($ok){
+    //*
     $nb = count($p);
     $req = $BDD->prepare("UPDATE beat
             SET beat_like = ?
@@ -60,8 +69,16 @@ if($ok){
     $req->execute(array($nb,$idbeat));
 
     echo "<br> *** refreshlike ***";
+    //*
+    $nb = count($v);
+    $req = $BDD->prepare("UPDATE beat
+            SET beat_nbvente = ?
+            WHERE beat_id = ?"); 
+    $req->execute(array($nb,$idbeat));
     
-    $nb = count($p);
+     echo "<br> *** refreshnbvente ***";
+    
+   
     $req = $BDD->prepare("UPDATE beat
             SET beat_author = ?
             WHERE beat_id = ?"); 

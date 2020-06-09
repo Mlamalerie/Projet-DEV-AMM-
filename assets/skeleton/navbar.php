@@ -86,7 +86,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     $req1->execute(array(3));   //pour enlever les bloqués de la messagerie
 
                     $relation_bloq=$req1->fetchAll(); 
-                   
+
 
                     include('assets/functions/datediff.php');
                     $req = $BDD->prepare("SELECT *
@@ -98,7 +98,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     $resuMESS = $req->fetchAll();
 
 
-$nbmess = 0;
+                    $nbmess = 0;
                     foreach($resuMESS as $m) {
                         ?>
 
@@ -122,7 +122,7 @@ $nbmess = 0;
 
 
                         if($okaffichemess){ 
-$nbmess++;
+                            $nbmess++;
 
                             $date1 = new DateTime( $m['date_message']);
                             $date2 = new DateTime(date("Y-m-d H:i:s"));
@@ -192,6 +192,7 @@ $nbmess++;
 
 
                         <a class="dropdown-item  " href="#"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
+                        
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="deconnexion.php"><i class="fas fa-power-off mr-2"></i>Déconnexion</a>
@@ -205,7 +206,14 @@ $nbmess++;
                 <li class="nav-item">
 
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#ModalPanier" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> <sup><span id="span_nb_panier" class="badge badge-primary px-1 rounded-pill ml-2 compteurPanier "></span> </sup></button>
+                    <script>
+ refreshNbPanier() ;
+                        
+   
 
+
+                    </script>
+                      <?php require_once("assets/functions/js-panier.php"); ?>
                 </li>
                 <?php } ?>
 
@@ -221,6 +229,8 @@ $nbmess++;
                 ?>
                 <li class="nav-item ">
                     <a class="nav-link btn" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
+                    
+                    
                 </li>
 
                 <?php if($jesuissurindex) { ?>
