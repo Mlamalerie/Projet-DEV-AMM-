@@ -3,14 +3,15 @@ session_start();
 $_SESSION['ici_index_bool'] = false;
 
 include('assets/db/connexiondb.php'); 
-
+$idmoi = (int) $_SESSION['user_id'] ;
+$id_messagerie = (int) $_GET['id'];
 
 $okconnectey = false;
 $oksessionadmin = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     $okconnectey = true;
 
-    if($_SESSION['user_role'] != 0){
+    if($_SESSION['user_role'] != 0 && $idmoi != $id_messagerie){
         echo "<script> history.go(-1); </script>";
         exit;
 
@@ -23,12 +24,12 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 }
 
 
-$idmoi = (int) $_SESSION['user_id'] ;
+
 
 
 
 print_r($_SESSION);
-$id_messagerie = (int) $_GET['id'];
+
 echo 'idmass'.$id_messagerie;
 
 
@@ -49,7 +50,7 @@ $req->execute(array('id'=>$id_messagerie ));
 
 
 $afficher_conversation= $req ->fetchAll();
-var_dump($afficher_conversation);
+//var_dump($afficher_conversation);
 
 $req1=$BDD->prepare("SELECT * FROM relation WHERE statut = ?");
 $req1->execute(array(3));   //pour enlever les bloqués de la messagerie

@@ -86,13 +86,13 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     $req1->execute(array(3));   //pour enlever les bloqués de la messagerie
 
                     $relation_bloq=$req1->fetchAll(); 
-                   
+
 
                     include('assets/functions/datediff.php');
                     $req = $BDD->prepare("SELECT * FROM (
                     SELECT *
                             FROM messagerie
-                            
+
                             WHERE id_to = ? AND lu = 0
                             ) base
                             ORDER BY date_message DESC
@@ -101,7 +101,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     $resuMESS = $req->fetchAll();
 
 
-$nbmess = 0;
+                    $nbmess = 0;
                     foreach($resuMESS as $m) {
                         ?>
 
@@ -125,7 +125,7 @@ $nbmess = 0;
 
 
                         if($okaffichemess){ 
-$nbmess++;
+                            $nbmess++;
 
                             $date1 = new DateTime( $m['date_message']);
                             $date2 = new DateTime(date("Y-m-d H:i:s"));
@@ -175,6 +175,36 @@ $nbmess++;
 
                 <div class="topbar-divider d-none d-sm-block"></div>
 
+
+
+
+
+                <!-- DEROULANT PROFIL-->
+                <?php 
+                    if($_SESSION['user_role']==0){   
+                ?>
+
+                <li class="nav-item dropdown no-arrow ">
+                    <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <span class="mr-2 d-none d-lg-inline "><i class="fa fa-lock mr-1 text-gray-400"></i>Admin</span>
+                    </a>
+                    <div class="dropdown-menu shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
+
+                        <a class="dropdown-item" href="all-utilisateurs.php"> <i class="fa fa-users mr-1 text-gray-400" aria-hidden="true"></i>  All-Users</a>
+                        <a class="dropdown-item" href="all-beats.php"> <i class="fa fa-music mr-1 text-gray-400" aria-hidden="true"></i>  All-Beats</a>
+                        <a class="dropdown-item" href="all-messages.php"> <i class="fa fa-comments mr-1 text-gray-400" aria-hidden="true"></i>  All-Messages</a>
+
+
+
+                        <?php
+                    }
+                        ?>
+                    </div>
+
+                </li>
+
+
+
                 <!-- DEROULANT PROFIL-->
                 <li class="nav-item dropdown no-arrow ">
                     <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
@@ -182,19 +212,8 @@ $nbmess++;
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 
-                        <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
-
-                        <?php 
-                    if($_SESSION['user_role']==0){   
-                        ?>
-                        <a class="dropdown-item  " href="all-utilisateurs.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Admin Studio</a>
-                        <?php
-                    }
-                        ?>
-
-
-
-                        <a class="dropdown-item  " href="#"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
+                        <a class="dropdown-item" href="profils.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
+                        <a class="dropdown-item " href="#"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
 
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="deconnexion.php"><i class="fas fa-power-off mr-2"></i>Déconnexion</a>

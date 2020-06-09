@@ -4,12 +4,15 @@ $_SESSION['ici_index_bool'] = false;
 
 include('assets/db/connexiondb.php'); 
 
+$tab = explode('-',$_GET['profil_id']);
+$get_id =(int)$tab[0];
+$idmoi = (int)$tab[1];
 
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     $okconnectey = true;
 
-    if($_SESSION['user_role'] != 0){
+    if($_SESSION['user_role'] != 0 && $idmoi != $_SESSION['user_id']){
         echo "<script> history.go(-1); </script>";
         exit;
 
@@ -18,10 +21,9 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     header('Location: index.php');
             exit;
 }
-$tab = explode('-',$_GET['profil_id']);
 
-$get_id =(int)$tab[0];
-$idmoi = (int)$tab[1];
+
+
 
 
 //*** lu lu
