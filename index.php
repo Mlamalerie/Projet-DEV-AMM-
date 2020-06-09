@@ -344,7 +344,7 @@ $resuTENDANCES=$req->fetchAll();
                                         <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-1_ffutqr.jpg" alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-italic lead  " > <i class="fa fa-quote-left mr-3 text-success guillemets" ></i>Je suis tombé sur ce site par hasard en cherchant des prods sur internet et aujourd'hui je ne m'en passe plus !</p>
+                                                    <p class="font-italic lead text-white" > <i class="fa fa-quote-left mr-3 text-success guillemets" ></i>Je suis tombé sur ce site par hasard en cherchant des prods sur internet et aujourd'hui je ne m'en passe plus !</p>
                                                     <footer class="blockquote-footer">Employé à
                                                         <cite>Chicken Spot</cite>
                                                     </footer>
@@ -357,7 +357,7 @@ $resuTENDANCES=$req->fetchAll();
                                         <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-3_hdxocq.jpg" alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-italic lead  "> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>Etant beatmaker, j'apprécie réellement ce site qui permet de faciliter les liens entre les artistes.</p>
+                                                    <p class="font-italic lead text-white"> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>Etant beatmaker, j'apprécie réellement ce site qui permet de faciliter les liens entre les artistes.</p>
                                                     <footer class="blockquote-footer">Ghost Killer Track</footer>
                                                 </blockquote>
                                             </div>
@@ -368,7 +368,7 @@ $resuTENDANCES=$req->fetchAll();
                                         <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-2_gibm2s.jpg" alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-italic lead  "> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>WeBeatz est mon site préféré ! J'ai découvert de nombreux beatmakers grâce à ce site !</p>
+                                                    <p class="font-italic lead text-white"> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>WeBeatz est mon site préféré ! J'ai découvert de nombreux beatmakers grâce à ce site !</p>
                                                     <footer class="blockquote-footer">Hakim</footer>
                                                 </blockquote>
                                             </div>
