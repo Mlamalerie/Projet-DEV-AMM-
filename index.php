@@ -132,7 +132,7 @@ $resuTENDANCES=$req->fetchAll();
         <script src="assets/js/search.js"></script>
         <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
 
-        
+
 
 
         <!--   *************************************************************  -->
@@ -181,71 +181,26 @@ $resuTENDANCES=$req->fetchAll();
                     <p class="lead mb-0 text-white text-center">Les meilleures ventes de beats</p>
 
                     <div class="my_slides multipleitems2">
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/Laylow.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Laylow<strong class="font-weight-bold text-white">
-                                    BURNING MAN</strong><span> 2020</span></h6>
+                        <?php
+                        $req = $BDD->prepare("SELECT * 
+                    FROM beat
+                    ORDER BY beat_nbvente DESC
+                    LIMIT 8");
+                        $req->execute(array());
+                        $resuVENTES=$req->fetchAll();
+                        foreach($resuVENTES as $rV){
 
-                            </div>
-                        </div>
+                        ?>
                         <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/bigmetro.jpg" alt="">
+                            <div class="hover hover-5 text-white rounded"><img src="<?= $rV['beat_cover']?>" alt="">
                                 <div class="hover-overlay"></div>
                                 <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Big Sean(ft Travis Scott)<strong class="font-weight-bold text-white">
-                                    Go Legend</strong><span> 2020</span></h6>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0"><?= $rV['beat_author']?><strong class="font-weight-bold text-white">
+                                    <?= $rV['beat_title']?></strong><span> <?= $rV['beat_year']?></span></h6>
                             </div>
                         </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/CG6.png" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">CG6<strong class="font-weight-bold text-white">
-                                    Nelson</strong><span> 2019</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/DB5.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Leto<strong class="font-weight-bold text-white">
-                                    Double Bang 5</strong><span> 2018</span></h6>
-                            </div>                        
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/luv.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Lil Uzi Vert<strong class="font-weight-bold text-white">
-                                    Futball Shuffle </strong><span> 2020</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/Sch.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Sch<strong class="font-weight-bold text-white">
-                                    Poupée Russe </strong><span> 2017</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/roddy.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Roddy Rich<strong class="font-weight-bold text-white">
-                                    Tip toe</strong><span> 2020</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/Spri.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Spri(ft 4Keus)<strong class="font-weight-bold text-white">
-                                    Night and Day</strong><span> 2020</span></h6>
-                            </div>
-                        </div>
+
+                        <?php } ?>
                     </div>
 
                     <div class="slider-btn rounded-circle">
@@ -284,44 +239,93 @@ $resuTENDANCES=$req->fetchAll();
 
         <!-- Section 4 -->
         <section class="py-5 d-flex align-items-center" id="four">
+            <!--
+<div class="container py-5">
+<div class="row text-center">
+<div class="col-lg-9 mx-auto" id="bestprod">
+<h2 class="h1 mb-4 text-white text-center">Meilleur Producteur</h2>
+<p class="font-italic mb-4 text-muted">Liste des profils des producteurs</p>
+<table class="table table-dark">
+<thead>
+<tr>
+<th scope="col">#</th>
+<th scope="col">First</th>
+<th scope="col">Last</th>
+<th scope="col">Handle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">1</th>
+<td>Mark</td>
+<td>Otto</td>
+<td>@mdo</td>
+</tr>
+<tr>
+<th scope="row">2</th>
+<td>Jacob</td>
+<td>Thornton</td>
+<td>@fat</td>
+</tr>
+<tr>
+<th scope="row">3</th>
+<td>Larry</td>
+<td>the Bird</td>
+<td>@twitter</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+-->
             <div class="container py-5">
-                <div class="row text-center">
-                    <div class="col-lg-9 mx-auto" id="bestprod">
-                        <h2 class="h1 mb-4 text-white text-center">Meilleur Producteur</h2>
-                        <p class="font-italic mb-4 text-muted">Liste des profils des producteurs</p>
-                        <table class="table table-dark">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="row">
+                    <div class="col-lg-7 mx-auto bg-white rounded shadow" id="bestprod">
+                        <h2 class="h1 mb-4  text-center">Meilleur Producteur</h2>
+
+                        <!-- Fixed header table-->
+                        <div class="table-responsive">
+
+                            <table class="table table-fixed">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="col-4">Position</th>
+                                        <th scope="col" class="col-4">Auteur</th>
+                                        <th scope="col" class="col-4">Nombre de ventes</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $req = $BDD->prepare("SELECT * 
+                    FROM beat
+                    ORDER BY beat_nbvente DESC
+                    LIMIT 8");
+                                    $req->execute(array());
+                                    $resuTOP_Producer=$req->fetchAll();
+                                    $firstplace=1;
+                                    
+                                    foreach($resuTOP_Producer as $rTP){
+                                                
+                                    ?>
+                                    <tr>
+                                        <th class="col-4"><?= $firstplace?></th>
+                                        <td class="col-4"><?=$rTP['beat_author']?></td>
+                                        <td class="col-4"><?=$rTP['beat_nbvente']?></td>
+                                    </tr>
+                                    <?php 
+                                        $firstplace++;
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div><!-- End -->
+
                     </div>
                 </div>
             </div>
+
         </section>
         <!-- Section 5 -->
         <section class="py-5 d-flex align-items-center" id="five">
@@ -532,7 +536,7 @@ $resuTENDANCES=$req->fetchAll();
 
 
         <?php
-    require_once('assets/skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.php');
         ?>
         <!--     RECHERCHE  -->
 
@@ -547,12 +551,12 @@ $resuTENDANCES=$req->fetchAll();
 
 
         <script src="assets/js/main.js"></script>
-        
-<!--
-            ************************** MUSIC PLAYER  **************************  
-        <?php
-            require_once('assets/skeleton/AudioPlayer/audioplayer.php');
-        ?>
+
+        <!--
+************************** MUSIC PLAYER  **************************  
+<?php
+require_once('assets/skeleton/AudioPlayer/audioplayer.php');
+?>
 -->
 
     </body>

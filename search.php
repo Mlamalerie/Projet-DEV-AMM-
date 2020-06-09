@@ -472,7 +472,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                             <h4 class="text-white">Type </h4>
                             <form action="search.php" id="formType">
 
-                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer " >
+                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer text-white">
                                     <!--   icon croix ou rond -->
                                     <?php if(!$wetypeexiste) { ?>
                                     <i class="far  fa-dot-circle mr-2"></i>
@@ -483,7 +483,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                 </span>
 
-                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer " >
+                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer text-white" >
                                     <!--   icon croix ou rond -->
                                     <?php if($wetypeexiste && $_GET['Type'] == "users") { ?>
                                     <i class="far  fa-dot-circle mr-2"></i>
@@ -494,7 +494,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                 </span>
 
-                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer " >
+                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer text-white" >
                                     <!--   icon croix ou rond -->
                                     <?php if($wetypeexiste && $_GET['Type'] == "beats") { ?>
                                     <i class="far  fa-dot-circle mr-2"></i>
