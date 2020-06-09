@@ -33,6 +33,7 @@ $resuTENDANCES=$req->fetchAll();
         ?>
 
         <link rel="stylesheet" type="text/css" href="assets/css/index.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/loading.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar-index-turfu.css">
 
@@ -47,9 +48,34 @@ $resuTENDANCES=$req->fetchAll();
         <link rel="stylesheet" href="assets/css/slick.css">
         <link rel="stylesheet" href="assets/css/slide.css">
 
+
+        <style>
+            .video-icon {
+                display: inline-block;
+                height: 5rem;
+                width: 5rem;
+                border-radius: 50%;
+                background-color: #793ea5;
+                background-image: url(assets/img/icon/icon-play.svg);
+                background-repeat: no-repeat;
+                background-position: 55% center;
+                background-size: 24px 27px;
+                -webkit-transition: background-color 0.3s ease-in-out;
+                transition: background-color 0.3s ease-in-out;
+            }
+        </style>
         <title>WeBeatz</title>
     </head>
     <body>
+        <!-- preloader
+================================================== -->
+        <div id="preloader">
+            <div id="loader" class="dots-jump">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
 
 
         <!--   *************************************************************  -->
@@ -67,7 +93,7 @@ $resuTENDANCES=$req->fetchAll();
         ?>
 
 
-
+      
 
         <!--   *************************************************************  -->
         <!--   ************************** HEADER  **************************  -->
@@ -80,16 +106,17 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container h-100">
                 <div class="d-flex h-100 text-center align-items-center">
                     <div class="w-100 text-white">
-                        <h1 class="display-3">Bienvenue sur WeBeatz</h1>
-                        <p class="lead mb-0">Retrouvez les beats des meilleurs producteurs du moment</p>
-                        <p class="lead mb-0">Inscrivez-vous pour commencer à acheter ou vendre des prods <a href="inscription.php">
-                            <br/>
-                            <button type="button" class="btn btn-danger btninscription" >Inscrivez-vous</button></a></p><br/>
+                        <div class="mb-4">  <span class="video-icon"></span>
+                            <h1 class="display-3">Bienvenue sur WeBeatz</h1>
+                            <p class="lead mb-0">Retrouvez les beats des meilleurs producteurs du moment</p>
+                            <p class="lead mb-0"><a href="incription.php" >Inscrivez-vous</a> pour commencer à acheter ou vendre des prods 
+
+                        </div>
 
                         <form id="searchform" method="get" action="search.php">
 
 
-                            <div class="searchbar ">
+                            <div class="searchbar searchtest">
 
                                 <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
 
@@ -105,13 +132,7 @@ $resuTENDANCES=$req->fetchAll();
         <script src="assets/js/search.js"></script>
         <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
 
-        <div id="countdown">
-            Temps restant pour le projet :
-            <span id="d"></span>
-
-
-
-        </div>
+        
 
 
         <!--   *************************************************************  -->
@@ -122,7 +143,7 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container-fluid">
                 <div class="mx-auto" id="tendances">
                     <h2 class="h1 mb-4 text-center text-white">Tendances</h2>
-                    <p class="lead mb-0">Retrouvez les beats du moment</p>
+                    <p class="lead mb-0 text-center text-white">Retrouvez les beats du moment</p>
                     <div class="my_slides multiple-items">
 
                         <?php
@@ -157,7 +178,7 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container-fluid">
                 <div class="mx-auto" id="topventes">
                     <h2 class="h1 mb-4 text-center text-white">TOP des ventes</h2>
-                    <p class="lead mb-0">Les meilleures ventes de beats</p>
+                    <p class="lead mb-0 text-white text-center">Les meilleures ventes de beats</p>
 
                     <div class="my_slides multipleitems2">
                         <div class="items">
@@ -239,20 +260,20 @@ $resuTENDANCES=$req->fetchAll();
         <section class="py-5 d-flex align-items-center" id="three">
             <div class="container">
                 <div class="col-lg-9 mx-auto" id="ccm">
-                    <h2 class="h1 mb-4" >Comment ça marche?</h2>
-                    <p class="lead mb-0">Retrouvez les beats du moment</p>
+                    <h2 class="h1 mb-4 text-white text-center" >Comment ça marche?</h2>
+                    <p class="lead mb-0 text-white text-center">Découvrez de quelle manière fonctionne le site</p>
 
-                    <div id="recherchez">
+                    <div id="recherchez" class="text-center">
                         <h3>Recherchez</h3>
                         <p> Retrouvez de nombreuses productions au sein de notre catalogue.</p>
                         <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/browse.svg">
                     </div>
-                    <div id="achetez">
+                    <div id="achetez" class="text-center">
                         <h3>Achetez</h3>
                         <p>Choisissez la licence qui vous convient et ajoutez la au panier.</p>
                         <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/buy.svg" width="100">
                     </div>
-                    <div id="creez">
+                    <div id="creez" class="text-center">
                         <h3>Créez</h3>
                         <p>Uploadez vos créations sur notre site et rejoignez de nombreux beatmakers</p>
                         <img src="https://airbit.com/img/landing-pages/buy-beats/how-it-works/create.svg">
@@ -266,7 +287,7 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container py-5">
                 <div class="row text-center">
                     <div class="col-lg-9 mx-auto" id="bestprod">
-                        <h2 class="h1 mb-4">Meilleur Producteur</h2>
+                        <h2 class="h1 mb-4 text-white text-center">Meilleur Producteur</h2>
                         <p class="font-italic mb-4 text-muted">Liste des profils des producteurs</p>
                         <table class="table table-dark">
                             <thead>
@@ -305,7 +326,7 @@ $resuTENDANCES=$req->fetchAll();
         <!-- Section 5 -->
         <section class="py-5 d-flex align-items-center" id="five">
             <div class="container">
-                <h2 class="h1 mb-4  ">Témoignages</h2>
+                <h2 class="h1 mb-4 txt-footer">Témoignages</h2>
                 <div class="row">
                     <div class="col-lg-10 col-xl-8 mx-auto">
                         <div class="p-5 rounded bloc_avis">
@@ -323,9 +344,9 @@ $resuTENDANCES=$req->fetchAll();
                                         <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-1_ffutqr.jpg" alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-italic lead  " > <i class="fa fa-quote-left mr-3 text-success guillemets" ></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                    <footer class="blockquote-footer">Someone famous in
-                                                        <cite title="Source Title">Source Title</cite>
+                                                    <p class="font-italic lead  " > <i class="fa fa-quote-left mr-3 text-success guillemets" ></i>Je suis tombé sur ce site par hasard en cherchant des prods sur internet et aujourd'hui je ne m'en passe plus !</p>
+                                                    <footer class="blockquote-footer">Employé à
+                                                        <cite>Chicken Spot</cite>
                                                     </footer>
                                                 </blockquote>
                                             </div>
@@ -336,10 +357,8 @@ $resuTENDANCES=$req->fetchAll();
                                         <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-3_hdxocq.jpg" alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-italic lead  "> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                    <footer class="blockquote-footer">Someone famous in
-                                                        <cite title="Source Title">Source Title</cite>
-                                                    </footer>
+                                                    <p class="font-italic lead  "> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>Etant beatmaker, j'apprécie réellement ce site qui permet de faciliter les liens entre les artistes.</p>
+                                                    <footer class="blockquote-footer">Ghost Killer Track</footer>
                                                 </blockquote>
                                             </div>
                                         </div>
@@ -349,10 +368,8 @@ $resuTENDANCES=$req->fetchAll();
                                         <div class="media"><img class="rounded-circle img-thumbnail" src="https://res.cloudinary.com/mhmd/image/upload/v1579676165/avatar-2_gibm2s.jpg" alt="" width="75">
                                             <div class="media-body ml-3">
                                                 <blockquote class="blockquote border-0 p-0">
-                                                    <p class="font-italic lead  "> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                    <footer class="blockquote-footer">Someone famous in
-                                                        <cite title="Source Title">Source Title</cite>
-                                                    </footer>
+                                                    <p class="font-italic lead  "> <i class="fa fa-quote-left mr-3 text-success guillemets"></i>WeBeatz est mon site préféré ! J'ai découvert de nombreux beatmakers grâce à ce site !</p>
+                                                    <footer class="blockquote-footer">Hakim</footer>
                                                 </blockquote>
                                             </div>
                                         </div>
@@ -378,32 +395,6 @@ $resuTENDANCES=$req->fetchAll();
 
         <!-- download
 ================================================== -->
-        <section id="download" class="s-download target-section">
-
-            <div class="row section-header align-center mx-auto" data-aos="fade-up">
-
-                <?php
-                $req = $BDD->prepare("SELECT user_id 
-                    FROM user ");
-                $req->execute(array());
-                $AllU=$req->fetchAll();
-
-
-                ?>
-                <div class="col-full">
-                    <h5 class="display-1 inline">
-                        Join Our Community of <?= count($AllU) ?>+ Users.
-                    </h5>
-                    <p class="lead">
-                        Et nihil atque ex. Reiciendis et rerum ut voluptate. Omnis molestiae nemo est. 
-                        Ut quis enim rerum quia assumenda repudiandae non cumque qui. Amet repellat 
-                        omnis ea.
-                    </p>
-                </div>
-            </div> <!-- end section-header -->
-
-        </section> <!-- end s-download -->
-
 
         <div class="go-top">
             <a class="smoothscroll" title="Back to Top" href="#top"></a>
@@ -427,7 +418,7 @@ $resuTENDANCES=$req->fetchAll();
                     </div>
 
                     <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                        <h6 class="text-uppercase font-weight-bold mb-4  ">WeBeats</h6>
+                        <h6 class="text-uppercase font-weight-bold mb-4 txt-footer ">WeBeats</h6>
                         <ul class="list-unstyled mb-0">
                             <li class="mb-2"><a href="#" class="text-mute">A Propos</a></li>
                             <li class="mb-2"><a href="#" class="text-mute">Aide</a></li>
@@ -436,7 +427,7 @@ $resuTENDANCES=$req->fetchAll();
                         </ul>
                     </div>
                     <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                        <h6 class="text-uppercase font-weight-bold mb-4  ">Explorer</h6>
+                        <h6 class="text-uppercase font-weight-bold mb-4 txt-footer ">Explorer</h6>
                         <ul class="list-unstyled mb-0">
                             <li class="mb-2"><a href="#tendances" class="text-mute">Tendances</a></li>
                             <li class="mb-2"><a href="#topventes" class="text-mute">Top ventes</a></li>
@@ -445,7 +436,7 @@ $resuTENDANCES=$req->fetchAll();
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-lg-0">
-                        <h6 class="text-uppercase font-weight-bold mb-4  ">Newsletter</h6>
+                        <h6 class="text-uppercase font-weight-bold mb-4 txt-footer ">Newsletter</h6>
                         <p class="text-mute mb-4">Inscrivez-vous pour ne rien louper de notre Actualité !</p>
                         <div class="p-1 rounded border">
                             <div class="input-group">
@@ -481,7 +472,7 @@ $resuTENDANCES=$req->fetchAll();
 
 
         <?php
-        require_once('assets/skeleton/endLinkScripts.php');
+    require_once('assets/skeleton/endLinkScripts.php');
         ?>
         <!--     RECHERCHE  -->
 

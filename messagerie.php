@@ -95,7 +95,7 @@ $relation_bloq=$req1->fetchAll();
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        // require_once('assets/skeleton/navbar.php');
+         require_once('assets/skeleton/navbar.php');
         ?>
         <br/><br/><br/><br/>
         <div class="container">

@@ -13,6 +13,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     echo "Pas de connexion";
 }
 ?>
+
 <?php
 if (isset($_POST['AppliquerRedu'])) {
 
@@ -31,6 +32,9 @@ if (isset($_POST['AppliquerRedu'])) {
             $reduction = 0.5;
 
         }
+        $_SESSION['AppliquerRedu'] = $code;
+    } else {
+        unset($_SESSION['AppliquerRedu']);
     }
 
 }
@@ -48,32 +52,20 @@ if (isset($_POST['AppliquerRedu'])) {
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
+        <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="Test_Mathieu/panierTestMathieu/affichagepanier.css">
+        <link rel="stylesheet" type="text/css" href="Test_Mathieu/panierTestMathieu/affichagepanier.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/commande.css">
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
-
-        <style>
-
-            body {
-                background: linear-gradient(to right, #5f3d79, #7327ad)!important;
-                background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
-                background: linear-gradient(to right, #eecda3, #ef629f);
-                min-height: 100vh;
-            }
-        </style>
         <title>Confirmation de votre commande | WeBeats</title>
     </head>
     <body onload="actualiserTOTALTOTAL()">
-
-
-
-
-
 
 
 
@@ -92,7 +84,7 @@ if (isset($_POST['AppliquerRedu'])) {
                         <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
 
                             <?php require_once('assets/skeleton/tablePanier.php'); ?> 
-
+                            <button type="button" onclick="document.location = 'search.php'" class="btn btn-dark rounded-pill py-2 btn-block btn-confirm">Continuer Shopping</button>
                         </div>
                     </div>
 
@@ -173,32 +165,25 @@ if (isset($_POST['AppliquerRedu'])) {
 
                                     </script>
                                 </ul> 
-                                <form id='formConfirmer' action="confirmation.php" method="post">
-                                    <input type="hidden" name="khalassCa" id="khalassCa">
-                                    <button type="button" onclick="document.getElementById('formConfirmer').submit()" href="confirmation.php" class="btn btn-dark rounded-pill py-2 btn-block">Confirmer</button>
+
+                                <form id='formConfirmer' action="paiement.php" method="post">
+                                    <input type="hidden" name="khalassStp" id="khalassStp">
+                                    <button type="button" onclick="document.getElementById('formConfirmer').submit()" href="confirmation.php" class="btn btn-dark rounded-pill py-2 btn-block" name='ConfirmCommande' value='Confirm'>Confirmer</button>
+
                                 </form>
+
+                                <div id="paypal-button-container"></div>
+                                <script src="https://www.paypal.com/sdk/js?client-id=Ae0hwalIu4jYQfJOup2Toy5iQHgLlK84Upq3nYmfD6y7UeQgyJDRrFOv-yI2IJZXUXhiXKhhPMhph1XV&currency=EUR" data-sdk-integration-source="button-factory"></script>
+                            
+
                                 <?php require_once("assets/functions/js-panier.php"); ?>
-                                <span id="waitRedirigey"></span>
+                                <span class="text-dark" id="waitRedirigey"></span>
                             </div>
                         </div>
                     </div>
 
-                    <?php
-                    $req = $BDD->prepare("SELECT panier_beat_id
-                                                                                        FROM panier
-                                                                                        WHERE panier_user_id = ?");
-                    $req->execute(array($_SESSION['user_id']));
-                    $voir = $req->fetch();
-                    $paniervide = 1;
-                    if(isset($voir['panier_beat_id'])) {
-                        $paniervide = 0;
+                  
 
-                    }
-
-
-                    ?>
-                                  
-                
                 </div>
             </div>
         </div>

@@ -9,11 +9,12 @@
 
 :root {
 
-    --base-color1: #7728b2;
+    --base-color1: rgb(78, 26, 74);
     --base-color2: #121619;
-    --base-color3: #ff3aff;
 
-
+    --base-colorDark1: #1b0929;
+    --base-colorDark2: #7728b2;
+    
     --base-color2: #121619;
 
     --base-police1: 'Quicksand', sans-serif;

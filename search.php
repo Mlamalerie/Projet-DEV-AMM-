@@ -4,7 +4,7 @@ $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
 print_r('<br><br><br><br><br><br><br>');
 print_r($_GET);
-$listeGenres = ['Hip Hop','Trap','R&B','Soul','Afro','Deep','Pop','Rock','Reggae','Zouk','Dance','Latino','Old School','Pop','Pop/Funk','Orchestral'];
+$listeGenres = ['Hip Hop','Trap','R&B','Soul','Afro','Deep','Pop/Funk','Rock','Reggae','Zouk & Kompa','Dance','Latino','Old School','Orchestral'];
 sort($listeGenres);
 $_SESSION["listeGenres"] = $listeGenres;
 
@@ -413,6 +413,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <!--  Audio player de mathieu   -->
         <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
+       
 
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">
@@ -421,13 +422,28 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <link rel="stylesheet" type="text/css" href="assets/css/modalPanier.css">
         <link rel="stylesheet" type="text/css" href="assets/css/modalUploadAudio.css">
 
-
+ <style>
+            .play-audio-icon {
+                display: inline-block;
+                height: 5rem;
+                width: 5rem;
+                border-radius: 50%;
+                background-color: #793ea5;
+                background-image: url(assets/img/icon/icon-play.svg);
+                background-repeat: no-repeat;
+                background-position: 55% center;
+                background-size: 24px 27px;
+                -webkit-transition: background-color 0.3s ease-in-out;
+                transition: background-color 0.3s ease-in-out;
+            }
+        </style>
 
 
 
         <title>Search</title>
     </head>
     <body onload=" refreshNbPanier();refreshAllBeats() ">
+
 
 
 
@@ -786,7 +802,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                     </thead>
                                     <tbody>
                                         <?php
-                                            if ($yadesresultatsBEATS) {$i = 1;foreach($resuBEATS as $r){
+                                                                      if ($yadesresultatsBEATS) {$i = 1;foreach($resuBEATS as $r){
                                         ?>
                                         <tr class="border rounded ">
                                             <td class="pr-0 border-0 align-middle"><strong><?= $i ?></strong></td>
@@ -844,25 +860,40 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                                 <?php 
                                                                           $okdejadanspanier = false;
-
+                                                                          $okdejaacheter = false;
                                                                           if($okconnectey) {
                                                                               $req = $BDD->prepare("SELECT *
-                                                                                        FROM panier
-                                                                                        WHERE panier_user_id = ? AND panier_beat_id = ?");
+                                                                                        FROM vente
+                                                                                        WHERE vente_user_id = ? AND vente_beat_id = ?");
                                                                               $req->execute(array($_SESSION['user_id'],$r['beat_id']));
 
 
-                                                                              $aff = $req->fetch();
+                                                                              $ach = $req->fetch();
+
+
+                                                                              if(isset($ach['id'])){
+                                                                                  $okdejaacheter = true;
+                                                                              }else {
+                                                                                  $req = $BDD->prepare("SELECT *
+                                                                                        FROM panier
+                                                                                        WHERE panier_user_id = ? AND panier_beat_id = ?");
+                                                                                  $req->execute(array($_SESSION['user_id'],$r['beat_id']));
+
+
+                                                                                  $aff = $req->fetch();
 
 
 
-                                                                              if(isset($aff['id'])){
-                                                                                  $okdejadanspanier = true;
-
+                                                                                  if(isset($aff['id'])){
+                                                                                      $okdejadanspanier = true;
+                                                                                  }
                                                                               }
                                                                           }
                                                 ?>
-                                                <?php if(($okconnectey && $r['beat_author_id'] != $_SESSION['user_id']) || !$okconnectey) { ?>
+                                                <?php 
+                                                                          if(!$okdejaacheter) {
+
+                                                                              if(($okconnectey && $r['beat_author_id'] != $_SESSION['user_id']) || !$okconnectey) { ?>
                                                 <button id='btnbeat-<?=$r['beat_id']?>' 
 
                                                         <?php if($okconnectey) { ?>
@@ -881,8 +912,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                                     <?php } ?>
 
                                                 </button>
+                                                <?php } } else {?>
+                                                <a class="btn btn-danger" href="audio/<?= $r['beat_source']?>" download>
+                                                    <span class="text-white"><i class="fas fa-download"></i></span>
+                                                </a>
                                                 <?php } ?>
-
                                                 <?php  if($okdejadanspanier) {?>
                                                 <script>document.getElementById('btnbeat-<?=$r['beat_id']?>').innerHTML = 'Dans le panier';</script>
                                                 <?php } ?>
@@ -1412,134 +1446,6 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <?php
         require_once('assets/skeleton/AudioPlayer/audioplayer.php');
         ?>
-        <!-- JS du player -->
-        <?php
-        include("assets/functions/fctforaudioplayer.php");
-        ?>
-        <script id="scriptDuPlayer">
-
-            const thumbnail = document.querySelector('#thumbnail'); // album cover 
-            const song = document.querySelector('#song'); // audio 
-
-            const btnAcheterPrice = document.querySelector('#btn-player-acheter');
-            const songArtist = document.querySelector('.song-artist'); // element où noms artistes apparaissent
-            const songTitle = document.querySelector('.song-title'); // element où titre apparait
-            const progressBar = document.querySelector('#progress-bar'); // element où progress bar apparait
-            let pPause = document.querySelector('#play-pause'); // element où images play pause apparaissent
-
-            let mouseDown = false;
-
-
-
-            songIndex = 0;
-            songs = <?=returnMusicListStr("songs", $resuBEATS); ?>;  //Stockage des audios
-            thumbnails = <?=returnMusicListStr("thumbnails", $resuBEATS); ?>; //Stockage des covers
-            songArtists = <?=returnMusicListStr("artists", $resuBEATS); ?>; //Stockage Noms Artistes
-            songTitles = <?=returnMusicListStr("titles", $resuBEATS); ?>; //Stockage Titres
-            songPrices = <?=returnMusicListStr("prices", $resuBEATS); ?>; //Stockage price
-            let playing = true;
-            function playPause(songIndex) {
-                document.getElementById('audioplayer').setAttribute('style','');
-                song.src = songs[songIndex];
-                thumbnail.src = thumbnails[songIndex];
-                songArtist.innerHTML = songArtists[songIndex];
-                songTitle.innerHTML = songTitles[songIndex];
-
-                //                let prixprix;
-                //                if(parseFloat(songPrices[songIndex]) == 0.00){
-                //                    prixprix = "FREE";
-                //
-                //                } else {
-                //                    prixprix = songPrices[songIndex] +"€";
-                //                }
-                //                btnAcheterPrice.innerHTML = "<i class='fas fa-shopping-cart iconPanierbtn'></i><sup>+</sup>"+ prixprix ;
-                //                console.log(btnAcheterPrice);
-                //                btnAcheterPrice.setAttribute('onclick',"go2Panier(this,'" + songTitles[songIndex] + "','" + songArtists[songIndex] + "', '"+ songPrices[songIndex] +"', '" + thumbnails[songIndex] + "');");
-                //                btnAcheterPrice.setAttribute('class','btn btn-danger');
-
-
-                if (playing) {
-                    pPause.src = "./assets/icon/pause.png"
-                    song.play();
-                    playing = false;
-                } else {
-                    pPause.src = "./assets/icon/play.png"
-                    song.pause();
-                    playing = true;
-                }
-            }
-
-
-
-            // joue automatiquement le son suivant
-            song.addEventListener('ended', function(){
-                nextSong();
-            });
-
-            function nextSong() {
-                songIndex++;
-                if (songIndex > songs.length -1) {
-                    songIndex = 0;
-                };
-                song.src = songs[songIndex];
-                thumbnail.src = thumbnails[songIndex];
-                if((songArtists[songIndex] != null) && (songTitles[songIndex] != null)){
-                    songArtist.innerHTML = songArtists[songIndex];
-                    songTitle.innerHTML = songTitles[songIndex];
-                }
-                playing = true;
-                playPause(songIndex);
-            }
-
-            function previousSong() {
-                songIndex--;
-                if (songIndex < 0) {
-                    songIndex = songs.length -1;
-                };
-                song.src = songs[songIndex];
-                thumbnail.src = thumbnails[songIndex];
-                if((songArtists[songIndex] != null) && (songTitles[songIndex] != null)){
-                    songArtist.innerHTML = songArtists[songIndex];
-                    songTitle.innerHTML = songTitles[songIndex];
-                }
-                playing = true;
-                playPause(songIndex);
-            }
-
-            // maj de la durée max du son, maj temps actuel
-            function updateProgressValue() {
-                progressBar.max = song.duration;
-                progressBar.value = song.currentTime;
-                document.querySelector('.currentTime').innerHTML = (formatTime(Math.floor(song.currentTime)));
-                if (document.querySelector('.durationTime').innerHTML === "NaN:NaN") {
-                    document.querySelector('.durationTime').innerHTML = "0:00";
-                } else {
-                    document.querySelector('.durationTime').innerHTML = (formatTime(Math.floor(song.duration)));
-                }
-            };
-
-
-            // conversion du temps en minutes/secondes dans le lecteur
-            function formatTime(seconds) {
-                let min = Math.floor((seconds / 60));
-                let sec = Math.floor(seconds - (min * 60));
-                if (sec < 10){ 
-                    sec  = `0${sec}`;
-                };
-                return `${min}:${sec}`;
-            };
-
-            // actualisation du lecteur en fct du temps(demi-secondes)
-            setInterval(updateProgressValue, 50);
-
-            // Valeur de la bar qd curseur est glissé sans lecture
-            function changeProgressBar() {
-                song.currentTime = progressBar.value;
-            };
-
-
-
-        </script>
-        <!--   END JS du Player     -->
+    
     </body>
 </html>

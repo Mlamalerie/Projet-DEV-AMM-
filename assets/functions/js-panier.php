@@ -1,4 +1,9 @@
 <script id="fonctionsPanier">
+
+
+    
+    
+    
     function redir(str){
         self.location.href=str;
     }
@@ -10,9 +15,9 @@
         if (nb != 0) {
             btn.style = "display : ;"
         } else {
-            setTimeout(redir("search.php"),5000);
+            setTimeout(redir("search.php"),50000);
             btn.style = "display : none ;"
-           
+
             document.getElementById('waitRedirigey').innerHTML = "Votre panier est vide, Vous allez être redirigé dans 5sec.. vers une autre page pour le remplir";
 
         }
@@ -21,7 +26,7 @@
     function actualiserTOTALTOTAL(){
         let to = document.getElementById('TotalPanierCommande').innerHTML.split('€');
         to = to[0];
-
+document.getElementById('khalassStp').value = to;
         <?php if(isset($reduction)) { ?>
 
         let redu = <?=$reduction?>;
@@ -40,7 +45,7 @@
         t.innerHTML = roundDecimal(res) +"€";
         console.log(to,redu,t);
 
-        let input = document.getElementById('khalassCa');
+        let input = document.getElementById('khalassStp');
         input.value = roundDecimal(res);
         console.log(input);
 
@@ -70,28 +75,7 @@
         actualiserTOTALTOTAL()
     }
 
-    function refreshNbPanier() {
-        let tbody = document.getElementById("tbodypanier");
-        let ici = document.getElementById("span_nb_panier");
 
-        if (ici != null) {
-            let nb = tbody.children.length;
-            console.log(nb,ici);
-
-            console.log(nb,ici);
-            if (nb != 0) {
-                ici.innerHTML = nb;
-                affichePasserCommande(true);
-            } else {
-                ici.innerHTML = "";
-
-                affichePasserCommande(false);
-            }
-            console.log(nb,ici);
-        }
-    }
-    
-   
 
     function ajoutBDDPanier(idbeat) {
         console.log("ajoutBDD");
@@ -140,7 +124,26 @@
         return strID;
 
     }
+    function refreshNbPanier() {
+        let tbody = document.getElementById("tbodypanier");
+        let ici = document.getElementById("span_nb_panier");
 
+        if (ici != null) {
+            let nb = tbody.children.length;
+            console.log(nb,ici);
+
+            console.log(nb,ici);
+            if (nb != 0) {
+                ici.innerHTML = nb;
+                affichePasserCommande(true);
+            } else {
+                ici.innerHTML = "";
+
+                affichePasserCommande(false);
+            }
+            console.log(nb,ici);
+        }
+    }
     function go2Panier(btn,b_title,b_author,b_price,b_cover,idbeat) {
 
         let textIn = "Dans le panier";
