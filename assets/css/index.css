@@ -9,16 +9,6 @@
 ********* GLOBAL ******** 
 ***************************************************** */
 
-:root {
-    --base-taille: 16px;
-    --base-color1: #7728b2;
-
-    --base-color2: #ff00c4;
-    --base-color3: #ff3aff;
-    /*  --base-font-family: 'Roboto', sans-serif;*/
-
-}
-
 body {
 
 }
@@ -126,7 +116,8 @@ header .overlay-sombre {
 /******** SECTIONS ********/
 /*section 1 */
 section:first-of-type {
-    background: linear-gradient(to right, #5d4157, #a8caba);
+/*    background: linear-gradient(to right, #5d4157, #a8caba);*/
+    background-color: var(--base-colorDark1);
 }
 /* carousel */
 .image_sons {/*les images des instrus*/
@@ -151,13 +142,13 @@ section:first-of-type {
 
 /*section 2 */
 section:nth-of-type(2) {
-    background: #14181b;
+    background-color: #121618;
 }
 
 
 /* section 3 */
 section:nth-of-type(3) {
-    background: linear-gradient(to left, #7728b2, #121618);
+    background-color: var(--base-colorDark1);
 }
 /*Comment ca marche*/
 #ccm h3{
@@ -178,7 +169,7 @@ section:nth-of-type(4) {
 
 /* section 5 */
 section:nth-of-type(5) {
-    background: linear-gradient(to left, #7728b2, rgb(119, 189, 193));
+    background-color: var(--base-colorDark1);
 }
 .bloc_avis{/*bloc des avis*/
 
@@ -328,7 +319,7 @@ section:nth-of-type(5) {
 
 #foot {
     /*background-color: #7728b2!important*/;
-    background: linear-gradient(to right, #13161a, #7327ad)!important;
+    background: linear-gradient(to right, #602362, #5a0f6c)!important;
 }
 
 

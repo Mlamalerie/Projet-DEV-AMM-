@@ -132,13 +132,7 @@ $resuTENDANCES=$req->fetchAll();
         <script src="assets/js/search.js"></script>
         <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
 
-        <div id="countdown">
-            Temps restant pour le projet :
-            <span id="d"></span>
-
-
-
-        </div>
+        
 
 
         <!--   *************************************************************  -->
@@ -401,27 +395,6 @@ $resuTENDANCES=$req->fetchAll();
 
         <!-- download
 ================================================== -->
-        <section id="download" class="s-download target-section">
-            <div class="row section-header align-left mx-auto" data-aos="fade-up">
-
-                <?php
-                $req = $BDD->prepare("SELECT user_id 
-                    FROM user ");
-                $req->execute(array());
-                $AllU=$req->fetchAll();
-                ?>
-                <div class="col-full">
-                    <h5 class="display-1 inline txt-nb">
-                        Rejoignez notre communauté de <?= count($AllU) ?>+ membres.
-                    </h5>
-                    <p class="lead">
-                        Venez partager votre talent et collaborez avec d'autres artistes.
-                    </p>
-                </div>
-            </div> <!-- end section-header -->
-            
-        </section> <!-- end s-download -->
-
 
         <div class="go-top">
             <a class="smoothscroll" title="Back to Top" href="#top"></a>
