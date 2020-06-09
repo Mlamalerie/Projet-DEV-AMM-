@@ -4,7 +4,11 @@ $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
 print_r('<br><br><br><br><br><br><br>');
 print_r($_GET);
-$listeGenres = ['Hip Hop','Trap','R&B','Soul','Afro','Deep','Pop/Funk','Rock','Reggae','Zouk & Kompa','Dance','Latino','Old School','Orchestral'];
+
+                                                                      $req = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
+                                                $req->execute(array());
+                                                $listeGenres = $req->fetchAll();
+                                                                      
 sort($listeGenres);
 $_SESSION["listeGenres"] = $listeGenres;
 
@@ -450,6 +454,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
         <?php
+          require_once('assets/functions/js-panier.php'); 
         require_once('assets/skeleton/navbar.php');
         ?>
 
@@ -536,17 +541,18 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                     <!--                                    <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>-->
                                 </span>
 
-                                <?php foreach($listeGenres as $gr){ 
+                                <?php 
+                                                                      foreach($listeGenres as $gr){ 
                                 ?>
                                 <!-- -Coulissage de tout les autres genres -  -->
                                 <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer " >
                                     <!--   icon croix ou rond -->
-                                    <?php if($wegenreexiste && $_GET['Genre'] == $gr) { ?>
+                                    <?php if($wegenreexiste && $_GET['Genre'] == $gr['genre_nom']) { ?>
                                     <i class="fas fa-times-circle"></i>
                                     <?php } else { ?> 
                                     <i class="fa fa-circle-o mr-2 icon_activer"></i>
                                     <?php } ?>
-                                    <span id="genre_<?= $gr?>" ><?= $gr?></span>
+                                    <span id="genre_<?= $gr['genre_nom']?>" ><?= $gr['genre_nom']?></span>
                                 </span>
 
                                 <?php
@@ -1357,12 +1363,13 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                             input.value = gr;
 
                             ici.insertBefore(input,avant);
+                            console.log(input);
                         }
                     }
 
                 }
 
-
+ok = false;
                 if (ok) {
                     document.getElementById('formGenre').submit();
 
@@ -1439,10 +1446,9 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
             }
 
         </script>
-
+   
         <!--   *************************************************************  -->
         <!--   ************************** MUSIC PLAYER  **************************  -->
-
         <?php
         require_once('assets/skeleton/AudioPlayer/audioplayer.php');
         ?>
