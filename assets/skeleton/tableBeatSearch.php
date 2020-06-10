@@ -1,4 +1,4 @@
-<div class="table-responsive bg-dark mx-2  rounded">
+<div class="table-responsive mx-2  rounded">
     <table class="table  rounded border-success">
         <thead>
             <!--
@@ -66,9 +66,9 @@
                                         }
                     ?>
                     <?php if ($oktaliker) { ?>
-                    <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class="text-dark coeur_active"><i class="fas fa-heart"></i></span>
+                    <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class=" iconLike text-dark coeur_active"><i class="fas fa-heart"></i></span>
                     <?php    } else { ?> 
-                    <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class="text-dark"><i class="far fa-heart"></i></span>
+                    <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class=" iconLike text-dark"><i class="far fa-heart"></i></span>
                     <?php } ?>
                 </td>
                 <?php } ?>
