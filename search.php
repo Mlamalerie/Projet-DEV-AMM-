@@ -1231,6 +1231,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <!--   *************************************************************  -->
         <!--   ************************** MUSIC PLAYER  **************************  -->
         <?php
+        $resuPLAYLIST = $resuBEATS;
         require_once('assets/skeleton/AudioPlayer/audioplayer.php');
         ?>
 

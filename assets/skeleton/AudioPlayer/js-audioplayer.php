@@ -9,18 +9,18 @@
             const songArtist = document.querySelector('.song-artist'); // element où noms artistes apparaissent
             const songTitle = document.querySelector('.song-title'); // element où titre apparait
             const progressBar = document.querySelector('#progress-bar'); // element où progress bar apparait
-            let pPause = document.querySelector('#play-pause'); // element où images play pause apparaissent
+            let pPause = document.querySelector('#btn-play-pause'); // element où images play pause apparaissent
 
             let mouseDown = false;
 
 
 
             songIndex = 0;
-            songs = <?=returnMusicListStr("songs", $resuBEATS); ?>;  //Stockage des audios
-            thumbnails = <?=returnMusicListStr("thumbnails", $resuBEATS); ?>; //Stockage des covers
-            songArtists = <?=returnMusicListStr("artists", $resuBEATS); ?>; //Stockage Noms Artistes
-            songTitles = <?=returnMusicListStr("titles", $resuBEATS); ?>; //Stockage Titres
-            songPrices = <?=returnMusicListStr("prices", $resuBEATS); ?>; //Stockage price
+            songs = <?=returnMusicListStr("songs", $resuPLAYLIST); ?>;  //Stockage des audios
+            thumbnails = <?=returnMusicListStr("thumbnails", $resuPLAYLIST); ?>; //Stockage des covers
+            songArtists = <?=returnMusicListStr("artists", $resuPLAYLIST); ?>; //Stockage Noms Artistes
+            songTitles = <?=returnMusicListStr("titles", $resuPLAYLIST); ?>; //Stockage Titres
+            songPrices = <?=returnMusicListStr("prices", $resuPLAYLIST); ?>; //Stockage price
             let playing = true;
             function playPause(songIndex) {
                 document.getElementById('audioplayer').setAttribute('style','');
@@ -43,11 +43,11 @@
 
 
                 if (playing) {
-                    pPause.src = "./assets/icon/pause.png"
+                    pPause.setAttribute('class','player-pause-icon'); 
                     song.play();
                     playing = false;
                 } else {
-                    pPause.src = "./assets/icon/play.png"
+                    pPause.setAttribute('class','player-play-icon'); 
                     song.pause();
                     playing = true;
                 }

@@ -9,14 +9,48 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
     $okconnectey = true;
 } 
+function date_outil($date,$nombre_jour) {
+
+    $year = substr($date, 0, -6);   
+    $month = substr($date, -5, -3);   
+    $day = substr($date, -2);   
+
+    // récupère la date du jour
+    $date_string = mktime(0,0,0,$month,$day,$year);
+
+    // Supprime les jours
+    $timestamp = $date_string - ($nombre_jour * 86400);
+    $nouvelle_date = date("Y-m-d", $timestamp); 
+
+    // pour afficher
+    return $nouvelle_date;
+
+}
+$maxaffresu = 5;
 
 $req = $BDD->prepare("SELECT * 
                     FROM beat
                     ORDER BY beat_dateupload DESC
-                    LIMIT 7 ");
+                    LIMIT $maxaffresu  ");
 $req->execute(array());
 $resuTENDANCES=$req->fetchAll();
 
+
+$dateajd = date("Y-m-d"); 
+$date22 = date_outil($dateajd,30);
+$req = $BDD->prepare("
+                    SELECT * 
+                    FROM beat
+                    WHERE beat_dateupload BETWEEN ? AND ?
+                    ORDER BY beat_nbvente DESC                   
+                    LIMIT $maxaffresu  ");
+$req->execute(array($date22,$dateajd ));
+$resuVENTES=$req->fetchAll();
+
+//var_dump($resuVENTES);
+//var_dump($resuTENDANCES);
+
+$resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
 
 ?>
 
@@ -50,18 +84,63 @@ $resuTENDANCES=$req->fetchAll();
 
 
         <style>
-            .video-icon {
+            .player-play-icon {
                 display: inline-block;
-                height: 5rem;
-                width: 5rem;
+                height: 3.2rem;
+                width: 3.2rem;
                 border-radius: 50%;
                 background-color: #793ea5;
-                background-image: url(assets/img/icon/icon-play.svg);
+                background-image: url(assets/img/icon/icon-play.svg); 
                 background-repeat: no-repeat;
                 background-position: 55% center;
                 background-size: 24px 27px;
                 -webkit-transition: background-color 0.3s ease-in-out;
                 transition: background-color 0.3s ease-in-out;
+              
+            }
+            
+            .player-pause-icon {
+                display: inline-block;
+                height: 3.2rem;
+                width: 3.2rem;
+                border-radius: 50%;
+                background-color: #793ea5;
+                background-image: url(assets/img/icon/pause.svg); 
+                background-repeat: no-repeat;
+                background-position: 55% center;
+                background-size: 24px 27px;
+                -webkit-transition: background-color 0.3s ease-in-out;
+                transition: background-color 0.3s ease-in-out;
+              
+            }
+            
+              .player-prev-icon {
+                display: inline-block;
+                height: 2rem;
+                width: 2rem;
+                border-radius: 50%;
+                background-color: #793ea5;
+                background-image: url(assets/img/icon/backward-solid.svg);
+                background-repeat: no-repeat;
+                background-position: 55% center;
+                background-size: 15px;
+                -webkit-transition: background-color 0.3s ease-in-out;
+                transition: background-color 0.3s ease-in-out;
+                    margin-right: 0.1rem;
+            }
+              .player-next-icon {
+                display: inline-block;
+                height: 2rem;
+                width: 2rem;
+                border-radius: 50%;
+                background-color: #793ea5;
+                background-image: url(assets/img/icon/forward-solid.svg);
+                background-repeat: no-repeat;
+                background-position: 55% center;
+                background-size: 15px;
+                -webkit-transition: background-color 0.3s ease-in-out;
+                transition: background-color 0.3s ease-in-out;
+                    margin-left: 0.1rem;
             }
         </style>
         <title>WeBeatz</title>
@@ -83,13 +162,6 @@ $resuTENDANCES=$req->fetchAll();
 
         <?php
         require_once('assets/skeleton/navbar.php');
-        ?>
-
-        <!--   *************************************************************  -->
-        <!--   ************************** MUSIC PLAYER  **************************  -->
-
-        <?php
-        require_once('assets/skeleton/AudioPlayer/audioplayer.php');
         ?>
 
 
@@ -132,7 +204,7 @@ $resuTENDANCES=$req->fetchAll();
         <script src="assets/js/search.js"></script>
         <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
 
-        
+
 
 
         <!--   *************************************************************  -->
@@ -147,19 +219,20 @@ $resuTENDANCES=$req->fetchAll();
                     <div class="my_slides multiple-items">
 
                         <?php
-                        foreach($resuTENDANCES as $rT){
+                        $i = 1;
+                        foreach($resuTENDANCES as $r){
 
                         ?>
                         <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="<?= $rT['beat_cover']?>" alt="">
+                            <div class="hover hover-5 text-white rounded"><img src="<?= $r['beat_cover']?>" alt="">
                                 <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0"><?= $rT['beat_author']?><strong class="font-weight-bold text-white">
-                                    <?= $rT['beat_title']?></strong><span> <?= $rT['beat_year']?></span></h6>
+                                <div class="link_icon" onclick="playPause(<?=$i-1 ?>)"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0"><?= $r['beat_author']?><strong class="font-weight-bold text-white">
+                                    <?= $r['beat_title']?></strong><span> <?= $r['beat_year']?></span></h6>
                             </div>
                         </div>
 
-                        <?php } ?>
+                        <?php $i++;} ?>
 
                     </div>
 
@@ -181,71 +254,22 @@ $resuTENDANCES=$req->fetchAll();
                     <p class="lead mb-0 text-white text-center">Les meilleures ventes de beats</p>
 
                     <div class="my_slides multipleitems2">
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/Laylow.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Laylow<strong class="font-weight-bold text-white">
-                                    BURNING MAN</strong><span> 2020</span></h6>
+                           <?php
+                        $j = $i;
+                        foreach($resuVENTES as $r){
 
+                        ?>
+                        <div class="items">
+                            <div class="hover hover-5 text-white rounded"><img src="<?= $r['beat_cover']?>" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="link_icon" onclick="playPause(<?=$j-1 ?>)"><i class="far fa-play-circle"></i></div>
+                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0"><?= $r['beat_author']?><strong class="font-weight-bold text-white">
+                                    <?= $r['beat_title']?></strong><span> <?= $r['beat_year']?></span></h6>
                             </div>
                         </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/bigmetro.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Big Sean(ft Travis Scott)<strong class="font-weight-bold text-white">
-                                    Go Legend</strong><span> 2020</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/CG6.png" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">CG6<strong class="font-weight-bold text-white">
-                                    Nelson</strong><span> 2019</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/DB5.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Leto<strong class="font-weight-bold text-white">
-                                    Double Bang 5</strong><span> 2018</span></h6>
-                            </div>                        
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/luv.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Lil Uzi Vert<strong class="font-weight-bold text-white">
-                                    Futball Shuffle </strong><span> 2020</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/Sch.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Sch<strong class="font-weight-bold text-white">
-                                    Poupée Russe </strong><span> 2017</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/roddy.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Roddy Rich<strong class="font-weight-bold text-white">
-                                    Tip toe</strong><span> 2020</span></h6>
-                            </div>
-                        </div>
-                        <div class="items">
-                            <div class="hover hover-5 text-white rounded"><img src="img/Spri.jpg" alt="">
-                                <div class="hover-overlay"></div>
-                                <div class="link_icon"><i class="far fa-play-circle"></i></div>
-                                <h6 class="hover-5-title text-uppercase font-weight-light mb-0">Spri(ft 4Keus)<strong class="font-weight-bold text-white">
-                                    Night and Day</strong><span> 2020</span></h6>
-                            </div>
-                        </div>
+                        
+                        <?php $j++;} ?>
+
                     </div>
 
                     <div class="slider-btn rounded-circle">
@@ -465,14 +489,18 @@ $resuTENDANCES=$req->fetchAll();
 
 
         <?php
-    require_once('assets/skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.php');
         ?>
         <!--     RECHERCHE  -->
 
 
-        <!--        COMPTE A REBOURS -->
-        <script src="assets/js/comptearebours.js"></script>
-        <!--    END - COMPTE A REBOURS -->
+        <!--   *************************************************************  -->
+        <!--   ************************** MUSIC PLAYER  **************************  -->
+
+        <?php
+        require_once('assets/skeleton/AudioPlayer/audioplayer.php');
+        ?>
+
 
         <!-- SCRIPT SLIDES       -->
         <script src="assets/js/slick.min.js"></script>
