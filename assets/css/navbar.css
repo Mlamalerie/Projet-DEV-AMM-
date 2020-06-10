@@ -87,19 +87,24 @@
     font-size: 0.95rem;
     color: #aaa;
     font-style: italic;   
-}
+} 
+ 
 
-
-
-
-
-img#iconPanier,img#iconUpload ,img#iconUser {
+img#iconPanier,img#iconUpload  {
     width: 1.6rem;
 
 }
 
+
+#iconUser {
+    border-radius: 75%;
+    width: 1.4rem;
+    height: 1.4rem;
+}
+
+
 .compteurPanier 
-{
+{ 
     background-color: #b800d0;
     position: absolute;
  

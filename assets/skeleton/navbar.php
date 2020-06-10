@@ -186,7 +186,9 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
                 <li class="nav-item dropdown no-arrow ">
                     <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+
                         <span class="mr-2 d-none d-lg-inline "><i class="fa fa-lock mr-1 text-gray-400"></i>Admin</span>
+
                     </a>
                     <div class="dropdown-menu shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 

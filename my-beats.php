@@ -52,6 +52,17 @@ if(isset($_POST['inputOption'])) {
 
     </head>
     <body>
+
+
+        <style>
+            body {
+                background-image: url("assets/img/tracks.jpg");
+                background-size: 100%;
+                background-repeat: no-repeat;
+            }
+        </style>
+
+
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
@@ -78,7 +89,9 @@ if(isset($_POST['inputOption'])) {
                     <li class="nav-item flex-sm-fill">
                         <a id="mypurchase-tab" data-toggle="tab" href="#mypurchase" role="tab" aria-controls="mypurchase" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">Mes achats</a>
                     </li>
-
+                    <li class="nav-item flex-sm-fill">
+                        <a id="mylike-tab" data-toggle="tab" href="#mylike" role="tab" aria-controls="mylike" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">Mes likes</a>
+                    </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div id="myupload" role="tabpanel" aria-labelledby="myupload-tab" class="tab-pane fade px-4 py-5 show active">
@@ -95,7 +108,12 @@ if(isset($_POST['inputOption'])) {
                         require_once('assets/skeleton/tableAchats.php');
                         ?>
                     </div>
-
+                    <div id="mylike" role="tabpanel" aria-labelledby="mylike-tab" class="tab-pane fade px-4 py-5">
+                        <p class="text-muted">Les beats que vous avez likés</p>
+                        <?php 
+                        require_once('assets/skeleton/tableLikes.php');
+                        ?>
+                    </div>
                 </div>
                 <!-- End rounded tabs -->
             </div>

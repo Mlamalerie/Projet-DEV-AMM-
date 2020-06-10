@@ -191,10 +191,9 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                             <div class="searchbar searchtest">
 
                                 <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
-
-
                                 <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
                             </div>
+
                         </form>
 
                     </div>
@@ -416,10 +415,6 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
             </div>
         </section>
 
-
-        <!-- download
-================================================== -->
-
         <div class="go-top">
             <a class="smoothscroll" title="Back to Top" href="#top"></a>
         </div>
@@ -472,10 +467,6 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Copyrights -->
-            <div class="bg-light py-4">
                 <div class="container text-center">
                     <p class="text-mute mb-0 py-2">© 2020 WeBeats All rights reserved.</p>
                 </div>
@@ -483,6 +474,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
 
         </footer>
         <!-- End -->
+
 
 
         <script src="assets/js/search.js"></script>
@@ -502,12 +494,21 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
         ?>
 
 
+
         <!-- SCRIPT SLIDES       -->
         <script src="assets/js/slick.min.js"></script>
         <script src="assets/js/slide.js"></script>
 
 
         <script src="assets/js/main.js"></script>
+
+        <!--   *************************************************************  -->
+        <!--   ************************** MUSIC PLAYER  **************************  -->
+
+        <?php
+        require_once('assets/skeleton/AudioPlayer/audioplayer.php');
+        ?>
+
 
     </body>
 </html>
