@@ -89,9 +89,12 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
 
                     include('assets/functions/datediff.php');
-                    $req = $BDD->prepare("SELECT *
+                    $req = $BDD->prepare("SELECT * FROM (
+                    SELECT *
                             FROM messagerie
-                            WHERE id_to = ?
+
+                            WHERE id_to = ? AND lu = 0
+                            ) base
                             ORDER BY date_message DESC
                              LIMIT 5");
                     $req->execute(array($_SESSION['user_id']));
@@ -129,7 +132,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                             $recent = dateDiff($date1, $date2);
 
                         ?>
-                        <a class="dropdown-item d-flex align-items-center" href="message.php?profil_id=<?= $m['id_from'] ?>">
+                        <a class="dropdown-item d-flex align-items-center" href="message.php?profil_id=<?= $m['id_from'] ?>-<?= $_SESSION['user_id']?>">
                             <div class="dropdown-list-image mr-3">
                                 <img class="rounded-circle" width="30" src="<?= $user['user_image']?>" alt="">
                                 <div class="status-indicator bg-success"></div>
@@ -145,7 +148,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                         ?>
 
 
-                        <a class="dropdown-item text-center small text-gray-500" href="messagerie.php">Read More Messages</a>
+                        <a class="dropdown-item text-center small text-gray-500" href="messagerie.php?id=<?= $_SESSION['user_id']?>">Read More Messages</a>
                     </div>
                     <script>
                         refreshNbMess();
@@ -172,6 +175,36 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
                 <div class="topbar-divider d-none d-sm-block"></div>
 
+
+
+
+
+                <!-- DEROULANT PROFIL-->
+                <?php 
+                    if($_SESSION['user_role']==0){   
+                ?>
+
+                <li class="nav-item dropdown no-arrow ">
+                    <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <span class="mr-2 d-none d-lg-inline "><i class="fa fa-lock mr-1 text-gray-400"></i>Admin</span>
+                    </a>
+                    <div class="dropdown-menu shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
+
+                        <a class="dropdown-item" href="all-utilisateurs.php"> <i class="fa fa-users mr-1 text-gray-400" aria-hidden="true"></i>  All-Users</a>
+                        <a class="dropdown-item" href="all-beats.php"> <i class="fa fa-music mr-1 text-gray-400" aria-hidden="true"></i>  All-Beats</a>
+                        <a class="dropdown-item" href="all-messages.php"> <i class="fa fa-comments mr-1 text-gray-400" aria-hidden="true"></i>  All-Messages</a>
+
+
+
+                        <?php
+                    }
+                        ?>
+                    </div>
+
+                </li>
+
+
+
                 <!-- DEROULANT PROFIL-->
                 <li class="nav-item dropdown no-arrow ">
                     <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
@@ -179,18 +212,9 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 
-                        <a class="dropdown-item  " href="profils.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
 
-                        <?php 
-                    if($_SESSION['user_role']==0){   
-                        ?>
-                        <a class="dropdown-item  " href="all-utilisateurs.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Admin Studio</a>
-                        <?php
-                    }
-                        ?>
-
-
-
+                        <a class="dropdown-item" href="profils.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
+                       
                         <a class="dropdown-item  " href="my-beats.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
 
 

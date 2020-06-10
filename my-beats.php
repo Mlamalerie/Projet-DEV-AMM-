@@ -15,6 +15,20 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     exit;
 }
 
+if(isset($_POST['inputOption'])) {
+    $id_beat=$_POST['inputOption_beat_id'];
+    $ok = true;
+    if($_POST['inputOption']== "suppr"){
+        if($ok){
+            $req = $BDD->prepare("DELETE FROM beat
+            WHERE beat_id = ?"); 
+            $req->execute(array($id_beat));
+            header('Location: my-beats');
+            exit;
+
+        }
+    }
+}
 
 ?>
 
