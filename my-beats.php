@@ -120,10 +120,14 @@ if(isset($_POST['inputOption'])) {
         </div>
 
         <!--      SCRIPTS      -->
+       
+        
         <?php 
         require_once('assets/skeleton/endLinkScripts.php');
         ?>
 
-
+ <?php 
+        require_once('assets/functions/js-panier.php');
+        ?>
     </body>
 </html>
