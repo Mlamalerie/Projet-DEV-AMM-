@@ -55,7 +55,7 @@
 }
 
 .hover-5:hover .hover-overlay {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 /*
@@ -69,16 +69,16 @@
 */
 
 .link_icon{/*bloc contenant le play*/
-/*    position: absolute;*/
-/*
+    position: absolute;
+
     left: 50%;
     top: 50%;
     margin-left: -25px;
     margin-top: -25px;
-    height: 50px;
+   
     width: 50px;
     font-size: 12px;
-*/
+ min-height: 100px;
     z-index: 100;
 }
 
@@ -87,7 +87,7 @@
 /*    margin:auto;*/
      
     font-size: 40px;
-    color: rgba(121, 6, 247, 0.9); 
+
     opacity: 0;
 }
 
@@ -101,6 +101,19 @@
     z-index: 100;
 } 
 
+.video-icon {
+                display: inline-block;
+                height: 2.9rem;
+                width: 2.9rem;
+                border-radius: 50%;
+                background-color: #793ea5;
+                background-image: url(assets/img/icon/icon-play.svg);
+                background-repeat: no-repeat;
+                background-position: 55% center;
+                background-size: 15px 27px;
+                -webkit-transition: background-color 0.3s ease-in-out;
+                transition: background-color 0.3s ease-in-out;
+            }
 
 
 .roundedImage{   
@@ -120,8 +133,11 @@ tr {
 
 
 .iconLike{ 
-    cursor: pointer; 
-    
+    cursor: hand; 
+     
 }
 
+.coeur_active { 
+    color: red;
+}
 

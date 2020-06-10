@@ -432,19 +432,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <link rel="stylesheet" type="text/css" href="assets/css/modalUploadAudio.css">
 
         <style>
-            .video-icon {
-                display: inline-block;
-                height: 2.7rem;
-                width: 2.7rem;
-                border-radius: 50%;
-                background-color: #793ea5;
-                background-image: url(assets/img/icon/icon-play.svg);
-                background-repeat: no-repeat;
-                background-position: 55% center;
-                background-size: 15px 27px;
-                -webkit-transition: background-color 0.3s ease-in-out;
-                transition: background-color 0.3s ease-in-out;
-            }
+            
         </style>
 
 
