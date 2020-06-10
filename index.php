@@ -106,7 +106,7 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container h-100">
                 <div class="d-flex h-100 text-center align-items-center">
                     <div class="w-100 text-white">
-                        <div class="mb-4">  <span class="video-icon"></span>
+                        <div class="mb-4">  
                             <h1 class="display-3">Bienvenue sur WeBeatz</h1>
                             <p class="lead mb-0">Retrouvez les beats des meilleurs producteurs du moment</p>
                             <p class="lead mb-0"><a href="incription.php" >Inscrivez-vous</a> pour commencer à acheter ou vendre des prods 

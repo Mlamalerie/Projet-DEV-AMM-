@@ -9,8 +9,6 @@ $req = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
 $req->execute(array());
 $listeGenres = $req->fetchAll();
 
-sort($listeGenres);
-$_SESSION["listeGenres"] = $listeGenres;
 var_dump($_POST);
 
 
@@ -39,7 +37,7 @@ var_dump($_POST);
     // $_GET[GENRE
     if (isset($_GET['Genre']) && !empty($_GET['Genre'])) {
         $wegenreexiste = true;
-     
+
     }
     else {
         $wegenreexiste = false;
@@ -383,21 +381,16 @@ else if (!$wetypeexiste) {
 
 }
 
+$yadesresultatsBEATS = false;
 if (isset($resuBEATS) && !empty($resuBEATS)){
     $yadesresultatsBEATS = true;
-
-} else {
-    $yadesresultatsBEATS = false;
-
 }
+$yadesresultatsUSERS = false;
+
 if (isset($resuUSERS) && !empty($resuUSERS)){
     $yadesresultatsUSERS = true;
 
-} else {
-    $yadesresultatsUSERS = false;
-
-}
-
+} 
 ?>
 
 
@@ -439,16 +432,16 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <link rel="stylesheet" type="text/css" href="assets/css/modalUploadAudio.css">
 
         <style>
-            .play-audio-icon {
+            .video-icon {
                 display: inline-block;
-                height: 5rem;
-                width: 5rem;
+                height: 2.7rem;
+                width: 2.7rem;
                 border-radius: 50%;
                 background-color: #793ea5;
                 background-image: url(assets/img/icon/icon-play.svg);
                 background-repeat: no-repeat;
                 background-position: 55% center;
-                background-size: 24px 27px;
+                background-size: 15px 27px;
                 -webkit-transition: background-color 0.3s ease-in-out;
                 transition: background-color 0.3s ease-in-out;
             }
@@ -711,7 +704,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                     <?php if (!empty($_GET['q']))  { ?>
                     <div class="">
                         <div class=" bg-dark mx-auto mt-4">
-
+<span class="play-audio-icon"></span>
                             <h1 class="display-4">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
 
 
@@ -729,7 +722,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
 
                     <div class="container-fluid  d-flex mx-3">
-                        <div class="row col-6 bg-danger d-flex align-items-center justify-content-start ">
+                        <div class="row col-6 bg-danger">
                             <p class="lead mx-4  ">
                                 <?php 
 
@@ -759,7 +752,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                             </p>
 
                         </div>
-                                            <?php if (($wetypeexiste && !$jechercheunboug)) { ?>
+                        <?php if (($wetypeexiste && !$jechercheunboug)) { ?>
                         <div class="row col-6 bg-success d-flex align-items-center justify-content-end mx-3">
 
                             <form  id="formTrie" action="search.php">
@@ -790,182 +783,14 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                             </form>
                         </div> <?php } ?>
                     </div>
-                   
+
 
 
 
                     <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100    bg-primary" >
 
 
-                        <div class="table-responsive bg-dark mx-2  rounded">
-                            <table class="table  rounded">
-                                <thead>
-                                    <!--
-<tr>
-<th scope="col" class="border-0 bg-light">
-<div class="py-0  text-uppercase">n</div>
-</th>
-<th scope="col" class="border-0 bg-light">
-<div class="p-2 px-3 text-uppercase"> image</div>
-</th>
-<th scope="col" class="border-0 bg-light">
-<div class="py-2 text-uppercase">like</div>
-</th>
-<th scope="col" class="border-0 bg-light">
-<div class="py-2 text-uppercase">carte</div>
-</th>
-</tr>
--->
-                                </thead>
-                                <tbody class=" rounded">
-                                    <?php
-                                                                      if ($yadesresultatsBEATS) {$i = 1;foreach($resuBEATS as $r){
-                                    ?>
-                                    <tr class="border rounded mb-2  px-md-5">
-                                        <td class="pr-0 border-0 align-middle rounded"><strong><?= $i ?></strong></td>
-                                        <th scope="row" class="border-0 rounded">
-                                            <div class="p-0 rounded ">
-                                                <div class="hover hover-5 text-white rounded d-inline-block align-middle">
-                                                    <img src="<?=$r['beat_cover']?>" alt="" width="70" class="img-fluid rounded shadow-sm">
-                                                    <div class="hover-overlay d-inline-block"></div>
-
-                                                    <div class="link_icon" onclick="playPause(<?=$i-1 ?>)">
-                                                        <i class="fa fa-play-circle playplay-btn"></i>
-                                                    </div>
-
-                                                </div>
-                                                <!--                                                    -->
-
-                                                <div class="ml-3 d-inline-block align-middle rounded" >
-                                                    <h5 class="mb-0"> <a href="view-beat.php?id=<?= $r['beat_id']?>" class="text-dark d-inline-block align-middle"><?=$r['beat_title']?></a>
-                                                    </h5>
-
-                                                    <a href="profils.php?profil_id=<?= $r['beat_author_id']?>" class="text-dark d-inline-block align-middle"><span class="text-muted font-weight-normal font-italic d-block">
-                                                        <?=$r['beat_author']?>
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                        </th>
-                                        <!-- **LIKE -->
-                                        <?php if($okconnectey) {  ?>
-                                        <td class="border-0 align-middle rounded">
-
-                                            <span id="span_nbLike-<?=$r['beat_id']?>"><?=$r['beat_like']?></span>
-
-                                            <?php
-                                        $oktaliker = false;
-                                                                $req = $BDD->prepare("SELECT id FROM likelike WHERE like_user_id = ? AND like_beat_id = ?");
-                                                                $req->execute(array($_SESSION['user_id'],$r['beat_id']));
-                                                                $lll = $req->fetch();
-
-                                                                if(isset($lll['id'])){
-                                                                    $oktaliker = true;
-                                                                }
-                                            ?>
-                                            <?php if ($oktaliker) { ?>
-                                            <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class="text-dark coeur_active"><i class="fas fa-heart"></i></span>
-                                            <?php    } else { ?> 
-                                            <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class="text-dark"><i class="far fa-heart"></i></span>
-                                            <?php } ?>
-                                        </td>
-                                        <?php } ?>
-
-                                        <!-- **AJOUTER PANIER -->
-                                        <td class="border-0 align-middle rounded">
-
-                                            <?php 
-                                                                          $okdejadanspanier = false;
-                                                                          $okdejaacheter = false;
-                                                                          if($okconnectey) {
-                                                                              $req = $BDD->prepare("SELECT *
-                                                                                        FROM vente
-                                                                                        WHERE vente_user_id = ? AND vente_beat_id = ?");
-                                                                              $req->execute(array($_SESSION['user_id'],$r['beat_id']));
-
-
-                                                                              $ach = $req->fetch();
-
-
-                                                                              if(isset($ach['id'])){
-                                                                                  $okdejaacheter = true;
-                                                                              }else {
-                                                                                  $req = $BDD->prepare("SELECT *
-                                                                                        FROM panier
-                                                                                        WHERE panier_user_id = ? AND panier_beat_id = ?");
-                                                                                  $req->execute(array($_SESSION['user_id'],$r['beat_id']));
-
-
-                                                                                  $aff = $req->fetch();
-
-
-
-                                                                                  if(isset($aff['id'])){
-                                                                                      $okdejadanspanier = true;
-                                                                                  }
-                                                                              }
-                                                                          }
-                                            ?>
-                                            <?php 
-                                                                          if(!$okdejaacheter) {
-
-                                                                              if(($okconnectey && $r['beat_author_id'] != $_SESSION['user_id']) || !$okconnectey) { ?>
-                                            <button id='btnbeat-<?=$r['beat_id']?>' 
-
-                                                    <?php if($okconnectey) { ?>
-                                                    onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>','<?=$r['beat_id']?>');" <?php }else { ?> onclick="goConnexionStp();"  <?php } ?>
-
-                                                    class="btn btn-danger"
-
-
-                                                    >
-
-
-
-                                                <?php if(!$okdejadanspanier) { ?>
-                                                <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup>
-                                                <?php if($r['beat_price'] != 0.00) { echo $r['beat_price'].'€'; } else {echo "FREE";} ?>
-                                                <?php } ?>
-
-                                            </button>
-                                            <?php } } else {?>
-                                            <a class="btn btn-danger" href="audio/<?= $r['beat_source']?>" download>
-                                                <span class="text-white"><i class="fas fa-download"></i></span>
-                                            </a>
-                                            <?php } ?>
-                                            <?php  if($okdejadanspanier) {?>
-                                            <script>document.getElementById('btnbeat-<?=$r['beat_id']?>').innerHTML = 'Dans le panier';</script>
-                                            <?php } ?>
-
-
-                                        </td>
-
-
-
-                                    </tr>
-                                    <?php
-                                                                          $i++;}}
-
-                                    ?>
-                                    <script >
-                                        function goConnexionStp() {
-                                            window.location.replace("connexion.php");
-                                        } 
-
-
-
-                                    </script>
-
-                                    <?php require_once("assets/functions/js-refreshBDD.php"); ?>
-                                    <?php require_once("assets/functions/js-liker.php"); ?>
-
-
-
-                                </tbody>
-                            </table>
-                        </div>
-
+                        <?php  require_once('assets/skeleton/tableBeatSearch.php'); ?>
 
 
 
