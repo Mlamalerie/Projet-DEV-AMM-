@@ -280,9 +280,11 @@ $resuTENDANCES=$req->fetchAll();
 </div>
 -->
             <div class="container py-5">
+                <h2 class="h1 mb-4 text-white text-center">Meilleur Producteur</h2>
                 <div class="row">
+
                     <div class="col-lg-7 mx-auto bg-white rounded shadow" id="bestprod">
-                        <h2 class="h1 mb-4  text-center">Meilleur Producteur</h2>
+
 
                         <!-- Fixed header table-->
                         <div class="table-responsive">
@@ -293,7 +295,7 @@ $resuTENDANCES=$req->fetchAll();
                                         <th scope="col" class="col-4">Position</th>
                                         <th scope="col" class="col-4">Auteur</th>
                                         <th scope="col" class="col-4">Nombre de ventes</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -305,13 +307,13 @@ $resuTENDANCES=$req->fetchAll();
                                     $req->execute(array());
                                     $resuTOP_Producer=$req->fetchAll();
                                     $firstplace=1;
-                                    
+
                                     foreach($resuTOP_Producer as $rTP){
-                                                
+
                                     ?>
                                     <tr>
                                         <th class="col-4"><?= $firstplace?></th>
-                                        <td class="col-4"><?=$rTP['beat_author']?></td>
+                                        <td class="col-4"><a href="profils.php?profil_id=<?= $rTP['beat_author_id'] ?>"><?=$rTP['beat_author']?></a></td>
                                         <td class="col-4"><?=$rTP['beat_nbvente']?></td>
                                     </tr>
                                     <?php 

@@ -156,6 +156,7 @@ else{
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 
         <style>
+            
             .selected-user {
                 width: 100%;
                 border: 3px solid #7728b2;
@@ -172,7 +173,7 @@ else{
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        //require_once('assets/skeleton/navbar.php');
+        require_once('assets/skeleton/navbar.php');
         ?>
         <br/><br/><br/><br/>
 
@@ -207,9 +208,10 @@ else{
                             $a=$req->fetch(); 
 
                         ?>
-
-                        <a class="btn" title="Supprimer <?= $am['message']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption_mess(this,'suppr','<?= $am['id'] ?>','<?= $a['user_pseudo']?>')" ><span class="text-dark"><i class='fa fa-trash'></i></span></a>
+                        <div style="font-size : 11px">
+                        <a class="btn" title="Supprimer <?= $am['message']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption_mess(this,'suppr','<?= $am['id'] ?>','<?= $a['user_pseudo']?>')" ><span class="text-dark"><i class='fa fa-trash' style="font-size : 11px"></i></span></a>
                         <i class="fa fa-check-circle-o" aria-hidden="true"></i> <?= $am['date_message']?>
+                        </div>
                     </div>
                     <?php
                         }
@@ -237,8 +239,10 @@ else{
                             $a=$req->fetch(); 
 
                         ?>
-                        <a class="btn" title="Signaler <?= $am['message']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption_mess(this,'signaler','<?= $am['id'] ?>', '<?= $a['user_pseudo']?>')" ><span class="text-dark" ><i class="fa fa-exclamation-circle" aria-hidden="true"></i></span></a>
+                        <div style="font-size : 11px">
+                        <a class="btn" title="Signaler <?= $am['message']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption_mess(this,'signaler','<?= $am['id'] ?>', '<?= $a['user_pseudo']?>')" ><span class="text-dark" ><i class="fa fa-exclamation-circle" aria-hidden="true" style="font-size : 11px"></i></span></a>
                          <i class="fa fa-check-circle-o" aria-hidden="true"></i> <?= $am['date_message']?>
+                        </div>
 
                     </div>
                     <?php 
@@ -257,8 +261,8 @@ else{
                     <form method="post">
                         <textarea class="form-control" rows="3" placeholder="Votre message..." name="message"></textarea>
                         <br/>
-                        <input type="submit" name="envoyer" value="Envoyer"/>
-                        <input type="submit" name="bloquer" value="Supprimer la conversation"/>
+                        <input type="submit" name="envoyer" class="btn btn-danger" style="background:#7728b2;border-color:#7728b2" value="Envoyer"/>
+                        <input type="submit" name="bloquer" class="btn btn-danger" value="Supprimer la conversation"/>
                     </form>
 
                 </div>

@@ -279,7 +279,7 @@ if(isset($vousabloq['id_demandeur'])) {
                 ?>
 
                 <div class="col-md-4" style="display:inline-block;width:30%;margin-left:5%">
-                    <button class="msg-btn" href=""> <a href="message.php?profil_id=<?= $id_receveur ?>" style="color:white">
+                    <button class="msg-btn" href=""> <a href="message.php?profil_id=<?= $id_receveur ?>-<?= $id_demandeur ?>" style="color:white">
                         DM
                         </a></button> 
                 </div>  
