@@ -118,7 +118,7 @@ img.rounded {
 }
 
 .tab-content>.active {
-    display: block;
+    display: block; 
 }
 
 
