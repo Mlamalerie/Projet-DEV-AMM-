@@ -495,7 +495,7 @@ header('Location: dashboard.php');
         <?php
         // require_once('assets/skeleton/navbar.php');
         ?>
-        <div class="container py-5">
+        <div class="container py-2">
             <!-- For demo purpose -->
             <div class="row mb-1">
                 <div class="col-lg-8 py-4 text-center mx-auto">

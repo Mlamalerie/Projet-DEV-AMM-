@@ -106,7 +106,7 @@ $resuTENDANCES=$req->fetchAll();
             <div class="container h-100">
                 <div class="d-flex h-100 text-center align-items-center">
                     <div class="w-100 text-white">
-                        <div class="mb-4">  <span class="video-icon"></span>
+                        <div class="mb-4">  
                             <h1 class="display-3">Bienvenue sur WeBeatz</h1>
                             <p class="lead mb-0">Retrouvez les beats des meilleurs producteurs du moment</p>
                             <p class="lead mb-0"><a href="incription.php" >Inscrivez-vous</a> pour commencer à acheter ou vendre des prods 
@@ -210,7 +210,7 @@ $resuTENDANCES=$req->fetchAll();
                 </div>
             </div>  
         </section>
-
+        
         <!-- Section 3 -->
         <section class="py-5 d-flex align-items-center" id="three">
             <div class="container">
@@ -398,66 +398,6 @@ $resuTENDANCES=$req->fetchAll();
             </div>
         </section>
 
-        <!-- features
-================================================== -->
-        <section id="features" class="s-features target-section">
-
-            <div class="testimonials-wrap" data-aos="fade-up">
-
-                <div class="row">
-                    <div class="col-full testimonials-header">
-                        <h2 class="display-2">Our Users Love Our App!</h2>
-                    </div>
-                </div>
-
-                <div class="row testimonials">
-
-                    <div class="col-full slick-slider testimonials__slider">
-
-                        <div class="testimonials__slide">
-                            <img src="images/avatars/user-03.jpg" alt="Author image" class="testimonials__avatar">
-
-                            <p>Qui ipsam temporibus quisquam velMaiores eos cumque distinctio nam accusantium ipsum. 
-                                Laudantium quia consequatur molestias delectus culpa facere hic dolores aperiam. Accusantium praesentium corpori.</p>
-
-                            <div class="testimonials__author">
-                                <span class="testimonials__name">Naruto Uzumaki</span>
-                                <a href="#0" class="testimonials__link">@narutouzumaki</a>
-                            </div>
-                        </div> <!-- end testimonials__slide -->
-
-                        <div class="testimonials__slide">
-                            <img src="images/avatars/user-05.jpg" alt="Author image" class="testimonials__avatar">
-
-                            <p>Excepturi nam cupiditate culpa doloremque deleniti repellat. Veniam quos repellat voluptas animi adipisci.
-                                Nisi eaque consequatur. Quasi voluptas eius distinctio. Atque eos maxime. Qui ipsam temporibus quisquam vel.</p>
-
-                            <div class="testimonials__author">
-                                <span class="testimonials__name">Sasuke Uchiha</span>
-                                <a href="#0" class="testimonials__link">@sasukeuchiha</a>
-                            </div>
-                        </div> <!-- end testimonials__slide -->
-
-                        <div class="testimonials__slide">
-                            <img src="images/avatars/user-01.jpg" alt="Author image" class="testimonials__avatar">
-
-                            <p>Repellat dignissimos libero. Qui sed at corrupti expedita voluptas odit. Nihil ea quia nesciunt. Ducimus aut sed ipsam.  
-                                Autem eaque officia cum exercitationem sunt voluptatum accusamus. Quasi voluptas eius distinctio.</p>
-
-                            <div class="testimonials__author">
-                                <span class="testimonials__name">Shikamaru Nara</span>
-                                <a href="#0" class="testimonials__link">@shikamarunara</a>
-                            </div>
-                        </div> <!-- end testimonials__slide -->
-
-                    </div> <!-- end testimonials__slider -->
-
-                </div> <!-- end testimonials -->
-
-            </div> <!-- end testimonials-wrap -->
-
-        </section> <!-- end s-features -->
-
 
         <!-- download
 ================================================== -->
@@ -527,13 +467,6 @@ $resuTENDANCES=$req->fetchAll();
         <!-- End -->
 
 
-
-
-        <!--  JS du MusicPlayer  -->
-        <script id="scriptDuPlayer" src="assets/skeleton/AudioPlayer/audioplayer.js"></script>
-
-
-
         <script src="assets/js/search.js"></script>
 
 
@@ -545,7 +478,7 @@ $resuTENDANCES=$req->fetchAll();
 
         <!--        COMPTE A REBOURS -->
         <script src="assets/js/comptearebours.js"></script>
-        <!--    END     COMPTE A REBOURS -->
+        <!--    END - COMPTE A REBOURS -->
 
         <!-- SCRIPT SLIDES       -->
         <script src="assets/js/slick.min.js"></script>
