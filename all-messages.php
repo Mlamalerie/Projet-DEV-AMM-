@@ -23,7 +23,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     $okconnectey = true;
 } 
 
-print_r($_POST);
+print_r($_SESSION);
 
 
 
@@ -51,8 +51,20 @@ if(isset($_POST['inputOption'])) {
             
         }
     }
+    else if($_POST['inputOption']== "signaler"){/*si l'utilisateur choisit de supprimer le message signalé*/
+        if($ok){
+             $req = $BDD->prepare("DELETE FROM messagerie
+            WHERE id = ?"); 
+            $req->execute(array($id_message));
+            header('Location: all-messages');
+            exit;
+            
+        }
+    }
 
 }
+
+
 
 
 
@@ -94,8 +106,7 @@ if(isset($_POST['inputOption'])) {
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-
-        //require_once('assets/skeleton/navbar.php');
+            require_once('assets/skeleton/navbar.php');
         ?>
         <br/><br/><br/><br/>
 
@@ -113,8 +124,9 @@ if(isset($_POST['inputOption'])) {
                                         <th class="text-center align-middle">Messages</th>
                                         <th class="text-center align-middle" >Expéditeur</th>  
 
-                                        <th class="text-center align-middle" >Réceptionneur</th>
-                                        <th class="text-center align-middle" >Dtae d'envoi du message</th>
+                                        <th class="text-center align-middle" >Destinataire</th>
+                                        <th class="text-center align-middle" >Date d'envoi du message</th>
+                                        <th class="text-center align-middle" >Signalement</th>
                                     
                                     </tr>
                                 </thead>
@@ -126,8 +138,8 @@ if(isset($_POST['inputOption'])) {
                                     <tr>
                                         <td class="text-center align-middle">
                                             <div class="row"> 
-                                                <!--<a href="messagerie.php?id=<?= $am['user_id'] ?>">--><button class="btn">Accéder à la messagerie</button>                                                                           
-                                                <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $am['message']?>')" value="suppr">Supprimer</button>
+                                                <a href="messagerie.php?id=<?= $am['id_from'] ?>"> <button class="btn">Accéder à la messagerie</button></a>                                                                           
+                                                <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $am['message']?>')" value="suppr"><i class='fa fa-trash'></i></button>
   
                                             </div>
                                         </td>
@@ -135,17 +147,62 @@ if(isset($_POST['inputOption'])) {
                                             <?=$am['message']?>
                                         </td>  
                                         <td class="text-center align-middle">
-                                            <span><?=$am['id_from']?></span>
-                                        </td>
+                                           <?php
+                                            $req = $BDD->prepare("SELECT user_pseudo
+                                                                FROM user
+                                                                WHERE user_id = ?");
+                                            $req->execute(array($am['id_from']));
 
+                                            $af=$req->fetch(); 
+
+                                            ?>
+                                            <a href="profils.php?profil_id=<?=$am['id_from']?>"><span><?=$af['user_pseudo']?></span></a>
+                                        </td>
+                                        
+                                        <?php
+                                            $req = $BDD->prepare("SELECT user_pseudo
+                                                                FROM user
+                                                                WHERE user_id = ?");
+                                            $req->execute(array($am['id_to']));
+
+                                            $at=$req->fetch(); 
+
+                                            ?>
                                         <td class="text-center align-middle">
-                                           <span><?=$am['id_to']?></span>
+                                           <a href="profils.php?profil_id=<?=$am['id_to']?>"><span><?=$at['user_pseudo']?></span></a>
                                         </td>
                                         <td class="text-center align-middle">
                                             <span><?=$am['date_message']?></span>
                                         </td>
-   
-                                        <script type="text/javascript">
+                                        <td>
+                                            <?php
+                                                $req1 =$BDD->prepare("SELECT *
+                                                                    FROM messagerie_signal
+                                                                    WHERE message_id = ?
+                                                                    ");
+                                            /*on prend tous les id des messages signalés qui ont le même id dans la messagerie*/
+                                                 $req1->execute(array($am['id']));
+                                                 $s=$req1->fetch();
+                                        
+                                                if(isset($s['id'])){
+                                            ?>
+                                            <!--  On affiche cet icon quand un message a été signalé  -->
+                                            <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $af['user_pseudo']?>')" value="signaler"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></button>
+                                           
+                                            <?php
+                                                }
+                                                else{
+                                                    echo "Rien à signaler";
+                                                }
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <?php 
+                                    }
+                                    ?>
+
+                                </tbody>
+                                 <script type="text/javascript">
                                             function goInputOption(bay,idd,blaz){
                                                 let mode = bay.value;
                                                 console.log(mode,idd);
@@ -160,16 +217,13 @@ if(isset($_POST['inputOption'])) {
                                                 if (mode == 'suppr'){
                                                     p.innerHTML = "supprimer le message " + blaz + " ?";   
                                                 }
+                                                if (mode == 'signaler'){
+                                                    p.innerHTML = "supprimer le message signalé de " + blaz + " ou <a href='all-utilisateurs.php'>désactiver son compte?</a>";   
+                                                }
+                                                
                                                 console.log(iO,iO_id);
                                             } 
                                         </script>
-                                       
-                                    </tr>
-                                    <?php 
-                                    }
-                                    ?>
-
-                                </tbody>
                             </table>
 
                             <!-- Modal -->

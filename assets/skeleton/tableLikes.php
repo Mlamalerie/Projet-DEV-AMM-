@@ -8,7 +8,9 @@
                 <th scope="col" class="border-0 bg-light">
                     <div class="p-2 px-3 text-uppercase">Produits</div>
                 </th>
-
+                <th scope="col" class="border-0 bg-light">
+                    <div class="p-2 px-3 text-uppercase">Ajouter au panier</div>
+                </th>
                 <th scope="col" class="border-0 bg-light">
                     <div class="py-2 text-uppercase">Action</div>
                 </th>
@@ -18,13 +20,22 @@
         <tbody id="tbodypanier">
             <?php 
 
-    $req = $BDD->prepare("SELECT *
-                                            FROM beat
-                                            WHERE beat_author_id = ?");
+    $req = $BDD->prepare("SELECT like_beat_id
+                                            FROM likelike
+                                            WHERE like_user_id = ?");
     $req->execute(array($_SESSION['user_id']));
-    $resuUP = $req->fetchAll();
+    $resuLIKES = $req->fetchAll();
 
-    foreach($resuUP as $b) {
+    foreach($resuLIKES as $p) {
+
+        $req = $BDD->prepare("SELECT *
+                                            FROM beat
+                                            WHERE beat_id = ?");
+        $req->execute(array($p['like_beat_id']));
+        $resuPAN = $req->fetchAll();
+
+
+        foreach($resuPAN as $b) {
 
 
 
@@ -45,10 +56,10 @@
                         </div>
                     </div>
                 </th>
-
+                <td class='border-0 align-middle'><strong><?php if($b['beat_price'] != 0.00) { echo $b['beat_price']; } else { echo "FREE";} ?></strong>
+                </td>
                 <td class='border-0 align-middle'>
-                    <a href="edit-tracks.php?id=<?= $b['beat_id'] ?>"><button class="btn">Modifier</button></a>                                                                           
-                    <button class="btn" data-toggle="modal" data-target="#supp_modal" onclick="goInputOption(this,'<?= $b['beat_id'] ?>','<?= $b['beat_title']?>')" value="suppr"><i class='fa fa-trash'></i></button>
+                    <a href="edit-tracks.php?id=<?= $b['beat_id'] ?>"><button class="btn">Unlike</button></a>                                     
                 </td>
 
 
@@ -57,7 +68,9 @@
 
             <?php
 
+        }
     }
+
 }
 
 

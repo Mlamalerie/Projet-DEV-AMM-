@@ -26,7 +26,7 @@ $resuTENDANCES=$req->fetchAll();
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name='description' content="Site Responsive Hotel ">
+        <meta name='description' content="Site Responsive Hotel">
 
         <?php
         require_once('assets/skeleton/headLinkCSS.html');
@@ -119,10 +119,9 @@ $resuTENDANCES=$req->fetchAll();
                             <div class="searchbar searchtest">
 
                                 <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
-
-
                                 <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
                             </div>
+
                         </form>
 
                     </div>
@@ -132,7 +131,7 @@ $resuTENDANCES=$req->fetchAll();
         <script src="assets/js/search.js"></script>
         <!--   ************************** PARTIE MLAMALI TEST CALA PAS  **************************  -->
 
-        
+
 
 
         <!--   *************************************************************  -->
@@ -392,69 +391,7 @@ $resuTENDANCES=$req->fetchAll();
             </div>
         </section>
 
-        <!-- features
-================================================== -->
-        <section id="features" class="s-features target-section">
 
-            <div class="testimonials-wrap" data-aos="fade-up">
-
-                <div class="row">
-                    <div class="col-full testimonials-header">
-                        <h2 class="display-2">Our Users Love Our App!</h2>
-                    </div>
-                </div>
-
-                <div class="row testimonials">
-
-                    <div class="col-full slick-slider testimonials__slider">
-
-                        <div class="testimonials__slide">
-                            <img src="images/avatars/user-03.jpg" alt="Author image" class="testimonials__avatar">
-
-                            <p>Qui ipsam temporibus quisquam velMaiores eos cumque distinctio nam accusantium ipsum. 
-                                Laudantium quia consequatur molestias delectus culpa facere hic dolores aperiam. Accusantium praesentium corpori.</p>
-
-                            <div class="testimonials__author">
-                                <span class="testimonials__name">Naruto Uzumaki</span>
-                                <a href="#0" class="testimonials__link">@narutouzumaki</a>
-                            </div>
-                        </div> <!-- end testimonials__slide -->
-
-                        <div class="testimonials__slide">
-                            <img src="images/avatars/user-05.jpg" alt="Author image" class="testimonials__avatar">
-
-                            <p>Excepturi nam cupiditate culpa doloremque deleniti repellat. Veniam quos repellat voluptas animi adipisci.
-                                Nisi eaque consequatur. Quasi voluptas eius distinctio. Atque eos maxime. Qui ipsam temporibus quisquam vel.</p>
-
-                            <div class="testimonials__author">
-                                <span class="testimonials__name">Sasuke Uchiha</span>
-                                <a href="#0" class="testimonials__link">@sasukeuchiha</a>
-                            </div>
-                        </div> <!-- end testimonials__slide -->
-
-                        <div class="testimonials__slide">
-                            <img src="images/avatars/user-01.jpg" alt="Author image" class="testimonials__avatar">
-
-                            <p>Repellat dignissimos libero. Qui sed at corrupti expedita voluptas odit. Nihil ea quia nesciunt. Ducimus aut sed ipsam.  
-                                Autem eaque officia cum exercitationem sunt voluptatum accusamus. Quasi voluptas eius distinctio.</p>
-
-                            <div class="testimonials__author">
-                                <span class="testimonials__name">Shikamaru Nara</span>
-                                <a href="#0" class="testimonials__link">@shikamarunara</a>
-                            </div>
-                        </div> <!-- end testimonials__slide -->
-
-                    </div> <!-- end testimonials__slider -->
-
-                </div> <!-- end testimonials -->
-
-            </div> <!-- end testimonials-wrap -->
-
-        </section> <!-- end s-features -->
-
-
-        <!-- download
-================================================== -->
 
         <div class="go-top">
             <a class="smoothscroll" title="Back to Top" href="#top"></a>
@@ -508,10 +445,6 @@ $resuTENDANCES=$req->fetchAll();
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Copyrights -->
-            <div class="bg-light py-4">
                 <div class="container text-center">
                     <p class="text-mute mb-0 py-2">© 2020 WeBeats All rights reserved.</p>
                 </div>
@@ -519,14 +452,6 @@ $resuTENDANCES=$req->fetchAll();
 
         </footer>
         <!-- End -->
-
-
-        <!--   *************************************************************  -->
-        <!--   ************************** MUSIC PLAYER  **************************  -->
-
-        <?php
-        require_once('assets/skeleton/AudioPlayer/audioplayer.php');
-        ?>
 
         <!--  JS du MusicPlayer  -->
         <script id="scriptDuPlayer" src="assets/skeleton/AudioPlayer/audioplayer.js"></script>
@@ -537,14 +462,10 @@ $resuTENDANCES=$req->fetchAll();
 
 
         <?php
-    require_once('assets/skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.php');
         ?>
         <!--     RECHERCHE  -->
 
-
-        <!--        COMPTE A REBOURS -->
-        <script src="assets/js/comptearebours.js"></script>
-        <!--    END     COMPTE A REBOURS -->
 
         <!-- SCRIPT SLIDES       -->
         <script src="assets/js/slick.min.js"></script>
@@ -552,6 +473,14 @@ $resuTENDANCES=$req->fetchAll();
 
 
         <script src="assets/js/main.js"></script>
+
+        <!--   *************************************************************  -->
+        <!--   ************************** MUSIC PLAYER  **************************  -->
+
+        <?php
+        require_once('assets/skeleton/AudioPlayer/audioplayer.php');
+        ?>
+
 
     </body>
 </html>

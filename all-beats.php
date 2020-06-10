@@ -95,7 +95,7 @@ if(isset($_POST['inputOption'])) {
 
         <?php
 
-        //require_once('assets/skeleton/navbar.php');
+        require_once('assets/skeleton/navbar.php');
         ?>
         <br/><br/><br/><br/>
 
@@ -133,7 +133,7 @@ if(isset($_POST['inputOption'])) {
                                         <td class="text-center align-middle">
                                             <div class="row"> 
                                                 <a href="view-beat.php?id=<?= $am['beat_id'] ?>"><button class="btn">Modifier</button></a>                                                                           
-                                                <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['beat_id'] ?>','<?= $am['beat_title']?>')" value="suppr">Supprimer</button>
+                                                <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['beat_id'] ?>','<?= $am['beat_title']?>')" value="suppr"><i class='fa fa-trash'></i></button>
   
                                             </div>
                                         </td>
@@ -167,7 +167,15 @@ if(isset($_POST['inputOption'])) {
                                             <span><?=$am['beat_format']?></span>
                                         </td>
                                         
-                                        <script type="text/javascript">
+                                        
+                                       
+                                    </tr>
+                                    <?php 
+                                    }
+                                    ?>
+
+                                </tbody>
+                                <script type="text/javascript">
                                             function goInputOption(bay,idd,blaz){
                                                 let mode = bay.value;
                                                 console.log(mode,idd);
@@ -184,14 +192,7 @@ if(isset($_POST['inputOption'])) {
                                                 }
                                                 console.log(iO,iO_id);
                                             } 
-                                        </script>
-                                       
-                                    </tr>
-                                    <?php 
-                                    }
-                                    ?>
-
-                                </tbody>
+                                </script>
                             </table>
 
                             <!-- Modal -->

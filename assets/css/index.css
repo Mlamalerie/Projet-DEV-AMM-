@@ -81,7 +81,7 @@ header .overlay-sombre {
     height: 60px;
     margin: auto;
     max-width: 83%;
-    background-color: #353b48;
+    background-color: #d0c4d3;
     border-radius: 30px; /*forme arrondie de la barre*/
     padding: 10px;
 }
@@ -94,6 +94,7 @@ header .overlay-sombre {
     /*    max-width:  90%; le curseur descend en bas*/
     caret-color:rgba(121, 6, 247, 0.9);
     line-height: 40px;
+    width: 700px;
 }
 .search_icon{
     height: 40px;
