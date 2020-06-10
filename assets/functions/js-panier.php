@@ -1,9 +1,7 @@
 <script id="fonctionsPanier">
 
 
-    
-    
-    
+
     function redir(str){
         self.location.href=str;
     }
@@ -26,7 +24,7 @@
     function actualiserTOTALTOTAL(){
         let to = document.getElementById('TotalPanierCommande').innerHTML.split('€');
         to = to[0];
-document.getElementById('khalassStp').value = to;
+        document.getElementById('khalassStp').value = to;
         <?php if(isset($reduction)) { ?>
 
         let redu = <?=$reduction?>;
@@ -124,26 +122,7 @@ document.getElementById('khalassStp').value = to;
         return strID;
 
     }
-    function refreshNbPanier() {
-        let tbody = document.getElementById("tbodypanier");
-        let ici = document.getElementById("span_nb_panier");
 
-        if (ici != null) {
-            let nb = tbody.children.length;
-            console.log(nb,ici);
-
-            console.log(nb,ici);
-            if (nb != 0) {
-                ici.innerHTML = nb;
-                affichePasserCommande(true);
-            } else {
-                ici.innerHTML = "";
-
-                affichePasserCommande(false);
-            }
-            console.log(nb,ici);
-        }
-    }
     function go2Panier(btn,b_title,b_author,b_price,b_cover,idbeat) {
 
         let textIn = "Dans le panier";

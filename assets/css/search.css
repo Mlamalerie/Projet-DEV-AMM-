@@ -5,7 +5,7 @@
 }
  
 :root{
-    --taille-img : 80px;
+    --taille-img : 100px;
     
 }
 /* PETIT MUSIC CARD */
@@ -55,7 +55,7 @@
 }
 
 .hover-5:hover .hover-overlay {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 /*
@@ -70,22 +70,24 @@
 
 .link_icon{/*bloc contenant le play*/
     position: absolute;
+
     left: 50%;
     top: 50%;
     margin-left: -25px;
     margin-top: -25px;
-    height: 50px;
+   color: whitesmoke;
     width: 50px;
     font-size: 12px;
+ min-height: 100px;
     z-index: 100;
 }  
  
 .playplay-btn{/*le play caché*/
     display:block;
-    margin:auto;
+/*    margin:auto;*/
      
     font-size: 40px;
-    color: rgba(121, 6, 247, 0.9); 
+
     opacity: 0;
 }
 
@@ -99,6 +101,20 @@
     z-index: 100;
 } 
 
+.video-icon {
+    color: whitesmoke;
+                display: inline-block;
+                height: 2.9rem;
+                width: 2.9rem;
+                border-radius: 50%;
+                background-color: #793ea5;
+                background-image: url(assets/img/icon/icon-play.svg);
+                background-repeat: no-repeat;
+                background-position: 55% center;
+                background-size: 15px 27px;
+                -webkit-transition: background-color 0.3s ease-in-out;
+                transition: background-color 0.3s ease-in-out;
+            }
 
 
 .roundedImage{   
@@ -111,5 +127,41 @@
 }
 
 
+tr {
+    padding-left: none; 
+    padding-right: none; 
+}
 
+
+.iconLike{ 
+    cursor: hand; 
+     
+}
+
+.coeur_active { 
+    color: red;
+}
+
+
+/*buttons*/
+.btn-buy {
+    background-color: var(--base-color1);
+    color: whitesmoke;
+    position: relative;
+    padding: 10px 1px;
+    width:  8rem;
+    margin: .3125rem 1px;
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 1.428571;
+    text-decoration: none;
+   
+    
+    letter-spacing: 0;
+    border: 0; 
+    border-radius: .2rem;
+    outline: 0;
+    transition: box-shadow .2s cubic-bezier(.4,0,1,1),background-color .2s cubic-bezier(.4,0,.2,1);
+    will-change: box-shadow,transform;
+} 
 
