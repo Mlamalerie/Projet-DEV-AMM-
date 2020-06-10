@@ -75,7 +75,7 @@
     top: 50%;
     margin-left: -25px;
     margin-top: -25px;
-   
+   color: whitesmoke;
     width: 50px;
     font-size: 12px;
  min-height: 100px;
@@ -102,6 +102,7 @@
 } 
 
 .video-icon {
+    color: whitesmoke;
                 display: inline-block;
                 height: 2.9rem;
                 width: 2.9rem;
@@ -140,4 +141,27 @@ tr {
 .coeur_active { 
     color: red;
 }
+
+
+/*buttons*/
+.btn-buy {
+    background-color: var(--base-color1);
+    color: whitesmoke;
+    position: relative;
+    padding: 10px 1px;
+    width:  8rem;
+    margin: .3125rem 1px;
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 1.428571;
+    text-decoration: none;
+   
+    
+    letter-spacing: 0;
+    border: 0; 
+    border-radius: .2rem;
+    outline: 0;
+    transition: box-shadow .2s cubic-bezier(.4,0,1,1),background-color .2s cubic-bezier(.4,0,.2,1);
+    will-change: box-shadow,transform;
+} 
 

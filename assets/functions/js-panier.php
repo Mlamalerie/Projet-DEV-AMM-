@@ -2,47 +2,6 @@
 
 
 
-
-    function affichePasserCommande(ok){
-        let mdf = document.getElementsByClassName('modal-footer');
-        let aa = document.getElementById("passercommandes");
-
-        okyarien = false;
-        if(mdf[0].children.length == 0){
-            okyarien = true;
-        }
-
-        if(ok){
-
-            let a = document.createElement('a');
-            a.setAttribute('href','commande.php');
-            a.setAttribute('id','passercommandes');
-            let btn = document.createElement('button');
-            btn.setAttribute('type','button');
-            btn.setAttribute('class','btn btn-primary');
-            btn.innerHTML = "Passer Commandes"
-            a.appendChild(btn);
-            console.log(a);
-
-            if( okyarien){
-                mdf[0].appendChild(a);
-            }
-
-
-
-        }else {
-            let a = document.getElementById("passercommandes");
-
-            if(!okyarien){
-                let ca = a.parentNode;
-
-                ca.removeChild(a);
-            }
-
-        }
-
-    }
-
     function redir(str){
         self.location.href=str;
     }

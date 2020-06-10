@@ -260,8 +260,7 @@ if( $id_demandeur==$id_receveur){
                     ?>
 
                     <div class="row">
-                        <div class="col-md-6 d-flex
-                                    h-100  bg-primary">
+                        <div class="pt-3 pb-3 d-flex shadow-sm rounded h-100 w-100    bg-primary">
                             <?php  require_once('assets/skeleton/tableBeatSearch.php'); ?>
                         </div>
                     </div>
@@ -271,7 +270,9 @@ if( $id_demandeur==$id_receveur){
             </div>
         </div>
 
-
+ <?php
+    require_once('assets/skeleton/endLinkScripts.php');
+        ?>
 
         <!--   *************************************************************  -->
         <!--   ************************** MUSIC PLAYER  **************************  -->

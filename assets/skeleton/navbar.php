@@ -196,12 +196,13 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
 
 
-                        <?php
-                    }
-                        ?>
+
                     </div>
 
                 </li>
+                <?php
+                    }
+                ?>
 
 
 
@@ -214,7 +215,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
 
                         <a class="dropdown-item" href="profils.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
-                       
+
                         <a class="dropdown-item  " href="my-beats.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
 
 
@@ -230,8 +231,8 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                 <li class="nav-item">
 
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#ModalPanier" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> <sup><span id="span_nb_panier" class="badge badge-primary px-1 rounded-pill ml-2 compteurPanier "></span> </sup></button>
-                    
-                    
+
+
                 </li>
                 <?php } ?>
 
@@ -311,13 +312,62 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                 <?php require_once('assets/skeleton/tablePanier.php'); ?>
 
             </div>
-            <div class="modal-footer" >
+            <div id="modal_footer_panier" class="modal-footer" >
+            </div>
+            
 
-<?php require_once('assets/functions/js-panier.php'); ?>
+                <?php require_once('assets/functions/js-panier.php'); ?>
                 <script>
-                        refreshNbPanier() ;
+                    
+                    function affichePasserCommande(ok){
 
-function refreshNbPanier() {
+                        let aa = document.getElementById("passercommandes");
+                        let mdf = document.getElementById("modal_footer_panier");
+
+
+                        console.log('affPasserComm',mdf );
+                        okyarien = false;
+                        if(mdf.children.length == 0){
+                            okyarien = true;
+                        }
+
+                        if(ok){
+
+                            let a = document.createElement('a');
+                            a.setAttribute('href','commande.php');
+                            a.setAttribute('id','passercommandes');
+                            let btn = document.createElement('button');
+                            btn.setAttribute('type','button');
+                            btn.setAttribute('class','btn btn-primary');
+                            btn.innerHTML = "Passer Commandes"
+                            a.appendChild(btn);
+                            console.log(a);
+
+                            if( okyarien){
+                                mdf.appendChild(a);
+                            }
+
+
+
+                        }else {
+                            let a = document.getElementById("passercommandes");
+
+                            if(!okyarien){
+                                let ca = a.parentNode;
+
+                                ca.removeChild(a);
+                            }
+
+                        }
+
+                    }
+
+
+
+                    
+                    refreshNbPanier() ;
+
+                    function refreshNbPanier() {
                         let tbody = document.getElementById("tbodypanier");
                         let ici = document.getElementById("span_nb_panier");
 
@@ -339,8 +389,8 @@ function refreshNbPanier() {
                     }
 
 
-                    </script>                
-            </div>
+
+                </script>                
         </div>
     </div>
 </div>
