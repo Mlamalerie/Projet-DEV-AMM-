@@ -94,7 +94,7 @@ header .overlay-sombre {
     /*    max-width:  90%; le curseur descend en bas*/
     caret-color:rgba(121, 6, 247, 0.9);
     line-height: 40px;
-    width: 300px;
+    width: 700px;
 }
 .search_icon{
     height: 40px;

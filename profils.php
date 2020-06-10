@@ -14,12 +14,14 @@ include('assets/db/connexiondb.php');
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])) {
     $okconnectey = true;
-
 }
 
 $id_receveur = (int) $_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
 if($okconnectey) {
     $id_demandeur=$_SESSION['user_id'];
+}
+else{
+    $id_demandeur=0;
 }
 
 
@@ -32,10 +34,14 @@ $req->execute(array(':id1' => $id_receveur));
 
 $afficher_profil = $req->fetch();
 
+
+$okiblockhe = false;
+$okheblocki = false;
+$okifollowhe = false;
 //*** BOOLEEN
 if(isset($id_demandeur)){
     // je l'ai bloqué ?
-    $okiblockhe = false;
+    
     $req = $BDD->prepare("SELECT *
         FROM relation
         WHERE id_demandeur = ? AND id_receveur = ? AND statut = ?");
@@ -45,7 +51,7 @@ if(isset($id_demandeur)){
         $okiblockhe = true;
     }
     // il m'a bloqué ?
-    $okheblocki = false;
+    
     $req = $BDD->prepare("SELECT *
         FROM relation
         WHERE id_demandeur = ? AND id_receveur = ? AND statut = ?");
@@ -55,7 +61,7 @@ if(isset($id_demandeur)){
         $okheblocki = true;
     }
     // je le follow ?
-    $okifollowhe = false;
+    
     $req = $BDD->prepare("SELECT *
         FROM relation
         WHERE id_demandeur = ? AND id_receveur = ? AND statut = ?");
@@ -172,8 +178,6 @@ if( $id_demandeur==$id_receveur){
 
     </head>
     <body class="profile-page">
-
-
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
         <?php require_once('assets/skeleton/navbar.php');  require_once('assets/functions/js-panier.php');?>
@@ -183,23 +187,9 @@ if( $id_demandeur==$id_receveur){
         if($okprofildesac){
             echo "Ce compte a été désactivé";
         }
-        else if($okheblocki){/*si l'utilisateur nous a bloqué*/
-            echo "Ce compte vous a bloqué";
-        }
-        else if($okiblockhe){
-            echo"Vous l'avez bloqué";
-        ?>
-        <form action="" method="post">
-       <input type="submit" name="debloquer" value="Débloquer">
-        </form>
-        <?php    
-        }
         else{
-
         ?>
-
-
-        <div class="page-header header-filter" data-parallax="true" style="">szdz</div>
+        <div class="page-header header-filter" data-parallax="true" style=""></div>
         <div class="main main-raised">
             <div class="profile-content">
                 <div class="container">
@@ -215,85 +205,108 @@ if( $id_demandeur==$id_receveur){
                                     <?php if ($afficher_profil['user_role'] == 0){?>
                                     <h6>ADMIN</h6>
                                     <?php } ?>
-
                                 </div>
                             </div>
                         </div>
-
                     </div>
+                    <?php
+            if($okheblocki){/*si l'utilisateur nous a bloqué*/
+                echo "Ce compte vous a bloqué";
+            }
+            else if($okiblockhe){
+                echo"Vous l'avez bloqué";
+                    ?>
+                    <form action="" method="post">
+                        <input type="submit" name="debloquer" value="Débloquer">
+                    </form>
+                    <?php    
+            }
+            else{
+                    ?>
                     <div class="description text-center">
                         <p><?=$afficher_profil['user_description']?> </p>
                     </div>
                     <div>
-
-                        <?php if( $id_demandeur==$id_receveur ){ ?> 
-
-
-
+                    <?php 
+                        if($id_demandeur==$id_receveur){ 
+                    ?> 
                         <a href="editer-profil.php?profil_id=<?=$id_receveur?>" > <button>Editer</button></a>
-                        <button></button>
-
+                        
+                         <a href="histo-ventes.php?" ><button>Historique de mes ventes</button></a>
                         <!-- SI C'EST PAS TON COMPTE -->
-                        <?php } else {?>
-
-                        <div class="row">
+                    <?php } 
+                        else if ($id_demandeur!=$id_receveur){
+                    ?>
+                   <div class="row">
                             <!-- Message -->
-                            <button> <a href="message.php?profil_id=<?= $id_receveur ?>" style="color:white">  <object class="iconMess" data="assets/img/icon/envelope.svg" type="image/svg+xml"></object></a></button>
-                            <span><?= $nb_follow?> Follower(s)</span>
+                            <?php
+                                if(!$okconnectey){
+                            ?>
+                            <button onclick="window.location.replace('connexion.php')"><i class="fas fa-envelope" style="font-size : 20px"></i></button>
+                            <?php        
+                                }
+                                else{
+                            ?>
+                            <a href="message.php?profil_id=<?= $id_receveur ?>" class="col-10"><button><i class="fas fa-envelope" style="font-size : 20px"></i></button></a>
+                            <?php
+                                }
+                                ?>
+                            
+                            
+                            <span class="col-2"><?= $nb_follow?> Follower(s)</span>
 
                         </div>
 
                         <form action="" method="post">
                             <?php  
-                            if($okifollowhe){
-                                echo"Vous le suivez";
+                        if($okifollowhe){
+                            echo"Vous le suivez";
                             ?>
                             <input type="submit" name="unfollow" value="Unfollow">
                             <?php 
-                            } 
-                            else{ 
+                        } 
+                                      else{ 
                             ?>
                             <input type="submit" name="follow" value="Follow">
                             <?php   
-                            }    
+                                      }    
                             ?>
-                     <input type="submit" name="bloquer" value="Bloquer">
+                            <input type="submit" name="bloquer" value="Bloquer">
                         </form>
                         <?php
-                                     } 
+                                } 
                         ?>
                     </div>
 
                     <?php 
 
-            $req = $BDD->prepare("  SELECT *
+                $req = $BDD->prepare("  SELECT *
                                                         FROM beat
                                                         WHERE beat_author_id = ?
                                                         ORDER BY beat_dateupload DESC");
-            $req->execute(array($id_receveur));
-            $resuBEATS = $req->fetchAll();
+                $req->execute(array($id_receveur));
+                $resuBEATS = $req->fetchAll();
 
-            $yadesresultatsBEATS = false;
-            if (isset($resuBEATS) && !empty($resuBEATS)){
-                $yadesresultatsBEATS = true;
-            }
+                $yadesresultatsBEATS = false;
+                if (isset($resuBEATS) && !empty($resuBEATS)){
+                    $yadesresultatsBEATS = true;
+                }
                     ?>
-
                     <div class="row">
                         <div class="col-md-6 d-flex
                                     h-100  bg-primary">
-                            <?php  require_once('assets/skeleton/tableBeatSearch.php'); ?>
+                            <?php  
+                                require_once('assets/skeleton/tableBeatSearch.php'); 
+                            ?>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
-        <?php 
-        }
+        <?php  
+                }
+            }
         ?>
-
         <!--   *************************************************************  -->
         <!--   ************************** MUSIC PLAYER  **************************  -->
         <?php
