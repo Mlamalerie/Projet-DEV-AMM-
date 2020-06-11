@@ -172,6 +172,12 @@ section:nth-of-type(4) {
 section:nth-of-type(5) {
     background-color: var(--base-colorDark1);
 }
+
+/* section 6 */
+section:nth-of-type(6) {
+   background-color: #290e3d;
+}
+
 .bloc_avis{/*bloc des avis*/
 
 }

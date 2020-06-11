@@ -82,70 +82,74 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
         <link rel="stylesheet" href="assets/css/slick.css">
         <link rel="stylesheet" href="assets/css/slide.css">
 
-
-        <style>
-            .player-play-icon {
-                display: inline-block;
-                height: 3.2rem;
-                width: 3.2rem;
-                border-radius: 50%;
-                background-color: #793ea5;
-                background-image: url(assets/img/icon/icon-play.svg); 
-                background-repeat: no-repeat;
-                background-position: 55% center;
-                background-size: 24px 27px;
-                -webkit-transition: background-color 0.3s ease-in-out;
-                transition: background-color 0.3s ease-in-out;
-              
-            }
-            
-            .player-pause-icon {
-                display: inline-block;
-                height: 3.2rem;
-                width: 3.2rem;
-                border-radius: 50%;
-                background-color: #793ea5;
-                background-image: url(assets/img/icon/pause.svg); 
-                background-repeat: no-repeat;
-                background-position: 55% center;
-                background-size: 24px 27px;
-                -webkit-transition: background-color 0.3s ease-in-out;
-                transition: background-color 0.3s ease-in-out;
-              
-            }
-            
-              .player-prev-icon {
-                display: inline-block;
-                height: 2rem;
-                width: 2rem;
-                border-radius: 50%;
-                background-color: #793ea5;
-                background-image: url(assets/img/icon/backward-solid.svg);
-                background-repeat: no-repeat;
-                background-position: 55% center;
-                background-size: 15px;
-                -webkit-transition: background-color 0.3s ease-in-out;
-                transition: background-color 0.3s ease-in-out;
-                    margin-right: 0.1rem;
-            }
-              .player-next-icon {
-                display: inline-block;
-                height: 2rem;
-                width: 2rem;
-                border-radius: 50%;
-                background-color: #793ea5;
-                background-image: url(assets/img/icon/forward-solid.svg);
-                background-repeat: no-repeat;
-                background-position: 55% center;
-                background-size: 15px;
-                -webkit-transition: background-color 0.3s ease-in-out;
-                transition: background-color 0.3s ease-in-out;
-                    margin-left: 0.1rem;
-            }
-        </style>
         <title>WeBeatz</title>
     </head>
     <body id="top">
+
+        <style>
+
+            <div class="container">
+            <!-- For demo purpose -->
+            <div class="row py-5">
+            <div class="col-lg-9 mx-auto text-white text-center">
+            <h1 class="display-4">Bootstrap 4 accordion</h1>
+            <p class="lead mb-0">Using Bootstrap 4 card component, build a vertical accrodion with up & down chevrons.</p>
+            <p class="lead">Snippet by
+            <a href="https://bootstrapious.com/snippets" class="text-white">
+            <u>Bootstrapious</u>
+            </a>
+            </p>
+            </div>
+            </div>
+
+
+            <div class="row">
+            <div class="col-lg-9 mx-auto">
+            <!-- Accordion -->
+            <div id="accordionExample" class="accordion shadow">
+
+            <!-- Accordion item 1 -->
+            <div class="card">
+            <div id="headingOne" class="card-header bg-white shadow-sm border-0">
+            <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Collapsible Group Item #1</a></h6>
+            </div>
+            <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample" class="collapse show">
+            <div class="card-body p-5">
+            <p class="font-weight-light m-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</p>
+            </div>
+            </div>
+            </div>
+
+            <!-- Accordion item 2 -->
+            <div class="card">
+            <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
+            <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="d-block position-relative collapsed text-dark text-uppercase collapsible-link py-2">Collapsible Group Item #2</a></h6>
+            </div>
+            <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample" class="collapse">
+            <div class="card-body p-5">
+            <p class="font-weight-light m-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</p>
+            </div>
+            </div>
+            </div>
+
+            <!-- Accordion item 3 -->
+            <div class="card">
+            <div id="headingThree" class="card-header bg-white shadow-sm border-0">
+            <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="d-block position-relative collapsed text-dark text-uppercase collapsible-link py-2">Collapsible Group Item #3</a></h6>
+            </div>
+            <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample" class="collapse">
+            <div class="card-body p-5">
+            <p class="font-weight-light m-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</p>
+            </div>
+            </div>
+            </div>
+
+            </div>
+            </div>
+            </div>
+            </div>
+        </style>
+
         <!-- preloader
 ================================================== -->
         <div id="preloader">
@@ -163,7 +167,6 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
         <?php
         require_once('assets/skeleton/navbar.php');
         ?>
-
 
 
 
@@ -253,7 +256,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                     <p class="lead mb-0 text-white text-center">Les meilleures ventes de beats</p>
 
                     <div class="my_slides multipleitems2">
-                           <?php
+                        <?php
                         $j = $i;
                         foreach($resuVENTES as $r){
 
@@ -266,7 +269,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                                     <?= $r['beat_title']?></strong><span> <?= $r['beat_year']?></span></h6>
                             </div>
                         </div>
-                        
+
                         <?php $j++;} ?>
 
                     </div>
@@ -414,7 +417,99 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                 </div>
             </div>
         </section>
+        <!-- Section 6 -->
+        <section class="py-5 d-flex align-items-center" id="six">
+            <div class="container">
+                <!-- For demo purpose -->
+                <div class="row py-5">
+                    <div class="col-lg-9 mx-auto text-white text-center">
+                        <h1 class="display-4">Foire Aux Questions</h1>
+                    </div>
+                </div>
 
+
+                <div class="row">
+                    <div class="col-lg-9 mx-auto">
+                        <!-- Accordion -->
+                        <div id="accordionExample" class="accordion shadow">
+
+                            <!-- Accordion item 1 -->
+                            <div class="card">
+                                <div id="headingOne" class="card-header bg-white shadow-sm border-0">
+                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Quel usage puis-je faire des beats achetés ?</a></h6>
+                                </div>
+                                <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample" class="collapse show">
+                                    <div class="card-body p-5">
+                                        <p class="font-weight-light m-0">Une fois achetés, vous pouvez faire ce que vous souhaitez des beats. Vous pouvez les utiliser dans des vidéos ou enregistrer une chanson. Vous pouvez bien sûr monétiser votre chanson.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Accordion item 2 -->
+                            <div class="card">
+                                <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
+                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="d-block position-relative collapsed text-dark text-uppercase collapsible-link py-2">Combien ça coûte ?</a></h6>
+                                </div>
+                                <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample" class="collapse">
+                                    <div class="card-body p-5">
+                                        <p class="font-weight-light m-0">Vous pouvez écouter des beats gratuitement en vous inscrivant sur notre site. Les prix des différents beats varient selon les producteurs, et une fois achetés, ils vous appartiennent et vous pouvez en faire l'usuage de votre choix.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Accordion item 3 -->
+                            <div class="card">
+                                <div id="headingThree" class="card-header bg-white shadow-sm border-0">
+                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="d-block position-relative collapsed text-dark text-uppercase collapsible-link py-2">Où puis-je retrouver les beats que j'ai acheté ?</a></h6>
+                                </div>
+                                <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample" class="collapse">
+                                    <div class="card-body p-5">
+                                        <p class="font-weight-light m-0">Vous pouvez retrouver la liste des beats achetés dans l'onglet "Mes Tracks" en cliquant sur votre profil dans la barre de navigation. Vous pourrez également observer sur cette page la liste des vos beats uploadés ou likés.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Accordion item 4 -->
+                            <div class="card">
+                                <div id="headingFour" class="card-header bg-white shadow-sm border-0">
+                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Pourquoi liker un beat ?</a></h6>
+                                </div>
+                                <div id="collapseFour" aria-labelledby="headingOne" data-parent="#accordionExample" class="collapse show">
+                                    <div class="card-body p-5">
+                                        <p class="font-weight-light m-0">Liker un beat vous permet de soutenir un producteur et d'ajouter ce beat dans votre liste de beats likés sur la page "Mes Tracks". La section "Mes likes" joue ainsi le rôle d'une liste de souhait, dans laquele vous pouvez ajouter les beats dans votre panier à tout moment.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Accordion item 5 -->
+                            <div class="card">
+                                <div id="headingFive" class="card-header bg-white shadow-sm border-0">
+                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Comment payer sur WeBeatz ?</a></h6>
+                                </div>
+                                <div id="collapseFive" aria-labelledby="headingFive" data-parent="#accordionExample" class="collapse show">
+                                    <div class="card-body p-5">
+                                        <p class="font-weight-light m-0">Après avoir ajouter des articles dans le panier, confirmez votre commande afin d'accéder à une page PayPal. L'identifiant est webeats@buy.com et le mot de passe est 12345678. Vous pouvez retrouver les articles commandés sur votre profil dans l'onglet "Mes Tracks".</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Accordion item 6 -->
+                            <div class="card">
+                                <div id="headingSix" class="card-header bg-white shadow-sm border-0">
+                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">D'autres questions ?</a></h6>
+                                </div>
+                                <div id="collapseSix" aria-labelledby="headingSix" data-parent="#accordionExample" class="collapse show">
+                                    <div class="card-body p-5">
+                                        <p class="font-weight-light m-0">Si vous avez d'autres questions, n'hésitez pas à nous contacter sur nos réseaux sociaux ou par mail à l'adresse webeatzprod@gmail.com.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <div class="go-top">
             <a class="smoothscroll" title="Back to Top" href="#top"></a>
         </div>

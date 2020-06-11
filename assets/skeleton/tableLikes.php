@@ -1,127 +1,166 @@
-<!--    TABLE DU PANIER -->
-
-<div class="table-responsive">
-
-    <table class="table">
+<div class="table-responsive mx-2  rounded">
+    <table class="table  rounded border-success">
         <thead>
             <tr>
                 <th scope="col" class="border-0 bg-light">
                     <div class="p-2 px-3 text-uppercase">Produits</div>
                 </th>
+
                 <th scope="col" class="border-0 bg-light">
-                    <div class="p-2 px-3 text-uppercase">Ajouter au panier</div>
+                    <div class="py-2 text-uppercase">Likes</div>
                 </th>
+                
                 <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Action</div>
+                    <div class="py-2 text-uppercase">Ajouter au panier</div>
                 </th>
             </tr>
         </thead>
-        <?php if($okconnectey) { ?>
-        <tbody id="tbodypanier">
-            <?php 
+        <tbody class=" rounded">
+            <?php if ($yadesresultatsBEATS) {$i = 1;foreach($resuBEATS as $r){?>
+            <tr class="border-0 rounded px-md-5">
+                <th scope="row" class="border-0 rounded">
+                    <div class="p-0 rounded ">
+                        <div class="hover hover-5 text-white rounded d-inline-block align-middle">
+                            <img src="<?=$r['beat_cover']?>" alt="" width="70" class="img-fluid rounded shadow-sm">
+                            <div class="hover-overlay d-inline-block"></div>
 
-    $req = $BDD->prepare("SELECT like_beat_id
-                                            FROM likelike
-                                            WHERE like_user_id = ?");
-    $req->execute(array($_SESSION['user_id']));
-    $resuLIKES = $req->fetchAll();
+                            <div class="link_icon  " onclick="playPause(<?=$i-1 ?>)">
+                                <span class="video-icon playplay-btn"></span>
+                            </div>
 
-    foreach($resuLIKES as $p) {
+                        </div>
+                        <!--                                                    -->
 
-        $req = $BDD->prepare("SELECT *
-                                            FROM beat
-                                            WHERE beat_id = ?");
-        $req->execute(array($p['like_beat_id']));
-        $resuPAN = $req->fetchAll();
-
-
-        foreach($resuPAN as $b) {
-
-
-
-
-            ?> 
-
-            <tr class="rounded border-bottom border-light">
-
-
-
-                <th scope='row' class='border-0'>
-                    <div class='p-2'>
-                        <img src='<?=$b['beat_cover'] ?>' alt='' width='70' class='img-fluid rounded shadow-sm'>
-                        <div class='ml-3 d-inline-block align-middle'> 
-                            <h5 class='mb-0'> <a href="view-beat.php?id=<?= $b['beat_id']?>" class='text-dark d-inline-block align-middle'><?=$b['beat_title'] ?></a>
+                        <div class="ml-3 d-inline-block align-middle rounded" >
+                            <h5 class="mb-0"> <a href="view-beat.php?id=<?= $r['beat_id']?>" class="text-dark d-inline-block align-middle"><?=$r['beat_title']?></a>
                             </h5>
-                            <a href="profils.php?profil_id=<?= $b['beat_author_id']?>" class="text-dark d-inline-block align-middle"> <span class='text-muted font-weight-normal font-italic d-block'><?=$b['beat_author'] ?></span></a> 
+
+                            <a href="profils.php?profil_id=<?= $r['beat_author_id']?>" class="text-dark d-inline-block align-middle"><span class="text-muted font-weight-normal font-italic d-block">
+                                <?=$r['beat_author']?>
+                                </span>
+                            </a>
                         </div>
                     </div>
+
                 </th>
-                <td class='border-0 align-middle'><strong><?php if($b['beat_price'] != 0.00) { echo $b['beat_price']; } else { echo "FREE";} ?></strong>
+                <!-- **LIKE -->
+                <?php if($okconnectey) {  ?>
+                <td class="border-0 align-middle rounded">
+
+                    <span id="span_nbLike-<?=$r['beat_id']?>"><?=$r['beat_like']?></span>
+
+                    <?php
+    $oktaliker = false;
+                                        $req = $BDD->prepare("SELECT id FROM likelike WHERE like_user_id = ? AND like_beat_id = ?");
+                                        $req->execute(array($_SESSION['user_id'],$r['beat_id']));
+                                        $lll = $req->fetch();
+
+                                        if(isset($lll['id'])){
+                                            $oktaliker = true;
+                                        }
+                    ?>
+                    <?php if ($oktaliker) { ?>
+                    <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class=" iconLike text-dark coeur_active"><i class="fas fa-heart"></i></span>
+                    <?php    } else { ?> 
+                    <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class=" iconLike text-dark"><i class="far fa-heart"></i></span>
+                    <?php } ?>
                 </td>
-                <td class='border-0 align-middle'>
-                    <a href="edit-tracks.php?id=<?= $b['beat_id'] ?>"><button class="btn">Unlike</button></a>                                     
+                <?php } ?>
+
+                <!-- **AJOUTER PANIER -->
+                <td class="border-0 align-middle rounded">
+
+                    <?php 
+                                                                              $okdejadanspanier = false;
+                                                                              $okdejaacheter = false;
+                                                                              if($okconnectey) {
+                                                                                  $req = $BDD->prepare("SELECT *
+                                                                                        FROM vente
+                                                                                        WHERE vente_user_id = ? AND vente_beat_id = ?");
+                                                                                  $req->execute(array($_SESSION['user_id'],$r['beat_id']));
+
+
+                                                                                  $ach = $req->fetch();
+
+
+                                                                                  if(isset($ach['id'])){
+                                                                                      $okdejaacheter = true;
+                                                                                  }else {
+                                                                                      $req = $BDD->prepare("SELECT *
+                                                                                        FROM panier
+                                                                                        WHERE panier_user_id = ? AND panier_beat_id = ?");
+                                                                                      $req->execute(array($_SESSION['user_id'],$r['beat_id']));
+
+
+                                                                                      $aff = $req->fetch();
+
+
+
+                                                                                      if(isset($aff['id'])){
+                                                                                          $okdejadanspanier = true;
+                                                                                      }
+                                                                                  }
+                                                                              }
+                    ?>
+                    <?php 
+                                                                              if(!$okdejaacheter) {
+
+                                                                                  if(($okconnectey && $r['beat_author_id'] != $_SESSION['user_id']) || !$okconnectey) { ?>
+                    <button id='btnbeat-<?=$r['beat_id']?>' 
+
+                            <?php if($okconnectey) { ?>
+                            onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>','<?=$r['beat_id']?>');" <?php }else { ?> onclick="goConnexionStp();"  <?php } ?>
+
+                            class="btn btn-buy"
+
+
+                            >
+
+
+
+                        <?php if(!$okdejadanspanier) { ?>
+                        <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup>
+                        <?php if($r['beat_price'] != 0.00) { echo $r['beat_price'].'€'; } else {echo "FREE";} ?>
+                        <?php } ?>
+
+                    </button>
+                    <?php } } else {?>
+                    <a class="btn btn-danger" href="audio/<?= $r['beat_source']?>" download>
+                        <span class="text-white"><i class="fas fa-download"></i></span>
+                    </a>
+                    <?php } ?>
+                    <?php  if($okdejadanspanier) {?>
+                    <script>document.getElementById('btnbeat-<?=$r['beat_id']?>').innerHTML = 'Dans le panier';</script>
+                    <?php } ?>
+
+
                 </td>
+
 
 
             </tr>
-
-
             <?php
+                                                                              $i++;}}
+            else { ?>
 
-        }
-    }
+            Aucun résultat;
+            <?php } ?>
 
-}
+            <script >
+                function goConnexionStp() {
+                    window.location.replace("connexion.php");
+                } 
 
 
-            ?>
+
+            </script>
+
+            <?php require_once("assets/functions/js-refreshBDD.php"); ?>
+            <?php require_once("assets/functions/js-liker.php"); ?>
+
+
+
         </tbody>
     </table>
-    <script type="text/javascript">
-        function goInputOption(bay,idd,blaz){
-            let mode = bay.value;
-            console.log(mode,idd,blaz);
-
-            var p = document.getElementById('phraseConfirm');
-            var iO = document.getElementById('inputOption');
-            var iO_id = document.getElementById('inputOption_beat_id');
-
-            iO.value = mode;
-            iO_id.value = idd;
-
-            if (mode == 'suppr'){
-                p.innerHTML = "supprimer le beat " + blaz + " ?";   
-            }
-            console.log(iO,iO_id);
-        } 
-    </script>
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="supp_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Êtes vous sûr de vouloir <span id="phraseConfirm"></span>
-                    <form method="post" id="formOptionConfirm" action="">
-                        <input type="hidden" name="inputOption" id="inputOption">
-                        <input type="hidden" name="inputOption_beat_id" id="inputOption_beat_id">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                    <button onclick="document.getElementById('formOptionConfirm').submit()" type="button" class="btn btn-primary">Oui</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- END Modal -->
 </div>
 
