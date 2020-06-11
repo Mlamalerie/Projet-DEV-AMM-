@@ -150,10 +150,14 @@ $nb_follow=0;
 $resuFOLLOWprof= $req1->fetchAll();
 
 //print_r($resuRELA);
-foreach($resuFOLLOWprof as $rr){ foreach($rr as $key => $value){
+foreach($resuFOLLOWprof as $rr){ 
+    foreach($rr as $key => $value){
 
-    if($key =='statut' && $value== 1){ $nb_follow++;}   
-} }
+        if($key =='statut' && $value== 1){
+            $nb_follow++;
+        }   
+    }
+}
 
 $okcmoncompte = false;
 if( $id_demandeur==$id_receveur){
@@ -218,7 +222,7 @@ if( $id_demandeur==$id_receveur){
                 echo"Vous l'avez bloqué";
                     ?>
                     <form action="" method="post">
-                        <input type="submit" name="debloquer" value="Débloquer">
+                        <button  class="btn btn-danger" style="background:white;border-color:red; color : red"><i class="fa fa-unlock-alt" aria-hidden="true"></i><input type="submit" class="btn" style="background:white; color : red" name="debloquer" value="Débloquer"></button>
                     </form>
                     <?php    
             }
@@ -231,7 +235,7 @@ if( $id_demandeur==$id_receveur){
                         <?php 
                         if($id_demandeur==$id_receveur){ 
                         ?> 
-                        <a href="editer-profil.php?profil_id=<?=$id_receveur?>" > <button>Editer</button></a>
+                        <button class="btn btn-danger" style="background:#7728b2;border-color:#7728b2;box-shadow :0 0 0 0.2rem #7728b2"><a href="editer-profil.php?profil_id=<?=$id_receveur?>" class="text-white"><i class="fas fa-edit"></i><span class="ml-3">Editer</span></a></button>
 
                         <a href="histo-ventes.php?" ><button>Historique de mes ventes</button></a>
                         <!-- SI C'EST PAS TON COMPTE -->
@@ -243,36 +247,38 @@ if( $id_demandeur==$id_receveur){
                             <?php
                     if(!$okconnectey){
                             ?>
-                            <button onclick="window.location.replace('connexion.php')"><i class="fas fa-envelope" style="font-size : 20px"></i></button>
+                            <button onclick="window.location.replace('connexion.php')" class="btn btn-danger col-3 mb-3" style="background:#7728b2;border-color:#7728b2;box-shadow :0 0 0 0.2rem #7728b2"><i class="fas fa-comment-alt"></i><span class="ml-3">DM</span></button>
+                            
                             <?php        
                     }
                     else{
                             ?>
-                            <a href="message.php?profil_id=<?= $id_receveur ?>" class="col-10"><button><i class="fas fa-envelope" style="font-size : 20px"></i></button></a>
+                            <button class="btn btn-danger col-3 mb-3" style="background:#7728b2;border-color:#7728b2;box-shadow :0 0 0 0.2rem #7728b2" ><a href="message.php?profil_id=<?= $id_receveur ?>" class="text-white"><i class="fas fa-comment-alt"></i><span class="ml-3">DM</span></a></button>       
+                            <br/><br/>
                             <?php
                     
                             ?>
 
 
-                            <span class="col-2"><?= $nb_follow?> Follower(s)</span>
+                            
 
                         </div>
 
                         <form action="" method="post">
                             <?php  
                                 if($okifollowhe){
-                                    echo"Vous le suivez";
+                                    echo"Vous le suivez<br/>";
                             ?>
-                            <input type="submit" name="unfollow" value="Unfollow">
+                            <button class="btn btn-danger" style="background:white;border-color:#7728b2; color : #7728b2; box-shadow :0 0 0 0.2rem #7728b2"><i class="fas fa-user-minus"></i><input type="submit"  class="btn" style="margin-left:3px;background:white;color : #7728b2;" name="unfollow" value="Unfollow"></button>
                             <?php 
                                 } 
                     else{ 
                             ?>
-                            <input type="submit" name="follow" value="Follow">
+                            <button class="btn btn-danger" style="background:#7728b2;border-color:#7728b2;box-shadow :0 0 0 0.2rem #7728b2" ><i class="fas fa-user-plus"></i><input type="submit" class="btn btn-danger" style="margin-left:3px;background:#7728b2;border-color:#7728b2;box-shadow :0 0 0 0.2rem #7728b2"  name="follow" value="Follow"></button>
                             <?php   
                     }    
                             ?>
-                            <input type="submit" name="bloquer" value="Bloquer">
+                            <button class="btn btn-danger" style="margin-left:10px;" ><i class="fas fa-user-lock"></i><input type="submit" class="btn btn-danger" name="bloquer" value="Bloquer"></button>
                         </form>
                         <?php
                     }
@@ -293,7 +299,32 @@ if( $id_demandeur==$id_receveur){
                 if (isset($resuBEATS) && !empty($resuBEATS)){
                     $yadesresultatsBEATS = true;
                 }
+                $nb_prods=0;
+                foreach($resuBEATS as $r){ 
+                    foreach($r as $key => $value){
+
+                        if($key =='beat_author_id' && $value==$id_receveur ){
+                            $nb_prods++;
+                        }   
+                    }
+                }
                     ?>
+                    <div class="row">
+                    
+                        <div class="col-9">
+                            <span><?= $nb_prods ?> Production(s)</span>
+                            <span class="ml-3"><?= $nb_follow?> Follower(s)</span>
+                        </div>
+
+                        <div class="col-3">
+                           <div>Sexe : <?=$afficher_profil['user_sexe']?></div>
+                            <div>Né le : <?=$afficher_profil['user_datenaissance']?></div>
+                            <div>Ville : <?=$afficher_profil['user_ville']?></div>
+                            <div>E-mail : <?=$afficher_profil['user_email']?></div>
+                        </div>
+                    
+                    </div>
+                    
                     <div class="row">
 
                         <div class="pt-3 pb-3 d-flex shadow-sm rounded h-100 w-100    bg-primary">

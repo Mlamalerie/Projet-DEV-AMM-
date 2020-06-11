@@ -13,7 +13,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])){
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Mon historique de ventes </title>
+        <title>Mon historique de ventes</title>
         <?php
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
@@ -21,6 +21,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])){
     <body>
         <div class="row py-5">
             <div class="col-lg-10 mx-auto">
+                <h1>Mon historique de ventes</h1>
                 <div class="card rounded shadow border-0">
                     <div class="card-body p-5 bg-white rounded">
                         <div class="table-responsive">
@@ -92,7 +93,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])){
                                             <span><?=$p['vente_date']?></span>
                                         </td>   
                                         <td>
-                                            <span><?=$b['beat_price']?></span>
+                                            <span><?=$b['beat_price']?> €</span>
                                         </td>    
                                     </tr>
                                     <?php 
