@@ -253,7 +253,7 @@ if( $id_demandeur==$id_receveur){
                     }
                     else{
                             ?>
-                            <button class="btn btn-danger col-3 mb-3" style="background:#7728b2;border-color:#7728b2;box-shadow :0 0 0 0.2rem #7728b2" ><a href="message.php?profil_id=<?= $id_receveur ?>" class="text-white"><i class="fas fa-comment-alt"></i><span class="ml-3">DM</span></a></button>       
+                            <button class="btn btn-danger col-3 mb-3" style="background:#7728b2;border-color:#7728b2;box-shadow :0 0 0 0.2rem #7728b2" ><a href="message.php?profil_id=<?= $id_receveur ?>-<?= $id_demandeur ?>" class="text-white"><i class="fas fa-comment-alt"></i><span class="ml-3">DM</span></a></button>       
                             <br/><br/>
                             <?php
                     

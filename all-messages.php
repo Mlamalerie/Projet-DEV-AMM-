@@ -61,6 +61,16 @@ if(isset($_POST['inputOption'])) {
             
         }
     }
+    else if($_POST['inputOption']== "annuler"){/*si l'utilisateur choisit d'annuler le signalement d'un message*/
+        if($ok){
+             $req = $BDD->prepare("DELETE FROM messagerie_signal
+            WHERE message_id = ?"); 
+            $req->execute(array($id_message));
+            header('Location: all-messages');
+            exit;
+            
+        }
+    }
 
 }
 
@@ -188,6 +198,9 @@ if(isset($_POST['inputOption'])) {
                                             ?>
                                             <!--  On affiche cet icon quand un message a été signalé  -->
                                             <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $af['user_pseudo']?>')" value="signaler"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></button>
+                                            
+                                            <!--  On affiche cet icon pour enlever le signalement d'un message -->
+                                            <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $af['user_pseudo']?>')" value="annuler"><i class="fas fa-undo" style="color:red"></i></button>
                                            
                                             <?php
                                                 }
@@ -219,6 +232,9 @@ if(isset($_POST['inputOption'])) {
                                                 }
                                                 if (mode == 'signaler'){
                                                     p.innerHTML = "supprimer le message signalé de " + blaz + " ou <a href='all-utilisateurs.php'>désactiver son compte?</a>";   
+                                                }
+                                                if(mode == 'annuler'){
+                                                    p.innerHTML = "annuler le signalement du message " + blaz + " ?";
                                                 }
                                                 
                                                 console.log(iO,iO_id);
