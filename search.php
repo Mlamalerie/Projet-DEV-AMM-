@@ -463,7 +463,9 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                             
                             <form action="search.php" id="formType">
 
+
                                 <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer " >
+
                                     <!--   icon croix ou rond -->
                                     <?php if(!$wetypeexiste) { ?>
                                     <i class="radioMenu far  fa-dot-circle mr-2"></i>
@@ -485,7 +487,9 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                                 </span>
 
+
                                 <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer  " >
+
                                     <!--   icon croix ou rond -->
                                     <?php if($wetypeexiste && $_GET['Type'] == "beats") { ?>
                                     <i class=" radioMenu far  fa-dot-circle mr-2"></i>

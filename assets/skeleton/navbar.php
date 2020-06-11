@@ -244,15 +244,14 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                         <a class="dropdown-item" href="all-beats.php"> <i class="fa fa-music mr-1 text-gray-400" aria-hidden="true"></i>  All-Beats</a>
                         <a class="dropdown-item" href="all-messages.php"> <i class="fa fa-comments mr-1 text-gray-400" aria-hidden="true"></i>  All-Messages</a>
 
-
-
-
                     </div>
 
                 </li>
+
                 <?php
                     }
                 ?>
+
 
 
 

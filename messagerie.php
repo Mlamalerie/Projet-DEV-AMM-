@@ -169,6 +169,5 @@ $relation_bloq=$req1->fetchAll();
                 </div>
             </div>
         </div>
-
     </body>
 </html> 
