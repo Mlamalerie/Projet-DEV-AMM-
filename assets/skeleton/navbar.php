@@ -146,7 +146,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     $relation_bloq=$req1->fetchAll(); 
 
 
-                    include('assets/functions/datediff.php');
+                    include('assets/functions/date-fct.php');
                     $req = $BDD->prepare("SELECT * FROM (
                     SELECT *
                             FROM messagerie

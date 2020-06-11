@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once("assets/db/connexiondb.php"); // inclure le fichier pour se connecter à la base de donnée
-include_once("fichierfct.php");
+
 print_r($_SESSION);
 // si une connection est détecter : (ta rien a faire ici mec)
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo']) ){

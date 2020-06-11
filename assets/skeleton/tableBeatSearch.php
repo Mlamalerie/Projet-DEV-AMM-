@@ -14,7 +14,7 @@
                             <div class="hover-overlay d-inline-block"></div>
 
                             <div class="link_icon  " onclick="playPause(<?=$i-1 ?>)">
-                                <span class="video-icon playplay-btn"></span>
+                                <span class="play-audio-icon playplay-btn"></span>
                             </div>
 
                         </div>
