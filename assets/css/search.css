@@ -165,3 +165,8 @@ tr {
     will-change: box-shadow,transform;
 } 
 
+.radioMenu {
+    color: var(--base-color1); 
+    
+}
+

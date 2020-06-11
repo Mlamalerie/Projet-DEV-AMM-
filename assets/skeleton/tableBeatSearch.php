@@ -39,11 +39,28 @@
                             <h5 class="mb-0"> <a href="view-beat.php?id=<?= $r['beat_id']?>" class="text-dark d-inline-block align-middle"><?=$r['beat_title']?></a>
                             </h5>
 
-                            <a href="profils.php?profil_id=<?= $r['beat_author_id']?>" class="text-dark d-inline-block align-middle"><span class="text-muted font-weight-normal font-italic d-block">
-                                <?=$r['beat_author']?>
+                            <span class="text-muted font-weight-normal font-italic d-block ">by <a href="profils.php?profil_id=<?= $r['beat_author_id']?>" class="text-dark d-inline-block "><span class="text-muted font-weight-normal font-italic d-block">
+                                 <?=$r['beat_author']?>
                                 </span>
-                            </a>
+                            </a></span>
                         </div>
+                    </div>
+
+                </th>
+                <?php 
+                $tags = explode(',',$r['beat_tags']);
+                                                                              
+                
+                ?>
+                 <th scope="row" class="border-0 align-middle rounded">
+                    <div class="p-0 rounded ">
+                       <?php foreach($tags as $t) {
+                        if(strlen($t)>1){
+                            $t = trim($t);
+                            
+                        ?>
+                        <a class="spanTag badge badge-light text-primary px-2 rounded-pill ml-2" href="search.php?Type=beats&q=<?= $t ?>">#<?= $t ?> </a>
+                        <?php }} ?>
                     </div>
 
                 </th>

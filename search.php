@@ -139,16 +139,16 @@ if ($wetypeexiste && !$jechercheunboug) {
         //*** recherche dans TOUT les genres
 
         if(($wegenreexiste && $_GET['Genre'] == "All") || !$wegenreexiste) {
-            print_r("##");
+            print_r("#-");
 
             // selection des free beats
             if ($wepriceexiste){
-                print_r("##");
+                print_r("##-");
 
                 print_r("<br> FREEBEATZ+");
                 $req = $BDD->prepare("SELECT * FROM (       SELECT *
                                                         FROM beat
-                                                        WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
+                                                        WHERE CONCAT(beat_title,beat_author,beat_description,beat_year,beat_tags)
                                                         LIKE ?  ) base
                                                         WHERE $borneprixinf <= beat_price AND beat_price <= $borneprixsup  
                                                         ORDER BY $trierpar $asc_desc");
@@ -159,7 +159,7 @@ if ($wetypeexiste && !$jechercheunboug) {
                 print_r("<br> FREEBEATZ--");
                 $req = $BDD->prepare("SELECT *
                                                         FROM beat
-                                                        WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
+                                                        WHERE CONCAT(beat_title,beat_author,beat_description,beat_year,beat_tags)
                                                         LIKE ?
                                                         ORDER BY $trierpar $asc_desc");
             }
@@ -177,7 +177,7 @@ if ($wetypeexiste && !$jechercheunboug) {
                         $g = $gr['id'];
                         $req = $BDD->prepare("SELECT * FROM (
                                                         SELECT * FROM beat
-                                                        WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
+                                                        WHERE CONCAT(beat_title,beat_author,beat_description,beat_year,beat_tags)
                                                         LIKE ? ) base
                                         WHERE beat_genre = '$g' AND ($borneprixinf <= beat_price AND beat_price <= $borneprixsup )
                                         ORDER BY $trierpar $asc_desc");
@@ -195,7 +195,7 @@ if ($wetypeexiste && !$jechercheunboug) {
                         $g = $gr['id'];
                         $req = $BDD->prepare("SELECT * FROM (
                                                         SELECT * FROM beat
-                                                        WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
+                                                        WHERE CONCAT(beat_title,beat_author,beat_description,beat_year,beat_tags)
                                                         LIKE ? ) base
                                         WHERE beat_genre = '$g'
                                         ORDER BY $trierpar $asc_desc");
@@ -350,7 +350,7 @@ else if (!$wetypeexiste) {
 
         $req = $BDD->prepare("SELECT *
                             FROM beat
-                            WHERE CONCAT(beat_title,beat_author,beat_description,beat_year)
+                            WHERE CONCAT(beat_title,beat_author,beat_description,beat_year,beat_tags)
                             LIKE ?
                             ORDER BY beat_title ASC");
 
@@ -432,7 +432,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <link rel="stylesheet" type="text/css" href="assets/css/modalUploadAudio.css">
 
         <style>
-            
+
         </style>
 
 
@@ -460,39 +460,42 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
 
                         <div class="list-group">
-                            <h4 class="text-white">Type </h4>
+                            <h4 class="text-white">Type </h4> 
+                            <?php if ($weqexiste && ($wegenreexiste || $wesortexiste || $wepriceexiste))  { ?>
+<a class='text-white' href="search.php?Type=beats&q=<?=$_GET['q']?>"> clear all</a><?php } ?>
+                            
                             <form action="search.php" id="formType">
 
-                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer text-white" >
+                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer " >
                                     <!--   icon croix ou rond -->
                                     <?php if(!$wetypeexiste) { ?>
-                                    <i class="far  fa-dot-circle mr-2"></i>
+                                    <i class="radioMenu far  fa-dot-circle mr-2"></i>
                                     <?php } else { ?> 
-                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <i class="radioMenu fa fa-circle-o mr-2 icon_activer"></i>
                                     <?php } ?>
-                                    <span id="" >All Catégories</span>
+                                    <span id="" class='text-white'>All Catégories</span>
 
                                 </span>
 
-                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer text-white" >
+                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer " >
                                     <!--   icon croix ou rond -->
                                     <?php if($wetypeexiste && $_GET['Type'] == "users") { ?>
-                                    <i class="far  fa-dot-circle mr-2"></i>
+                                    <i class="radioMenu far  fa-dot-circle mr-2"></i>
                                     <?php } else { ?> 
-                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <i class="radioMenu fa fa-circle-o mr-2 icon_activer"></i>
                                     <?php } ?>
-                                    <span id="" >Musiciens</span>
+                                    <span id="" class='text-white' >Musiciens</span>
 
                                 </span>
 
-                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer text-white " >
+                                <span onclick="goType(this)" class="nav-link px-4 rounded-pill activer  " >
                                     <!--   icon croix ou rond -->
                                     <?php if($wetypeexiste && $_GET['Type'] == "beats") { ?>
-                                    <i class="far  fa-dot-circle mr-2"></i>
+                                    <i class=" radioMenu far  fa-dot-circle mr-2"></i>
                                     <?php } else { ?> 
-                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <i class=" radioMenu fa fa-circle-o mr-2 icon_activer"></i>
                                     <?php } ?>
-                                    <span id="" >Instrumentals</span>
+                                    <span id="" class='text-white'>Instrumentals</span>
 
                                 </span>
 
@@ -523,12 +526,12 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                     <!--   icon croix ou rond -->
                                     <?php if(!$wegenreexiste) { ?>
-                                    <i class="far  fa-dot-circle mr-2"></i>
+                                    <i class="radioMenu  far  fa-dot-circle mr-2"></i>
                                     <?php } else { ?> 
-                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <i class="radioMenu  fa fa-circle-o mr-2 icon_activer"></i>
                                     <?php } ?>
 
-                                    <span id="genre_All" >All Genres</span>
+                                    <span id="genre_All" class='text-white'>All Genres</span>
                                     <!--                                    <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>-->
                                 </span>
 
@@ -539,11 +542,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                 <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer " >
                                     <!--   icon croix ou rond -->
                                     <?php if($wegenreexiste && $_GET['Genre'] == $gr['id']) { ?>
-                                    <i class="fas fa-times-circle"></i>
+                                    <i class="radioMenu  radioMenu  fas fa-times-circle mr-2"></i>
                                     <?php } else { ?> 
-                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <i class="radioMenu  radioMenu  fa fa-circle-o mr-2 icon_activer"></i>
                                     <?php } ?>
-                                    <span id="genre_<?= $gr['id']?>"  ><?= $gr['genre_nom']?></span>
+                                    <span id="genre_<?= $gr['id']?>" class='text-white' ><?= $gr['genre_nom']?></span>
                                 </span>
 
                                 <?php
@@ -591,12 +594,12 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                                     <!--   icon croix ou rond -->
                                     <?php if(!$wepriceexiste) { ?>
-                                    <i class="far  fa-dot-circle mr-2 "></i>
+                                    <i class="radioMenu  far  fa-dot-circle mr-2 "></i>
                                     <?php } else { ?> 
-                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <i class="radioMenu  fa fa-circle-o mr-2 icon_activer"></i>
                                     <?php } ?>
 
-                                    <span>All Prix</span>
+                                    <span class='text-white'>All Prix</span>
                                     <!--                                    <span class="badge badge-primary px-2 rounded-pill ml-2">45</span>-->
                                 </span>
 
@@ -604,11 +607,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                 <span onclick="goPrice(this)" class="nav-link px-4 rounded-pill activer " >
                                     <!--   icon croix ou rond -->
                                     <?php if($wepriceexiste && $_GET['Price'] == "free") { ?>
-                                    <i class="fas fa-times-circle"></i>
+                                    <i class="radioMenu  fas fa-times-circle"></i>
                                     <?php } else { ?> 
-                                    <i class="fa fa-circle-o mr-2 icon_activer"></i>
+                                    <i class="radioMenu  fa fa-circle-o mr-2 icon_activer"></i>
                                     <?php } ?>
-                                    <span id="price_Price" >Free Beats</span>
+                                    <span id="price_Price" class='text-white' >Free Beats</span>
 
                                 </span>
 
@@ -692,7 +695,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                     <?php if (!empty($_GET['q']))  { ?>
                     <div class="">
                         <div class=" bg-dark mx-auto mt-4">
-<span class="play-audio-icon"></span>
+                            <span class="play-audio-icon"></span>
                             <h1 class="display-4">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
 
 
@@ -846,7 +849,6 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                     <span class="text-uppercase ">
 
                                         <?php
-
                             //*** Verification du Pays
                             $req = $BDD->prepare("SELECT * 
                             FROM pays
@@ -1231,7 +1233,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <!--   *************************************************************  -->
         <!--   ************************** MUSIC PLAYER  **************************  -->
         <?php
-        $resuPLAYLIST = $resuBEATS;
+        if(isset($resuBEATS) && !empty($resuBEATS)) {
+            $resuPLAYLIST = $resuBEATS;
+        } else {
+            $resuPLAYLIST = array();
+        }
         require_once('assets/skeleton/AudioPlayer/audioplayer.php');
         ?>
 

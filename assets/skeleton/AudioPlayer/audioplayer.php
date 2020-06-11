@@ -1,5 +1,5 @@
-<nav id='audioplayer' class=" navplayer fixed-bottom " style="">  
-    <!--   display:none     -->
+<nav id='audioplayer' class=" navplayer fixed-bottom " style="display:none">  
+    <!--        -->
     <audio src="" id="song" volume = 0.75></audio>
 
 

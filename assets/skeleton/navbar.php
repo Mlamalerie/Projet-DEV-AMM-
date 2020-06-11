@@ -265,17 +265,18 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <?php 
-                    $listeGenres = $_SESSION['listeGenres'];
+                  $req = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
+$req->execute(array());
+$listeGenres = $req->fetchAll();
                     foreach($listeGenres as $gr){
-
-                        ?>
-                        <a class="dropdown-item  " href="#"><?= $gr?></a>
+  if($gr['id'] != 6 && $gr['id'] != 0) { ?>
+                        <a class="dropdown-item  " href="search.php?Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a>
                         <?php
-                    }
+                    }}
                         ?>
 
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Free Beats</a>
+                        <a class="dropdown-item" href="search.php?Price=free">Free Beats</a>
                     </div>
                 </li>
                 <?php } ?>
