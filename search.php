@@ -815,12 +815,9 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                         <?php } ?>
                         <select id='sortuser' name="sort" class="custom-select " onchange="goTrier2()">
 
-
-
-
                             <option value="alphacr" <?php if($wesortexiste && $_GET['sort'] == 'alphacr'){?> selected <?php } ?>>Ordre Alphabétique (A - Z) </option>
                             <option value="alphadecr" <?php if($wesortexiste && $_GET['sort'] == 'alphadecr'){?> selected <?php } ?>>Ordre Alphabétique (Z - A) </option>
-
+                    
 
                         </select>
                     </form>

@@ -155,7 +155,7 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 
 <?php if(!$okcestpastaprod) { ?>
-                            <a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Editer la piste </a>
+                            <a class="dropdown-item" href="#">Editer la piste </a>
 
                             <div class="dropdown-divider"></div>
                             <?php } ?>
