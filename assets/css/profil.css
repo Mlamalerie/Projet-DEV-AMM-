@@ -118,53 +118,9 @@ img.rounded {
 }
 
 .tab-content>.active {
-    display: block;
+    display: block; 
 }
 
-/*buttons*/
-.btn {
-    position: relative;
-    padding: 12px 30px;
-    margin: .3125rem 1px;
-    font-size: .75rem;
-    font-weight: 400;
-    line-height: 1.428571;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    border: 0;
-    border-radius: .2rem;
-    outline: 0;
-    transition: box-shadow .2s cubic-bezier(.4,0,1,1),background-color .2s cubic-bezier(.4,0,.2,1);
-    will-change: box-shadow,transform;
-}
-
-.btn.btn-just-icon {
-    font-size: 20px;
-    height: 41px;
-    min-width: 41px;
-    width: 41px;
-    padding: 0;
-    overflow: hidden;
-    position: relative;
-    line-height: 41px;
-}
-
-.btn.btn-just-icon fa{
-    margin-top: 0;
-    position: absolute;
-    width: 100%;
-    transform: none;
-    left: 0;
-    top: 0;
-    height: 100%;
-    line-height: 41px;
-    font-size: 20px;
-}
-.btn.btn-link{
-    background-color: transparent;
-    color: #999;
-}
 
 
 .roundedImage{  

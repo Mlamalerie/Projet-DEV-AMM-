@@ -843,7 +843,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
 
                             <div class=" rounded shadow-sm py-3 px-3"><a href="profils.php?profil_id=<?= $r['user_id']?>">
-                                <img src="<?=$r['user_image'] ?>" alt=""  class="img-fluid roundedImage mb-3 img-thumbnail shadow-sm">
+                                <img src="<?=$r['user_image'] ?>" alt=""  class="img-fluid roundedImage img-thumbnail shadow-sm">
                                 <h5 class="mb-0"><a href="profils.php?profil_id=<?= $r['user_id']?>"><?=$r['user_pseudo'] ?></a></h5>
 
                                 <span class="small  text-muted"><?=$r['user_ville'] ?>
@@ -1235,6 +1235,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <!--   *************************************************************  -->
         <!--   ************************** MUSIC PLAYER  **************************  -->
         <?php
+        $resuPLAYLIST = $resuBEATS;
         require_once('assets/skeleton/AudioPlayer/audioplayer.php');
         ?>
 

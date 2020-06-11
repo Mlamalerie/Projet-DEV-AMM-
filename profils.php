@@ -41,7 +41,7 @@ $okifollowhe = false;
 //*** BOOLEEN
 if(isset($id_demandeur)){
     // je l'ai bloqué ?
-    
+
     $req = $BDD->prepare("SELECT *
         FROM relation
         WHERE id_demandeur = ? AND id_receveur = ? AND statut = ?");
@@ -51,7 +51,7 @@ if(isset($id_demandeur)){
         $okiblockhe = true;
     }
     // il m'a bloqué ?
-    
+
     $req = $BDD->prepare("SELECT *
         FROM relation
         WHERE id_demandeur = ? AND id_receveur = ? AND statut = ?");
@@ -61,7 +61,7 @@ if(isset($id_demandeur)){
         $okheblocki = true;
     }
     // je le follow ?
-    
+
     $req = $BDD->prepare("SELECT *
         FROM relation
         WHERE id_demandeur = ? AND id_receveur = ? AND statut = ?");
@@ -175,6 +175,7 @@ if( $id_demandeur==$id_receveur){
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
         <link rel="stylesheet" type="text/css" href="assets/css/profil.css">
+        <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
 
     </head>
     <body class="profile-page">
@@ -227,54 +228,55 @@ if( $id_demandeur==$id_receveur){
                         <p><?=$afficher_profil['user_description']?> </p>
                     </div>
                     <div>
-                    <?php 
+                        <?php 
                         if($id_demandeur==$id_receveur){ 
-                    ?> 
+                        ?> 
                         <a href="editer-profil.php?profil_id=<?=$id_receveur?>" > <button>Editer</button></a>
-                        
-                         <a href="histo-ventes.php?" ><button>Historique de mes ventes</button></a>
+
+                        <a href="histo-ventes.php?" ><button>Historique de mes ventes</button></a>
                         <!-- SI C'EST PAS TON COMPTE -->
-                    <?php } 
-                        else if ($id_demandeur!=$id_receveur){
-                    ?>
-                   <div class="row">
+                        <?php } 
+                else if ($id_demandeur!=$id_receveur){
+                        ?>
+                        <div class="row">
                             <!-- Message -->
                             <?php
-                                if(!$okconnectey){
+                    if(!$okconnectey){
                             ?>
                             <button onclick="window.location.replace('connexion.php')"><i class="fas fa-envelope" style="font-size : 20px"></i></button>
                             <?php        
-                                }
-                                else{
+                    }
+                    else{
                             ?>
                             <a href="message.php?profil_id=<?= $id_receveur ?>" class="col-10"><button><i class="fas fa-envelope" style="font-size : 20px"></i></button></a>
                             <?php
-                                }
-                                ?>
-                            
-                            
+                    
+                            ?>
+
+
                             <span class="col-2"><?= $nb_follow?> Follower(s)</span>
 
                         </div>
 
                         <form action="" method="post">
                             <?php  
-                        if($okifollowhe){
-                            echo"Vous le suivez";
+                                if($okifollowhe){
+                                    echo"Vous le suivez";
                             ?>
                             <input type="submit" name="unfollow" value="Unfollow">
                             <?php 
-                        } 
-                                      else{ 
+                                } 
+                    else{ 
                             ?>
                             <input type="submit" name="follow" value="Follow">
                             <?php   
-                                      }    
+                    }    
                             ?>
                             <input type="submit" name="bloquer" value="Bloquer">
                         </form>
                         <?php
-                                } 
+                    }
+                } 
                         ?>
                     </div>
 
@@ -293,20 +295,26 @@ if( $id_demandeur==$id_receveur){
                 }
                     ?>
                     <div class="row">
-                        <div class="col-md-6 d-flex
-                                    h-100  bg-primary">
-                            <?php  
-                                require_once('assets/skeleton/tableBeatSearch.php'); 
-                            ?>
+
+                        <div class="pt-3 pb-3 d-flex shadow-sm rounded h-100 w-100    bg-primary">
+                            <?php  require_once('assets/skeleton/tableBeatSearch.php'); ?>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <?php  
-                }
             }
+        }
         ?>
+
+
+        <?php
+        require_once('assets/skeleton/endLinkScripts.php');
+        ?>
+
         <!--   *************************************************************  -->
         <!--   ************************** MUSIC PLAYER  **************************  -->
         <?php

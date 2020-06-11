@@ -1,86 +1,49 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
- 
-/* container for music player */
-/*.container {
-    position: absolute;
-    height: 300pt;
-    width: 250pt;
-    margin: auto;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #000000;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #000000;
-}*/
 
 /* container for play, pause, previous track, next track, and progress bar  */
 .box {
-    position: absolute;
+    /*    position: absolute;*/
     /*height: 10%;*/
     width: 100%;
-    background: -webkit-linear-gradient(45deg, rgb(40, 40, 40), #9C27B0);
+    height: 6rem;
+    background: #272727;
     z-index: 4;
     bottom: 0;
 }
 
+.tableuh td, .tableuh th {
+    padding: .4rem;
+} 
+
 .navplayer{
 
-    
+
 }
 
-/* album cover 
-#thumbnail {
-    position: absolute;
-    width: 103%;
-    top: -7%;
-    transition: 1s;
-    z-index: 3;
-}*/
-
-/* track artist */
 .song-artist {
-    position: absolute;
-    z-index: 4;
-    color: white;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-    bottom: 60%;
-    left: 28%;
+    color: whitesmoke;
+}
+.song-title {
+    color: whitesmoke;
 }
 
-/* track title */
-.song-title {
-    position: absolute;
-    z-index: 4;
-    color: white;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 17px;
-    bottom: 33%;
-    left: 28%;
-}
+
+
+.song-title  
+
+
+
+
 
 /* style for play and pause images */
-#play-pause {
-    position: absolute;
-    height: 50px;
-    width: 50px;
-    filter: invert(1);
-    cursor: pointer;
-    bottom: 10%;
-    z-index: 4;
-    font-size: 53px;
-    right: 92.2%;
+#btn-play-pause {  
+    width: 20px!important; height : 20px!important;
+
 }
 
 /* style for next and previous song images */
-#next-song, #previous-song {
+#btn-next-song, #btn-previous-song {
+    width: 30px; height : 30px;
+    /* 
     position: absolute;
     height: 30px;
     width: 30px;
@@ -88,24 +51,27 @@
     cursor: pointer;
     bottom: 13.5%;
     font-size: 40px;
-    z-index: 4;
+    z-index: 4; 
+    */
 }
 
 /* unique style for next song image */
 #next-song {
-    right: 89%;
-    bottom: 23%;
-}
+    /*    right: 89%;*/
+    /*    bottom: 23%;*/
+} 
 
 /* unique style for previous song image */
 #previous-song {
+    /*
     right: 96.9%;
     bottom: 23%;
+    */
 }
 
 /* style for current time of the track */
 .currentTime {
-    position: absolute;
+    /*    position: absolute;*/
     width: 50px;
     cursor: pointer;
     bottom: 15%;
@@ -119,7 +85,7 @@
 
 /* style for the total length of the track */
 .durationTime {
-    position: absolute;
+    /*    position: absolute;*/
     width: 50px;
     cursor: pointer;
     bottom: 15%;
@@ -135,7 +101,7 @@
 #progress-bar {
     -webkit-appearance: none;
     appearance: none;
-    position: absolute;
+    /*    position: absolute;*/
     z-index: 4;
     height: 5px;
     background: #000000;
@@ -148,8 +114,8 @@
 /* style for the progress bar's slider thumb */
 #progress-bar::-webkit-slider-thumb {
     -webkit-appearance: none;
-    margin-top: -3px;
-    margin-left: 0px;
+    /*    margin-top: -3px;*/
+    /*    margin-left: 0px;*/
     height: 10px;
     width: 7px;
     border: 0;
@@ -173,14 +139,50 @@
 }
 
 #thumbnail{
-    width :4%;
+    width :70px;
     border-radius: 20%;
-    margin-top: 10px;
-    margin-left: 184px;
+
 }
 
-.btn-buy{
-    color: #9C27B0;
-    background-color: aliceblue;
-    margin-left: 1000px;
+
+/*
+
+.volume-range {
+display: none;
+} 
+
+
+
+.icon-size {
+font-size: 1rem;
 }
+
+.bar-hoverbox {
+padding: 10px 15px;
+opacity: 0.7;
+transition: opacity .2s;
+
+&:hover {
+opacity: 1;
+cursor: pointer;
+}
+}
+
+.bar {
+background: #999;
+height: 7px;
+width: 120px;
+border-radius: 15px;
+overflow: hidden;
+pointer-events: none;
+}
+.bar-fill {
+background: #FFF;
+width: 0%;
+height: 100%;
+background-clip: border-box;
+pointer-events: none;
+}
+
+
+*/

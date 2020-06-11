@@ -19,9 +19,7 @@
 -->
         </thead>
         <tbody class=" rounded">
-            <?php
-            if ($yadesresultatsBEATS) {$i = 1;foreach($resuBEATS as $r){
-            ?>
+            <?php if ($yadesresultatsBEATS) {$i = 1;foreach($resuBEATS as $r){?>
             <tr class="border-0 rounded px-md-5">
                 <td class="pr-0 border-0 align-middle rounded "><strong class="ml-1"><?= $i ?></strong></td>
                 <th scope="row" class="border-0 rounded">
@@ -117,7 +115,7 @@
                             <?php if($okconnectey) { ?>
                             onclick="go2Panier(this,'<?=$r['beat_title']?>','<?=$r['beat_author']?>', '<?=$r['beat_price']?>', '<?=$r['beat_cover']?>','<?=$r['beat_id']?>');" <?php }else { ?> onclick="goConnexionStp();"  <?php } ?>
 
-                            class="btn btn-danger"
+                            class="btn btn-buy"
 
 
                             >
@@ -152,7 +150,6 @@
                 Aucun résultat;
             <?php } ?>
 
-            ?>
             <script >
                 function goConnexionStp() {
                     window.location.replace("connexion.php");
