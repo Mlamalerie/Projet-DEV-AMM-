@@ -1,22 +1,7 @@
 <div class="table-responsive mx-2  rounded">
     <table class="table  rounded border-success">
         <thead>
-            <!--
-<tr>
-<th scope="col" class="border-0 bg-light">
-<div class="py-0  text-uppercase">n</div>
-</th>
-<th scope="col" class="border-0 bg-light">
-<div class="p-2 px-3 text-uppercase"> image</div>
-</th>
-<th scope="col" class="border-0 bg-light">
-<div class="py-2 text-uppercase">like</div>
-</th>
-<th scope="col" class="border-0 bg-light">
-<div class="py-2 text-uppercase">carte</div>
-</th>
-</tr>
--->
+  
         </thead>
         <tbody class=" rounded">
             <?php if ($yadesresultatsBEATS) {$i = 1;foreach($resuBEATS as $r){?>
@@ -40,26 +25,26 @@
                             </h5>
 
                             <span class="text-muted font-weight-normal font-italic d-block ">by <a href="profils.php?profil_id=<?= $r['beat_author_id']?>" class="text-dark d-inline-block "><span class="text-muted font-weight-normal font-italic d-block">
-                                 <?=$r['beat_author']?>
+                                <?=$r['beat_author']?>
                                 </span>
-                            </a></span>
+                                </a></span>
                         </div>
                     </div>
 
                 </th>
                 <?php 
-                $tags = explode(',',$r['beat_tags']);
-                                                                              
-                
+    $tags = explode(',',$r['beat_tags']);
+
+
                 ?>
-                 <th scope="row" class="border-0 align-middle rounded">
+                <th scope="row" class=" border-0 align-middle rounded">
                     <div class="p-0 rounded ">
-                       <?php foreach($tags as $t) {
-                        if(strlen($t)>1){
-                            $t = trim($t);
-                            
+                        <?php foreach($tags as $t) {
+                    if(strlen($t)>1){
+                        $t = trim($t);
+
                         ?>
-                        <a class="spanTag badge badge-light text-primary px-2 rounded-pill ml-2" href="search.php?Type=beats&q=<?= $t ?>">#<?= $t ?> </a>
+                        <a class="spanTag  badge badge-light text-primary px-2 rounded-pill ml-2" href="search.php?Type=beats&q=<?= $t ?>">#<?= $t ?> </a>
                         <?php }} ?>
                     </div>
 
@@ -68,10 +53,12 @@
                 <?php if($okconnectey) {  ?>
                 <td class="border-0 align-middle rounded">
 
+
+
                     <span id="span_nbLike-<?=$r['beat_id']?>"><?=$r['beat_like']?></span>
 
                     <?php
-                $oktaliker = false;
+                    $oktaliker = false;
                                         $req = $BDD->prepare("SELECT id FROM likelike WHERE like_user_id = ? AND like_beat_id = ?");
                                         $req->execute(array($_SESSION['user_id'],$r['beat_id']));
                                         $lll = $req->fetch();
@@ -92,41 +79,42 @@
                 <td class="border-0 align-middle rounded">
 
                     <?php 
-                $okdejadanspanier = false;
-                $okdejaacheter = false;
-                if($okconnectey) {
-                    $req = $BDD->prepare("SELECT *
+                                                                              $okdejadanspanier = false;
+                                                                              $okdejaacheter = false;
+                                                                              if($okconnectey) {
+                                                                                  $req = $BDD->prepare("SELECT *
                                                                                         FROM vente
                                                                                         WHERE vente_user_id = ? AND vente_beat_id = ?");
-                    $req->execute(array($_SESSION['user_id'],$r['beat_id']));
+                                                                                  $req->execute(array($_SESSION['user_id'],$r['beat_id']));
 
 
-                    $ach = $req->fetch();
+                                                                                  $ach = $req->fetch();
 
 
-                    if(isset($ach['id'])){
-                        $okdejaacheter = true;
-                    }else {
-                        $req = $BDD->prepare("SELECT *
+                                                                                  if(isset($ach['id'])){
+                                                                                      $okdejaacheter = true;
+                                                                                  }else {
+                                                                                      $req = $BDD->prepare("SELECT *
                                                                                         FROM panier
                                                                                         WHERE panier_user_id = ? AND panier_beat_id = ?");
-                        $req->execute(array($_SESSION['user_id'],$r['beat_id']));
+                                                                                      $req->execute(array($_SESSION['user_id'],$r['beat_id']));
 
 
-                        $aff = $req->fetch();
+                                                                                      $aff = $req->fetch();
 
 
 
-                        if(isset($aff['id'])){
-                            $okdejadanspanier = true;
-                        }
-                    }
-                }
+                                                                                      if(isset($aff['id'])){
+                                                                                          $okdejadanspanier = true;
+                                                                                      }
+                                                                                  }
+                                                                              }
                     ?>
                     <?php 
-                if(!$okdejaacheter) {
+                                                                              $okcestpastaprod = ($okconnectey && $r['beat_author_id'] != $_SESSION['user_id']);
+                                                                              if(!$okdejaacheter) {
 
-                    if(($okconnectey && $r['beat_author_id'] != $_SESSION['user_id']) || !$okconnectey) { ?>
+                                                                                  if($okcestpastaprod || !$okconnectey) { ?>
                     <button id='btnbeat-<?=$r['beat_id']?>' 
 
                             <?php if($okconnectey) { ?>
@@ -155,16 +143,36 @@
                     <?php } ?>
 
 
-                </td>
 
+                </td>
+                
+<!--  ** 3 point -->
+                <td class="pr-0 border-0 align-middle rounded ">
+                    <div id='3point' class="nav-item dropdown no-arrow ">
+                        <button class="nav-link dropdown-toggle  dropdown-toggle-pointpoint btn " href="#" id="3pointDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                            <i class="fa fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
+
+<?php if(!$okcestpastaprod) { ?>
+                            <a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Editer la piste </a>
+
+                            <div class="dropdown-divider"></div>
+                            <?php } ?>
+                            <a class="dropdown-item" href="#">Aller à la pistes</a>
+                            <a class="dropdown-item" href="#">Aller à l'artiste</a>
+                        </div>
+
+                    </div>
+                </td>
 
 
             </tr>
             <?php
-                $i++;}}
+                                                                              $i++;}}
             else { ?>
-                
-                Aucun résultat;
+
+            Aucun résultat;
             <?php } ?>
 
             <script >

@@ -9,7 +9,13 @@ $req = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
 $req->execute(array());
 $listeGenres = $req->fetchAll();
 
-var_dump($_POST);
+$okconnectey = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
+    print_r($_SESSION);
+    $okconnectey = true;
+} else{
+    echo "Pas de connexion";
+}
 
 
 {
@@ -394,15 +400,6 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 ?>
 
 
-<?php
-$okconnectey = false;
-if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
-    print_r($_SESSION);
-    $okconnectey = true;
-} else{
-    echo "Pas de connexion";
-}
-?>
 
 
 
