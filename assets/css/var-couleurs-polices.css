@@ -14,9 +14,13 @@
 
     --base-colorDark1: #1b0929;
     --base-colorDark2: #7728b2;
+    --base-colorDark3: ;
     
-    --base-color2: #121619;
-
+    
+     --base-color-purple1: #871b8b;
+     --base-color-purple2: #121619;
+ --base-color-purple3:;
+     
     --base-police1: 'Quicksand', sans-serif;
 
     --base-taille1: 16px;

@@ -115,6 +115,27 @@ img#iconPanier,img#iconUpload  {
 
    
 }
+.dropdown-toggle-pointpoint:after { 
+  display: none!important; 
+}
+/*** MEGA MENU */ 
+.megamenu {
+  position: static;
+}
 
+.megamenu .dropdown-menu {
+  background: none;
+  border: none;
+  width: 100%;
+}
 
-
+.contenant-mega-1 {
+     background-color: var(--couleurdark);
+    border-bottom-left-radius:  var(--base-border-radius);
+    
+}
+.contenant-mega-2 {
+   
+    border-bottom-right-radius:  var(--base-border-radius);
+    
+}
