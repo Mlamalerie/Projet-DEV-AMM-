@@ -297,7 +297,8 @@ if( $id_demandeur==$id_receveur){
                     <div class="row">
 
                         <div class="pt-3 pb-3 d-flex shadow-sm rounded h-100 w-100    bg-primary">
-                            <?php  require_once('assets/skeleton/tableBeatSearch.php'); ?>
+                           
+                            <?php $decal = 0; require_once('assets/skeleton/tableBeatSearch.php'); ?>
 
                         </div>
                     </div>

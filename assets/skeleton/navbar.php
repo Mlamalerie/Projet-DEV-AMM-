@@ -327,7 +327,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     $listeGenres = $req->fetchAll();
                     foreach($listeGenres as $gr){
                         if($gr['id'] != 6 && $gr['id'] != 0) { ?>
-                        <a class="dropdown-item  " href="search.php?Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a>
+                        <a class="dropdown-item  " href="search.php?Type=beats&Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a>
                         <?php
                                                              }}
                         ?>

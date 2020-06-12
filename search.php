@@ -333,6 +333,27 @@ else if ($wetypeexiste && $jechercheunboug){
             $resuUSERS = $req->fetchAll();
             
         } else if ($wesortexiste) {
+            echo '##########e';
+            $req = $BDD->prepare("SELECT beat_author_id, SUM(beat_nbvente) AS vente_total
+                                    FROM beat
+                                    GROUP BY beat_author_id
+                                    ORDER BY $trierpar $asc_desc ");
+            $req->execute(array());
+
+            $resuUb = $req->fetchAll();
+            $resuUSERS = [];
+            foreach($resuUb as $u) {
+                $req = $BDD->prepare("SELECT * FROM (SELECT *
+                                    FROM user
+                                    WHERE user_id = ? ) base 
+                                    WHERE CONCAT(user_pseudo,user_description)
+                                    LIKE ? ");
+                $req->execute(array($u['beat_author_id'],"%".$xxx."%"));
+                $resuUu = $req->fetchAll();
+
+                $resuUSERS = array_merge($resuUSERS,$resuUu);
+
+            }
 
 
         }
@@ -353,6 +374,7 @@ else if ($wetypeexiste && $jechercheunboug){
             $resuUSERS = $req->fetchAll();
 
         }else if ($wesortexiste) {
+            
             $req = $BDD->prepare("SELECT beat_author_id, SUM(beat_nbvente) AS vente_total
                                     FROM beat
                                     GROUP BY beat_author_id
@@ -461,6 +483,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
 
+        <link rel="stylesheet" type="text/css" href="assets/css/var-couleurs-polices.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <!--  Audio player de mathieu   -->
         <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
@@ -503,7 +526,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                         <div class="list-group">
                             <h4 class="text-white">Type </h4> 
-                            <?php if ($weqexiste && ($wegenreexiste || $wesortexiste || $wepriceexiste))  { ?>
+                            <?php if ( $weqexiste && ($wegenreexiste || $wepriceexiste))  { ?>
                             <a class='text-white' href="search.php?Type=beats&q=<?=$_GET['q']?>"> clear all</a><?php } ?>
 
                             <form action="search.php" id="formType">
@@ -741,7 +764,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     <?php if (!empty($_GET['q']))  { ?>
                     <div class="">
                         <div class=" bg-dark mx-auto mt-4">
-                            <span class="play-audio-icon"></span>
+                            
                             <h1 class="display-4">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
 
 
@@ -822,7 +845,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded bg-primary mb-4" >
 
 
-                        <?php  require_once('assets/skeleton/tableBeatSearch.php'); ?>
+                        <?php  $decal =0; require_once('assets/skeleton/tableBeatSearch.php'); ?>
 
 
 

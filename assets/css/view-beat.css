@@ -1,4 +1,4 @@
-            .animated-btn {
+.animated-btn {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -7,8 +7,8 @@
     text-align: center;
     background: #ff3f3f;
     position: relative;
-                margin-top:1%;
-                
+    margin-top:2%; 
+
 }
 .iconPlay {  
     margin-top: 1.89rem;
@@ -57,6 +57,8 @@
         opacity: 0;
     }
 }
-            body {
-    background: #121618;  
-}
+
+
+body {
+    background: #171218;  
+} 

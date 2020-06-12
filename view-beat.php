@@ -11,6 +11,14 @@ $req = $BDD -> prepare("SELECT * FROM beat WHERE beat_id = ?");
 $req->execute(array($beat_id));
 $instru = $req->fetch();
 
+$okconnectey = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
+    print_r($_SESSION);
+    $okconnectey = true;
+} else{
+    echo "Pas de connexion";
+}
+
 
 
 ?>
@@ -23,9 +31,18 @@ $instru = $req->fetch();
         <?php
     require_once('assets/skeleton/headLinkCSS.html');
         ?>
+        <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/search.css">
+         <!--  Audio player de mathieu   -->
+        <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
         <link rel="stylesheet" type="text/css" href="assets/css/view-beat.css">
     </head>
     <body>
+        
+         <!--   *************************************************************  -->
+        <!--   ************************** NAVBAR  **************************  -->
+    
+       
         <!-- Demo header-->
         <section class="mt-5 pb-4 header text-center">
 
@@ -61,21 +78,71 @@ $instru = $req->fetch();
 
 
             <!-- Animated button -->
-            <span  onclick='goAfficheInfo()' class="animated-btn text-white" href="#"><i class="fa fa-play iconPlay"></i></span>
+            <span id='1btnbeat-<?=$instru['beat_id']?>' onclick="playPause(0,<?=$instru['beat_id']?>)" class="animated-btn text-white" href="#"><i class="fa fa-play iconPlay"></i></span>
+
+
 
 
         </section>
 
-        <script>
-            function goAfficheInfo() {
+        <section class="mt-2 pb-4 header text-center">
+            <div id="resultcontentAlea"  class="container py-5 text-white rounded bg-primary mb-4" >
 
-            }
 
-            function playBeat(){
+                <?php
 
-            }
+                $req = $BDD->prepare("SELECT beat_id
+                            FROM beat
+                            WHERE beat_id <> ?
+                            ");
+                $req->execute(array( $instru['beat_id'] ));
+                $resuID = $req->fetchAll();
+                shuffle($resuID);
+                shuffle($resuID);
+                var_dump(count($resuID));
 
-        </script>
+                $resuBEATS = [];
+                for ($i = 0; $i < 3; $i++){
+                    $req = $BDD->prepare("SELECT *
+                            FROM beat
+                            WHERE beat_id = ?");
+                    $req->execute(array($resuID[$i]['beat_id']));
+                    $resuB = $req->fetchAll();
+
+                    $resuBEATS = array_merge($resuBEATS,$resuB);
+                }
+                $yadesresultatsBEATS = false;
+                if (isset($resuBEATS) && !empty($resuBEATS)){
+                    $yadesresultatsBEATS = true;
+                }
+                
+                $oublielepremier = false;
+
+                ?>
+
+                <?php  $decal = 1; require_once('assets/skeleton/tableBeatSearch.php'); ?>
+
+            </div>
+        </section>
+
+        
+        
+         <?php
+        require_once('assets/skeleton/endLinkScripts.php');
+        ?>
+        
+         <!--   *************************************************************  -->
+        <!--   ************************** MUSIC PLAYER  **************************  -->
+        <?php
+        if(isset($resuBEATS) && !empty($resuBEATS)) {
+            $resuPLAYLIST = $resuBEATS;
+           array_unshift($resuPLAYLIST, $instru);
+        } else {
+            $resuPLAYLIST = array();
+        }
+        
+        require_once('assets/skeleton/AudioPlayer/audioplayer.php');
+        ?>
 
     </body>
 
