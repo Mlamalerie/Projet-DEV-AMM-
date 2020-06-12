@@ -6,11 +6,16 @@ include('assets/db/connexiondb.php');
 /*print_r($_GET);*/
 
 if (!isset($_GET['profil_id'])){
-    header('Location: profils.php'); 
+    header('Location: /'); 
     exit;
 }
 
 $id = (int)$_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
+
+if ($id != $_SESSION['user_id']){
+    header('Location: /'); 
+    exit;
+}
 
 $req = $BDD->prepare("SELECT * 
     FROM user 
@@ -48,19 +53,16 @@ $privee = $req->fetch();
 </head>
 <body>
         <div class="container">
-           
             <div class="img-privee">
-                    <img src="img/<?=$privee['user_image']?>" style="width: 150px;height: 150px;">
+                <img src="<?=$privee['user_image']?>" style="width: 150px;height: 150px;">
             </div>
-            
             <div class="infos-privee">
                     <h2><?= $privee['user_nom'] ?> <?= $privee['user_prenom']?></h2>  
                     <ul>                   
                         <li>Adresse complète : <?= $privee['user_ville'] ?></li> 
-                         <li>Mot de passe : <?= $privee['user_password'] ?></li>               <li>Historique des achats/ventes<?= $privee['user_id_beats'] ?></li>
+                         <li>Mot de passe : <?= $privee['user_password'] ?></li>               
                     </ul>
-            </div>
-            
+            </div>        
         </div>
 </body>
 </html>

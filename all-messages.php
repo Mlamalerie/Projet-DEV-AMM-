@@ -200,7 +200,7 @@ if(isset($_POST['inputOption'])) {
                                             <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $af['user_pseudo']?>')" value="signaler"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></button>
                                             
                                             <!--  On affiche cet icon pour enlever le signalement d'un message -->
-                                            <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $af['user_pseudo']?>')" value="annuler"><i class="fas fa-undo" style="color:red"></i></button>
+                                            <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $af['user_pseudo']?>')" value="annuler"><i class="fas fa-times" style="color:red"></i></button>
                                            
                                             <?php
                                                 }

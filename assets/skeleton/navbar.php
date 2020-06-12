@@ -265,7 +265,9 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
                         <a class="dropdown-item" href="profils.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
 
-                        <a class="dropdown-item  " href="my-beats.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
+                        <a class="dropdown-item" href="my-beats.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
+                        
+                        <a class="dropdown-item" href="privee.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user-shield mr-1 text-gray-400"></i> Mes Informations Privées </a>
 
 
                         <div class="dropdown-divider"></div>
