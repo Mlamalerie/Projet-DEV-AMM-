@@ -41,7 +41,8 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         
          <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
-    
+        <?php require_once('assets/skeleton/navbar.php');  require_once('assets/functions/js-panier.php');?>
+
        
         <!-- Demo header-->
         <section class="mt-5 pb-4 header text-center">

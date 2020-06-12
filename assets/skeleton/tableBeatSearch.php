@@ -50,7 +50,7 @@
                         $t = trim($t);
 
                         ?>
-                        <a class="spanTag  badge badge-light text-primary px-2 rounded-pill ml-2" href="search.php?Type=beats&q=<?= $t ?>">#<?= $t ?> </a>
+                        <a class="spanTag  badge badge-light text-dark px-2 rounded-pill ml-2" href="search.php?Type=beats&q=<?= $t ?>">#<?= $t ?> </a>
                         <?php }} ?>
                     </div>
 

@@ -1,5 +1,9 @@
 <?php 
 $jesuissurindex = $_SESSION['ici_index_bool']; 
+$reqG = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
+$reqG->execute(array());
+$listeGenres = $reqG->fetchAll();
+
 
 ?>
 
@@ -79,8 +83,15 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                                             </div>
                                             <div class="col-lg-4 border-right border-secondary">
                                                 <h6 class="font-weight-bold text-uppercase">Genres</h6>
-                                                <ul class="list-unstyled text-left">
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">x</a></li>
+                                                <ul class="list-unstyled text-left"> <?php 
+                    
+                    foreach($listeGenres as $gr){
+                        if($gr['id'] != 6 && $gr['id'] != 0 && $gr['id'] != 12 && $gr['id'] != 15 && $gr['id'] != 4 && $gr['id'] != 6) { ?>
+
+                                                    <li class="nav-item"><a class="dropdown-item  " href="search.php?Type=beats&Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a></li> 
+  <?php
+                                                             }}
+                        ?>
 
                                                 </ul>
                                             </div>
@@ -322,9 +333,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <?php 
-                    $req = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
-                    $req->execute(array());
-                    $listeGenres = $req->fetchAll();
+                    
                     foreach($listeGenres as $gr){
                         if($gr['id'] != 6 && $gr['id'] != 0) { ?>
                         <a class="dropdown-item  " href="search.php?Type=beats&Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a>
