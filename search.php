@@ -5,9 +5,9 @@ include_once("assets/db/connexiondb.php");
 print_r('<br><br><br><br><br><br><br>');
 print_r($_GET);
 
-$req = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
-$req->execute(array());
-$listeGenres = $req->fetchAll();
+$reqG = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
+$reqG->execute(array());
+$listeGenres = $reqG->fetchAll();
 
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
@@ -91,7 +91,9 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                 $_GET['trierpar'] = "user_pseudo";
                 $_GET['asc_desc'] = "DESC";
 
-
+            } else if($_GET['sort'] == "seller") {
+                $_GET['trierpar'] = "vente_total";
+                $_GET['asc_desc'] = "DESC";
             }
 
 
@@ -133,6 +135,13 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     }
 }
 
+//$req = $BDD->prepare("SELECT beat_author_id, SUM(beat_nbvente) AS vente_total
+//FROM beat
+//GROUP BY beat_author_id
+//ORDER BY vente_total DESC
+//");
+//$req->execute(array());
+//$resuZ = $req->fetchAll();
 
 //DANS LES INSTRU
 if ($wetypeexiste && !$jechercheunboug) {
@@ -308,32 +317,88 @@ if ($wetypeexiste && !$jechercheunboug) {
 else if ($wetypeexiste && $jechercheunboug){
 
     if($weqexiste) {
-        print_r("GANGA");
+
         $xxx = (String) trim(($_GET['q']));
-        $req = $BDD->prepare("SELECT *
+        if(!$wesortexiste || ($wesortexiste && $_GET['sort'] != 'seller')) {
+            
+            print_r("GANGA");
+
+            $req = $BDD->prepare("SELECT *
                             FROM user
                             WHERE CONCAT(user_pseudo,user_description)
                             LIKE ?
                             ORDER BY $trierpar $asc_desc");
 
+            $req->execute(array("%".$xxx."%"));
+            $resuUSERS = $req->fetchAll();
+            
+        } else if ($wesortexiste) {
+            echo '##########e';
+            $req = $BDD->prepare("SELECT beat_author_id, SUM(beat_nbvente) AS vente_total
+                                    FROM beat
+                                    GROUP BY beat_author_id
+                                    ORDER BY $trierpar $asc_desc ");
+            $req->execute(array());
+
+            $resuUb = $req->fetchAll();
+            $resuUSERS = [];
+            foreach($resuUb as $u) {
+                $req = $BDD->prepare("SELECT * FROM (SELECT *
+                                    FROM user
+                                    WHERE user_id = ? ) base 
+                                    WHERE CONCAT(user_pseudo,user_description)
+                                    LIKE ? ");
+                $req->execute(array($u['beat_author_id'],"%".$xxx."%"));
+                $resuUu = $req->fetchAll();
+
+                $resuUSERS = array_merge($resuUSERS,$resuUu);
+
+            }
 
 
-        $req->execute(array("%".$xxx."%"));
-        $resuUSERS = $req->fetchAll();
+        }
 
 
 
-    } else {
-        $req = $BDD->prepare("SELECT *
+
+    } 
+    // pas de recherche
+    else {
+
+        if(!$wesortexiste || ($wesortexiste && $_GET['sort'] != 'seller')) {
+
+            $req = $BDD->prepare("SELECT *
                             FROM user
                             ORDER BY $trierpar $asc_desc");
+            $req->execute(array());
+            $resuUSERS = $req->fetchAll();
 
-        $req->execute(array());
-        $resuUSERS = $req->fetchAll();
+        }else if ($wesortexiste) {
+            
+            $req = $BDD->prepare("SELECT beat_author_id, SUM(beat_nbvente) AS vente_total
+                                    FROM beat
+                                    GROUP BY beat_author_id
+                                    ORDER BY $trierpar $asc_desc ");
+            $req->execute(array());
+
+            $resuUb = $req->fetchAll();
+            $resuUSERS = [];
+            foreach($resuUb as $u) {
+                $req = $BDD->prepare("SELECT *
+                                    FROM user
+                                    WHERE user_id = ? ");
+                $req->execute(array($u['beat_author_id']));
+                $resuUu = $req->fetchAll();
+
+                $resuUSERS = array_merge($resuUSERS,$resuUu);
+
+            }
+
+
+        } 
+
 
     }
-
-
 
 }
 
@@ -395,6 +460,8 @@ $yadesresultatsUSERS = false;
 
 if (isset($resuUSERS) && !empty($resuUSERS)){
     $yadesresultatsUSERS = true;
+    echo '  oui';
+
 
 } 
 ?>
@@ -416,6 +483,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
 
+        <link rel="stylesheet" type="text/css" href="assets/css/var-couleurs-polices.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <!--  Audio player de mathieu   -->
         <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
@@ -458,9 +526,9 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                         <div class="list-group">
                             <h4 class="text-white">Type </h4> 
-                            <?php if ($weqexiste && ($wegenreexiste || $wesortexiste || $wepriceexiste))  { ?>
-<a class='text-white' href="search.php?Type=beats&q=<?=$_GET['q']?>"> clear all</a><?php } ?>
-                            
+                            <?php if ( $weqexiste && ($wegenreexiste || $wepriceexiste))  { ?>
+                            <a class='text-white' href="search.php?Type=beats&q=<?=$_GET['q']?>"> clear all</a><?php } ?>
+
                             <form action="search.php" id="formType">
 
 
@@ -696,7 +764,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                     <?php if (!empty($_GET['q']))  { ?>
                     <div class="">
                         <div class=" bg-dark mx-auto mt-4">
-                            <span class="play-audio-icon"></span>
+                            
                             <h1 class="display-4">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
 
 
@@ -731,12 +799,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
         $obj1 = count($resuBEATS)." beats trouvé";
 
         print_r($obj1);
-    } else {
-        $obj1 = "Rien trouvé";
-
-        print_r($obj1);
-
-    }
+    } 
 
 
                                 ?> 
@@ -779,10 +842,10 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
 
-                    <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100    bg-primary" >
+                    <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded bg-primary mb-4" >
 
 
-                        <?php  require_once('assets/skeleton/tableBeatSearch.php'); ?>
+                        <?php  $decal =0; require_once('assets/skeleton/tableBeatSearch.php'); ?>
 
 
 
@@ -791,12 +854,10 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                     <!--  END div blue -->
 
-
-                    <p class="lead font-italic mb-0">"Lorem ipsumnisi."</p>
-
                     <?php } //end je cherche une prod ?>
                     <!--   *************************************************************  -->
                     <!--   ************************** RESULTAT USER **************************  -->
+
                     <?php if ($jechercheunboug || (!$wetypeexiste)) { ?>
                     <?php if (($wetypeexiste && $jechercheunboug)) { ?>
                     <form id="formTrie2" action="search.php">
@@ -821,13 +882,14 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                             <option value="alphacr" <?php if($wesortexiste && $_GET['sort'] == 'alphacr'){?> selected <?php } ?>>Ordre Alphabétique (A - Z) </option>
                             <option value="alphadecr" <?php if($wesortexiste && $_GET['sort'] == 'alphadecr'){?> selected <?php } ?>>Ordre Alphabétique (Z - A) </option>
-                    
+                            <option value="seller" <?php if($wesortexiste && $_GET['sort'] == 'seller'){?> selected <?php } ?>>Les plus gros vendeurs </option>
+
 
                         </select>
                     </form>
                     <?php } ?>
-                    <div id="resultuser"  class="pt-3 pb-3 d-flex shadow-sm rounded h-100" style="background-color : blue;">
-                        <?php  if (isset($resuUSERS)) {
+                    <div id="resultuser"  class="pt-3 pb-3 d-flex shadow-sm rounded bg-dark">
+                        <?php  if ($yadesresultatsUSERS) {
     foreach($resuUSERS as $r){ 
 
         if( ($r['user_role'] == 2 || $r['user_role'] == 0) && ($r['user_statut'] == 1) ) {

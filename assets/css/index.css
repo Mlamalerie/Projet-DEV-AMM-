@@ -81,9 +81,10 @@ header .overlay-sombre {
     height: 60px;
     margin: auto;
     max-width: 83%;
-    background-color: #d0c4d3;
+    background-color: rgba(103, 36, 100, 0.72);
     border-radius: 30px; /*forme arrondie de la barre*/
     padding: 10px;
+
 } 
 
 .search_input{
@@ -102,9 +103,10 @@ header .overlay-sombre {
     float: right;
     display: flex;
     justify-content: center;
+   background: rgba(252, 252, 252, 0.98);
     align-items: center;
     border-radius: 50%;
-    color:white;
+    color:rgb(126, 0, 149);
     text-decoration:none;
 }
 .search_icon:hover{
@@ -337,7 +339,7 @@ section:nth-of-type(5) {
 
 .form-control::placeholder {
     font-size: 0.95rem;
-    color: #aaa;
+    color: rgba(222, 222, 222, 0.9);
     font-style: italic;
 }
 

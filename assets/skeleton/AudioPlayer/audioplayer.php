@@ -39,6 +39,8 @@
                                        max=""
                                        value="0"
                                        onchange="changeProgressBar()"
+                                       onmouseup="changeProgressBar()"
+                                       onclick="changeProgressBar()"
 
                                        />
                                 <div class="durationTime"></div>
@@ -50,9 +52,9 @@
                     <td class='border-0 align-middle'>
                         <!-- volume-->
                         <div class="volume">
-                            <input id="volume_range" onchange="goVolume(this)" type="range" min="0" max="100" value="75" class="volume-range">
-                            <div class="icon">
-                                <i class="fa fa-volume-up icon-size" aria-hidden="true" onclick="caMute()"></i>
+                            <input id="volume_range" onmouseup='goVolume(this)' onchange="goVolume(this)" type="range" min="0" max="100" value="75" class="volume-range">
+                            <div id="divMute" class="icon text-light p-3" onclick="caMute(this)">
+                                <i class="fa fa-volume-up icon-size" ></i>
                             </div>
                             <div class="bar-hoverbox">
                                 <div class="bar">
@@ -74,15 +76,33 @@
 
         // Change le son
         var son = document.getElementById("song");
-
-        function caMute(){
-            son.volume = 0;
+var volvol;
+        
+        function caMute(bay){
+            
+            // 
+            if(son.volume > 0) {
+                volvol = son.volume;
+                 son.volume = 0;
+                bay.innerHTML = "<i class='fas fa-volume-mute icon-size'></i>";
+            } else {
+                son.volume = volvol;
+                bay.innerHTML = " <i class='fa fa-volume-up icon-size' ></i>";
+            }
+            
         }
 
         function goVolume(bay){
             let s = parseInt(bay.value)/100;
             son.volume = s;
             console.log("volume",s);
+            
+            if(s == 0){
+                console.log('x');
+                 document.getElementById("divMute").innerHTML = "<i class='fas fa-volume-mute icon-size'></i>";
+            } else {
+                 document.getElementById("divMute").innerHTML = "<i class='fas fa-volume-up icon-size'></i>";
+            } 
         }
 
     </script>

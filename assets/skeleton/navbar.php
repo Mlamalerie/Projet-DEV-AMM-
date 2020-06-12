@@ -1,5 +1,9 @@
 <?php 
 $jesuissurindex = $_SESSION['ici_index_bool']; 
+$reqG = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
+$reqG->execute(array());
+$listeGenres = $reqG->fetchAll();
+
 
 ?>
 
@@ -25,14 +29,14 @@ $jesuissurindex = $_SESSION['ici_index_bool'];
 
                 <div class="form-group row mr-2">
                     <input id='searchbar'
-                           type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-describedby="button-search" class="form-control rounded-pill form-control-underlined ">
+                           type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-describedby="button-search" class="form-control rounded-pill form-control-underlined " value="<?php if(!empty($_GET['q']) && isset($_GET['q']) ) echo $_GET['q']; ?>">
                     <div class="input-group-append">
-                        <select name="Type" class=" rounded-pill btn-block shadow-sm custom-select" >
+                        <select name="Type" class=" rounded-pill btn-block shadow-sm custom-select" onchange='submit()'>
 
-                            <option value="beats" class="dropdown-item">All beats</option>
+                           <option value="beats" class="dropdown-item"  <?php if (!empty($_GET['Type']) && isset($_GET['Type']) && $_GET['Type'] == 'beats' )  { ?> selected <?php } ?>>All beats</option> 
 
 
-                            <option value="users" class="dropdown-item">All users</option>
+                       <option value="users" class="dropdown-item"  <?php if (!empty($_GET['Type']) && isset($_GET['Type']) && $_GET['Type'] == 'users' )  { ?> selected <?php } ?>>All users</option>
 
 
                         </select>
@@ -54,14 +58,8 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
         <!--            Menu droite -->
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-md-auto" >
-                <?php
-                // si je detecte une connexion alors
-                if($okconnectey) {
-                ?>
+                <?php if(!$jesuissurindex) { ?>
 
-                <li class="nav-item ">
-                    <a class="nav-link btn" href="test_zone.php">Test_Zone<span class="sr-only">(current)</span></a>
-                </li>
 
                 <!-- Megamenu-->
                 <li class="nav-item dropdown megamenu">
@@ -85,8 +83,15 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                                             </div>
                                             <div class="col-lg-4 border-right border-secondary">
                                                 <h6 class="font-weight-bold text-uppercase">Genres</h6>
-                                                <ul class="list-unstyled text-left">
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">x</a></li>
+                                                <ul class="list-unstyled text-left"> <?php 
+                    
+                    foreach($listeGenres as $gr){
+                        if($gr['id'] != 6 && $gr['id'] != 0 && $gr['id'] != 12 && $gr['id'] != 15 && $gr['id'] != 4 && $gr['id'] != 6) { ?>
+
+                                                    <li class="nav-item"><a class="dropdown-item  " href="search.php?Type=beats&Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a></li> 
+  <?php
+                                                             }}
+                        ?>
 
                                                 </ul>
                                             </div>
@@ -108,9 +113,25 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     </div>
                 </li>
 
+                <?php } ?>
+                <?php
+                // si je detecte une connexion alors
+
+
+                if($okconnectey) {
+                ?>
+
+                <li class="nav-item ">
+                    <a class="nav-link btn" href="test_zone.php">Test_Zone<span class="sr-only">(current)</span></a>
+                </li>
+
+
+
+                <?php if(!$jesuissurindex) { ?>
+
+
 
                 <!-- UPLOADER -->
-                <?php if(!$jesuissurindex) { ?>
                 <li class="nav-item">
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#modalUpload"><img id="iconUpload" src="assets/img/icon/ui.svg"> Uploader </button>
                 </li>
@@ -136,7 +157,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     $relation_bloq=$req1->fetchAll(); 
 
 
-                    include('assets/functions/datediff.php');
+                    include('assets/functions/date-fct.php');
                     $req = $BDD->prepare("SELECT * FROM (
                     SELECT *
                             FROM messagerie
@@ -314,12 +335,10 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <?php 
-                    $req = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
-                    $req->execute(array());
-                    $listeGenres = $req->fetchAll();
+                    
                     foreach($listeGenres as $gr){
                         if($gr['id'] != 6 && $gr['id'] != 0) { ?>
-                        <a class="dropdown-item  " href="search.php?Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a>
+                        <a class="dropdown-item  " href="search.php?Type=beats&Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a>
                         <?php
                                                              }}
                         ?>

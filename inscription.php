@@ -4,7 +4,7 @@ include_once("assets/db/connexiondb.php"); // inclure le fichier pour se connect
 
 // si une connection est détecter : (ta rien a faire ici mec)
 if(isset($_SESSION['user_id'])){
-    header('Location: dashboard.php');
+//    header('Location: dashboard.php');
     exit;
 }
 
@@ -347,7 +347,7 @@ if(!empty($_POST)){
                                                 <label for="ville"> Ville </label>
                                             </div>
 
-                                            <input type="text" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ville" name="ville" placeholder="Où habitez-vous ?"  value="<?php if(isset($ville)){echo $ville;}?>" autofocus>
+                                            <input type="text" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ville" name="ville" placeholder="Où habitez-vous ?"  value="<?php if(isset($ville)){echo $ville;}?>" >
                                             <?php
                                             if(isset($err_ville)){
                                                 echo "<span class='spanAlertchamp'> ";
