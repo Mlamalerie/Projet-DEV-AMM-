@@ -38,6 +38,7 @@ $afficher_profil = $req->fetch();
 $okiblockhe = false;
 $okheblocki = false;
 $okifollowhe = false;
+
 //*** BOOLEEN
 if(isset($id_demandeur)){
     // je l'ai bloqué ?
@@ -101,11 +102,10 @@ if(!empty($_POST)){
             echo "follow existe";
         }
         if($valid){
-            $req=$BDD->prepare("INSERT INTO relation (id_demandeur,id_receveur,statut) VALUES (?,?,?)");
-            $req->execute(array($id_demandeur,$id_receveur,1));
-
+            $date_relation = date("Y-m-d H:i:s");
+            $req=$BDD->prepare("INSERT INTO relation (id_demandeur,id_receveur,statut,date_relation) VALUES (?,?,?,?)");
+            $req->execute(array($id_demandeur,$id_receveur,1,$date_relation));
         }
-
         header('Location: profils.php?profil_id='.$id_receveur);
         exit;
     }
@@ -122,9 +122,10 @@ if(!empty($_POST)){
         $req=$BDD->prepare("DELETE FROM relation  WHERE (id_receveur = ? AND id_demandeur = ?) OR (id_receveur = ? AND id_demandeur = ?)");
 
         $req->execute(array($id_receveur, $id_demandeur, $id_demandeur,$id_receveur));
-
-        $req=$BDD->prepare("INSERT INTO relation (id_demandeur,id_receveur, statut) VALUES (?,?,?)");
-        $req->execute(array($id_demandeur,$id_receveur,3));
+        
+        $date_relation = date("Y-m-d H:i:s");
+        $req=$BDD->prepare("INSERT INTO relation (id_demandeur,id_receveur, statut,date_relation) VALUES (?,?,?,?)");
+        $req->execute(array($id_demandeur,$id_receveur,3,$date_relation));
         /*c'est comme unfollow mais on insère juste l'id de du profil bloqué*/ /*on suppose que le statut 3 est une demande bloqué*/
 
 
@@ -219,7 +220,7 @@ if( $id_demandeur==$id_receveur){
                 echo "Ce compte vous a bloqué";
             }
             else if($okiblockhe){
-                echo"Vous l'avez bloqué";
+                echo"Vous l'avez bloqué depuis le ".$resuIBLOCKHE['date_relation']."<br/>";
                     ?>
                     <form action="" method="post">
                         <button  class="btn btn-danger" style="background:white;border-color:red; color : red"><i class="fa fa-unlock-alt" aria-hidden="true"></i><input type="submit" class="btn" style="background:white; color : red" name="debloquer" value="Débloquer"></button>
@@ -267,7 +268,7 @@ if( $id_demandeur==$id_receveur){
                         <form action="" method="post">
                             <?php  
                                 if($okifollowhe){
-                                    echo"Vous le suivez<br/>";
+                                    echo "Vous le suivez depuis le ".$resuIFOLLOWHE['date_relation']."<br/>";
                             ?>
                             <button class="btn btn-danger" style="background:white;border-color:#7728b2; color : #7728b2; box-shadow :0 0 0 0.2rem #7728b2"><i class="fas fa-user-minus"></i><input type="submit"  class="btn" style="margin-left:3px;background:white;color : #7728b2;" name="unfollow" value="Unfollow"></button>
                             <?php 
@@ -327,7 +328,7 @@ if( $id_demandeur==$id_receveur){
                     
                     <div class="row">
 
-                        <div class="pt-3 pb-3 d-flex shadow-sm rounded h-100 w-100    bg-primary">
+                        <div class="pt-3 pb-3 d-flex shadow-sm rounded h-100 w-100 bg-primary">
                            
                             <?php $decal = 0; require_once('assets/skeleton/tableBeatSearch.php'); ?>
 

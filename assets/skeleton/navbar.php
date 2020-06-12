@@ -73,11 +73,11 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                                             <div class="col-lg-4 border-right border-secondary">
 
                                                 <ul class="list-unstyled text-left">
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0">Top Ventes Beats</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&sort=vente" class="nav-link text-small pb-0">Top Ventes Beats</a></li>
 
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Recemeent ajouté </a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Free Beats</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0">Top Vendeur</a></li>
+                                                    <li class="nav-item"><a href="http://localhost/Projet/search.php?Type=beats&sort=nouveaute" class="nav-link text-small pb-0 ">Récemment ajouté </a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&Price=free" class="nav-link text-small pb-0 ">Free Beats</a></li>
+                                                    <li class="nav-item"><a href="http://localhost/Projet/search.php?Type=users&sort=seller" class="nav-link text-small pb-0">Top Vendeurs</a></li>
 
                                                 </ul>
                                             </div>
@@ -98,9 +98,14 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                                             <div class="col-lg-4">
                                                 <h6 class="font-weight-bold text-uppercase">Type Beat</h6>
                                                 <ul class="list-unstyled text-left">
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Leto</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 "></a></li>
-
+                                                  <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Black-D</a></li>
+                                                  <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">CG6</a></li>
+                                                   <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Cheu-B</a></li>
+                                                   <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Dadju</a></li>
+                                                   <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Kepler</a></li>
+                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Leto</a></li>         
+                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Wanabilini</a></li>
+                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Z-17</a></li>
                                                 </ul>
                                             </div>
 
