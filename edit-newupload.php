@@ -8,7 +8,7 @@ $reqG = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
 $reqG->execute(array());
 $listeGenres = $reqG->fetchAll();
 
-print_r("$ <br><br><br><br>");
+print_r("$ <br><br><br><br>");print_r("$ <br><br><br><br>");
 
 print_r($_FILES);print_r($_POST);
 
@@ -40,13 +40,10 @@ if(isset($_FILES['uploadAudio'])) {
         $tmp_name = $_FILES['uploadAudio']['tmp_name'];
         $name = $_FILES['uploadAudio']['name'];
 
-
         $nomduboug = $_SESSION['user_pseudo'];
         $idduboug = $_SESSION['user_id'];
 
         $destination = $upd->uploadAudio($tmp_name,$name,$nomduboug,$idduboug);
-
-
     }
     else {
         $destination = "error0";
@@ -67,29 +64,39 @@ if(isset($_FILES['uploadAudio'])) {
             $okaudioposer = false;
 
         }
-    }  else {
+        var_dump($_FILES);
+        unset($_FILES['uploadAudio']);
+    } else { // si ya pas d'ereeur
         $_SESSION['destination'] = $destination;
     }
 
+}
 
-} 
+if(!isset($err_upload)){
+    if( !isset($_SESSION['destination'])){ // 
+        $okaudioposer = false;
+        $err_upload = "fichier n'est pas posé";
+    } else if (!isset($name) || empty($name)){
+        $okaudioposer = false;
+        $err_upload = "rien de posé";
+
+    }
+}
+if(!isset($err_upload) || isset($_POST['Uploader-mon-instru'])){ // si l'audio est bien posé alors verif
+    $nn = pathinfo($_SESSION['destination']);
+    //var_dump($nn);
+    $ext =  strtolower($nn['extension']); // stock le format audio
+    $dir = "data/".$_SESSION['user_id']."-".$_SESSION['user_pseudo']."/beats/";
+    $fichier = $dir.basename($_SESSION['user_id']."-beat-x.".$ext);
+    if (!file_exists($fichier)) {
+        $err_upload = "aucun fichier trouvé";
+        $okaudioposer = false;
+    }
+}
+var_dump($okaudioposer);
+
+
 print_r($_SESSION);
-$nn = pathinfo($_SESSION['destination']);
-//var_dump($nn);
-$ext =  strtolower($nn['extension']);
-
-$dir = "data/".$_SESSION['user_id']."-".$_SESSION['user_pseudo']."/beats/";
-$fichier = $dir.basename($_SESSION['user_id']."-beat-x.".$ext);
-
-if (!file_exists($fichier)) {
-    $okaudioposer = false;
-
-}
-
-if (!$okaudioposer){
-    echo "<script> history.go(-1); </script>";
-    exit;
-}
 
 if (!empty($_POST)) {
     echo 'emppy';
@@ -186,11 +193,13 @@ if (!empty($_POST)) {
                     echo 'rennneeaame';
                     $req = $BDD->prepare("UPDATE beat SET beat_source = ? WHERE beat_id = ? "); 
                     $req->execute(array($newfichier,$bb['beat_id']));
-                    // header('Location: view-beat.php?beat_id='.$bb['beat_id']);
-                    // exit;
+
 
                     echo "<script> alert('".$fichier."') </script>";
                     echo "<script> alert('".$_SESSION['user_id']."-beat-".$bb['beat_id'].".".$ext."') </script>";
+                    unset($_SESSION['destination']);
+                    header('Location: view-beat.php?id='.$bb['beat_id']);
+                    exit;
                 }
 
 
@@ -210,11 +219,6 @@ if (!empty($_POST)) {
 
 }
 
-
-
-if(isset($err_upload)) {
-    echo $err_upload;
-}
 
 ?>
 
@@ -243,27 +247,24 @@ if(isset($err_upload)) {
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        //  require_once('assets/skeleton/navbar.php');
+        require_once('assets/skeleton/navbar.php');
         ?>;
-        <?php
-        if (isset($err_upload)) { ?>
-        <a href=javascript:history.go(-1)>Retournez en arrière</a>
-
-        <?php   }
 
 
-        else {?>
-
-        <?php if(isset($destination)) {echo $destination;}
 
 
-        ?>
+        <?php if(isset($destination)) {echo $destination;}?>
+
+
         <section class="mt-5 pb-4 header text-center">
 
             <div class="bg-dark container py-5 text-white rounded">
-
+                <?php if (isset($err_upload)) { ?> <?=$err_upload ?> <a href=javascript:history.go(-1)>Retournez en arrière</a>  <?php }else {?>
 
                 <form id='formNewUpload' action="" method="post">
+
+                    <?= $name ?>
+
                     <input type="hidden" name="destinationbay" id="destinationbay" value="<?php if(isset($destination)){ echo $destination;} ?>">
 
                     <!--TITRE-->
@@ -278,13 +279,12 @@ if(isset($err_upload)) {
 
                         <select onchange="gogoUpload2()" name="b_genre" id="b_genre" class="mb-2  text-center form-control rounded-pill  shadow-sm px-4">
                             <option class=" " value="-1">Selectionner Genre</option>
-                            <?php 
-
-              foreach($listeGenres as $gr){
+                            <?php  
+                                                                                                                                              foreach($listeGenres as $gr){
                             ?>
                             <option class=" " value="<?=$gr['id']?>"><?= $gr['genre_nom']?></option>
                             <?php
-              }
+                                                                                                                                              }
                             ?>
 
                         </select>
@@ -333,7 +333,7 @@ if(isset($err_upload)) {
 
                 </form>
 
-
+                <?php  }  ?>
             </div>
 
 
@@ -343,12 +343,7 @@ if(isset($err_upload)) {
 
 
 
-        <?php
 
-
-
-             }
-        ?>
 
 
 

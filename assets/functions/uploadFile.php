@@ -121,7 +121,7 @@ class uploadFile{
         // si le fichier est un bien un fichier Image
         if (in_array($ext,$formatImage)){
 
-            $name = $idduboug.'-'.strtolower($nomduboug).'-cover_beat-'.$idbeat.'.'.$ext;
+            $name = $idduboug.'-cover-'.$idbeat.'.'.$ext;
 
 
             $dir = 'data/'.$idduboug.'-'.$nomduboug.'/images/cover/';

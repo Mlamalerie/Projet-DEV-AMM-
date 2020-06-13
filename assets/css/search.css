@@ -180,11 +180,7 @@ tr {
     will-change: box-shadow,transform;
 } 
 
-.radioMenu {
-    color: #eb3caf; 
-    font-size: 1.1rem; 
-    
-}
+
 /** les 3 point **/ 
 
 .dropdown-toggle-pointpoint:after { 
