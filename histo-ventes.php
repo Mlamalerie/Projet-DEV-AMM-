@@ -21,7 +21,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])){
     <body>
         <div class="row py-5">
             <div class="col-lg-10 mx-auto">
-                <h1>Mon historique de ventes</h1>
+                <h1><i class="fas fa-search-dollar"></i>    Mon historique de ventes</h1>
                 <div class="card rounded shadow border-0">
                     <div class="card-body p-5 bg-white rounded">
                         <div class="table-responsive">
@@ -71,10 +71,10 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])){
                                     ?> 
                                     <tr>
                                         <td class="text-center align-middle">
-                                            <img src="<?=$b['beat_cover']?>" style="height : 25px; width : 25px;" class="img-fluid mb-3 roundedImage shadow-sm">
+                                            <a href="view-beat.php?id=<?= $b['beat_id'] ?>"> <img src="<?=$b['beat_cover']?>" style="height : 25px; width : 25px;" class="img-fluid mb-3 roundedImage shadow-sm"></a>
                                         </td>
                                         <td  class="text-center align-middle">
-                                            <span><?=$b['beat_title']?></span>
+                                            <a href="view-beat.php?id=<?= $b['beat_id'] ?>"><span><?=$b['beat_title']?></span></a>
                                         </td>  
                                         <?php
                                             $req1=$BDD->prepare("SELECT *
@@ -84,7 +84,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])){
                                             $acheteur=$req1->fetch();
                                         ?>
                                         <td class="text-center align-middle">
-                                            <span><?=$acheteur['user_pseudo']?></span>
+                                            <a href="profils.php?profil_id= <?= $acheteur['user_id'] ?>"><span><?=$acheteur['user_pseudo']?></span></a>
                                         </td>
                                         <td class="text-center align-middle">
                                             <span><?=$acheteur['user_email']?></span>

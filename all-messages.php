@@ -148,16 +148,7 @@ if(isset($_POST['inputOption'])) {
                                     <tr>
                                         <td class="text-center align-middle">
                                             <div class="row"> 
-                                                <a href="messagerie.php?id=<?= $am['id_from'] ?>"> <button class="btn">Accéder à la messagerie</button></a>                                                                           
-                                                <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $am['message']?>')" value="suppr"><i class='fa fa-trash'></i></button>
-  
-                                            </div>
-                                        </td>
-                                        <td  class="text-center align-middle">
-                                            <?=$am['message']?>
-                                        </td>  
-                                        <td class="text-center align-middle">
-                                           <?php
+                                               <?php
                                             $req = $BDD->prepare("SELECT user_pseudo
                                                                 FROM user
                                                                 WHERE user_id = ?");
@@ -166,6 +157,16 @@ if(isset($_POST['inputOption'])) {
                                             $af=$req->fetch(); 
 
                                             ?>
+                                                <a href="messagerie.php?id=<?= $am['id_from'] ?>" title="Voir la messagerie de <?=$af['user_pseudo']?>"> <button class="btn">Accéder à la messagerie</button></a>                                                                           
+                                                <button class="btn"  title="Supprimer le message de <?=$af['user_pseudo']?>"  data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $am['message']?>')" value="suppr"><i class='fa fa-trash'></i></button>
+  
+                                            </div>
+                                        </td>
+                                        <td  class="text-center align-middle">
+                                            <?=$am['message']?>
+                                        </td>  
+                                        <td class="text-center align-middle">
+                                           
                                             <a href="profils.php?profil_id=<?=$am['id_from']?>"><span><?=$af['user_pseudo']?></span></a>
                                         </td>
                                         
