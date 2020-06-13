@@ -31,6 +31,7 @@ $icon = "<i class='fas fa-exclamation-circle mr-1'></i>";
 
 
 // UPLOADER
+$okaudioposer = true;
 $upd = new uploadFile();
 if(isset($_FILES['uploadAudio'])) {
     if($_FILES['uploadAudio']['size'] != 0) { 
@@ -51,7 +52,7 @@ if(isset($_FILES['uploadAudio'])) {
         $destination = "error0";
     }
 
-    $okaudioposer = true;
+
     if (substr($destination,0,-1) == "error") { 
         if ($destination[5] == "0") { 
             $err_upload = "Taille 0";
@@ -67,8 +68,8 @@ if(isset($_FILES['uploadAudio'])) {
 
         }
     }  else {
-            $_SESSION['destination'] = $destination;
-        }
+        $_SESSION['destination'] = $destination;
+    }
 
 
 } 
@@ -78,9 +79,17 @@ $nn = pathinfo($_SESSION['destination']);
 $ext =  strtolower($nn['extension']);
 
 $dir = "data/".$_SESSION['user_id']."-".$_SESSION['user_pseudo']."/beats/";
-$fichier = $dir.basename($_SESSION['user_id']."-beat-x".$ext);
+$fichier = $dir.basename($_SESSION['user_id']."-beat-x.".$ext);
 
+if (!file_exists($fichier)) {
+    $okaudioposer = false;
 
+}
+
+if (!$okaudioposer){
+    echo "<script> history.go(-1); </script>";
+    exit;
+}
 
 if (!empty($_POST)) {
     echo 'emppy';
@@ -153,7 +162,7 @@ if (!empty($_POST)) {
 
         if($ok) {
             echo "€€OOOOK";
-
+            echo "<script> alert('OKKKK') </script>";
             $date_upload = date("Y-m-d H:i:s"); 
 
             // preparer requete insertion
@@ -170,11 +179,13 @@ if (!empty($_POST)) {
 
             if(isset($bb)) {
 
-                echo $fichier;
-                $newfichier = $dir.basename($_SESSION['user_id']."-beat-".$bb['beat_id'].".".$ext);
-                if(rename($fichier,$dir.basename($_SESSION['user_id']."-beat-".$bb['beat_id'].".".$ext))) {
-                    echo 'rennneeaame';
 
+                $newfichier = $dir.basename($_SESSION['user_id']."-beat-".$bb['beat_id'].".".$ext);
+
+                if(rename($fichier, $newfichier)) {
+                    echo 'rennneeaame';
+                    $req = $BDD->prepare("UPDATE beat SET beat_source = ? WHERE beat_id = ? "); 
+                    $req->execute(array($newfichier,$bb['beat_id']));
                     // header('Location: view-beat.php?beat_id='.$bb['beat_id']);
                     // exit;
 
@@ -300,7 +311,7 @@ if(isset($err_upload)) {
 
                         </div>
                         <!--money-->
-                        <input  onchange="gogoUpload2()" onkeyup="gogoUpload2()" type="number" step="0.01" min="1" max="10000" class="mb-2 text-center form-control rounded-pill  shadow-sm px-4" id="b_price" name="b_price" placeholder="Mettez un price pour votre profil"  value="<?php if(isset($b_price) && !isset($_POST['freebay'])){echo $b_price;}?>" autofocus>
+                        <input  onchange="gogoUpload2()" onkeyup="gogoUpload2()" type="number" step="0.01" min="1" max="5000" class="mb-2 text-center form-control rounded-pill  shadow-sm px-4" id="b_price" name="b_price" placeholder="Mettez un price pour votre profil"  value="<?php if(isset($b_price) && !isset($_POST['freebay'])){echo $b_price;}?>" autofocus>
                     </div>
 
 
@@ -400,6 +411,10 @@ if(isset($err_upload)) {
                 else if (title.value.trim().length > 20){
                     erreurTitle.classList.remove("d-none");  //afficher erreur
                     erreurTitle.innerHTML = icon + "Titre trop grand";
+                    ok = false;
+                } else if (title.value.trim().length == 1 ){
+                    erreurTitle.classList.remove("d-none");  //afficher erreur
+                    erreurTitle.innerHTML = icon + "Titre trop petit";
                     ok = false;
                 } 
                 else {
@@ -501,9 +516,9 @@ if(isset($err_upload)) {
                     let price2 = parseFloat(price)
                     console.log(price);
 
-                    if (price2 < 1 || price2 > 10000){
+                    if (price2 < 1 || price2 > 5000){
                         erreurPrice.classList.remove("d-none");
-                        erreurPrice.innerHTML = icon + "Saisir un prix entre 1 et 10000";
+                        erreurPrice.innerHTML = icon + "Saisir un prix entre 1 et 5000";
                         ok = false;
 
                     } else {

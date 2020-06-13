@@ -8,7 +8,7 @@ function returnMusicListStr($bay, $resuBEATS){
         foreach($resuBEATS as $r) {
             $pose = $r['beat_source'];
 
-            $str .= "'audio/$pose',";
+            $str .= "'$pose',";
 
         }
 
