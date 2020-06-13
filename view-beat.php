@@ -27,7 +27,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title><?= $instru['beat_title'] ?></title>
+        <title><?= $instru['beat_title'] ?> by <?= $instru['beat_author'] ?> • WeBeatz </title>
         <?php
     require_once('assets/skeleton/headLinkCSS.html');
         ?>
@@ -43,7 +43,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <!--   ************************** NAVBAR  **************************  -->
         <?php require_once('assets/skeleton/navbar.php');  require_once('assets/functions/js-panier.php');?>
 
-       
+   
         <!-- Demo header-->
         <section class="mt-5 pb-4 header text-center">
 
@@ -79,7 +79,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
 
             <!-- Animated button -->
-            <span id='1btnbeat-<?=$instru['beat_id']?>' onclick="playPause(0,<?=$instru['beat_id']?>)" class="animated-btn text-white" href="#"><i class="fa fa-play iconPlay"></i></span>
+            <span id='btnplayView-<?=$instru['beat_id']?>' onclick="playPause(0,<?=$instru['beat_id']?>)" class="animated-btn text-white" href="#"><i class="fa fa-play iconPlay"></i></span>
 
 
 
@@ -144,6 +144,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         
         require_once('assets/skeleton/AudioPlayer/audioplayer.php');
         ?>
+           
 
     </body>
 

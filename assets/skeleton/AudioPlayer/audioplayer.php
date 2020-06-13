@@ -49,13 +49,14 @@
 
                     </td>
 
-                    <td class='border-0 align-middle'>
+                    <td class='border-0 align-middle '>
                         <!-- volume-->
-                        <div class="volume">
-                            <input id="volume_range" onmouseup='goVolume(this)' onchange="goVolume(this)" type="range" min="0" max="100" value="75" class="volume-range">
-                            <div id="divMute" class="icon text-light p-3" onclick="caMute(this)">
+                        <div class="volume row mt-3 ">
+                             <div id="divMute" class="icon text-light p-2" onclick="caMute(this)">
                                 <i class="fa fa-volume-up icon-size" ></i>
                             </div>
+                            <input id="volume_range" onmouseup='goVolume(this)' onchange="goVolume(this)" type="range" min="0" max="100" value="75" class="volume-range">
+                          
                             <div class="bar-hoverbox">
                                 <div class="bar">
                                     <div class="bar-fill"></div>

@@ -60,22 +60,9 @@ function returnMusicListStr($bay, $resuBEATS){
 ?>
 
 <script>
-            function changeAllBtn(playing,idbeat) {
-                let btn = document.getElementById('1btnbeat-'+idbeat.toString());
-                if(btn != null){
-                if(playing){
-                    btn.innerHTML = "<i class='fa fa-play iconPlay'></i>";
-                }else {
-                     btn.innerHTML = "<i class='fa fa-pause iconPlay'></i>";
-                }}
 
-            }
 
-            function playBeat(){
-
-            }
-
-        </script>
+</script>
 
 <script id="scriptDuPlayer">
 
@@ -101,36 +88,82 @@ function returnMusicListStr($bay, $resuBEATS){
     songPrices = <?=returnMusicListStr("prices", $resuPLAYLIST); ?>; //Stockage price
     let playing = true;
     var idencours = 0;
-    function playPause(songIndex,idbeat) {
-        
-        
-        document.getElementById('audioplayer').setAttribute('style',''); 
-        pPause.setAttribute('onclick',"playPause(songIndex," +songsID[songIndex].toString() + ")"); 
+    function changeBtnView(playing,idbeat) {
+        let btn = document.getElementById('btnplayView-'+idbeat.toString());
+        if(btn != null){
+            if(playing){
+                btn.innerHTML = "<i class='fa fa-play iconPlay'></i>";
+            }else {
+                btn.innerHTML = "<i class='fa fa-pause iconPlay'></i>";
+            }
+        }
+
+    }
+
+    function changeBtnBtn(playing,idbeat) {
+            if (idbeat != null){            
+        let btn = document.getElementById('btnplay-'+idbeat.toString());
+        console.log('changeBtnBtn',btn);
+        if(btn != null){
+            if(playing){
+                btn.innerHTML =  "<span class='play-audio-icon playplay-btn'></span>";
+            }else {
+                btn.innerHTML = "<span class='pause-audio-icon playplay-btn'></span>";
+            }
+        }}
+
+    }
+
+    function changeBoutons(playing,idbeat){
+        // changeBtnView(playing,idbeat) ;
+        changeBtnBtn(playing,idbeat);
+    }
+
+    function lesAutreBtn(idbeat){
+          changeBtnBtn(true,idbeat);
+        for(let i = 0; i < songsID.length; i++ ) {
+
+            if(i != idbeat){
+                console.log('ff',songsID[i]);
+                changeBtnBtn(true,songsID[i]);
+            } 
+
+        }
+
+    }
+
+    function playPause(Index,idbeat) {
+        songIndex = Index; 
+        console.log('index',songIndex,'idbeat',idbeat);
+        document.getElementById('audioplayer').setAttribute('style',''); //affiche le lecteur
+
         song.src = songs[songIndex];
         thumbnail.src = thumbnails[songIndex];
         songArtist.innerHTML = songArtists[songIndex];
         songTitle.innerHTML = songTitles[songIndex];
-         
-        
+
+
         if(idencours != songsID[songIndex]){playing = true};
         idencours = songsID[songIndex];
-       
-        
+        lesAutreBtn(idencours);
+        pPause.setAttribute('onclick',"playPause(songIndex," +idencours.toString() + ")"); 
+
         if (playing) {
-            
+
             pPause.setAttribute('class','player-pause-icon'); 
-            
+
             song.play();
-            
+
             console.log('play()',idencours);
             playing = false;
-            changeAllBtn(playing,songsID[songIndex]);
+            changeBoutons(playing,idbeat)
         } else {
             pPause.setAttribute('class','player-play-icon'); 
             song.pause();
-            console.log('pause()');
+            console.log('pause()',song);
             playing = true;
-            changeAllBtn(playing,songsID[songIndex]);
+            changeBoutons(playing,idbeat);
+            
         }
     }
 
@@ -143,6 +176,8 @@ function returnMusicListStr($bay, $resuBEATS){
 
     function nextSong() {
         songIndex++;
+        
+        
         if (songIndex > songs.length -1) {
             songIndex = 0;
         };
