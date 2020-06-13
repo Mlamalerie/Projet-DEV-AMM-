@@ -183,7 +183,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                     <div class="w-100 text-white">
                         <div class="mb-4">  
                             <h1 class="display-3">Bienvenue sur WeBeatz</h1>
-                            <p class="lead mb-0">Retrouvez les beats des meilleurs producteurs du moment</p>
+                            <p class="lead mb-0">The World's #1 Marketplace to buy & sell beats</p>
                             <p class="lead mb-0"><a href="incription.php" >Inscrivez-vous</a> pour commencer à acheter ou vendre des prods 
 
                         </div>
@@ -257,6 +257,14 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
 
                     <div class="my_slides multipleitems2">
                         <?php
+
+                        $req = $BDD->prepare("SELECT * 
+                    FROM beat
+                    ORDER BY beat_nbvente DESC
+                    LIMIT 8");
+                        $req->execute(array());
+                        $resuVENTES=$req->fetchAll();
+           
                         $j = $i;
                         foreach($resuVENTES as $r){
 
@@ -268,10 +276,9 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                                 <h6 class="hover-5-title text-uppercase font-weight-light mb-0"><?= $r['beat_author']?><strong class="font-weight-bold text-white">
                                     <?= $r['beat_title']?></strong><span> <?= $r['beat_year']?></span></h6>
                             </div>
-                        </div>
 
+                        </div>           
                         <?php $j++;} ?>
-
                     </div>
 
                     <div class="slider-btn rounded-circle">
@@ -281,7 +288,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                 </div>
             </div>  
         </section>
-
+        
         <!-- Section 3 -->
         <section class="py-5 d-flex align-items-center" id="three">
             <div class="container">
@@ -310,44 +317,95 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
 
         <!-- Section 4 -->
         <section class="py-5 d-flex align-items-center" id="four">
+            <!--
+<div class="container py-5">
+<div class="row text-center">
+<div class="col-lg-9 mx-auto" id="bestprod">
+<h2 class="h1 mb-4 text-white text-center">Meilleur Producteur</h2>
+<p class="font-italic mb-4 text-muted">Liste des profils des producteurs</p>
+<table class="table table-dark">
+<thead>
+<tr>
+<th scope="col">#</th>
+<th scope="col">First</th>
+<th scope="col">Last</th>
+<th scope="col">Handle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">1</th>
+<td>Mark</td>
+<td>Otto</td>
+<td>@mdo</td>
+</tr>
+<tr>
+<th scope="row">2</th>
+<td>Jacob</td>
+<td>Thornton</td>
+<td>@fat</td>
+</tr>
+<tr>
+<th scope="row">3</th>
+<td>Larry</td>
+<td>the Bird</td>
+<td>@twitter</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+-->
             <div class="container py-5">
-                <div class="row text-center">
-                    <div class="col-lg-9 mx-auto" id="bestprod">
-                        <h2 class="h1 mb-4 text-white text-center">Meilleur Producteur</h2>
-                        <p class="font-italic mb-4 text-muted">Liste des profils des producteurs</p>
-                        <table class="table table-dark">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <h2 class="h1 mb-4 text-white text-center">Meilleur Producteur</h2>
+                <div class="row">
+
+                    <div class="col-lg-7 mx-auto bg-white rounded shadow" id="bestprod">
+
+
+                        <!-- Fixed header table-->
+                        <div class="table-responsive">
+
+                            <table class="table table-fixed">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="col-4">Position</th>
+                                        <th scope="col" class="col-4">Auteur</th>
+                                        <th scope="col" class="col-4">Nombre de ventes</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $req = $BDD->prepare("SELECT * 
+                    FROM beat
+                    ORDER BY beat_nbvente DESC
+                    LIMIT 8");
+                                    $req->execute(array());
+                                    $resuTOP_Producer=$req->fetchAll();
+                                    $firstplace=1;
+
+                                    foreach($resuTOP_Producer as $rTP){
+
+                                    ?>
+                                    <tr>
+                                        <th class="col-4"><?= $firstplace?></th>
+                                        <td class="col-4"><a href="profils.php?profil_id=<?= $rTP['beat_author_id'] ?>"><?=$rTP['beat_author']?></a></td>
+                                        <td class="col-4"><?=$rTP['beat_nbvente']?></td>
+                                    </tr>
+                                    <?php 
+                                        $firstplace++;
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div><!-- End -->
+
                     </div>
                 </div>
             </div>
+
         </section>
         <!-- Section 5 -->
         <section class="py-5 d-flex align-items-center" id="five">
@@ -419,7 +477,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
         </section>
         <!-- Section 6 -->
         <section class="py-5 d-flex align-items-center" id="six">
-            <div class="container">
+            <div class="container" id="faq">
                 <!-- For demo purpose -->
                 <div class="row py-5">
                     <div class="col-lg-9 mx-auto text-white text-center">
@@ -472,7 +530,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                             <!-- Accordion item 4 -->
                             <div class="card">
                                 <div id="headingFour" class="card-header bg-white shadow-sm border-0">
-                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Pourquoi liker un beat ?</a></h6>
+                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Pourquoi liker un beat ?</a></h6>
                                 </div>
                                 <div id="collapseFour" aria-labelledby="headingOne" data-parent="#accordionExample" class="collapse show">
                                     <div class="card-body p-5">
@@ -484,7 +542,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                             <!-- Accordion item 5 -->
                             <div class="card">
                                 <div id="headingFive" class="card-header bg-white shadow-sm border-0">
-                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Comment payer sur WeBeatz ?</a></h6>
+                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Comment payer sur WeBeatz ?</a></h6>
                                 </div>
                                 <div id="collapseFive" aria-labelledby="headingFive" data-parent="#accordionExample" class="collapse show">
                                     <div class="card-body p-5">
@@ -496,7 +554,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                             <!-- Accordion item 6 -->
                             <div class="card">
                                 <div id="headingSix" class="card-header bg-white shadow-sm border-0">
-                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">D'autres questions ?</a></h6>
+                                    <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">D'autres questions ?</a></h6>
                                 </div>
                                 <div id="collapseSix" aria-labelledby="headingSix" data-parent="#accordionExample" class="collapse show">
                                     <div class="card-body p-5">
@@ -534,10 +592,10 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                     <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
                         <h6 class="text-uppercase font-weight-bold mb-4 txt-footer ">WeBeats</h6>
                         <ul class="list-unstyled mb-0">
-                            <li class="mb-2"><a href="#" class="text-mute">A Propos</a></li>
-                            <li class="mb-2"><a href="#" class="text-mute">Aide</a></li>
-                            <li class="mb-2"><a href="#" class="text-mute">On recrute</a></li>
-                            <li class="mb-2"><a href="#" class="text-mute">Contactez-nous</a></li>
+                            <li class="mb-2"><a href="about-us.php" class="text-mute">A Propos</a></li>
+                            <li class="mb-2"><a href="#faq" class="text-mute">Aide</a></li>
+                            <li class="mb-2"><a href="recrute.php" class="text-mute">On recrute</a></li>
+                            <li class="mb-2"><a href="aide.php" class="text-mute">Contactez-nous</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
@@ -597,12 +655,6 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
 
         <script src="assets/js/main.js"></script>
 
-        <!--   *************************************************************  -->
-        <!--   ************************** MUSIC PLAYER  **************************  -->
-
-        <?php
-        require_once('assets/skeleton/AudioPlayer/audioplayer.php');
-        ?>
 
 
     </body>

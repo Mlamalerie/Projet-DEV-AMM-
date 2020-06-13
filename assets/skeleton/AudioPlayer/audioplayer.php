@@ -1,5 +1,5 @@
-<nav id='audioplayer' class=" navplayer fixed-bottom " style="">  
-    <!--   display:none     -->
+<nav id='audioplayer' class=" navplayer fixed-bottom " style="display:none">  
+    <!--        -->
     <audio src="" id="song" volume = 0.75></audio>
 
 
@@ -29,7 +29,7 @@
                            
                         </div>
                         <!--        range -->
-                        <div class="container-fluid d-block ">
+                        <div  class="container-fluid d-block " >
                             <div class="row d-flex flex-row d-flex justify-content-center">
                                 <div class="currentTime"></div>
                                 <input
@@ -39,6 +39,7 @@
                                        max=""
                                        value="0"
                                        onchange="changeProgressBar()"
+
                                        />
                                 <div class="durationTime"></div>
                             </div>
@@ -93,68 +94,4 @@
 require_once('assets/skeleton/AudioPlayer/js-audioplayer.php');
 ?>
 
-                        </div>
-                        <!--        range -->
-                        <div class="container-fluid d-block ">
-                            <div class="row d-flex flex-row d-flex justify-content-center">
-                                <div class="currentTime"></div>
-                                <input
-                                       type="range"
-                                       id="progress-bar"
-                                       min="0"
-                                       max=""
-                                       value="0"
-                                       onchange="changeProgressBar()"
-                                       />
-                                <div class="durationTime"></div>
-                            </div>
-                        </div>
-
-                    </td>
-
-                    <td class='border-0 align-middle'>
-                        <!-- volume-->
-                        <div class="volume">
-                            <input id="volume_range" onchange="goVolume(this)" type="range" min="0" max="100" value="75" class="volume-range">
-                            <div class="icon">
-                                <i class="fa fa-volume-up icon-size" aria-hidden="true" onclick="caMute()"></i>
-                            </div>
-                            <div class="bar-hoverbox">
-                                <div class="bar">
-                                    <div class="bar-fill"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-
-
-                </tr>
-
-
-            </tbody>
-        </table>
-
-    </div>
-    <script>
-
-        // Change le son
-        var son = document.getElementById("song");
-
-        function caMute(){
-            son.volume = 0;
-        }
-
-        function goVolume(bay){
-            let s = parseInt(bay.value)/100;
-            son.volume = s;
-            console.log("volume",s);
-        }
-
-    </script>
-
-
-</nav>
-
-<?php
-require_once('assets/skeleton/AudioPlayer/js-audioplayer.php');
-?>
+                    

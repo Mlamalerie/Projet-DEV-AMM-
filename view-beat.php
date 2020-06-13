@@ -8,7 +8,13 @@ $req = $BDD -> prepare("SELECT * FROM beat WHERE beat_id = ?");
 $req->execute(array($beat_id));
 $instru = $req->fetch();
 
-
+$okconnectey = false;
+if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
+    print_r($_SESSION);
+    $okconnectey = true;
+} else{
+    echo "Pas de connexion";
+}
 
 
 
@@ -17,29 +23,36 @@ $instru = $req->fetch();
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+      <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
        <meta charset="utf-8">
         <title>Détail de la prod <?= $instru['beat_title'] ?></title>
         <?php
             require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <style>
+            
+            body{
+                background: rgb(242, 242, 242);
+            }
+            
             .container{
-                background:  #7728b2;
+                background:  #8828b2;
                 color: white;
+                width: 100%;
             }
             .image_beat{
                 display: block; /*centrer image*/
                 margin-left: auto;
                 margin-right: auto;
-                width: 300px;
+                width: 200px;
                
             }
             .info{
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
-                background: black;
-                color: #7728b2;
+                background: none;
+                color: white;
                 text-align: center;
             }
             .btn-ajout_panier{
@@ -49,6 +62,12 @@ $instru = $req->fetch();
         </style>
     </head>
     <body>
+            <!--   ************************** NAVBAR  **************************  -->
+
+        <?php
+
+        require_once('assets/skeleton/navbar.php');
+        ?>
             <!-- image source info -->
         <div class="container">
            

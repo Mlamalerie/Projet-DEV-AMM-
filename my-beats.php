@@ -39,8 +39,7 @@ if(isset($_POST['inputOption'])) {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <?php        require_once('assets/skeleton/headLinkCSS.html');
-        ?>
+        <?php require_once('assets/skeleton/headLinkCSS.html');?>
 
 
 
@@ -70,6 +69,7 @@ if(isset($_POST['inputOption'])) {
 
         require_once('assets/skeleton/navbar.php');
         ?>
+        
         <div class="container py-5">
             <!-- For demo purpose -->
             <div class="row mb-5">

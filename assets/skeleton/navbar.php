@@ -5,49 +5,52 @@ $jesuissurindex = $_SESSION['ici_index_bool'];
 
 <div class="boxnav">
     <nav id='LANAVBAR' class="navbar navbar-expand-lg navbar-light fixed-top" >
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand ml-2" href="#">
             <?php if (!$jesuissurindex){ ?>
             <img src='assets/img/icon/compact-disc.svg' width="35" height="35" alt="">
             <?php } else { ?>
             <img src='assets/img/icon/compact-disc2.svg' width="35" height="35" alt="">
             <?php } ?>
         </a>
-        <a class="navbar-brand" href="index.php">WeBeatz</a>
+        <a class="navbar-brand mr-3" href="index.php">WeBeatz</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span> 
         </button>
         <!--   Barre de recherche     -->
         <!--   Barre de recherche     -->
         <?php if (!$jesuissurindex) { ?>
-
-        <form id="searchform" method="get" action="search.php" class="form-inline nav-brand " style="margin-bottom: 0px;">
-
-
-            <div class="form-group row mr-2">
-                <input id='searchbar'
-                       type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-describedby="button-search" class="form-control rounded-pill form-control-underlined ">
-                <div class="input-group-append">
-                    <select name="Type" class=" rounded-pill btn-block shadow-sm custom-select" >
-
-                        <option value="beats" class="dropdown-item">All beats</option>
+        <div class="ml-3">
+            <form id="searchform" method="get" action="search.php" class="form-inline nav-brand " style="margin-bottom: 0px;">
 
 
-                        <option value="users" class="dropdown-item">All users</option>
+                <div class="form-group row mr-2">
+                    <input id='searchbar'
+                           type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-describedby="button-search" class="form-control rounded-pill form-control-underlined ">
+                    <div class="input-group-append">
+                        <select name="Type" class=" rounded-pill btn-block shadow-sm custom-select" >
+
+                            <option value="beats" class="dropdown-item">All beats</option>
 
 
-                    </select>
+                            <option value="users" class="dropdown-item">All users</option>
+
+
+                        </select>
+                    </div>
+
                 </div>
 
-            </div>
-            <!--
+                <!--
 
 <button onclick="goSearch()" id="button-search" type="button" class="btn btn-link text-info search_icon"><i class="fa fa-search"></i></button>
 <input id='searchbar'
 type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-describedby="button-search" class="form-control searchbar bg-none border-0">
 -->
-        </form>
+            </form>
+        </div>
         <?php } ?>
 
+        <!--            Menu droite -->
         <!--            Menu droite -->
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-md-auto" >
@@ -60,6 +63,51 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     <a class="nav-link btn" href="test_zone.php">Test_Zone<span class="sr-only">(current)</span></a>
                 </li>
 
+                <!-- Megamenu-->
+                <li class="nav-item dropdown megamenu">
+                    <a id="megamneu" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-uppercase">Beats</a>
+                    <div id='div1megamega' aria-labelledby="megamneu" class="dropdown-menu border-0 p-0 m-0">
+                        <div class="container mx-auto">
+                            <div class="row bg-dark rounded-0 m-0 shadow-sm w-100">
+                                <div class="col-lg-7 col-xl-8 contenant-mega-1" >
+                                    <div class="p-4">
+                                        <div class="row mb-1">
+                                            <div class="col-lg-4 border-right border-secondary">
+
+                                                <ul class="list-unstyled text-left">
+                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0">Top Ventes Beats</a></li>
+
+                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Recemeent ajouté </a></li>
+                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Free Beats</a></li>
+                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0">Top Vendeur</a></li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="col-lg-4 border-right border-secondary">
+                                                <h6 class="font-weight-bold text-uppercase">Genres</h6>
+                                                <ul class="list-unstyled text-left">
+                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">x</a></li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <h6 class="font-weight-bold text-uppercase">Type Beat</h6>
+                                                <ul class="list-unstyled text-left">
+                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Leto</a></li>
+                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 "></a></li>
+
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-xl-4 px-0 d-none d-lg-block contenant-mega-2" style="background: center center url(https://res.cloudinary.com/mhmd/image/upload/v1556990826/mega_bmtcdb.png)no-repeat; background-size: cover;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
 
                 <!-- UPLOADER -->
                 <?php if(!$jesuissurindex) { ?>
@@ -70,7 +118,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
                 <?php if(!$jesuissurindex) { ?>
                 <li class="nav-item dropdown no-arrow mx-1" >
-                    <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-pointpoint" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img id="iconPanier" src="assets/img/icon/chat-box.svg">
 
                         <!-- Counter - Messages -->
@@ -196,15 +244,14 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                         <a class="dropdown-item" href="all-beats.php"> <i class="fa fa-music mr-1 text-gray-400" aria-hidden="true"></i>  All-Beats</a>
                         <a class="dropdown-item" href="all-messages.php"> <i class="fa fa-comments mr-1 text-gray-400" aria-hidden="true"></i>  All-Messages</a>
 
-
-
-
                     </div>
 
                 </li>
+
                 <?php
                     }
                 ?>
+
 
 
 
@@ -265,17 +312,18 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <?php 
-                    $listeGenres = $_SESSION['listeGenres'];
+                    $req = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
+                    $req->execute(array());
+                    $listeGenres = $req->fetchAll();
                     foreach($listeGenres as $gr){
-
-                        ?>
-                        <a class="dropdown-item  " href="#"><?= $gr?></a>
+                        if($gr['id'] != 6 && $gr['id'] != 0) { ?>
+                        <a class="dropdown-item  " href="search.php?Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a>
                         <?php
-                    }
+                                                             }}
                         ?>
 
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Free Beats</a>
+                        <a class="dropdown-item" href="search.php?Price=free">Free Beats</a>
                     </div>
                 </li>
                 <?php } ?>
@@ -316,83 +364,83 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
             </div>
             <div id="modal_footer_panier" class="modal-footer" >
             </div>
-            
-
-                <?php require_once('assets/functions/js-panier.php'); ?>
-                <script>
-                    
-                    function affichePasserCommande(ok){
-
-                        let aa = document.getElementById("passercommandes");
-                        let mdf = document.getElementById("modal_footer_panier");
 
 
-                        console.log('affPasserComm',mdf );
-                        okyarien = false;
-                        if(mdf.children.length == 0){
-                            okyarien = true;
+            <?php require_once('assets/functions/js-panier.php'); ?>
+            <script>
+
+                function affichePasserCommande(ok){
+
+                    let aa = document.getElementById("passercommandes");
+                    let mdf = document.getElementById("modal_footer_panier");
+
+
+                    console.log('affPasserComm',mdf );
+                    okyarien = false;
+                    if(mdf.children.length == 0){
+                        okyarien = true;
+                    }
+
+                    if(ok){
+
+                        let a = document.createElement('a');
+                        a.setAttribute('href','commande.php');
+                        a.setAttribute('id','passercommandes');
+                        let btn = document.createElement('button');
+                        btn.setAttribute('type','button');
+                        btn.setAttribute('class','btn btn-primary');
+                        btn.innerHTML = "Passer Commandes"
+                        a.appendChild(btn);
+                        console.log(a);
+
+                        if( okyarien){
+                            mdf.appendChild(a);
                         }
 
-                        if(ok){
-
-                            let a = document.createElement('a');
-                            a.setAttribute('href','commande.php');
-                            a.setAttribute('id','passercommandes');
-                            let btn = document.createElement('button');
-                            btn.setAttribute('type','button');
-                            btn.setAttribute('class','btn btn-primary');
-                            btn.innerHTML = "Passer Commandes"
-                            a.appendChild(btn);
-                            console.log(a);
-
-                            if( okyarien){
-                                mdf.appendChild(a);
-                            }
 
 
+                    }else {
+                        let a = document.getElementById("passercommandes");
 
-                        }else {
-                            let a = document.getElementById("passercommandes");
+                        if(!okyarien){
+                            let ca = a.parentNode;
 
-                            if(!okyarien){
-                                let ca = a.parentNode;
-
-                                ca.removeChild(a);
-                            }
-
+                            ca.removeChild(a);
                         }
 
                     }
 
+                }
 
 
-                    
-                    refreshNbPanier() ;
 
-                    function refreshNbPanier() {
-                        let tbody = document.getElementById("tbodypanier");
-                        let ici = document.getElementById("span_nb_panier");
 
-                        if (ici != null) {
-                            let nb = tbody.children.length;
-                            console.log(nb,ici);
+                refreshNbPanier() ;
 
-                            console.log(nb,ici);
-                            if (nb != 0) {
-                                ici.innerHTML = nb;
-                                affichePasserCommande(true);
-                            } else {
-                                ici.innerHTML = "";
+                function refreshNbPanier() {
+                    let tbody = document.getElementById("tbodypanier");
+                    let ici = document.getElementById("span_nb_panier");
 
-                                affichePasserCommande(false);
-                            }
-                            console.log(nb,ici);
+                    if (ici != null) {
+                        let nb = tbody.children.length;
+                        console.log(nb,ici);
+
+                        console.log(nb,ici);
+                        if (nb != 0) {
+                            ici.innerHTML = nb;
+                            affichePasserCommande(true);
+                        } else {
+                            ici.innerHTML = "";
+
+                            affichePasserCommande(false);
                         }
+                        console.log(nb,ici);
                     }
+                }
 
 
 
-                </script>                
+            </script>                
         </div>
     </div>
 </div>

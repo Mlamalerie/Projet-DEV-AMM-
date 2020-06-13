@@ -23,7 +23,8 @@
             songPrices = <?=returnMusicListStr("prices", $resuPLAYLIST); ?>; //Stockage price
             let playing = true;
             function playPause(songIndex) {
-                document.getElementById('audioplayer').setAttribute('style','');
+                document.getElementById('audioplayer').setAttribute('style',''); 
+                console.log
                 song.src = songs[songIndex];
                 thumbnail.src = thumbnails[songIndex];
                 songArtist.innerHTML = songArtists[songIndex];
