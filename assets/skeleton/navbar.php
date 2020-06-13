@@ -98,14 +98,11 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                                             <div class="col-lg-4">
                                                 <h6 class="font-weight-bold text-uppercase">Type Beat</h6>
                                                 <ul class="list-unstyled text-left">
-                                                  <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Black-D</a></li>
-                                                  <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">CG6</a></li>
-                                                   <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Cheu-B</a></li>
-                                                   <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Dadju</a></li>
-                                                   <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Kepler</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Leto</a></li>         
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Wanabilini</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Z-17</a></li>
+                                                  <li class="nav-item"><a href="search.php?Type=beats&q=BlackD" class="nav-link text-small pb-0 ">BlackD</a></li>
+                                                   <li class="nav-item"><a href="search.php?Type=beats&q=Cheu-b" class="nav-link text-small pb-0 ">Cheu-B</a></li>
+                                                   <li class="nav-item"><a href="search.php?Type=beats&q=Kepler" class="nav-link text-small pb-0 ">Kepler</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&q=Leto" class="nav-link text-small pb-0 ">Leto</a></li>         
+                                                    <li class="nav-item"><a href="search.php?Type=beats&q=Wanabilini" class="nav-link text-small pb-0 ">Wanabilini</a></li>
                                                 </ul>
                                             </div>
 
@@ -349,7 +346,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                         ?>
 
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="search.php?Price=free">Free Beats</a>
+                        <a class="dropdown-item" href="search.php?Type=beats&Price=free">Free Beats</a>
                     </div>
                 </li>
                 <?php } ?>
