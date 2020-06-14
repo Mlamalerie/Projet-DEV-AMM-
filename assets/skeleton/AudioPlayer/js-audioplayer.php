@@ -59,10 +59,6 @@ function returnMusicListStr($bay, $resuBEATS){
 
 ?>
 
-<script>
-
-
-</script>
 
 <script id="scriptDuPlayer">
 
@@ -88,6 +84,8 @@ function returnMusicListStr($bay, $resuBEATS){
     songPrices = <?=returnMusicListStr("prices", $resuPLAYLIST); ?>; //Stockage price
     let playing = true;
     var idencours = 0;
+    
+    
     function changeBtnView(playing,idbeat) {
         let btn = document.getElementById('btnplayView-'+idbeat.toString());
         if(btn != null){
@@ -115,7 +113,7 @@ function returnMusicListStr($bay, $resuBEATS){
     }
 
     function changeBoutons(playing,idbeat){
-        // changeBtnView(playing,idbeat) ;
+         changeBtnView(playing,idbeat) ;
         changeBtnBtn(playing,idbeat);
     }
 

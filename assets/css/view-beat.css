@@ -60,5 +60,6 @@
 
 
 body {
-    background: #171218;  
-} 
+    color: whitesmoke;
+ background: linear-gradient(to bottom, rgb(29, 29, 29) 0%,rgb(25, 25, 25) 44%,rgba(17,17,17,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}

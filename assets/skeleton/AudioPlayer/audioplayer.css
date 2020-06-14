@@ -141,7 +141,8 @@
 }
 
 #thumbnail{
-    width :70px; 
+    width :71px; 
+    height: 71px;  
     border-radius: 20%;
 
 }
