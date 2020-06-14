@@ -23,7 +23,7 @@ if(isset($_POST['inputOption'])) {
             $req = $BDD->prepare("DELETE FROM beat
             WHERE beat_id = ?"); 
             $req->execute(array($id_beat));
-            header('Location: my-beats');
+            header('Location: my-beats.php');
             exit;
 
         }
