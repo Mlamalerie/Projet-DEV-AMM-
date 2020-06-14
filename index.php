@@ -9,23 +9,9 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
     $okconnectey = true;
 } 
-function date_outil($date,$nombre_jour) {
 
-    $year = substr($date, 0, -6);   
-    $month = substr($date, -5, -3);   
-    $day = substr($date, -2);   
 
-    // récupère la date du jour
-    $date_string = mktime(0,0,0,$month,$day,$year);
-
-    // Supprime les jours
-    $timestamp = $date_string - ($nombre_jour * 86400);
-    $nouvelle_date = date("Y-m-d", $timestamp); 
-
-    // pour afficher
-    return $nouvelle_date;
-
-}
+include('assets/functions/date-fct.php');
 $maxaffresu = 5;
 
 $req = $BDD->prepare("SELECT * 
@@ -81,6 +67,11 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
         <!--Slides-->
         <link rel="stylesheet" href="assets/css/slick.css">
         <link rel="stylesheet" href="assets/css/slide.css">
+
+
+        <style>
+            
+        </style>
 
         <title>WeBeatz</title>
     </head>
@@ -184,7 +175,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                         <div class="mb-4">  
                             <h1 class="display-3">Bienvenue sur WeBeatz</h1>
                             <p class="lead mb-0">The World's #1 Marketplace to buy & sell beats</p>
-                            <p class="lead mb-0"><a href="incription.php" >Inscrivez-vous</a> pour commencer à acheter ou vendre des prods 
+                            <p class="lead mb-0"><a href="inscription.php" >Inscrivez-vous</a> pour commencer à acheter ou vendre des prods 
 
                         </div>
 
@@ -378,10 +369,10 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $req = $BDD->prepare("SELECT * 
-                    FROM beat
-                    ORDER BY beat_nbvente DESC
-                    LIMIT 8");
+                                    $req = $BDD->prepare("SELECT beat_author,beat_author_id, SUM(beat_nbvente) AS vente_total
+                                    FROM beat
+                                    GROUP BY beat_author
+                                    ORDER BY vente_total DESC ");
                                     $req->execute(array());
                                     $resuTOP_Producer=$req->fetchAll();
                                     $firstplace=1;
@@ -392,7 +383,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                                     <tr>
                                         <th class="col-4"><?= $firstplace?></th>
                                         <td class="col-4"><a href="profils.php?profil_id=<?= $rTP['beat_author_id'] ?>"><?=$rTP['beat_author']?></a></td>
-                                        <td class="col-4"><?=$rTP['beat_nbvente']?></td>
+                                        <td class="col-4"><?=$rTP['vente_total']?></td>
                                     </tr>
                                     <?php 
                                         $firstplace++;

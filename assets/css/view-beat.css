@@ -1,0 +1,92 @@
+.animated-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    line-height: 80px;
+    display: inline-block;
+    text-align: center;
+    background: rgb(159, 62, 165);
+    position: relative;
+    margin-top:2%; 
+
+}
+.iconPlay {  
+    margin-top: 1.89rem;
+}
+
+.animated-btn::before, .animated-btn::after {
+    content: '';
+    display: block; 
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+    background: rgb(159, 62, 165);
+    animation: ripple-1 2s infinite ease-in-out;
+    z-index: -1;
+}
+
+.animated-btn::after {
+    background: rgb(159, 62, 165);
+    animation: ripple-2 2s infinite ease-in-out;
+    animation-delay: 0.5s;
+}
+
+@keyframes ripple-1 {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes ripple-2 {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.7);
+        opacity: 0;
+    }
+}
+
+
+body {
+    background-color: var(--base-colorDark1);
+} 
+
+.vb-color {
+    background-color: #793ea5!important;
+    margin: 0 auto;
+}
+
+.vb-color2 {
+    background-color: #c7a6e0!important;
+}
+
+.vb-cover {
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
+.vb-text {
+    font-size: 32px;
+    text-align: left;
+}
+
+.vb-stext {
+    font-size: 20px;
+}
+
+.vb-desc {
+    text-align: right;
+    margin-left: 100px;
+}

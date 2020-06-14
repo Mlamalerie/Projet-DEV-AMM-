@@ -4,17 +4,23 @@
   
         </thead>
         <tbody class=" rounded">
-            <?php if ($yadesresultatsBEATS) {$i = 1;foreach($resuBEATS as $r){?>
+            <?php
+           
+        
+            if ($yadesresultatsBEATS) {foreach($resuBEATS as $key => $r){
+            
+           
+            ?>
             <tr class="border-0 rounded px-md-5">
-                <td class="pr-0 border-0 align-middle rounded "><strong class="ml-1"><?= $i ?></strong></td>
+                <td class="pr-0 border-0 align-middle rounded "><strong class="ml-1"><?= ($key+1) ?></strong></td>
                 <th scope="row" class="border-0 rounded">
                     <div class="p-0 rounded ">
                         <div class="hover hover-5 text-white rounded d-inline-block align-middle">
                             <img src="<?=$r['beat_cover']?>" alt="" width="70" class="img-fluid rounded shadow-sm">
                             <div class="hover-overlay d-inline-block"></div>
 
-                            <div class="link_icon  " onclick="playPause(<?=$i-1 ?>)">
-                                <span class="video-icon playplay-btn"></span>
+                            <div id="btnplay-<?= $r['beat_id']?>" class="link_icon  " onclick="playPause(<?=($key + $decal) ?>,<?= $r['beat_id']?>)">
+                                <span class="play-audio-icon playplay-btn"></span>
                             </div>
 
                         </div>
@@ -44,7 +50,7 @@
                         $t = trim($t);
 
                         ?>
-                        <a class="spanTag  badge badge-light text-primary px-2 rounded-pill ml-2" href="search.php?Type=beats&q=<?= $t ?>">#<?= $t ?> </a>
+                        <a class="spanTag  badge badge-light text-dark px-2 rounded-pill ml-2" href="search.php?Type=beats&q=<?= $t ?>">#<?= $t ?> </a>
                         <?php }} ?>
                     </div>
 
@@ -154,13 +160,13 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 
-<?php if(!$okcestpastaprod) { ?>
+<?php if(!$okcestpastaprod && $okconnectey ) { ?>
                             <a class="dropdown-item" href="#">Editer la piste </a>
 
                             <div class="dropdown-divider"></div>
                             <?php } ?>
-                            <a class="dropdown-item" href="#">Aller à la pistes</a>
-                            <a class="dropdown-item" href="#">Aller à l'artiste</a>
+                            <a class="dropdown-item" href="view-beat.php?id=<?=$r['beat_id']?>">Aller à la pistes</a>
+                            <a class="dropdown-item" href="profils.php?profil_id=<?= $r['beat_author_id']?>">Aller à l'artiste</a>
                         </div>
 
                     </div>
@@ -169,7 +175,7 @@
 
             </tr>
             <?php
-                                                                              $i++;}}
+                                                                      }}
             else { ?>
 
             Aucun résultat;

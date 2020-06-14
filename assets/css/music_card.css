@@ -80,17 +80,5 @@
 }
 
 
- .play-audio-icon {
-                display: inline-block;
-                height: 9rem;
-                width: 9rem;
-                border-radius: 50%;
-                background-color: #793ea5;
-                background-image: url(assets/img/icon/icon-play.svg);
-                background-repeat: no-repeat;
-                background-position: 55% center;
-                background-size: 24px 27px;
-                -webkit-transition: background-color 0.3s ease-in-out;
-                transition: background-color 0.3s ease-in-out;
-            }
+
 
