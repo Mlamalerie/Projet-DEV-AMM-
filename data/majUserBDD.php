@@ -51,20 +51,31 @@ if(isset($u) && !empty($u)) {
             if ($old != $new) {
                 if(rename($old,$new)){
                     echo "rename reussi";
+
                 }else {
                     echo "erreur rename";
+                    if (copy ($old,$new)) {
+                        unlink($old);
+                        echo "<br> euh comme rename marche pas jai tout copier et supprimer l'ancien bail";
+                    }
+
                 }
 
                 //**update user_image
                 $attend = explode('/',$u['user_image']);
                 if ($attend[1] != $new){
-                    $attend[1] = $new;
-                    $newimage = implode('/',$attend);
-                    echo "<br> New user_image : ".$newimage;
+                    if(implode('/',$attend) != 'assets/img/user.png'){
 
-                    $req = $BDD->prepare("UPDATE user SET user_image = ?  WHERE user_id = ?"); 
+                        $attend[1] = $new;
+                        $newimage = implode('/',$attend);
+                        echo "<br> New user_image : ".$newimage;
 
-                    $req->execute(array($newimage,$id));
+                        $req = $BDD->prepare("UPDATE user SET user_image = ?  WHERE user_id = ?"); 
+
+                        $req->execute(array($newimage,$id));
+                    }else {
+                        echo "<br> on change pas photo profil par defautl mec ";
+                    }
                 }
 
                 //**
@@ -87,7 +98,7 @@ if(isset($u) && !empty($u)) {
                         $attend = explode('/',$b['beat_cover']);
                         if ($attend[1] != $new){
 
-                            
+
 
                             if(implode('/',$attend) != 'assets/img/cover_default.jpg'){
                                 $attend[1] = $new;

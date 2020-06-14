@@ -5,7 +5,7 @@
 .my_slides .items {
     width: 250px;
     height: 250px;
-    margin: 100px;
+    margin: 1rem 5rem;
 }
 .my_slides .items img {
     width: 250px;
@@ -15,7 +15,7 @@
     background-color: #7728b2;
     padding: 1rem 1.25rem;
     color: white;
-    margin:0 1rem;
+/*    margin:0 0.1rem;*/
     border-radius:60%;
 }
 .slider-btn .prev1, .slider-btn .next1{

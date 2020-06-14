@@ -285,13 +285,13 @@ if (!empty($_POST)) {
 
 
 
-                    <!--TITRE-->
+                
 
 
                     <?php if(isset($err_b_title)){echo "<span class='spanAlertchamp'> ";echo $icon . $err_b_title ;echo "</span> ";} ?>
 
 
-                    <!--GENRE & ANN2E --> 
+                    <!-- TITRE & GENRE & ANN2E --> 
                     <div class="form-group  ml-5 mr-5 ">
                         <div class="d-flex justify-content-between">
                             <div class="text-uppercase"><label for="b_title" class="lesLabels rounded ml-3">Titre <span class="text-danger">*</span></label></div>
