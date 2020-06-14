@@ -27,8 +27,64 @@
 }
 
 
+.player-play-icon {
+    display: inline-block;
+    height: 3.2rem;
+    width: 3.2rem;
+    border-radius: 50%;
+    background-color: #793ea5;
+    background-image: url(assets/img/icon/icon-play.svg); 
+    background-repeat: no-repeat;
+    background-position: 55% center;
+    background-size: 24px 27px;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
 
-.song-title  
+}
+
+.player-pause-icon {
+    display: inline-block;
+    height: 3.2rem;
+    width: 3.2rem;
+    border-radius: 50%;
+    background-color: #793ea5;
+    background-image: url(assets/img/icon/pause.svg); 
+    background-repeat: no-repeat;
+    background-position: 55% center;
+    background-size: 24px 27px;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+
+}
+
+.player-prev-icon {
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background-color: #793ea5;
+    background-image: url(assets/img/icon/backward-solid.svg);
+    background-repeat: no-repeat;
+    background-position: 55% center;
+    background-size: 15px;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+    margin-right: 0.1rem;
+}
+.player-next-icon {
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background-color: #793ea5;
+    background-image: url(assets/img/icon/forward-solid.svg);
+    background-repeat: no-repeat;
+    background-position: 55% center;
+    background-size: 15px;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+    margin-left: 0.1rem;
+}s
 
 
 
@@ -141,7 +197,8 @@
 }
 
 #thumbnail{
-    width :70px;
+    width :71px; 
+    height: 71px;  
     border-radius: 20%;
 
 }

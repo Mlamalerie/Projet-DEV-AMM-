@@ -5,7 +5,7 @@
     line-height: 80px;
     display: inline-block;
     text-align: center;
-    background: #ff3f3f;
+    background: rgb(159, 62, 165);
     position: relative;
     margin-top:2%; 
 
@@ -23,13 +23,13 @@
     bottom: 0;
     left: 0;
     border-radius: 50%;
-    background: rgba(255, 63, 63, 0.8);
+    background: rgb(159, 62, 165);
     animation: ripple-1 2s infinite ease-in-out;
     z-index: -1;
 }
 
 .animated-btn::after {
-    background: rgba(255, 63, 63, 0.6);
+    background: rgb(159, 62, 165);
     animation: ripple-2 2s infinite ease-in-out;
     animation-delay: 0.5s;
 }
@@ -60,5 +60,37 @@
 
 
 body {
-    background: #171218;  
+
+    color: whitesmoke;
+ background: linear-gradient(to bottom, rgb(29, 29, 29) 0%,rgb(25, 25, 25) 44%,rgba(17,17,17,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
 } 
+
+.vb-color {
+    background-color: #793ea5!important;
+    margin: 0 auto;
+}
+
+.vb-color2 {
+    background-color: #c7a6e0!important;
+}
+
+.vb-cover {
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
+.vb-text {
+    font-size: 32px;
+    text-align: left;
+}
+
+.vb-stext {
+    font-size: 20px;
+}
+
+.vb-desc {
+    text-align: right;
+    margin-left: 100px;
+>>>>>>> 9fc3738c287ef42ae9556c430cb6860b26dff010
+}

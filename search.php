@@ -502,7 +502,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
 
-        <title>Search</title>
+        <title>Search • WeBeatz</title>
     </head>
     <body onload=" refreshNbPanier();refreshAllBeats() ">
 

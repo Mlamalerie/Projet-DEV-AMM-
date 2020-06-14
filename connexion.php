@@ -94,9 +94,6 @@ if(!empty($_POST)){
             $_SESSION['user_image'] = $verif_user['user_image'];
             $_SESSION['user_role'] = $verif_user['user_role'];
 
-            $listeGenres = ['Hip Hop','Trap','Afro','Deep','Pop','Rock','Reggae',"Indéfini"];
-            sort($listeGenres);
-            $_SESSION['listeGenres'] = $listeGenres ;
 
            // header('Location: dashboard.php');
           

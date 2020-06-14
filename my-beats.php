@@ -39,8 +39,7 @@ if(isset($_POST['inputOption'])) {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <?php        require_once('assets/skeleton/headLinkCSS.html');
-        ?>
+        <?php require_once('assets/skeleton/headLinkCSS.html');?>
 
 
 
@@ -60,6 +59,7 @@ if(isset($_POST['inputOption'])) {
                 background-size: 100%;
                 background-repeat: no-repeat;
             }
+
         </style>
 
 
@@ -69,6 +69,7 @@ if(isset($_POST['inputOption'])) {
 
         require_once('assets/skeleton/navbar.php');
         ?>
+        
         <div class="container py-5">
             <!-- For demo purpose -->
             <div class="row mb-5">
@@ -111,6 +112,30 @@ if(isset($_POST['inputOption'])) {
                     <div id="mylike" role="tabpanel" aria-labelledby="mylike-tab" class="tab-pane fade px-4 py-5">
                         <p class="text-muted">Les beats que vous avez likés</p>
                         <?php 
+                        $resuBEATS = [];
+                        $req = $BDD->prepare("SELECT like_beat_id
+                                            FROM likelike
+                                            WHERE like_user_id = ?");
+                        $req->execute(array($_SESSION['user_id']));
+                        $resuLIKES = $req->fetchAll();
+
+                        foreach($resuLIKES as $p) {
+
+                            $req = $BDD->prepare("SELECT *
+                                            FROM beat
+                                            WHERE beat_id = ?");
+                            $req->execute(array($p['like_beat_id']));
+                            $resuPAN = $req->fetchAll();
+                            if(isset($resuPAN)){
+                                $resuBEATS = array_merge($resuBEATS,$resuPAN);
+                            }
+                        }
+
+                        $yadesresultatsBEATS = false;
+                        if (isset($resuBEATS) && !empty($resuBEATS)){
+                            $yadesresultatsBEATS = true;
+                        }
+
                         require_once('assets/skeleton/tableLikes.php');
                         ?>
                     </div>
@@ -120,10 +145,14 @@ if(isset($_POST['inputOption'])) {
         </div>
 
         <!--      SCRIPTS      -->
+
+
         <?php 
         require_once('assets/skeleton/endLinkScripts.php');
         ?>
 
-
+        <?php 
+        require_once('assets/functions/js-panier.php');
+        ?>
     </body>
 </html>

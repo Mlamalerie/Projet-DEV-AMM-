@@ -409,9 +409,10 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                         let a = document.createElement('a');
                         a.setAttribute('href','commande.php');
                         a.setAttribute('id','passercommandes');
+                        a.setAttribute('class','w-100');
                         let btn = document.createElement('button');
                         btn.setAttribute('type','button');
-                        btn.setAttribute('class','btn btn-primary');
+                        btn.setAttribute('class','btn btn-primary w-100 btn-block p-2 rounded-pill shadow-sm');
                         btn.innerHTML = "Passer Commandes"
                         a.appendChild(btn);
                         console.log(a);

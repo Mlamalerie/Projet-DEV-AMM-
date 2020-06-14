@@ -95,7 +95,7 @@ header .overlay-sombre {
     /*    max-width:  90%; le curseur descend en bas*/
     caret-color:rgba(121, 6, 247, 0.9);
     line-height: 40px;
-    width: 700px;
+    width: 400px;
 }
 .search_icon{
     height: 40px;
@@ -201,6 +201,12 @@ section:nth-of-type(4) {
 section:nth-of-type(5) {
     background-color: var(--base-colorDark1);
 }
+
+/* section 6 */
+section:nth-of-type(6) {
+   background-color: #290e3d;
+}
+
 .bloc_avis{/*bloc des avis*/
 
 }

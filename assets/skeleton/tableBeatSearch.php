@@ -19,7 +19,7 @@
                             <img src="<?=$r['beat_cover']?>" alt="" width="70" class="img-fluid rounded shadow-sm">
                             <div class="hover-overlay d-inline-block"></div>
 
-                            <div class="link_icon  " onclick="playPause(<?=($key + $decal) ?>,<?= $r['beat_id']?>)">
+                            <div id="btnplay-<?= $r['beat_id']?>" class="link_icon  " onclick="playPause(<?=($key + $decal) ?>,<?= $r['beat_id']?>)">
                                 <span class="play-audio-icon playplay-btn"></span>
                             </div>
 

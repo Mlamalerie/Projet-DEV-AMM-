@@ -27,36 +27,41 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title><?= $instru['beat_title'] ?></title>
+        <title><?= $instru['beat_title'] ?> by <?= $instru['beat_author'] ?> • WeBeatz </title>
         <?php
     require_once('assets/skeleton/headLinkCSS.html');
         ?>
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
-         <!--  Audio player de mathieu   -->
+        <!--  Audio player de mathieu   -->
         <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
         <link rel="stylesheet" type="text/css" href="assets/css/view-beat.css">
     </head>
     <body>
-        
-         <!--   *************************************************************  -->
+
+        <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
         <?php require_once('assets/skeleton/navbar.php');  require_once('assets/functions/js-panier.php');?>
 
-       
+
         <!-- Demo header-->
         <section class="mt-5 pb-4 header text-center">
-
-            <div class="bg-dark container py-5 text-white rounded">
-
-                <div class="text-light font-italic"><?= $instru['beat_title']?> <br>by
-                    <a class="text-light" href="https://bootstrapious.com/">
-                        <u><?= $instru['beat_author']?></u>
-                    </a>
+            <div class="bg-dark container py-5 text-white rounded vb-color">
+                <div class="row">
+                    <div>
+                        <img src="<?= $instru['beat_cover']?>" alt="" width="150" class="img-fluid rounded shadow-sm vb-cover">
+                    </div>
+                    <div class="text-light vb-text">
+                        <?= $instru['beat_title']?> <br/>
+                        <a class="text-light vb-stext" href="profils.php?profil_id=<?= $instru['beat_author_id']?>">
+                            <u><?= $instru['beat_author']?></u>
+                        </a>
+                    </div>
+                    <div class="col-5 vb-desc">
+                        <?= $instru['beat_description']?>
+                    </div>
                 </div>
                 <section id="divInfo" class="py-3">
-                    <h1 class="display-4">Bootstrap animated play button</h1>
-                    <p class="text-light font-italic mb-1">Using css animation and pseudo elements, create a nice animated play button.</p>
                     <?php  $tags = explode(',',$instru['beat_tags']); ?>
 
 
@@ -79,7 +84,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
 
             <!-- Animated button -->
-            <span id='1btnbeat-<?=$instru['beat_id']?>' onclick="playPause(0,<?=$instru['beat_id']?>)" class="animated-btn text-white" href="#"><i class="fa fa-play iconPlay"></i></span>
+            <span id='btnplayView-<?=$instru['beat_id']?>' onclick="playPause(0,<?=$instru['beat_id']?>)" class="animated-btn text-white" href="#"><i class="fa fa-play iconPlay"></i></span>
 
 
 
@@ -87,37 +92,37 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         </section>
 
         <section class="mt-2 pb-4 header text-center">
-            <div id="resultcontentAlea"  class="container py-5 text-white rounded bg-primary mb-4" >
+            <div id="resultcontentAlea"  class="container py-5 text-white rounded bg-primary mb-4 vb-color2" >
 
 
                 <?php
 
-                $req = $BDD->prepare("SELECT beat_id
+    $req = $BDD->prepare("SELECT beat_id
                             FROM beat
                             WHERE beat_id <> ?
                             ");
-                $req->execute(array( $instru['beat_id'] ));
-                $resuID = $req->fetchAll();
-                shuffle($resuID);
-                shuffle($resuID);
-                var_dump(count($resuID));
+                  $req->execute(array( $instru['beat_id'] ));
+                  $resuID = $req->fetchAll();
+                  shuffle($resuID);
+                  shuffle($resuID);
+                  var_dump(count($resuID));
 
-                $resuBEATS = [];
-                for ($i = 0; $i < 3; $i++){
-                    $req = $BDD->prepare("SELECT *
+                  $resuBEATS = [];
+                  for ($i = 0; $i < 3; $i++){
+                      $req = $BDD->prepare("SELECT *
                             FROM beat
                             WHERE beat_id = ?");
-                    $req->execute(array($resuID[$i]['beat_id']));
-                    $resuB = $req->fetchAll();
+                      $req->execute(array($resuID[$i]['beat_id']));
+                      $resuB = $req->fetchAll();
 
-                    $resuBEATS = array_merge($resuBEATS,$resuB);
-                }
-                $yadesresultatsBEATS = false;
-                if (isset($resuBEATS) && !empty($resuBEATS)){
-                    $yadesresultatsBEATS = true;
-                }
-                
-                $oublielepremier = false;
+                      $resuBEATS = array_merge($resuBEATS,$resuB);
+                  }
+                  $yadesresultatsBEATS = false;
+                  if (isset($resuBEATS) && !empty($resuBEATS)){
+                      $yadesresultatsBEATS = true;
+                  }
+
+                  $oublielepremier = false;
 
                 ?>
 
@@ -126,24 +131,25 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
             </div>
         </section>
 
-        
-        
-         <?php
+
+
+        <?php
         require_once('assets/skeleton/endLinkScripts.php');
         ?>
-        
-         <!--   *************************************************************  -->
+
+        <!--   *************************************************************  -->
         <!--   ************************** MUSIC PLAYER  **************************  -->
         <?php
         if(isset($resuBEATS) && !empty($resuBEATS)) {
             $resuPLAYLIST = $resuBEATS;
-           array_unshift($resuPLAYLIST, $instru);
+            array_unshift($resuPLAYLIST, $instru);
         } else {
             $resuPLAYLIST = array();
         }
-        
+
         require_once('assets/skeleton/AudioPlayer/audioplayer.php');
         ?>
+
 
     </body>
 
