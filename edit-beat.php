@@ -164,6 +164,33 @@ if (!empty($_POST) && isset($_POST)) {
 
 }
 
+//**** Supprimer
+if(isset($_POST['inputOption'])) {
+    $id_beat=$_POST['inputOption_beat_id'];
+    $ok = true;
+    if($_POST['inputOption']== "suppr"){
+        if($ok){
+
+            // supprimer le fichier du dossier data
+            $req = $BDD->prepare("SELECT beat_source FROM beat
+            WHERE beat_id = ?"); 
+            $req->execute(array($id_beat));
+            $bb = $req->fetch();
+
+            unlink($bb['beat_source']);
+
+            // supprimer de la BDD
+            $req = $BDD->prepare("DELETE FROM beat
+            WHERE beat_id = ?"); 
+            $req->execute(array($id_beat));
+
+
+            header('Location: my-beats.php');
+            exit;
+
+        }
+    }
+}
 
 ?>
 
@@ -207,16 +234,62 @@ if (!empty($_POST) && isset($_POST)) {
                         <div class="d-flex align-items-center justify-content-between mb-3 mr-5 ml-5"> 
                             <span class="grandTitre text-uppercase ml-3"><strong>Editer •  <?= $basetitle ?> </strong></span>
                             <div>
-                               <?php
+                                <?php
     $teuda = explode(' ',$afficher_beat['beat_dateupload'])[0];
-    $datedate = explode('-',$teuda);
-    ?>
-                               
+            $datedate = explode('-',$teuda);
+                                ?>
+
                                 <span class="badge  badge-light mr-1" >Date d'upload : <?= $datedate[2]?>-<?= $datedate[1]?>-<?= $datedate[0]?></span>
                             </div>
                             <div>
-                                <button><i class="fas fa-trash-alt"></i></button>
-                                
+                                <button class="btn" data-toggle="modal" data-target="#supp_modal" onclick="goInputOption(this,'<?= $afficher_beat['beat_id'] ?>','<?= $afficher_beat['beat_title']?>')" value="suppr"><i class="fas fa-trash-alt"></i></button>
+
+                               
+                                <!-- Modal -->
+                                <div class="modal fade" id="supp_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body text-dark">
+                                                Êtes vous sûr de vouloir <span id="phraseConfirm"></span>
+                                                <form method="post" id="formOptionConfirm" action="">
+                                                    <input type="hidden" name="inputOption" id="inputOption">
+                                                    <input type="hidden" name="inputOption_beat_id" id="inputOption_beat_id">
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                                <button onclick="document.getElementById('formOptionConfirm').submit()" type="button" class="btn btn-primary">Oui</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- END Modal -->
+                                 <script type="text/javascript">
+                                    function goInputOption(bay,idd,blaz){
+                                        let mode = bay.value;
+                                        console.log(mode,idd,blaz);
+
+                                        var p = document.getElementById('phraseConfirm');
+                                        var iO = document.getElementById('inputOption');
+                                        var iO_id = document.getElementById('inputOption_beat_id');
+
+                                        iO.value = mode;
+                                        iO_id.value = idd;
+
+                                        if (mode == 'suppr'){
+                                            p.innerHTML = "supprimer le beat " + blaz + " ?";   
+                                        }
+                                        console.log(iO,iO_id);
+                                    } 
+                                </script>
+
                             </div>
                         </div>
 

@@ -74,6 +74,10 @@
 
     </div>
     <script>
+function probleme(){
+        songTitle.innerHTML = '<i class="fas fa-exclamation-triangle text-warning"></i> erreur';
+        songArtist.innerHTML = ' ...';
+    }
 
         // Change le son
         var son = document.getElementById("song");
