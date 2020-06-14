@@ -42,10 +42,10 @@
 }
 
 /* decalement*/
-.nav-item {
+navbar-nav  .nav-item {
     padding-left: 0.8rem; 
 }
-#navbarNavDropdown{
+#navbarNavDropdown{ 
     margin-right: 0.7rem;
 }
 

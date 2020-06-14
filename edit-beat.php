@@ -37,13 +37,6 @@ $baseannee = $afficher_beat['beat_year'];
 $basecover = $afficher_beat['beat_cover'];
 $basetags = $afficher_beat['beat_tags'];
 
-?>
-
-
-<?php
-session_start();
-include_once("assets/db/connexiondb.php");
-$_SESSION['ici_index_bool'] = false;
 
 
 $reqG = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");

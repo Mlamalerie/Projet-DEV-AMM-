@@ -240,7 +240,7 @@ if (!empty($_POST)) {
         <!--        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> -->
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 
-        <link rel="stylesheet" type="text/css" href="assets/css/edit-upload.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/edit-beat.css">
         <link rel="stylesheet" type="text/css" href="assets/css/button-style2ouf.css">
 
         <title>New upload</title>
@@ -313,7 +313,7 @@ if (!empty($_POST)) {
 
                     </div>
                     <!--DESCRITION--> 
-                    <div class="form-group  ml-5 mr-5">
+                    <div class="form-group  ml-5 mr-5"> 
                         <div class="d-flex justify-content-start ">
                             <div class=" text-uppercase">  <label for="b_description" class="lesLabels rounded ml-3">Description <span class="text-danger">*</span></label></div>
                         </div>
@@ -335,9 +335,9 @@ if (!empty($_POST)) {
                                 <div class=" text-uppercase mr-2">  <label for="b_price" class="lesLabels rounded ml-3">Prix<span class="text-danger">*</span> </label></div>
 
                                 <!--free-->
-                                <div class="custom-control custom-switch d-flex justify-content-center mb-2">
+                                <div class="custom-control custom-switch d-flex  justify-content-center mb-2 ml-5">
                                     <input onchange="gogoUpload2()" name="freebay" class="custom-control-input" id="freebay" type="checkbox" <?php if(isset($_POST['freebay']) || (isset($b_price) && $b_price == 0.00)){ ?> checked <?php } ?> >
-                                    <label class="custom-control-label lesLabels rounded ml-3" for="freebay" title="En cochant ca nanani aniniai">Gratuit</label>
+                                    <label class="custom-control-label lesLabels rounded " for="freebay" title="En cochant ca nanani aniniai">Gratuit</label>
 
                                 </div>
                             </div>

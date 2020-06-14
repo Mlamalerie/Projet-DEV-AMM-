@@ -17,3 +17,7 @@
   text-decoration: none;
   color: #555;
 }
+
+.bg-light{
+    background-color: var(--base-colorDark1);
+}

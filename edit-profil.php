@@ -244,7 +244,7 @@ if(!empty($_POST)){
 
 
             $toutestbonemail = true;if($_SESSION['user_id'] == $baseid) {
-            $_SESSION['user_email'] = $baseemail;}
+                $_SESSION['user_email'] = $baseemail;}
 
         }
 
@@ -463,8 +463,8 @@ if(!empty($_POST)){
             if($okrolenotsame){$baserole = $role;}
 
             $toutestboninfoperso = true;if($_SESSION['user_id'] == $baseid) {
-            $_SESSION['user_role'] = $baserole;}
-header('Location: dashboard.php');
+                $_SESSION['user_role'] = $baserole;}
+            header('Location: dashboard.php');
             exit;
 
         }
@@ -591,9 +591,9 @@ header('Location: dashboard.php');
 
 
 
-            <div class="p-5 bg-white rounded shadow mb-5">
+            <div class="p-5 bg-back rounded shadow mb-5">
                 <!-- TITTRE DES TAB -->
-                <ul id="myTab" role="tablist" class="nav nav-tabs nav-pills flex-column flex-sm-row text-center bg-light border-0 rounded-nav">
+                <ul id="myTab" role="tablist" class="nav nav-tabs nav-pills flex-column flex-sm-row text-center  border-0 rounded-nav">
                     <li class="nav-item flex-sm-fill">
                         <a id="home-tab" data-toggle="tab" href="#tabinfoprofil" role="tab" aria-controls="tabinfoprofil" aria-selected="true" class="nav-link border-0 text-uppercase font-weight-bold <?php if($activetabinfoprofil){ ?> active <?php } ?>">Information du profil </a>
                     </li>
@@ -611,15 +611,14 @@ header('Location: dashboard.php');
                     <!--  TAB INFO DU PROFIL   -->
                     <div id="tabinfoprofil" role="tabpanel" aria-labelledby="info-profil-tab" class="tab-pane fade px-4 py-5 <?php if($activetabinfoprofil){ ?> show active <?php } ?>">
 
-                        <form method="post">
+                        <form method="post" class="">
                             <!--PSEUDO-->
-                            <div class="form-group mb-2  ">
+                            <div class="form-group mb-4 ml-3 mr-3">
 
-                                <div class="row">
-                                    <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                    <label for="pseudo"> Pseudo </label>
+                                <div class="d-flex justify-content-start ">
+                                    <div class=" text-uppercase text-center">  <label for="pseudo" class="lesLabels rounded ml-3"><i class="fas fa-user mr-2"></i>Pseudo</label></div>
                                 </div>
-                                <input onkeyup="goBtnSave(this,1)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="pseudo" name="pseudo" placeholder="Mettez un pseudo pour votre profil"  value="<?=$basepseudo?>" autofocus>
+                                <input onkeyup="goBtnSave(this,1)" type="text" class="mb-2 mr-3 text-light text-center border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="pseudo" name="pseudo" placeholder="Mettez un pseudo pour votre profil"  value="<?=$basepseudo?>" autofocus>
                                 <?php
     if(isset($err_pseudo)){
         echo "<span class='spanAlertchamp'> ";
@@ -631,14 +630,13 @@ header('Location: dashboard.php');
 
 
                             <!--BIO-->
-                            <div class="form-group mb-2  ">
+                            <div class="form-group  ml-3 mr-3 ">
 
-                                <div class="row">
-                                    <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                    <label for="description"> Bio </label>
+                                <div class="d-flex justify-content-start ">
+                                    <div class=" text-uppercase text-center">  <label for="description" class="lesLabels rounded ml-3"><i class="fas fa-user mr-2"></i>Description</label></div>
                                 </div>
 
-                                <textarea onkeyup="goBtnSave(this,1)" id="description" name="description" class="form-control shadow-sm" value="<?=$basedescription?>"><?=$basedescription?></textarea>
+                                <textarea onkeyup="goBtnSave(this,1)" id="description" name="description" class="mb-2 mr-3 text-light border-0 form-control lesInputs rounded shadow-sm px-4" value="<?=$basedescription?>"><?=$basedescription?></textarea>
 
                                 <?php
     if(isset($err_description)){
@@ -685,12 +683,11 @@ header('Location: dashboard.php');
                     <div id="tabemail" role="tabpanel" aria-labelledby="email-tab" class="tab-pane fade px-4 py-5 <?php if($activetabemail){ ?> show active <?php } ?> ">
                         <form method="post">
 
-                            <div class="form-group mb-4">
-                                <div class="row">
-                                    <object class="iconGradient" data="assets/img/icon/envelope.svg" type="image/svg+xml"></object>
-                                    <label for="email"> Adresse Email</label>
+                            <div class="form-group ml-3 mr-3 mb-4 ">
+                                <div class="d-flex justify-content-start ">
+                                    <div class=" text-uppercase text-center">  <label for="email" class="lesLabels rounded ml-3"><i class="fas fa-envelope mr-2"></i>Adresse email</label></div>
                                 </div>
-                                <input onkeyup="goBtnSave(this,2)" type="email" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="email" name="email" aria-describedby="emailHelp" placeholder="Tapez votre e-mail" value="<?=$baseemail?>">
+                                <input onkeyup="goBtnSave(this,2)" type="email" class="mb-2 mr-3 text-light text-center border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="email" name="email" aria-describedby="emailHelp" placeholder="Tapez votre e-mail" value="<?=$baseemail?>">
                                 <?php
     if(isset($err_email)){
         echo "<span class='spanAlertchamp'> ";
@@ -702,13 +699,12 @@ header('Location: dashboard.php');
 
                             </div>
                             <!--VOTRE MOT DE PASSE -->
-                            <div class="form-group mb-2  ">
+                            <div class="form-group ml-3 mr-3 mb-4  ">
 
-                                <div class="row">
-                                    <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                    <label for="votremotdepasse4email"> Saisir Mot de passe </label>
+                                <div class="d-flex justify-content-start ">
+                                    <div class=" text-uppercase text-center">  <label for="password" class="lesLabels rounded ml-3"><i class="fas fa-key mr-2"></i>Saisissez votre mot de passe</label></div>
                                 </div>
-                                <input onkeyup="goBtnSave(this,2)" type="password" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="votremotdepasse4email" name="votremotdepasse4email" placeholder="" autofocus  disabled>
+                                <input onkeyup="goBtnSave(this,2)" type="password" class="mb-2 mr-3 text-light text-center border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="votremotdepasse4email" name="votremotdepasse4email" placeholder="" autofocus  disabled>
 
                                 <?php
                                 if(isset($err_votremotdepasse4email)){
@@ -719,7 +715,7 @@ header('Location: dashboard.php');
                                 ?>
 
                             </div>
-                            <input id="btnsave2" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="savechangeemail" value="Sauvegarder changement">
+                            <input id="btnsave2" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm  " name="savechangeemail" value="Sauvegarder changement">
 
 
 
@@ -740,13 +736,12 @@ header('Location: dashboard.php');
                     <div id="tabmotdepasse" role="tabpanel" aria-labelledby="password-tab" class="tab-pane fade px-4 py-5<?php if($activetabmdp){ ?> show active <?php } ?>">
                         <form method="post">
                             <!--ANCIEN MOT DE PASSE -->
-                            <div class="form-group mb-2  ">
+                            <div class="form-group mb-3  ">
 
-                                <div class="row">
-                                    <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                    <label for="ancienmotdepasse"> Ancien Mot de passe </label>
+                                 <div class="d-flex justify-content-start ">
+                                    <div class=" text-uppercase text-center">  <label for="ancienmotdepasse" class="lesLabels rounded ml-3"><i class="fas fa-key mr-2"></i>Ancien mot de passe</label></div>
                                 </div>
-                                <input onkeyup="goBtnSave(this,3)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ancienmotdepasse" name="ancienmotdepasse" placeholder="" autofocus <?php if(isset($_POST['ancienmotdepasse']) && !$toutestbonmdp){ ?> value="<?= $_POST['ancienmotdepasse'] ?>" <?php }?> >
+                                <input onkeyup="goBtnSave(this,3)" type="password" class="mb-2 mr-3 text-light text-center border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="ancienmotdepasse" name="ancienmotdepasse" placeholder="" autofocus <?php if(isset($_POST['ancienmotdepasse']) && !$toutestbonmdp){ ?> value="<?= $_POST['ancienmotdepasse'] ?>" <?php }?> >
 
                                 <?php
                                 if(isset($err_ancienmotdepasse)){
@@ -761,11 +756,10 @@ header('Location: dashboard.php');
                             <!-- NOUVEAU MOT DE PASSE -->
                             <div class="form-group mb-2  ">
 
-                                <div class="row">
-                                    <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                    <label for="nouveaumotdepasse"> Nouveau Mot de passe </label>
+                                 <div class="d-flex justify-content-start ">
+                                    <div class=" text-uppercase text-center">  <label for="nouveaumotdepasse" class="lesLabels rounded ml-3"><i class="fas fa-key mr-2"></i>Nouveau mot de passe</label></div>
                                 </div>
-                                <input onkeyup="goBtnSave(this,3)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="nouveaumotdepasse" name="nouveaumotdepasse" placeholder="" autofocus >
+                                <input onkeyup="goBtnSave(this,3)" type="password" class="mb-2 mr-3 text-light text-center border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="nouveaumotdepasse" name="nouveaumotdepasse" placeholder="" autofocus >
                                 <?php
                                 if(isset($err_nouveaumotdepasse)){
                                     echo "<span class='spanAlertchamp'> ";
