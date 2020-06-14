@@ -535,7 +535,7 @@ if(!empty($_POST)){
             WHERE user_id = ?"); 
 
                                 $req->execute(array($destination,$baseid));
-
+unlink($baseimage);
                                 $baseimage = $destination;
 
 

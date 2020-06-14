@@ -106,7 +106,7 @@ if(!empty($_POST)){
 
         }
 
-        header('Location: profils.php?profil_id='.$id_receveur);
+        header('Location: profil.php?profil_id='.$id_receveur);
         exit;
     }
 
@@ -114,7 +114,7 @@ if(!empty($_POST)){
         echo "#unfollow";
         $req=$BDD->prepare("DELETE FROM relation  WHERE (id_receveur = ? AND id_demandeur = ?)");
         $req->execute(array($id_receveur,$id_demandeur));
-        header('Location: profils.php?profil_id='.$id_receveur);
+        header('Location: profil.php?profil_id='.$id_receveur);
         exit;
     }
     else if(isset($_POST['bloquer'])){
@@ -128,14 +128,14 @@ if(!empty($_POST)){
         /*c'est comme unfollow mais on insère juste l'id de du profil bloqué*/ /*on suppose que le statut 3 est une demande bloqué*/
 
 
-        header('Location: profils.php?profil_id='.$id_receveur);
+        header('Location: profil.php?profil_id='.$id_receveur);
         exit;
     } 
     else if(isset($_POST['debloquer'])){
         echo "#debloquer";
         $req=$BDD->prepare("DELETE FROM relation  WHERE (id_demandeur = ? AND id_receveur = ? AND statut = ? )");
         $req->execute(array($id_demandeur,$id_receveur,3));
-        header('Location: profils.php?profil_id='.$id_receveur);
+        header('Location: profil.php?profil_id='.$id_receveur);
         exit;
     } 
 }

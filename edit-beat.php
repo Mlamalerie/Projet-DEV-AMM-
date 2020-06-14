@@ -36,13 +36,13 @@ $basetags = $afficher_beat['beat_tags'];
 
 
 
+
 $reqG = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
 $reqG->execute(array());
 $listeGenres = $reqG->fetchAll();
 
 
 $icon = "<i class='fas fa-exclamation-circle mr-1'></i>";
-
 
 if (!empty($_POST) && isset($_POST)) {
     echo 'emppy';
@@ -197,117 +197,224 @@ if (!empty($_POST) && isset($_POST)) {
 
 
 
-        <section class="mt-5 pb-4 header text-center">
+        <section class="mt-4  text-center container">
 
-            <div class="bg-back container py-5 text-white rounded">
+            <div class="row">
 
-                <div class="  mb-5">
-                    <div class="d-flex align-items-center justify-content-between mb-3 mr-5 ml-5"> 
-                        <span class="grandTitre text-uppercase ml-3"><strong>Edition  </strong></span>
+                <div class="col-12 col-lg-8 bg-back container py-5 text-white rounded">
 
-                    </div>
-
-                </div>
-                <form id='formNewUpload' action="" method="post">
-
-
-
-                    <!--TITRE-->
-
-
-                    <?php if(isset($err_b_title)){echo "<span class='spanAlertchamp'> ";echo $icon . $err_b_title ;echo "</span> ";} ?>
-
-
-                    <!--GENRE & ANN2E --> 
-                    <div class="form-group  ml-5 mr-5 ">
-                        <div class="d-flex justify-content-between">
-                            <div class="text-uppercase"><label for="b_title" class="lesLabels rounded ml-3">Titre <span class="text-danger">*</span></label></div>
-                            <div class="text-uppercase"><label for="b_genre" class="lesLabels rounded ml-3"> Genre <span class="text-danger">*</span></label></div>
-                            <div class="text-uppercase">  <label for="b_year" class="lesLabels rounded mr-3">Année <span class="text-danger">*</span></label></div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <input onkeyup="gogoUpload2()" type="text" class="mb-2 mr-3 text-light border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_title" name="b_title" placeholder="Mettez un title pour votre profil"  value="<?= $basetitle ?>" autofocus>
-
-                            <select onchange="gogoUpload2()" name="b_genre" id="b_genre" class="mb-2  text-light  border-0 form-control lesInputs rounded-pill shadow-sm px-4">
-                                <?php $req = $BDD->prepare("SELECT genre_nom FROM genre WHERE id = ? ");
-                                   $req->execute(array($basegenre));
-                                   $voir_genre = $req->fetch();
-                                ?>
-                                <option value="<?= $basegenre?>"> <?= mb_strtoupper($voir_genre['genre_nom']) ?> </option>
-
-
-                                <?php foreach($listeGenres as $gr){ ?>
-                                <option class=" " value="<?=$gr['id']?>"><?= mb_strtoupper($gr['genre_nom'])?></option>
-                                <?php } ?>
-
-                            </select>
-                            <input onchange="gogoUpload2()" onkeyup="gogoUpload2()" type="number" min="1900" max="<?= date("Y")+5?>" class="mb-2 ml-3 text-light text-center border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_year" name="b_year" placeholder="Mettez un year pour votre profil"  value="<?php if(isset($b_year)){echo $b_year;} else { echo date("Y");} ?>" autofocus>
+                    <div class="  mb-5">
+                        <div class="d-flex align-items-center justify-content-between mb-3 mr-5 ml-5"> 
+                            <span class="grandTitre text-uppercase ml-3"><strong>Editer •  <?= $basetitle ?> </strong></span>
+                            <div>
+                               <?php
+    $teuda = explode(' ',$afficher_beat['beat_dateupload'])[0];
+    $datedate = explode('-',$teuda);
+    ?>
+                               
+                                <span class="badge  badge-light mr-1" >Date d'upload : <?= $datedate[2]?>-<?= $datedate[1]?>-<?= $datedate[0]?></span>
+                            </div>
+                            <div>
+                                <button><i class="fas fa-trash-alt"></i></button>
+                                
+                            </div>
                         </div>
 
                     </div>
-                    <!--DESCRITION--> 
-                    <div class="form-group  ml-5 mr-5">
-                        <div class="d-flex justify-content-start ">
-                            <div class=" text-uppercase">  <label for="b_description" class="lesLabels rounded ml-3">Description <span class="text-danger">*</span></label></div>
-                        </div>
-                        <textarea onkeyup="gogoUpload2()" id="b_description" name="b_description" class="mb-2 mr-3 text-light border-0 form-control lesInputs rounded shadow-sm px-4" placeholder="description ici la" value="this.value.trim()"><?= $basedescription?></textarea>
-                    </div>
-                    <!--TAGS--> 
-                    <div class="form-group  ml-5 mr-5">
-                        <div class="d-flex justify-content-start ">
-                            <div class=" text-uppercase">  <label for="b_tags" class="lesLabels rounded ml-3">TAGS<span class="text-danger">*</span> <small>(4)</small></label></div>
-                        </div>
-                        <input onkeyup="gogoUpload2()" type="text" class="mb-2 mr-3 text-light border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_tags" name="b_tags" placeholder="Mettez un tags pour votre profil"  value="<?= $basetags ?>" >
+                    <form id='formNewUpload' action="" method="post">
 
-                    </div>
 
-                    <!--PRICE-->
-                    <div class="form-group  ml-5 mr-5 mt-4">
-                        <div class="row mx-auto">
-                            <div class="d-flex align-items-center justify-content-start ">
-                                <div class=" text-uppercase mr-5">  <label for="b_price" class="lesLabels rounded ml-3">Prix<span class="text-danger">*</span> </label></div>
 
-                                <!--free-->
-                                <div class="custom-control custom-switch d-flex justify-content-center mb-2">
-                                    <input onchange="gogoUpload2()" name="freebay" class="custom-control-input" id="freebay" type="checkbox" <?php if(isset($_POST['freebay']) || (isset($baseprice) && $baseprice == 0.00)){ ?> checked <?php } ?> >
-                                    <label class="custom-control-label lesLabels rounded ml-3" for="freebay" title="En cochant ca nanani aniniai">Gratuit</label>
+                        <!--TITRE-->
 
-                                </div>
+
+                        <?php if(isset($err_b_title)){echo "<span class='spanAlertchamp'> ";echo $icon . $err_b_title ;echo "</span> ";} ?>
+
+
+                        <!--GENRE & ANN2E --> 
+                        <div class="form-group  ml-5 mr-5 ">
+                            <div class="d-flex justify-content-between">
+                                <div class="text-uppercase"><label for="b_title" class="lesLabels rounded ml-3">Titre <span class="text-danger">*</span></label></div>
+                                <div class="text-uppercase"><label for="b_genre" class="lesLabels rounded ml-3"> Genre <span class="text-danger">*</span></label></div>
+                                <div class="text-uppercase">  <label for="b_year" class="lesLabels rounded mr-3">Année <span class="text-danger">*</span></label></div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <input onkeyup="gogoUpload2()" type="text" class="mb-2 mr-3 text-light border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_title" name="b_title" placeholder="Mettez un title pour votre profil"  value="<?= $basetitle ?>" autofocus>
+
+                                <select onchange="gogoUpload2()" name="b_genre" id="b_genre" class="mb-2  text-light  border-0 form-control lesInputs rounded-pill shadow-sm px-4">
+                                    <?php $req = $BDD->prepare("SELECT genre_nom FROM genre WHERE id = ? ");
+                                       $req->execute(array($basegenre));
+                                       $voir_genre = $req->fetch();
+                                    ?>
+                                    <option value="<?= $basegenre?>"> <?= mb_strtoupper($voir_genre['genre_nom']) ?> </option>
+
+
+                                    <?php foreach($listeGenres as $gr){ ?>
+                                    <option class=" " value="<?=$gr['id']?>"><?= mb_strtoupper($gr['genre_nom'])?></option>
+                                    <?php } ?>
+
+                                </select>
+                                <input onchange="gogoUpload2()" onkeyup="gogoUpload2()" type="number" min="1900" max="<?= date("Y")+5?>" class="mb-2 ml-3 text-light text-center border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_year" name="b_year" placeholder="Mettez un year pour votre profil"  value="<?php if(isset($b_year)){echo $b_year;} else { echo date("Y");} ?>" autofocus>
                             </div>
 
-                            <!--money-->
-                            <input  onchange="gogoUpload2()" onkeyup="gogoUpload2()" type="number" step="0.01" min="1" max="5000" class="mb-2 ml-4  text-light border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_price" name="b_price" placeholder="Mettez un price pour votre profil"  value="<?php if(isset($baseprice) && $baseprice != 0.00){echo $baseprice;}?>" autofocus>
                         </div>
+                        <!--DESCRITION--> 
+                        <div class="form-group  ml-5 mr-5">
+                            <div class="d-flex justify-content-start ">
+                                <div class=" text-uppercase">  <label for="b_description" class="lesLabels rounded ml-3">Description <span class="text-danger">*</span></label></div>
+                            </div>
+                            <textarea onkeyup="gogoUpload2()" id="b_description" name="b_description" class="mb-2 mr-3 text-light border-0 form-control lesInputs rounded shadow-sm px-4" placeholder="description ici la" value="this.value.trim()"><?= $basedescription?></textarea>
+                        </div>
+                        <!--TAGS--> 
+                        <div class="form-group  ml-5 mr-5">
+                            <div class="d-flex justify-content-start ">
+                                <div class=" text-uppercase">  <label for="b_tags" class="lesLabels rounded ml-3">TAGS <span class="text-danger">*</span> <small>(4)</small></label></div>
+                            </div>
+                            <input onkeyup="gogoUpload2()" type="text" class="mb-2 mr-3 text-light border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_tags" name="b_tags" placeholder="Mettez un tags pour votre profil"  value="<?= $basetags ?>" >
+
+                        </div>
+
+                        <!--PRICE-->
+                        <div class="form-group  ml-5 mr-5 mt-4">
+                            <div class="row mx-auto">
+                                <div class="d-flex align-items-center justify-content-start ">
+                                    <div class=" text-uppercase mr-5">  <label for="b_price" class="lesLabels rounded ml-3">Prix <span class="text-danger">*</span> </label></div>
+
+                                    <!--free-->
+                                    <div class="custom-control custom-switch d-flex justify-content-center mb-2">
+                                        <input onchange="gogoUpload2()" name="freebay" class="custom-control-input" id="freebay" type="checkbox" <?php if(isset($_POST['freebay']) || (isset($baseprice) && $baseprice == 0.00)){ ?> checked <?php } ?> >
+                                        <label class="custom-control-label lesLabels rounded ml-3" for="freebay" title="En cochant ca nanani aniniai">Gratuit</label>
+
+                                    </div>
+                                </div>
+
+                                <!--money-->
+                                <input  onchange="gogoUpload2()" onkeyup="gogoUpload2()" type="number" step="0.01" min="1" max="5000" class="mb-2 ml-4  text-light border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_price" name="b_price" placeholder="Mettez un price pour votre profil"  value="<?php if(isset($baseprice) && $baseprice != 0.00){echo $baseprice;}?>" autofocus>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class=" ml-5 mr-5 "><div id="iciBtnSubmit" class="w-100 mx-auto "></div></div>
+                        <p class="text-muted mt-2">
+                            <span id="spanErreurTitle" class="text-danger d-none"> </span>
+                            <span id="spanErreurYear" class="text-danger d-none"> </span>
+                            <span id="spanErreurGenre" class="text-danger d-none"> </span>
+                            <span id="spanErreurDescription" class="text-danger d-none"> </span>
+                            <span id="spanErreurTags" class="text-danger d-none"> </span>
+                            <span id="spanErreurPrice" class="text-danger d-none"> </span>
+
+                        </p>
+
+
+
+
+                    </form>
+
+                </div>
+
+                <!-- For demo purpose  sm md lg xl -->
+                <div class="col-12 col-lg-4  my-5 d-flex align-items-center">
+                    <div class="col-lg-8 pb-0 mt-3 text-center mx-auto">
+                        <div class="hover text-white rounded d-inline-block align-middle ">
+                            <img onclick="getfile();" id="imgdubeat" src="<?=$basecover ?>" alt=""  class="img-fluid  mb-3 shadow-sm">
+                        </div>
+
+                        <span class="small text-uppercase text-muted">Cliquer sur l'image pour la changer :)</span>
+                        <?php 
+    $toutestboncover = false;
+                                 require_once 'assets/functions/uploadFile.php';
+
+                                 $upd = new uploadFile();
+
+                                 if(isset($_FILES['fileUploadCover'])) {
+                                     if($_FILES['fileUploadCover']['size'] != 0) { 
+                                         // FICHIER RECU
+                                         //                                var_dump($_FILES['fileUploadCover']);
+                                         $tmp_name = $_FILES['fileUploadCover']['tmp_name'];
+                                         $name = $_FILES['fileUploadCover']['name'];
+
+                                         $nomduboug = $afficher_beat['beat_author'];
+                                         $idduboug = $afficher_beat['beat_author_id'];
+
+
+                                         $destination = $upd->uploadCoverBeats($tmp_name,$name,$nomduboug,$idduboug,$baseid);
+                                         // echo $destination;
+                                         if ($destination == "error1") { 
+                                             $err_uploadcover = " ERREUR : Ceci n'est pas une image";
+
+                                         }
+                                         else if ($destination == "error2") {
+                                             $err_uploadcover= "ERREUR : Image non sauvegardée...";
+
+                                         } else {
+                                             $toutestboncover = true;
+
+                                             // preparer requete
+                                             $req = $BDD->prepare("UPDATE beat SET  beat_cover = ? WHERE beat_id = ?"); 
+
+                                             $req->execute(array($destination,$baseid));
+                                             unlink($basecover);
+                                             $basecover = $destination;
+
+
+
+                                         }
+                                     } else {
+                                         $err_uploadcover = "fichier taille 0";
+                                     }
+                                 }
+
+
+                        ?>
+
+                        <form id='formUpload1' action="" method="post" enctype="multipart/form-data">
+
+                            <input id="hiddenfile" type="file" style="display:none;" name='fileUploadCover' onchange="submit()" class="form-control border-0">
+                        </form>
+
+                        <?php
+                        if(isset($err_uploadcover)){
+                            echo "<span class='spanAlertchamp'> ";
+                            echo $icon . $err_uploadcover ;
+                            echo "</span> ";
+                        } 
+                        ?>
+                        <?php
+                        if($toutestboncover){ 
+                        ?>
+                        <div class="divDone ml-4 ">
+                            <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle mx-1"></i> (Le changement de votre photo ne sera pas visible directement)</span>
+                        </div>
+                        <?php
+                        }
+                        ?>
+                        <script type="text/javascript">
+                            function getfile(){
+                                document.getElementById('hiddenfile').click();
+                            }
+
+                        </script>
+
+
+
+
+
                     </div>
-
-
-
-
-
-                    <div class=" ml-5 mr-5 "><div id="iciBtnSubmit" class="w-100 mx-auto "></div></div>
-                    <p class="text-muted mt-2">
-                        <span id="spanErreurTitle" class="text-danger d-none"> </span>
-                        <span id="spanErreurYear" class="text-danger d-none"> </span>
-                        <span id="spanErreurGenre" class="text-danger d-none"> </span>
-                        <span id="spanErreurDescription" class="text-danger d-none"> </span>
-                        <span id="spanErreurTags" class="text-danger d-none"> </span>
-                        <span id="spanErreurPrice" class="text-danger d-none"> </span>
-
-                    </p>
-
-
-
-
-                </form>
-
+                </div>
+                <!-- End div du haut-->
             </div>
-
-
 
         </section>
 
 
+        <section class="mt-4 pb-4 header text-center">
 
+
+
+        </section>
 
 
 
@@ -504,17 +611,17 @@ if (!empty($_POST) && isset($_POST)) {
 
                 /***************** Changement ?**************************/
                 let okokafficherbouton = false;
-                
+
                 let ctitle = document.getElementById('b_title').value.trim();
                 let cdescription = document.getElementById('b_description').value.trim();
                 let ctags = document.getElementById('b_tags').value.trim();
                 let cgenre = document.getElementById('b_genre').value;
                 let cyear = document.getElementById('b_year').value;
                 let cprice = document.getElementById('b_price').value;
-                    if (freebay.checked) {
-                        cprice = 0.00;
-                    }
-                
+                if (freebay.checked) {
+                    cprice = 0.00;
+                }
+
                 let oktitle = ctitle != "<?=$basetitle?>";
                 let oktags = ctags != "<?=$basetags?>";
                 let okyear = parseInt(cyear) != <?=$baseyear?>;
@@ -526,7 +633,7 @@ if (!empty($_POST) && isset($_POST)) {
                 okokafficherbouton = oktitle || oktags || okyear || okgenre || okdescription || okprice;  
                 console.log(ok,'#',okokafficherbouton,'//',ctitle,oktitle ,ctags, oktags ,cyear, okyear , cgenre, okgenre , cdescription, okdescription,cprice, okprice);
 
-/***/ 
+                /***/ 
                 ok = ok && okokafficherbouton;
                 if (ok) {
 

@@ -20,10 +20,22 @@ if(isset($_POST['inputOption'])) {
     $ok = true;
     if($_POST['inputOption']== "suppr"){
         if($ok){
+            
+            // supprimer le fichier du dossier data
+            $req = $BDD->prepare("SELECT beat_source FROM beat
+            WHERE beat_id = ?"); 
+            $req->execute(array($id_beat));
+            $bb = $req->fetch();
+            
+            unlink($bb['beat_source']);
+            
+            // supprimer de la BDD
             $req = $BDD->prepare("DELETE FROM beat
             WHERE beat_id = ?"); 
             $req->execute(array($id_beat));
-            header('Location: my-beats');
+            
+            
+            header('Location: my-beats.php');
             exit;
 
         }

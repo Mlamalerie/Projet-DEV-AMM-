@@ -161,7 +161,7 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 
 <?php if(!$okcestpastaprod && $okconnectey ) { ?>
-                            <a class="dropdown-item" href="#">Editer la piste </a>
+                            <a class="dropdown-item" href="edit-beat.php?id=<?=$r['beat_id']?>">Editer la piste </a>
 
                             <div class="dropdown-divider"></div>
                             <?php } ?>

@@ -112,7 +112,7 @@ class uploadFile{
         }
     } // END function uploadImage
 
-    function uploadCoverBeats($tmp_name,$name,$title,$nomduboug,$idduboug,$idbeat){
+    function uploadCoverBeats($tmp_name,$name,$nomduboug,$idduboug,$idbeat){
         $formatImage = array('png','jpg','jpeg');
 
         $nn = pathinfo($name);
