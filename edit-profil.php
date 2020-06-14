@@ -490,12 +490,12 @@ if(!empty($_POST)){
     <body>
 
         <?php
-        // require_once('assets/skeleton/navbar.php');
+         require_once('assets/skeleton/navbar.php');
         ?>
         <div class="container py-2">
             <!-- For demo purpose -->
             <div class="row mb-1">
-                <div class="col-lg-8 py-3 text-center mx-auto">
+                <div class="col-lg-8 pb-0 mt-3 text-center mx-auto">
 
                     <img onclick="getfile();" id="imgduboug" src="<?=$baseimage ?>" alt=""  class="img-fluid  mb-3  roundedImage shadow-sm">
                     <h5 class="mb-0 "><?=$basepseudo ?> <?php if($okadmin) { ?> (ADMIN) <?php } ?> </h5>

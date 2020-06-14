@@ -1,6 +1,6 @@
 <nav id='audioplayer' class=" navplayer fixed-bottom " style="display:none">  
     <!--        -->
-    <audio src="" id="song" volume = 0.75></audio>
+    <audio src="" id="song" volume = 0.75 onerror="probleme()"></audio>
 
 
     <div class="box ">
@@ -13,9 +13,9 @@
                         <div class='p-2 d-flex w-100 align-middle'>
                             <img id="thumbnail"  src='assets/img/cover_default.jpg' alt='' width='90' class='img-fluid rounded shadow-sm ml-2'>
                             <div class='ml-3 d-inline-block align-middle mt-2'>
-                              <span class="song-title">WEBEATS</span>
+                              <span class="song-title"></span>
                                
-                                <span class='text-muted font-weight-normal font-italic d-block'><span class="song-artist">zgzbrzgz</span></span>
+                                <span class='text-muted font-weight-normal font-italic d-block'><span class="song-artist"></span></span>
                             </div>
                         </div>
                     </th>

@@ -140,7 +140,7 @@
 
                     </button>
                     <?php } } else {?>
-                    <a class="btn btn-danger" href="audio/<?= $r['beat_source']?>" download>
+                    <a class="btn btn-danger" href="<?= $r['beat_source']?>" download>
                         <span class="text-white"><i class="fas fa-download"></i></span>
                     </a>
                     <?php } ?>

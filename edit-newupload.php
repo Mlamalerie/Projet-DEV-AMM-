@@ -106,9 +106,9 @@ if (!empty($_POST)) {
 
     if(isset($_POST['Uploader-mon-instru']) ){
         echo " *_";
-        $b_title = (String) $b_title;
-        $b_description = (String) $b_description;
-        $b_tags = (String) $b_tags;
+        $b_title = (String) trim($b_title);
+        $b_description = (String) trim($b_description);
+        $b_tags = (String) trim($b_tags);
         $b_genre = (int) $b_genre;
         $b_year = (int) $b_year;
         $b_price = (float) round($b_price,2);

@@ -3,12 +3,10 @@ session_start();
 $_SESSION['ici_index_bool'] = false;
 include('assets/db/connexiondb.php'); 
 
-print_r($_GET);
-print_r("<br>");
 print_r($_POST);
 print_r($_SESSION);
 
-$baseid = (int) $_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
+$baseid = (int) $_GET['id'];/*récupère id du beat qu'on a cliqué*/
 
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
@@ -20,20 +18,19 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
 
 
-
-
 $req = $BDD->prepare("SELECT * 
     FROM beat 
-    WHERE beat_author_id = ?");
+    WHERE beat_id = ?");
 
 $req->execute(array($baseid));
 $afficher_beat = $req->fetch();
 
-$basenom = $afficher_beat['beat_title'];
+
+$basetitle = $afficher_beat['beat_title'];
 $basedescription = $afficher_beat['beat_description'];
-$baseprix = $afficher_beat['beat_price'];
+$baseprice = $afficher_beat['beat_price'];
 $basegenre = $afficher_beat['beat_genre'];
-$baseannee = $afficher_beat['beat_year'];
+$baseyear = $afficher_beat['beat_year'];
 $basecover = $afficher_beat['beat_cover'];
 $basetags = $afficher_beat['beat_tags'];
 
@@ -44,210 +41,119 @@ $reqG->execute(array());
 $listeGenres = $reqG->fetchAll();
 
 
-
-print_r($_FILES);print_r($_POST);
-
-
-
-$okconnectey = false;
-if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
-
-    $okconnectey = true;
-} 
-
-if(empty($_FILES)) {
-
-}
-
-
-require_once 'assets/functions/uploadFile.php';
-
 $icon = "<i class='fas fa-exclamation-circle mr-1'></i>";
 
 
-// UPLOADER
-$okaudioposer = true;
-$upd = new uploadFile();
-if(isset($_FILES['uploadAudio'])) {
-    if($_FILES['uploadAudio']['size'] != 0) { 
-        // FICHIER RECU
-        var_dump($_FILES['uploadAudio']);
-        $tmp_name = $_FILES['uploadAudio']['tmp_name'];
-        $name = $_FILES['uploadAudio']['name'];
-
-        $nomduboug = $_SESSION['user_pseudo'];
-        $idduboug = $_SESSION['user_id'];
-
-        $destination = $upd->uploadAudio($tmp_name,$name,$nomduboug,$idduboug);
-    }
-    else {
-        $destination = "error0";
-    }
-
-
-    if (substr($destination,0,-1) == "error") { 
-        if ($destination[5] == "0") { 
-            $err_upload = "Taille 0";
-            $okaudioposer = false;
-
-        } else if( $destination[5] == "1") { 
-            $err_upload = "ceci n'est pas un audio";
-            $okaudioposer = false;
-
-        }else if( $destination[5] == "2") { 
-            $err_upload = "erreur inconnu";
-            $okaudioposer = false;
-
-        }
-        var_dump($_FILES);
-        unset($_FILES['uploadAudio']);
-    } else { // si ya pas d'ereeur
-        $_SESSION['destination'] = $destination;
-    }
-
-}
-
-if(!isset($err_upload)){
-    if( !isset($_SESSION['destination'])){ // 
-        $okaudioposer = false;
-        $err_upload = "fichier n'est pas posé";
-    } else if (!isset($name) || empty($name)){
-        $okaudioposer = false;
-        $err_upload = "rien de posé";
-
-    }
-}
-if(!isset($err_upload) || isset($_POST['Uploader-mon-instru'])){ // si l'audio est bien posé alors verif
-    $nn = pathinfo($_SESSION['destination']);
-    //var_dump($nn);
-    $ext =  strtolower($nn['extension']); // stock le format audio
-    $dir = "data/".$_SESSION['user_id']."-".$_SESSION['user_pseudo']."/beats/";
-    $fichier = $dir.basename($_SESSION['user_id']."-beat-x.".$ext);
-    if (!file_exists($fichier)) {
-        $err_upload = "aucun fichier trouvé";
-        $okaudioposer = false;
-    }
-}
-var_dump($okaudioposer);
-
-
-print_r($_SESSION);
-
-if (!empty($_POST)) {
+if (!empty($_POST) && isset($_POST)) {
     echo 'emppy';
     extract($_POST); // si pas vide alors extraire le tableau, grace a ça on pourra directemet mettre le nom de la varilable en dur
 
     $ok = true;
 
-    if(isset($_POST['Uploader-mon-instru']) ){
+    if(isset($_POST['Modifier-mon-instru']) ){
         echo " *_";
-        $b_title = (String) $b_title;
-        $b_description = (String) $b_description;
-        $b_tags = (String) $b_tags;
+        $b_title = (String) trim($b_title);
+        $b_description = (String) trim($b_description);
+        $b_tags = (String) trim($b_tags);
         $b_genre = (int) $b_genre;
         $b_year = (int) $b_year;
         $b_price = (float) round($b_price,2);
 
+        $oktitlenotsame = false;
+        if($basetitle != $b_title){
+            $oktitlenotsame =  true;
+            if(empty($b_title)) {
+                $ok = false; 
+                $err_b_title = "Veuillez renseigner ce champ !"; 
 
+            } 
+        }
 
+        $okdescriptionnotsame = false;
+        if($basedescription != $b_description){
+            $okdescriptionnotsame =  true;
+            if(empty($b_description)) {
+                $ok = false;
+                $err_b_description = "Veuillez renseigner ce champ !"; 
+            } 
+        }
 
+        $oktagsnotsame = false;
+        if($basetags != $b_tags){
+            $oktagsnotsame =  true;
+            //*** Verification du Tag
+            if(empty($b_tags)) {
+                $ok = false;
+                $err_b_tags = "Veuillez renseigner ce champ !"; 
+            } 
+        }
 
-        if(empty($b_title)) {
-            $ok = false; 
-            $err_b_title = "Veuillez renseigner ce champ !"; 
-
-        } 
-
-        if(empty($b_description)) {
-            $ok = false;
-            $err_b_description = "Veuillez renseigner ce champ !"; 
-        } 
-        //*** Verification du Tag
-        if(empty($b_tags)) {
-            $ok = false;
-            $err_b_tags = "Veuillez renseigner ce champ !"; 
-        } 
-        //*** Verification du Genre
-        $req = $BDD->prepare("SELECT genre_nom 
+        $okgenrenotsame = false;
+        if($basegenre != $b_genre){
+            $okgenrenotsame =  true;
+            //*** Verification du Genre
+            $req = $BDD->prepare("SELECT genre_nom 
                             FROM genre
                             WHERE id = ?");
-        $req->execute(array($b_genre));
-        $verif_g = $req->fetch();
+            $req->execute(array($b_genre));
+            $verif_g = $req->fetch();
 
-        if(empty($b_genre)) {
-            $ok = false;
-            $err_b_genre = "Veuillez renseigner ce champ !"; 
+            if(empty($b_genre)) {
+                $ok = false;
+                $err_b_genre = "Veuillez renseigner ce champ !"; 
 
-        } else if($b_genre == -1){
-            echo "$$";
-            $ok = false;
-            $err_b_genre = "oh !";
+            } else if($b_genre == -1){
+                echo "$$";
+                $ok = false;
+                $err_b_genre = "oh !";
+            }
+            else if(!isset($verif_g['genre_nom'])){ // si 
+                $ok = false;
+                $err_b_genre = "Veuillez renseigner ce champ !";
+            }
         }
-        else if(!isset($verif_g['genre_nom'])){ // si 
-            $ok = false;
-            $err_b_genre = "Veuillez renseigner ce champ !";
-        }
-        //*** Verification du Année
-        if(empty($b_year)) {
-            $ok = false;
-            $err_b_year = "Veuillez renseigner ce champ !";  
 
+        $okyearnotsame = false;
+        if($baseyear != $b_year){
+            $okyearnotsame =  true;
+            //*** Verification du Année
+            if(empty($b_year)) {
+                $ok = false;
+                $err_b_year = "Veuillez renseigner ce champ !";  
+
+            }
         }
-        //*** Verification du Prix
-        if(isset($_POST['freebay'])) {
-            $b_price = 0.00;
-        } else if(empty($b_price)) {
-            $ok = false;
-            $err_b_price = "Veuillez renseigner ce champ !"; 
-        } else if( $b_price < 0 || 5000 < $b_price) {
-            $ok = false;
-            $err_b_price = "Veuillez saisir un prix entre 1 et 5000 !"; 
+        $okpricenotsame = false;
+        if($baseprice != $b_price){
+            $okpricenotsame =  true;
+            //*** Verification du Prix
+            if(isset($_POST['freebay'])) {
+                $b_price = 0.00;
+            } else if(empty($b_price)) {
+                $ok = false;
+                $err_b_price = "Veuillez renseigner ce champ !"; 
+            } else if( $b_price < 0 || 5000 < $b_price) {
+                $ok = false;
+                $err_b_price = "Veuillez saisir un prix entre 1 et 5000 !"; 
+            }
         }
 
 
         if($ok) {
             echo "€€OOOOK";
             echo "<script> alert('OKKKK') </script>";
-            $date_upload = date("Y-m-d H:i:s"); 
 
             // preparer requete insertion
-            $req = $BDD->prepare("INSERT INTO beat (beat_title,beat_author,beat_author_id,beat_format,beat_genre,beat_description,beat_year,beat_price,beat_dateupload,beat_tags,beat_source) VALUES (?,?,?,?,?,?,?,?,?,?,?)"); 
+            $req = $BDD->prepare("UPDATE beat SET beat_title = ?, beat_genre = ?, beat_description = ?, beat_year = ?, beat_price = ?, beat_tags = ? WHERE beat_id = ?"); 
 
-            $req->execute(array($b_title,$_SESSION['user_pseudo'],$_SESSION['user_id'],$ext,$b_genre,$b_description,$b_year,$b_price,$date_upload,$b_tags,$fichier));
+            $req->execute(array($b_title,$b_genre,$b_description,$b_year,$b_price,$b_tags,$baseid));
 
-            // recup beat_id
-            $req = $BDD->prepare("SELECT beat_id FROM beat WHERE (beat_title = ? AND beat_author = ? AND beat_author_id = ? AND beat_format = ? AND beat_genre = ? AND beat_description = ? AND beat_year = ? AND beat_price = ? AND beat_dateupload = ? AND beat_tags = ? AND beat_source = ?) "); 
-
-            $req->execute(array($b_title,$_SESSION['user_pseudo'],$_SESSION['user_id'],$ext,$b_genre,$b_description,$b_year,$b_price,$date_upload,$b_tags,$fichier));
-            $bb = $req->fetch();
-
-
-            if(isset($bb)) {
-
-
-                $newfichier = $dir.basename($_SESSION['user_id']."-beat-".$bb['beat_id'].".".$ext);
-
-                if(rename($fichier, $newfichier)) {
-                    echo 'rennneeaame';
-                    $req = $BDD->prepare("UPDATE beat SET beat_source = ? WHERE beat_id = ? "); 
-                    $req->execute(array($newfichier,$bb['beat_id']));
-
-
-                    echo "<script> alert('".$fichier."') </script>";
-                    echo "<script> alert('".$_SESSION['user_id']."-beat-".$bb['beat_id'].".".$ext."') </script>";
-                    unset($_SESSION['destination']);
-                    unset($_POST);
-                    header('Location: view-beat.php?id='.$bb['beat_id']);
-                    exit;
-                }
-
-
-
-
-            }else {
-                echo'not bb';
-            }
-
+            if($oktitlenotsame) {$basetitle = $b_title;}
+            if($okgenrenotsame) {$basegenre = $b_genre;}
+            if($okdescriptionnotsame) {$basedescription = $b_description;}
+            if($okyearnotsame) {$baseyear = $b_year;}
+            if($okpricenotsame) {$baseprice = $b_price;}
+            if($oktagsnotsame) {$basetags = $b_tags;}
 
 
         } else {
@@ -275,10 +181,10 @@ if (!empty($_POST)) {
         <!--        <link rel="stylesheet" type="text/css" href="assets/css/styles-index.css"> -->
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
 
-        <link rel="stylesheet" type="text/css" href="assets/css/edit-upload.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/edit-beat.css">
         <link rel="stylesheet" type="text/css" href="assets/css/button-style2ouf.css">
 
-        <title>New upload</title>
+        <title>Edit <?= $basetitle ?></title>
     </head>
     <body onload="gogoUpload2()">
 
@@ -286,33 +192,19 @@ if (!empty($_POST)) {
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-        require_once('assets/skeleton/navbar.php');
+    // require_once('assets/skeleton/navbar.php');
         ?>;
 
-
-
-
-        <?php if(isset($destination)) {echo $destination;}?>
 
 
         <section class="mt-5 pb-4 header text-center">
 
             <div class="bg-back container py-5 text-white rounded">
-                <!--  si erreur de upload alors-->
-                <?php if (isset($err_upload)) { ?>
-                <?=$err_upload ?> <a href=javascript:history.go(-1)>Retournez en arrière</a>  
-                <!-- sinon si tout va bien -->
-                <?php }else {?>
-
 
                 <div class="  mb-5">
-
-
                     <div class="d-flex align-items-center justify-content-between mb-3 mr-5 ml-5"> 
                         <span class="grandTitre text-uppercase ml-3"><strong>Edition  </strong></span>
-                        <div>
-                            <span class="badge  badge-light mr-1" ><i class="fas fa-music"></i> <?= $name ?></span>
-                        </div>
+
                     </div>
 
                 </div>
@@ -334,12 +226,18 @@ if (!empty($_POST)) {
                             <div class="text-uppercase">  <label for="b_year" class="lesLabels rounded mr-3">Année <span class="text-danger">*</span></label></div>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <input onkeyup="gogoUpload2()" type="text" class="mb-2 mr-3 text-light border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_title" name="b_title" placeholder="Mettez un title pour votre profil"  value="<?php if (isset($b_title)) {echo $b_title;} else {echo "Nouvelle Piste";} ?>" autofocus>
+                            <input onkeyup="gogoUpload2()" type="text" class="mb-2 mr-3 text-light border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_title" name="b_title" placeholder="Mettez un title pour votre profil"  value="<?= $basetitle ?>" autofocus>
 
                             <select onchange="gogoUpload2()" name="b_genre" id="b_genre" class="mb-2  text-light  border-0 form-control lesInputs rounded-pill shadow-sm px-4">
-                                <option class=" " value="-1">Selectionner Genre</option>
+                                <?php $req = $BDD->prepare("SELECT genre_nom FROM genre WHERE id = ? ");
+                                   $req->execute(array($basegenre));
+                                   $voir_genre = $req->fetch();
+                                ?>
+                                <option value="<?= $basegenre?>"> <?= mb_strtoupper($voir_genre['genre_nom']) ?> </option>
+
+
                                 <?php foreach($listeGenres as $gr){ ?>
-                                <option class=" " value="<?=$gr['id']?>"><?= $gr['genre_nom']?></option>
+                                <option class=" " value="<?=$gr['id']?>"><?= mb_strtoupper($gr['genre_nom'])?></option>
                                 <?php } ?>
 
                             </select>
@@ -352,14 +250,14 @@ if (!empty($_POST)) {
                         <div class="d-flex justify-content-start ">
                             <div class=" text-uppercase">  <label for="b_description" class="lesLabels rounded ml-3">Description <span class="text-danger">*</span></label></div>
                         </div>
-                        <textarea onkeyup="gogoUpload2()" id="b_description" name="b_description" class="mb-2 mr-3 text-light border-0 form-control lesInputs rounded shadow-sm px-4" placeholder="description ici la" value="this.value.trim()"><?php if (isset($b_description)) {echo $b_description;} ?></textarea>
+                        <textarea onkeyup="gogoUpload2()" id="b_description" name="b_description" class="mb-2 mr-3 text-light border-0 form-control lesInputs rounded shadow-sm px-4" placeholder="description ici la" value="this.value.trim()"><?= $basedescription?></textarea>
                     </div>
                     <!--TAGS--> 
                     <div class="form-group  ml-5 mr-5">
                         <div class="d-flex justify-content-start ">
                             <div class=" text-uppercase">  <label for="b_tags" class="lesLabels rounded ml-3">TAGS<span class="text-danger">*</span> <small>(4)</small></label></div>
                         </div>
-                        <input onkeyup="gogoUpload2()" type="text" class="mb-2 mr-3 text-light border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_tags" name="b_tags" placeholder="Mettez un tags pour votre profil"  value="<?php if (isset($b_tags)) {echo $b_tags;} ?>" >
+                        <input onkeyup="gogoUpload2()" type="text" class="mb-2 mr-3 text-light border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_tags" name="b_tags" placeholder="Mettez un tags pour votre profil"  value="<?= $basetags ?>" >
 
                     </div>
 
@@ -367,18 +265,18 @@ if (!empty($_POST)) {
                     <div class="form-group  ml-5 mr-5 mt-4">
                         <div class="row mx-auto">
                             <div class="d-flex align-items-center justify-content-start ">
-                                <div class=" text-uppercase mr-2">  <label for="b_price" class="lesLabels rounded ml-3">Prix<span class="text-danger">*</span> </label></div>
+                                <div class=" text-uppercase mr-5">  <label for="b_price" class="lesLabels rounded ml-3">Prix<span class="text-danger">*</span> </label></div>
 
                                 <!--free-->
                                 <div class="custom-control custom-switch d-flex justify-content-center mb-2">
-                                    <input onchange="gogoUpload2()" name="freebay" class="custom-control-input" id="freebay" type="checkbox" <?php if(isset($_POST['freebay']) || (isset($b_price) && $b_price == 0.00)){ ?> checked <?php } ?> >
+                                    <input onchange="gogoUpload2()" name="freebay" class="custom-control-input" id="freebay" type="checkbox" <?php if(isset($_POST['freebay']) || (isset($baseprice) && $baseprice == 0.00)){ ?> checked <?php } ?> >
                                     <label class="custom-control-label lesLabels rounded ml-3" for="freebay" title="En cochant ca nanani aniniai">Gratuit</label>
 
                                 </div>
                             </div>
 
                             <!--money-->
-                            <input  onchange="gogoUpload2()" onkeyup="gogoUpload2()" type="number" step="0.01" min="1" max="5000" class="mb-2 ml-4  text-light border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_price" name="b_price" placeholder="Mettez un price pour votre profil"  value="<?php if(isset($b_price) && !isset($_POST['freebay'])){echo $b_price;}?>" autofocus>
+                            <input  onchange="gogoUpload2()" onkeyup="gogoUpload2()" type="number" step="0.01" min="1" max="5000" class="mb-2 ml-4  text-light border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="b_price" name="b_price" placeholder="Mettez un price pour votre profil"  value="<?php if(isset($baseprice) && $baseprice != 0.00){echo $baseprice;}?>" autofocus>
                         </div>
                     </div>
 
@@ -402,7 +300,6 @@ if (!empty($_POST)) {
 
                 </form>
 
-                <?php  }  ?>
             </div>
 
 
@@ -605,22 +502,47 @@ if (!empty($_POST)) {
                     okyarien = true;
                 }
 
+                /***************** Changement ?**************************/
+                let okokafficherbouton = false;
+                
+                let ctitle = document.getElementById('b_title').value.trim();
+                let cdescription = document.getElementById('b_description').value.trim();
+                let ctags = document.getElementById('b_tags').value.trim();
+                let cgenre = document.getElementById('b_genre').value;
+                let cyear = document.getElementById('b_year').value;
+                let cprice = document.getElementById('b_price').value;
+                    if (freebay.checked) {
+                        cprice = 0.00;
+                    }
+                
+                let oktitle = ctitle != "<?=$basetitle?>";
+                let oktags = ctags != "<?=$basetags?>";
+                let okyear = parseInt(cyear) != <?=$baseyear?>;
+                let okgenre = parseInt(cgenre) != <?=$basegenre?>;
+                let okprice = parseFloat(cprice) != <?=$baseprice?>;
+                let okdescription = cdescription != "<?=trim($basedescription)?>";
 
+
+                okokafficherbouton = oktitle || oktags || okyear || okgenre || okdescription || okprice;  
+                console.log(ok,'#',okokafficherbouton,'//',ctitle,oktitle ,ctags, oktags ,cyear, okyear , cgenre, okgenre , cdescription, okdescription,cprice, okprice);
+
+/***/ 
+                ok = ok && okokafficherbouton;
                 if (ok) {
 
                     if(okyarien) {
                         let btn = document.createElement('button');
                         btn.setAttribute('type','submit');
-                        btn.setAttribute('id','Uploader-mon-instru');
-                        btn.setAttribute('name','Uploader-mon-instru');
-                        btn.setAttribute('class','btn boutonstyle2ouf w-100 btn-block p-2 rounded-pill shadow-sm');
-                        btn.innerHTML = "UPLOADER MON INSTRU "
+                        btn.setAttribute('id','Modifier-mon-instru');
+                        btn.setAttribute('name','Modifier-mon-instru');
+                        btn.setAttribute('class','btn btn-primary w-100 btn-block p-2 rounded-pill shadow-sm');
+                        btn.innerHTML = "Sauvegarder modifications ";
                         divS.appendChild(btn);
                     }
 
                 }else {
                     if(!okyarien) {
-                        let btn = document.getElementById('Uploader-mon-instru');
+                        let btn = document.getElementById('Modifier-mon-instru');
                         divS.removeChild(btn);
                     }
 

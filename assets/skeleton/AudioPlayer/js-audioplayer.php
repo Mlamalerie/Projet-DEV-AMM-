@@ -64,8 +64,8 @@ function returnMusicListStr($bay, $resuBEATS){
 
     const thumbnail = document.querySelector('#thumbnail'); // album cover 
     const song = document.querySelector('#song'); // audio 
-
-    const btnAcheterPrice = document.querySelector('#btn-player-acheter');
+    
+//    const btnAcheterPrice = document.querySelector('#btn-player-acheter');
     const songArtist = document.querySelector('.song-artist'); // element où noms artistes apparaissent
     const songTitle = document.querySelector('.song-title'); // element où titre apparait
     const progressBar = document.querySelector('#progress-bar'); // element où progress bar apparait
@@ -73,6 +73,10 @@ function returnMusicListStr($bay, $resuBEATS){
 
     let mouseDown = false;
 
+    function probleme(){
+        songTitle.innerHTML = '<i class="fas fa-exclamation-triangle text-warning"></i> erreur';
+        songArtist.innerHTML = 'source introuvable..';
+    }
 
 
     songIndex = 0;
@@ -136,6 +140,7 @@ function returnMusicListStr($bay, $resuBEATS){
         document.getElementById('audioplayer').setAttribute('style',''); //affiche le lecteur
 
         song.src = songs[songIndex];
+        
         thumbnail.src = thumbnails[songIndex];
         songArtist.innerHTML = songArtists[songIndex];
         songTitle.innerHTML = songTitles[songIndex];
