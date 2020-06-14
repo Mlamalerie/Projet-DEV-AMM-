@@ -502,7 +502,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
 
-        <title>Search • WeBeatz</title>
+        <title>Search <?php if($weqexiste){echo '"'.$_GET['q'].'"';} ?> • WeBeatz</title>
     </head>
     <body onload=" refreshNbPanier();refreshAllBeats() ">
 
@@ -902,7 +902,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
                             <div class=" rounded shadow-sm py-3 px-3"><a href="profils.php?profil_id=<?= $r['user_id']?>">
-                                <img src="<?=$r['user_image'] ?>" alt=""  class="img-fluid roundedImage img-thumbnail shadow-sm">
+                                <img src="<?=$r['user_image'] ?>" alt=""  class="img-fluid roundedImage  shadow-sm mb-2">
                                 <h5 class="mb-0"><a href="profils.php?profil_id=<?= $r['user_id']?>"><?=$r['user_pseudo'] ?></a></h5>
 
                                 <span class="small  text-muted"><?=$r['user_ville'] ?>

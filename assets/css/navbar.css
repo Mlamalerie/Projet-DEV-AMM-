@@ -32,7 +32,7 @@
 
 .dropdown-menu{  /*couleur fond sous menu*/
     background-color: var(--couleurdark);
-    border-radius:  var(--base-border-radius);
+    border-radius:  var(--base-border-radius); 
 }
 
 .dropdown-item:focus, .dropdown-item:hover {/*couleur sous menu et bleu turquoise qd tu passes sur les mots*/

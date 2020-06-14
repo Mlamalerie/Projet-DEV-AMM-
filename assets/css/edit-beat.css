@@ -27,7 +27,7 @@ body {
     max-width: 45%; 
 }
 #b_year {
-    max-width: 16%;
+    max-width: 25%; 
 }
 
 #freebay:checked {
@@ -50,6 +50,25 @@ body {
 * ==========================================
 *
 */
+
+:root{ 
+    --taille-img : 280px;
+    
+}
+/* PETIT MUSIC CARD */
+.hover {  
+    height: var(--taille-img );  
+  width: var(--taille-img );    
+  overflow: hidden;  
+  position: relative; 
+  padding-bottom: var(--taille-img );  
+     
+    
+} 
+#imgdubeat {
+    width: 100%;
+} 
+
 #uploadCover {
     opacity: 0;
 }

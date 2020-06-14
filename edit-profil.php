@@ -84,10 +84,7 @@ $toutestbonmdp = false;
 $toutestboninfoperso = false;
 $toutestbonimage = false;
 
-$icon = " <svg class='mr-1 my-1 bi bi-exclamation-circle' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
-                                            <path fill-rule='evenodd' d='M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z' clip-rule='evenodd'/>
-                                            <path d='M7.002 11a1 1 0 112 0 1 1 0 01-2 0zM7.1 4.995a.905.905 0 111.8 0l-.35 3.507a.552.552 0 01-1.1 0L7.1 4.995z'/>
-                                        </svg>";
+$icon = " <i class='fas fa-exclamation-circle mr-2'></i>";
 
 if(!empty($_POST)){
 
@@ -464,8 +461,8 @@ if(!empty($_POST)){
 
             $toutestboninfoperso = true;if($_SESSION['user_id'] == $baseid) {
                 $_SESSION['user_role'] = $baserole;}
-            header('Location: dashboard.php');
-            exit;
+//            header('Location: edit-profil.php?profil_id='.$baseid);
+//            exit;
 
         }
 
@@ -493,15 +490,15 @@ if(!empty($_POST)){
     <body>
 
         <?php
-        // require_once('assets/skeleton/navbar.php');
+         require_once('assets/skeleton/navbar.php');
         ?>
         <div class="container py-2">
             <!-- For demo purpose -->
             <div class="row mb-1">
-                <div class="col-lg-8 py-4 text-center mx-auto">
+                <div class="col-lg-8 pb-0 mt-3 text-center mx-auto">
 
-                    <img onclick="getfile();" id="imgduboug" src="<?=$baseimage ?>" alt=""  class="img-fluid  mb-3 img-thumbnail roundedImage shadow-sm">
-                    <h5 class="mb-0"><?=$basepseudo ?> <?php if($okadmin) { ?> (ADMIN) <?php } ?> </h5>
+                    <img onclick="getfile();" id="imgduboug" src="<?=$baseimage ?>" alt=""  class="img-fluid  mb-3  roundedImage shadow-sm">
+                    <h5 class="mb-0 "><?=$basepseudo ?> <?php if($okadmin) { ?> (ADMIN) <?php } ?> </h5>
                     <span class="small text-uppercase text-muted">Cliquer sur l'image pour la changer</span>
                     <?php 
 
@@ -521,7 +518,7 @@ if(!empty($_POST)){
 
 
                             $destination = $upd->uploadImage($tmp_name,$name,$nomduboug,$idduboug);
-                            echo $destination;
+                           // echo $destination;
                             if ($destination == "error1") { 
                                 $err_uploadimage = " ERREUR : Ceci n'est pas une image";
 
@@ -538,7 +535,7 @@ if(!empty($_POST)){
             WHERE user_id = ?"); 
 
                                 $req->execute(array($destination,$baseid));
-
+unlink($baseimage);
                                 $baseimage = $destination;
 
 
@@ -567,10 +564,9 @@ if(!empty($_POST)){
                     <?php
                     if($toutestbonimage){ 
                     ?>
-                    <div class="divDone">
-                        <span class="spanDone"> Vos modifications ont bien été enregistrées. </span>
-                        <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
-                    </div>
+                    <div class="divDone ml-4 ">
+                                <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle mx-1"></i> (Le changement de votre photo ne sera pas visible directement)</span>
+                        </div>
                     <?php
                     }
                     ?>
@@ -652,9 +648,9 @@ if(!empty($_POST)){
                             <?php
                             if($toutestboninfoprofil){ 
                             ?>
-                            <div class="divDone">
-                                <span class="spanDone"> Vos modifications ont bien été enregistrées </span>
-                                <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
+                            <div class="divDone ml-4 ">
+                                <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle ml-1"></i></span>
+                                
 
                                 <script>
                                     majmajFolder("<?= $baseid?>");
@@ -723,9 +719,8 @@ if(!empty($_POST)){
                         <?php
                         if($toutestbonemail){ 
                         ?>
-                        <div>
-                            <span class="spanDone"> Vos modifications ont bien été enregistrées</span>
-                            <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
+                         <div class="divDone ml-4 ">
+                                <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle ml-1"></i></span>
                         </div>
                         <?php
                         }
@@ -736,9 +731,9 @@ if(!empty($_POST)){
                     <div id="tabmotdepasse" role="tabpanel" aria-labelledby="password-tab" class="tab-pane fade px-4 py-5<?php if($activetabmdp){ ?> show active <?php } ?>">
                         <form method="post">
                             <!--ANCIEN MOT DE PASSE -->
-                            <div class="form-group mb-3  ">
+                            <div class="form-group ml-3 mr-3 ml-3 mr-3  mb-4  ">
 
-                                 <div class="d-flex justify-content-start ">
+                                <div class="d-flex justify-content-start ">
                                     <div class=" text-uppercase text-center">  <label for="ancienmotdepasse" class="lesLabels rounded ml-3"><i class="fas fa-key mr-2"></i>Ancien mot de passe</label></div>
                                 </div>
                                 <input onkeyup="goBtnSave(this,3)" type="password" class="mb-2 mr-3 text-light text-center border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="ancienmotdepasse" name="ancienmotdepasse" placeholder="" autofocus <?php if(isset($_POST['ancienmotdepasse']) && !$toutestbonmdp){ ?> value="<?= $_POST['ancienmotdepasse'] ?>" <?php }?> >
@@ -754,9 +749,9 @@ if(!empty($_POST)){
                             </div>
 
                             <!-- NOUVEAU MOT DE PASSE -->
-                            <div class="form-group mb-2  ">
+                            <div class="form-group ml-3 mr-3 ml-3 mr-3  mb-2  ">
 
-                                 <div class="d-flex justify-content-start ">
+                                <div class="d-flex justify-content-start ">
                                     <div class=" text-uppercase text-center">  <label for="nouveaumotdepasse" class="lesLabels rounded ml-3"><i class="fas fa-key mr-2"></i>Nouveau mot de passe</label></div>
                                 </div>
                                 <input onkeyup="goBtnSave(this,3)" type="password" class="mb-2 mr-3 text-light text-center border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="nouveaumotdepasse" name="nouveaumotdepasse" placeholder="" autofocus >
@@ -779,9 +774,8 @@ if(!empty($_POST)){
                         <?php
                         if($toutestbonmdp){ 
                         ?>
-                        <div>
-                            <span class="spanDone"> Vos modifications ont bien été enregistrées </span>
-                            <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
+                         <div class="divDone ml-4 ">
+                                <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle ml-1"></i></span>
                         </div>
                         <?php
                         }
@@ -789,16 +783,21 @@ if(!empty($_POST)){
                     </div>
                     <!-- TAB INFO PERSO  -->
                     <div id="tabinfoperso" role="tabpanel" aria-labelledby="info-perso-tab" class="tab-pane fade px-4 py-5 <?php if($activetabinfoperso){ ?> show active <?php } ?>">
-                        <form method="post">
+                        <form method="post" action="">
+
                             <!-- SEXE -->
-                            <div class="custom-control custom-radio mb-3 ">
-                                <div  class="form-check form-check-inline">
-                                    <input name="sexe" onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioHomme" value="M" <?php if(isset($basesexe) && ($basesexe == "M")) { ?> checked <?php } ?>>
-                                    <label  class="custom-control-label form-check-label" for="radioHomme">HOMME</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input  name="sexe" onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioFemme" value="F" <?php if(isset($basesexe) && ($basesexe == "F")) { ?> checked <?php } ?>>
-                                    <label  class="custom-control-label form-check-label" for="radioFemme" >FEMME</label>
+                            <div class="custom-control custom-radio mb-2  ">
+                                <div class="d-flex align-items-center justify-content-center ">
+                                    <div class=" text-center text-uppercase mr-3 ">  <span  class="lesLabels rounded ml-2 px-2"> <i class="fas fa-venus-mars"></i> </span></div>
+
+                                    <div  class="form-check form-check-inline mx-4">
+                                        <input name="sexe" onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioHomme" value="M" <?php if(isset($basesexe) && ($basesexe == "M")) { ?> checked <?php } ?>>
+                                        <label  class="custom-control-label lesLabels rounded text-center " for="radioHomme">HOMME</label>
+                                    </div>
+                                    <div class="form-check form-check-inline mx-4">
+                                        <input  name="sexe" onchange="goBtnSave(this,4)" class="custom-control-input form-check-input" type="radio" name="inlineRadioOptions" id="radioFemme" value="F" <?php if(isset($basesexe) && ($basesexe == "F")) { ?> checked <?php } ?>>
+                                        <label  class="custom-control-label lesLabels rounded text-center " for="radioFemme" >FEMME</label>
+                                    </div>
                                 </div>
 
                                 <?php
@@ -811,49 +810,44 @@ if(!empty($_POST)){
 
                             </div>
 
-                            <!--PRENOM-->
-                            <div class="form-group mb-2  ">
+                            <!--PRENOM-->      <!--NOM-->
+                            <div class="form-group mb-3  ml-3 mr-3 ">
+                                <div class="d-flex justify-content-between ml-4 mr-4">
+                                    <div class=" text-uppercase text-center">  <label for="prenom" class="lesLabels rounded px-2"><i class="fas fa-key mr-2"></i>Prénom</label></div>
+                                    <div class=" text-uppercase text-center">  <label for="nom" class="lesLabels rounded  px-2"><i class="fas fa-key mr-2"></i>Nom</label></div>
 
-                                <div class="row">
-                                    <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                    <label for="prenom"> Prenom </label>
                                 </div>
-                                <input onkeyup="goBtnSave(this,4)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="prenom" name="prenom" placeholder="Mettez un prenom pour votre profil"  value="<?=$baseprenom?>" autofocus>
-                                <?php
+                                <div class="d-flex justify-content-center">
+
+                                    <input onkeyup="goBtnSave(this,4)" type="text" class="mb-2 mr-2 text-light  text-center border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="prenom" name="prenom" placeholder="Mettez un prenom pour votre profil"  value="<?=$baseprenom?>" autofocus>
+                                    <?php
     if(isset($err_prenom)){
         echo "<span class='spanAlertchamp'> ";
         echo $icon . $err_prenom ;
         echo "</span> ";
     } 
-                                ?>
+                                    ?>
 
-                            </div>
-                            <!--NOM-->
-                            <div class="form-group mb-2  ">
+                                    <input onkeyup="goBtnSave(this,4)" type="text" class="mb-2 ml-2 text-light text-center  border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="nom" name="nom" placeholder="Mettez un nom pour votre profil"  value="<?=$basenom?>" autofocus>
 
-                                <div class="row">
-                                    <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                    <label for="nom"> NOM </label>
-                                </div>
-                                <input onkeyup="goBtnSave(this,4)" type="text" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="nom" name="nom" placeholder="Mettez un nom pour votre profil"  value="<?=$basenom?>" autofocus>
-
-                                <?php
+                                    <?php
     if(isset($err_nom)){
         echo "<span class='spanAlertchamp'> ";
         echo $icon . $err_nom ;
         echo "</span> ";
     } 
-                                ?>
-
-                            </div>
-                            <!--DATE-->
-                            <div class="form-group mb-2  ">
-
-                                <div class="row">
-                                    <object class="iconGradient" data="assets/img/icon/user.svg" type="image/svg+xml"></object>
-                                    <label for="datenaissance"> DATE </label>
+                                    ?>
                                 </div>
-                                <input onchange="goBtnSave(this,4)" type="date" class="mb-2 text-center form-control rounded-pill border-0 shadow-sm px-4" id="datenaissance"  name="datenaissance" value="<?= $basedate_naissance ?>" autofocus>
+                            </div>
+
+
+                            <!--DATE-->
+                            <div class="form-group mb-3 ml-3 mr-3  ">
+
+                                <div class="d-flex justify-content-start ">
+                                    <div class=" text-uppercase text-center">  <label for="datenaissance" class="lesLabels rounded ml-3"><i class="fas fa-key mr-2"></i>date de naissance</label></div>
+                                </div>
+                                <input onchange="goBtnSave(this,4)" type="date" class="mb-2 text-light border-0 text-center  form-control lesInputs rounded-pill shadow-sm px-4" id="datenaissance"  name="datenaissance" value="<?= $basedate_naissance ?>" autofocus>
                                 <?php
     if(isset($err_datenaissance)){
         echo "<span class='spanAlertchamp'> ";
@@ -863,82 +857,101 @@ if(!empty($_POST)){
                                 ?>
 
                             </div>
-                            <div class="form-group mb-2  ">
-                                <!--VILLE-->
-                                <div class="row">
-                                    <object class="iconGradient" data="assets/img/icon/map.svg" type="image/svg+xml"></object>
-                                    <label for="ville"> Ville </label>
-                                </div>
+                            <div class="form-group mb-2  ml-3 mr-3 ">
+                                <!--VILLE-->  <!--PAYS-->
+                                <div class="d-flex justify-content-between ml-4 mr-4">
+                                    <div class=" text-uppercase text-center">  <label for="ville" class="lesLabels rounded px-2"><i class="fas fa-key mr-2"></i>ville</label></div>
+                                    <div class=" text-uppercase text-center">  <label for="pays" class="lesLabels rounded  px-2"><i class="fas fa-key mr-2"></i>Pays</label></div>
 
-                                <input onkeyup="goBtnSave(this,4)" type="text" class="mb-1 text-center form-control rounded-pill border-0 shadow-sm px-4" id="ville" name="ville" placeholder="Ou habiter vous ?"  value="<?=$baseville?>" autofocus>
-                                <?php
-    if(isset($err_ville)){
-        echo "<span class='spanAlertchamp'> ";
-        echo $icon . $err_ville ;
-        echo "</span> ";
-    } 
-                                ?>
-                                <!--PAYS-->
-                                <div class="row">
-                                    <object class="iconGradient" data="assets/img/icon/compass.svg" type="image/svg+xml"></object>
-                                    <label for="pays">Votre Pays</label>
                                 </div>
-                                <select onchange="goBtnSave(this,4)" id='pays' name="pays" class="form-control rounded-pill border-0 shadow-sm px-4 dropdown-toggle">
-                                    <?php
-                                    if(isset($basepays)){
-                                        $req = $BDD->prepare("SELECT code,nom_fr_fr
+                                <div class="d-flex justify-content-center">
+
+
+                                    <input onkeyup="goBtnSave(this,4)" type="text" class="mb-2  mr-2 text-light text-center border-0 form-control lesInputs rounded-pill shadow-sm px-4" id="ville" name="ville" placeholder="Ou habiter vous ?"  value="<?=$baseville?>" autofocus>
+                                    <?php if(isset($err_ville)){
+    echo "<span class='spanAlertchamp'> ";
+    echo $icon . $err_ville ;
+    echo "</span> ";
+} 
+                                    ?>
+
+
+                                    <select onchange="goBtnSave(this,4)" id='pays' name="pays" class="mb-2 ml-2  text-light text-center border-0 form-control lesInputs rounded-pill shadow-sm px-4">
+                                        <?php
+                                        if(isset($basepays)){
+                                            $req = $BDD->prepare("SELECT code,nom_fr_fr
                             FROM pays 
                             WHERE code = ?
                             ");
-                                        $req->execute(array($basepays));
-                                        $voir_pays = $req->fetch();
-                                    ?>
-                                    <option value="<?= $voir_pays['code'] ?>"> <?= mb_strtoupper($voir_pays['nom_fr_fr']) ?> </option>
+                                            $req->execute(array($basepays));
+                                            $voir_pays = $req->fetch();
+                                        ?>
+                                        <option value="<?= $voir_pays['code'] ?>"> <?= mb_strtoupper($voir_pays['nom_fr_fr']) ?> </option>
 
-                                    <?php
-                                    }
+                                        <?php
+                                        }
 
-                                    $req = $BDD->prepare("SELECT code,nom_fr_fr  
+                                        $req = $BDD->prepare("SELECT code,nom_fr_fr  
                             FROM pays 
                              ORDER BY pays.nom_fr_fr ASC");
-                                    $req->execute();
-                                    $voir_pays = $req->fetchAll();
+                                        $req->execute();
+                                        $voir_pays = $req->fetchAll();
 
-                                    foreach($voir_pays as $vp) {
-                                    ?>     
-                                    <option value="<?= $vp['code'] ?>"> <?= mb_strtoupper($vp['nom_fr_fr']) ?> </option>
+                                        foreach($voir_pays as $vp) {
+                                        ?>     
+                                        <option value="<?= $vp['code'] ?>"> <?= mb_strtoupper($vp['nom_fr_fr']) ?> </option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+
                                     <?php
-                                    }
+                                    if(isset($err_pays)){
+                                        echo "<span class='spanAlertchamp'> ";
+                                        echo $icon . $err_pays ;
+                                        echo "</span> ";
+                                    } 
                                     ?>
-                                </select>
 
+                                </div>
 
-
-                                <?php
-                                if(isset($err_pays)){
-                                    echo "<span class='spanAlertchamp'> ";
-                                    echo $icon . $err_pays ;
-                                    echo "</span> ";
-                                } 
-                                ?>
 
                             </div>
 
                             <?php if  (!$okadmin) { ?>  
-                            <p class="custom-control custom-switch m-0">
-                                <input onchange="goBtnSave(this,4)" name="roleee" class="custom-control-input" id="roleee" type="checkbox" <?php if(isset($baserole) && ($baserole == 2)) { ?> checked <?php } ?> >
-                                <label class="custom-control-label font-italic" for="roleee">Mode Produceur activé *</label>
-                                <br/>
-                                <label>*Activez ce mode si vous ne souhaitez pas être visible par les autres membres de WeBeatz.
-                                    <br/>On ne pourra pas vous trouver à partir de la barre de recherche.</label>
-                                <?php
+
+                            <div class="form-group  mt-4">
+                          
+                                    <div class="d-flex align-items-center justify-content-center ">
+                                        
+
+                                        <!--free-->
+                                        <div class="custom-control custom-switch  mb-2">
+                                            <input onchange="goBtnSave(this,4)" name="roleee" class="custom-control-input " id="roleee" type="checkbox" <?php if(isset($baserole) && ($baserole == 2)) { ?> checked <?php } ?> >
+                                           <label class="custom-control-label lesLabels rounded text-center px-1" for="roleee">Mode Produceur activé <span class="text-danger">*</span></label> 
+                                            
+                                        </div>
+                                     
+                                        
+                                           <?php
                                                    if(isset($err_sexe)){
                                                        echo "<span class='spanAlertchamp'> ";
                                                        echo $icon . $err_role ;
                                                        echo "</span> ";
                                                    } 
                                 ?>
-                            </p>
+                                    </div>
+   <div class="ml-5 mr-5 text-center font-italic"><span class="text-danger">*</span> Désactivez ce mode si vous ne souhaitez pas être visible par les autres membres de WeBeatz.
+On ne pourra pas vous trouver à partir de la barre de recherche.</div>
+                              
+                            </div>
+
+                        
+
+
+
+                             
+                      
                             <?php } ?>
 
                             <input id="btnsave4" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="savechangeinfoperso" value="Sauvegarder changement">
@@ -946,9 +959,8 @@ if(!empty($_POST)){
                         <?php
                         if($toutestboninfoperso){ 
                         ?>
-                        <div>
-                            <span class="spanDone"> Vos modifications ont bien été enregistrées </span>
-                            <object class="iconDone" data="assets/img/icon/done.svg" type="image/svg+xml"></object>
+                         <div class="divDone ml-4 ">
+                                <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle ml-1"></i></span>
                         </div>
                     </div>
                     <?php

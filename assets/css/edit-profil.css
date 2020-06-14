@@ -1,6 +1,6 @@
 body {
     color: whitesmoke;
- background: linear-gradient(to bottom, rgb(49, 49, 49) 0%,rgb(25, 25, 25) 44%,rgb(40, 26, 41) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+ background: linear-gradient(to bottom, rgb(30, 22, 33) 0%,rgb(25, 25, 25) 44%,rgb(20, 18, 20) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 
@@ -9,20 +9,21 @@ body {
  
 }
 #myTab {
-    background-color: #2d2234; 
+    background-color: #1e1921; 
 }
 #myTab li a.nav-link{
     color: white;
 /*    background-color: #aa33c6;*/
 }
 #myTab li a:active,.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
-    background-color: #9933c6;
+    background-color: #a74abe;   
 }
   
 .lesLabels {  
-    min-width: 105%;    
+    min-width: 106%;     
+        
     background-color: #191919;  
-    font-size: 1.1rem;
+    font-size: 1.1rem; 
     max-height: 30px; 
 }  
 
@@ -50,9 +51,11 @@ body {
     font-size: 0.95em;
 }
 .spanAlertchamp {
+    display: contents;
     margin-left: 25%;
     color: red!important;
     font-size: 0.8rem;
+
 
 }
 
@@ -74,7 +77,7 @@ body {
 }
 .spanDone{
     font-size: 1.1rem; 
-    color: limegreen; 
+    color: #70e53d; 
 } 
 
 

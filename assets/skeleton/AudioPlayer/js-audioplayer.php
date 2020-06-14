@@ -43,6 +43,12 @@ function returnMusicListStr($bay, $resuBEATS){
 
             $str .= "'$pose',";
         }
+    }else if ($bay == 'author_ids'){
+        foreach($resuBEATS as $r) {
+            $pose = $r['beat_author_id'];
+
+            $str .= "'$pose',";
+        }
     } 
     // ici effacer la virgule en + puis c bon
     $str = substr($str,0,-1);
@@ -64,8 +70,8 @@ function returnMusicListStr($bay, $resuBEATS){
 
     const thumbnail = document.querySelector('#thumbnail'); // album cover 
     const song = document.querySelector('#song'); // audio 
-
-    const btnAcheterPrice = document.querySelector('#btn-player-acheter');
+    
+//    const btnAcheterPrice = document.querySelector('#btn-player-acheter');
     const songArtist = document.querySelector('.song-artist'); // element où noms artistes apparaissent
     const songTitle = document.querySelector('.song-title'); // element où titre apparait
     const progressBar = document.querySelector('#progress-bar'); // element où progress bar apparait
@@ -73,13 +79,14 @@ function returnMusicListStr($bay, $resuBEATS){
 
     let mouseDown = false;
 
-
+    
 
     songIndex = 0;
     songs = <?=returnMusicListStr("songs", $resuPLAYLIST); ?>;  //Stockage des audios
     songsID = <?=returnMusicListStr("ids", $resuPLAYLIST); ?>;  //Stockage des audios
     thumbnails = <?=returnMusicListStr("thumbnails", $resuPLAYLIST); ?>; //Stockage des covers
     songArtists = <?=returnMusicListStr("artists", $resuPLAYLIST); ?>; //Stockage Noms Artistes
+    songArtistsID = <?=returnMusicListStr("author_ids", $resuPLAYLIST); ?>; //Stockage Noms Artistes
     songTitles = <?=returnMusicListStr("titles", $resuPLAYLIST); ?>; //Stockage Titres
     songPrices = <?=returnMusicListStr("prices", $resuPLAYLIST); ?>; //Stockage price
     let playing = true;
@@ -136,9 +143,10 @@ function returnMusicListStr($bay, $resuBEATS){
         document.getElementById('audioplayer').setAttribute('style',''); //affiche le lecteur
 
         song.src = songs[songIndex];
+        
         thumbnail.src = thumbnails[songIndex];
-        songArtist.innerHTML = songArtists[songIndex];
-        songTitle.innerHTML = songTitles[songIndex];
+        songArtist.innerHTML = "<a href='profil.php?profil_id=" + songArtistsID[songIndex] + "'>" + songArtists[songIndex] + "</a>";
+        songTitle.innerHTML = "<a href='view-beat.php?id=" + songsID[songIndex] + "'>" + songTitles[songIndex] + "</a>";
 
 
         if(idencours != songsID[songIndex]){playing = true};

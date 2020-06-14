@@ -106,9 +106,9 @@ if (!empty($_POST)) {
 
     if(isset($_POST['Uploader-mon-instru']) ){
         echo " *_";
-        $b_title = (String) $b_title;
-        $b_description = (String) $b_description;
-        $b_tags = (String) $b_tags;
+        $b_title = (String) trim($b_title);
+        $b_description = (String) trim($b_description);
+        $b_tags = (String) trim($b_tags);
         $b_genre = (int) $b_genre;
         $b_year = (int) $b_year;
         $b_price = (float) round($b_price,2);
@@ -285,13 +285,13 @@ if (!empty($_POST)) {
 
 
 
-                    <!--TITRE-->
+                
 
 
                     <?php if(isset($err_b_title)){echo "<span class='spanAlertchamp'> ";echo $icon . $err_b_title ;echo "</span> ";} ?>
 
 
-                    <!--GENRE & ANN2E --> 
+                    <!-- TITRE & GENRE & ANN2E --> 
                     <div class="form-group  ml-5 mr-5 ">
                         <div class="d-flex justify-content-between">
                             <div class="text-uppercase"><label for="b_title" class="lesLabels rounded ml-3">Titre <span class="text-danger">*</span></label></div>
