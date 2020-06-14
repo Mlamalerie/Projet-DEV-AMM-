@@ -1,4 +1,4 @@
-<?php
+ <?php
 session_start();
 $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
