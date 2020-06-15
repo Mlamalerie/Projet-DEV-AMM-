@@ -62,35 +62,51 @@
 body {
 
     color: whitesmoke;
- background: linear-gradient(to bottom, rgb(29, 29, 29) 0%,rgb(25, 25, 25) 44%,rgba(17,17,17,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: linear-gradient(to bottom, rgb(29, 29, 29) 0%,rgb(25, 25, 25) 44%,rgba(17,17,17,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 
 } 
 
 .vb-color {
-    background-color: #793ea5!important;
+background: rgb(122,51,135);
+background: linear-gradient(72deg, rgba(122,51,135,1) 0%, rgba(180,62,196,1) 100%);
     margin: 0 auto;
 }
 
 .vb-color2 {
     background-color: #c7a6e0!important;
-}
+} 
 
 .vb-cover {
     margin-right: 50px;
     margin-left: 50px;
 }
-
+ 
 .vb-text {
-    font-size: 32px;
-    text-align: left;
+    font-size: 32px; 
+      
 }
-
+  
 .vb-stext {
     font-size: 20px;
 }
 
 .vb-desc {
-    text-align: right;
-    margin-left: 100px;
->>>>>>> 9fc3738c287ef42ae9556c430cb6860b26dff010
+  
+    font-size: 90%;
+ 
 }
+  
+
+/* PETIT MUSIC CARD */
+.hover-xx {  
+    height: 200px;  
+  width: 200px;    
+  overflow: hidden;  
+  position: relative; 
+  padding-bottom: 200px;  
+     
+    
+} 
+#imgdubeat { 
+    width: 100%;
+} 

@@ -184,7 +184,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
 
                             <div class="searchbar searchtest">
 
-                                <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
+                                <input id='searchbar' class="search_input text-center" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
                                 <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
                             </div>
 
@@ -382,7 +382,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                                     ?>
                                     <tr>
                                         <th class="col-4"><?= $firstplace?></th>
-                                        <td class="col-4"><a href="profils.php?profil_id=<?= $rTP['beat_author_id'] ?>"><?=$rTP['beat_author']?></a></td>
+                                        <td class="col-4"><a href="profil.php?profil_id=<?= $rTP['beat_author_id'] ?>"><?=$rTP['beat_author']?></a></td>
                                         <td class="col-4"><?=$rTP['vente_total']?></td>
                                     </tr>
                                     <?php 

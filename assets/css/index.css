@@ -13,6 +13,11 @@ body {
 
 }
 
+::placeholder {
+    color: rgba(255, 255, 255, 0.59)!important;
+    font-size: 0.95em;
+}
+
 /*
 .btn:focus, .btn.focus {
 box-shadow: 0 0 0 0.1rem rgba(20, 230, 214, 0.12);
