@@ -188,7 +188,7 @@ else{
                         $img_from=$req2->fetch(); 
                         
             ?>
-           <h1><img src="<?= $img_from['user_image'] ?>" class="rounded-circle" width="50" height="50">Discussion avec <a href="profils.php?profil_id=<?= $get_id ?>"><?= $user['user_pseudo']?></a></h1>
+           <h1><img src="<?= $img_from['user_image'] ?>" class="rounded-circle" width="50" height="50">Discussion avec <a href="profil.php?profil_id=<?= $get_id ?>"><?= $user['user_pseudo']?></a></h1>
            <br/>
             <div class="row">
                 <div class="col-sm-12">

@@ -901,9 +901,9 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                         <div class="col-xl-3 col-sm-6 mb-5 text-center">
 
 
-                            <div class=" rounded shadow-sm py-3 px-3"><a href="profils.php?profil_id=<?= $r['user_id']?>">
+                            <div class=" rounded shadow-sm py-3 px-3"><a href="profil.php?profil_id=<?= $r['user_id']?>">
                                 <img src="<?=$r['user_image'] ?>" alt=""  class="img-fluid roundedImage  shadow-sm mb-2">
-                                <h5 class="mb-0"><a href="profils.php?profil_id=<?= $r['user_id']?>"><?=$r['user_pseudo'] ?></a></h5>
+                                <h5 class="mb-0"><a href="profil.php?profil_id=<?= $r['user_id']?>"><?=$r['user_pseudo'] ?></a></h5>
 
                                 <span class="small  text-muted"><?=$r['user_ville'] ?>
                                     <span class="text-uppercase ">

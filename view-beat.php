@@ -53,7 +53,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                     </div>
                     <div class="text-light vb-text">
                         <?= $instru['beat_title']?> <br/>
-                        <a class="text-light vb-stext" href="profils.php?profil_id=<?= $instru['beat_author_id']?>">
+                        <a class="text-light vb-stext" href="profil.php?profil_id=<?= $instru['beat_author_id']?>">
                             <u><?= $instru['beat_author']?></u>
                         </a>
                     </div>

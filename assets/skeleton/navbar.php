@@ -75,9 +75,9 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                                                 <ul class="list-unstyled text-left">
                                                     <li class="nav-item"><a href="search.php?Type=beats&sort=vente" class="nav-link text-small pb-0">Top Ventes Beats</a></li>
 
-                                                    <li class="nav-item"><a href="http://localhost/Projet/search.php?Type=beats&sort=nouveaute" class="nav-link text-small pb-0 ">Récemment ajouté </a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&sort=nouveaute" class="nav-link text-small pb-0 ">Récemment ajouté </a></li>
                                                     <li class="nav-item"><a href="search.php?Type=beats&Price=free" class="nav-link text-small pb-0 ">Free Beats</a></li>
-                                                    <li class="nav-item"><a href="http://localhost/Projet/search.php?Type=users&sort=seller" class="nav-link text-small pb-0">Top Vendeurs</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=users&sort=seller" class="nav-link text-small pb-0">Top Vendeurs</a></li>
 
                                                 </ul>
                                             </div>
@@ -286,7 +286,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 
 
-                        <a class="dropdown-item" href="profils.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
+                        <a class="dropdown-item" href="profil.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
 
                         <a class="dropdown-item" href="my-beats.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
                         

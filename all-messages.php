@@ -167,7 +167,7 @@ if(isset($_POST['inputOption'])) {
                                         </td>  
                                         <td class="text-center align-middle">
                                            
-                                            <a href="profils.php?profil_id=<?=$am['id_from']?>"><span><?=$af['user_pseudo']?></span></a>
+                                            <a href="profil.php?profil_id=<?=$am['id_from']?>"><span><?=$af['user_pseudo']?></span></a>
                                         </td>
                                         
                                         <?php
@@ -180,7 +180,7 @@ if(isset($_POST['inputOption'])) {
 
                                             ?>
                                         <td class="text-center align-middle">
-                                           <a href="profils.php?profil_id=<?=$am['id_to']?>"><span><?=$at['user_pseudo']?></span></a>
+                                           <a href="profil.php?profil_id=<?=$am['id_to']?>"><span><?=$at['user_pseudo']?></span></a>
                                         </td>
                                         <td class="text-center align-middle">
                                             <span><?=$am['date_message']?></span>
