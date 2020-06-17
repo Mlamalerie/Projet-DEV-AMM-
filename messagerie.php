@@ -126,47 +126,50 @@ $relation_bloq=$req1->fetchAll();
                                 if ($oksessionadmin && ($ac['id_to'] == $_SESSION['user_id']) ) {
                                 ?>
                                 <a href="message.php?profil_id=<?= $ac['user_id'] ?>-<?= $id_messagerie?>" class="pseudo">
-                                    <img src="<?= $ac['user_image'] ?>"> 222222 <?= $ac['user_pseudo'] ?> <?= $ac['user_id'] ?>-<?=  $id_messagerie?>  </a>  
+                                    <img src="<?= $ac['user_image'] ?>"><?= $ac['user_pseudo'] ?> - <?= $ac['message'] ?></a>  
 
 
                                 <?php }
                                 else if ($oksessionadmin){
                                 ?>   
                                 <a href="message.php?profil_id=<?= $ac['user_id'] ?>-<?= $ac['id_from'] ?>" class="pseudo">
-                                    <img src="<?= $ac['user_image'] ?>">111111  <?= $ac['user_pseudo'] ?><?= $ac['user_id'] ?>-<?= $ac['id_from'] ?>
+                                    <img src="<?= $ac['user_image'] ?>"> <span class="ml-2"><?= $ac['user_pseudo']?></span>
                                 </a>  
+                                - <?= $ac['message'] ?> -
 
                                 <?php
                                 }
                                 else{
                                 ?>
-                                    <a href="message.php?profil_id=<?= $ac['id_receveur'] ?>-<?= $idmoi ?>" class="pseudo">
-                                    <img src="<?= $ac['user_image'] ?>"><?= $ac['user_pseudo'] ?><?= $ac['user_id'] ?>-<?= $ac['id_from'] ?>
+                                <a href="message.php?profil_id=<?= $ac['id_receveur'] ?>-<?= $idmoi ?>" class="pseudo">
+                                    <img src="<?= $ac['user_image'] ?>"><span class="ml-2"><?= $ac['user_pseudo']?></span>
                                 </a>  
-                                
+                               - <?= $ac['message'] ?> -
                                 
                             </td>
 
                             <td>
                                 <?php
-                                if(($ac['id_from'] != $id_messagerie ) && $ac['lu']==0){
+                                    if(($ac['id_from'] != $id_messagerie ) && $ac['lu']==0){
                                 ?>
                                 <b>Nouveau message</b>
                                 <?php
-                                }
+                                    }
                                 ?>
                             </td>
 
                             <td>
                                 <?php 
+                                }
                                 if(isset($ac['date_message'])){
+                                    echo" le ";
                                     echo date('d-m-Y à H:i:s', strtotime($ac['date_message'])); 
                                 }
                                 ?>
                             </td>
                         </tr>
                         <?php 
-                                }
+                                
                             }            
                         }
 
