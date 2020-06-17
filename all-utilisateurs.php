@@ -180,7 +180,7 @@ if(isset($_POST['inputOption'])) {
 
                                             <div  class="btn-group mr-2" role="group" >
 
-                                                <a href="editer-profil.php?profil_id=<?= $am['user_id'] ?>" title="Modifier les informations de <?= $am['user_pseudo']?>"><button class="btn"><span class="text-dark" ><i class="fas fa-pencil-alt"></i></span></button></a>                                           
+                                                <a href="edit-profil.php?profil_id=<?= $am['user_id'] ?>" title="Modifier les informations de <?= $am['user_pseudo']?>"><button class="btn"><span class="text-dark" ><i class="fas fa-pencil-alt"></i></span></button></a>                                           
 
                                                 <?php 
                                         if($am['user_id']!=$_SESSION['user_id']){
@@ -215,7 +215,7 @@ if(isset($_POST['inputOption'])) {
                                         </td>
 
                                         <td class="text-center align-middle">
-                                            <a href="profils.php?profil_id=<?= $am['user_id'] ?>"><span><?=$am['user_pseudo']?></span></a>
+                                            <a href="profil.php?profil_id=<?= $am['user_id'] ?>"><span><?=$am['user_pseudo']?></span></a>
                                         </td>
                                         <td class="text-center align-middle">
                                             <span><?=$am['user_email']?></span>

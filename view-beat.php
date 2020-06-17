@@ -51,11 +51,13 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                     <div class="hover-xx">
                         <img src="<?= $instru['beat_cover']?>" alt="" id='imgdubeat' class="img-fluid rounded shadow-sm ">
                     </div>
+
                     <div class="text-light text-left mt-1 ml-4 d-inline-block align-middle rounded">
                         <h5 class="mb-0 vb-text "><?= $instru['beat_title']?> </h5>
                         <!--  auteur -->
                         <a class="text-light vb-stext " href="profils.php?profil_id=<?= $instru['beat_author_id']?>">
                             by <u><?= $instru['beat_author']?></u>
+
                         </a>
                         <!--  date-->
                         <?php

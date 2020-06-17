@@ -30,7 +30,9 @@
                             <h5 class="mb-0"> <a href="view-beat.php?id=<?= $r['beat_id']?>" class="font-weight-bol text-light d-inline-block align-middle"><?=$r['beat_title']?></a>
                             </h5>
 
-                            <span class="text-muted font-weight-normal font-italic d-block ">by <a href="profil.php?profil_id=<?= $r['beat_author_id']?>" class="text-muted d-inline-block "><span class="text-muted font-weight-normal font-italic d-block">
+
+                            <span class="text-muted font-weight-normal font-italic d-block ">by <a href="profil.php?profil_id=<?= $r['beat_author_id']?>" class="text-dark d-inline-block "><span class="text-muted font-weight-normal font-italic d-block">
+
                                 <?=$r['beat_author']?>
                                 </span>
                                 </a></span>

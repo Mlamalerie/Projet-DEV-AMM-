@@ -145,7 +145,7 @@ if(isset($_POST['inputOption'])) {
                                         </td>
 
                                         <td class="text-center align-middle">
-                                            <a href="profils.php?profil_id=<?=$am['beat_author_id']?>"><span><?=$am['beat_author']?></span></a>
+                                            <a href="profil.php?profil_id=<?=$am['beat_author_id']?>"><span><?=$am['beat_author']?></span></a>
                                         </td>
                                         <td class="text-center align-middle">
                                             <span><?=$am['beat_genre']?></span>

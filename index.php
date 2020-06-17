@@ -174,7 +174,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                     <div class="w-100 text-white">
                         <div class="mb-4">  
                             <h1 class="display-3">Bienvenue sur WeBeatz</h1>
-                            <p class="lead mb-0">The World's #1 Marketplace to buy & sell beats</p>
+                            <p class="lead mb-0">Écoutez, Vendez et Partagez des productions musicales</p>
                             <p class="lead mb-0"><a href="inscription.php" >Inscrivez-vous</a> pour commencer à acheter ou vendre des prods 
 
                         </div>

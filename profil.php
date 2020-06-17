@@ -236,7 +236,7 @@ if( $id_demandeur==$id_receveur){
                         <?php 
                         if($id_demandeur==$id_receveur){ 
                         ?> 
-                        <button class="btn btn-danger" style="background:#7728b2;border-color:#7728b2;box-shadow :0 0 0 0.2rem #7728b2"><a href="editer-profil.php?profil_id=<?=$id_receveur?>" class="text-white"><i class="fas fa-edit"></i><span class="ml-3">Editer</span></a></button>
+                        <button class="btn btn-danger" style="background:#7728b2;border-color:#7728b2;box-shadow :0 0 0 0.2rem #7728b2"><a href="edit-profil.php?profil_id=<?=$id_receveur?>" class="text-white"><i class="fas fa-edit"></i><span class="ml-3">Editer</span></a></button>
 
                     
                         <!-- SI C'EST PAS TON COMPTE -->
