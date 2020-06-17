@@ -461,8 +461,8 @@ if(!empty($_POST)){
 
             $toutestboninfoperso = true;if($_SESSION['user_id'] == $baseid) {
                 $_SESSION['user_role'] = $baserole;}
-//            header('Location: edit-profil.php?profil_id='.$baseid);
-//            exit;
+            //            header('Location: edit-profil.php?profil_id='.$baseid);
+            //            exit;
 
         }
 
@@ -490,7 +490,7 @@ if(!empty($_POST)){
     <body>
 
         <?php
-         require_once('assets/skeleton/navbar.php');
+        require_once('assets/skeleton/navbar.php');
         ?>
         <div class="container py-2">
             <!-- For demo purpose -->
@@ -518,7 +518,7 @@ if(!empty($_POST)){
 
 
                             $destination = $upd->uploadImage($tmp_name,$name,$nomduboug,$idduboug);
-                           // echo $destination;
+                            // echo $destination;
                             if ($destination == "error1") { 
                                 $err_uploadimage = " ERREUR : Ceci n'est pas une image";
 
@@ -535,7 +535,8 @@ if(!empty($_POST)){
             WHERE user_id = ?"); 
 
                                 $req->execute(array($destination,$baseid));
-unlink($baseimage);
+                                
+                              
                                 $baseimage = $destination;
 
 
@@ -565,8 +566,8 @@ unlink($baseimage);
                     if($toutestbonimage){ 
                     ?>
                     <div class="divDone ml-4 ">
-                                <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle mx-1"></i> (Le changement de votre photo ne sera pas visible directement)</span>
-                        </div>
+                        <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle mx-1"></i> (Le changement de votre photo ne sera pas visible directement)</span>
+                    </div>
                     <?php
                     }
                     ?>
@@ -650,7 +651,7 @@ unlink($baseimage);
                             ?>
                             <div class="divDone ml-4 ">
                                 <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle ml-1"></i></span>
-                                
+
 
                                 <script>
                                     majmajFolder("<?= $baseid?>");
@@ -719,8 +720,8 @@ unlink($baseimage);
                         <?php
                         if($toutestbonemail){ 
                         ?>
-                         <div class="divDone ml-4 ">
-                                <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle ml-1"></i></span>
+                        <div class="divDone ml-4 ">
+                            <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle ml-1"></i></span>
                         </div>
                         <?php
                         }
@@ -774,8 +775,8 @@ unlink($baseimage);
                         <?php
                         if($toutestbonmdp){ 
                         ?>
-                         <div class="divDone ml-4 ">
-                                <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle ml-1"></i></span>
+                        <div class="divDone ml-4 ">
+                            <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle ml-1"></i></span>
                         </div>
                         <?php
                         }
@@ -921,37 +922,37 @@ unlink($baseimage);
                             <?php if  (!$okadmin) { ?>  
 
                             <div class="form-group  mt-4">
-                          
-                                    <div class="d-flex align-items-center justify-content-center ">
-                                        
 
-                                        <!--free-->
-                                        <div class="custom-control custom-switch  mb-2">
-                                            <input onchange="goBtnSave(this,4)" name="roleee" class="custom-control-input " id="roleee" type="checkbox" <?php if(isset($baserole) && ($baserole == 2)) { ?> checked <?php } ?> >
-                                           <label class="custom-control-label lesLabels rounded text-center px-1" for="roleee">Mode Produceur activé <span class="text-danger">*</span></label> 
-                                            
-                                        </div>
-                                     
-                                        
-                                           <?php
+                                <div class="d-flex align-items-center justify-content-center ">
+
+
+                                    <!--free-->
+                                    <div class="custom-control custom-switch  mb-2">
+                                        <input onchange="goBtnSave(this,4)" name="roleee" class="custom-control-input " id="roleee" type="checkbox" <?php if(isset($baserole) && ($baserole == 2)) { ?> checked <?php } ?> >
+                                        <label class="custom-control-label lesLabels rounded text-center px-1" for="roleee">Mode Produceur activé <span class="text-danger">*</span></label> 
+
+                                    </div>
+
+
+                                    <?php
                                                    if(isset($err_sexe)){
                                                        echo "<span class='spanAlertchamp'> ";
                                                        echo $icon . $err_role ;
                                                        echo "</span> ";
                                                    } 
-                                ?>
-                                    </div>
-   <div class="ml-5 mr-5 text-center font-italic"><span class="text-danger">*</span> Désactivez ce mode si vous ne souhaitez pas être visible par les autres membres de WeBeatz.
-On ne pourra pas vous trouver à partir de la barre de recherche.</div>
-                              
+                                    ?>
+                                </div>
+                                <div class="ml-5 mr-5 text-center font-italic"><span class="text-danger">*</span> Désactivez ce mode si vous ne souhaitez pas être visible par les autres membres de WeBeatz.
+                                    On ne pourra pas vous trouver à partir de la barre de recherche.</div>
+
                             </div>
 
-                        
 
 
 
-                             
-                      
+
+
+
                             <?php } ?>
 
                             <input id="btnsave4" type="hidden" class="btn btn-primary btn-block mt-3 boutonstyle2ouf  rounded-pill shadow-sm" name="savechangeinfoperso" value="Sauvegarder changement">
@@ -959,8 +960,8 @@ On ne pourra pas vous trouver à partir de la barre de recherche.</div>
                         <?php
                         if($toutestboninfoperso){ 
                         ?>
-                         <div class="divDone ml-4 ">
-                                <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle ml-1"></i></span>
+                        <div class="divDone ml-4 ">
+                            <span class="spanDone text-center"> Vos modifications ont bien été enregistrées <i class="fas fa-check-circle ml-1"></i></span>
                         </div>
                     </div>
                     <?php

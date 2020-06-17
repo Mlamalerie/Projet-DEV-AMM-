@@ -184,7 +184,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
 
                             <div class="searchbar searchtest">
 
-                                <input id='searchbar' class="search_input" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
+                                <input id='searchbar' class="search_input text-center" type="text" placeholder="Recherchez vos musiques, artistes..." name="q">
                                 <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
                             </div>
 

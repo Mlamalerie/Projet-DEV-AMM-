@@ -211,7 +211,7 @@ if(isset($_POST['inputOption'])) {
         <link rel="stylesheet" type="text/css" href="assets/css/edit-beat.css">
         <link rel="stylesheet" type="text/css" href="assets/css/button-style2ouf.css">
 
-        <title>Edit <?= $basetitle ?></title>
+        <title>Editer <?= $basetitle ?> • WeBeatz</title>
     </head>
     <body onload="gogoUpload2()">
 
@@ -232,7 +232,7 @@ if(isset($_POST['inputOption'])) {
 
                     <div class="  mb-5">
                         <div class="d-flex align-items-center justify-content-between mb-3 mr-5 ml-5"> 
-                            <span class="grandTitre text-uppercase ml-3"><strong>Editer •  <?= $basetitle ?> </strong></span>
+                            <span class="grandTitre ml-1 px-2"><strong><span class="text-uppercase">Editer</span> •  <?= $basetitle ?>rgergre </strong></span>
                             <div>
                                 <?php
     $teuda = explode(' ',$afficher_beat['beat_dateupload'])[0];
@@ -242,9 +242,9 @@ if(isset($_POST['inputOption'])) {
                                 <span class="badge  badge-light mr-1" >Date d'upload : <?= $datedate[2]?>-<?= $datedate[1]?>-<?= $datedate[0]?></span>
                             </div>
                             <div>
-                                <button class="btn" data-toggle="modal" data-target="#supp_modal" onclick="goInputOption(this,'<?= $afficher_beat['beat_id'] ?>','<?= $afficher_beat['beat_title']?>')" value="suppr"><i class="fas fa-trash-alt"></i></button>
+                                <button class="btn btn-dark rounded-pill p-2" data-toggle="modal" data-target="#supp_modal" onclick="goInputOption(this,'<?= $afficher_beat['beat_id'] ?>','<?= $afficher_beat['beat_title']?>')" value="suppr"><i class="fas fa-trash-alt text-danger"></i></button>
 
-                               
+
                                 <!-- Modal -->
                                 <div class="modal fade" id="supp_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -271,7 +271,7 @@ if(isset($_POST['inputOption'])) {
                                 </div>
 
                                 <!-- END Modal -->
-                                 <script type="text/javascript">
+                                <script type="text/javascript">
                                     function goInputOption(bay,idd,blaz){
                                         let mode = bay.value;
                                         console.log(mode,idd,blaz);
@@ -395,7 +395,7 @@ if(isset($_POST['inputOption'])) {
                             <img onclick="getfile();" id="imgdubeat" src="<?=$basecover ?>" alt=""  class="img-fluid  mb-3 shadow-sm">
                         </div>
 
-                        <span class="small text-uppercase text-muted">Cliquer sur l'image pour la changer :)</span>
+                        <span onclick="getfile();" class="small text-uppercase text-muted">Cliquer sur l'image pour la changer :)</span>
                         <?php 
     $toutestboncover = false;
                                  require_once 'assets/functions/uploadFile.php';
@@ -425,11 +425,17 @@ if(isset($_POST['inputOption'])) {
                                          } else {
                                              $toutestboncover = true;
 
+                                             if($basecover != $destination){
+                                                 if (file_exists($basecover)) {
+                                                     unlink($basecover);
+                                                 }
+
+                                             }
                                              // preparer requete
                                              $req = $BDD->prepare("UPDATE beat SET  beat_cover = ? WHERE beat_id = ?"); 
 
                                              $req->execute(array($destination,$baseid));
-                                             unlink($basecover);
+
                                              $basecover = $destination;
 
 

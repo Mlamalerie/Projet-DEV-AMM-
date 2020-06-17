@@ -12,7 +12,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     $okconnectey = true;
 
     if($_SESSION['user_role'] != 0 && $idmoi != $id_messagerie){
-        echo "<script> history.go(-1); </script>";
+       header('Location: messagerie.php?id='.$_SESSION['user_id']);
         exit;
 
     } else {
@@ -33,20 +33,22 @@ print_r($_SESSION);
 echo 'idmass'.$id_messagerie;
 
 
+
 $req = $BDD ->prepare("SELECT u.user_pseudo, u.user_id, u.user_image, u.user_statut, m.message, m.date_message, m.id_from, m.id_to, m.lu
-                        FROM(
-                        SELECT IF(r.id_demandeur=:id, r.id_receveur, r.id_demandeur) id_user, MAX(m.id) max_id FROM relation r 
+                        FROM
+                        (
+                        SELECT IF(r.id_demandeur =:id, r.id_receveur, r.id_demandeur) id_user, MAX(m.id) max_id 
+                        FROM relation r 
                         LEFT JOIN messagerie m ON ((m.id_from,m.id_to)=(r.id_demandeur,r.id_receveur) OR (m.id_from,m.id_to)=(r.id_receveur,r.id_demandeur)) 
                         WHERE (m.id_to=:id or m.id_from=:id)
-                        GROUP BY IF(m.id_from=:id, m.id_to, m.id_from), r.id) AS DM
+                        GROUP BY IF(m.id_from=:id, m.id_to, m.id_from), r.id
+                        ) AS DM
                         LEFT JOIN messagerie m ON m.id = DM.max_id
                         LEFT JOIN user u ON u.user_id = DM.id_user
                         ORDER BY m.date_message DESC");
 
-$req->execute(array('id'=>$id_messagerie )); 
 
-
-
+$req->execute(array('id'=>$id_messagerie ));  
 
 $afficher_conversation= $req ->fetchAll();
 
@@ -87,7 +89,7 @@ $relation_bloq=$req1->fetchAll();
             tr:nth-child(even) {
                 background-color: rgb(230,235,255);
             }
-             
+
         </style>
 
     </head>
@@ -95,10 +97,10 @@ $relation_bloq=$req1->fetchAll();
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-         require_once('assets/skeleton/navbar.php');
+        require_once('assets/skeleton/navbar.php');
         ?>
-        <br/><br/><br/><br/>
-        <div class="container">
+        
+        <div class="container mt-5">
             <div class="row">
                 <div class="col-sm-12">
                     <h1>Mes messages</h1>

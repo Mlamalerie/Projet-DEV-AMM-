@@ -46,38 +46,56 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
         <!-- Demo header-->
         <section class="mt-5 pb-4 header text-center">
-            <div class="bg-dark container py-5 text-white rounded vb-color">
-                <div class="row">
-                    <div>
-                        <img src="<?= $instru['beat_cover']?>" alt="" width="150" class="img-fluid rounded shadow-sm vb-cover">
+            <div class="bg-dark mt-5 container py-5 text-white rounded vb-color ">
+                <div class="row mx-4 align-middle rounded">
+                    <div class="hover-xx">
+                        <img src="<?= $instru['beat_cover']?>" alt="" id='imgdubeat' class="img-fluid rounded shadow-sm ">
                     </div>
-                    <div class="text-light vb-text">
-                        <?= $instru['beat_title']?> <br/>
-                        <a class="text-light vb-stext" href="profil.php?profil_id=<?= $instru['beat_author_id']?>">
-                            <u><?= $instru['beat_author']?></u>
+
+                    <div class="text-light text-left mt-1 ml-4 d-inline-block align-middle rounded">
+                        <h5 class="mb-0 vb-text "><?= $instru['beat_title']?> </h5>
+                        <!--  auteur -->
+                        <a class="text-light vb-stext " href="profils.php?profil_id=<?= $instru['beat_author_id']?>">
+                            by <u><?= $instru['beat_author']?></u>
+
                         </a>
-                    </div>
-                    <div class="col-5 vb-desc">
-                        <?= $instru['beat_description']?>
-                    </div>
-                </div>
-                <section id="divInfo" class="py-3">
-                    <?php  $tags = explode(',',$instru['beat_tags']); ?>
+                        <!--  date-->
+                        <?php
+    $teuda = explode(' ',$instru['beat_dateupload'])[0];
+                             $datedate = explode('-',$teuda);
+                        ?>
+                        <div class="w-100 mt-2">
+                            <i class="fas fa-clock"></i>  <?= $datedate[2]?>-<?= $datedate[1]?>-<?= $datedate[0]?>
+                            <!--   description    -->
+                        </div> 
+
+                        <div class="vb-desc mw-75 mt-2">
+                            <?= $instru['beat_description']?>
+                            <!--    bouton acheter -->
+                        </div>
+                        <?php  $tags = explode(',',$instru['beat_tags']); ?>
 
 
 
-                    <div scope="row" class=" border-0 align-middle rounded">
-                        <div class="p-0 rounded ">
-                            <?php foreach($tags as $t) { if(strlen($t)>1){ $t = trim($t);
+                        <div scope="row" class=" border-0 d-flex justify-content-end mr-2 mt-3">
+                            <div>
+                                <button>acheter</button>
+                            </div>
+                            <div class="p-2 rounded  ">
+                                <?php foreach($tags as $t) { if(strlen($t)>1){ $t = trim($t);
 
-                            ?>
-                            <a class="spanTag  badge badge-light text-dark px-2 rounded-pill ml-2" href="search.php?Type=beats&q=<?= $t ?>">#<?= $t ?> </a>
-                            <?php }} ?>
+                                ?>
+                                <a class="spanTag  badge badge-light text-dark px-2 rounded-pill ml-2" href="search.php?Type=beats&q=<?= $t ?>">#<?= $t ?> </a>
+                                <?php }} ?>
+                            </div>
+
                         </div>
 
                     </div>
 
-                </section>
+
+                </div>
+
             </div>
 
 
@@ -92,7 +110,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         </section>
 
         <section class="mt-2 pb-4 header text-center">
-            <div id="resultcontentAlea"  class="container py-5 text-white rounded bg-primary mb-4 vb-color2" >
+            <div id="resultcontentAlea"  class="container py-5 text-white rounded bg-primary mb-4 " >
 
 
                 <?php

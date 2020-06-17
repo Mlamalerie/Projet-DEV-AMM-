@@ -2,8 +2,7 @@
 session_start();
 $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
-print_r('<br><br><br><br><br><br><br>');
-print_r($_GET);
+
 
 $reqG = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
 $reqG->execute(array());
@@ -11,12 +10,9 @@ $listeGenres = $reqG->fetchAll();
 
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
-    print_r($_SESSION);
+   // print_r($_SESSION);
     $okconnectey = true;
-} else{
-    echo "Pas de connexion";
-}
-
+} 
 
 {
     // $_GET[TYPE
@@ -489,8 +485,8 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
         <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
 
 
-        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">
+<!--        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">-->
+<!--        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">-->
         <!--        <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">-->
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
         <link rel="stylesheet" type="text/css" href="assets/css/modalPanier.css">
@@ -514,14 +510,14 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
         <?php require_once('assets/skeleton/navbar.php');  require_once('assets/functions/js-panier.php');?>
 
 
-        <div class="rounded container-fluid mb-0">
-            <div class="row ">
+        <div class="rounded div1 container-fluid mb-0 ">
+            <div class="row mx-3 ">
 
                 <div class="col-lg-4 mb-4 mb-lg-0 col-md-4 col-xl-3">
                     <!--   *************************************************************  -->
                     <!--   ************************** MENU VERTICAL **************************  -->
 
-                    <nav id="menuvertical" class="nav flex-column bg-white shadow-sm font-italic rounded p-3">
+                    <nav id="menuvertical" class="nav flex-column shadow-sm font-italic rounded p-4 border-back ">
 
 
                         <div class="list-group">
@@ -758,14 +754,15 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                 <!--   ************************** RESULTAT**************************  -->
                 <!--   *************************************************************  -->
                 <!--   *************************************************************  -->
-                <div class="col-lg-8 mb-5 col-md-8 col-xl-9 m-0 " style="background-color : yellow;">
+            
+                <div class="col-lg-8 mb-5 col-md-8 col-xl-9 m-0 bg-back container rounded mx-auto py-4 border-back">
 
 
                     <?php if (!empty($_GET['q']))  { ?>
                     <div class="">
-                        <div class=" bg-dark mx-auto mt-4">
+                        <div class=" mx-auto mt-3">
                             
-                            <h1 class="display-4">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
+                            <h1 class="display-5">Résultats de recherche pour "<?= $_GET['q'] ?>"</h1>
 
 
 
@@ -781,7 +778,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
 
-                    <div class="container-fluid  d-flex mx-3">
+                    <div class="container-fluid  d-flex mx-3 mt-3">
                         <div class="row col-6 bg-danger">
                             <p class="lead mx-4  ">
                                 <?php 
@@ -842,7 +839,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
 
-                    <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded bg-primary mb-4" >
+                    <div id="resultcontent"  class="pt-3 pb-3 d-flex shadow-sm rounded  mb-4" >
 
 
                         <?php  $decal =0; require_once('assets/skeleton/tableBeatSearch.php'); ?>
@@ -854,7 +851,8 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                     <!--  END div blue -->
 
-                    <?php } //end je cherche une prod ?>
+                    <?php } //end  resultat beat ?>
+                    
                     <!--   *************************************************************  -->
                     <!--   ************************** RESULTAT USER **************************  -->
 
