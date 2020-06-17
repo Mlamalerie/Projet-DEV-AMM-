@@ -308,46 +308,6 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
 
         <!-- Section 4 -->
         <section class="py-5 d-flex align-items-center" id="four">
-            <!--
-<div class="container py-5">
-<div class="row text-center">
-<div class="col-lg-9 mx-auto" id="bestprod">
-<h2 class="h1 mb-4 text-white text-center">Meilleur Producteur</h2>
-<p class="font-italic mb-4 text-muted">Liste des profils des producteurs</p>
-<table class="table table-dark">
-<thead>
-<tr>
-<th scope="col">#</th>
-<th scope="col">First</th>
-<th scope="col">Last</th>
-<th scope="col">Handle</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th scope="row">1</th>
-<td>Mark</td>
-<td>Otto</td>
-<td>@mdo</td>
-</tr>
-<tr>
-<th scope="row">2</th>
-<td>Jacob</td>
-<td>Thornton</td>
-<td>@fat</td>
-</tr>
-<tr>
-<th scope="row">3</th>
-<td>Larry</td>
-<td>the Bird</td>
-<td>@twitter</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
--->
             <div class="container py-5">
                 <h2 class="h1 mb-4 text-white text-center">Meilleur Producteur</h2>
                 <div class="row">

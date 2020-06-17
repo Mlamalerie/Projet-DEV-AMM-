@@ -536,12 +536,7 @@ if(!empty($_POST)){
 
                                 $req->execute(array($destination,$baseid));
                                 
-                                if($baseimage != $destination){
-                                    if (file_exists($baseimage)) {
-                                        unlink($baseimage);
-                                    }
-
-                                }
+                              
                                 $baseimage = $destination;
 
 

@@ -73,11 +73,11 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                                             <div class="col-lg-4 border-right border-secondary">
 
                                                 <ul class="list-unstyled text-left">
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0">Top Ventes Beats</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&sort=vente" class="nav-link text-small pb-0">Top Ventes Beats</a></li>
 
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Recemeent ajouté </a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Free Beats</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0">Top Vendeur</a></li>
+                                                    <li class="nav-item"><a href="http://localhost/Projet/search.php?Type=beats&sort=nouveaute" class="nav-link text-small pb-0 ">Récemment ajouté </a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&Price=free" class="nav-link text-small pb-0 ">Free Beats</a></li>
+                                                    <li class="nav-item"><a href="http://localhost/Projet/search.php?Type=users&sort=seller" class="nav-link text-small pb-0">Top Vendeurs</a></li>
 
                                                 </ul>
                                             </div>
@@ -98,9 +98,11 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                                             <div class="col-lg-4">
                                                 <h6 class="font-weight-bold text-uppercase">Type Beat</h6>
                                                 <ul class="list-unstyled text-left">
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 ">Leto</a></li>
-                                                    <li class="nav-item"><a href="" class="nav-link text-small pb-0 "></a></li>
-
+                                                  <li class="nav-item"><a href="search.php?Type=beats&q=BlackD" class="nav-link text-small pb-0 ">BlackD</a></li>
+                                                   <li class="nav-item"><a href="search.php?Type=beats&q=Cheu-b" class="nav-link text-small pb-0 ">Cheu-B</a></li>
+                                                   <li class="nav-item"><a href="search.php?Type=beats&q=Kepler" class="nav-link text-small pb-0 ">Kepler</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&q=Leto" class="nav-link text-small pb-0 ">Leto</a></li>         
+                                                    <li class="nav-item"><a href="search.php?Type=beats&q=Wanabilini" class="nav-link text-small pb-0 ">Wanabilini</a></li>
                                                 </ul>
                                             </div>
 
@@ -286,7 +288,10 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
                         <a class="dropdown-item" href="profil.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
 
-                        <a class="dropdown-item  " href="my-beats.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
+                        <a class="dropdown-item" href="my-beats.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
+                        
+<!--                        <a class="dropdown-item" href="privee.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user-shield mr-1 text-gray-400"></i> Mes Informations Privées </a><-->  
+                        <a class="dropdown-item" href="histo-ventes.php"><i class="fas fa-search-dollar mr-1 text-gray-400"></i>Mon historique de ventes </a>
 
 
                         <div class="dropdown-divider"></div>
@@ -342,7 +347,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                         ?>
 
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="search.php?Price=free">Free Beats</a>
+                        <a class="dropdown-item" href="search.php?Type=beats&Price=free">Free Beats</a>
                     </div>
                 </li>
                 <?php } ?>

@@ -61,6 +61,16 @@ if(isset($_POST['inputOption'])) {
             
         }
     }
+    else if($_POST['inputOption']== "annuler"){/*si l'utilisateur choisit d'annuler le signalement d'un message*/
+        if($ok){
+             $req = $BDD->prepare("DELETE FROM messagerie_signal
+            WHERE message_id = ?"); 
+            $req->execute(array($id_message));
+            header('Location: all-messages');
+            exit;
+            
+        }
+    }
 
 }
 
@@ -138,16 +148,7 @@ if(isset($_POST['inputOption'])) {
                                     <tr>
                                         <td class="text-center align-middle">
                                             <div class="row"> 
-                                                <a href="messagerie.php?id=<?= $am['id_from'] ?>"> <button class="btn">Accéder à la messagerie</button></a>                                                                           
-                                                <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $am['message']?>')" value="suppr"><i class='fa fa-trash'></i></button>
-  
-                                            </div>
-                                        </td>
-                                        <td  class="text-center align-middle">
-                                            <?=$am['message']?>
-                                        </td>  
-                                        <td class="text-center align-middle">
-                                           <?php
+                                               <?php
                                             $req = $BDD->prepare("SELECT user_pseudo
                                                                 FROM user
                                                                 WHERE user_id = ?");
@@ -156,6 +157,16 @@ if(isset($_POST['inputOption'])) {
                                             $af=$req->fetch(); 
 
                                             ?>
+                                                <a href="messagerie.php?id=<?= $am['id_from'] ?>" title="Voir la messagerie de <?=$af['user_pseudo']?>"> <button class="btn">Accéder à la messagerie</button></a>                                                                           
+                                                <button class="btn"  title="Supprimer le message de <?=$af['user_pseudo']?>"  data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $am['message']?>')" value="suppr"><i class='fa fa-trash'></i></button>
+  
+                                            </div>
+                                        </td>
+                                        <td  class="text-center align-middle">
+                                            <?=$am['message']?>
+                                        </td>  
+                                        <td class="text-center align-middle">
+                                           
                                             <a href="profils.php?profil_id=<?=$am['id_from']?>"><span><?=$af['user_pseudo']?></span></a>
                                         </td>
                                         
@@ -188,6 +199,9 @@ if(isset($_POST['inputOption'])) {
                                             ?>
                                             <!--  On affiche cet icon quand un message a été signalé  -->
                                             <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $af['user_pseudo']?>')" value="signaler"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></button>
+                                            
+                                            <!--  On affiche cet icon pour enlever le signalement d'un message -->
+                                            <button class="btn" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['id'] ?>','<?= $af['user_pseudo']?>')" value="annuler"><i class="fas fa-times" style="color:red"></i></button>
                                            
                                             <?php
                                                 }
@@ -219,6 +233,9 @@ if(isset($_POST['inputOption'])) {
                                                 }
                                                 if (mode == 'signaler'){
                                                     p.innerHTML = "supprimer le message signalé de " + blaz + " ou <a href='all-utilisateurs.php'>désactiver son compte?</a>";   
+                                                }
+                                                if(mode == 'annuler'){
+                                                    p.innerHTML = "annuler le signalement du message " + blaz + " ?";
                                                 }
                                                 
                                                 console.log(iO,iO_id);

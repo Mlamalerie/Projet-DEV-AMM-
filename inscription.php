@@ -4,7 +4,7 @@ include_once("assets/db/connexiondb.php"); // inclure le fichier pour se connect
 
 // si une connection est détecter : (ta rien a faire ici mec)
 if(isset($_SESSION['user_id'])){
-//    header('Location: dashboard.php');
+    header('Location: index.php');
     exit;
 }
 

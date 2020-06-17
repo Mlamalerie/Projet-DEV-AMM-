@@ -47,10 +47,11 @@ $req = $BDD ->prepare("SELECT u.user_pseudo, u.user_id, u.user_image, u.user_sta
                         LEFT JOIN user u ON u.user_id = DM.id_user
                         ORDER BY m.date_message DESC");
 
+
 $req->execute(array('id'=>$id_messagerie ));  
 
 $afficher_conversation= $req ->fetchAll();
-var_dump($afficher_conversation);
+
 
 $req1=$BDD->prepare("SELECT * FROM relation WHERE statut = ?");
 $req1->execute(array(3));   //pour enlever les bloqués de la messagerie
@@ -98,8 +99,8 @@ $relation_bloq=$req1->fetchAll();
         <?php
         require_once('assets/skeleton/navbar.php');
         ?>
-        <br/><br/><br/><br/>
-        <div class="container">
+        
+        <div class="container mt-5">
             <div class="row">
                 <div class="col-sm-12">
                     <h1>Mes messages</h1>
@@ -139,7 +140,13 @@ $relation_bloq=$req1->fetchAll();
 
                                 <?php
                                 }
+                                else{
                                 ?>
+                                    <a href="message.php?profil_id=<?= $ac['id_receveur'] ?>-<?= $idmoi ?>" class="pseudo">
+                                    <img src="<?= $ac['user_image'] ?>"><?= $ac['user_pseudo'] ?><?= $ac['user_id'] ?>-<?= $ac['id_from'] ?>
+                                </a>  
+                                
+                                
                             </td>
 
                             <td>
@@ -161,6 +168,7 @@ $relation_bloq=$req1->fetchAll();
                             </td>
                         </tr>
                         <?php 
+                                }
                             }            
                         }
 
