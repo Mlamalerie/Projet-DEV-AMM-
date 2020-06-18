@@ -33,10 +33,10 @@ $listeGenres = $reqG->fetchAll();
                     <div class="input-group-append">
                         <select name="Type" class=" rounded-pill btn-block shadow-sm custom-select" onchange='submit()'>
 
-                           <option value="beats" class="dropdown-item"  <?php if (!empty($_GET['Type']) && isset($_GET['Type']) && $_GET['Type'] == 'beats' )  { ?> selected <?php } ?>>All beats</option> 
+                            <option value="beats" class="dropdown-item"  <?php if (!empty($_GET['Type']) && isset($_GET['Type']) && $_GET['Type'] == 'beats' )  { ?> selected <?php } ?>>All beats</option> 
 
 
-                       <option value="users" class="dropdown-item"  <?php if (!empty($_GET['Type']) && isset($_GET['Type']) && $_GET['Type'] == 'users' )  { ?> selected <?php } ?>>All users</option>
+                            <option value="users" class="dropdown-item"  <?php if (!empty($_GET['Type']) && isset($_GET['Type']) && $_GET['Type'] == 'users' )  { ?> selected <?php } ?>>All users</option>
 
 
                         </select>
@@ -58,10 +58,9 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
         <!--            Menu droite -->
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-md-auto" >
+               
+                <!-- **Megamenu-->
                 <?php if(!$jesuissurindex) { ?>
-
-
-                <!-- Megamenu-->
                 <li class="nav-item dropdown megamenu">
                     <a id="megamneu" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-uppercase">Beats</a>
                     <div id='div1megamega' aria-labelledby="megamneu" class="dropdown-menu border-0 p-0 m-0">
@@ -84,23 +83,23 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                                             <div class="col-lg-4 border-right border-secondary">
                                                 <h6 class="font-weight-bold text-uppercase">Genres</h6>
                                                 <ul class="list-unstyled text-left"> <?php 
-                    
-                    foreach($listeGenres as $gr){
-                        if($gr['id'] != 6 && $gr['id'] != 0 && $gr['id'] != 12 && $gr['id'] != 15 && $gr['id'] != 4 && $gr['id'] != 6) { ?>
+
+    foreach($listeGenres as $gr){
+        if($gr['id'] != 6 && $gr['id'] != 0 && $gr['id'] != 12 && $gr['id'] != 15 && $gr['id'] != 4 && $gr['id'] != 6) { ?>
 
                                                     <li class="nav-item"><a class="dropdown-item  " href="search.php?Type=beats&Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a></li> 
-  <?php
-                                                             }}
-                        ?>
+                                                    <?php
+                                                                                                                       }}
+                                                    ?>
 
                                                 </ul>
                                             </div>
                                             <div class="col-lg-4">
                                                 <h6 class="font-weight-bold text-uppercase">Type Beat</h6>
                                                 <ul class="list-unstyled text-left">
-                                                  <li class="nav-item"><a href="search.php?Type=beats&q=BlackD" class="nav-link text-small pb-0 ">BlackD</a></li>
-                                                   <li class="nav-item"><a href="search.php?Type=beats&q=Cheu-b" class="nav-link text-small pb-0 ">Cheu-B</a></li>
-                                                   <li class="nav-item"><a href="search.php?Type=beats&q=Kepler" class="nav-link text-small pb-0 ">Kepler</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&q=BlackD" class="nav-link text-small pb-0 ">BlackD</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&q=Cheu-b" class="nav-link text-small pb-0 ">Cheu-B</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&q=Kepler" class="nav-link text-small pb-0 ">Kepler</a></li>
                                                     <li class="nav-item"><a href="search.php?Type=beats&q=Leto" class="nav-link text-small pb-0 ">Leto</a></li>         
                                                     <li class="nav-item"><a href="search.php?Type=beats&q=Wanabilini" class="nav-link text-small pb-0 ">Wanabilini</a></li>
                                                 </ul>
@@ -114,35 +113,54 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                         </div>
                     </div>
                 </li>
-
                 <?php } ?>
-                <?php
-                // si je detecte une connexion alors
+               
+                <?php if($jesuissurindex) { ?>
+                 <!-- **Accueil -->
+                <li class="nav-item ">
+                    <a class="nav-link btn" href="#">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <?php } ?>
+                <?php if($jesuissurindex) { ?>
+                <!-- **Genre -->
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        Genres
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <?php 
 
+    foreach($listeGenres as $gr){
+        if($gr['id'] != 6 && $gr['id'] != 0) { ?>
+                        <a class="dropdown-item  " href="search.php?Type=beats&Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a>
+                        <?php
+                                             }}
+                        ?>
+
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="search.php?Type=beats&Price=free">Free Beats</a>
+                    </div>
+                </li>
+                  <?php } ?>
+
+                <?php //************************************ si je detecte une connexion alors
 
                 if($okconnectey) {
                 ?>
 
-                <li class="nav-item ">
-                    <a class="nav-link btn" href="test_zone.php">Test_Zone<span class="sr-only">(current)</span></a>
-                </li>
-
-
 
                 <?php if(!$jesuissurindex) { ?>
-
-
-
-                <!-- UPLOADER -->
+                <!-- **UPLOADER -->
                 <li class="nav-item">
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#modalUpload"><img id="iconUpload" src="assets/img/icon/ui.svg"> Uploader </button>
                 </li>
                 <?php } ?>
 
+                <!-- **MESSAGES -->
                 <?php if(!$jesuissurindex) { ?>
                 <li class="nav-item dropdown no-arrow mx-1" >
                     <a class="nav-link dropdown-toggle dropdown-toggle-pointpoint" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img id="iconPanier" src="assets/img/icon/chat-box.svg">
+                        <img id="iconChat" src="assets/img/icon/chat-box.svg">
 
                         <!-- Counter - Messages -->
                         <span id="span_nb_mess" class="badge badge-danger rounded-pill "></span>
@@ -247,14 +265,8 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                 <div class="topbar-divider d-none d-sm-block"></div>
 
 
-
-
-
-                <!-- DEROULANT PROFIL-->
-                <?php 
-                    if($_SESSION['user_role']==0){   
-                ?>
-
+                <!-- **DEROULANT ADMIN-->
+                <?php   if($_SESSION['user_role'] == 0){   ?>
                 <li class="nav-item dropdown no-arrow ">
                     <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
 
@@ -270,15 +282,9 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     </div>
 
                 </li>
+                <?php  } ?>
 
-                <?php
-                    }
-                ?>
-
-
-
-
-                <!-- DEROULANT PROFIL-->
+                <!-- **DEROULANT PROFIL-->
                 <li class="nav-item dropdown no-arrow ">
                     <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <span class="mr-2 d-none d-lg-inline "><?= $_SESSION['user_pseudo'] ?></span> <img id="iconUser" src="assets/img/user.png">
@@ -286,12 +292,12 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 
 
-                        <a class="dropdown-item" href="profil.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
+                        <a class="dropdown-item" href="profil.php?profil_id=<?= $_SESSION['user_id']?>" ><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
 
                         <a class="dropdown-item" href="my-beats.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
-                        
-<!--                        <a class="dropdown-item" href="privee.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user-shield mr-1 text-gray-400"></i> Mes Informations Privées </a><-->  
-                        <a class="dropdown-item" href="histo-ventes.php"><i class="fas fa-search-dollar mr-1 text-gray-400"></i>Mon historique de ventes </a>
+
+                        <!--                        <a class="dropdown-item" href="privee.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user-shield mr-1 text-gray-400"></i> Mes Informations Privées </a><-->  
+                        <a class="dropdown-item" href="histo-ventes.php"><i class="fas fa-search-dollar mr-1 text-gray-400"></i>Historique de ventes </a>
 
 
                         <div class="dropdown-divider"></div>
@@ -300,9 +306,8 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
                 </li>
 
-                <!--  PANIER -->
+                <!-- **PANIER -->
                 <?php if(!$jesuissurindex) { ?>
-
                 <li class="nav-item">
 
                     <button class="nav-link btn" href="#" data-toggle="modal" data-target="#ModalPanier" ><img id="iconPanier" src="assets/img/icon/shopping-cart.svg"> <sup><span id="span_nb_panier" class="badge badge-primary px-1 rounded-pill ml-2 compteurPanier "></span> </sup></button>
@@ -311,46 +316,10 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                 </li>
                 <?php } ?>
 
+                <?php  }
+                //************************************************ PAS de connection
+                else{ ?>
 
-
-
-
-
-                <?php
-                }
-                // si je detecte pas de connection
-                else{
-                ?>
-                <li class="nav-item ">
-                    <a class="nav-link btn" href="test_zone.php">Test_Zone <span class="sr-only">(current)</span></a>
-
-
-                </li>
-
-                <?php if($jesuissurindex) { ?>
-                <li class="nav-item ">
-                    <a class="nav-link btn" href="#">Accueil <span class="sr-only">(current)</span></a>
-                </li>
-
-                <li class="nav-item dropdown ">
-                    <a class="nav-link dropdown-toggle btn  " href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                        Genres
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <?php 
-                    
-                    foreach($listeGenres as $gr){
-                        if($gr['id'] != 6 && $gr['id'] != 0) { ?>
-                        <a class="dropdown-item  " href="search.php?Type=beats&Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a>
-                        <?php
-                                                             }}
-                        ?>
-
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="search.php?Type=beats&Price=free">Free Beats</a>
-                    </div>
-                </li>
-                <?php } ?>
                 <li class="nav-item">
                     <a class="nav-link btn" href="connexion.php">Se connecter</a>
                 </li>

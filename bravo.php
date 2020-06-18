@@ -51,7 +51,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
         <title>Confirmation de votre commande | WeBeats</title>
     </head>
-    <body>
+    <body onload=" refreshNbPanier();refreshAllBeats()">
     <?php require_once('assets/functions/js-paiement.php'); ?>
     <?php require_once("assets/functions/js-panier.php"); ?>
     

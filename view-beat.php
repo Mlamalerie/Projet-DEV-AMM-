@@ -37,7 +37,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
         <link rel="stylesheet" type="text/css" href="assets/css/view-beat.css">
     </head>
-    <body>
+    <body onload=" refreshNbPanier();refreshAllBeats() ">
 
         <!--   *************************************************************  -->
         <!--   ************************** NAVBAR  **************************  -->
@@ -110,7 +110,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         </section>
 
         <section class="mt-2 pb-4 header text-center">
-            <div id="resultcontentAlea"  class="container py-5 text-white rounded bg-primary mb-4 " >
+            <div id="resultcontentAlea"  class="container pt-4 pb-5 text-white rounded bg-back mb-4 " >
 
 
                 <?php
@@ -123,7 +123,6 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                   $resuID = $req->fetchAll();
                   shuffle($resuID);
                   shuffle($resuID);
-                  var_dump(count($resuID));
 
                   $resuBEATS = [];
                   for ($i = 0; $i < 3; $i++){

@@ -63,14 +63,14 @@ navbar-nav  .nav-item {
     border-color:  var(--couleur1);
 
 
-}
+} 
 .btninscription:focus, .btninscription.focus {/*quand on clique sur le bouton c'est un peu plus foncé*/
 
     background-color:var(--couleur1);
     border-color: var(--couleur1);
 }
-
-/* BARRE DE RECHERCHE */
+  
+/* BARRE DE RECHERCHE */ 
 .searchbar {
     background-color: none;
     border-width: 0;
@@ -90,18 +90,18 @@ navbar-nav  .nav-item {
 } 
  
 
-img#iconPanier,img#iconUpload  {
-    width: 1.6rem;
+img#iconPanier,img#iconUpload ,img#iconChat  {
+    width: 1.6rem; 
 
-}
-
+} 
+ 
 
 #iconUser {
     border-radius: 75%;
     width: 1.4rem;
     height: 1.4rem;
 }
-
+   
 
 .compteurPanier 
 { 
@@ -113,7 +113,7 @@ img#iconPanier,img#iconUpload  {
     right: .25rem;
     margin-top: -.99rem;
 
-   
+    
 }
 .dropdown-toggle-pointpoint:after { 
   display: none!important; 
@@ -121,8 +121,8 @@ img#iconPanier,img#iconUpload  {
 /*** MEGA MENU */ 
 .megamenu {
   position: static;
-}
-
+} 
+  
 .megamenu .dropdown-menu {
   background: none;
   border: none;

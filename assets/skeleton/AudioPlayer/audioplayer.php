@@ -6,7 +6,7 @@
     <div class="box ">
 
         <table class=" tableuh">
-            <tbody id="">
+            <tbody id="tbodyAudioPlayer">
                 <tr class="d-flex justify-content-start ml-4 mb-2">
 
                     <th  class='border-0 d-flex align-middle ' style="width: 250px";>
@@ -15,7 +15,7 @@
                             <div class='ml-3 d-inline-block align-middle mt-2'>
                               <span class="song-title"></span>
                                
-                                <span class='text-muted font-weight-normal font-italic d-block'><span class="song-artist"></span></span>
+                                <span class='text-muted font-weight-normal font-italic d-block'><small>by</small> <span class="song-artist"></span></span>
                             </div>
                         </div>
                     </th>
