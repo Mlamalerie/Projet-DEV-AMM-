@@ -345,7 +345,7 @@ if( $id_demandeur==$id_receveur){
 
 
         <?php
-        require_once('assets/skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.html');
         ?>
 
         <!--   *************************************************************  -->

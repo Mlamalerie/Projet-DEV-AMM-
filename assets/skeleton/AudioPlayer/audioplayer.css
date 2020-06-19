@@ -9,20 +9,28 @@
     z-index: 4;
     bottom: 0;
 }
-
-.tableuh td, .tableuh th {
+.tableuh {
+    width: 100%;
+    margin-left: none!important;
+    margin-right: none!important;
+}
+.tableuh td, .tableuh th { 
     padding: .4rem;
 } 
 
+#tbodyAudioPlayer, #tbodyAudioPlayer tr {
+    width: 100%
+    
+}
 .navplayer{
 
 
 }
 
-.song-artist {
-    color: whitesmoke;
-}
-.song-title {
+.song-artist, .song-artist a {
+    color: #c3c3c3;
+} 
+.song-title ,.song-title a { 
     color: whitesmoke;
 }
 

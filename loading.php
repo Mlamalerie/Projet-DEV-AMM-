@@ -199,7 +199,7 @@
                 <p class="font-italic text-muted">This loading window will be removed after <strong class="countdown text-dark font-weight-bold">3 </strong> Seconds</p>
             </div>
         </div>
-        <?php require_once('assets/skeleton/endLinkScripts.php'); ?>
+        <?php require_once('assets/skeleton/endLinkScripts.html'); ?>
         <script>
             $(document).ready(function(){
                 // HIDE LOADING SPINNER WHEN PAGE IS LOADED [3000msec after the page is loaded]

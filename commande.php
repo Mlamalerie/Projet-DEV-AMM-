@@ -58,12 +58,13 @@ if (isset($_POST['AppliquerRedu'])) {
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="Test_Mathieu/panierTestMathieu/affichagepanier.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/search.css">
         <link rel="stylesheet" type="text/css" href="assets/css/commande.css">
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
-        <title>Confirmation de votre commande | WeBeats</title>
+        <title>Confirmation de votre commande • WeBeats</title>
     </head>
     <body onload="actualiserTOTALTOTAL()">
 
