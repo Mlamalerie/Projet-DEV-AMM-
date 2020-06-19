@@ -326,7 +326,7 @@ else{
         </div>
         <!-- END Modal -->
         <?php
-        require_once('assets/skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.html');
         ?>
     </body>
 </html> 

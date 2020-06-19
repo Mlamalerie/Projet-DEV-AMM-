@@ -112,8 +112,13 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                         <div class="mb-4">  
                             <h1 class="display-3">Bienvenue sur WeBeatz</h1>
                             <p class="lead mb-0">Écoutez, Vendez et Partagez des productions musicales</p>
+                            <?php
+                                if($okconnectey==false){
+                            ?>
                             <p class="lead mb-0"><a href="inscription.php" >Inscrivez-vous</a> pour commencer à acheter ou vendre des prods 
-
+                            <?php
+                                }
+                            ?>
                         </div>
 
                         <form id="searchform" method="get" action="search.php">
