@@ -1,15 +1,40 @@
 
+
+body {
+    background-image: url("../../assets/img/tracks.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+}   
+
+
+.bg-back { 
+    background-color: #121212!important; 
+
+} 
+#myTab { 
+    background-color: #1e1921; 
+}
+#myTab li a.nav-link{
+    color: white;
+    /*    background-color: #aa33c6;*/
+}
+#myTab li a:active,.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color: #a74abe;   
+}
+
+
+
 /* Rounded tabs */ 
- 
+
 @media (min-width: 576px) {
-  .rounded-nav {
-    border-radius: 50rem !important;
-  }
+    .rounded-nav {
+        border-radius: 50rem !important;
+    }
 }
 
 @media (min-width: 576px) {
-  .rounded-nav .nav-link {
-    border-radius: 50rem !important;
-  }
+    .rounded-nav .nav-link {
+        border-radius: 50rem !important;
+    }
 }
- 

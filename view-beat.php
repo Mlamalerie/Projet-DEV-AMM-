@@ -79,7 +79,72 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
                         <div scope="row" class=" border-0 d-flex justify-content-end mr-2 mt-3">
                             <div>
-                                <button>acheter</button>
+
+                                <?php 
+                                $okdejadanspanier = false;
+                                $okdejaacheter = false;
+                                if($okconnectey) {
+                                    $req = $BDD->prepare("SELECT *
+                                                                                        FROM vente
+                                                                                        WHERE vente_user_id = ? AND vente_beat_id = ?");
+                                    $req->execute(array($_SESSION['user_id'],$instru['beat_id']));
+
+
+                                    $ach = $req->fetch();
+
+
+                                    if(isset($ach['id'])){
+                                        $okdejaacheter = true;
+                                    }else {
+                                        $req = $BDD->prepare("SELECT *
+                                                                                        FROM panier
+                                                                                        WHERE panier_user_id = ? AND panier_beat_id = ?");
+                                        $req->execute(array($_SESSION['user_id'],$instru['beat_id']));
+
+
+                                        $aff = $req->fetch();
+
+
+
+                                        if(isset($aff['id'])){
+                                            $okdejadanspanier = true;
+                                        }
+                                    }
+                                }
+                                ?>
+                                <?php 
+                                $okcestpastaprod = ($okconnectey && $instru['beat_author_id'] != $_SESSION['user_id']);
+                                if(!$okdejaacheter) {
+
+                                    if($okcestpastaprod || !$okconnectey) { ?>
+                                <button id='btnbeat-<?=$instru['beat_id']?>' 
+
+                                        <?php if($okconnectey) { ?>
+                                        onclick="go2Panier(this,'<?=$instru['beat_title']?>','<?=$instru['beat_author']?>', '<?=$instru['beat_price']?>', '<?=$instru['beat_cover']?>','<?=$instru['beat_id']?>');" <?php }else { ?> onclick="goConnexionStp();"  <?php } ?>
+
+                                        class="btn btn-buy"
+
+
+                                        >
+
+
+
+                                    <?php if(!$okdejadanspanier) { ?>
+                                    <i class="fas fa-shopping-cart iconPanierbtn"></i><sup>+</sup>
+                                    <?php if($instru['beat_price'] != 0.00) { echo $instru['beat_price'].'€'; } else {echo "FREE";} ?>
+                                    <?php } ?>
+
+                                </button>
+                                <?php } } else {?>
+                                <a class="btn btn-danger" href="<?= $instru['beat_source']?>" download>
+                                    <span class="text-white"><i class="fas fa-download"></i></span>
+                                </a>
+                                <?php } ?>
+                                <?php  if($okdejadanspanier) {?>
+                                <script>document.getElementById('btnbeat-<?=$instru['beat_id']?>').innerHTML = 'Dans le panier';</script>
+                                <?php } ?>
+
+
                             </div>
                             <div class="p-2 rounded  ">
                                 <?php foreach($tags as $t) { if(strlen($t)>1){ $t = trim($t);

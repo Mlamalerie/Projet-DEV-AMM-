@@ -40,7 +40,7 @@ $baseprenom = $afficher_profil['user_prenom'];
 $basedescription = $afficher_profil['user_description'];
 
 $basesexe = $afficher_profil['user_sexe'];
-var_dump($basesexe);
+
 $baserole  = (int) $afficher_profil['user_role'];
 $okadmin = false;
 if ($baserole == 0){

@@ -5,10 +5,14 @@ body {
  background: linear-gradient(to bottom, rgb(49, 49, 49) 0%,rgb(25, 25, 25) 44%,rgba(17,17,17,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
-a, a:hover {
-    text-decoration: none!important;
+a {
+/*    text-decoration: none!important;*/
     color: whitesmoke; 
 }
+ a:hover {
+/*    text-decoration: none!important;*/
+    color: whitesmoke; 
+} 
 .bg-back {
     background-color: #121212!important;
 
@@ -84,7 +88,7 @@ section.dashboard-counts .progress {
     font-size: .75rem;
     background-color: #e9ecef;
     border-radius: .25rem;
-}
+} 
 
 /*-----------------------------------------------------------------------------------------*/
 
@@ -104,7 +108,7 @@ small {
     font-size: 1.5em;
     color: #333; 
     font-weight: 700;
-    line-height: 1;
+    line-height: 1; 
 }
 .statistic .icon {
     width: 40px;
@@ -125,3 +129,4 @@ small {
 .chart .title {
     padding: 15px 0 0 15px;
 }
+

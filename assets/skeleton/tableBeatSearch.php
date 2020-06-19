@@ -11,8 +11,9 @@
 
 
             ?>
-            <tr class=" rounded px-md-">
+            <tr class=" rounded">
                 <td class="pr-0 border-0 align-middle   "><strong class="ml-1"><?= ($key+1) ?></strong></td>
+                <!--  ** Image Titre-->
                 <th scope="row" class="border-0  ">
                     <div class="p-0 rounded ">
                         <div class="hover hover-5 text-white rounded d-inline-block align-middle">

@@ -69,16 +69,16 @@ navbar-nav  .nav-item {
     background-color:var(--couleur1);
     border-color: var(--couleur1);
 }
-  
+   
 /* BARRE DE RECHERCHE */ 
 .searchbar {
     background-color: none;
     border-width: 0;
     border-bottom-width: 1px;
-    border-radius: 30px;
+    border-radius: 30px; 
     padding-left: 0;
 }
-
+ 
 .searchbar:focus{ 
     box-shadow: none; 
 }
@@ -88,13 +88,13 @@ navbar-nav  .nav-item {
     color: #aaa;
     font-style: italic;   
 } 
- 
+  
 
 img#iconPanier,img#iconUpload ,img#iconChat  {
     width: 1.6rem; 
 
 } 
- 
+  
 
 #iconUser {
     border-radius: 75%;

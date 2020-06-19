@@ -1,17 +1,19 @@
 <?php
 session_start();
 include_once("assets/db/connexiondb.php");
-$_SESSION['ici_index_bool'] = true;
-?>
-<?php
+$_SESSION['ici_index_bool'] = false;
+
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
     $okconnectey = true;
+} else {
+    header('connexion.php');
+    exit;
 } 
 
 
-include('assets/functions/date-fct.php');
+include_once('assets/functions/date-fct.php');
 $dateajd = date("Y-m-d"); 
 $dateya30j = date_outil($dateajd,30);
 
@@ -73,12 +75,12 @@ $nbnewfollowers = $resu['COUNT(*)'];
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
 
-  <link rel="stylesheet" type="text/css" href="assets/css/dashboard.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/dashboard.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
-      
 
 
-        <title>Tableua de Bord • WeBeatz</title>
+
+        <title>Tableau de Bord • WeBeatz</title>
     </head>
     <body id="top" onload=" refreshAllBeats()">
 
@@ -101,7 +103,16 @@ $nbnewfollowers = $resu['COUNT(*)'];
                 </div>
                 <div class="row bg-back has-shadow rounded ">
 
-                    <h1 class="mb-0 ml-5 font-weight-bold">Statistiques du mois</h1>
+                    <div class="row w-100">
+                        <div class="col-9">    
+                            <h1 class="mb-0 ml-5 font-weight-bold">Statistiques du mois</h1>
+                        </div>
+                        <div class="col-3">  
+
+                            <a class='text-deco chap text-warning ' href="histo-ventes.php"><i class="fas fa-search-dollar mr-1 text-gray-400"></i> Voir historique de ventes</a>
+                        </div>
+                    </div>
+
                     <div class="row col-12">
                         <!-- Item -->
                         <div class="col-xl-3 col-sm-6  rounded">

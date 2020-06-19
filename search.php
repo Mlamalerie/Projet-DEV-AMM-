@@ -943,7 +943,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
         <?php
-        require_once('assets/skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.html');
         ?>
         <!-- JS de Fourchette de prix -->
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>

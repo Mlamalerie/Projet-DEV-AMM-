@@ -3,8 +3,7 @@ session_start();
 $_SESSION['ici_index_bool'] = false;
 include('assets/db/connexiondb.php'); 
 
-print_r($_POST);
-print_r($_SESSION);
+
 
 $baseid = (int) $_GET['id'];/*récupère id du beat qu'on a cliqué*/
 
@@ -45,7 +44,7 @@ $listeGenres = $reqG->fetchAll();
 $icon = "<i class='fas fa-exclamation-circle mr-1'></i>";
 
 if (!empty($_POST) && isset($_POST)) {
-    echo 'emppy';
+   
     extract($_POST); // si pas vide alors extraire le tableau, grace a ça on pourra directemet mettre le nom de la varilable en dur
 
     $ok = true;
@@ -140,7 +139,7 @@ if (!empty($_POST) && isset($_POST)) {
 
 
         if($ok) {
-            echo "€€OOOOK";
+         
             echo "<script> alert('OKKKK') </script>";
 
             // preparer requete insertion
@@ -219,20 +218,20 @@ if(isset($_POST['inputOption'])) {
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-    // require_once('assets/skeleton/navbar.php');
+     require_once('assets/skeleton/navbar.php');
         ?>;
 
-
+<br><br><br>
 
         <section class="mt-4  text-center container">
 
-            <div class="row">
+            <div class="row mt-4">
 
                 <div class="col-12 col-lg-8 bg-back container py-5 text-white rounded">
 
                     <div class="  mb-5">
                         <div class="d-flex align-items-center justify-content-between mb-3 mr-5 ml-5"> 
-                            <span class="grandTitre ml-1 px-2"><strong><span class="text-uppercase">Editer</span> •  <?= $basetitle ?>rgergre </strong></span>
+                            <span class="grandTitre ml-1 px-2"><strong><span class="text-uppercase">Editer</span> •  <?= $basetitle ?></strong></span>
                             <div>
                                 <?php
     $teuda = explode(' ',$afficher_beat['beat_dateupload'])[0];
@@ -504,7 +503,7 @@ if(isset($_POST['inputOption'])) {
 
 
         <?php
-        require_once('assets/skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.html');
         ?>
         <script>
 

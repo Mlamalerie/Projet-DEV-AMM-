@@ -1,4 +1,9 @@
 <?php 
+
+//session_start();
+//include_once("../../assets/db/connexiondb.php");
+//$okconnectey = false;
+
 $jesuissurindex = $_SESSION['ici_index_bool']; 
 $reqG = $BDD->prepare("SELECT genre_nom,id FROM genre  ORDER BY genre_nom ASC");
 $reqG->execute(array());
@@ -177,7 +182,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     $relation_bloq=$req1->fetchAll(); 
 
 
-                    include('assets/functions/date-fct.php');
+                    include_once('assets/functions/date-fct.php');
                     $req = $BDD->prepare("SELECT * FROM (
                     SELECT *
                             FROM messagerie
@@ -296,8 +301,8 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
                         <a class="dropdown-item" href="my-beats.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i> Mes Tracks </a>
 
-                        <!--                        <a class="dropdown-item" href="privee.php?profil_id=<?= $_SESSION['user_id']?>"><i class="fas fa-user-shield mr-1 text-gray-400"></i> Mes Informations Privées </a><-->  
-                        <a class="dropdown-item" href="histo-ventes.php"><i class="fas fa-search-dollar mr-1 text-gray-400"></i>Historique de ventes </a>
+                      
+                        <a class="dropdown-item" href="dashboard.php"><i class="fas fa-tachometer-alt mr-1"></i> Tableau de Bord </a>
 
 
                         <div class="dropdown-divider"></div>

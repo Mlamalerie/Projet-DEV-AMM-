@@ -45,12 +45,14 @@
                 </th>
                 <!-- **LIKE -->
                 <?php if($okconnectey) {  ?>
-                <td class="border-0 align-middle rounded">
+              <td class="border-0 align-middle  ">
 
-                    <span id="span_nbLike-<?=$r['beat_id']?>"><?=$r['beat_like']?></span>
+
+
+                    <span id="span_nbLike-<?=$r['beat_id']?>" class="text-light"><?=$r['beat_like']?></span>
 
                     <?php
-    $oktaliker = false;
+                $oktaliker = false;
                                         $req = $BDD->prepare("SELECT id FROM likelike WHERE like_user_id = ? AND like_beat_id = ?");
                                         $req->execute(array($_SESSION['user_id'],$r['beat_id']));
                                         $lll = $req->fetch();
@@ -60,9 +62,9 @@
                                         }
                     ?>
                     <?php if ($oktaliker) { ?>
-                    <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class=" iconLike text-dark coeur_active"><i class="fas fa-heart"></i></span>
+                    <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class=" iconLike coeur_active"><i class="fas fa-heart  "></i></span>
                     <?php    } else { ?> 
-                    <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class=" iconLike text-dark"><i class="far fa-heart"></i></span>
+                    <span onclick="goLikeuh(this,'<?=$r['beat_id']?>')" class=" iconLike "><i class="far fa-heart"></i></span>
                     <?php } ?>
                 </td>
                 <?php } ?>
