@@ -601,7 +601,7 @@ if(!empty($_POST)){
                         <a id="contact-tab" data-toggle="tab" href="#tabmotdepasse" role="tab" aria-controls="tabmotdepasse" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold <?php if($activetabmdp){ ?> active <?php } ?>">Mot de passe </a>
                     </li>
                     <li class="nav-item flex-sm-fill">
-                        <a id="contact-tab" data-toggle="tab" href="#tabinfoperso" role="tab" aria-controls="tabinfoperso" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold <?php if($activetabinfoperso){ ?> active <?php } ?>">Infos personnels</a>
+                        <a id="contact-tab" data-toggle="tab" href="#tabinfoperso" role="tab" aria-controls="tabinfoperso" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold <?php if($activetabinfoperso){ ?> active <?php } ?>">Infos personnelles</a>
                     </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
