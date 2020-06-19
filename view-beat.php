@@ -216,7 +216,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
 
         <?php
-        require_once('assets/skeleton/endLinkScripts.php');
+        require_once('assets/skeleton/endLinkScripts.html');
         ?>
 
         <!--   *************************************************************  -->
