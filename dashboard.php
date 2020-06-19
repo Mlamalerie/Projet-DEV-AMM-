@@ -8,7 +8,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
     $okconnectey = true;
 } else {
-    header('connexion.php');
+    header('Location: connexion.php');
     exit;
 } 
 
