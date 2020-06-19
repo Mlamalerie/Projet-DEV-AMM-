@@ -262,7 +262,8 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
         <!-- Section 4 -->
         <section class="py-5 d-flex align-items-center" id="four">
             <div class="container py-5">
-                <h2 class="h1 mb-4 text-white text-center">Meilleur Producteur</h2>
+                <h2 class="h1 mb-4 text-white text-center">Meilleurs Producteurs</h2>
+                <p class="lead mb-0 text-white text-center">Le classement des meilleurs vendeurs de Beats</p>
                 <div class="row">
 
                     <div class="col-lg-7 mx-auto bg-white rounded shadow" id="bestprod">
@@ -436,7 +437,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                                 <div id="headingFour" class="card-header bg-white shadow-sm border-0">
                                     <h6 class="mb-0 font-weight-bold"><a href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">Pourquoi liker un beat ?</a></h6>
                                 </div>
-                                <div id="collapseFour" aria-labelledby="headingOne" data-parent="#accordionExample" class="collapse show">
+                                <div id="collapseFour" aria-labelledby="headingFour" data-parent="#accordionExample" class="collapse show">
                                     <div class="card-body p-5">
                                         <p class="font-weight-light m-0">Liker un beat vous permet de soutenir un producteur et d'ajouter ce beat dans votre liste de beats likés sur la page "Mes Tracks". La section "Mes likes" joue ainsi le rôle d'une liste de souhait, dans laquele vous pouvez ajouter les beats dans votre panier à tout moment.</p>
                                     </div>
@@ -499,7 +500,6 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
                             <li class="mb-2"><a href="about-us.php" class="text-mute">A Propos</a></li>
                             <li class="mb-2"><a href="#faq" class="text-mute">Aide</a></li>
                             <li class="mb-2"><a href="recrute.php" class="text-mute">On recrute</a></li>
-                            <li class="mb-2"><a href="aide.php" class="text-mute">Contactez-nous</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
