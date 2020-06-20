@@ -77,11 +77,11 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                                             <div class="col-lg-4 border-right border-secondary">
 
                                                 <ul class="list-unstyled text-left">
-                                                    <li class="nav-item"><a href="search.php?Type=beats&sort=vente" class="nav-link text-small pb-0">Top Ventes Beats</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&sort=vente" class="nav-link text-small pb-0"><i class="fas fa-medal"></i> Top Ventes Beats</a></li>
 
-                                                    <li class="nav-item"><a href="search.php?Type=beats&sort=nouveaute" class="nav-link text-small pb-0 ">Récemment ajouté </a></li>
-                                                    <li class="nav-item"><a href="search.php?Type=beats&Price=free" class="nav-link text-small pb-0 ">Free Beats</a></li>
-                                                    <li class="nav-item"><a href="search.php?Type=users&sort=seller" class="nav-link text-small pb-0">Top Vendeurs</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&sort=nouveaute" class="nav-link text-small pb-0 "><i class="far fa-clock"></i> Récemment ajouté </a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&Price=free" class="nav-link text-small pb-0 "><i class="far fa-handshake"></i> Free Beats</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=users&sort=seller" class="nav-link text-small pb-0"><i class="fas fa-trophy"></i> Top Vendeurs</a></li>
 
                                                 </ul>
                                             </div>
