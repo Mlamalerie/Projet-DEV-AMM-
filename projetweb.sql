@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 20 juin 2020 à 03:04
+-- Généré le :  sam. 20 juin 2020 à 01:04
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `beat` (
   KEY `beat_author_id` (`beat_author_id`),
   KEY `beat_author` (`beat_author`),
   KEY `beat_genre` (`beat_genre`)
-) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `beat`
@@ -64,21 +64,14 @@ INSERT INTO `beat` (`beat_id`, `beat_title`, `beat_author`, `beat_author_id`, `b
 (15, 'Temps Mort ', 'Wanabilini', 17, 16, 'Instrumental Original du titre \"Temps Mort\" de Bosh', 'bosh, wanabilini', 2017, 49.99, 'mp3', 'data/17-Wanabilini/beats/17-beat-15.mp3', 'data/17-Wanabilini/images/cover/17-beat-15.png', 0, 0, '2020-05-29 00:00:00'),
 (16, 'Raconte', 'Wanabilini', 17, 13, 'Instrumental Piano Triste Modern Old School Trap / Sample Instrumental ', 'Guizmo, Rémy', 2018, 10.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-16.mp3', 'data/17-Wanabilini/images/cover/17-beat-16.png', 0, 0, '2020-05-31 00:00:00'),
 (20, 'Yembe', 'Wanabilini', 17, 5, 'La prod préféré des youtubeuse', 'zoken,2t,Wanabilini, Afro Beat', 2020, 0.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-20.mp3', 'data/17-Wanabilini/images/cover/17-cover-20.png', 0, 0, '2020-05-20 00:00:00'),
-(21, 'Baby Yes', 'Wanabilini', 17, 0, 'Instru été ', 'DanceHall, Playa, Wanabilini', 2019, 19.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-21.mp3', 'data/17-Wanabilini/images/cover/17-cover-21.png', 0, 0, '2020-06-20 03:00:00'),
-(22, 'Burny', 'Wanabilini', 17, 5, '  Instrument Afro Beat New Vibes', 'burna boy,wanabilini', 2020, 15.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-22.mp3', 'data/17-Wanabilini/images/cover/17-cover-22.png', 0, 0, '2020-06-17 09:09:00'),
-(23, 'Butin', 'Wanabilini', 17, 0, '  La MG type Beat Afro beat', 'La MG, 4keus', 2018, 25.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-23.mp3', 'data/17-Wanabilini/images/cover/17-cover-23.png', 0, 0, '2020-05-14 00:00:00'),
-(24, 'Timide', 'Wanabilini', 17, 0, '  Tayc type Beat Love Instrumental', 'Tayc,Leto', 2019, 3.99, 'mp3', 'data/17-Wanabilini/beats/17-beat-24.mp3', 'data/17-Wanabilini/images/cover/17-cover-24.png', 0, 0, '2020-06-12 00:00:00'),
-(25, 'Humeur', 'Akuma', 10, 16, '  Chinese Sample, Meilleur prod du monde', 'RMR, Akuma, Sample', 2020, 50.00, 'mp3', 'data/10-Akuma/beats/10-beat-25.mp3', 'data/10-Akuma/images/cover/10-beat-25.png', 0, 0, '2020-06-20 20:00:00'),
-(50, 'Persia', 'PascalProd', 30, 5, 'Deviens le prince de Perse', NULL, 2020, 72.50, 'mp3', 'data/30-PascalProd/beats/30-beat-50.mp3', 'data/30-PascalProd/images/cover/30-cover-50.png', 0, 0, '2020-06-19 21:56:00'),
-(51, 'Petite', 'PascalProd', 30, 9, 'Vien par ici ma petite ;)', NULL, 2020, 44.45, 'mp3', 'data/30-PascalProd/beats/30-beat-51.mp3', 'data/30-PascalProd/images/cover/30-cover-51.png', 0, 0, '2020-06-19 21:58:00'),
-(52, 'Utopia', 'PascalProd', 30, 0, 'La vie n\'est qu\'une utopie ?', NULL, 2019, 24.50, 'mp3', 'data/30-PascalProd/beats/30-beat-52.mp3', 'data/30-PascalProd/images/cover/30-cover-52.png', 0, 0, '2019-06-19 22:03:00'),
-(53, 'Sale', 'BeaBeatz', 31, 0, ' C\'est pas propre', NULL, 2018, 18.50, 'mp3', 'data/31-BeaBeatz/beats/31-beat-53.mp3', 'data/31-BeaBeatz/images/cover/31-cover-53.png', 0, 0, '2018-08-08 22:05:21'),
-(54, 'No more beginning', 'BeaBeatz', 31, 4, '  Je suis saoul', NULL, 2016, 12.00, 'mp3', 'data/31-BeaBeatz/beats/31-beat-54.mp3', 'data/31-BeaBeatz/images/cover/31-cover-54.png', 0, 0, '2016-12-16 22:07:46'),
-(55, 'Rock-n Roll-up', 'BeaBeatz', 31, 8, '  Rock\'n Roll Babyyyy!!!', NULL, 2012, 0.00, 'mp3', 'data/31-BeaBeatz/beats/31-beat-55.mp3', 'data/31-BeaBeatz/images/cover/31-cover-55.png', 0, 0, '2012-10-01 19:35:32'),
-(56, 'Better', 'WillyFunk', 32, 1, '  It\'s better', NULL, 2020, 66.60, 'mp3', 'data/32-WillyFunk/beats/32-beat-56.mp3', 'data/32-WillyFunk/images/cover/32-cover-56.png', 0, 0, '2020-06-09 22:13:04'),
-(57, 'True Love', 'WillyFunk', 32, 3, ' Pour une vraie déclaration...', NULL, 2017, 33.25, 'mp3', 'data/32-WillyFunk/beats/32-beat-57.mp3', 'data/32-WillyFunk/images/cover/32-cover-57.png', 0, 0, '2017-02-14 14:25:26'),
-(58, 'Sang', 'WillyFunk', 32, 16, ' Rouge Sang', NULL, 2020, 88.88, 'mp3', 'data/32-WillyFunk/beats/32-beat-58.mp3', 'data/32-WillyFunk/images/cover/32-cover-58.png', 0, 0, '2020-06-19 22:21:35'),
-(59, 'Profond', 'WillyFunk', 32, 6, ' Entre dans les profondeurs', NULL, 2019, 50.00, 'mp3', 'data/32-WillyFunk/beats/32-beat-59.mp3', 'data/32-WillyFunk/images/cover/32-cover-59.png', 0, 0, '2019-09-10 20:00:00');
+(30, 'Disrepect', 'SeniorAlaProd', 32, 16, 'Trap drill', 'Hamza', 2020, 30.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-30.mp3\r\n', 'data/20-SeniorAlaProd/images/cover/20-cover-30.png\r\n', 0, 0, '2020-06-18 00:00:00'),
+(31, 'Encore', 'SeniorAlaProd', 32, 3, 'Chill', 'Luidji,Krisy', 2019, 19.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-31.mp3\r\n', 'data/20-SeniorAlaProd/images/cover/20-cover-31.png\r\n', 0, 0, '2020-06-10 00:00:00'),
+(32, 'Go On', 'SeniorAlaProd', 32, 0, 'Afro Beat', 'BurnaBoy', 2020, 19.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-32.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-32.png\r\n', 0, 0, '2020-04-22 00:00:00'),
+(33, 'Mi Vida', 'SeniorAlaProd', 32, 10, 'Du zouk en 2020', 'Zouk', 2017, 15.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-33.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-33.png\r\n', 0, 0, '2020-06-09 00:00:00'),
+(34, 'Masterpiece', 'SarutoBeats', 33, 15, 'Beat orchestral', 'RickRoss', 2018, 0.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-34.mp3\r\n', 'data/21-SarutoBeats/images/cover/21-cover-34.png', 0, 0, '2020-06-23 00:00:00'),
+(35, 'Hustlers', 'SarutoBeats', 33, 1, 'C\'est New York ici', 'RickRoss', 2019, 0.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-35.mp3\r\n', 'data/21-SarutoBeats/images/cover/21-cover-35.png', 0, 0, '2020-06-24 00:00:00'),
+(36, 'Right Round', 'SarutoBeats', 33, 14, 'Funky beat', 'BrunoMars,MichaelJackson', 2016, 24.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-36.mp3\r\n', 'data/21-SarutoBeats/images/cover/21-cover-36.png', 0, 0, '2020-05-14 00:00:00'),
+(37, 'Monaco', 'SarutoBeats', 33, 12, 'Zumba d\'été  ', 'Maes', 2020, 25.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-37.mp3\r\n', 'data/21-SarutoBeats/images/cover/21-cover-37.png\r\n', 0, 0, '2020-06-16 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -148,6 +141,22 @@ CREATE TABLE IF NOT EXISTS `messagerie` (
   KEY `id_to` (`id_to`),
   KEY `id_from` (`id_from`)
 ) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `messagerie`
+--
+
+INSERT INTO `messagerie` (`id`, `id_from`, `id_to`, `message`, `date_message`, `lu`) VALUES
+(52, 1, 17, 'test1', '2020-06-15 00:00:00', 1),
+(53, 1, 17, 'test2', '2020-06-15 01:00:00', 1),
+(54, 17, 1, 'rep1', '2020-06-15 02:00:00', 1),
+(55, 1, 17, 'test3', '2020-06-15 03:00:00', 1),
+(56, 3, 17, 'allo', '2020-06-16 00:00:00', 1),
+(59, 17, 1, 'wsh t ou ?', '2020-06-15 01:06:08', 1),
+(60, 17, 1, 'att', '2020-06-15 01:06:18', 1),
+(61, 17, 2, '12345', '2020-06-15 01:06:46', 0),
+(62, 17, 2, 'cava ?', '2020-06-15 01:06:53', 0),
+(63, 1, 17, '123', '2020-06-15 07:06:06', 0);
 
 -- --------------------------------------------------------
 
@@ -502,21 +511,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_pseudo` (`user_pseudo`),
   UNIQUE KEY `user_mail` (`user_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`user_id`, `user_role`, `user_pseudo`, `user_email`, `user_image`, `user_prenom`, `user_nom`, `user_description`, `user_sexe`, `user_datenaissance`, `user_ville`, `user_pays`, `user_password`, `user_dateinscription`, `user_dateconnexion`, `user_statut`) VALUES
-(1, 0, 'AriduBinks', 'ari@gmail.com', 'data/1-AriduBinks/images/1-photo.jpg', 'Ari', 'Rajaofera', ' Babinks', 'M', '2000-04-02', 'Montmagny', 450, '$6$rounds=5000$grzgirjzgrpzhte9$eWM.Yc29LjPJRHe9uYpgmczTkRbnex.5Y2Q227Jg/nyXktILjyHkvisfwFZT593T9P6PQ2K/P7.jEGJHojfoj.', '2020-05-17 18:00:30', '2020-06-20 00:58:30', 1),
+(1, 0, 'AriduBinks', 'ari@gmail.com', 'assets/img/user.png', 'Ari', 'Rajaofera', ' Babinks', 'M', '2000-04-02', 'Montmagny', 450, '$6$rounds=5000$grzgirjzgrpzhte9$eWM.Yc29LjPJRHe9uYpgmczTkRbnex.5Y2Q227Jg/nyXktILjyHkvisfwFZT593T9P6PQ2K/P7.jEGJHojfoj.', '2020-05-17 18:00:30', '2020-06-15 19:41:55', 1),
 (2, 0, 'Mlamali95600', 'mlamali@gmail.com', 'assets/2-Mlamali95600/user.png', 'Mlamali', 'Said Salimo', ' Pfpeajgfrzapg', 'M', '2001-06-28', 'Eaubonne', 4, '$6$rounds=5000$grzgirjzgrpzhte9$eWM.Yc29LjPJRHe9uYpgmczTkRbnex.5Y2Q227Jg/nyXktILjyHkvisfwFZT593T9P6PQ2K/P7.jEGJHojfoj.', '2020-05-17 18:01:03', '2020-06-19 00:01:09', 1),
-(3, 0, 'Mathieu', 'mathieu@gmail.com', 'data/3-Mathieu95/images/3-photo.jpg', 'Mathieu', 'Cissé', ' Tysmé ', 'M', '2000-01-01', 'Aix', 4, '$6$rounds=5000$grzgirjzgrpzhte9$eWM.Yc29LjPJRHe9uYpgmczTkRbnex.5Y2Q227Jg/nyXktILjyHkvisfwFZT593T9P6PQ2K/P7.jEGJHojfoj.', '2020-05-17 18:01:22', '2020-06-10 15:20:55', 1),
-(10, 2, 'Akuma', 'akuma@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', '0', NULL, 'Paris', 250, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-20 02:37:00', '2020-06-20 02:37:00', 1),
-(17, 2, 'Wanabilini', 'saidou@gmail.com', 'data/17-Wanabilini/images/17-photo.jpg', 'Mlamali wan', 'Said Salimo', 'producer young beatmakeur', 'F', '2001-06-28', 'ville', 8, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-05-10 15:51:15', '2020-06-20 02:36:11', 1),
-(30, 2, 'PascalProd', 'pascalprod@mail.com', 'assets/img/user.png', NULL, NULL, '\' \'', 'M', NULL, 'Paris', 250, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 21:37:59', '2020-06-19 21:37:59', 1),
-(31, 2, 'BeaBeatz', 'bea@mail.com', 'assets/img/user.png', NULL, NULL, '\' \'', 'F', NULL, 'Manchester', 826, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 21:42:42', '2020-06-19 21:42:42', 1),
-(32, 2, 'WillyFunk', 'willy@mail.com', 'assets/img/user.png', NULL, NULL, '\' \'', 'M', NULL, 'Kingston', 388, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 21:44:40', '2020-06-19 21:44:40', 1);
+(3, 0, 'Mathieu95', 'mathieu@gmail.com', 'data/3-Mathieu95/images/3-photo.jpg', 'Mathieu', 'Cissé', ' Tysmé ', 'M', '2000-01-01', 'Aix', 4, '$6$rounds=5000$grzgirjzgrpzhte9$eWM.Yc29LjPJRHe9uYpgmczTkRbnex.5Y2Q227Jg/nyXktILjyHkvisfwFZT593T9P6PQ2K/P7.jEGJHojfoj.', '2020-05-17 18:01:22', '2020-06-10 15:20:55', 1),
+(17, 2, 'Wanabilini', 'saidou@gmail.com', 'data/17-Wanabilini/images/17-photo.jpg', 'Mlamali wan', 'Said Salimo', 'producer young beatmakeur', 'F', '2001-06-28', 'ville', 8, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-05-10 15:51:15', '2020-06-19 01:30:52', 1),
+(32, 2, 'SeniorAlaProd', 'senior@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', '0', NULL, 'Cergy', 250, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 23:50:27', '2020-06-19 23:50:27', 1),
+(33, 2, 'SarutoBeats', 'sarutobeats@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', '0', NULL, 'Cergy', 250, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 23:53:59', '2020-06-19 23:53:59', 1);
 
 -- --------------------------------------------------------
 
