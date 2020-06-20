@@ -3,10 +3,7 @@ session_start();
 $_SESSION['ici_index_bool'] = false;
 include('assets/db/connexiondb.php'); 
 
-print_r($_GET);
-print_r("<br>");
-print_r($_POST);
-print_r($_SESSION);
+
 
 $baseid = (int) $_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
 
@@ -23,7 +20,11 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 }
 
 
-
+// ta rien a faire ici si c pas toi le boug
+if(empty($baseid) ){
+    header('Location: edit-profil.php?profil_id='.$_SESSION['user_id']);
+    exit;
+} 
 
 
 $req = $BDD->prepare("SELECT * 
@@ -32,6 +33,18 @@ $req = $BDD->prepare("SELECT *
 
 $req->execute(array($baseid));
 $afficher_profil = $req->fetch();
+
+if(isset($afficher_profil['user_pseudo'])) {
+    if(!$okconnecteyadmin){
+            header('HTTP/1.1 403 Forbidden');
+            exit;
+        }
+    
+}else {
+    header('HTTP/1.0 404 Not Found');
+    exit;
+}
+
 
 $basepseudo = $afficher_profil['user_pseudo'];
 $baseemail = $afficher_profil['user_email'];
@@ -57,24 +70,6 @@ $baseimage = $afficher_profil['user_image'];
 
 
 
-// ta rien a faire ici si c pas toi le boug
-if(empty($baseid) ){
-    header('Location: edit-profil.php?profil_id='.$_SESSION['user_id']);
-    exit;
-} else if ( empty($afficher_profil)) {
-
-} else if($_SESSION['user_id'] != $baseid || $_SESSION['user_role'] != 0 ){
-
-    //   header('Location: edit-profil.php?profil_id='.$_SESSION['user_id']);
-    // exit;
-}
-
-if($baseid != $_SESSION['user_id']  ) {
-    if($okadmin && $_SESSION['user_role'] != 0 ){// si le compte à afficher est celui d'un admin et que tu n'es pa admin..
-        //   header('Location: edit-profil.php?profil_id='.$_SESSION['user_id']);
-        //   exit;
-    }
-}
 
 
 $activetabinfoprofil = true;
@@ -377,9 +372,7 @@ if(!empty($_POST)){
 
                 //*** Verification du date
                 $dateuh = explode('-',$datenaissance);
-                print_r($datenaissance);
-                print_r($dateuh);
-
+               
                 if (!checkdate($dateuh[1], $dateuh[2], $dateuh[0])) {
 
                     $ok = false;
@@ -496,12 +489,12 @@ if(!empty($_POST)){
         <?php
         require_once('assets/skeleton/navbar.php');
         ?>
-        <div class="container py-2">
+        <div class="container py-2 mt-5">
             <!-- For demo purpose -->
-            <div class="row mb-1">
+            <div class="row mb-1 mt-5">
                 <div class="col-lg-8 pb-0 mt-3 text-center mx-auto">
 
-                    <img onclick="getfile();" id="imgduboug" src="<?=$baseimage ?>" alt=""  class="img-fluid  mb-3  roundedImage shadow-sm">
+                    <img onclick="getfile();" id="imgduboug" src="<?=$baseimage ?>" alt=""  class="img-fluid  mb-2  roundedImage shadow-sm">
                     <h5 class="mb-0 "><?=$basepseudo ?> <?php if($okadmin) { ?> (ADMIN) <?php } ?> </h5>
                     <span class="small text-uppercase text-muted">Cliquer sur l'image pour la changer</span>
                     <?php 

@@ -5,26 +5,27 @@ include_once("assets/db/connexiondb.php");
 
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
-    print_r($_SESSION);
+   
     $okconnectey = true;
 } 
 
-$beat_id = (int)$_GET['id'];
-//** verif beat_id
-$req = $BDD->prepare("SELECT beat_title
-                    FROM beat
-                    WHERE beat_id = ?");
-$req->execute(array($beat_id));
-$verifb=$req->fetch();
-
-if(!isset($verifb['beat_title'])) {
-    header('HTTP/1.0 404 Not Found');
+if(!isset($_GET['id']) ) {
+     header('HTTP/1.0 404 Not Found');
     exit;
 }
+
+$beat_id = (int)$_GET['id'];
+
+
+
 $req = $BDD -> prepare("SELECT * FROM beat WHERE beat_id = ?");
 $req->execute(array($beat_id));
 $instru = $req->fetch();
-
+//** verif beat_id
+if(!isset($instru['beat_title'])) {
+    header('HTTP/1.0 404 Not Found');
+    exit;
+}
 
 
 ?>
