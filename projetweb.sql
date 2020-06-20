@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 20 juin 2020 à 03:34
+-- Généré le :  sam. 20 juin 2020 à 01:38
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -77,7 +77,7 @@ INSERT INTO `beat` (`beat_id`, `beat_title`, `beat_author`, `beat_author_id`, `b
 (35, 'Hustlers', 'SarutoBeats', 21, 1, 'C\'est New York ici', 'RickRoss', 2019, 0.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-35.mp3\r\n', 'data/21-SarutoBeats/images/cover/21-cover-35.png', 0, 0, '2020-06-24 00:00:00'),
 (36, 'Right Round', 'SarutoBeats', 21, 14, 'Funky beat', 'BrunoMars,MichaelJackson', 2016, 24.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-36.mp3\r\n', 'data/21-SarutoBeats/images/cover/21-cover-36.png', 0, 0, '2020-05-14 00:00:00'),
 (37, 'Monaco', 'SarutoBeats', 21, 12, 'Zumba d\'été  ', 'Maes', 2020, 25.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-37.mp3\r\n', 'data/21-SarutoBeats/images/cover/21-cover-37.png\r\n', 0, 0, '2020-06-16 00:00:00'),
-(50, 'Persia', 'PascalProd', 30, 5, 'Deviens le prince de Perse', NULL, 2020, 72.50, 'mp3', 'data/30-PascalProd/beats/30-beat-50.mp3', 'data/30-PascalProd/images/cover/30-cover-50.png', 0, 0, '2020-06-19 21:56:00'),
+(50, 'Persia', 'PascalProd', 30, 5, 'Deviens le prince de Perse', 'Pascal', 2020, 72.50, 'mp3', 'data/30-PascalProd/beats/30-beat-50.mp3', 'data/30-PascalProd/images/cover/30-cover-50.png', 0, 0, '2020-06-19 21:56:00'),
 (51, 'Petite', 'PascalProd', 30, 9, 'Vien par ici ma petite ;)', NULL, 2020, 44.45, 'mp3', 'data/30-PascalProd/beats/30-beat-51.mp3', 'data/30-PascalProd/images/cover/30-cover-51.png', 0, 0, '2020-06-19 21:58:00'),
 (52, 'Utopia', 'PascalProd', 30, 0, 'La vie n\'est qu\'une utopie ?', NULL, 2019, 24.50, 'mp3', 'data/30-PascalProd/beats/30-beat-52.mp3', 'data/30-PascalProd/images/cover/30-cover-52.png', 0, 0, '2019-06-19 22:03:00'),
 (53, 'Sale', 'BeaBeatz', 31, 0, ' C\'est pas propre', NULL, 2018, 18.50, 'mp3', 'data/31-BeaBeatz/beats/31-beat-53.mp3', 'data/31-BeaBeatz/images/cover/31-cover-53.png', 0, 0, '2018-08-08 22:05:21'),
