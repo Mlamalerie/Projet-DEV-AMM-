@@ -8,7 +8,7 @@
                 <th scope="col" class="border-0 ">
                     <div class="p-2 px-3 text-uppercase text-light">Produits</div>
                 </th>
-                
+
                 <th scope="col" class="border-0 ">
                     <div class="py-2 text-uppercase text-light">Télécharger</div>
                 </th>
@@ -17,19 +17,32 @@
         <?php if($okconnectey) { ?>
         <tbody id="tbodypanier">
             <?php 
-  
+
+
+    if ($lim != 0){
+        $req = $BDD->prepare("SELECT *
+                            FROM vente
+                            WHERE vente_user_id = ? 
+                            ORDER BY vente_date DESC
+                            LIMIT $lim ");
+        $req->execute(array($_SESSION['user_id']));
+    } else {
+        $req = $BDD->prepare("SELECT *
+                            FROM vente
+                            WHERE vente_user_id = ? 
+                            ORDER BY vente_date DESC");
+        $req->execute(array($_SESSION['user_id']));
+
+    }
+    $resuACHAT = $req->fetchAll();
 
     foreach($resuACHAT as $p) {
 
-        $req = $BDD->prepare("SELECT *
-                                            FROM beat
-                                            WHERE beat_id = ?");
+        $req = $BDD->prepare("SELECT *  FROM beat  WHERE beat_id = ?");
         $req->execute(array($p['vente_beat_id']));
         $resuPAN = $req->fetchAll();
 
         foreach($resuPAN as $b) {
-
-
 
 
             ?> 
@@ -48,7 +61,7 @@
                         </div>
                     </div>
                 </th>
-              
+
                 <td class='border-0 align-middle'>
                     <a href="audio/<?= $b['beat_source']?>" download>
                         <span class="text-black"><i class="fas fa-download"></i></span>
@@ -66,17 +79,17 @@
 
 
             ?>
-            
-          
-            
+
+
+
             <?php    } ?>
 
         </tbody>
     </table>
-      <?php if(count($resuACHAT) == 0) { ?>
-                Vous n'avez encore rien acheté.. <a href="search.php?Type=beats&sort=nouveaute"> Faire mon shopping</a>
-                
-           <?php } ?>
+    <?php if(count($resuACHAT) == 0) { ?>
+    Vous n'avez encore rien acheté.. <a href="search.php?Type=beats&sort=nouveaute"> Faire mon shopping</a>
+
+    <?php } ?>
 
 </div>
 
