@@ -105,7 +105,7 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
         <header class="s-header">
             <div class="overlay-sombre"></div>
             <video id="BACKGROUNDVIDEO1" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop"><!--fond d'écran animé-->
-                <source src="img/Nebula.mp4" type="video/mp4">
+                <source src="assets/img/Nebula.mp4" type="video/mp4">
             </video>
             <div class="container h-100">
                 <div class="d-flex h-100 text-center align-items-center">

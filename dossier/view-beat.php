@@ -53,7 +53,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                     </div>
 
                     <div class="text-light text-left mt-1 ml-4 d-inline-block align-middle rounded">
-                        <h5 class="mb-0 vb-text "><?= $instru['beat_title']?> </h5>
+                        <h5 class="mb-0 vb-text "><?= $instru['beat_title']?> <small class="vb-year">• <?= $instru['beat_year']?></small></h5> 
                         <!--  auteur -->
                         <a class="text-light vb-stext " href="profils.php?profil_id=<?= $instru['beat_author_id']?>">
                             by <u><?= $instru['beat_author']?></u>
@@ -64,12 +64,14 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     $teuda = explode(' ',$instru['beat_dateupload'])[0];
                              $datedate = explode('-',$teuda);
                         ?>
-                        <div class="w-100 mt-2">
-                            <i class="fas fa-clock"></i>  <?= $datedate[2]?>-<?= $datedate[1]?>-<?= $datedate[0]?>
+                        <div class="w-100 mt-2 vb-date font-italic">
+                           Date de mise en ligne : 
+                            <i class="fas fa-clock ml-1"></i>  <?= $datedate[2]?>-<?= $datedate[1]?>-<?= $datedate[0]?>
                             <!--   description    -->
                         </div> 
 
                         <div class="vb-desc mw-75 mt-2">
+                           <span>Description : </span>
                             <?= $instru['beat_description']?>
                             <!--    bouton acheter -->
                         </div>
