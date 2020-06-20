@@ -6,6 +6,21 @@ include('assets/db/connexiondb.php');
 $idmoi = (int) $_SESSION['user_id'] ;
 $id_messagerie = (int) $_GET['id'];
 
+
+//** verif profil_id
+$req = $BDD->prepare("SELECT user_pseudo
+        FROM user 
+        WHERE user_id = ?");
+
+$req->execute(array($id_messagerie));
+
+$verifu = $req->fetch();
+if(!isset($verifu['user_pseudo'])) {
+    header('HTTP/1.0 404 Not Found');
+    exit;
+}
+
+
 $okconnectey = false;
 $oksessionadmin = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
@@ -19,7 +34,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         $oksessionadmin = true;
     }
 } else {
-    header('Location: index.php');
+     header('Location: connexion.php');
     exit;
 }
 
@@ -104,7 +119,11 @@ $relation_bloq=$req1->fetchAll();
             <div class="row">
                 <div class="col-sm-12">
                     <h1>Mes messages</h1>
+                    
+                    <?php if(count($afficher_conversation)==0) echo "Aucune conversation"?>
                     <table class="all_mssg">
+                       
+                    
                         <?php
 
                         foreach($afficher_conversation as $ac){

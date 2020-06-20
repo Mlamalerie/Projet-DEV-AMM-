@@ -282,12 +282,12 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="navbarDropdownMenuLink">
 
 
-                        <a class="dropdown-item" href="profil.php?profil_id=<?= $_SESSION['user_id']?>" ><i class="fas fa-user fa-sm fa-fw mr-1 text-gray-400"></i> Mon Profil </a>
+                        <a class="dropdown-item" href="profil.php?profil_id=<?= $_SESSION['user_id']?>" ><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>Mon Profil </a>
 
-                        <a class="dropdown-item" href="my-beats.php"> <i class="fas fa-compact-disc mr-1 text-gray-400"></i>Mes Tracks </a>
+                        <a class="dropdown-item" href="my-beats.php"> <i class="fas fa-compact-disc mr-2 text-gray-400"></i>Mes Tracks </a>
 
 
-                        <a class="dropdown-item" href="dashboard.php"><i class="fas fa-tachometer-alt mr-1"></i>Tableau de Bord </a>
+                        <a class="dropdown-item" href="dashboard.php"><i class="fas fa-tachometer-alt mr-2"></i>Tableau de Bord </a>
 
 
                         <div class="dropdown-divider"></div>

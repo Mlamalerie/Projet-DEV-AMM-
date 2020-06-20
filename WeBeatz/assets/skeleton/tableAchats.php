@@ -5,34 +5,19 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col" class="border-0 bg-light">
-                    <div class="p-2 px-3 text-uppercase">Produits</div>
+                <th scope="col" class="border-0 ">
+                    <div class="p-2 px-3 text-uppercase text-light">Produits</div>
                 </th>
                 
-                <th scope="col" class="border-0 bg-light">
-                    <div class="py-2 text-uppercase">Télécharger</div>
+                <th scope="col" class="border-0 ">
+                    <div class="py-2 text-uppercase text-light">Télécharger</div>
                 </th>
             </tr>
         </thead>
         <?php if($okconnectey) { ?>
         <tbody id="tbodypanier">
             <?php 
-    if ($lim != 0){
-    $req = $BDD->prepare("SELECT *
-                            FROM vente
-                            WHERE vente_user_id = ? 
-                            ORDER BY vente_date DESC
-                            LIMIT $lim ");
-    $req->execute(array($_SESSION['user_id']));
-        } else {
-        $req = $BDD->prepare("SELECT *
-                            FROM vente
-                            WHERE vente_user_id = ? 
-                            ORDER BY vente_date DESC");
-    $req->execute(array($_SESSION['user_id']));
-        
-    }
-    $resuACHAT = $req->fetchAll();
+  
 
     foreach($resuACHAT as $p) {
 
@@ -81,11 +66,17 @@
 
 
             ?>
-
+            
+          
+            
             <?php    } ?>
 
         </tbody>
     </table>
+      <?php if(count($resuACHAT) == 0) { ?>
+                Vous n'avez encore rien acheté.. <a href="search.php?Type=beats&sort=nouveaute"> Faire mon shopping</a>
+                
+           <?php } ?>
 
 </div>
 

@@ -1,57 +1,57 @@
 .hover {
-  width: 250px;
-  height: 250px;
-  overflow: hidden;
-  position: relative;
-  padding-bottom: 60%;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 60%;
 } 
 
 .hover-overlay {
-  width: 250px;
-  height: 250px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 90;
-  transition: all 0.4s;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    transition: all 0.4s;
 }
 
 .hover img {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: all 0.3s;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.3s;
 }
 
 .hover-overlay {
-  background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .hover-5-title { 
-  position: absolute;
-  bottom: 1rem;
-  left: 0;
-  transition: all 0.3s;
-  padding: 2rem 3rem;
-  z-index: 99;
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    transition: all 0.3s;
+    padding: 2rem 3rem;
+    z-index: 99;
 }
 
 .hover-5-title span {
-  transition: all 0.4s;
-  color: #b95aff;
+    transition: all 0.4s;
+    color: #b95aff;
 } 
 
 .hover-5:hover .hover-overlay {
-  background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .hover-5:hover .hover-5-title {
-  bottom: 0;
+    bottom: 0;
 }
 
 .hover-5:hover::after {
-  bottom: 0;
+    bottom: 0;
 }
 
 .link_icon{/*bloc contenant le play*/
@@ -66,16 +66,16 @@
     z-index: 100;
 }
 
- 
+
 .playplay-btn{/*le play caché*/
     display:block;
-/*    margin:auto;*/
-     
+    /*    margin:auto;*/
+
     font-size: 40px;
 
     opacity: 0;
 }
- 
+
 .playplay-btn:hover{/*le play apparait qd on passe dessus*/
     display:block;
     margin:auto;
@@ -86,32 +86,32 @@
     z-index: 100; 
 } 
 
- .play-audio-icon{
+.play-audio-icon{
     color: whitesmoke;
-                display: inline-block;
-                height: 2.9rem;
-                width: 2.9rem;
-                border-radius: 50%;
-                background-color: #793ea5;
-                background-image: url(../img/icon/icon-play.svg);
-                background-repeat: no-repeat;
-                background-position: 55% center;
-                background-size: 15px 27px;
-                -webkit-transition: background-color 0.3s ease-in-out;
-                transition: background-color 0.3s ease-in-out;
-            }
+    display: inline-block;
+    height: 3.8rem;
+    width: 3.8rem;
+    border-radius: 50%;
+    background-color: #793ea5;
+    background-image: url(../img/icon/icon-play.svg);
+    background-repeat: no-repeat;
+    background-position: 55% center;
+    background-size: 15px 27px;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+}
 .pause-audio-icon{ 
     color: whitesmoke;
-                display: inline-block;
-                height: 2.9rem;
-                width: 2.9rem;
-                border-radius: 50%;
-                background-color: #793ea5;
-                background-image: url(../img/icon/pause.svg);
-                background-repeat: no-repeat;
-                background-position: 55% center;
-                background-size: 15px 27px;
-                -webkit-transition: background-color 0.3s ease-in-out;
-                transition: background-color 0.3s ease-in-out;
-            }
+    display: inline-block;
+    height: 3.8rem;
+    width: 3.8rem;
+    border-radius: 50%;
+    background-color: #793ea5;
+    background-image: url(../img/icon/pause.svg);
+    background-repeat: no-repeat;
+    background-position: 55% center;
+    background-size: 15px 27px;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+}
 

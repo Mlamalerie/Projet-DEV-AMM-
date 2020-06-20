@@ -23,8 +23,6 @@
     foreach($resuUP as  $key => $b) {
 
 
-
-
             ?> 
 
             <tr class="rounded ">
@@ -91,7 +89,7 @@
             iO_id.value = idd;
 
             if (mode == 'suppr'){
-                p.innerHTML = "supprimer le beat " + blaz + " ?";   
+                p.innerHTML = "supprimer '" + blaz + "' ?";   
             }
             console.log(iO,iO_id);
         } 

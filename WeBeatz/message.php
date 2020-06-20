@@ -7,18 +7,40 @@ include('assets/db/connexiondb.php');
 $tab = explode('-',$_GET['profil_id']);
 $get_id =(int)$tab[0];
 $idmoi = (int)$tab[1];
+//** verif get_id
+$req = $BDD->prepare("SELECT user_pseudo
+        FROM user 
+        WHERE user_id = ?");
+
+$req->execute(array($get_id));
+$verifu = $req->fetch();
+if(!isset($verifu['user_pseudo'])) {
+    header('HTTP/1.0 404 Not Found');
+    exit;
+}
+//** verif idmoi
+$req = $BDD->prepare("SELECT user_pseudo
+        FROM user 
+        WHERE user_id = ?");
+
+$req->execute(array($idmoi));
+$verifu = $req->fetch();
+if(!isset($verifu['user_pseudo'])) {
+    header('HTTP/1.0 404 Not Found');
+    exit;
+}
 
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     $okconnectey = true;
 
     if($_SESSION['user_role'] != 0 && $idmoi != $_SESSION['user_id']){
-        echo "<script> history.go(-1); </script>";
-        exit;
+        header('HTTP/1.1 403 Forbidden');
+            exit;
 
     }
 } else {
-    header('Location: index.php');
+    header('Location: connexion.php');
     exit;
 }
 

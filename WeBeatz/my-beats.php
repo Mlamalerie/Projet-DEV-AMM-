@@ -58,10 +58,10 @@ if(isset($_POST['inputOption'])) {
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/my-beats.css">
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
-        
+
         <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
 
-        <title>All Users</title>
+        <title>Mes Tracks • WeBeatz</title>
 
     </head>
     <body>
@@ -95,13 +95,13 @@ if(isset($_POST['inputOption'])) {
                 <!-- Rounded tabs -->
                 <ul id="myTab" role="tablist" class="nav nav-tabs nav-pills flex-column flex-sm-row text-center  border-0 rounded-nav">
                     <li class="nav-item flex-sm-fill">
-                        <a id="myupload-tab" data-toggle="tab" href="#myupload" role="tab" aria-controls="myupload" aria-selected="true" class="nav-link border-0 text-uppercase font-weight-bold active">Mes Upload</a>
+                        <a id="myupload-tab" data-toggle="tab" href="#myupload" role="tab" aria-controls="myupload" aria-selected="true" class="nav-link border-0 text-uppercase font-weight-bold active"><i class="fas fa-file-upload mr-2"></i>Mes Upload</a>
                     </li>
                     <li class="nav-item flex-sm-fill">
-                        <a id="mypurchase-tab" data-toggle="tab" href="#mypurchase" role="tab" aria-controls="mypurchase" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">Mes achats</a>
+                        <a id="mypurchase-tab" data-toggle="tab" href="#mypurchase" role="tab" aria-controls="mypurchase" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold"><i class="fas fa-shopping-bag mr-2"></i>Mes achats</a>
                     </li>
                     <li class="nav-item flex-sm-fill">
-                        <a id="mylike-tab" data-toggle="tab" href="#mylike" role="tab" aria-controls="mylike" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">Mes likes</a>
+                        <a id="mylike-tab" data-toggle="tab" href="#mylike" role="tab" aria-controls="mylike" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold"><i class="fas fa-heart mr-2"></i>Mes likes</a>
                     </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
@@ -123,6 +123,22 @@ if(isset($_POST['inputOption'])) {
 
                         <?php 
                         $lim = 0;
+                        if ($lim != 0){
+                            $req = $BDD->prepare("SELECT *
+                            FROM vente
+                            WHERE vente_user_id = ? 
+                            ORDER BY vente_date DESC
+                            LIMIT $lim ");
+                            $req->execute(array($_SESSION['user_id']));
+                        } else {
+                            $req = $BDD->prepare("SELECT *
+                            FROM vente
+                            WHERE vente_user_id = ? 
+                            ORDER BY vente_date DESC");
+                            $req->execute(array($_SESSION['user_id']));
+
+                        }
+                        $resuACHAT = $req->fetchAll();
                         require_once('assets/skeleton/tableAchats.php');
                         ?>
                     </div>

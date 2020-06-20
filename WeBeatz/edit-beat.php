@@ -25,31 +25,7 @@ if(!isset($_GET['id']) ) {
 }
 
 $baseid = (int) $_GET['id'];/*récupère id du beat qu'on a cliqué*/
-//** verif beat_id
-$req = $BDD->prepare("SELECT  beat_author_id
-                    FROM beat
-                    WHERE beat_id = ?");
-$req->execute(array($baseid));
-$verifb=$req->fetch();
 
-if(isset($verifb['beat_author_id']) ) { // la prod existe
-
-    if( !(($verifb['beat_author_id'] == $_SESSION['user_id']) || $okconnecteyadmin)  ) { // 
-
-        if(!$okconnecteyadmin){
-            header('HTTP/1.1 403 Forbidden');
-            exit;
-        }
-        header('HTTP/1.0 404 Not Found');
-        exit;
-
-    } 
-
-
-} else {
-    header('HTTP/1.0 404 Not Found');
-    exit;
-}
 
 
 
@@ -59,6 +35,24 @@ $req = $BDD->prepare("SELECT *
 
 $req->execute(array($baseid));
 $afficher_beat = $req->fetch();
+
+//** verif beat_id
+if(isset($afficher_beat['beat_title']) ) { // la prod existe
+
+    if( !(($afficher_beat['beat_author_id'] == $_SESSION['user_id']) || $okconnecteyadmin)  ) { // 
+
+        if(!$okconnecteyadmin){
+            header('HTTP/1.1 403 Forbidden');
+            exit;
+        }
+        header('HTTP/1.0 404 Not Found');
+        exit;
+    } 
+
+} else {
+    header('HTTP/1.0 404 Not Found');
+    exit;
+}
 
 
 $basetitle = $afficher_beat['beat_title'];
