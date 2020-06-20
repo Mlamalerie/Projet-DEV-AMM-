@@ -574,7 +574,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
                         <?php if($wetypeexiste && !$jechercheunboug) { ?>
                         <!-- ***** GENRES -->
-                        <div class="list-group">
+                        <div class="list-group mt-3">
                             <h4 class="text-white display-6">GENRES</h4>
                             <form id='formGenre' action="search.php">
 
@@ -642,7 +642,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                         </div> 
 
                         <!-- ***** PRIX -->
-                        <div class="list-group">
+                        <div class="list-group mt-3">
                             <h4 class="text-white">PRIX </h4>
                             <form action="search.php" id="formPrice">
 

@@ -5,13 +5,49 @@ include('assets/db/connexiondb.php');
 
 
 
-$baseid = (int) $_GET['id'];/*récupère id du beat qu'on a cliqué*/
 
 $okconnectey = false;
+$okconnecteyadmin = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     $okconnectey = true;
+    if(0 == $_SESSION['user_role'])  {
+        $okconnecteyadmin = true;
+    }
+
 } else {
     header('Location: connexion.php');
+    exit;
+}
+
+if(!isset($_GET['id']) ) {
+     header('HTTP/1.0 404 Not Found');
+    exit;
+}
+
+$baseid = (int) $_GET['id'];/*récupère id du beat qu'on a cliqué*/
+//** verif beat_id
+$req = $BDD->prepare("SELECT  beat_author_id
+                    FROM beat
+                    WHERE beat_id = ?");
+$req->execute(array($baseid));
+$verifb=$req->fetch();
+
+if(isset($verifb['beat_author_id']) ) { // la prod existe
+
+    if( !(($verifb['beat_author_id'] == $_SESSION['user_id']) || $okconnecteyadmin)  ) { // 
+
+        if(!$okconnecteyadmin){
+            header('HTTP/1.1 403 Forbidden');
+            exit;
+        }
+        header('HTTP/1.0 404 Not Found');
+        exit;
+
+    } 
+
+
+} else {
+    header('HTTP/1.0 404 Not Found');
     exit;
 }
 
@@ -44,7 +80,7 @@ $listeGenres = $reqG->fetchAll();
 $icon = "<i class='fas fa-exclamation-circle mr-1'></i>";
 
 if (!empty($_POST) && isset($_POST)) {
-   
+
     extract($_POST); // si pas vide alors extraire le tableau, grace a ça on pourra directemet mettre le nom de la varilable en dur
 
     $ok = true;
@@ -139,7 +175,7 @@ if (!empty($_POST) && isset($_POST)) {
 
 
         if($ok) {
-         
+
             echo "<script> alert('OKKKK') </script>";
 
             // preparer requete insertion
@@ -218,10 +254,10 @@ if(isset($_POST['inputOption'])) {
         <!--   ************************** NAVBAR  **************************  -->
 
         <?php
-     require_once('assets/skeleton/navbar.php');
+    require_once('assets/skeleton/navbar.php');
         ?>;
 
-<br><br><br>
+        <br><br><br>
 
         <section class="mt-4  text-center container">
 
@@ -235,7 +271,7 @@ if(isset($_POST['inputOption'])) {
                             <div>
                                 <?php
     $teuda = explode(' ',$afficher_beat['beat_dateupload'])[0];
-            $datedate = explode('-',$teuda);
+                                $datedate = explode('-',$teuda);
                                 ?>
 
                                 <span class="badge  badge-light mr-1" >Date d'upload : <?= $datedate[2]?>-<?= $datedate[1]?>-<?= $datedate[0]?></span>

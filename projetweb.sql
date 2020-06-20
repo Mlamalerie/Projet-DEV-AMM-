@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 20 juin 2020 à 03:34
+-- Généré le :  sam. 20 juin 2020 à 20:39
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -56,33 +56,33 @@ CREATE TABLE IF NOT EXISTS `beat` (
 --
 
 INSERT INTO `beat` (`beat_id`, `beat_title`, `beat_author`, `beat_author_id`, `beat_genre`, `beat_description`, `beat_tags`, `beat_year`, `beat_price`, `beat_format`, `beat_source`, `beat_cover`, `beat_nbvente`, `beat_like`, `beat_dateupload`) VALUES
-(10, 'BlueCup', 'Wanabilini', 17, 16, '200k vue sur youtube ', 'Black D,Cheu B, Rep Cup', 2017, 0.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-10.mp3', 'data/17-Wanabilini/images/cover/17-cover-10.png', 0, 0, '2020-05-14 00:00:00'),
-(11, 'Malsain 2', 'Wanabilini', 17, 16, 'Type beat Leto\r\nFollow insta @wanabilini', 'Leto,Kepler, Wanabilini', 2020, 25.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-11.mp3', 'data/17-Wanabilini/images/cover/17-cover-11.png', 0, 0, '2020-05-18 00:00:00'),
-(12, 'Psykokwak', 'Wanabilini', 17, 16, 'Instru de Game boy un peu', 'Black D, Pokemon, Mlachahe', 2019, 45.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-12.mp3', 'data/17-Wanabilini/images/cover/17-cover-12.png\r\n', 0, 0, '2020-06-19 00:00:00'),
-(13, 'Telo', 'Wanabilini', 17, 16, 'Instru piano', 'koba, leto', 2018, 33.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-13.mp3', 'data/17-Wanabilini/images/cover/17-beat-13.png', 0, 0, '2020-06-17 00:00:00'),
-(14, 'Montant', 'Wanabilini', 17, 16, 'Instru type beat Bosh - French Drill', 'Bosh, French Drill', 2019, 39.99, 'mp3', 'data/17-Wanabilini/beats/17-beat-14.mp3', 'data/17-Wanabilini/images/cover/17-beat-14.png', 0, 0, '2020-06-20 00:00:00'),
-(15, 'Temps Mort ', 'Wanabilini', 17, 16, 'Instrumental Original du titre \"Temps Mort\" de Bosh', 'bosh, wanabilini', 2017, 49.99, 'mp3', 'data/17-Wanabilini/beats/17-beat-15.mp3', 'data/17-Wanabilini/images/cover/17-beat-15.png', 0, 0, '2020-05-29 00:00:00'),
-(16, 'Raconte', 'Wanabilini', 17, 13, 'Instrumental Piano Triste Modern Old School Trap / Sample Instrumental ', 'Guizmo, Rémy', 2018, 10.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-16.mp3', 'data/17-Wanabilini/images/cover/17-beat-16.png', 0, 0, '2020-05-31 00:00:00'),
-(20, 'Yembe', 'Wanabilini', 17, 5, 'La prod préféré des youtubeuse', 'zoken,2t,Wanabilini, Afro Beat', 2020, 0.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-20.mp3', 'data/17-Wanabilini/images/cover/17-cover-20.png', 0, 0, '2020-05-20 00:00:00'),
-(21, 'Baby Yes', 'Wanabilini', 17, 0, 'Instru été ', 'DanceHall, Playa, Wanabilini', 2019, 19.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-21.mp3', 'data/17-Wanabilini/images/cover/17-cover-21.png', 0, 0, '2020-06-20 03:00:00'),
-(22, 'Burny', 'Wanabilini', 17, 5, '  Instrument Afro Beat New Vibes', 'burna boy,wanabilini', 2020, 15.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-22.mp3', 'data/17-Wanabilini/images/cover/17-cover-22.png', 0, 0, '2020-06-17 09:09:00'),
-(23, 'Butin', 'Wanabilini', 17, 0, '  La MG type Beat Afro beat', 'La MG, 4keus', 2018, 25.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-23.mp3', 'data/17-Wanabilini/images/cover/17-cover-23.png', 0, 0, '2020-05-14 00:00:00'),
-(24, 'Timide', 'Wanabilini', 17, 0, '  Tayc type Beat Love Instrumental', 'Tayc,Leto', 2019, 3.99, 'mp3', 'data/17-Wanabilini/beats/17-beat-24.mp3', 'data/17-Wanabilini/images/cover/17-cover-24.png', 0, 0, '2020-06-12 00:00:00'),
-(25, 'Humeur', 'Akuma', 10, 16, '  Chinese Sample, Meilleur prod du monde', 'RMR, Akuma, Sample', 2020, 50.00, 'mp3', 'data/10-Akuma/beats/10-beat-25.mp3', 'data/10-Akuma/images/cover/10-beat-25.png', 0, 0, '2020-06-20 20:00:00'),
-(30, 'Disrepect', 'SeniorAlaProd', 20, 16, 'Trap drill', 'Hamza', 2020, 30.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-30.mp3\r\n', 'data/20-SeniorAlaProd/images/cover/20-cover-30.png\r\n', 0, 0, '2020-06-18 00:00:00'),
-(31, 'Encore', 'SeniorAlaProd', 20, 3, 'Chill', 'Luidji,Krisy', 2019, 19.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-31.mp3\r\n', 'data/20-SeniorAlaProd/images/cover/20-cover-31.png\r\n', 0, 0, '2020-06-10 00:00:00'),
-(32, 'Go On', 'SeniorAlaProd', 20, 0, 'Afro Beat', 'BurnaBoy', 2020, 19.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-32.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-32.png\r\n', 0, 0, '2020-04-22 00:00:00'),
-(33, 'Mi Vida', 'SeniorAlaProd', 20, 10, 'Du zouk en 2020', 'Zouk', 2017, 15.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-33.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-33.png\r\n', 0, 0, '2020-06-09 00:00:00'),
-(34, 'Masterpiece', 'SarutoBeats', 21, 15, 'Beat orchestral', 'RickRoss', 2018, 0.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-34.mp3\r\n', 'data/21-SarutoBeats/images/cover/21-cover-34.png', 0, 0, '2020-06-23 00:00:00'),
-(35, 'Hustlers', 'SarutoBeats', 21, 1, 'C\'est New York ici', 'RickRoss', 2019, 0.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-35.mp3\r\n', 'data/21-SarutoBeats/images/cover/21-cover-35.png', 0, 0, '2020-06-24 00:00:00'),
-(36, 'Right Round', 'SarutoBeats', 21, 14, 'Funky beat', 'BrunoMars,MichaelJackson', 2016, 24.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-36.mp3\r\n', 'data/21-SarutoBeats/images/cover/21-cover-36.png', 0, 0, '2020-05-14 00:00:00'),
-(37, 'Monaco', 'SarutoBeats', 21, 12, 'Zumba d\'été  ', 'Maes', 2020, 25.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-37.mp3\r\n', 'data/21-SarutoBeats/images/cover/21-cover-37.png\r\n', 0, 0, '2020-06-16 00:00:00'),
+(10, 'BlueCup', 'Wanabilini', 17, 16, '200k vue sur youtube ', 'Black D,Cheu B, Rep Cup', 2017, 0.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-10.mp3', 'data/17-Wanabilini/images/cover/17-cover-10.png', 0, 5, '2020-05-14 00:00:00'),
+(11, 'Malsain 2', 'Wanabilini', 17, 16, 'Type beat Leto\r\nFollow insta @wanabilini', 'Leto,Kepler, Wanabilini', 2020, 25.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-11.mp3', 'data/17-Wanabilini/images/cover/17-cover-11.png', 0, 10, '2020-05-18 00:00:00'),
+(12, 'Psykokwak', 'Wanabilini', 17, 16, 'Instru de Game boy un peu', 'Black D, Pokemon, Mlachahe', 2019, 45.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-12.mp3', 'data/17-Wanabilini/images/cover/17-cover-12.png', 0, 5, '2020-06-19 00:00:00'),
+(13, 'Telo', 'Wanabilini', 17, 16, 'Instru piano', 'koba, leto', 2018, 33.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-13.mp3', 'data/17-Wanabilini/images/cover/17-cover-13.png', 0, 3, '2020-06-17 00:00:00'),
+(14, 'Montant', 'Wanabilini', 17, 16, 'Instru type beat Bosh - French Drill', 'Bosh, French Drill', 2019, 39.99, 'mp3', 'data/17-Wanabilini/beats/17-beat-14.mp3', 'data/17-Wanabilini/images/cover/17-cover-14.png', 0, 6, '2020-06-20 00:00:00'),
+(15, 'Temps Mort ', 'Wanabilini', 17, 16, 'Instrumental Original du titre \"Temps Mort\" de Bosh', 'bosh, wanabilini', 2017, 49.99, 'mp3', 'data/17-Wanabilini/beats/17-beat-15.mp3', 'data/17-Wanabilini/images/cover/17-cover-15.png', 0, 3, '2020-05-29 00:00:00'),
+(16, 'Raconte', 'Wanabilini', 17, 13, 'Instrumental Piano Triste Modern Old School Trap / Sample Instrumental ', 'Guizmo, Rémy', 2018, 10.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-16.mp3', 'data/17-Wanabilini/images/cover/17-cover-16.png', 0, 2, '2020-05-31 00:00:00'),
+(20, 'Yembe', 'Wanabilini', 17, 5, 'La prod préféré des youtubeuse', 'zoken,2t,Wanabilini, Afro Beat', 2020, 0.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-20.mp3', 'data/17-Wanabilini/images/cover/17-cover-20.png', 0, 2, '2020-05-20 00:00:00'),
+(21, 'Baby Yes', 'Wanabilini', 17, 0, 'Instru été ', 'DanceHall, Playa, Wanabilini', 2019, 19.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-21.mp3', 'data/17-Wanabilini/images/cover/17-cover-21.png', 0, 5, '2020-06-20 03:00:00'),
+(22, 'Burny', 'Wanabilini', 17, 5, '  Instrument Afro Beat New Vibes', 'burna boy,wanabilini', 2020, 15.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-22.mp3', 'data/17-Wanabilini/images/cover/17-cover-22.png', 0, 3, '2020-06-17 09:09:00'),
+(23, 'Butin', 'Wanabilini', 17, 0, '  La MG type Beat Afro beat', 'La MG, 4keus', 2018, 25.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-23.mp3', 'data/17-Wanabilini/images/cover/17-cover-23.png', 0, 1, '2020-05-14 00:00:00'),
+(24, 'Timide', 'Wanabilini', 17, 0, '  Tayc type Beat Love Instrumental', 'Tayc,Leto', 2019, 3.99, 'mp3', 'data/17-Wanabilini/beats/17-beat-24.mp3', 'data/17-Wanabilini/images/cover/17-cover-24.png', 0, 2, '2020-06-12 00:00:00'),
+(25, 'Humeur', 'Akuma', 10, 16, '  Chinese Sample, Meilleur prod du monde', 'RMR, Akuma, Sample', 2020, 50.00, 'mp3', 'data/10-Akuma/beats/10-beat-25.mp3', 'data/10-Akuma/images/cover/10-cover-25.png', 0, 2, '2020-06-20 20:00:00'),
+(30, 'Disrepect', 'SeniorAlaProd', 20, 16, 'Trap drill', 'Hamza', 2020, 30.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-30.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-30.png', 0, 0, '2020-06-18 00:00:00'),
+(31, 'Encore', 'SeniorAlaProd', 20, 3, 'Chill', 'Luidji,Krisy', 2019, 19.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-31.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-31.png', 0, 0, '2020-06-10 00:00:00'),
+(32, 'Go On', 'SeniorAlaProd', 20, 0, 'Afro Beat', 'BurnaBoy', 2020, 19.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-32.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-32.png', 0, 0, '2020-04-22 00:00:00'),
+(33, 'Mi Vida', 'SeniorAlaProd', 20, 10, 'Du zouk en 2020', 'Zouk', 2017, 15.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-33.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-33.png', 0, 1, '2020-06-09 00:00:00'),
+(34, 'Masterpiece', 'SarutoBeats', 21, 15, 'Beat orchestral', 'RickRoss', 2018, 0.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-34.mp3', 'data/21-SarutoBeats/images/cover/21-cover-34.png', 0, 2, '2020-06-23 00:00:00'),
+(35, 'Hustlers', 'SarutoBeats', 21, 1, 'C\'est New York ici', 'RickRoss', 2019, 0.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-35.mp3', 'data/21-SarutoBeats/images/cover/21-cover-35.png', 0, 1, '2020-06-24 00:00:00'),
+(36, 'Right Round', 'SarutoBeats', 21, 14, 'Funky beat', 'BrunoMars,MichaelJackson', 2016, 24.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-36.mp3', 'data/21-SarutoBeats/images/cover/21-cover-36.png', 0, 0, '2020-05-14 00:00:00'),
+(37, 'Monaco', 'SarutoBeats', 21, 12, 'Zumba d\'été  ', 'Maes', 2020, 25.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-37.mp3', 'data/21-SarutoBeats/images/cover/21-cover-37.png', 0, 0, '2020-06-16 00:00:00'),
 (50, 'Persia', 'PascalProd', 30, 5, 'Deviens le prince de Perse', NULL, 2020, 72.50, 'mp3', 'data/30-PascalProd/beats/30-beat-50.mp3', 'data/30-PascalProd/images/cover/30-cover-50.png', 0, 0, '2020-06-19 21:56:00'),
 (51, 'Petite', 'PascalProd', 30, 9, 'Vien par ici ma petite ;)', NULL, 2020, 44.45, 'mp3', 'data/30-PascalProd/beats/30-beat-51.mp3', 'data/30-PascalProd/images/cover/30-cover-51.png', 0, 0, '2020-06-19 21:58:00'),
-(52, 'Utopia', 'PascalProd', 30, 0, 'La vie n\'est qu\'une utopie ?', NULL, 2019, 24.50, 'mp3', 'data/30-PascalProd/beats/30-beat-52.mp3', 'data/30-PascalProd/images/cover/30-cover-52.png', 0, 0, '2019-06-19 22:03:00'),
+(52, 'Utopia', 'PascalProd', 30, 0, 'La vie n\'est qu\'une utopie ?', NULL, 2019, 24.50, 'mp3', 'data/30-PascalProd/beats/30-beat-52.mp3', 'data/30-PascalProd/images/cover/30-cover-52.png', 0, 1, '2019-06-19 22:03:00'),
 (53, 'Sale', 'BeaBeatz', 31, 0, ' C\'est pas propre', NULL, 2018, 18.50, 'mp3', 'data/31-BeaBeatz/beats/31-beat-53.mp3', 'data/31-BeaBeatz/images/cover/31-cover-53.png', 0, 0, '2018-08-08 22:05:21'),
 (54, 'No more beginning', 'BeaBeatz', 31, 4, '  Je suis saoul', NULL, 2016, 12.00, 'mp3', 'data/31-BeaBeatz/beats/31-beat-54.mp3', 'data/31-BeaBeatz/images/cover/31-cover-54.png', 0, 0, '2016-12-16 22:07:46'),
-(55, 'Rock-n Roll-up', 'BeaBeatz', 31, 8, '  Rock\'n Roll Babyyyy!!!', NULL, 2012, 0.00, 'mp3', 'data/31-BeaBeatz/beats/31-beat-55.mp3', 'data/31-BeaBeatz/images/cover/31-cover-55.png', 0, 0, '2012-10-01 19:35:32'),
+(55, 'Rock-n Roll-up', 'BeaBeatz', 31, 8, '  Rock\'n Roll Babyyyy!!!', NULL, 2012, 0.00, 'mp3', 'data/31-BeaBeatz/beats/31-beat-55.mp3', 'data/31-BeaBeatz/images/cover/31-cover-55.png', 0, 2, '2012-10-01 19:35:32'),
 (56, 'Better', 'WillyFunk', 32, 1, '  It\'s better', NULL, 2020, 66.60, 'mp3', 'data/32-WillyFunk/beats/32-beat-56.mp3', 'data/32-WillyFunk/images/cover/32-cover-56.png', 0, 0, '2020-06-09 22:13:04'),
 (57, 'True Love', 'WillyFunk', 32, 3, ' Pour une vraie déclaration...', NULL, 2017, 33.25, 'mp3', 'data/32-WillyFunk/beats/32-beat-57.mp3', 'data/32-WillyFunk/images/cover/32-cover-57.png', 0, 0, '2017-02-14 14:25:26'),
 (58, 'Sang', 'WillyFunk', 32, 16, ' Rouge Sang', NULL, 2020, 88.88, 'mp3', 'data/32-WillyFunk/beats/32-beat-58.mp3', 'data/32-WillyFunk/images/cover/32-cover-58.png', 0, 0, '2020-06-19 22:21:35'),
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `genre` (
   `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   UNIQUE KEY `genre_nom` (`genre_nom`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `genre`
@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `genre` (
 
 INSERT INTO `genre` (`genre_nom`, `id`) VALUES
 ('Afro', 5),
+('DanceHall', 18),
 ('Deep\r\n', 6),
 ('Hip-Hop', 1),
 ('Indéfini', 0),
@@ -136,7 +137,69 @@ CREATE TABLE IF NOT EXISTS `likelike` (
   PRIMARY KEY (`id`),
   KEY `like_beat_id` (`like_beat_id`),
   KEY `like_user_id` (`like_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `likelike`
+--
+
+INSERT INTO `likelike` (`id`, `like_beat_id`, `like_user_id`) VALUES
+(10, 11, 36),
+(11, 11, 37),
+(12, 11, 38),
+(13, 11, 39),
+(14, 11, 43),
+(15, 11, 40),
+(16, 11, 41),
+(17, 11, 44),
+(18, 11, 42),
+(19, 10, 36),
+(20, 11, 17),
+(21, 12, 17),
+(22, 14, 17),
+(23, 15, 17),
+(24, 22, 17),
+(25, 34, 36),
+(26, 25, 36),
+(27, 14, 36),
+(28, 21, 36),
+(29, 12, 36),
+(30, 22, 36),
+(31, 24, 36),
+(32, 33, 36),
+(33, 15, 36),
+(34, 52, 36),
+(35, 55, 36),
+(36, 13, 36),
+(37, 21, 37),
+(38, 14, 37),
+(39, 12, 37),
+(40, 10, 37),
+(41, 23, 37),
+(42, 14, 38),
+(43, 10, 38),
+(44, 21, 38),
+(45, 16, 38),
+(46, 14, 39),
+(47, 15, 39),
+(48, 16, 39),
+(49, 25, 39),
+(50, 21, 40),
+(51, 22, 40),
+(52, 13, 40),
+(53, 24, 40),
+(54, 20, 40),
+(55, 10, 41),
+(56, 12, 41),
+(58, 13, 41),
+(59, 14, 42),
+(60, 12, 42),
+(61, 21, 42),
+(62, 35, 42),
+(63, 34, 42),
+(64, 20, 42),
+(65, 10, 42),
+(66, 55, 42);
 
 -- --------------------------------------------------------
 
@@ -186,7 +249,16 @@ CREATE TABLE IF NOT EXISTS `panier` (
   PRIMARY KEY (`id`),
   KEY `panier_user_id` (`panier_user_id`),
   KEY `panier_beat_id` (`panier_beat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=249 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `panier`
+--
+
+INSERT INTO `panier` (`id`, `panier_user_id`, `panier_beat_id`) VALUES
+(249, 41, 13),
+(250, 41, 11),
+(251, 41, 10);
 
 -- --------------------------------------------------------
 
@@ -206,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `pays` (
   UNIQUE KEY `alpha2` (`alpha2`),
   UNIQUE KEY `alpha3` (`alpha3`),
   UNIQUE KEY `code_unique` (`code`)
-) ENGINE=MyISAM AUTO_INCREMENT=242 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `pays`
@@ -471,16 +543,13 @@ CREATE TABLE IF NOT EXISTS `relation` (
   PRIMARY KEY (`id`),
   KEY `id_demandeur` (`id_demandeur`),
   KEY `id_receveur` (`id_receveur`)
-) ENGINE=InnoDB AUTO_INCREMENT=263 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=264 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `relation`
 --
 
 INSERT INTO `relation` (`id`, `id_demandeur`, `id_receveur`, `statut`, `date_relation`) VALUES
-(249, 1, 2, 1, '2020-06-12 00:00:00'),
-(260, 17, 1, 1, '2020-06-15 00:00:00'),
-(261, 17, 2, 0, '2020-06-15 01:06:46'),
 (262, 2, 17, 1, '2020-06-17 00:00:00');
 
 -- --------------------------------------------------------
@@ -502,31 +571,42 @@ CREATE TABLE IF NOT EXISTS `user` (
   `user_sexe` varchar(1) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_datenaissance` date DEFAULT NULL,
   `user_ville` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_pays` int(3) NOT NULL,
+  `user_pays` int(3) DEFAULT NULL,
   `user_password` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_dateinscription` datetime NOT NULL,
   `user_dateconnexion` datetime NOT NULL,
   `user_statut` int(2) DEFAULT 1,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_pseudo` (`user_pseudo`),
-  UNIQUE KEY `user_mail` (`user_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  UNIQUE KEY `user_mail` (`user_email`),
+  KEY `user_pays` (`user_pays`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`user_id`, `user_role`, `user_pseudo`, `user_email`, `user_image`, `user_prenom`, `user_nom`, `user_description`, `user_sexe`, `user_datenaissance`, `user_ville`, `user_pays`, `user_password`, `user_dateinscription`, `user_dateconnexion`, `user_statut`) VALUES
-(1, 0, 'AriduBinks', 'ari@gmail.com', 'data/1-AriduBinks/images/1-photo.jpg', 'Ari', 'Rajaofera', ' Babinks', 'M', '2000-04-02', 'Montmagny', 450, '$6$rounds=5000$grzgirjzgrpzhte9$eWM.Yc29LjPJRHe9uYpgmczTkRbnex.5Y2Q227Jg/nyXktILjyHkvisfwFZT593T9P6PQ2K/P7.jEGJHojfoj.', '2020-05-17 18:00:30', '2020-06-20 00:58:30', 1),
-(2, 0, 'Mlamali95600', 'mlamali@gmail.com', 'assets/2-Mlamali95600/user.png', 'Mlamali', 'Said Salimo', ' Pfpeajgfrzapg', 'M', '2001-06-28', 'Eaubonne', 4, '$6$rounds=5000$grzgirjzgrpzhte9$eWM.Yc29LjPJRHe9uYpgmczTkRbnex.5Y2Q227Jg/nyXktILjyHkvisfwFZT593T9P6PQ2K/P7.jEGJHojfoj.', '2020-05-17 18:01:03', '2020-06-19 00:01:09', 1),
-(3, 0, 'Mathieu', 'mathieu@gmail.com', 'data/3-Mathieu95/images/3-photo.jpg', 'Mathieu', 'Cissé', ' Tysmé ', 'M', '2000-01-01', 'Aix', 4, '$6$rounds=5000$grzgirjzgrpzhte9$eWM.Yc29LjPJRHe9uYpgmczTkRbnex.5Y2Q227Jg/nyXktILjyHkvisfwFZT593T9P6PQ2K/P7.jEGJHojfoj.', '2020-05-17 18:01:22', '2020-06-10 15:20:55', 1),
-(10, 2, 'Akuma', 'akuma@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', '0', NULL, 'Paris', 250, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-20 02:37:00', '2020-06-20 02:37:00', 1),
-(17, 2, 'Wanabilini', 'saidou@gmail.com', 'data/17-Wanabilini/images/17-photo.jpg', 'Mlamali wan', 'Said Salimo', 'producer young beatmakeur', 'F', '2001-06-28', 'ville', 8, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-05-10 15:51:15', '2020-06-20 02:36:11', 1),
+(1, 0, 'AriduBinks', 'ari@gmail.com', 'assets/img/user.png', 'Ari', 'Rajaofera', ' Babinks', 'M', '2000-04-02', 'Montmagny', 450, '$6$rounds=5000$grzgirjzgrpzhte9$eWM.Yc29LjPJRHe9uYpgmczTkRbnex.5Y2Q227Jg/nyXktILjyHkvisfwFZT593T9P6PQ2K/P7.jEGJHojfoj.', '2020-05-17 18:00:30', '2020-06-20 00:58:30', 1),
+(2, 0, 'Mlamali95600', 'mlamali@gmail.com', 'assets/img/user.png', 'Mlamali', 'Said Salimo', ' Pfpeajgfrzapg', 'M', '2001-06-28', 'Eaubonne', 4, '$6$rounds=5000$grzgirjzgrpzhte9$eWM.Yc29LjPJRHe9uYpgmczTkRbnex.5Y2Q227Jg/nyXktILjyHkvisfwFZT593T9P6PQ2K/P7.jEGJHojfoj.', '2020-05-17 18:01:03', '2020-06-20 20:17:23', 1),
+(3, 0, 'Mathieu', 'mathieu@gmail.com', 'assets/img/user.png', 'Mathieu', 'Cissé', ' Tysmé ', 'M', '2000-01-01', 'Aix', 4, '$6$rounds=5000$grzgirjzgrpzhte9$eWM.Yc29LjPJRHe9uYpgmczTkRbnex.5Y2Q227Jg/nyXktILjyHkvisfwFZT593T9P6PQ2K/P7.jEGJHojfoj.', '2020-05-17 18:01:22', '2020-06-10 15:20:55', 1),
+(10, 2, 'Akuma', 'akuma@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', '0', NULL, 'Paris', 250, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-20 02:37:00', '2020-06-20 18:34:14', 1),
+(17, 2, 'Wanabilini', 'saidou@gmail.com', 'data/17-Wanabilini/images/17-photo.png', 'Mlamali wan', 'Said Salimo', 'producer young beatmakeur', 'F', '2001-06-28', 'ville', 8, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-05-10 15:51:15', '2020-06-20 20:30:13', 1),
 (20, 2, 'SeniorAlaProd', 'senior@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', '0', NULL, 'Cergy', 250, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 23:50:27', '2020-06-19 23:50:27', 1),
 (21, 2, 'SarutoBeats', 'sarutobeats@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', '0', NULL, 'Cergy', 250, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 23:53:59', '2020-06-19 23:53:59', 1),
 (30, 2, 'PascalProd', 'pascalprod@mail.com', 'assets/img/user.png', NULL, NULL, '\' \'', 'M', NULL, 'Paris', 250, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 21:37:59', '2020-06-19 21:37:59', 1),
 (31, 2, 'BeaBeatz', 'bea@mail.com', 'assets/img/user.png', NULL, NULL, '\' \'', 'F', NULL, 'Manchester', 826, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 21:42:42', '2020-06-19 21:42:42', 1),
-(32, 2, 'WillyFunk', 'willy@mail.com', 'assets/img/user.png', NULL, NULL, '\' \'', 'M', NULL, 'Kingston', 388, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 21:44:40', '2020-06-19 21:44:40', 1);
+(32, 2, 'WillyFunk', 'willy@mail.com', 'assets/img/user.png', NULL, NULL, '\' \'', 'M', NULL, 'Kingston', 388, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 21:44:40', '2020-06-19 21:44:40', 1),
+(36, 1, 'Inconnu1', 'Inconnu1@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', NULL, NULL, 'inconnuville', 4, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-20 00:00:00', '2020-06-20 20:05:06', 1),
+(37, 1, 'Inconnu2', 'inconnu2@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', NULL, NULL, NULL, 4, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-20 00:00:00', '2020-06-20 19:40:28', 1),
+(38, 1, 'Inconnu3', 'Inconnu3@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', NULL, NULL, NULL, 4, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-20 00:00:00', '2020-06-20 19:41:42', 1),
+(39, 1, 'Inconnu4', 'Inconnu4@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', NULL, NULL, NULL, 4, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-20 00:00:00', '2020-06-20 19:42:53', 1),
+(40, 1, 'Inconnu5', 'Inconnu5@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', NULL, NULL, NULL, 4, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-20 00:00:00', '2020-06-20 19:44:10', 1),
+(41, 1, 'Inconnu6', 'Inconnu6@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', NULL, NULL, NULL, 4, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-13 00:00:00', '2020-06-20 19:44:46', 1),
+(42, 1, 'Inconnu7', 'Inconnu7@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', NULL, NULL, NULL, 4, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-20 00:00:00', '2020-06-20 19:50:03', 1),
+(43, 1, 'Inconnu8', 'Inconnu8@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', NULL, NULL, NULL, 4, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-20 00:00:00', '2020-06-20 00:00:00', 1),
+(44, 1, 'Inconnu9', 'Inconnu9@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', NULL, NULL, NULL, 4, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-20 00:00:00', '2020-06-20 00:00:00', 1),
+(45, 1, 'Inconnu10', 'Inconnu10@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', NULL, NULL, NULL, 4, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-20 00:00:00', '2020-06-20 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -543,7 +623,7 @@ CREATE TABLE IF NOT EXISTS `vente` (
   PRIMARY KEY (`id`),
   KEY `vente_beat_id` (`vente_beat_id`),
   KEY `vente_user_id` (`vente_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Contraintes pour les tables déchargées
@@ -590,6 +670,12 @@ ALTER TABLE `panier`
 ALTER TABLE `relation`
   ADD CONSTRAINT `relation_ibfk_1` FOREIGN KEY (`id_demandeur`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `relation_ibfk_2` FOREIGN KEY (`id_receveur`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`user_pays`) REFERENCES `pays` (`code`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `vente`

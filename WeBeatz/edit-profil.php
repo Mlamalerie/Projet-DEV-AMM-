@@ -11,8 +11,12 @@ print_r($_SESSION);
 $baseid = (int) $_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
 
 $okconnectey = false;
+$okconnecteyadmin = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     $okconnectey = true;
+     if(0 == $_SESSION['user_role'])  {
+        $okconnecteyadmin = true;
+    }
 } else {
     header('Location: connexion.php');
     exit;

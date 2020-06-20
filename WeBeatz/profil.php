@@ -1,31 +1,21 @@
 <?php
 session_start();
 $_SESSION['ici_index_bool'] = false;
-
 include('assets/db/connexiondb.php'); 
 
 
-/*print_r($_GET);*/
 
-//if (!isset($_GET['profil_id'])){
-//    header('Location: utilisateurs.php'); 
-//    exit;
-//}
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])) {
     $okconnectey = true;
+    $id_demandeur=$_SESSION['user_id'];
+} else {
+      $id_demandeur=0;
 }
 
 $id_receveur = (int) $_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
-if($okconnectey) {
-    $id_demandeur=$_SESSION['user_id'];
-}
-else{
-    $id_demandeur=0;
-}
 
-
-
+//** verif profil_id
 $req = $BDD->prepare("SELECT u.*
         FROM user u
         WHERE u.user_id = :id1");
@@ -34,6 +24,10 @@ $req->execute(array(':id1' => $id_receveur));
 
 $afficher_profil = $req->fetch();
 
+if(!isset($afficher_profil['user_pseudo'])) {
+    header('HTTP/1.0 404 Not Found');
+    exit;
+}
 
 $okiblockhe = false;
 $okheblocki = false;
