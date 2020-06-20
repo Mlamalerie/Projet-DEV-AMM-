@@ -12,7 +12,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
 
 include('assets/functions/date-fct.php');
-$maxaffresu = 5;
+$maxaffresu = 8;
 
 $req = $BDD->prepare("SELECT * 
                     FROM beat
