@@ -1,0 +1,132 @@
+
+
+body {
+    color: whitesmoke;
+ background: linear-gradient(to bottom, rgb(49, 49, 49) 0%,rgb(25, 25, 25) 44%,rgba(17,17,17,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+a {
+/*    text-decoration: none!important;*/
+    color: whitesmoke; 
+}
+ a:hover {
+/*    text-decoration: none!important;*/
+    color: whitesmoke; 
+} 
+.bg-back {
+    background-color: #121212!important;
+
+} 
+
+.chap { 
+   min-width: 100%;  
+    background-color: #191919; 
+    font-size: 1.2rem; 
+
+    text-align: center;
+    color: whitesmoke;
+}  
+ 
+//*****************************************************************************/
+
+ 
+
+
+//*****************************************************************************/
+//*****************************************************************************/
+
+section { 
+    padding: 50px 0; 
+}
+section.dashboard-counts div[class*='col-'] .item {
+    border : 2px solid rgba(247, 225, 255, 0.27);
+    background-color: #0f0f0f;
+    padding: 5px 0; 
+  
+       
+}   
+  
+.icon { 
+    background-color: #191919;
+    width: 40px;
+    height: 40px;  
+    line-height: 40px; 
+    text-align: center;
+    min-width: 40px;
+    max-width: 40px;
+    border-radius: 50%;
+    
+    transform: translateY(3px); 
+}
+section.dashboard-counts .title {
+    font-size: 1.1em;
+    font-weight: 300;
+    color: #777;
+/*    margin: 0 20px;*/
+}
+section.dashboard-counts .number {
+    font-size: 1.8em;
+    font-weight: 300; 
+}
+strong { 
+    font-weight: 700;
+}
+
+section.dashboard-counts .row {
+    padding: 30px 15px;
+    margin: 0;
+} 
+section.dashboard-counts .progress {
+    margin-top: 10px;
+    height: 4px;
+}
+.progress {
+   
+    display: flex;
+   
+    overflow: hidden;
+    font-size: .75rem;
+    background-color: #e9ecef;
+    border-radius: .25rem;
+} 
+
+/*-----------------------------------------------------------------------------------------*/
+
+small {
+    color: #aaa;
+    text-transform: uppercase;
+    font-size: 80%;
+    font-weight: 400; 
+} 
+
+.statistic {
+    padding: 20px 15px;
+/*    margin-bottom: 15px;*/
+}
+
+.statistic strong {
+    font-size: 1.5em;
+    color: #333; 
+    font-weight: 700;
+    line-height: 1; 
+}
+.statistic .icon {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    min-width: 40px;
+    max-width: 40px; 
+    color: #fff;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+/***/
+.chart .title strong {
+    font-weight: 700; 
+    font-size: 1.2em;
+}
+.chart .title {
+    padding: 15px 0 0 15px;
+}
+

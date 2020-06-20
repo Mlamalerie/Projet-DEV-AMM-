@@ -1,0 +1,108 @@
+body {
+    color: whitesmoke;
+ background: linear-gradient(to bottom, rgb(30, 22, 33) 0%,rgb(25, 25, 25) 44%,rgb(20, 18, 20) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+
+.bg-back { 
+    background-color: #121212!important; 
+ 
+}
+#myTab {
+    background-color: #1e1921; 
+}
+#myTab li a.nav-link{
+    color: white;
+/*    background-color: #aa33c6;*/
+}
+#myTab li a:active,.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color: #a74abe;   
+}
+  
+.lesLabels {  
+    min-width: 106%;     
+        
+    background-color: #191919;  
+    font-size: 1.1rem; 
+    max-height: 30px; 
+}  
+
+.lesInputs, .lesInputs:focus { 
+    background-color: #393939;     
+}
+
+#votremotdepasse4email:disabled{
+    background-color: #080808; 
+    
+}
+
+
+
+#divNaissance{
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+
+::placeholder {
+    color: #868686!important;
+    font-size: 0.95em;
+}
+.spanAlertchamp {
+    display: contents;
+    margin-left: 25%;
+    color: red!important;
+    font-size: 0.8rem;
+
+
+}
+
+.iconGradient { 
+    width: 20px; 
+    margin-right: 5px;
+    margin-bottom: 8px;
+} 
+
+#imgduboug {
+    display:block;
+    margin:auto;
+    width: 6em;
+
+}
+
+.iconDone {
+    width: 20px;   
+}
+.spanDone{
+    font-size: 1.1rem; 
+    color: #70e53d; 
+} 
+
+
+
+
+ /*Rounded tabs */
+
+@media (min-width: 576px) {
+  .rounded-nav {
+    border-radius: 50rem !important;
+  }
+}
+
+@media (min-width: 576px) {
+  .rounded-nav .nav-link { 
+    border-radius: 50rem !important;
+  }
+}
+
+.roundedImage{  
+    overflow:hidden; 
+    -webkit-border-radius:75%;
+    -moz-border-radius:75%; 
+    border-radius:75%;
+    min-width:140px;
+    height:140px; 
+}
+

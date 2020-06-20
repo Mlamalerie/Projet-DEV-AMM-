@@ -1,0 +1,10 @@
+body {
+    background: linear-gradient(to right, #5f3d79, #7327ad)!important;
+    background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
+    background: linear-gradient(to right, #eecda3, #ef629f);
+    min-height: 100vh;
+}
+
+.btn-confirm {
+    width: 20%;
+}

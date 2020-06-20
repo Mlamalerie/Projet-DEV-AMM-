@@ -1,0 +1,35 @@
+
+/* ******* IMPORT ******* */
+/*********************************************/
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap');
+
+
+/* **************************************************** */
+
+:root {
+
+    --base-color1: #871b8b;
+    --base-color2: #121619;
+
+    --base-colorDark1: #1b0929;
+    --base-colorDark2: #7728b2;
+    --base-colorDark3: ;
+
+    --background-dark : #121618;
+
+    --base-color-purple1: #871b8b;
+    --base-color-purple2: #121619;
+    --base-color-purple3:;
+
+    --base-police1: 'Quicksand', sans-serif;
+
+    --base-taille1: 16px;
+}
+
+body,html {
+    
+    font-family: var(--base-police1);
+    
+ 
+}

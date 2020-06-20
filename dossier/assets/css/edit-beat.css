@@ -1,0 +1,82 @@
+body {
+    color: whitesmoke;
+ background: linear-gradient(to bottom, rgb(49, 49, 49) 0%,rgb(25, 25, 25) 44%,rgba(17,17,17,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.bg-back {
+    background-color: #121212!important;
+
+}
+
+.lesLabels { 
+   min-width: 105%; 
+    background-color: #191919; 
+    font-size: 1.1rem;
+    max-height: 30px;
+}  
+
+.lesInputs, .lesInputs:focus { 
+    background-color: #393939;     
+}
+
+#b_title {  
+    max-width: 75%;
+
+}
+#b_genre { 
+    max-width: 45%; 
+}
+#b_year {
+    max-width: 25%; 
+}
+
+#freebay:checked {
+    background-color: #ebff00;
+}
+
+#b_price {
+    max-width: 20rem;
+}
+
+.grandTitre {
+    font-size: 1.7rem;
+}
+
+
+/*
+*
+* ==========================================
+* EDIT BEAT
+* ==========================================
+*
+*/
+
+:root{ 
+    --taille-img : 280px;
+    
+}
+/* PETIT MUSIC CARD */
+.hover {  
+    height: var(--taille-img );  
+  width: var(--taille-img );    
+  overflow: hidden;  
+  position: relative; 
+  padding-bottom: var(--taille-img );  
+     
+    
+} 
+#imgdubeat {
+    width: 100%;
+} 
+
+#uploadCover {
+    opacity: 0;
+}
+
+#uploadCover-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+
