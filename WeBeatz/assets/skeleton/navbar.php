@@ -81,7 +81,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
 
                                                     <li class="nav-item"><a href="search.php?Type=beats&sort=nouveaute" class="nav-link text-small pb-0 "><i class="far fa-clock"></i> Nouveauté</a></li>
                                                     <li class="nav-item"><a href="search.php?Type=beats&Price=free" class="nav-link text-small pb-0 "><i class="far fa-handshake"></i> Free Beats</a></li>
-                                                    <li class="nav-item"><a href="search.php?Type=users&sort=seller" class="nav-link text-small pb-0"><i class="fas fa-trophy"></i> Top Vendeurs</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=users&sort=seller" class="nav-link text-small pb-0"><i class="fas fa-trophy"></i> Top Vendeurs</a></li>   
 
                                                 </ul>
                                             </div>
