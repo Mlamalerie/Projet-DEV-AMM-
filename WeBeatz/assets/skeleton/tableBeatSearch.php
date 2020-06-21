@@ -12,7 +12,7 @@
 
             ?>
             <tr class=" rounded">
-                <td class="pr-0 border-0 align-middle   "><strong class="ml-1"><?= ($key+1) ?></strong></td>
+                <td class="pr-0 border-0 align-middle "><strong class="text-muted font-weight-normal ml-1"><?= ($key+1) ?></strong></td>
                 <!--  ** Image Titre-->
                 <th scope="row" class="border-0  ">
                     <div class="p-0 rounded ">
@@ -141,8 +141,8 @@
 
                     </button>
                     <?php } } else {?>
-                    <a class="btn btn-danger" href="<?= $r['beat_source']?>" download>
-                        <span class="text-white"><i class="fas fa-download"></i></span>
+                    <a class="btn btn-buy btn-dll" href="<?= $r['beat_source']?>" download>
+                       <i class="fas fa-download"></i>
                     </a>
                     <?php } ?>
                     <?php  if($okdejadanspanier) {?>

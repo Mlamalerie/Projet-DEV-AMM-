@@ -10,10 +10,6 @@ $listeGenres = $reqG->fetchAll();
 
 
 
-print_r($_FILES);print_r($_POST);
-
-
-
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 
@@ -36,7 +32,7 @@ $upd = new uploadFile();
 if(isset($_FILES['uploadAudio'])) {
     if($_FILES['uploadAudio']['size'] != 0) { 
         // FICHIER RECU
-        var_dump($_FILES['uploadAudio']);
+       // var_dump($_FILES['uploadAudio']);
         $tmp_name = $_FILES['uploadAudio']['tmp_name'];
         $name = $_FILES['uploadAudio']['name'];
 

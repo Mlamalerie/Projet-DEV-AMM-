@@ -344,7 +344,7 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ModalPanierLabel">Panier WeBeats</h5>
+                <h5 class="modal-title text-dark" id="ModalPanierLabel">Panier WeBeats</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span class="croixquit d-flex justify-content-center rounded" aria-hidden="true"><i class="fas fa-times"></i></span>
                 </button>
@@ -446,14 +446,14 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content ">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Uploader</h5>
+                <h5 class="modal-title text-dark" id="exampleModalLongTitle">Uploader</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                     <span class="croixquit d-flex justify-content-center rounded" aria-hidden="true"><i class="fas fa-times"></i></span>
                 </button>
             </div>
             <form id='formUpload1' action="edit-newupload.php" method="post" enctype="multipart/form-data">
 
-                <div class="modal-body" id="modalBodyUpload">
+                <div class="modal-body " id="modalBodyUpload">
 
                     <!-- FICHIER -->
                     <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">

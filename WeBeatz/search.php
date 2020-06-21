@@ -38,8 +38,17 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     }
     // $_GET[GENRE
     if (isset($_GET['Genre']) && !empty($_GET['Genre'])) {
-        $wegenreexiste = true;
+        $req = $BDD->prepare("SELECT genre_nom  FROM genre  WHERE id = ?");
 
+        $req->execute(array($_GET['Genre']));
+        $verif_genre = $req->fetch();
+
+        //** verif genre
+        if(isset($verif_genre['genre_nom'] ) ){  
+            $wegenreexiste = true;
+        } else {
+            $wegenreexiste = false;
+        }
     }
     else {
         $wegenreexiste = false;
@@ -221,8 +230,15 @@ if ($wetypeexiste && !$jechercheunboug) {
 
         // si condition de prix
         if ($wepriceexiste){
-            if(in_array($_GET['Genre'],$listeGenres)) {
 
+            if($_GET['Genre'] == "All") {
+
+                $req = $BDD->prepare("SELECT *
+                         FROM beat
+                         WHERE ($borneprixinf <= beat_price AND beat_price <= $borneprixsup )
+                         ORDER BY $trierpar $asc_desc");
+
+            } else {
 
                 foreach($listeGenres as $gr){
 
@@ -236,23 +252,25 @@ if ($wetypeexiste && !$jechercheunboug) {
                         //break;break;
                     }
                 }
-            }
-            else {
-
-                $req = $BDD->prepare("SELECT *
-                            FROM beat
-                            WHERE $borneprixinf <= beat_price AND beat_price <= $borneprixsup
-                            ORDER BY $trierpar $asc_desc");
 
             }
+
+
+
 
         }
 
         // si pas de condition de prix
         else{
-            if(in_array($_GET['Genre'],$listeGenres)) {
 
 
+            if($_GET['Genre'] == "All") {
+
+                $req = $BDD->prepare("SELECT *
+                         FROM beat
+                         ORDER BY $trierpar $asc_desc");
+
+            } else {
                 foreach($listeGenres as $gr){
 
                     if($_GET['Genre'] == $gr['id']) {
@@ -265,14 +283,10 @@ if ($wetypeexiste && !$jechercheunboug) {
                         //break;break;
                     }
                 }
-            }
-            else {
-
-                $req = $BDD->prepare("SELECT *
-                            FROM beat
-                            ORDER BY $trierpar $asc_desc");
 
             }
+
+
         }
 
         $req->execute(array());
@@ -478,12 +492,6 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
 
 
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
-        
-        
-
-        <style>
-
-        </style>
 
 
 
@@ -579,7 +587,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                 <span onclick="goGenre(this)" class="nav-link px-4 rounded-pill activer " >
 
                                     <!--   icon croix ou rond -->
-                                    <?php if(!$wegenreexiste) { ?>
+                                    <?php if(!$wegenreexiste || ($wegenreexiste && $_GET['Genre'] == 'All')) { ?>
                                     <i class="radioMenu  far  fa-dot-circle mr-2"></i>
                                     <?php } else { ?> 
                                     <i class="radioMenu  fa fa-circle-o mr-2 icon_activer"></i>
@@ -903,7 +911,7 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
                                     <span class="text-uppercase ">
 
                                         <?php
-                            //*** Verification du Pays
+                            //*** Pays
                             $req = $BDD->prepare("SELECT * 
                             FROM pays
                             WHERE code = ?");

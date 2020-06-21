@@ -2,19 +2,15 @@
 session_start();
 $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
-?>
-
-<?php
+ 
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
-    print_r($_SESSION);
+   
     $okconnectey = true;
-} else{
-    echo "Pas de connexion";
+}  else {
+    header('Location: connexion.php');
+    exit;
 }
-?>
-
-<?php
 if (isset($_POST['AppliquerRedu'])) {
 
     print_r($_POST);
@@ -64,7 +60,7 @@ if (isset($_POST['AppliquerRedu'])) {
         <div class="px-4 px-lg-0">
             <!-- For demo purpose -->
             <div class="container text-white py-5 text-center">
-                <h1 class="display-4">Panier WeBeats</h1>
+                <h1 class="display-4">Confirmation</h1>
                 <p class="lead mb-0">Validez votre commande</p>
             </div>
             <!-- End -->
@@ -81,7 +77,7 @@ if (isset($_POST['AppliquerRedu'])) {
 
                     <div id="sectionRecap" class="row py-5 p-4 bg-white rounded shadow-sm" >
                         <div class="col-lg-6">
-                            <div class="text-dark rounded-pill px-4 py-3 text-uppercase font-weight-bold">Code de réduction</div>
+                            <div class="text-dark bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Code de réduction</div>
                             <div class="p-4">
                                 <form action="" method="post">
                                     <p class="font-italic mb-4 text-dark">Si vous en possédez un, entrez votre code ci-dessous</p>
@@ -103,7 +99,7 @@ if (isset($_POST['AppliquerRedu'])) {
 
                         </div>
                         <div class="col-lg-6">
-                            <div class="text-dark rounded-pill px-4 py-3 text-uppercase font-weight-bold">Récapitulatif de votre commande </div>
+                            <div class="text-dark bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Récapitulatif de votre commande </div>
                             <div class="p-4">
                                 <p class="font-italic mb-4 text-dark">Attention : aucun remboursement possible après confirmation de votre commande</p>
                                 <ul class="list-unstyled mb-4">

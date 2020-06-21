@@ -77,7 +77,7 @@
                 </th>
 
                 <td class='border-0 align-middle'>
-                    <a href="audio/<?= $b['beat_source']?>" download>
+                    <a class="btn btn-buy btn-dll" href="<?= $b['beat_source']?>" download>
                         <span class="text-black"><i class="fas fa-download"></i></span>
                     </a>
                 </td>

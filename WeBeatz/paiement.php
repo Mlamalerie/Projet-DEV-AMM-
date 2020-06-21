@@ -4,12 +4,9 @@ $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
 
 
-?>
-
-<?php
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
-    print_r($_SESSION);
+
     $okconnectey = true;
 } else{
     echo "Pas de connexion";
@@ -18,7 +15,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
 $reduction = 0.0;
 if (isset($_SESSION['AppliquerRedu'])) {
 
-    print_r($_POST);
+
     $code = (String) $_SESSION['AppliquerRedu'];
 
     $listeCodeRedu = ["WEBEATZ10","BARTHOLOMEW-EISTI"];
@@ -56,13 +53,10 @@ foreach($resuPANIER as $p) {
     $req->execute(array($p['panier_beat_id']));
     $resuPAN = $req->fetchAll();
 
-    foreach($resuPAN as $b) {
-        print_r($b);
+    foreach($resuPAN as $b) {       
+        $nb++;
+        $somme = $somme + $b['beat_price']; 
 
-        {
-            $nb++;
-            $somme = $somme + $b['beat_price']; 
-        }
 
     }
 }
@@ -105,7 +99,7 @@ $prix = round($somme * (1-$reduction),2);
         <div class="px-4 px-lg-0">
             <!-- For demo purpose -->
             <div class="container text-white py-5 text-center">
-                <h1 class="display-4">Panier WeBeats</h1>
+                <h1 class="display-4">Paiement</h1>
                 <p class="lead mb-0">Confirmation de commande</p>
             </div>
             <!-- End -->
@@ -128,8 +122,8 @@ $prix = round($somme * (1-$reduction),2);
                             <?php require_once("assets/functions/js-paiement.php"); ?>
 
                             <!-- End -->
-                            
-                             <!-- Script affichage de PayPal Sandbox-->
+
+                            <!-- Script affichage de PayPal Sandbox-->
                             <script>
 
                                 <?php if ($prix != 0.00) { ?>

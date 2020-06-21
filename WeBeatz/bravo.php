@@ -3,18 +3,20 @@ session_start();
 $_SESSION['ici_index_bool'] = false;
 include_once("assets/db/connexiondb.php");
 
-?>
-
-<?php
 $okconnectey = false;
 if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
-    print_r($_SESSION);
+    
     $okconnectey = true;
-} else{
-    echo "Pas de connexion";
+}  else {
+    header('Location: connexion.php');
+    exit;
 }
 
-
+if(isset($_GET['n'])) {
+    $nxn = (int) $_GET['n'];
+} else {
+    $nxn = 0;
+}
 
 //$okkhalass = false;
 //if(isset($_SESSION['khalassStp'])) {
@@ -39,14 +41,10 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         require_once('assets/skeleton/headLinkCSS.html');
         ?>
 
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="Test_Mathieu/panierTestMathieu/affichagepanier.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/search.css">
         <link rel="stylesheet" type="text/css" href="assets/css/bravo.css">
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-
+        
 
 
         <title>Confirmation de votre commande | WeBeats</title>
@@ -59,17 +57,17 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
         <div class="px-4 px-lg-0">
             <!-- For demo purpose -->
             <div class="container text-white py-5 text-center">
-                <h1 class="display-4">WeBeatz</h1>
-                <p class="lead mb-0">Merci de votre confiance</p>
+                <h1 class="display-4">C'est bon ! Tout c'est bien passé </h1>
+                <p class="lead mb-0"> Merci de votre confiance. Vous pouvez maintenant télécharger vos achat :) </p>
             </div>
             <!-- End -->
 
             <div class="pb-5">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                        <div class="col-lg-12 p-5 bg-warning rounded shadow-sm mb-5">
                             <?php
-                            $lim = (int) $_GET['n'];
+                            $lim = $nxn;
 
                             ?>
 
@@ -81,7 +79,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
                                 <table class="table">
                                     <div> Votre commande a bien été effectuée. Vous recevrez un mail de confirmation à l'adresse <?php echo $_SESSION['user_email']; ?> </div>
                                     <br/>
-                                    <button type="submit" onclick="document.location = 'search.php'" class="btn btn-primary btn-fini rounded-pill">Continuer mon shopping</button>
+                                    <button type="submit" onclick="document.location = 'search.php?Type=beats'" class="btn btn-primary btn-fini rounded-pill">Continuer mon shopping</button>
                                     <br/>
                                     <br/>
                                     <button type="submit" onclick="document.location = 'index.php'" class="btn btn-primary btn-fini rounded-pill">Retourner à l'accueil</button>
@@ -97,9 +95,9 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
             </div>
         </div>
         
-
-
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<?php
+        require_once('assets/skeleton/headLinkCSS.html');
+        ?>
 
 
 
