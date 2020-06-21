@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 21 juin 2020 à 12:06
+-- Généré le :  Dim 21 juin 2020 à 23:24
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `beat` (
   `beat_price` double(7,2) UNSIGNED DEFAULT 0.00,
   `beat_format` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
   `beat_source` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `beat_cover` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT '''assets/img/cover_default.jpg''',
+  `beat_cover` text COLLATE utf8mb4_unicode_ci DEFAULT 'assets/img/cover_default.jpg',
   `beat_nbvente` int(15) UNSIGNED NOT NULL DEFAULT 0,
   `beat_like` int(6) DEFAULT 0,
   `beat_dateupload` datetime NOT NULL,
@@ -635,7 +635,7 @@ INSERT INTO `user` (`user_id`, `user_role`, `user_pseudo`, `user_email`, `user_i
 (2, 0, 'Mlamali95600', 'mlamali@gmail.com', 'assets/img/user.png', 'Mlamali', 'Said Salimo', ' Pfpeajgfrzapg', 'M', '2001-06-28', 'Eaubonne', 4, '$6$rounds=5000$grzgirjzgrpzhte9$eWM.Yc29LjPJRHe9uYpgmczTkRbnex.5Y2Q227Jg/nyXktILjyHkvisfwFZT593T9P6PQ2K/P7.jEGJHojfoj.', '2020-05-17 18:01:03', '2020-06-20 20:17:23', 1),
 (3, 0, 'Mathieu', 'mathieu@gmail.com', 'assets/img/user.png', 'Mathieu', 'Cissé', ' Tysmé ', 'M', '2000-01-01', 'Aix', 4, '$6$rounds=5000$grzgirjzgrpzhte9$eWM.Yc29LjPJRHe9uYpgmczTkRbnex.5Y2Q227Jg/nyXktILjyHkvisfwFZT593T9P6PQ2K/P7.jEGJHojfoj.', '2020-05-17 18:01:22', '2020-06-10 15:20:55', 1),
 (10, 2, 'Akuma', 'akuma@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', '0', NULL, 'Paris', 250, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-20 02:37:00', '2020-06-20 18:34:14', 1),
-(17, 2, 'Wanabilini', 'saidou@gmail.com', 'data/17-Wanabilini/images/17-photo.png', 'Mlamali wan', 'Said Salimo', 'producer young beatmakeur', 'F', '2001-06-28', 'ville', 8, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-05-10 15:51:15', '2020-06-21 01:22:32', 1),
+(17, 2, 'Wanabilini', 'saidou@gmail.com', 'data/17-Wanabilini/images/17-photo.png', 'Mlamali wan', 'Said Salimo', 'producer young beatmakeur', 'F', '2001-06-28', 'ville', 8, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-05-10 15:51:15', '2020-06-21 23:23:25', 1),
 (20, 2, 'SeniorAlaProd', 'senior@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', '0', NULL, 'Cergy', 250, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 23:50:27', '2020-06-19 23:50:27', 1),
 (21, 2, 'SarutoBeats', 'sarutobeats@gmail.com', 'assets/img/user.png', NULL, NULL, '\' \'', '0', NULL, 'Cergy', 250, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 23:53:59', '2020-06-19 23:53:59', 1),
 (30, 2, 'PascalProd', 'pascalprod@mail.com', 'assets/img/user.png', NULL, NULL, '\' \'', 'M', NULL, 'Paris', 250, '$6$rounds=5000$grzgirjzgrpzhte9$vHl3DtVy1.KNo0EFNRyGm7GDXPZWPJyPMI2aQ1xrErBSaiGNKkYF0k5iAVa9kkeR0yZaxidsoUhjgz2XmlzZo0', '2020-06-19 21:37:59', '2020-06-19 21:37:59', 1),

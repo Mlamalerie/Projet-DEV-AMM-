@@ -144,7 +144,7 @@ $nbnewfollowers = $resu['COUNT(*)'];
                         </div>
                         <!-- Item -->
                         <div class="col-xl-3 col-sm-6 rounded">
-                            <h3 class="text-center chap rounded  py-3 ">Money</h3>
+                            <h3 class="text-center chap rounded  py-3 ">Bénéfice net</h3>
                             <a href="histo-ventes.php ">
                                 <div class="item d-flex align-items-center justify-content-center rounded py-4">
                                     <div class="icon  mr-3"><i class="fas fa-money-check-alt"></i></div>
