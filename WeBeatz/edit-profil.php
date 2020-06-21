@@ -35,7 +35,7 @@ $req->execute(array($baseid));
 $afficher_profil = $req->fetch();
 
 if(isset($afficher_profil['user_pseudo'])) {
-    if(!$okconnecteyadmin){
+    if(!$okconnecteyadmin && $baseid != $_SESSION['user_id']){
             header('HTTP/1.1 403 Forbidden');
             exit;
         }

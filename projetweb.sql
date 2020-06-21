@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `beat` (
 --
 
 INSERT INTO `beat` (`beat_id`, `beat_title`, `beat_author`, `beat_author_id`, `beat_genre`, `beat_description`, `beat_tags`, `beat_year`, `beat_price`, `beat_format`, `beat_source`, `beat_cover`, `beat_nbvente`, `beat_like`, `beat_dateupload`) VALUES
+
 (10, 'BlueCup', 'Wanabilini', 17, 16, '200k vue sur youtube ', 'Black D,Cheu B, Rep Cup', 2017, 0.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-10.mp3', 'data/17-Wanabilini/images/cover/17-cover-10.png', 0, 5, '2020-05-14 00:00:00'),
 (11, 'Malsain 2', 'Wanabilini', 17, 16, 'Type beat Leto\r\nFollow insta @wanabilini', 'Leto,Kepler, Wanabilini', 2020, 25.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-11.mp3', 'data/17-Wanabilini/images/cover/17-cover-11.png', 0, 10, '2020-05-18 00:00:00'),
 (12, 'Psykokwak', 'Wanabilini', 17, 16, 'Instru de Game boy un peu', 'Black D, Pokemon, Mlachahe', 2019, 45.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-12.mp3', 'data/17-Wanabilini/images/cover/17-cover-12.png', 0, 5, '2020-06-19 00:00:00'),
@@ -87,6 +88,7 @@ INSERT INTO `beat` (`beat_id`, `beat_title`, `beat_author`, `beat_author_id`, `b
 (57, 'True Love', 'WillyFunk', 32, 3, ' Pour une vraie déclaration...', NULL, 2017, 33.25, 'mp3', 'data/32-WillyFunk/beats/32-beat-57.mp3', 'data/32-WillyFunk/images/cover/32-cover-57.png', 0, 0, '2017-02-14 14:25:26'),
 (58, 'Sang', 'WillyFunk', 32, 16, ' Rouge Sang', NULL, 2020, 88.88, 'mp3', 'data/32-WillyFunk/beats/32-beat-58.mp3', 'data/32-WillyFunk/images/cover/32-cover-58.png', 0, 0, '2020-06-19 22:21:35'),
 (59, 'Profond', 'WillyFunk', 32, 6, ' Entre dans les profondeurs', NULL, 2019, 50.00, 'mp3', 'data/32-WillyFunk/beats/32-beat-59.mp3', 'data/32-WillyFunk/images/cover/32-cover-59.png', 0, 0, '2019-09-10 20:00:00');
+
 
 -- --------------------------------------------------------
 
@@ -137,7 +139,9 @@ CREATE TABLE IF NOT EXISTS `likelike` (
   PRIMARY KEY (`id`),
   KEY `like_beat_id` (`like_beat_id`),
   KEY `like_user_id` (`like_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 --
 -- Déchargement des données de la table `likelike`
@@ -200,7 +204,50 @@ INSERT INTO `likelike` (`id`, `like_beat_id`, `like_user_id`) VALUES
 (64, 20, 42),
 (65, 10, 42),
 (66, 55, 42),
-(67, 25, 17);
+(67, 25, 17),
+(68, 15, 40),
+(69, 50, 40),
+(70, 10, 40),
+(71, 14, 40),
+(72, 37, 40),
+(73, 52, 41),
+(74, 37, 41),
+(75, 30, 41),
+(76, 50, 42),
+(77, 22, 42),
+(78, 56, 42),
+(79, 33, 42),
+(80, 57, 42),
+(81, 53, 42),
+(82, 59, 42),
+(83, 13, 43),
+(84, 20, 43),
+(85, 52, 43),
+(86, 10, 43),
+(87, 50, 43),
+(88, 36, 44),
+(89, 57, 44),
+(90, 52, 44),
+(91, 59, 44),
+(92, 10, 44),
+(93, 13, 44),
+(94, 50, 44),
+(95, 37, 36),
+(96, 31, 36),
+(97, 34, 37),
+(98, 35, 37),
+(99, 30, 37),
+(100, 37, 37),
+(101, 31, 37),
+(102, 34, 38),
+(106, 30, 38),
+(107, 37, 38),
+(108, 31, 38),
+(109, 32, 38),
+(110, 34, 39),
+(111, 35, 39),
+(112, 21, 39),
+(113, 31, 39);
 
 -- --------------------------------------------------------
 
@@ -250,7 +297,8 @@ CREATE TABLE IF NOT EXISTS `panier` (
   PRIMARY KEY (`id`),
   KEY `panier_user_id` (`panier_user_id`),
   KEY `panier_beat_id` (`panier_beat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=255 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=307 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 --
 -- Déchargement des données de la table `panier`
@@ -624,14 +672,67 @@ CREATE TABLE IF NOT EXISTS `vente` (
   PRIMARY KEY (`id`),
   KEY `vente_beat_id` (`vente_beat_id`),
   KEY `vente_user_id` (`vente_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `vente`
 --
 
 INSERT INTO `vente` (`id`, `vente_beat_id`, `vente_user_id`, `vente_date`) VALUES
-(10, 25, 17, '2020-06-21 02:47:43');
+(11, 20, 40, '2020-06-21 00:04:12'),
+(12, 50, 40, '2020-06-21 00:04:13'),
+(13, 14, 40, '2020-06-21 00:04:13'),
+(14, 13, 41, '2020-06-21 00:10:09'),
+(15, 11, 41, '2020-06-21 00:10:10'),
+(16, 10, 41, '2020-06-21 00:10:11'),
+(17, 14, 41, '2020-06-21 00:10:12'),
+(18, 30, 41, '2020-06-21 00:10:13'),
+(19, 50, 41, '2020-06-21 00:10:16'),
+(20, 50, 42, '2020-06-21 00:17:02'),
+(21, 56, 42, '2020-06-21 00:17:03'),
+(22, 33, 42, '2020-06-21 00:17:03'),
+(23, 20, 42, '2020-06-21 00:17:04'),
+(24, 11, 42, '2020-06-21 00:17:05'),
+(25, 57, 42, '2020-06-21 00:17:05'),
+(26, 59, 42, '2020-06-21 00:17:06'),
+(27, 55, 42, '2020-06-21 00:17:07'),
+(28, 20, 43, '2020-06-21 00:21:28'),
+(29, 10, 43, '2020-06-21 00:21:28'),
+(30, 13, 43, '2020-06-21 00:21:28'),
+(31, 50, 43, '2020-06-21 00:21:28'),
+(32, 36, 44, '2020-06-21 00:24:37'),
+(33, 54, 44, '2020-06-21 00:24:38'),
+(34, 52, 44, '2020-06-21 00:24:39'),
+(35, 10, 44, '2020-06-21 00:24:40'),
+(36, 13, 44, '2020-06-21 00:24:41'),
+(37, 50, 44, '2020-06-21 00:24:42'),
+(38, 34, 36, '2020-06-20 23:17:58'),
+(39, 14, 36, '2020-06-20 23:17:59'),
+(40, 11, 36, '2020-06-20 23:18:05'),
+(41, 10, 36, '2020-06-20 23:18:06'),
+(42, 37, 36, '2020-06-20 23:18:16'),
+(43, 33, 36, '2020-06-20 23:18:17'),
+(44, 21, 36, '2020-06-20 23:18:17'),
+(45, 14, 37, '2020-06-20 23:23:07'),
+(46, 30, 37, '2020-06-20 23:23:07'),
+(47, 34, 37, '2020-06-20 23:23:07'),
+(48, 37, 37, '2020-06-20 23:23:07'),
+(49, 35, 37, '2020-06-20 23:23:58'),
+(50, 31, 37, '2020-06-20 23:23:58'),
+(51, 14, 38, '2020-06-20 23:31:47'),
+(52, 37, 38, '2020-06-20 23:31:47'),
+(53, 31, 38, '2020-06-20 23:31:47'),
+(54, 30, 38, '2020-06-20 23:31:47'),
+(55, 34, 38, '2020-06-20 23:31:47'),
+(56, 11, 38, '2020-06-20 23:32:41'),
+(57, 25, 39, '2020-06-20 23:36:56'),
+(58, 21, 39, '2020-06-20 23:36:56'),
+(59, 14, 39, '2020-06-20 23:36:56'),
+(60, 31, 39, '2020-06-20 23:36:56'),
+(61, 34, 39, '2020-06-20 23:36:56'),
+(62, 11, 39, '2020-06-20 23:36:56'),
+(63, 10, 39, '2020-06-20 23:36:56'),
+(64, 35, 39, '2020-06-20 23:57:58');
 
 --
 -- Contraintes pour les tables déchargées

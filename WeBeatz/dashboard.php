@@ -151,6 +151,7 @@ $nbnewfollowers = $resu['COUNT(*)'];
                                 </div>
                             </a>
                         </div>
+                        <?php print_r(($_SESSION)) ?>
                         <!-- Item -->
                         <div class="col-xl-3 col-sm-6 rounded">
                             <h3 class="text-center chap rounded py-3 ">Nouveaux Followers</h3>

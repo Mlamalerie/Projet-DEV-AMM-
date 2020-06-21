@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <script id="jsPaiementhein">
+=======
+<script>
+>>>>>>> e8cc67e99f70c1c4c8f7e7d77562b76a6d3cc86b
     function supprVar(quoi) {
         console.log("supprVarSeesion");
         var xmlhttp = new XMLHttpRequest();
@@ -40,7 +44,12 @@
 
             foreach($resuPAN as $b) { ?>
         ajoutBDDVente(<?= $b['beat_id'] ?>);
+<<<<<<< HEAD
         
+=======
+        alert('ajoutPanier');
+                      
+>>>>>>> e8cc67e99f70c1c4c8f7e7d77562b76a6d3cc86b
         <?php  } 
         } 
         ?>

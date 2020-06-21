@@ -79,27 +79,30 @@ $prix = round($somme * (1-$reduction),2);
 ?>
 
 
+
 <!DOCTYPE html>
-<html lang="fr">
+<html>
     <head>
-        <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
 
 
-        <?php
-        require_once('assets/skeleton/headLinkCSS.html');
-        ?>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="Test_Mathieu/panierTestMathieu/affichagepanier.css">
 
-        <link rel="stylesheet" type="text/css" href="assets/css/dashboard.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
 
 
-        <title>Paiement • WeBeatz</title>
+        <title>PAIEMENT| WeBeats</title>
     </head>
-    <body id="top" >
+    <body class='bg-white'>
+
 
 
         <div class="px-4 px-lg-0">
@@ -115,12 +118,13 @@ $prix = round($somme * (1-$reduction),2);
                     <div class="row">
                         <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
 
-                            <!-- Bouton acheter paypal, affiche le prix à payer -->
+                            <!-- Shopping cart table -->
                             <div class="table-responsive">
                                 <table class="table">
                                     <div>Montant à payer : <?php echo $prix; ?> &euro; </div>
                                 </table>
                             </div>
+
 
                             <div id="paypal-button-container"></div>
                             <script src="https://www.paypal.com/sdk/js?client-id=Ae0hwalIu4jYQfJOup2Toy5iQHgLlK84Upq3nYmfD6y7UeQgyJDRrFOv-yI2IJZXUXhiXKhhPMhph1XV&currency=EUR" data-sdk-integration-source="button-factory"></script>
@@ -128,8 +132,6 @@ $prix = round($somme * (1-$reduction),2);
                             <?php require_once("assets/functions/js-paiement.php"); ?>
 
                             <!-- End -->
-                            
-                             <!-- Script affichage de PayPal Sandbox-->
                             <script>
 
                                 <?php if ($prix != 0.00) { ?>
@@ -141,7 +143,6 @@ $prix = round($somme * (1-$reduction),2);
                                         label: 'pay',
 
                                     },
-                                    // La page PayPal prend en valeur le montant du panier (avec réduction s'il y a)
                                     createOrder: function(data, actions) {
                                         return actions.order.create({
                                             purchase_units: [{
@@ -174,9 +175,8 @@ $prix = round($somme * (1-$reduction),2);
         </div>
 
 
-        <?php
-        require_once('assets/skeleton/endLinkScripts.html');
-        ?>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 
 
 
