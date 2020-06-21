@@ -54,6 +54,7 @@ if (isset($_POST['AppliquerRedu'])) {
         <link rel="stylesheet" type="text/css" href="assets/css/commande.css">
 
         <title>Confirmation de votre commande • WeBeats</title>
+        
     </head>
     <body onload="actualiserTOTALTOTAL()">
 
@@ -80,10 +81,10 @@ if (isset($_POST['AppliquerRedu'])) {
 
                     <div id="sectionRecap" class="row py-5 p-4 bg-white rounded shadow-sm" >
                         <div class="col-lg-6">
-                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Code de réduction</div>
+                            <div class="text-dark rounded-pill px-4 py-3 text-uppercase font-weight-bold">Code de réduction</div>
                             <div class="p-4">
                                 <form action="" method="post">
-                                    <p class="font-italic mb-4">Si vous en possédez un, entrez votre code ci-dessous</p>
+                                    <p class="font-italic mb-4 text-dark">Si vous en possédez un, entrez votre code ci-dessous</p>
                                     <div class="input-group mb-4 border rounded-pill p-2">
                                         <input name='code' type="text" placeholder="Appliquer le code" aria-describedby="button-addon3" class="form-control border-0">
                                         <div class="input-group-append border-0">
@@ -102,9 +103,9 @@ if (isset($_POST['AppliquerRedu'])) {
 
                         </div>
                         <div class="col-lg-6">
-                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Récapitulatif de votre commande </div>
+                            <div class="text-dark rounded-pill px-4 py-3 text-uppercase font-weight-bold">Récapitulatif de votre commande </div>
                             <div class="p-4">
-                                <p class="font-italic mb-4">Attention : aucun remboursement possible après confirmation de votre commande</p>
+                                <p class="font-italic mb-4 text-dark">Attention : aucun remboursement possible après confirmation de votre commande</p>
                                 <ul class="list-unstyled mb-4">
                                     <li class="d-flex justify-content-between py-3 border-bottom">
 
@@ -135,12 +136,12 @@ if (isset($_POST['AppliquerRedu'])) {
 
                                         }
                                         ?>
-                                        <strong class="text-muted">Prix </strong><strong id="TotalPanierCommande"><?= $somme ?>€</strong>
+                                        <strong class="text-muted">Prix </strong><strong id="TotalPanierCommande" class="text-dark"><?= $somme ?>€</strong>
 
 
                                     </li>
-                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Réduction appliquée</strong>
-                                        <strong id='Reduction'> <?php if(!isset($reduction)) { ?> 
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted text-dark">Réduction appliquée</strong>
+                                        <strong id='Reduction'  class="text-dark"> <?php if(!isset($reduction)) { ?> 
                                             0.00€ 
                                             <?php } ?>
                                         </strong>
@@ -148,7 +149,7 @@ if (isset($_POST['AppliquerRedu'])) {
 
 
                                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted  text-uppercase">Total</strong>
-                                        <h5 class="font-weight-bold" id="TOTALTOTAL" ></h5>
+                                        <h5 class="font-weight-bold text-dark" id="TOTALTOTAL" ></h5>
                                     </li>
 
                                     <script>

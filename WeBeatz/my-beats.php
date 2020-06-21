@@ -11,7 +11,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     $okconnectey = true;
 
 } else {
-    header('Location: index.php');
+    header('Location: connexion.php');
     exit;
 }
 
@@ -123,22 +123,7 @@ if(isset($_POST['inputOption'])) {
 
                         <?php 
                         $lim = 0;
-                        if ($lim != 0){
-                            $req = $BDD->prepare("SELECT *
-                            FROM vente
-                            WHERE vente_user_id = ? 
-                            ORDER BY vente_date DESC
-                            LIMIT $lim ");
-                            $req->execute(array($_SESSION['user_id']));
-                        } else {
-                            $req = $BDD->prepare("SELECT *
-                            FROM vente
-                            WHERE vente_user_id = ? 
-                            ORDER BY vente_date DESC");
-                            $req->execute(array($_SESSION['user_id']));
-
-                        }
-                        $resuACHAT = $req->fetchAll();
+                        
                         require_once('assets/skeleton/tableAchats.php');
                         ?>
                     </div>
