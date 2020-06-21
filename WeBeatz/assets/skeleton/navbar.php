@@ -74,33 +74,33 @@ type="text" placeholder="Recherchez vos musiques, artistes..." name="q" aria-des
                                 <div class="col-lg-7 col-xl-8 contenant-mega-1" >
                                     <div class="p-4">
                                         <div class="row mb-1">
-                                            <div class="col-lg-4 border-right border-secondary">
+                                            <div class="col-lg-4 border-right border-secondary  ">
 
                                                 <ul class="list-unstyled text-left">
-                                                    <li class="nav-item"><a href="search.php?Type=beats&sort=vente" class="nav-link text-small pb-0"><i class="fas fa-medal"></i> Top Ventes</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&sort=vente" class="nav-link text-small pb-0"><i class="fas fa-medal mr-2"></i> Top Ventes</a></li>
 
-                                                    <li class="nav-item"><a href="search.php?Type=beats&sort=nouveaute" class="nav-link text-small pb-0 "><i class="far fa-clock"></i> Nouveauté</a></li>
-                                                    <li class="nav-item"><a href="search.php?Type=beats&Price=free" class="nav-link text-small pb-0 "><i class="far fa-handshake"></i> Free Beats</a></li>
-                                                    <li class="nav-item"><a href="search.php?Type=users&sort=seller" class="nav-link text-small pb-0"><i class="fas fa-trophy"></i> Top Vendeurs</a></li>   
+                                                    <li class="nav-item"><a href="search.php?Type=beats&sort=nouveaute" class="nav-link text-small pb-0 "><i class="far fa-clock mr-2"></i> Nouveauté</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=beats&Price=free" class="nav-link text-small pb-0 "><i class="far fa-handshake mr-2"></i> Free Beats</a></li>
+                                                    <li class="nav-item"><a href="search.php?Type=users&sort=seller" class="nav-link text-small pb-0"><i class="fas fa-trophy mr-2"></i> Top Vendeurs</a></li>   
 
                                                 </ul>
                                             </div>
-                                            <div class="col-lg-4 border-right border-secondary">
-                                                <h6 class="font-weight-bold text-uppercase">Genres</h6>
+                                            <div class="col-lg-4 border-right border-secondary ">
+                                                <h6 class="text-white font-weight-bold text-uppercase">Genres</h6>
                                                 <ul class="list-unstyled text-left"> <?php 
 
     foreach($listeGenres as $gr){
         if($gr['id'] != 6 && $gr['id'] != 0 && $gr['id'] != 12 && $gr['id'] != 15 && $gr['id'] != 4 && $gr['id'] != 6) { ?>
 
-                                                    <li class="nav-item"><a class="dropdown-item  " href="search.php?Type=beats&Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a></li> 
+                                                    <li class="nav-item"><a class="nav-link text-small pb-0 " href="search.php?Type=beats&Genre=<?= $gr['id']?>"><?= $gr['genre_nom']?></a></li> 
                                                     <?php
                                                                                                                        }}
                                                     ?>
 
                                                 </ul>
                                             </div>
-                                            <div class="col-lg-4">
-                                                <h6 class="font-weight-bold text-uppercase">Type Beat</h6>
+                                            <div class="col-lg-4 ">
+                                                <h6 class="text-white font-weight-bold text-uppercase">Type Beat</h6>
                                                 <ul class="list-unstyled text-left">
                                                     <li class="nav-item"><a href="search.php?Type=beats&q=BlackD" class="nav-link text-small pb-0 ">BlackD</a></li>
                                                     <li class="nav-item"><a href="search.php?Type=beats&q=Cheu-b" class="nav-link text-small pb-0 ">Cheu-B</a></li>
