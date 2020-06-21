@@ -177,10 +177,7 @@
             </tr>
             <?php
             }}
-            else { ?>
-
-            Aucun résultat;
-            <?php } ?>
+            ?>
 
             <script >
                 function goConnexionStp() {

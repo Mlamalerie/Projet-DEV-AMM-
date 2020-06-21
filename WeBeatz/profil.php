@@ -13,6 +13,10 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])) {
       $id_demandeur=0;
 }
 
+if(!isset($_GET['profil_id'])) {
+    header('HTTP/1.0 404 Not Found');
+    exit;
+}
 $id_receveur = (int) $_GET['profil_id'];/*récupère id du profil qu'on a cliqué*/
 
 //** verif profil_id

@@ -18,7 +18,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
     // $_GET[TYPE
     if(isset($_GET['Type']) && !empty($_GET['Type'])) {
         $wetypeexiste = true;
-       
+
         if ($_GET['Type'] == "users") {
             $jechercheunboug = true;
         }
@@ -26,7 +26,7 @@ if(isset($_SESSION['user_id']) || isset($_SESSION['user_pseudo'])  ) {
             $jechercheunboug = false;
         }
     }else{
-       
+
         $wetypeexiste = false;
         $jechercheunboug = false;
     }
@@ -144,13 +144,13 @@ if ($wetypeexiste && !$jechercheunboug) {
         //*** recherche dans TOUT les genres
 
         if(($wegenreexiste && $_GET['Genre'] == "All") || !$wegenreexiste) {
-            
+
 
             // selection des free beats
             if ($wepriceexiste){
-                
 
-                
+
+
                 $req = $BDD->prepare("SELECT * FROM (       SELECT *
                                                         FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year,beat_tags)
@@ -161,7 +161,7 @@ if ($wetypeexiste && !$jechercheunboug) {
 
             //si ya pas de condition de prix
             else {
-                
+
                 $req = $BDD->prepare("SELECT *
                                                         FROM beat
                                                         WHERE CONCAT(beat_title,beat_author,beat_description,beat_year,beat_tags)
@@ -222,13 +222,13 @@ if ($wetypeexiste && !$jechercheunboug) {
         // si condition de prix
         if ($wepriceexiste){
             if(in_array($_GET['Genre'],$listeGenres)) {
-              
+
 
                 foreach($listeGenres as $gr){
 
                     if($_GET['Genre'] == $gr['id']) {
                         $g = $gr['id'];
-                       
+
                         $req = $BDD->prepare("SELECT *
                          FROM beat
                          WHERE beat_genre = '$g' AND ($borneprixinf <= beat_price AND beat_price <= $borneprixsup )
@@ -238,7 +238,7 @@ if ($wetypeexiste && !$jechercheunboug) {
                 }
             }
             else {
-                
+
                 $req = $BDD->prepare("SELECT *
                             FROM beat
                             WHERE $borneprixinf <= beat_price AND beat_price <= $borneprixsup
@@ -251,13 +251,13 @@ if ($wetypeexiste && !$jechercheunboug) {
         // si pas de condition de prix
         else{
             if(in_array($_GET['Genre'],$listeGenres)) {
-                
+
 
                 foreach($listeGenres as $gr){
 
                     if($_GET['Genre'] == $gr['id']) {
                         $g = $gr['id'];
-                      
+
                         $req = $BDD->prepare("SELECT *
                          FROM beat
                          WHERE beat_genre = '$g'
@@ -267,7 +267,7 @@ if ($wetypeexiste && !$jechercheunboug) {
                 }
             }
             else {
-               
+
                 $req = $BDD->prepare("SELECT *
                             FROM beat
                             ORDER BY $trierpar $asc_desc");
@@ -298,7 +298,7 @@ if ($wetypeexiste && !$jechercheunboug) {
 
         $req->execute(array());
         $resuBEATS = $req->fetchAll();
-       
+
     }
 
 }
@@ -321,7 +321,7 @@ else if ($wetypeexiste && $jechercheunboug){
             $resuUSERS = $req->fetchAll();
 
         } else if ($wesortexiste) {
-           
+
             $req = $BDD->prepare("SELECT beat_author_id, SUM(beat_nbvente) AS vente_total
                                     FROM beat
                                     GROUP BY beat_author_id
@@ -477,12 +477,9 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
         <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
 
 
-        <!--        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical.css">-->
-        <!--        <link rel="stylesheet" type="text/css" href="assets/css/navmenuvertical_responsive.css">-->
-        <!--        <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">-->
         <link rel="stylesheet" type="text/css" href="assets/css/search.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/modalPanier.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/modalUploadAudio.css">
+        
+        
 
         <style>
 
@@ -785,11 +782,15 @@ if (isset($resuUSERS) && !empty($resuUSERS)){
     } else if ($yadesresultatsUSERS) {
 
         $obj1 = count($resuUSERS)." personnes trouvées";
-   echo $obj1;
+        echo $obj1;
     } else if ($yadesresultatsBEATS) {
         $obj1 = count($resuBEATS)." beats trouvé";
 
-   echo $obj1;
+        echo $obj1;
+    } else if (!$yadesresultatsUSERS && !$yadesresultatsBEATS) {
+
+        $obj1 = "Aucun résultat..";
+        echo $obj1;
     } 
 
 

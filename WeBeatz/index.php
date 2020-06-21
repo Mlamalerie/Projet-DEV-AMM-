@@ -57,6 +57,9 @@ $resuPLAYLIST = array_merge($resuTENDANCES, $resuVENTES);
         <link rel="stylesheet" type="text/css" href="assets/css/loading.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/navbar-index-turfu.css">
+        
+        
+        
 
 
         <link rel="stylesheet" type="text/css" href="assets/css/music_card.css">

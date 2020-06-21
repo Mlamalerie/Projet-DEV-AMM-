@@ -52,12 +52,12 @@ if(isset($_POST['inputOption'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?php require_once('assets/skeleton/headLinkCSS.html');?>
 
-
+    
 
 
         <link rel="stylesheet" type="text/css" href="assets/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="assets/css/my-beats.css">
-        <link rel="stylesheet" type="text/css" href="assets/css/search.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/search.css">
 
         <link rel="stylesheet" type="text/css" href="assets/skeleton/AudioPlayer/audioplayer.css">
 

@@ -13,39 +13,50 @@
                 <th scope="col" class="border-0">
                     <div class="py-2 text-uppercase text-light">Ajouter au panier</div>
                 </th>  
-                    <th scope="col" class="border-0">
+                <th scope="col" class="border-0">
                     <div class="py-2 text-uppercase text-light"> </div>
                 </th>
             </tr>
         </thead>
         <tbody class=" rounded">
-            <?php if ($yadesresultatsBEATS) {$i = 1;foreach($resuBEATS as $r){?>
+            <?php if ($yadesresultatsBEATS) {
+
+    if(isset($resuUP) && !empty($resuUP)) {
+        $i = count($resuUP)+1;
+    } else {
+        $i = 1;
+    }
+    foreach($resuBEATS as $r){?>
             <tr class="border-0 rounded px-md-5">
-                <th scope="row" class="border-0 rounded">
-                    <div class="p-0 rounded ">
+                <th scope="row" class="border-0  ">
+                    <div class="p-0 rounded ml-4 ">
                         <div class="hover hover-5 text-white rounded d-inline-block align-middle">
                             <img src="<?=$r['beat_cover']?>" alt="" width="70" class="img-fluid rounded shadow-sm">
                             <div class="hover-overlay d-inline-block"></div>
 
-                            <div class="link_icon  " onclick="playPause(<?=$i-1 ?>)">
-                                <span class="video-icon playplay-btn"></span>
+                            <div id="btnplay-<?= $r['beat_id']?>" class="link_icon  " onclick="playPause(<?=($i-1 )?>,<?= $r['beat_id']?>)">
+                                <span class="play-audio-icon playplay-btn"></span>
                             </div>
 
                         </div>
                         <!--                                                    -->
 
                         <div class="ml-3 d-inline-block align-middle rounded" >
-                            <h5 class="mb-0"> <a href="view-beat.php?id=<?= $r['beat_id']?>" class="text-light  d-inline-block align-middle"><?=$r['beat_title']?></a>
+                            <h5 class="mb-0"> <a href="view-beat.php?id=<?= $r['beat_id']?>" class="font-weight-bol text-light d-inline-block align-middle"><?=$r['beat_title']?></a>
                             </h5>
 
-                            <a href="profil.php?profil_id=<?= $r['beat_author_id']?>" class="text-dark d-inline-block align-middle"><span class="text-muted font-weight-normal font-italic d-block">
+
+                            <span class="text-muted font-weight-normal font-italic d-block ">by <a href="profil.php?profil_id=<?= $r['beat_author_id']?>" class="text-dark d-inline-block "><span class="text-muted font-weight-normal font-italic d-block">
+
                                 <?=$r['beat_author']?>
                                 </span>
-                            </a>
+                                </a></span>
                         </div>
                     </div>
 
                 </th>
+
+
                 <!-- **LIKE -->
                 <?php if($okconnectey) {  ?>
                 <td class="border-0 align-middle  ">
@@ -55,7 +66,7 @@
                     <span id="span_nbLike-<?=$r['beat_id']?>" class="text-light"><?=$r['beat_like']?></span>
 
                     <?php
-    $oktaliker = false;
+        $oktaliker = false;
                                         $req = $BDD->prepare("SELECT id FROM likelike WHERE like_user_id = ? AND like_beat_id = ?");
                                         $req->execute(array($_SESSION['user_id'],$r['beat_id']));
                                         $lll = $req->fetch();
@@ -72,46 +83,46 @@
                 </td>
                 <?php } ?>
 
-               <!-- **AJOUTER PANIER -->
+                <!-- **AJOUTER PANIER -->
                 <td class="border-0 align-middle px-2 ">
 
                     <?php 
-                $okdejadanspanier = false;
-                $okdejaacheter = false;
-                if($okconnectey) {
-                    $req = $BDD->prepare("SELECT *
+                              $okdejadanspanier = false;
+                              $okdejaacheter = false;
+                              if($okconnectey) {
+                                  $req = $BDD->prepare("SELECT *
                                                                                         FROM vente
                                                                                         WHERE vente_user_id = ? AND vente_beat_id = ?");
-                    $req->execute(array($_SESSION['user_id'],$r['beat_id']));
+                                  $req->execute(array($_SESSION['user_id'],$r['beat_id']));
 
 
-                    $ach = $req->fetch();
+                                  $ach = $req->fetch();
 
 
-                    if(isset($ach['id'])){
-                        $okdejaacheter = true;
-                    }else {
-                        $req = $BDD->prepare("SELECT *
+                                  if(isset($ach['id'])){
+                                      $okdejaacheter = true;
+                                  }else {
+                                      $req = $BDD->prepare("SELECT *
                                                                                         FROM panier
                                                                                         WHERE panier_user_id = ? AND panier_beat_id = ?");
-                        $req->execute(array($_SESSION['user_id'],$r['beat_id']));
+                                      $req->execute(array($_SESSION['user_id'],$r['beat_id']));
 
 
-                        $aff = $req->fetch();
+                                      $aff = $req->fetch();
 
 
 
-                        if(isset($aff['id'])){
-                            $okdejadanspanier = true;
-                        }
-                    }
-                }
+                                      if(isset($aff['id'])){
+                                          $okdejadanspanier = true;
+                                      }
+                                  }
+                              }
                     ?>
                     <?php 
-                $okcestpastaprod = ($okconnectey && $r['beat_author_id'] != $_SESSION['user_id']);
-                if(!$okdejaacheter) {
+                              $okcestpastaprod = ($okconnectey && $r['beat_author_id'] != $_SESSION['user_id']);
+                              if(!$okdejaacheter) {
 
-                    if($okcestpastaprod || !$okconnectey) { ?>
+                                  if($okcestpastaprod || !$okconnectey) { ?>
                     <button id='btnbeat-<?=$r['beat_id']?>' 
 
                             <?php if($okconnectey) { ?>
@@ -143,7 +154,7 @@
 
                 </td>
 
- <!--  ** 3 point -->
+                <!--  ** 3 point -->
                 <td class="px-2 border-0 align-middle   ">
                     <div id='3point' class="nav-item dropdown no-arrow ">
                         <button class="nav-link dropdown-toggle  dropdown-toggle-pointpoint btn text-light" href="#" id="3pointDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
@@ -165,7 +176,7 @@
 
             </tr>
             <?php
-                                                                              $i++;}}
+                                  $i++;}}
             else { ?>
 
             Aucun résultat;

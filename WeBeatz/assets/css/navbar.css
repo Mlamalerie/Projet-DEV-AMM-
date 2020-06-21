@@ -139,3 +139,18 @@ img#iconPanier,img#iconUpload ,img#iconChat  {
     border-bottom-right-radius:  var(--base-border-radius);
     
 }
+
+
+
+
+
+#uploadAudio, #uploadCover {
+    opacity: 0;
+}
+
+#uploadAudio-label, #uploadCover-label { 
+    position: absolute;
+    top: 50%; 
+    left: 1rem;
+    transform: translateY(-50%); 
+}
