@@ -66,7 +66,7 @@ if(isset($id_demandeur)){
         WHERE id_demandeur = ? AND id_receveur = ? AND statut = ?");
     $req->execute(array($id_demandeur,$id_receveur,1));
     $resuIFOLLOWHE = $req->fetch(); 
-   // var_dump($resuIFOLLOWHE);
+    // var_dump($resuIFOLLOWHE);
     if(isset($resuIFOLLOWHE['statut'])) {
         echo 'truetrue';
         $okifollowhe = true;
@@ -242,7 +242,7 @@ $nb_prods=count($resuBEATS);
                                     </span>
                                 </div>
                                 <div class="description text-center row mb-3 ">
-                                   <?php if(!$okiblockhe && !$okheblocki) { ?> <div class="col-12 mb-2"><?=$afficher_profil['user_description']?></div>
+                                    <?php if(!$okiblockhe && !$okheblocki) { ?> <div class="col-12 mb-2"><?=$afficher_profil['user_description']?></div>
                                     <?php } ?>
 
                                     <div class="col-12 chiffres">
@@ -289,42 +289,56 @@ $nb_prods=count($resuBEATS);
                         <?php
                     if(!$okconnectey){
                         ?>
-                        
-                        
+
+
                         <!--  btn MESSAGE -->
                         <div class="d-flex justify-content-center ">
                             <div class="p-2">
-                                    <a href="connexion.php"  ><button class="btn btn-pf text-white mb-3"  ><i class="fas fa-comment-alt mr-2"></i>Message</button>   </a> 
- 
+                                <a href="connexion.php"  ><button class="btn btn-pf text-white mb-3"  ><i class="fas fa-comment-alt mr-2"></i>Message</button>   </a> 
+
                             </div>
-                            
-                            
+
+
                         </div>
-                   
-                       
+
+
                         <!-- ** si pas connecté -->
                         <?php  } else { ?>
 
-                       <!--  btn MESSAGE -->
-                        <a href="message.php?profil_id=<?= $id_receveur ?>-<?= $id_demandeur ?>"  ><button class="btn btn-pf text-white mb-3"  ><i class="fas fa-comment-alt"></i><span class="ml-3">Message</span></button>   </a>    
 
 
-                        <form action="" method="post">
+                        <div class="d-flex justify-content-center mb-2 ">
+                            <div class="p-1">
+                                <!--  btn MESSAGE -->
+                                <a href="message.php?profil_id=<?= $id_receveur ?>-<?= $id_demandeur ?>"  ><button class="btn btn-pf text-white "  ><i class="fas fa-comment-alt"></i><span class="ml-3">Message</span></button>   </a> 
+
+                            </div>
+
+
+                        </div>
+                        <div class="d-flex justify-content-center ">
+                            <div class="p-1">
+                                <form action="" method="post">
                             <?php   if($okifollowhe){ ?>
                             <button type="submit"  class="btn btn-pfdark" name="unfollow" value="Unfollow"> <i class="fas fa-user-minus mr-2"></i>Unfollow </button>
-                            <?php 
-                        } 
-                                       else{ 
-                            ?>
-                           <button type="submit" class="btn btn-pf text-white"   name="follow" value="Follow"><i class="fas fa-user-plus mr-2"></i>Follow</button>
-                            <?php   
-                                       }    
-                            ?>
+                            <?php   }  else{  ?>
+                            <button type="submit" class="btn btn-pf text-white"   name="follow" value="Follow"><i class="fas fa-user-plus mr-2"></i>Follow</button>
+                            <?php      }     ?>
+
                             <button type="submit" class="btn btn-pf text-white" name="bloquer" value="Bloquer"><i class="fas fa-user-lock mr-2"></i>Bloquer</button>
                         </form>
+                            </div>
+
+
+                        </div>
+
+
+
+
+                       
                         <?php
-                                      } 
-                } 
+                                      } // end pas connecté
+                } // end pas mon compte 
                         ?>
                     </div>
 
@@ -333,7 +347,7 @@ $nb_prods=count($resuBEATS);
                     <div class="row">
 
                         <div class="mt-3 pt-3 pb-3 d-flex shadow-sm rounded h-100 w-100 bg-back">
-<div class="text-center w-25">Tout les produit de <?=$afficher_profil['user_pseudo'] ?> uuuuuuuuuuuuuuuuuuuu</div>
+
                             <?php $decal = 0; require_once('assets/skeleton/tableBeatSearch.php'); ?>
 
                         </div>

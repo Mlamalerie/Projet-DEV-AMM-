@@ -34,11 +34,26 @@ foreach($resuBEATU as $b){
                     (SELECT * FROM vente WHERE vente_date BETWEEN ? AND ?) base
                     WHERE vente_beat_id = ?");
     $req->execute(array($dateya30j,$dateajd,$b['beat_id']));
-
     $resu=$req->fetch();
-    // var_dump($resu);
     $nbventesmois += $resu['COUNT(*)'];
-    $moneymois += $b['beat_price'];
+
+    $req2 = $BDD->prepare("SELECT * FROM 
+                    (SELECT * FROM vente WHERE vente_date BETWEEN ? AND ?) base
+                    WHERE vente_beat_id = ?");
+    $req2->execute(array($dateya30j,$dateajd,$b['beat_id']));
+    $resuVENTESINT=$req2->fetchAll();
+
+    foreach($resuVENTESINT as $v){
+        $req = $BDD->prepare("SELECT beat_price FROM 
+                    beat WHERE beat_id = ?");
+        $req->execute(array($v['vente_beat_id']));
+        $resub=$req->fetch();
+  $moneymois += $resub['beat_price'];
+       
+
+    }
+   
+   
 
 }
 
@@ -151,7 +166,7 @@ $nbnewfollowers = $resu['COUNT(*)'];
                                 </div>
                             </a>
                         </div>
-                        <?php print_r(($_SESSION)) ?>
+                       
                         <!-- Item -->
                         <div class="col-xl-3 col-sm-6 rounded">
                             <h3 class="text-center chap rounded py-3 ">Nouveaux Followers</h3>

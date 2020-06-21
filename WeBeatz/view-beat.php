@@ -146,7 +146,7 @@ if(!isset($instru['beat_title'])) {
 
                                 </button>
                                 <?php } } else {?>
-                                <a class="btn btn-danger" href="<?= $instru['beat_source']?>" download>
+                                <a class="btn btn-buy btn-dll" href="<?= $instru['beat_source']?>" download>
                                     <span class="text-white"><i class="fas fa-download"></i></span>
                                 </a>
                                 <?php } ?>
@@ -163,7 +163,12 @@ if(!isset($instru['beat_title'])) {
                                 <a class="spanTag  badge badge-light text-dark px-2 rounded-pill ml-2" href="search.php?Type=beats&q=<?= $t ?>">#<?= $t ?> </a>
                                 <?php }} ?>
                             </div>
-
+                            
+                            <?php if($instru['beat_author_id'] == $_SESSION['user_id']) { ?>
+                            <div class="ml-5">
+                                <a href="edit-beat.php?id=<?=$instru['beat_id']?>"><button class="btn text-light"><i class="far fa-edit"></i></button></a>
+                            </div>
+<?php } ?>
                         </div>
 
                     </div>
