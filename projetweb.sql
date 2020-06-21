@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 21 juin 2020 à 02:54
+-- Généré le :  Dim 21 juin 2020 à 12:06
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -56,39 +56,37 @@ CREATE TABLE IF NOT EXISTS `beat` (
 --
 
 INSERT INTO `beat` (`beat_id`, `beat_title`, `beat_author`, `beat_author_id`, `beat_genre`, `beat_description`, `beat_tags`, `beat_year`, `beat_price`, `beat_format`, `beat_source`, `beat_cover`, `beat_nbvente`, `beat_like`, `beat_dateupload`) VALUES
-
-(10, 'BlueCup', 'Wanabilini', 17, 16, '200k vue sur youtube ', 'Black D,Cheu B, Rep Cup', 2017, 0.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-10.mp3', 'data/17-Wanabilini/images/cover/17-cover-10.png', 0, 5, '2020-05-14 00:00:00'),
-(11, 'Malsain 2', 'Wanabilini', 17, 16, 'Type beat Leto\r\nFollow insta @wanabilini', 'Leto,Kepler, Wanabilini', 2020, 25.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-11.mp3', 'data/17-Wanabilini/images/cover/17-cover-11.png', 0, 10, '2020-05-18 00:00:00'),
+(10, 'BlueCup', 'Wanabilini', 17, 16, '200k vue sur youtube ', 'Black D,Cheu B, Rep Cup', 2017, 0.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-10.mp3', 'data/17-Wanabilini/images/cover/17-cover-10.png', 5, 8, '2020-05-14 00:00:00'),
+(11, 'Malsain 2', 'Wanabilini', 17, 16, 'Type beat Leto\r\nFollow insta @wanabilini', 'Leto,Kepler, Wanabilini', 2020, 25.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-11.mp3', 'data/17-Wanabilini/images/cover/17-cover-11.png', 5, 10, '2020-05-18 00:00:00'),
 (12, 'Psykokwak', 'Wanabilini', 17, 16, 'Instru de Game boy un peu', 'Black D, Pokemon, Mlachahe', 2019, 45.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-12.mp3', 'data/17-Wanabilini/images/cover/17-cover-12.png', 0, 5, '2020-06-19 00:00:00'),
-(13, 'Telo', 'Wanabilini', 17, 16, 'Instru piano', 'koba, leto', 2018, 33.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-13.mp3', 'data/17-Wanabilini/images/cover/17-cover-13.png', 0, 3, '2020-06-17 00:00:00'),
-(14, 'Montant', 'Wanabilini', 17, 16, 'Instru type beat Bosh - French Drill', 'Bosh, French Drill', 2019, 39.99, 'mp3', 'data/17-Wanabilini/beats/17-beat-14.mp3', 'data/17-Wanabilini/images/cover/17-cover-14.png', 0, 6, '2020-06-20 00:00:00'),
-(15, 'Temps Mort ', 'Wanabilini', 17, 16, 'Instrumental Original du titre \"Temps Mort\" de Bosh', 'bosh, wanabilini', 2017, 49.99, 'mp3', 'data/17-Wanabilini/beats/17-beat-15.mp3', 'data/17-Wanabilini/images/cover/17-cover-15.png', 0, 3, '2020-05-29 00:00:00'),
+(13, 'Telo', 'Wanabilini', 17, 16, 'Instru piano', 'koba, leto', 2018, 33.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-13.mp3', 'data/17-Wanabilini/images/cover/17-cover-13.png', 3, 5, '2020-06-17 00:00:00'),
+(14, 'Montant', 'Wanabilini', 17, 16, 'Instru type beat Bosh - French Drill', 'Bosh, French Drill', 2019, 39.99, 'mp3', 'data/17-Wanabilini/beats/17-beat-14.mp3', 'data/17-Wanabilini/images/cover/17-cover-14.png', 6, 7, '2020-06-20 00:00:00'),
+(15, 'Temps Mort ', 'Wanabilini', 17, 16, 'Instrumental Original du titre \"Temps Mort\" de Bosh', 'bosh, wanabilini', 2017, 49.99, 'mp3', 'data/17-Wanabilini/beats/17-beat-15.mp3', 'data/17-Wanabilini/images/cover/17-cover-15.png', 0, 4, '2020-05-29 00:00:00'),
 (16, 'Raconte', 'Wanabilini', 17, 13, 'Instrumental Piano Triste Modern Old School Trap / Sample Instrumental ', 'Guizmo, Rémy', 2018, 10.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-16.mp3', 'data/17-Wanabilini/images/cover/17-cover-16.png', 0, 2, '2020-05-31 00:00:00'),
-(20, 'Yembe', 'Wanabilini', 17, 5, 'La prod préféré des youtubeuse', 'zoken,2t,Wanabilini, Afro Beat', 2020, 0.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-20.mp3', 'data/17-Wanabilini/images/cover/17-cover-20.png', 0, 2, '2020-05-20 00:00:00'),
-(21, 'Baby Yes', 'Wanabilini', 17, 0, 'Instru été ', 'DanceHall, Playa, Wanabilini', 2019, 19.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-21.mp3', 'data/17-Wanabilini/images/cover/17-cover-21.png', 0, 5, '2020-06-20 03:00:00'),
-(22, 'Burny', 'Wanabilini', 17, 5, '  Instrument Afro Beat New Vibes', 'burna boy,wanabilini', 2020, 15.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-22.mp3', 'data/17-Wanabilini/images/cover/17-cover-22.png', 0, 3, '2020-06-17 09:09:00'),
+(20, 'Yembe', 'Wanabilini', 17, 5, 'La prod préféré des youtubeuse', 'zoken,2t,Wanabilini, Afro Beat', 2020, 0.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-20.mp3', 'data/17-Wanabilini/images/cover/17-cover-20.png', 3, 3, '2020-05-20 00:00:00'),
+(21, 'Baby Yes', 'Wanabilini', 17, 0, 'Instru été ', 'DanceHall, Playa, Wanabilini', 2019, 19.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-21.mp3', 'data/17-Wanabilini/images/cover/17-cover-21.png', 2, 6, '2020-06-20 03:00:00'),
+(22, 'Burny', 'Wanabilini', 17, 5, '  Instrument Afro Beat New Vibes', 'burna boy,wanabilini', 2020, 15.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-22.mp3', 'data/17-Wanabilini/images/cover/17-cover-22.png', 0, 4, '2020-06-17 09:09:00'),
 (23, 'Butin', 'Wanabilini', 17, 0, '  La MG type Beat Afro beat', 'La MG, 4keus', 2018, 25.00, 'mp3', 'data/17-Wanabilini/beats/17-beat-23.mp3', 'data/17-Wanabilini/images/cover/17-cover-23.png', 0, 1, '2020-05-14 00:00:00'),
 (24, 'Timide', 'Wanabilini', 17, 0, '  Tayc type Beat Love Instrumental', 'Tayc,Leto', 2019, 3.99, 'mp3', 'data/17-Wanabilini/beats/17-beat-24.mp3', 'data/17-Wanabilini/images/cover/17-cover-24.png', 0, 2, '2020-06-12 00:00:00'),
 (25, 'Humeur', 'Akuma', 10, 16, '  Chinese Sample, Meilleur prod du monde', 'RMR, Akuma, Sample', 2020, 50.00, 'mp3', 'data/10-Akuma/beats/10-beat-25.mp3', 'data/10-Akuma/images/cover/10-cover-25.png', 1, 3, '2020-06-20 20:00:00'),
-(30, 'Disrepect', 'SeniorAlaProd', 20, 16, 'Trap drill', 'Hamza', 2020, 30.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-30.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-30.png', 0, 0, '2020-06-18 00:00:00'),
-(31, 'Encore', 'SeniorAlaProd', 20, 3, 'Chill', 'Luidji,Krisy', 2019, 19.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-31.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-31.png', 0, 0, '2020-06-10 00:00:00'),
-(32, 'Go On', 'SeniorAlaProd', 20, 0, 'Afro Beat', 'BurnaBoy', 2020, 19.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-32.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-32.png', 0, 0, '2020-04-22 00:00:00'),
-(33, 'Mi Vida', 'SeniorAlaProd', 20, 10, 'Du zouk en 2020', 'Zouk', 2017, 15.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-33.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-33.png', 0, 1, '2020-06-09 00:00:00'),
-(34, 'Masterpiece', 'SarutoBeats', 21, 15, 'Beat orchestral', 'RickRoss', 2018, 0.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-34.mp3', 'data/21-SarutoBeats/images/cover/21-cover-34.png', 0, 2, '2020-06-23 00:00:00'),
-(35, 'Hustlers', 'SarutoBeats', 21, 1, 'C\'est New York ici', 'RickRoss', 2019, 0.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-35.mp3', 'data/21-SarutoBeats/images/cover/21-cover-35.png', 0, 1, '2020-06-24 00:00:00'),
-(36, 'Right Round', 'SarutoBeats', 21, 14, 'Funky beat', 'BrunoMars,MichaelJackson', 2016, 24.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-36.mp3', 'data/21-SarutoBeats/images/cover/21-cover-36.png', 0, 0, '2020-05-14 00:00:00'),
-(37, 'Monaco', 'SarutoBeats', 21, 12, 'Zumba d\'été  ', 'Maes', 2020, 25.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-37.mp3', 'data/21-SarutoBeats/images/cover/21-cover-37.png', 0, 0, '2020-06-16 00:00:00'),
-(50, 'Persia', 'PascalProd', 30, 5, 'Deviens le prince de Perse', NULL, 2020, 72.50, 'mp3', 'data/30-PascalProd/beats/30-beat-50.mp3', 'data/30-PascalProd/images/cover/30-cover-50.png', 0, 0, '2020-06-19 21:56:00'),
-(51, 'Petite', 'PascalProd', 30, 9, 'Vien par ici ma petite ;)', NULL, 2020, 44.45, 'mp3', 'data/30-PascalProd/beats/30-beat-51.mp3', 'data/30-PascalProd/images/cover/30-cover-51.png', 0, 0, '2020-06-19 21:58:00'),
-(52, 'Utopia', 'PascalProd', 30, 0, 'La vie n\'est qu\'une utopie ?', NULL, 2019, 24.50, 'mp3', 'data/30-PascalProd/beats/30-beat-52.mp3', 'data/30-PascalProd/images/cover/30-cover-52.png', 0, 1, '2019-06-19 22:03:00'),
-(53, 'Sale', 'BeaBeatz', 31, 0, ' C\'est pas propre', NULL, 2018, 18.50, 'mp3', 'data/31-BeaBeatz/beats/31-beat-53.mp3', 'data/31-BeaBeatz/images/cover/31-cover-53.png', 0, 0, '2018-08-08 22:05:21'),
-(54, 'No more beginning', 'BeaBeatz', 31, 4, '  Je suis saoul', NULL, 2016, 12.00, 'mp3', 'data/31-BeaBeatz/beats/31-beat-54.mp3', 'data/31-BeaBeatz/images/cover/31-cover-54.png', 0, 0, '2016-12-16 22:07:46'),
-(55, 'Rock-n Roll-up', 'BeaBeatz', 31, 8, '  Rock\'n Roll Babyyyy!!!', NULL, 2012, 0.00, 'mp3', 'data/31-BeaBeatz/beats/31-beat-55.mp3', 'data/31-BeaBeatz/images/cover/31-cover-55.png', 0, 2, '2012-10-01 19:35:32'),
-(56, 'Better', 'WillyFunk', 32, 1, '  It\'s better', NULL, 2020, 66.60, 'mp3', 'data/32-WillyFunk/beats/32-beat-56.mp3', 'data/32-WillyFunk/images/cover/32-cover-56.png', 0, 0, '2020-06-09 22:13:04'),
-(57, 'True Love', 'WillyFunk', 32, 3, ' Pour une vraie déclaration...', NULL, 2017, 33.25, 'mp3', 'data/32-WillyFunk/beats/32-beat-57.mp3', 'data/32-WillyFunk/images/cover/32-cover-57.png', 0, 0, '2017-02-14 14:25:26'),
-(58, 'Sang', 'WillyFunk', 32, 16, ' Rouge Sang', NULL, 2020, 88.88, 'mp3', 'data/32-WillyFunk/beats/32-beat-58.mp3', 'data/32-WillyFunk/images/cover/32-cover-58.png', 0, 0, '2020-06-19 22:21:35'),
-(59, 'Profond', 'WillyFunk', 32, 6, ' Entre dans les profondeurs', NULL, 2019, 50.00, 'mp3', 'data/32-WillyFunk/beats/32-beat-59.mp3', 'data/32-WillyFunk/images/cover/32-cover-59.png', 0, 0, '2019-09-10 20:00:00');
-
+(30, 'Disrepect', 'SeniorAlaProd', 20, 16, 'Trap drill', 'Hamza', 2020, 30.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-30.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-30.png', 3, 3, '2020-06-18 00:00:00'),
+(31, 'Encore', 'SeniorAlaProd', 20, 3, 'Chill', 'Luidji,Krisy', 2019, 19.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-31.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-31.png', 3, 4, '2020-06-10 00:00:00'),
+(32, 'Go On', 'SeniorAlaProd', 20, 0, 'Afro Beat', 'BurnaBoy', 2020, 19.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-32.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-32.png', 0, 1, '2020-04-22 00:00:00'),
+(33, 'Mi Vida', 'SeniorAlaProd', 20, 10, 'Du zouk en 2020', 'Zouk', 2017, 15.00, 'mp3', 'data/20-SeniorAlaProd/beats/20-beat-33.mp3', 'data/20-SeniorAlaProd/images/cover/20-cover-33.png', 2, 2, '2020-06-09 00:00:00'),
+(34, 'Masterpiece', 'SarutoBeats', 21, 15, 'Beat orchestral', 'RickRoss', 2018, 0.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-34.mp3', 'data/21-SarutoBeats/images/cover/21-cover-34.png', 4, 5, '2020-06-23 00:00:00'),
+(35, 'Hustlers', 'SarutoBeats', 21, 1, 'C\'est New York ici', 'RickRoss', 2019, 0.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-35.mp3', 'data/21-SarutoBeats/images/cover/21-cover-35.png', 2, 3, '2020-06-24 00:00:00'),
+(36, 'Right Round', 'SarutoBeats', 21, 14, 'Funky beat', 'BrunoMars,MichaelJackson', 2016, 24.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-36.mp3', 'data/21-SarutoBeats/images/cover/21-cover-36.png', 1, 1, '2020-05-14 00:00:00'),
+(37, 'Monaco', 'SarutoBeats', 21, 12, 'Zumba d\'été  ', 'Maes', 2020, 25.00, 'mp3', 'data/21-SarutoBeats/beats/21-beat-37.mp3', 'data/21-SarutoBeats/images/cover/21-cover-37.png', 3, 5, '2020-06-16 00:00:00'),
+(50, 'Persia', 'PascalProd', 30, 5, 'Deviens le prince de Perse', 'Yxng Bane', 2020, 72.50, 'mp3', 'data/30-PascalProd/beats/30-beat-50.mp3', 'data/30-PascalProd/images/cover/30-cover-50.png', 5, 4, '2020-06-19 21:56:00'),
+(51, 'Petite', 'PascalProd', 30, 9, 'Vien par ici ma petite ;)', 'J Balvin, Bad Bunny, Ozuna', 2020, 44.45, 'mp3', 'data/30-PascalProd/beats/30-beat-51.mp3', 'data/30-PascalProd/images/cover/30-cover-51.png', 0, 0, '2020-06-19 21:58:00'),
+(52, 'Utopia', 'PascalProd', 30, 18, 'La vie n\'est qu\'une utopie ?', 'Tory Lanez, Swae Lee, Wizkid', 2019, 24.50, 'mp3', 'data/30-PascalProd/beats/30-beat-52.mp3', 'data/30-PascalProd/images/cover/30-cover-52.png', 1, 4, '2019-06-19 22:03:00'),
+(53, 'Sale', 'BeaBeatz', 31, 16, ' C\'est pas propre', 'sale', 2018, 18.50, 'mp3', 'data/31-BeaBeatz/beats/31-beat-53.mp3', 'data/31-BeaBeatz/images/cover/31-cover-53.png', 0, 1, '2018-08-08 22:05:21'),
+(54, 'No more beginning', 'BeaBeatz', 31, 4, '  Je suis saoul', 'soul', 2016, 12.00, 'mp3', 'data/31-BeaBeatz/beats/31-beat-54.mp3', 'data/31-BeaBeatz/images/cover/31-cover-54.png', 1, 0, '2016-12-16 22:07:46'),
+(55, 'Rock-n Roll-up', 'BeaBeatz', 31, 8, '  Rock\'n Roll Babyyyy!!!', 'rock', 2012, 0.00, 'mp3', 'data/31-BeaBeatz/beats/31-beat-55.mp3', 'data/31-BeaBeatz/images/cover/31-cover-55.png', 1, 2, '2012-10-01 19:35:32'),
+(56, 'Better', 'WillyFunk', 32, 1, '  It\'s better', 'better, mieux', 2020, 66.60, 'mp3', 'data/32-WillyFunk/beats/32-beat-56.mp3', 'data/32-WillyFunk/images/cover/32-cover-56.png', 1, 1, '2020-06-09 22:13:04'),
+(57, 'True Love', 'WillyFunk', 32, 3, ' Pour une vraie déclaration...', 'love', 2017, 33.25, 'mp3', 'data/32-WillyFunk/beats/32-beat-57.mp3', 'data/32-WillyFunk/images/cover/32-cover-57.png', 1, 2, '2017-02-14 14:25:26'),
+(58, 'Sang', 'WillyFunk', 32, 16, ' Rouge Sang', 'Timal, Maes', 2020, 88.88, 'mp3', 'data/32-WillyFunk/beats/32-beat-58.mp3', 'data/32-WillyFunk/images/cover/32-cover-58.png', 0, 0, '2020-06-19 22:21:35'),
+(59, 'Profond', 'WillyFunk', 32, 6, ' Entre dans les profondeurs', 'deep, piano', 2019, 50.00, 'mp3', 'data/32-WillyFunk/beats/32-beat-59.mp3', 'data/32-WillyFunk/images/cover/32-cover-59.png', 1, 2, '2019-09-10 20:00:00');
 
 -- --------------------------------------------------------
 
@@ -139,9 +137,7 @@ CREATE TABLE IF NOT EXISTS `likelike` (
   PRIMARY KEY (`id`),
   KEY `like_beat_id` (`like_beat_id`),
   KEY `like_user_id` (`like_user_id`)
-
 ) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 
 --
 -- Déchargement des données de la table `likelike`
@@ -298,7 +294,6 @@ CREATE TABLE IF NOT EXISTS `panier` (
   KEY `panier_user_id` (`panier_user_id`),
   KEY `panier_beat_id` (`panier_beat_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=307 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 
 --
 -- Déchargement des données de la table `panier`
