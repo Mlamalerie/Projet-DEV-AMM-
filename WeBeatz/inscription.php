@@ -181,9 +181,9 @@ if(!empty($_POST)){
 
 
             $req = $BDD->prepare("SELECT user_id,user_image FROM user 
-            WHERE (user_pseudo = ? AND user_email = ? AND user_password = ? AND user_ville = ? AND user_pays = ? AND user_dateinscription = ? AND user_dateconnexion = ? AND user_statut = ? AND user_sexe = ?"); 
+            WHERE user_pseudo = ? AND user_email = ? "); 
 
-            $req->execute(array($pseudo,$email,$motdepasse,$ville,$pays,$date_inscription,$date_inscription,$statut,$sexe));
+            $req->execute(array($pseudo,$email));
             $u = $req->fetch();
             
              $_SESSION['user_id'] = $u['user_id'];
