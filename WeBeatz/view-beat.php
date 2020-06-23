@@ -63,7 +63,7 @@ if(!isset($instru['beat_title'])) {
                     <div class="text-light text-left mt-1 ml-4 d-inline-block align-middle rounded">
                         <h5 class="mb-0 vb-text "><?= $instru['beat_title']?> <small class="vb-year">• <?= $instru['beat_year']?></small></h5> 
                         <!--  auteur -->
-                        <a class="text-light vb-stext " href="profils.php?profil_id=<?= $instru['beat_author_id']?>">
+                        <a class="text-light vb-stext " href="profil.php?profil_id=<?= $instru['beat_author_id']?>">
                             by <u><?= $instru['beat_author']?></u>
 
                         </a>
@@ -164,7 +164,7 @@ if(!isset($instru['beat_title'])) {
                                 <?php }} ?>
                             </div>
                             
-                            <?php if($instru['beat_author_id'] == $_SESSION['user_id']) { ?>
+                            <?php if($okconnectey && $instru['beat_author_id'] == $_SESSION['user_id']) { ?>
                             <div class="ml-5">
                                 <a href="edit-beat.php?id=<?=$instru['beat_id']?>"><button class="btn text-light"><i class="far fa-edit"></i></button></a>
                             </div>

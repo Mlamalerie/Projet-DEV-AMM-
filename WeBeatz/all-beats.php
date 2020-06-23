@@ -132,7 +132,7 @@ if(isset($_POST['inputOption'])) {
                                     <tr>
                                         <td class="text-center align-middle">
                                             <div class="row"> 
-                                                <a href="view-beat.php?id=<?= $am['beat_id'] ?>" title="Modifier les informations de <?= $am['beat_title']?>"><button class="btn">Modifier</button></a>                                                                           
+                                                <a href="edit-beat.php?id=<?= $am['beat_id'] ?>" title="Modifier les informations de <?= $am['beat_title']?>"><button class="btn">Modifier</button></a>                                                                           
                                                 <button class="btn" title="Supprimer le beat <?= $am['beat_title']?>" data-toggle="modal" data-target="#desac_modal" onclick="goInputOption(this,'<?= $am['beat_id'] ?>','<?= $am['beat_title']?>')" value="suppr"><i class='fa fa-trash'></i></button>
   
                                             </div>

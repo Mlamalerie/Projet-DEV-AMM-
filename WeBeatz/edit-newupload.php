@@ -89,10 +89,10 @@ if(!isset($err_upload) || isset($_POST['Uploader-mon-instru'])){ // si l'audio e
         $okaudioposer = false;
     }
 }
-var_dump($okaudioposer);
+//var_dump($okaudioposer);
 
 
-print_r($_SESSION);
+
 
 if (!empty($_POST)) {
     echo 'emppy';
